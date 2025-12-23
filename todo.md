@@ -1,7 +1,0 @@
-- back up current state
-- figure out general formatting of files and folders
-- figure out way to link samples folder to cloud back-up
-    - some kind of sync script?
-- script to clean unused samples
-- rearrange sample folder structure
-- script to save in-use patches to specific folder
