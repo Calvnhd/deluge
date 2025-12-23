@@ -25,13 +25,18 @@ Back-up and scripts for managing Deluge patches
 
 ## Scripts
 
-(coming soon, maybe)
+### sync-samples.sh
+
+`DELUGE/SAMPLES/` is too large to store on GitHub, and may contain copyrighted material that shouldn't be distributed. Instead, use this script to sync to a another cloud-synced folder for back-up.
+
+1. Copy `scripts/.env.example` to `scripts/.env`
+2. Edit `.env` with your paths
+3. Run: `./scripts/sync-samples.sh`
 
 ---
 
 ## TODO
 
-- back up current state
 - figure out general formatting of files and folders
 - figure out way to link samples folder to cloud back-up
     - some kind of sync script?
