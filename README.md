@@ -4,6 +4,8 @@
 
 Back-up and scripts for managing Deluge patches
 
+---
+
 ## SD card file and folder structure
 
 - **DELUGE**:
@@ -11,15 +13,21 @@ Back-up and scripts for managing Deluge patches
     - **SONGS**: Song presets
     - **SYNTHS**: Synth presets
     - **SAMPLES**: Audio samples
-        - **ARTISTS**: Pre-made samples from various artists, shipped with the Deluge
-        - **CLIPS**: User recordings using the Deluge's mic or line in
-            - **TEMP**: Managed internally. User recordings are initially saved here and moved into the parent folder if the SONG is saved
-        - **RECORD**: User recordings
-        - **RESAMPLE**: User recordings created using the Deluge's resampling feature
+        - **ARTISTS**: Pre-made samples from various artists shipped with the Deluge
+        - **CLIPS**: User recordings created with the internal mic or line-in during AUDIO CLIP VIEW
+            - **TEMP**: Clip recordings are initially saved here and moved into the parent folder when the SONG is saved
+        - **RECORD**: User recordings created with the internal mic or line-in during KIT CLIP VIEW
+        - **RESAMPLE**: User recordings created with the resample feature
         ... 
         Additional user created folders
 
-**NOTE:** SONGS have reference to the kits and synths embedded within, therefore KITS and SYNTHS can be altered independently without breaking SONGS. Care must be taken when moving SAMPLES to not break references.
+**NOTE:** SONGS store kit and synth information within their own .xml files, therefore KITS and SYNTHS can be altered independently without breaking SONGS. Care must be taken to not break references when moving SAMPLES.
+
+## Scripts
+
+(coming soon, maybe)
+
+---
 
 ## TODO
 
@@ -34,4 +42,3 @@ Back-up and scripts for managing Deluge patches
 - a script to create a .zip backup?
 - update to latest community firmware
 - get presets from latest community competition
-
