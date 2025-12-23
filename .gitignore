@@ -210,4 +210,5 @@ __marimo__/
 *.wav
 *.WAV
 DELUGE/SAMPLES/
+DELUGE/.trash/
 scripts/.env
