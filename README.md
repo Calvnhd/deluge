@@ -9,15 +9,15 @@ Back-up and scripts for managing Deluge patches
 ## SD card file and folder structure
 
 - **DELUGE**:
-    - **KITS**: Kit presets
-    - **SONGS**: Song presets
-    - **SYNTHS**: Synth presets
-    - **SAMPLES**: Audio samples
-        - **ARTISTS**: Pre-made samples from various artists shipped with the Deluge
-        - **CLIPS**: User recordings created with the internal mic or line-in during AUDIO CLIP VIEW
-            - **TEMP**: Clip recordings are initially saved here and moved into the parent folder when the SONG is saved
-        - **RECORD**: User recordings created with the internal mic or line-in during KIT CLIP VIEW
-        - **RESAMPLE**: User recordings created with the resample feature
+    - **KITS** - Kit presets
+    - **SONGS** - Song presets
+    - **SYNTHS** - Synth presets
+    - **SAMPLES** - Audio samples
+        - **ARTISTS** - Pre-made samples from various artists shipped with the Deluge
+        - **CLIPS** - User recordings created with the internal mic or line-in during AUDIO CLIP VIEW
+            - **TEMP** - Clip recordings are initially saved here and moved into the parent folder when the SONG is saved
+        - **RECORD** - User recordings created with the internal mic or line-in during KIT CLIP VIEW
+        - **RESAMPLE** - User recordings created with the resample feature
         ... 
         Additional user created folders
 
