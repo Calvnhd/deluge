@@ -6,7 +6,7 @@ This repo manages the SD card contents for a Synthstrom Deluge hardware sampler/
 
 ## Architecture
 
-### Directory Layout (mirrors Deluge SD card)
+### Directory Layout
 ```
 DELUGE/
 ├── KITS/      # Drum kit XMLs - reference samples via relative paths
@@ -14,6 +14,8 @@ DELUGE/
 ├── SONGS/     # Full song XMLs - embed instrument configs + patterns
 └── SAMPLES/   # Audio files (NOT in git - backed up via scripts/)
 ```
+
+Note this structure mirrors that of a Deluge SD card, where DELUGE is the name of the SD card while KITS, SYNTHS, SONGS, SAMPLES are the four top level folders the card contains.
 
 ### Critical: Sample Path References
 Kit and song XMLs reference samples using **relative paths from DELUGE/**:

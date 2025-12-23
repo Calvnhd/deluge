@@ -1,0 +1,10 @@
+
+- This script will be used to back up the entire contents of a Deluge SD card to this repository
+- A SD card will be inserted into this computer which will contain the latest version of data, samples, songs etc
+- The contents of this repo represents an older version of the SD card contents
+- This script is the second point of backup for the SD card
+- This script should synchronize every folder in DELUGE/. with the SD card contents
+- The SD card path should be specified by .env
+- This script should use bash or python -- choose the safest and most reliable option
+- This script MUST NOT destroy or alter the contents of the SD card
+- This script should produce a concise changelog that lists the files changed, the type of file (i.e. song, kit, synth etc.).  Changes to XML files should note some indication of how much the file was altered.  .WAV changes can simply indicate that a file was added or deleted.  Entries in this log should be appended to logs/updates.log

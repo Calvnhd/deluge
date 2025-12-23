@@ -1,0 +1,12 @@
+
+- This script will be used to back up the entire contents of a Deluge SD card to a zip file that will be stored in the cloud
+- A SD card will be inserted into this computer which will contain the latest version of data, samples, songs etc
+- The contents of this repo represents an older version of the SD card contents
+- This script is the first point of backup for the SD card
+- This script should zip the entire contents of the SD card and save the zip to a specified destination
+- The resulting zip should be named in the format deluge-backup-yy-mm-dd.zip
+- The destination will be an independent cloud-synced folder, not in this repo.  This is similar to the way samples are backed up
+- The SD card path and zip destination path should be specified by .env
+- This script should use bash or python. Choose the safest and most reliable option
+- This script MUST NOT destroy or alter the contents of the SD card
+- This script MUST NOT alter the contents of this repository
