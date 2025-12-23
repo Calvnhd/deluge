@@ -1,6 +1,6 @@
 # Deluge
 
-Back-up and scripts for managing Deluge patches
+Deluge SD card back-up and scripts for managing its contents
 
 ---
 
@@ -77,3 +77,5 @@ python3 scripts/sd-to-repo.py
 - a script to sync to SD card?
 - update to latest community firmware
 - get presets from latest community competition
+- script to produce a list of patches? 
+- script to produce a list of samples and their usage data?
