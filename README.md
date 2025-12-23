@@ -1,7 +1,5 @@
 # Deluge
 
-# Deluge
-
 Back-up and scripts for managing Deluge patches
 
 ---
