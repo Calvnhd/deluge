@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../../DelugeFirmware"
+		},
+		{
+			"path": "../../DelugeFirmware.wiki"
 		}
 	],
 	"settings": {}

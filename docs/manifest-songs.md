@@ -1,6 +1,6 @@
 # Songs Manifest
 
-Generated: 2025-12-24 23:46:39
+Generated: 2025-12-25 00:26:36
 
 **Total: 46 songs**
 
@@ -17,6 +17,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (3):** KITS/KIT000, KITS/KIT016, KITS/KIT018
+- **Synths (5):** SYNTHS/SYNT016, SYNTHS/SYNT027, SYNTHS/SYNT133, SYNTHS/SYNT136, SYNTHS/SYNT172
 
 ## Ape
 
@@ -25,6 +26,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT000
+- **Synths (3):** SYNTHS/SYNT080, SYNTHS/SYNT137, SYNTHS/SYNT164
 
 ## 🎼 Arpo
 
@@ -33,6 +35,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.0
 - **Kits (2):** KITS/KIT008, KITS/KIT043
+- **Synths (5):** SYNTHS/SYNT000, SYNTHS/SYNT005, SYNTHS/SYNT037, SYNTHS/SYNT164, SYNTHS/SYNT171
 - **Audio Tracks (1):**
   - AUDIO3: `SAMPLES/CLIPS/REC00002.WAV`
 
@@ -51,6 +54,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT018
+- **Synths (1):** SYNTHS/SYNT000
 
 ## Bingbong
 
@@ -59,7 +63,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT000
-- **Synths (1):** SYNTHS/KERERU/Arp2
+- **Synths (4):** SYNTHS/KERERU/Arp2, SYNTHS/SYNT003, SYNTHS/SYNT014, SYNTHS/SYNT037
 
 ## 🎼 Bloop
 
@@ -68,6 +72,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT000
+- **Synths (7):** SYNTHS/SYNT000, SYNTHS/SYNT001, SYNTHS/SYNT002, SYNTHS/SYNT003, SYNTHS/SYNT133, SYNTHS/SYNT166, SYNTHS/SYNT171
 
 ## Bmtk
 
@@ -76,7 +81,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT003
-- **Synths (1):** SYNTHS/YAZO-LEAD2
+- **Synths (5):** SYNTHS/SYNT000, SYNTHS/SYNT006, SYNTHS/SYNT007, SYNTHS/SYNT023, SYNTHS/YAZO-LEAD2
 
 ## 🎼 Colour
 
@@ -85,6 +90,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT012
+- **Synths (4):** SYNTHS/SYNT000, SYNTHS/SYNT004, SYNTHS/SYNT164, SYNTHS/SYNT172
 
 ## Dject
 
@@ -93,6 +99,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT018
+- **Synths (9):** SYNTHS/SYNT009, SYNTHS/SYNT016, SYNTHS/SYNT018, SYNTHS/SYNT024, SYNTHS/SYNT036, SYNTHS/SYNT050, SYNTHS/SYNT051, SYNTHS/SYNT060, SYNTHS/SYNT073
 
 ## 🎼 Env
 
@@ -101,6 +108,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.0
 - **Kits (2):** KITS/KIT010, KITS/KIT040
+- **Synths (3):** SYNTHS/SYNT172, SYNTHS/SYNT173, SYNTHS/SYNT174
 
 ## 🎼 Japarps
 
@@ -109,6 +117,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT010
+- **Synths (5):** SYNTHS/SYNT002, SYNTHS/SYNT041, SYNTHS/SYNT143, SYNTHS/SYNT161, SYNTHS/SYNT170
 
 ## Judder
 
@@ -117,6 +126,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT018
+- **Synths (4):** SYNTHS/SYNT000, SYNTHS/SYNT003, SYNTHS/SYNT050, SYNTHS/SYNT164
 
 ## 🎼 K01Sink
 
@@ -137,7 +147,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (8):** KITS/KIT003, KITS/KIT043, KITS/KIT045, KITS/KIT046, KITS/KIT049, KITS/KIT051, KITS/SS-C-Bass, KITS/SS-C-Inst
-- **Synths (1):** SYNTHS/KERERU/K01Drone
+- **Synths (2):** SYNTHS/KERERU/K01Drone, SYNTHS/SYNT018
 - **Audio Tracks (14):**
   - AUDIO11: `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav`
   - AUDIO12: `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav`
@@ -161,7 +171,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (2):** KITS/KIT000, KITS/KIT018
-- **Synths (3):** SYNTHS/KERERU/Arp1, SYNTHS/KERERU/Arp2, SYNTHS/TB13
+- **Synths (12):** SYNTHS/KERERU/Arp1, SYNTHS/KERERU/Arp2, SYNTHS/SYNT014, SYNTHS/SYNT027, SYNTHS/SYNT035, SYNTHS/SYNT097, SYNTHS/SYNT128, SYNTHS/SYNT142, SYNTHS/SYNT170, SYNTHS/SYNT171, SYNTHS/SYNT172, SYNTHS/TB13
 - **Audio Tracks (3):**
   - AUDIO1: `SAMPLES/CLIPS/REC00041.WAV`
   - AUDIO2: `SAMPLES/CLIPS/REC00042.WAV`
@@ -174,7 +184,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Modified:** 2025-12-24
 - **Arrangement:** No
 - **Firmware:** 4.0.1
-- **Synths (2):** SYNTHS/41-VIOLINE 2, SYNTHS/41-VIOLINE 3
+- **Synths (5):** SYNTHS/41-VIOLINE 2, SYNTHS/41-VIOLINE 3, SYNTHS/SYNT014, SYNTHS/SYNT047, SYNTHS/SYNT143
 
 ## 🎼 K05BeautifulStranger
 
@@ -183,6 +193,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (2):** KITS/Deeper, KITS/KIT000
+- **Synths (9):** SYNTHS/SYNT002, SYNTHS/SYNT009, SYNTHS/SYNT014, SYNTHS/SYNT063, SYNTHS/SYNT067, SYNTHS/SYNT098, SYNTHS/SYNT100, SYNTHS/SYNT130, SYNTHS/SYNT172
 
 ## 🎼 K06MWHW 2
 
@@ -191,7 +202,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT019
-- **Synths (1):** SYNTHS/41-VIOLINE
+- **Synths (8):** SYNTHS/41-VIOLINE, SYNTHS/SYNT014, SYNTHS/SYNT055, SYNTHS/SYNT085, SYNTHS/SYNT119, SYNTHS/SYNT143, SYNTHS/SYNT150, SYNTHS/SYNT172
 
 ## 🎼 K07NatRad
 
@@ -200,7 +211,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (6):** KITS/Deeper, KITS/Nr Drums, KITS/Nr Hits, KITS/Nr Hook, KITS/Nr Isovox, KITS/Nr Piano
-- **Synths (1):** SYNTHS/Islp
+- **Synths (2):** SYNTHS/Islp, SYNTHS/SYNT080
 
 ## 🎼 K08Offbeat
 
@@ -209,6 +220,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (2):** KITS/KIT010, KITS/KIT039
+- **Synths (7):** SYNTHS/SYNT003, SYNTHS/SYNT008, SYNTHS/SYNT024, SYNTHS/SYNT041, SYNTHS/SYNT085, SYNTHS/SYNT086, SYNTHS/SYNT149
 
 ## 🎼 K09Arparty
 
@@ -217,7 +229,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (3):** KITS/KERERU/Fuzzgat, KITS/KIT000, KITS/KIT010
-- **Synths (5):** SYNTHS/KERERU/K01Drone, SYNTHS/KERERU/K01Fuzzbass, SYNTHS/KRumchybass, SYNTHS/TB11, SYNTHS/VISA-PAD
+- **Synths (13):** SYNTHS/KERERU/K01Drone, SYNTHS/KERERU/K01Fuzzbass, SYNTHS/KRumchybass, SYNTHS/SYNT009, SYNTHS/SYNT014, SYNTHS/SYNT028, SYNTHS/SYNT034, SYNTHS/SYNT050, SYNTHS/SYNT085, SYNTHS/SYNT165, SYNTHS/SYNT172, SYNTHS/TB11, SYNTHS/VISA-PAD
 - **Audio Tracks (1):**
   - AUDIO1: `SAMPLES/CLIPS/REC00015.WAV`
 - **MIDI Channels (1):** 0
@@ -229,7 +241,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (3):** KITS/KIT003, KITS/KIT021, KITS/KIT045
-- **Synths (2):** SYNTHS/KERERU/Fuzz, SYNTHS/TB02
+- **Synths (5):** SYNTHS/KERERU/Fuzz, SYNTHS/SYNT000, SYNTHS/SYNT014, SYNTHS/SYNT080, SYNTHS/TB02
 - **Audio Tracks (1):**
   - AUDIO1: `SAMPLES/CLIPS/REC00018.WAV`
 - **MIDI Channels (1):** 0
@@ -241,6 +253,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT003
+- **Synths (5):** SYNTHS/SYNT014, SYNTHS/SYNT025, SYNTHS/SYNT165, SYNTHS/SYNT168, SYNTHS/SYNT170
 
 ## K12Hj
 
@@ -249,6 +262,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT003
+- **Synths (3):** SYNTHS/SYNT037, SYNTHS/SYNT040, SYNTHS/SYNT086
 
 ## Kg
 
@@ -257,6 +271,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT005
+- **Synths (3):** SYNTHS/SYNT086, SYNTHS/SYNT159, SYNTHS/SYNT169
 
 ## Lcd
 
@@ -264,6 +279,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Modified:** 2025-12-24
 - **Arrangement:** No
 - **Firmware:** 4.0.1
+- **Synths (1):** SYNTHS/SYNT000
 - **MIDI Channels (1):** 0
 
 ## Lemon
@@ -273,7 +289,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT043
-- **Synths (2):** SYNTHS/KRAF-POLY, SYNTHS/YAZO-SEQ
+- **Synths (3):** SYNTHS/KRAF-POLY, SYNTHS/SYNT014, SYNTHS/YAZO-SEQ
 - **Audio Tracks (1):**
   - AUDIO2: `SAMPLES/CLIPS/REC00050.WAV`
 
@@ -301,6 +317,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Modified:** 2025-12-24
 - **Arrangement:** No
 - **Firmware:** 4.0.1
+- **Synths (1):** SYNTHS/SYNT008
 - **MIDI Channels (1):** 0
 
 ## 🎼 Paddy
@@ -310,6 +327,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT013
+- **Synths (7):** SYNTHS/SYNT000, SYNTHS/SYNT003, SYNTHS/SYNT009, SYNTHS/SYNT050, SYNTHS/SYNT155, SYNTHS/SYNT162, SYNTHS/SYNT171
 
 ## PianoArp
 
@@ -318,6 +336,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT031
+- **Synths (1):** SYNTHS/SYNT014
 - **Audio Tracks (1):**
   - AUDIO1: `SAMPLES/CLIPS/REC00005.WAV`
 
@@ -328,6 +347,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT031
+- **Synths (1):** SYNTHS/SYNT008
 - **Audio Tracks (1):**
   - AUDIO1: `SAMPLES/CLIPS/REC00005.WAV`
 
@@ -338,6 +358,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (3):** KITS/KIT000, KITS/KIT051, KITS/KIT053
+- **Synths (1):** SYNTHS/SYNT000
 - **MIDI Channels (1):** 1
 
 ## Repeatbeat
@@ -346,6 +367,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Modified:** 2025-12-24
 - **Arrangement:** No
 - **Firmware:** 4.0.0
+- **Synths (3):** SYNTHS/SYNT000, SYNTHS/SYNT034, SYNTHS/SYNT043
 
 ## Rr
 
@@ -354,6 +376,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT021
+- **Synths (1):** SYNTHS/SYNT022
 
 ## SlpspkArpsOld
 
@@ -362,6 +385,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.0
 - **Kits (1):** KITS/KIT000
+- **Synths (6):** SYNTHS/SYNT013, SYNTHS/SYNT030, SYNTHS/SYNT059, SYNTHS/SYNT161, SYNTHS/SYNT164, SYNTHS/SYNT172
 
 ## SlpspkRemix
 
@@ -370,6 +394,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (5):** KITS/KIT000, KITS/SS-C-Bass, KITS/SS-C-Inst, KITS/SS-C-vox, KITS/SS-Drums
+- **Synths (1):** SYNTHS/SYNT018
 
 ## 🎼 Sot
 
@@ -378,6 +403,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (4):** KITS/KIT042, KITS/KIT043, KITS/KIT044, KITS/KIT045
+- **Synths (1):** SYNTHS/SYNT175
 - **Audio Tracks (1):**
   - AUDIO1: `SAMPLES/CLIPS/REC00047.WAV`
 
@@ -388,6 +414,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (2):** KITS/KIT043, KITS/KIT044
+- **Synths (2):** SYNTHS/SYNT003, SYNTHS/SYNT176
 
 ## Stoner
 
@@ -396,6 +423,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT010
+- **Synths (3):** SYNTHS/SYNT000, SYNTHS/SYNT007, SYNTHS/SYNT158
 - **Audio Tracks (3):**
   - AUDIO1: `SAMPLES/CLIPS/REC00009.WAV`
   - AUDIO2: `SAMPLES/CLIPS/REC00011.WAV`
@@ -408,6 +436,7 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** No
 - **Firmware:** 4.0.1
 - **Kits (1):** KITS/KIT003
+- **Synths (1):** SYNTHS/SYNT050
 
 ## Three
 
@@ -433,3 +462,4 @@ Firmware versions: 4.0.0, 4.0.1
 - **Arrangement:** Yes
 - **Firmware:** 4.0.1
 - **Kits (2):** KITS/KIT010, KITS/KIT046
+- **Synths (2):** SYNTHS/SYNT014, SYNTHS/SYNT172

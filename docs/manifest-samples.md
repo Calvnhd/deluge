@@ -1,6 +1,6 @@
 # Samples Manifest
 
-Generated: 2025-12-24 23:46:39
+Generated: 2025-12-25 00:26:36
 
 ## Summary
 
@@ -42,14 +42,14 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/Andrew Stirton/Frugal/snare2A.wav` | 22.9 KB | 2023-03-18 | Kit: KIT015 |
 | `SAMPLES/Artists/Andrew Stirton/Frugal/sprongle.wav` | 767.1 KB | 2023-03-18 | Kit: KIT015 |
 | `SAMPLES/Artists/Andrew Stirton/Frugal/wurgle.wav` | 516.9 KB | 2023-03-18 | Kit: KIT015 |
-| `SAMPLES/Artists/Campbell Kneale/antihuman guitar.wav` | 11.3 MB | 2023-03-18 | Kit: KIT039, Synth: unnamed synth (in Judder), Kit: unnamed kit (in K08Offbeat) |
-| `SAMPLES/Artists/Campbell Kneale/arctic trem guitar.wav` | 16.7 MB | 2023-03-18 | Kit: KIT039, Kit: unnamed kit (in K08Offbeat) |
-| `SAMPLES/Artists/Campbell Kneale/bells of grenoble.wav` | 3.7 MB | 2023-03-18 | Kit: KIT039, Kit: unnamed kit (in K08Offbeat) |
-| `SAMPLES/Artists/Campbell Kneale/blurting bagpipe.wav` | 8.6 MB | 2023-03-18 | Kit: KIT039, Kit: unnamed kit (in K08Offbeat) |
-| `SAMPLES/Artists/Campbell Kneale/bowed roof.wav` | 7.1 MB | 2023-03-18 | Kit: KIT039, Kit: unnamed kit (in K08Offbeat) |
-| `SAMPLES/Artists/Campbell Kneale/dogskinning guitar.wav` | 8.5 MB | 2023-03-18 | Kit: KIT039, Kit: unnamed kit (in K08Offbeat) |
-| `SAMPLES/Artists/Campbell Kneale/goat throats.wav` | 12.3 MB | 2023-03-18 | Kit: KIT039, Kit: unnamed kit (in K08Offbeat) |
-| `SAMPLES/Artists/Campbell Kneale/karma shovel.wav` | 15.8 MB | 2023-03-18 | Kit: KIT039, Kit: unnamed kit (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/antihuman guitar.wav` | 11.3 MB | 2023-03-18 | Kit: KIT039, Synth: SYNT000 (in Judder), Kit: KIT039 (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/arctic trem guitar.wav` | 16.7 MB | 2023-03-18 | Kit: KIT039, Kit: KIT039 (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/bells of grenoble.wav` | 3.7 MB | 2023-03-18 | Kit: KIT039, Kit: KIT039 (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/blurting bagpipe.wav` | 8.6 MB | 2023-03-18 | Kit: KIT039, Kit: KIT039 (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/bowed roof.wav` | 7.1 MB | 2023-03-18 | Kit: KIT039, Kit: KIT039 (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/dogskinning guitar.wav` | 8.5 MB | 2023-03-18 | Kit: KIT039, Kit: KIT039 (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/goat throats.wav` | 12.3 MB | 2023-03-18 | Kit: KIT039, Kit: KIT039 (in K08Offbeat) |
+| `SAMPLES/Artists/Campbell Kneale/karma shovel.wav` | 15.8 MB | 2023-03-18 | Kit: KIT039, Kit: KIT039 (in K08Offbeat) |
 | `SAMPLES/Artists/Chaz/CB3-bell.wav` | 177.4 KB | 2023-03-18 | Kit: KIT030 |
 | `SAMPLES/Artists/Chaz/CB4-Cassette808_BD02.wav` | 75.5 KB | 2023-03-18 | Kit: KIT030 |
 | `SAMPLES/Artists/Chaz/CB5-Cassette808_BD03.wav` | 568.6 KB | 2023-03-18 | Kit: KIT030 |
@@ -117,38 +117,38 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/Dean Daughters/Bass Music/SN - ReallyNice.wav` | 119.8 KB | 2023-03-18 | Kit: KIT017 |
 | `SAMPLES/Artists/Dean Daughters/Bass Music/SN - Seasoned.wav` | 251.2 KB | 2023-03-18 | Kit: KIT017 |
 | `SAMPLES/Artists/Dean Daughters/Bass Music/SN - Tiburon.wav` | 147.8 KB | 2023-03-18 | Kit: KIT017 |
-| `SAMPLES/Artists/Dean Daughters/Psy/CLAP-Dimension.wav` | 44.0 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav` | 24.2 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav` | 37.9 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav` | 21.2 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/KICK-Bonus01.wav` | 62.1 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/KICK-Radar.wav` | 89.0 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/KICK-Silence.wav` | 69.8 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav` | 91.3 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav` | 61.4 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Silence.wav` | 45.5 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension1.wav` | 55.5 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension2.wav` | 56.7 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav` | 71.4 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/SHAKER-Radar.wav` | 56.0 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav` | 112.6 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav` | 45.2 KB | 2023-03-18 | Kit: KIT018, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Beginagain) (+3 more) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - CLAP - 01.wav` | 116.2 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - CLAP - 02.wav` | 424.8 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 01.wav` | 11.9 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 02.wav` | 245.3 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 03.wav` | 340.5 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 01.wav` | 79.1 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 02.wav` | 179.5 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 03.wav` | 55.0 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 04.wav` | 217.7 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 05.wav` | 77.4 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - RIM - 01.wav` | 17.1 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SHAKER - 01.wav` | 25.3 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 01.wav` | 88.0 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 02.wav` | 51.9 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 03.wav` | 356.1 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
-| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - TAMB - 01.wav` | 28.7 KB | 2023-03-18 | Kit: KIT016, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Psy/CLAP-Dimension.wav` | 44.0 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav` | 24.2 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav` | 37.9 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav` | 21.2 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/KICK-Bonus01.wav` | 62.1 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/KICK-Radar.wav` | 89.0 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/KICK-Silence.wav` | 69.8 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav` | 91.3 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav` | 61.4 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Silence.wav` | 45.5 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension1.wav` | 55.5 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension2.wav` | 56.7 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav` | 71.4 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/SHAKER-Radar.wav` | 56.0 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav` | 112.6 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav` | 45.2 KB | 2023-03-18 | Kit: KIT018, Kit: KIT018 (in Alr), Kit: KIT018 (in Beginagain) (+3 more) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - CLAP - 01.wav` | 116.2 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - CLAP - 02.wav` | 424.8 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 01.wav` | 11.9 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 02.wav` | 245.3 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 03.wav` | 340.5 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 01.wav` | 79.1 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 02.wav` | 179.5 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 03.wav` | 55.0 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 04.wav` | 217.7 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 05.wav` | 77.4 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - RIM - 01.wav` | 17.1 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SHAKER - 01.wav` | 25.3 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 01.wav` | 88.0 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 02.wav` | 51.9 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 03.wav` | 356.1 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
+| `SAMPLES/Artists/Dean Daughters/Y2K/Y2K - TAMB - 01.wav` | 28.7 KB | 2023-03-18 | Kit: KIT016, Kit: KIT016 (in Alr), Kit: KIT016 (in Mountain) |
 | `SAMPLES/Artists/Eric Mooney/Kit1/Bass, Sub, Doppler Distortion, Recorder Manipulation.wav` | 466.3 KB | 2023-03-18 | Kit: KIT027 |
 | `SAMPLES/Artists/Eric Mooney/Kit1/Braams, Guitar Bowed, Dark, Foreboding, Key of C.wav` | 6.1 MB | 2023-03-18 | Kit: KIT027 |
 | `SAMPLES/Artists/Eric Mooney/Kit1/Drone, Evolving, Slow Modulation, Electromagnetic.wav` | 52.4 MB | 2023-03-18 | Kit: KIT027 |
@@ -190,14 +190,14 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/James Closs/Kit2/14 TOMH.wav` | 40.1 KB | 2023-03-18 | Kit: KIT024 |
 | `SAMPLES/Artists/James Closs/Kit2/15 GUIRO.wav` | 132.1 KB | 2023-03-18 | Kit: KIT024 |
 | `SAMPLES/Artists/James Closs/Kit2/16 CWBL 02.wav` | 19.4 KB | 2023-03-18 | Kit: KIT024 |
-| `SAMPLES/Artists/John Atkinson/Homecoming Lo Loop.wav` | 826.3 KB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
-| `SAMPLES/Artists/John Atkinson/Homecoming Loop.wav` | 826.3 KB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
-| `SAMPLES/Artists/John Atkinson/Metal Bell Junk.wav` | 8.2 MB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
-| `SAMPLES/Artists/John Atkinson/Rank Riff.wav` | 301.2 KB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
-| `SAMPLES/Artists/John Atkinson/SolarClangs.wav` | 5.4 MB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
-| `SAMPLES/Artists/John Atkinson/Trash Hits Buzz.wav` | 4.5 MB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
-| `SAMPLES/Artists/John Atkinson/Truck Scrape.wav` | 988.0 KB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
-| `SAMPLES/Artists/John Atkinson/Wave Drone.wav` | 8.7 MB | 2023-03-18 | Kit: KIT040, Kit: unnamed kit (in Env) |
+| `SAMPLES/Artists/John Atkinson/Homecoming Lo Loop.wav` | 826.3 KB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
+| `SAMPLES/Artists/John Atkinson/Homecoming Loop.wav` | 826.3 KB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
+| `SAMPLES/Artists/John Atkinson/Metal Bell Junk.wav` | 8.2 MB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
+| `SAMPLES/Artists/John Atkinson/Rank Riff.wav` | 301.2 KB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
+| `SAMPLES/Artists/John Atkinson/SolarClangs.wav` | 5.4 MB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
+| `SAMPLES/Artists/John Atkinson/Trash Hits Buzz.wav` | 4.5 MB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
+| `SAMPLES/Artists/John Atkinson/Truck Scrape.wav` | 988.0 KB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
+| `SAMPLES/Artists/John Atkinson/Wave Drone.wav` | 8.7 MB | 2023-03-18 | Kit: KIT040, Kit: KIT040 (in Env) |
 | `SAMPLES/Artists/JS-Clipping/Alarm.wav` | 97.3 KB | 2023-03-18 | Kit: KIT038 |
 | `SAMPLES/Artists/JS-Clipping/CinderBlock-Drop.wav` | 270.5 KB | 2023-03-18 | Kit: KIT038 |
 | `SAMPLES/Artists/JS-Clipping/GlasTap.wav` | 67.2 KB | 2023-03-18 | Kit: KIT038 |
@@ -214,29 +214,29 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/Kody Nielson/6.wav` | 1.6 MB | 2023-03-18 | Kit: KIT032 |
 | `SAMPLES/Artists/Kody Nielson/7.wav` | 1.0 MB | 2023-03-18 | Kit: KIT032 |
 | `SAMPLES/Artists/Kody Nielson/8.wav` | 2.9 MB | 2023-03-18 | Kit: KIT032 |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/36 a.wav` | 596.1 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/39 a.WAV` | 356.1 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/43 a.WAV` | 838.6 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/46 a.WAV` | 382.4 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/50 a.WAV` | 1004.2 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/53 a.WAV` | 345.5 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/57 a.WAV` | 516.3 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/60 a.WAV` | 365.8 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/64 a.WAV` | 285.5 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/67 a.WAV` | 275.6 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/69 a.WAV` | 170.8 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/36 b.WAV` | 633.9 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/39 b.WAV` | 352.0 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/43 b.WAV` | 721.4 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/46 b.WAV` | 375.3 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/50 b.WAV` | 878.3 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/53 b.WAV` | 360.6 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/57 b.WAV` | 530.1 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/60 b.WAV` | 368.7 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/67 b.WAV` | 197.0 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/69 b.WAV` | 168.0 KB | 2023-03-18 | Synth: SYNT169, Synth: unnamed synth (in Kg) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/1.wav` | 858.5 KB | 2023-03-18 | Synth: SYNT168, Synth: unnamed synth (in K11Bonk) |
-| `SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/2.wav` | 804.2 KB | 2023-03-18 | Synth: SYNT168, Synth: unnamed synth (in K11Bonk) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/36 a.wav` | 596.1 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/39 a.WAV` | 356.1 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/43 a.WAV` | 838.6 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/46 a.WAV` | 382.4 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/50 a.WAV` | 1004.2 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/53 a.WAV` | 345.5 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/57 a.WAV` | 516.3 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/60 a.WAV` | 365.8 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/64 a.WAV` | 285.5 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/67 a.WAV` | 275.6 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/69 a.WAV` | 170.8 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/36 b.WAV` | 633.9 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/39 b.WAV` | 352.0 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/43 b.WAV` | 721.4 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/46 b.WAV` | 375.3 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/50 b.WAV` | 878.3 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/53 b.WAV` | 360.6 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/57 b.WAV` | 530.1 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/60 b.WAV` | 368.7 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/67 b.WAV` | 197.0 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/69 b.WAV` | 168.0 KB | 2023-03-18 | Synth: SYNT169, Synth: SYNT169 (in Kg) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/1.wav` | 858.5 KB | 2023-03-18 | Synth: SYNT168, Synth: SYNT168 (in K11Bonk) |
+| `SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/2.wav` | 804.2 KB | 2023-03-18 | Synth: SYNT168, Synth: SYNT168 (in K11Bonk) |
 | `SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/1BurpStretch Pitch-envelope2.wav` | 816.6 KB | 2023-03-18 | Kit: KIT020 |
 | `SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Beatbox snare + Drive filter mono.wav` | 78.7 KB | 2023-03-18 | Kit: KIT020 |
 | `SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/CLAP2.WAV` | 18.6 KB | 2023-03-18 | Kit: KIT020 |
@@ -250,47 +250,47 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Snare crisp.WAV` | 168.3 KB | 2023-03-18 | Kit: KIT020 |
 | `SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Snare Lip short SATURATED Beatbox.wav` | 60.7 KB | 2023-03-18 | Kit: KIT020 |
 | `SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/SNARE smack.wav` | 29.7 KB | 2023-03-18 | Kit: KIT020 |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317]-1.wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224319].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224320].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224322].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323]-1.wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224324].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224325].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224334].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224336].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224338].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224340].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224341].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224344].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224345].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: unnamed synth (in Japarps), Synth: unnamed synth (in K03Yends) (+1 more) |
-| `SAMPLES/Artists/Phil Elverum/Bass Houseshape.wav` | 733.4 KB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Phil Elverum/Blossom Clearmoon.wav` | 638.8 KB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Phil Elverum/Chord Clearmoon.wav` | 697.1 KB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Phil Elverum/Clavichord Palelights.wav` | 497.0 KB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Phil Elverum/Feedback The Place I Live.wav` | 3.6 MB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Phil Elverum/Gong Clearmoon.wav` | 1.5 MB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Phil Elverum/Guitar Oceanroar.wav` | 1.7 MB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Phil Elverum/HighDrone The Place Lives.wav` | 3.8 MB | 2023-03-18 | Kit: KIT042, Kit: unnamed kit (in Sot) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00171.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00172.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00173.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00174.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00175.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00176.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00177.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00178.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00179.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00180.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00183.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00184.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00185.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00187.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
-| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00188.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: unnamed kit (in K10FiveAlive), Kit: unnamed kit (in Rr) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317]-1.wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224319].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224320].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224322].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323]-1.wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224324].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224325].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224334].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224336].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224338].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224340].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224341].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224344].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224345].wav` | 2.0 MB | 2023-03-18 | Synth: SYNT170, Synth: SYNT170 (in Japarps), Synth: SYNT170 (in K03Yends) (+1 more) |
+| `SAMPLES/Artists/Phil Elverum/Bass Houseshape.wav` | 733.4 KB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Phil Elverum/Blossom Clearmoon.wav` | 638.8 KB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Phil Elverum/Chord Clearmoon.wav` | 697.1 KB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Phil Elverum/Clavichord Palelights.wav` | 497.0 KB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Phil Elverum/Feedback The Place I Live.wav` | 3.6 MB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Phil Elverum/Gong Clearmoon.wav` | 1.5 MB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Phil Elverum/Guitar Oceanroar.wav` | 1.7 MB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Phil Elverum/HighDrone The Place Lives.wav` | 3.8 MB | 2023-03-18 | Kit: KIT042, Kit: KIT042 (in Sot) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00171.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00172.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00173.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00174.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00175.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00176.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00177.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00178.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00179.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00180.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00183.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00184.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00185.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00187.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
+| `SAMPLES/Artists/Philippe Palmieri/Kit 1/REC00188.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT021, Kit: KIT021 (in K10FiveAlive), Kit: KIT021 (in Rr) |
 | `SAMPLES/Artists/Philippe Palmieri/Kit 2/REC00130.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT022 |
 | `SAMPLES/Artists/Philippe Palmieri/Kit 2/REC00131.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT022 |
 | `SAMPLES/Artists/Philippe Palmieri/Kit 2/REC00132.WAV` | 258.4 KB | 2023-03-18 | Kit: KIT022 |
@@ -329,18 +329,18 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/Roman Hatz/Kit 1/Snare HiMetal.wav` | 58.3 KB | 2023-03-18 | Kit: KIT026 |
 | `SAMPLES/Artists/Roman Hatz/Kit 1/Snare Metallic Punch.wav` | 32.7 KB | 2023-03-18 | Kit: KIT026 |
 | `SAMPLES/Artists/Roman Hatz/Kit 1/Snare.wav` | 70.8 KB | 2023-03-18 | Kit: KIT026 |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Clap.wav` | 17.4 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash.wav` | 70.7 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash2.wav` | 51.3 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_HiHat.wav` | 6.9 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Kick.wav` | 22.5 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Perc.wav` | 35.4 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_PercRev.wav` | 11.5 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Rim.wav` | 6.8 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker.wav` | 14.1 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker2.wav` | 20.6 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare.wav` | 21.0 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
-| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare2.wav` | 21.5 KB | 2023-03-18 | Kit: KIT019, Kit: unnamed kit (in K06MWHW 2), Kit: unnamed kit (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Clap.wav` | 17.4 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash.wav` | 70.7 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash2.wav` | 51.3 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_HiHat.wav` | 6.9 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Kick.wav` | 22.5 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Perc.wav` | 35.4 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_PercRev.wav` | 11.5 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Rim.wav` | 6.8 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker.wav` | 14.1 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker2.wav` | 20.6 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare.wav` | 21.0 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
+| `SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare2.wav` | 21.5 KB | 2023-03-18 | Kit: KIT019, Kit: KIT019 (in K06MWHW 2), Kit: KIT019 (in Wf) |
 | `SAMPLES/Artists/Sjionel Timu/cutss01.wav` | 747.6 KB | 2023-03-18 | Kit: KIT035 |
 | `SAMPLES/Artists/Sjionel Timu/cutss02.wav` | 1.1 MB | 2023-03-18 | Kit: KIT035 |
 | `SAMPLES/Artists/Sjionel Timu/cutss03.wav` | 1.5 MB | 2023-03-18 | Kit: KIT035 |
@@ -369,18 +369,18 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/Stephanie Engelbrecht/6.wav` | 842.1 KB | 2023-03-18 | Kit: KIT037 |
 | `SAMPLES/Artists/Stephanie Engelbrecht/7.wav` | 246.9 KB | 2023-03-18 | Kit: KIT037 |
 | `SAMPLES/Artists/Stephanie Engelbrecht/8.wav` | 197.0 KB | 2023-03-18 | Kit: KIT037 |
-| `SAMPLES/Artists/Totems/808 Bass C Deep-O.wav` | 812.2 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/cp02.wav` | 58.7 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/HiHat Closed 001 Widened.wav` | 79.0 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/Kick 003 Sensible.wav` | 64.0 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/PAD-LosAngeles92.wav` | 1.8 MB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/Percussion Bell 003 Agogo High.wav` | 128.5 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/Percussion Bubble 001.wav` | 17.8 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/Percussion Cowbell 004 808.wav` | 148.8 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/Percussion Rimshot 003.wav` | 405.3 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/Snare Drum 018 Dilla.wav` | 53.9 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/SYNTH-Bellishform1.wav` | 289.1 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
-| `SAMPLES/Artists/Totems/SYNTH-FancyPoly800longCool.wav` | 833.0 KB | 2023-03-18 | Kit: KIT031, Kit: unnamed kit (in PianoArp), Kit: unnamed kit (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/808 Bass C Deep-O.wav` | 812.2 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/cp02.wav` | 58.7 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/HiHat Closed 001 Widened.wav` | 79.0 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/Kick 003 Sensible.wav` | 64.0 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/PAD-LosAngeles92.wav` | 1.8 MB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/Percussion Bell 003 Agogo High.wav` | 128.5 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/Percussion Bubble 001.wav` | 17.8 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/Percussion Cowbell 004 808.wav` | 148.8 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/Percussion Rimshot 003.wav` | 405.3 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/Snare Drum 018 Dilla.wav` | 53.9 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/SYNTH-Bellishform1.wav` | 289.1 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
+| `SAMPLES/Artists/Totems/SYNTH-FancyPoly800longCool.wav` | 833.0 KB | 2023-03-18 | Kit: KIT031, Kit: KIT031 (in PianoArp), Kit: KIT031 (in PianoFatBass) |
 | `SAMPLES/Artists/Travis Egedy/ALPHA CHORDS.WAV` | 1.2 MB | 2023-03-18 | Kit: KIT034 |
 | `SAMPLES/Artists/Travis Egedy/BASS STABS.WAV` | 2.5 MB | 2023-03-18 | Kit: KIT034 |
 | `SAMPLES/Artists/Travis Egedy/DRUMS 130.WAV` | 2.5 MB | 2023-03-18 | Kit: KIT034 |
@@ -389,13 +389,13 @@ Total: 641 (860.8 MB)
 | `SAMPLES/Artists/Travis Egedy/POP.WAV` | 2.5 MB | 2023-03-18 | Kit: KIT034 |
 | `SAMPLES/Artists/Travis Egedy/TINY STROKES.WAV` | 2.5 MB | 2023-03-18 | Kit: KIT034 |
 | `SAMPLES/Artists/Travis Egedy/UP STROKES.WAV` | 2.5 MB | 2023-03-18 | Kit: KIT034 |
-| `SAMPLES/CLIPS/REC00002.WAV` | 2.2 MB | 2023-03-18 | Audio: AUDIO3 (in Arpo), Kit: unnamed kit (in Arpo) |
+| `SAMPLES/CLIPS/REC00002.WAV` | 2.2 MB | 2023-03-18 | Audio: AUDIO3 (in Arpo), Kit: KIT043 (in Arpo) |
 | `SAMPLES/CLIPS/REC00005.WAV` | 17.0 MB | 2024-01-08 | Audio: AUDIO1 (in PianoArp), Audio: AUDIO1 (in PianoFatBass) |
 | `SAMPLES/CLIPS/REC00009.WAV` | 1.6 MB | 2024-01-08 | Audio: AUDIO1 (in Stoner) |
 | `SAMPLES/CLIPS/REC00011.WAV` | 1.6 MB | 2024-01-08 | Audio: AUDIO2 (in Stoner) |
 | `SAMPLES/CLIPS/REC00013.WAV` | 1.6 MB | 2024-01-08 | Audio: AUDIO3 (in Stoner) |
 | `SAMPLES/CLIPS/REC00015.WAV` | 2.0 MB | 2025-12-23 | Audio: AUDIO1 (in K09Arparty) |
-| `SAMPLES/CLIPS/REC00018.WAV` | 5.8 MB | 2025-12-23 | Audio: AUDIO1 (in K10FiveAlive), Kit: unnamed kit (in K10FiveAlive) |
+| `SAMPLES/CLIPS/REC00018.WAV` | 5.8 MB | 2025-12-23 | Audio: AUDIO1 (in K10FiveAlive), Kit: KIT045 (in K10FiveAlive) |
 | `SAMPLES/CLIPS/REC00040.WAV` | 4.0 MB | 2025-12-23 | Audio: AUDIO2 (in K01Sink) |
 | `SAMPLES/CLIPS/REC00041.WAV` | 2.0 MB | 2025-12-23 | Audio: AUDIO1 (in K03Yends) |
 | `SAMPLES/CLIPS/REC00042.WAV` | 4.6 MB | 2025-12-23 | Audio: AUDIO2 (in K03Yends) |
@@ -404,197 +404,197 @@ Total: 641 (860.8 MB)
 | `SAMPLES/CLIPS/REC00050.WAV` | 3.2 MB | 2025-12-23 | Audio: AUDIO2 (in Lemon) |
 | `SAMPLES/DRUMS/Block/HR16B Block.wav` | 10.0 KB | 2023-03-18 | Kit: KIT007 |
 | `SAMPLES/DRUMS/Block/R-50 Agog.wav` | 6.8 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Block/R100 Woodblock.wav` | 25.5 KB | 2023-03-18 | Kit: Fuzzgat, Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/Block/R100 Woodblock.wav` | 25.5 KB | 2023-03-18 | Kit: Fuzzgat, Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/Block/RX-5 Bongo high.wav` | 14.7 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/Block/RX-5 Bongo low.wav` | 21.8 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/China/R-50 China.wav` | 43.5 KB | 2023-03-18 | Kit: KIT004 |
 | `SAMPLES/DRUMS/China/RX-5 China.wav` | 141.8 KB | 2023-03-18 | Kit: KIT009 |
-| `SAMPLES/DRUMS/Clap/808 Clap.WAV` | 172.3 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Clap/808 Clap.WAV` | 172.3 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
 | `SAMPLES/DRUMS/Clap/909 Clap.WAV` | 34.7 KB | 2023-03-18 | Kit: Deeper, Kit: Deeper (in K05BeautifulStranger), Kit: Deeper (in K07NatRad) (+8 more) |
-| `SAMPLES/DRUMS/Clap/DDD1 Clap.wav` | 54.2 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/Clap/DDD1 Clap.wav` | 54.2 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/Clap/HR16B Clap.wav` | 37.6 KB | 2023-03-18 | Kit: KIT007 |
 | `SAMPLES/DRUMS/Clap/Linndrum Clap.wav` | 16.5 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/Clap/R-50 Clap.wav` | 15.9 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Clap/Sequential Circuits Drumtraks Clap.wav` | 26.2 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
-| `SAMPLES/DRUMS/Claves/808 Claves.WAV` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Clap/Sequential Circuits Drumtraks Clap.wav` | 26.2 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
+| `SAMPLES/DRUMS/Claves/808 Claves.WAV` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
 | `SAMPLES/DRUMS/Claves/CR78 Claves.wav` | 4.5 KB | 2023-03-18 | Kit: KIT014 |
 | `SAMPLES/DRUMS/Claves/KR55 Claves.wav` | 3.7 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/Claves/R-50 Claves.wav` | 10.4 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Claves/Rhythmace Claves.WAV` | 8.1 KB | 2023-03-18 | Kit: KIT013, Kit: unnamed kit (in Paddy) |
-| `SAMPLES/DRUMS/Claves/Rhythmace Percussion.wav` | 22.6 KB | 2023-03-18 | Kit: KIT013, Kit: unnamed kit (in Paddy) |
-| `SAMPLES/DRUMS/ConH/808 Conga high.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Claves/Rhythmace Claves.WAV` | 8.1 KB | 2023-03-18 | Kit: KIT013, Kit: KIT013 (in Paddy) |
+| `SAMPLES/DRUMS/Claves/Rhythmace Percussion.wav` | 22.6 KB | 2023-03-18 | Kit: KIT013, Kit: KIT013 (in Paddy) |
+| `SAMPLES/DRUMS/ConH/808 Conga high.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
 | `SAMPLES/DRUMS/ConH/CR78 Conga high.wav` | 9.5 KB | 2023-03-18 | Kit: KIT014 |
 | `SAMPLES/DRUMS/ConH/Linndrum Conga extra high.wav` | 9.5 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/ConH/Linndrum Conga high.wav` | 15.1 KB | 2023-03-18 | Kit: KIT006 |
-| `SAMPLES/DRUMS/ConH/R100 Conga high.wav` | 24.3 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/ConH/Rhythmace Conga high.wav` | 6.3 KB | 2023-03-18 | Kit: KIT013, Kit: unnamed kit (in Paddy) |
-| `SAMPLES/DRUMS/ConL/808 Conga low.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/ConH/R100 Conga high.wav` | 24.3 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/ConH/Rhythmace Conga high.wav` | 6.3 KB | 2023-03-18 | Kit: KIT013, Kit: KIT013 (in Paddy) |
+| `SAMPLES/DRUMS/ConL/808 Conga low.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
 | `SAMPLES/DRUMS/ConL/CR78 Conga low.wav` | 17.6 KB | 2023-03-18 | Kit: KIT014 |
 | `SAMPLES/DRUMS/ConL/Linndrum Conga low.wav` | 39.3 KB | 2023-03-18 | Kit: KIT006 |
-| `SAMPLES/DRUMS/ConL/R100 Conga low.wav` | 36.5 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/ConL/Rhythmace Conga low.wav` | 15.1 KB | 2023-03-18 | Kit: KIT013, Kit: unnamed kit (in Paddy) |
-| `SAMPLES/DRUMS/ConM/808 Conga medium.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/ConL/R100 Conga low.wav` | 36.5 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/ConL/Rhythmace Conga low.wav` | 15.1 KB | 2023-03-18 | Kit: KIT013, Kit: KIT013 (in Paddy) |
+| `SAMPLES/DRUMS/ConM/808 Conga medium.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
 | `SAMPLES/DRUMS/ConM/CR78 Conga medium.wav` | 12.1 KB | 2023-03-18 | Kit: KIT014 |
 | `SAMPLES/DRUMS/ConM/Linndrum Conga medium.wav` | 23.7 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/ConM/R-50 Conga medium.wav` | 18.7 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Cowbell/808 Cowbell.wav` | 67.7 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Cowbell/808 Cowbell.wav` | 67.7 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
 | `SAMPLES/DRUMS/Cowbell/CR78 Cowbell.wav` | 8.0 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/Cowbell/DDD1 Cowbell.wav` | 58.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/Cowbell/DDD1 Cowbell.wav` | 58.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/Cowbell/KR55 Cowbell.wav` | 21.1 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/Cowbell/R-50 Cowbell.wav` | 13.2 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Cowbell/R100 Cowbell.wav` | 25.4 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/Cowbell/R100 Cowbell.wav` | 25.4 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/Cowbell/RX-5 Cowbell.wav` | 40.7 KB | 2023-03-18 | Kit: KIT009 |
-| `SAMPLES/DRUMS/Cowbell/Sequential Circuits Drumtraks Cowbell.wav` | 13.6 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
-| `SAMPLES/DRUMS/Crash/808 Cymbal.wav` | 129.2 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/Crash/909 Crash.wav` | 93.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+5 more) |
+| `SAMPLES/DRUMS/Cowbell/Sequential Circuits Drumtraks Cowbell.wav` | 13.6 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
+| `SAMPLES/DRUMS/Crash/808 Cymbal.wav` | 129.2 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Crash/909 Crash.wav` | 93.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+5 more) |
 | `SAMPLES/DRUMS/Crash/CR78 Cymbal.wav` | 22.0 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/Crash/DDD1 Crash.wav` | 243.2 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
-| `SAMPLES/DRUMS/Crash/Hammond Rhythm II Crash.wav` | 34.8 KB | 2023-03-18 | Kit: KIT012, Kit: unnamed kit (in Colour) |
+| `SAMPLES/DRUMS/Crash/DDD1 Crash.wav` | 243.2 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
+| `SAMPLES/DRUMS/Crash/Hammond Rhythm II Crash.wav` | 34.8 KB | 2023-03-18 | Kit: KIT012, Kit: KIT012 (in Colour) |
 | `SAMPLES/DRUMS/Crash/HR16B Crash.wav` | 155.9 KB | 2023-03-18 | Kit: KIT007 |
 | `SAMPLES/DRUMS/Crash/Linndrum Crash.wav` | 106.3 KB | 2023-03-18 | Kit: Deeper, Kit: KIT006, Kit: Deeper (in K05BeautifulStranger) (+1 more) |
 | `SAMPLES/DRUMS/Crash/R-50 Crash.wav` | 98.3 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Crash/R100 Crash.wav` | 213.5 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/Crash/R100 Crash.wav` | 213.5 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/Crash/RX-5 Crash.wav` | 163.3 KB | 2023-03-18 | Kit: KIT009 |
-| `SAMPLES/DRUMS/Crash/Sequential Circuits Drumtraks Crash.wav` | 103.5 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/Crash/Sequential Circuits Drumtraks Crash.wav` | 103.5 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/Crash/XV5080 Crash.wav` | 274.6 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
 | `SAMPLES/DRUMS/Guiro/CR78 Guiro.wav` | 18.5 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/Guiro/R100 Quijada.wav` | 35.2 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/HatC/808 Closed hihat.wav` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/HatC/909 Closed hihat.wav` | 9.2 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+5 more) |
+| `SAMPLES/DRUMS/Guiro/R100 Quijada.wav` | 35.2 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/HatC/808 Closed hihat.wav` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/HatC/909 Closed hihat.wav` | 9.2 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+5 more) |
 | `SAMPLES/DRUMS/HatC/CR78 Closed hihat.wav` | 7.2 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/HatC/DDD1 Closed hihat.wav` | 58.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
-| `SAMPLES/DRUMS/HatC/Hammond Rhythm II Closed hihat.wav` | 12.1 KB | 2023-03-18 | Kit: KIT012, Kit: unnamed kit (in Colour) |
+| `SAMPLES/DRUMS/HatC/DDD1 Closed hihat.wav` | 58.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
+| `SAMPLES/DRUMS/HatC/Hammond Rhythm II Closed hihat.wav` | 12.1 KB | 2023-03-18 | Kit: KIT012, Kit: KIT012 (in Colour) |
 | `SAMPLES/DRUMS/HatC/HR16B Closed hihat.wav` | 16.1 KB | 2023-03-18 | Kit: KIT007 |
-| `SAMPLES/DRUMS/HatC/KR55 Closed hihat.wav` | 11.1 KB | 2023-03-18 | Kit: KIT011, Kit: unnamed kit (in Sot) |
+| `SAMPLES/DRUMS/HatC/KR55 Closed hihat.wav` | 11.1 KB | 2023-03-18 | Kit: KIT011, Kit: KIT043 (in Sot) |
 | `SAMPLES/DRUMS/HatC/Linndrum Closed hihat.wav` | 9.9 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/HatC/R-50 Closed hihat.wav` | 9.4 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/HatC/R100 Closed hihat.wav` | 19.0 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/HatC/Rhythmace Closed hihat.wav` | 4.3 KB | 2023-03-18 | Kit: KIT013, Kit: unnamed kit (in Paddy) |
+| `SAMPLES/DRUMS/HatC/R100 Closed hihat.wav` | 19.0 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/HatC/Rhythmace Closed hihat.wav` | 4.3 KB | 2023-03-18 | Kit: KIT013, Kit: KIT013 (in Paddy) |
 | `SAMPLES/DRUMS/HatC/RX-5 Closed hihat.wav` | 9.6 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/HatC/SDS5 Closed hihat.wav` | 3.5 KB | 2023-03-18 | Kit: KIT002 |
-| `SAMPLES/DRUMS/HatC/Sequential Circuits Drumtraks Closed hihat.wav` | 12.9 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/HatC/Sequential Circuits Drumtraks Closed hihat.wav` | 12.9 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/HatC/XV5080 Closed hihat.wav` | 23.3 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
-| `SAMPLES/DRUMS/HatO/808 Open hihat.wav` | 64.6 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/HatO/808 Open hihat.wav` | 64.6 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
 | `SAMPLES/DRUMS/HatO/909 Open hihat.wav` | 39.6 KB | 2023-03-18 | Kit: K01Perc2, Kit: KIT003, Kit: KIT003A (+7 more) |
 | `SAMPLES/DRUMS/HatO/CR78 Open hihat.wav` | 47.9 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/HatO/DDD1 Open hihat.wav` | 103.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
-| `SAMPLES/DRUMS/HatO/Hammond Rhythm II Open hihat.wav` | 29.7 KB | 2023-03-18 | Kit: KIT012, Kit: unnamed kit (in Colour) |
+| `SAMPLES/DRUMS/HatO/DDD1 Open hihat.wav` | 103.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
+| `SAMPLES/DRUMS/HatO/Hammond Rhythm II Open hihat.wav` | 29.7 KB | 2023-03-18 | Kit: KIT012, Kit: KIT012 (in Colour) |
 | `SAMPLES/DRUMS/HatO/HR16B Open hihat.wav` | 131.1 KB | 2023-03-18 | Kit: KIT007 |
 | `SAMPLES/DRUMS/HatO/KR55 Open hihat.wav` | 29.9 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/HatO/Linndrum Open hihat.wav` | 52.9 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/HatO/R-50 Open hihat.wav` | 46.6 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/HatO/R100 Open hihat.wav` | 112.1 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/HatO/Rhythmace Open hihat.wav` | 27.2 KB | 2023-03-18 | Kit: KIT013, Kit: unnamed kit (in Paddy) |
+| `SAMPLES/DRUMS/HatO/R100 Open hihat.wav` | 112.1 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/HatO/Rhythmace Open hihat.wav` | 27.2 KB | 2023-03-18 | Kit: KIT013, Kit: KIT013 (in Paddy) |
 | `SAMPLES/DRUMS/HatO/RX-5 Open hihat.wav` | 80.6 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/HatO/SDS5 Open hihat.wav` | 65.0 KB | 2023-03-18 | Kit: KIT002 |
-| `SAMPLES/DRUMS/HatO/Sequential Circuits Drumtraks Open hihat.wav` | 20.0 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/HatO/Sequential Circuits Drumtraks Open hihat.wav` | 20.0 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/HatO/XV5080 Open hihat.wav` | 193.9 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
-| `SAMPLES/DRUMS/Kick/808 Kick.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+10 more) |
-| `SAMPLES/DRUMS/Kick/909 Kick.wav` | 39.4 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+6 more) |
+| `SAMPLES/DRUMS/Kick/808 Kick.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+10 more) |
+| `SAMPLES/DRUMS/Kick/909 Kick.wav` | 39.4 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+6 more) |
 | `SAMPLES/DRUMS/Kick/CR78 Kick.wav` | 11.1 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/Kick/DDD1 Kick.wav` | 7.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/Kick/DDD1 Kick.wav` | 7.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/Kick/Deep Sky Kick HQ9094.wav` | 34.2 KB | 2023-03-18 | Kit: Deeper, Kit: Deeper (in K05BeautifulStranger), Kit: Deeper (in K07NatRad) |
-| `SAMPLES/DRUMS/Kick/Hammond Rhythm II Kick.wav` | 15.4 KB | 2023-03-18 | Kit: KIT012, Kit: unnamed kit (in Colour) |
+| `SAMPLES/DRUMS/Kick/Hammond Rhythm II Kick.wav` | 15.4 KB | 2023-03-18 | Kit: KIT012, Kit: KIT012 (in Colour) |
 | `SAMPLES/DRUMS/Kick/HR16B Kick.wav` | 38.9 KB | 2023-03-18 | Kit: KIT007 |
 | `SAMPLES/DRUMS/Kick/KR55 Kick.wav` | 28.6 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/Kick/Linndrum Kick.wav` | 17.5 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/Kick/R-50 Kick.wav` | 8.8 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Kick/R100 Kick.wav` | 23.0 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/Kick/R100 Kick.wav` | 23.0 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/Kick/Rhythmace Kick.wav` | 56.7 KB | 2023-03-18 | Kit: K01Perc2, Kit: KIT013, Kit: K01Perc2 (in K01Sink) (+2 more) |
 | `SAMPLES/DRUMS/Kick/RX-5 Kick.wav` | 9.6 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/Kick/SDS5 Kick.wav` | 22.5 KB | 2023-03-18 | Kit: KIT002 |
-| `SAMPLES/DRUMS/Kick/Sequential Circuits Drumtraks Kick.wav` | 9.4 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/Kick/Sequential Circuits Drumtraks Kick.wav` | 9.4 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/Kick/XV5080 Kick.wav` | 18.2 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
 | `SAMPLES/DRUMS/Other/CR78 Metal.wav` | 9.9 KB | 2023-03-18 | Kit: KIT014 |
 | `SAMPLES/DRUMS/Other/R-50 Click.wav` | 9.2 KB | 2023-03-18 | Kit: KIT004 |
 | `SAMPLES/DRUMS/Other/R-50 Snap.wav` | 11.1 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Other/R100 Chime.wav` | 94.5 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/Other/R100 Triangle.wav` | 92.4 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/Ride/909 Ride.wav` | 70.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+5 more) |
-| `SAMPLES/DRUMS/Ride/DDD1 Ride.wav` | 243.2 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/Other/R100 Chime.wav` | 94.5 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/Other/R100 Triangle.wav` | 92.4 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/Ride/909 Ride.wav` | 70.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+5 more) |
+| `SAMPLES/DRUMS/Ride/DDD1 Ride.wav` | 243.2 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/Ride/KR55 Ride.wav` | 73.6 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/Ride/Linndrum Ride.wav` | 109.1 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/Ride/R-50 Ride.wav` | 68.0 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Ride/R100 Ride.wav` | 127.8 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/Ride/R100 Ride.wav` | 127.8 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/Ride/RX-5 Ride.wav` | 190.7 KB | 2023-03-18 | Kit: KIT009 |
-| `SAMPLES/DRUMS/Ride/Sequential Circuits Drumtraks Ride.wav` | 112.6 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/Ride/Sequential Circuits Drumtraks Ride.wav` | 112.6 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/Ride/XV5080 Ride cup.wav` | 228.6 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
 | `SAMPLES/DRUMS/Ride/XV5080 Ride edge.wav` | 220.1 KB | 2023-03-18 | Kit: K01Perc2, Kit: K01Perc2 (in K01Sink) |
-| `SAMPLES/DRUMS/Rim/808 Rim.wav` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/Rim/909 Rim.wav` | 5.9 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+5 more) |
+| `SAMPLES/DRUMS/Rim/808 Rim.wav` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Rim/909 Rim.wav` | 5.9 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+5 more) |
 | `SAMPLES/DRUMS/Rim/CR78 Rim.wav` | 5.3 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/Rim/DDD1 Rim.wav` | 40.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/Rim/DDD1 Rim.wav` | 40.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/Rim/KR55 Rim.wav` | 3.8 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/Rim/Linndrum Rim.wav` | 9.3 KB | 2023-03-18 | Kit: KIT006 |
-| `SAMPLES/DRUMS/Rim/R100 Rim.wav` | 14.7 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/Rim/R100 Rim.wav` | 14.7 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/Rim/RX-5 Rim.wav` | 8.0 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/Rim/SDS5 Rim.wav` | 7.7 KB | 2023-03-18 | Kit: KIT002 |
-| `SAMPLES/DRUMS/Rim/Sequential Circuits Drumtraks Rim.wav` | 13.1 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/Rim/Sequential Circuits Drumtraks Rim.wav` | 13.1 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/Rim/XV5080 Rim.wav` | 25.2 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
-| `SAMPLES/DRUMS/Shaker/808 Maraca.wav` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/Shaker/DDD1 Cabasa.wav` | 49.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/Shaker/808 Maraca.wav` | 21.6 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Shaker/DDD1 Cabasa.wav` | 49.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/Shaker/Linndrum Cabasa.wav` | 6.8 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/Shaker/R-50 Shaker.wav` | 15.7 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Shaker/R100 Percussion.wav` | 11.4 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/Shaker/R100 Shaker.wav` | 28.4 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
-| `SAMPLES/DRUMS/Shaker/Sequential Circuits Drumtraks Cabasa.wav` | 9.0 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
-| `SAMPLES/DRUMS/Snare/808 Snare.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/Snare/909 Snare.wav` | 30.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+6 more) |
-| `SAMPLES/DRUMS/Snare/CR78 Snare.wav` | 22.2 KB | 2023-03-18 | Kit: KIT014, Kit: unnamed kit (in Lemon) |
-| `SAMPLES/DRUMS/Snare/DDD1 Snare dry.wav` | 67.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
-| `SAMPLES/DRUMS/Snare/Hammond Rhythm II Snare.wav` | 12.2 KB | 2023-03-18 | Kit: KIT012, Kit: unnamed kit (in Colour) |
+| `SAMPLES/DRUMS/Shaker/R100 Percussion.wav` | 11.4 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/Shaker/R100 Shaker.wav` | 28.4 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
+| `SAMPLES/DRUMS/Shaker/Sequential Circuits Drumtraks Cabasa.wav` | 9.0 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
+| `SAMPLES/DRUMS/Snare/808 Snare.wav` | 43.1 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/Snare/909 Snare.wav` | 30.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+6 more) |
+| `SAMPLES/DRUMS/Snare/CR78 Snare.wav` | 22.2 KB | 2023-03-18 | Kit: KIT014, Kit: KIT043 (in Lemon) |
+| `SAMPLES/DRUMS/Snare/DDD1 Snare dry.wav` | 67.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
+| `SAMPLES/DRUMS/Snare/Hammond Rhythm II Snare.wav` | 12.2 KB | 2023-03-18 | Kit: KIT012, Kit: KIT012 (in Colour) |
 | `SAMPLES/DRUMS/Snare/HR16B Snare dry.wav` | 40.3 KB | 2023-03-18 | Kit: KIT007 |
 | `SAMPLES/DRUMS/Snare/KR55 Snare.wav` | 18.1 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/Snare/Linndrum Snare.wav` | 12.1 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/Snare/R-50 Snare.wav` | 18.1 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/Snare/R100 Snare.wav` | 52.5 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/Snare/R100 Snare.wav` | 52.5 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/Snare/Rhythmace Snare.wav` | 10.0 KB | 2023-03-18 | Kit: Deeper, Kit: K01Perc2, Kit: KIT013 (+4 more) |
 | `SAMPLES/DRUMS/Snare/RX-5 Snare.wav` | 21.7 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/Snare/SDS5 Snare.wav` | 35.0 KB | 2023-03-18 | Kit: KIT002 |
-| `SAMPLES/DRUMS/Snare/Sequential Circuits Drumtraks Snare.wav` | 17.8 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo), Kit: unnamed kit (in K09Arparty) |
+| `SAMPLES/DRUMS/Snare/Sequential Circuits Drumtraks Snare.wav` | 17.8 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo), Kit: KIT010 (in K09Arparty) |
 | `SAMPLES/DRUMS/Snare/XV5080 Snare.wav` | 163.4 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+6 more) |
 | `SAMPLES/DRUMS/Tambourine/CR78 Tambourine.wav` | 23.0 KB | 2023-03-18 | Kit: KIT014 |
-| `SAMPLES/DRUMS/Tambourine/DDD1 Tambourine.wav` | 45.2 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/Tambourine/DDD1 Tambourine.wav` | 45.2 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/Tambourine/HR16B Tambourine.wav` | 43.3 KB | 2023-03-18 | Kit: KIT007 |
 | `SAMPLES/DRUMS/Tambourine/Linndrum Tambourine.wav` | 13.7 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/Tambourine/R-50 Tambourine.wav` | 14.6 KB | 2023-03-18 | Kit: KIT004 |
 | `SAMPLES/DRUMS/Tambourine/RX-5 Tambourine.wav` | 30.4 KB | 2023-03-18 | Kit: KIT009 |
-| `SAMPLES/DRUMS/Tambourine/Sequential Circuits Drumtraks Tambourine.wav` | 26.7 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/Tambourine/Sequential Circuits Drumtraks Tambourine.wav` | 26.7 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/Timpany/RX-5 Timpany high.wav` | 30.0 KB | 2023-03-18 | Kit: KIT009 |
 | `SAMPLES/DRUMS/Timpany/RX-5 Timpany low.wav` | 32.6 KB | 2023-03-18 | Kit: KIT009 |
-| `SAMPLES/DRUMS/TomH/808 Tom high.wav` | 86.2 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/TomH/909 Tom high.wav` | 31.3 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+5 more) |
-| `SAMPLES/DRUMS/TomH/DDD1 Tom high.wav` | 85.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/TomH/808 Tom high.wav` | 86.2 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/TomH/909 Tom high.wav` | 31.3 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+5 more) |
+| `SAMPLES/DRUMS/TomH/DDD1 Tom high.wav` | 85.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/TomH/KR55 Tom high.wav` | 25.2 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/TomH/Linndrum Tom extra high.wav` | 20.2 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/TomH/Linndrum Tom high.wav` | 25.4 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/TomH/R-50 Tom high.wav` | 16.3 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/TomH/R100 Tom high.wav` | 43.4 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/TomH/R100 Tom high.wav` | 43.4 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/TomH/SDS5 Tom extra high.wav` | 56.5 KB | 2023-03-18 | Kit: KIT002 |
 | `SAMPLES/DRUMS/TomH/SDS5 Tom high.wav` | 93.6 KB | 2023-03-18 | Kit: KIT002 |
 | `SAMPLES/DRUMS/TomH/XV5080 Tom high.wav` | 99.9 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
-| `SAMPLES/DRUMS/TomL/808 Tom low.wav` | 86.2 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/TomL/909 Tom low.wav` | 36.9 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+5 more) |
-| `SAMPLES/DRUMS/TomL/DDD1 Tom low.wav` | 139.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/TomL/808 Tom low.wav` | 86.2 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/TomL/909 Tom low.wav` | 36.9 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+5 more) |
+| `SAMPLES/DRUMS/TomL/DDD1 Tom low.wav` | 139.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/TomL/KR55 Tom low.wav` | 32.8 KB | 2023-03-18 | Kit: KIT011 |
 | `SAMPLES/DRUMS/TomL/Linndrum Tom extra low.wav` | 78.1 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/TomL/Linndrum Tom low.wav` | 53.4 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/TomL/R-50 Tom low.wav` | 28.4 KB | 2023-03-18 | Kit: KIT004 |
-| `SAMPLES/DRUMS/TomL/R100 Tom low.wav` | 61.1 KB | 2023-03-18 | Kit: KIT005, Kit: unnamed kit (in Kg) |
+| `SAMPLES/DRUMS/TomL/R100 Tom low.wav` | 61.1 KB | 2023-03-18 | Kit: KIT005, Kit: KIT005 (in Kg) |
 | `SAMPLES/DRUMS/TomL/SDS5 Tom extra low.wav` | 64.1 KB | 2023-03-18 | Kit: KIT002 |
 | `SAMPLES/DRUMS/TomL/SDS5 Tom low.wav` | 73.3 KB | 2023-03-18 | Kit: KIT002 |
-| `SAMPLES/DRUMS/TomL/Sequential Circuits Drumtraks Tom low.wav` | 69.8 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/TomL/Sequential Circuits Drumtraks Tom low.wav` | 69.8 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/TomL/XV5080 Tom low.wav` | 160.1 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
-| `SAMPLES/DRUMS/TomM/808 Tom medium.wav` | 86.2 KB | 2023-03-18 | Kit: KIT000, Kit: unnamed kit (in Alr), Kit: unnamed kit (in Ape) (+9 more) |
-| `SAMPLES/DRUMS/TomM/909 Tom medium.wav` | 34.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: unnamed kit (in Bmtk) (+5 more) |
-| `SAMPLES/DRUMS/TomM/DDD1 Tom medium.wav` | 130.7 KB | 2023-03-18 | Kit: KIT001, Kit: unnamed kit (in Wf) |
+| `SAMPLES/DRUMS/TomM/808 Tom medium.wav` | 86.2 KB | 2023-03-18 | Kit: KIT000, Kit: KIT000 (in Alr), Kit: KIT000 (in Ape) (+9 more) |
+| `SAMPLES/DRUMS/TomM/909 Tom medium.wav` | 34.1 KB | 2023-03-18 | Kit: KIT003, Kit: KIT003A, Kit: KIT003 (in Bmtk) (+5 more) |
+| `SAMPLES/DRUMS/TomM/DDD1 Tom medium.wav` | 130.7 KB | 2023-03-18 | Kit: KIT001, Kit: KIT001 (in Wf) |
 | `SAMPLES/DRUMS/TomM/Linndrum Tom medium.wav` | 35.2 KB | 2023-03-18 | Kit: KIT006 |
 | `SAMPLES/DRUMS/TomM/R-50 Tom medium.wav` | 19.5 KB | 2023-03-18 | Kit: KIT004 |
 | `SAMPLES/DRUMS/TomM/SDS5 Tom medium.wav` | 44.9 KB | 2023-03-18 | Kit: KIT002 |
-| `SAMPLES/DRUMS/TomM/Sequential Circuits Drumtraks Tom medium.wav` | 52.2 KB | 2023-03-18 | Kit: KIT008, Kit: unnamed kit (in Arpo) |
+| `SAMPLES/DRUMS/TomM/Sequential Circuits Drumtraks Tom medium.wav` | 52.2 KB | 2023-03-18 | Kit: KIT008, Kit: KIT008 (in Arpo) |
 | `SAMPLES/DRUMS/TomM/XV5080 Tom medium.wav` | 133.6 KB | 2023-03-18 | Kit: K01Perc, Kit: KIT010, Kit: KIT010A (+7 more) |
-| `SAMPLES/FOUND/KG-PG-Drums.wav` | 1.8 MB | 2023-03-22 | Kit: unnamed kit (in Beepboop), Kit: unnamed kit (in Polygon) |
-| `SAMPLES/FOUND/KG-PG-DrumsBass.wav` | 1.8 MB | 2023-03-22 | Kit: unnamed kit (in Beepboop), Kit: unnamed kit (in Polygon) |
+| `SAMPLES/FOUND/KG-PG-Drums.wav` | 1.8 MB | 2023-03-22 | Kit: KIT053 (in Beepboop), Kit: KIT053 (in Polygon) |
+| `SAMPLES/FOUND/KG-PG-DrumsBass.wav` | 1.8 MB | 2023-03-22 | Kit: KIT051 (in Beepboop), Kit: KIT051 (in Polygon) |
 | `SAMPLES/KERERU/DrumLoops/SLPSPK-Drumloop4-120bpm.wav` | 1.1 MB | 2023-03-21 | Kit: SS-Drums, Kit: SS-Drums (in SlpspkRemix) |
 | `SAMPLES/KERERU/Sink/1-Drone-120bpm.wav` | 13.2 MB | 2024-02-18 | Kit: K01Drone |
 | `SAMPLES/KERERU/Sink/2-Drone-120bpm.wav` | 8.8 MB | 2024-02-18 | Kit: K01Drone |
@@ -603,19 +603,19 @@ Total: 641 (860.8 MB)
 | `SAMPLES/KERERU/Sink/6-Drone-120bpm.wav` | 13.2 MB | 2024-02-18 | Kit: K01Drone |
 | `SAMPLES/KERERU/Sink/7-Drone-120bpm.wav` | 35.2 MB | 2024-02-18 | Kit: K01Drone |
 | `SAMPLES/KERERU/Sink/8-Drone-120bpm.wav` | 11.0 MB | 2024-02-18 | Kit: K01Drone |
-| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-BassV-120bpm.wav` | 17.6 MB | 2025-08-15 | Kit: unnamed kit (in K02Slpspk) |
+| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-BassV-120bpm.wav` | 17.6 MB | 2025-08-15 | Kit: KIT051 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatPreV-new-120bpm.wav` | 4.4 MB | 2025-08-15 | Audio: AUDIO17 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatV-new-120bpm.wav` | 8.8 MB | 2025-08-15 | Audio: AUDIO18 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatVPlus-new-120bpm.wav` | 8.8 MB | 2025-08-15 | Audio: AUDIO19 (in K02Slpspk) |
-| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-1-Intro.wav` | 2.2 MB | 2024-02-27 | Kit: unnamed kit (in K02Slpspk) |
-| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-3-V1.wav` | 8.8 MB | 2024-02-27 | Kit: KIT049, Audio: AUDIO3 (in K02Slpspk), Kit: unnamed kit (in K02Slpspk) |
+| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-1-Intro.wav` | 2.2 MB | 2024-02-27 | Kit: KIT043 (in K02Slpspk) |
+| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-3-V1.wav` | 8.8 MB | 2024-02-27 | Kit: KIT049, Audio: AUDIO3 (in K02Slpspk), Kit: KIT049 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-4-C1-120bpm.wav` | 8.8 MB | 2024-02-27 | Audio: AUDIO4 (in K02Slpspk) |
-| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav` | 4.4 MB | 2024-02-27 | Kit: unnamed kit (in K02Slpspk) |
+| `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav` | 4.4 MB | 2024-02-27 | Kit: KIT045 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-6-V2-120bpm.wav` | 8.8 MB | 2024-02-27 | Audio: AUDIO6 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-7-C2-120bpm.wav` | 8.8 MB | 2024-02-27 | Audio: AUDIO7 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-8-CX-120bpm.wav` | 4.4 MB | 2024-02-27 | Audio: AUDIO8 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav` | 8.8 MB | 2024-02-22 | Kit: KIT050, Audio: AUDIO11 (in K02Slpspk) |
-| `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav` | 8.8 MB | 2024-02-22 | Audio: AUDIO12 (in K02Slpspk), Kit: unnamed kit (in K02Slpspk) |
+| `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav` | 8.8 MB | 2024-02-22 | Audio: AUDIO12 (in K02Slpspk), Kit: KIT046 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-3-V2-120bpm.wav` | 8.8 MB | 2024-02-22 | Audio: AUDIO13 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-4-C2-120bpm.wav` | 8.8 MB | 2024-02-22 | Audio: AUDIO14 (in K02Slpspk) |
 | `SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-5-CX-120bpm.wav` | 4.4 MB | 2024-02-22 | Audio: AUDIO15 (in K02Slpspk) |
@@ -624,32 +624,32 @@ Total: 641 (860.8 MB)
 | `SAMPLES/KERERU/SLPSPK-Chorus-Vox-120bpm.wav` | 8.8 MB | 2023-03-22 | Kit: SS-C-vox, Kit: SS-C-vox (in SlpspkRemix) |
 | `SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav` | 2.2 MB | 2023-03-22 | Kit: SS-D-Inst |
 | `SAMPLES/KERERU/SLPSPK-V1-Inst-120bpm.wav` | 4.4 MB | 2023-03-22 | Kit: SS-V-Inst |
-| `SAMPLES/LANDR/Birds/BritishHarborBirdsChirping_Y3Mls_07.wav` | 6.8 MB | 2022-10-26 | Kit: unnamed kit (in Sot) |
-| `SAMPLES/LANDR/Birds/MorningBirds_OTtBf_05.wav` | 6.5 MB | 2022-10-26 | Kit: unnamed kit (in Sot) |
-| `SAMPLES/LANDR/Dholak Session Vol 2/Dholak 72 - 8 Ptn.wav` | 2.2 MB | 2023-04-25 | Kit: unnamed kit (in Sot) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/04_160BPM_Cmin_Siren.wav` | 3.0 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/21 Sound Effects A#m Scream.wav` | 2.1 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/55 Sound Effects Bm Digital Riser.wav` | 1.9 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/AACY_Mid_Tempo_Fx_Impact_Deep.wav` | 1.9 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/AFFH_HipHop_FX_Ghost Pesto Sweep.wav` | 202.7 KB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/Ambience_Bats_in_the_City_Binaural.wav` | 18.0 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/AmtrakViewliner_Cf3Ye_01.wav` | 15.6 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/BEAT SESSION BELL FX.wav` | 1.9 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/BEAT SESSION IMPACT 2.wav` | 1.4 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/CCP_Kit_4_Moist_Fx_Shots_Oneshot.wav` | 1.2 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav` | 2.0 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/CS-SCI-FI Sustain Breath 2.wav` | 24.3 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/CS_TM_Kit_05_Fx_02_Emin_128bpm.wav` | 1.9 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/Drill_Sweep_FX_05.wav` | 1.5 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/ESM_Hi-Tech_Computer_Power_Up_2_Technology_Sci_fi_Interface_Click_Beep_Chirp_Futuristic.wav` | 975.9 KB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/ESM_Iconic_SFX_King_George_11_Magic_FX_Airy_Shimmer.wav` | 776.9 KB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/EvilDroidChatterConstant_ovBUP_02.wav` | 10.1 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/ExplosionSoftCrack_CyK5f_05.wav` | 2.0 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/FS_COM_Computer_Glitch_SFX 26.wav` | 593.6 KB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/FX_13_C_Maj_140Bpm.wav` | 3.5 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/INDUSTRIAL STRENGTH_MRI_CHROME HITS.wav` | 2.1 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/Sfx 049.wav` | 9.4 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
-| `SAMPLES/LANDR/Premium SFX/One_Shot/UNPLND_Riser 2.wav` | 1.0 MB | 2023-09-29 | Kit: unnamed kit (in Spook) |
+| `SAMPLES/LANDR/Birds/BritishHarborBirdsChirping_Y3Mls_07.wav` | 6.8 MB | 2022-10-26 | Kit: KIT044 (in Sot) |
+| `SAMPLES/LANDR/Birds/MorningBirds_OTtBf_05.wav` | 6.5 MB | 2022-10-26 | Kit: KIT044 (in Sot) |
+| `SAMPLES/LANDR/Dholak Session Vol 2/Dholak 72 - 8 Ptn.wav` | 2.2 MB | 2023-04-25 | Kit: KIT045 (in Sot) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/04_160BPM_Cmin_Siren.wav` | 3.0 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/21 Sound Effects A#m Scream.wav` | 2.1 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/55 Sound Effects Bm Digital Riser.wav` | 1.9 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/AACY_Mid_Tempo_Fx_Impact_Deep.wav` | 1.9 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/AFFH_HipHop_FX_Ghost Pesto Sweep.wav` | 202.7 KB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/Ambience_Bats_in_the_City_Binaural.wav` | 18.0 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/AmtrakViewliner_Cf3Ye_01.wav` | 15.6 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/BEAT SESSION BELL FX.wav` | 1.9 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/BEAT SESSION IMPACT 2.wav` | 1.4 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/CCP_Kit_4_Moist_Fx_Shots_Oneshot.wav` | 1.2 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav` | 2.0 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/CS-SCI-FI Sustain Breath 2.wav` | 24.3 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/CS_TM_Kit_05_Fx_02_Emin_128bpm.wav` | 1.9 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/Drill_Sweep_FX_05.wav` | 1.5 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/ESM_Hi-Tech_Computer_Power_Up_2_Technology_Sci_fi_Interface_Click_Beep_Chirp_Futuristic.wav` | 975.9 KB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/ESM_Iconic_SFX_King_George_11_Magic_FX_Airy_Shimmer.wav` | 776.9 KB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/EvilDroidChatterConstant_ovBUP_02.wav` | 10.1 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/ExplosionSoftCrack_CyK5f_05.wav` | 2.0 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/FS_COM_Computer_Glitch_SFX 26.wav` | 593.6 KB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/FX_13_C_Maj_140Bpm.wav` | 3.5 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/INDUSTRIAL STRENGTH_MRI_CHROME HITS.wav` | 2.1 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/Sfx 049.wav` | 9.4 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
+| `SAMPLES/LANDR/Premium SFX/One_Shot/UNPLND_Riser 2.wav` | 1.0 MB | 2023-09-29 | Kit: KIT043 (in Spook) |
 | `SAMPLES/MICE/NatRad-ChaosStrings-2Bars-108bpm.wav` | 1.2 MB | 2023-03-24 | Kit: Nr Hits 2, Kit: Nr Hits, Kit: Nr Voxhook (+1 more) |
 | `SAMPLES/MICE/NatRad-DrumsHook-8Bars-108bpm.wav` | 4.9 MB | 2023-03-25 | Kit: Nr Drums, Kit: Nr Drums (in K07NatRad) |
 | `SAMPLES/MICE/NatRad-Hook-8Bars-108bpm.wav` | 4.5 MB | 2023-03-23 | Kit: Nr Hook, Kit: Nr Hook (in K07NatRad) |
@@ -665,7 +665,7 @@ Total: 641 (860.8 MB)
 | `SAMPLES/RECORD/REC00024.WAV` | 2.6 MB | 2025-12-23 | Kit: Fuzzgat, Kit: Fuzzgat (in K09Arparty) |
 | `SAMPLES/RECORD/REC00025.WAV` | 1.8 MB | 2025-12-23 | Kit: Fuzzgat, Kit: Fuzzgat (in K09Arparty) |
 | `SAMPLES/RECORD/REC00028.WAV` | 2.3 MB | 2025-12-23 | Kit: Fuzzgat, Kit: Fuzzgat (in K09Arparty) |
-| `SAMPLES/RESAMPLE/REC00005.WAV` | 611.8 KB | 2024-01-08 | Kit: unnamed kit (in Yeti) |
+| `SAMPLES/RESAMPLE/REC00005.WAV` | 611.8 KB | 2024-01-08 | Kit: KIT046 (in Yeti) |
 | `SAMPLES/RESAMPLE/REC00017.WAV` | 5.4 MB | 2025-12-23 | Audio: AUDIO1 (in Noize) |
 
 ---

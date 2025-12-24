@@ -9,6 +9,10 @@ Creates 4 pairs of manifest files (markdown + CSV) in docs/:
   - manifest-samples: Used/unused samples, sizes, broken references
 
 Usage: ./scripts/create-manifest.py
+
+IMPORTANT: This script is READ-ONLY with respect to the DELUGE/ folder.
+It MUST NEVER modify any .XML or .wav files. All output is written to docs/.
+This is a hard requirement to protect the integrity of Deluge SD card data.
 """
 
 import os
@@ -200,9 +204,10 @@ def extract_instruments_from_song(root: ET.Element) -> tuple[list[str], list[str
             full_path = f"{folder}/{name}" if folder else name
             kits.append(full_path)
         elif kit.get('presetSlot'):
-            # Older format with slot number
+            # Older format with slot number - use folder if available
             slot = kit.get('presetSlot', '')
-            kits.append(f"KITS/KIT{slot.zfill(3)}")
+            folder = kit.get('presetFolder', 'KITS')
+            kits.append(f"{folder}/KIT{slot.zfill(3)}")
         # Check for arrangement data
         if kit.get('clipInstances'):
             has_arrangement = True
@@ -214,6 +219,11 @@ def extract_instruments_from_song(root: ET.Element) -> tuple[list[str], list[str
         if name:
             full_path = f"{folder}/{name}" if folder else name
             synths.append(full_path)
+        elif sound.get('presetSlot'):
+            # Older format with slot number - use folder if available
+            slot = sound.get('presetSlot', '')
+            folder = sound.get('presetFolder', 'SYNTHS')
+            synths.append(f"{folder}/SYNT{slot.zfill(3)}")
         # Check for arrangement data
         if sound.get('clipInstances'):
             has_arrangement = True
@@ -375,14 +385,24 @@ def extract_embedded_instrument_samples(root: ET.Element, song_name: str) -> dic
     
     # Extract samples from embedded kits
     for kit in instruments.findall('kit'):
-        kit_name = kit.get('presetName', 'unnamed kit')
+        kit_name = kit.get('presetName', '')
+        if not kit_name and kit.get('presetSlot'):
+            # Older format with slot number
+            slot = kit.get('presetSlot', '')
+            kit_name = f"KIT{slot.zfill(3)}"
+        kit_name = kit_name or 'unnamed kit'
         samples = extract_sample_paths(kit)
         for sample in samples:
             result[sample] = f"Kit: {kit_name} (in {song_name})"
     
     # Extract samples from embedded synths (sound elements)
     for sound in instruments.findall('sound'):
-        synth_name = sound.get('presetName', 'unnamed synth')
+        synth_name = sound.get('presetName', '')
+        if not synth_name and sound.get('presetSlot'):
+            # Older format with slot number
+            slot = sound.get('presetSlot', '')
+            synth_name = f"SYNT{slot.zfill(3)}"
+        synth_name = synth_name or 'unnamed synth'
         samples = extract_sample_paths(sound)
         for sample in samples:
             result[sample] = f"Synth: {synth_name} (in {song_name})"
@@ -830,13 +850,25 @@ def main() -> int:
     deluge_path = repo_dir / 'DELUGE'
     docs_path = repo_dir / 'docs'
     
-    # Output files
+    # Output files - MUST be outside DELUGE folder
     output_files = {
         'kits': (docs_path / 'manifest-kits.md', docs_path / 'manifest-kits.csv'),
         'synths': (docs_path / 'manifest-synths.md', docs_path / 'manifest-synths.csv'),
         'songs': (docs_path / 'manifest-songs.md', docs_path / 'manifest-songs.csv'),
         'samples': (docs_path / 'manifest-samples.md', docs_path / 'manifest-samples.csv'),
     }
+    
+    # SAFETY CHECK: Ensure no output files are inside DELUGE folder
+    # This script must NEVER modify any files in DELUGE/
+    for category, (md_file, csv_file) in output_files.items():
+        for output_path in [md_file, csv_file]:
+            try:
+                output_path.resolve().relative_to(deluge_path.resolve())
+                print(f"FATAL ERROR: Output file {output_path} is inside DELUGE folder!")
+                print("This script must NEVER write to DELUGE/. Aborting.")
+                return 1
+            except ValueError:
+                pass  # Good - output is not inside DELUGE
     
     # Validate DELUGE folder exists
     if not deluge_path.exists():

@@ -70,6 +70,8 @@ python3 scripts/sd-to-repo.py
 
 Generates manifests of all SD card contents for quick reference. Outputs both markdown and CSV formats for each category.
 
+> ⚠️ **Work in Progress:** This script is under active development and has not been thoroughly tested. Sample tracking and XML parsing may have edge cases that produce inaccurate results. Please verify critical information manually.
+
 **Requirements:**
 - Python 3.9+
 
@@ -86,12 +88,31 @@ python3 scripts/create-manifest.py
 - `docs/manifest-songs.md` / `.csv` - Song projects
 - `docs/manifest-samples.md` / `.csv` - Sample files (used/unused)
 
-**Contents:**
-- **Kits** - Names, samples used, last modified date, firmware version
-- **Synths** - Names, samples used (if any), last modified date, firmware version
-- **Songs** - Names, kits/synths used, last modified date, firmware version
-- **Samples** - Used/unused status, size, last modified, which presets use them
-- **Warnings** - Broken sample references (samples referenced but not found)
+**What each manifest contains:**
+
+| Manifest | Contents |
+|----------|----------|
+| **Kits** | Name, samples used, last modified, firmware version |
+| **Synths** | Name, samples used (if any), last modified, firmware version |
+| **Songs** | Name, kits/synths/audio tracks/MIDI channels, arrangement status, last modified, firmware version |
+| **Samples** | Used/unused status, file size, last modified, detailed usage info |
+
+**Sample usage tracking:**
+
+The samples manifest shows exactly where each sample is used:
+- `Kit: KIT000` - Used by a kit preset file
+- `Synth: Bass` - Used by a synth preset file  
+- `Audio: AUDIO2 (in MySong)` - Used by an audio clip in a song
+- `Kit: KIT000 (in MySong)` - Used by an embedded kit within a song
+
+This distinction matters because songs store independent copies of kit/synth configurations. A sample might be used by a preset file AND a song's embedded copy (which could differ from the preset).
+
+**Broken reference detection:**
+
+The script warns about samples referenced in XML files that don't exist on disk. This helps identify:
+- Samples that were moved or renamed
+- Samples that were deleted but still referenced
+- Path case-sensitivity issues
 
 ---
 
