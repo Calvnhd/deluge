@@ -66,6 +66,33 @@ python3 scripts/sd-to-repo.py
 ./scripts/sync-samples.sh
 ```
 
+### create-manifest.py
+
+Generates manifests of all SD card contents for quick reference. Outputs both markdown and CSV formats for each category.
+
+**Requirements:**
+- Python 3.9+
+
+**Usage:**
+```bash
+./scripts/create-manifest.py
+# or
+python3 scripts/create-manifest.py
+```
+
+**Output:**
+- `docs/manifest-kits.md` / `.csv` - Kit presets
+- `docs/manifest-synths.md` / `.csv` - Synth presets
+- `docs/manifest-songs.md` / `.csv` - Song projects
+- `docs/manifest-samples.md` / `.csv` - Sample files (used/unused)
+
+**Contents:**
+- **Kits** - Names, samples used, last modified date, firmware version
+- **Synths** - Names, samples used (if any), last modified date, firmware version
+- **Songs** - Names, kits/synths used, last modified date, firmware version
+- **Samples** - Used/unused status, size, last modified, which presets use them
+- **Warnings** - Broken sample references (samples referenced but not found)
+
 ---
 
 ## TODO
@@ -77,5 +104,5 @@ python3 scripts/sd-to-repo.py
 - a script to sync to SD card?
 - update to latest community firmware
 - get presets from latest community competition
-- script to produce a list of patches? 
-- script to produce a list of samples and their usage data?
+- ~~script to produce a list of patches?~~ ✅ `create-manifest.py`
+- ~~script to produce a list of samples and their usage data?~~ ✅ `create-manifest.py`

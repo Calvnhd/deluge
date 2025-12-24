@@ -11,7 +11,7 @@ Safety guarantees:
   - Only syncs .xml and .wav files
   - Validates paths before any operations
 
-Logs: Appends execution summary to logs/scripts.log
+Logs: Appends execution summary to docs/scripts.log
 """
 
 import os
@@ -227,7 +227,7 @@ def main() -> int:
     script_dir = Path(__file__).parent.resolve()
     repo_dir = script_dir.parent
     env_file = script_dir / '.env'
-    log_file = repo_dir / 'logs' / 'scripts.log'
+    log_file = repo_dir / 'docs' / 'scripts.log'
     
     # Load config
     env = load_env(env_file)

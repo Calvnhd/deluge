@@ -12,13 +12,13 @@
 #   - Only includes .xml and .wav files (warns about any other files found)
 #
 # Output: deluge-backup-YYYY-MM-DD.zip in the configured backup destination
-# Logs:   Appends execution summary to logs/scripts.log
+# Logs:   Appends execution summary to docs/scripts.log
 
 set -e  # Exit on any error
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
-LOG_FILE="$REPO_DIR/logs/scripts.log"
+LOG_FILE="$REPO_DIR/docs/scripts.log"
 ENV_FILE="$SCRIPT_DIR/.env"
 
 # Track start time for elapsed calculation
