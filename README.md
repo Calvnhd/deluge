@@ -29,7 +29,7 @@ All scripts read configuration from `scripts/.env`. Copy `scripts/.env.example` 
 
 ### sd-to-zip.sh
 
-Creates a complete backup of the SD card as a `.zip` file. This is the **first point of backup** - run this before syncing to the repo.
+Creates a complete backup of the SD card as a `.zip` file. 
 
 **Usage:**
 ```bash
@@ -40,7 +40,7 @@ Output: `deluge-backup-YYYY-MM-DD.zip` in your configured backup folder.
 
 ### sd-to-repo.py
 
-Syncs SD card contents to this repository. This is the **second point of backup** - run after `sd-to-zip.sh`.
+Syncs SD card contents to this repository. 
 
 **Requirements:**
 - Python 3.9+
