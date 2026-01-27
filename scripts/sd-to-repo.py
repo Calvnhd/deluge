@@ -2,9 +2,6 @@
 """
 Sync Deluge SD card contents to this repository.
 
-This is the SECOND point of backup - syncs SD card to repo after sd-to-zip.sh
-has created a full archive.
-
 Safety guarantees:
   - Read-only access to SD card (copies FROM, never writes TO)
   - Files removed from SD card are moved to DELUGE/.trash/ (not deleted)
