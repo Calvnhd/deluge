@@ -3,11 +3,10 @@
 # Back up entire Deluge SD card contents to a .zip file
 #
 # Creates a complete archive of the SD card for cloud backup.
-# This is the FIRST point of backup - captures everything before selective sync to the repository.
 #
 # Safety guarantees:
-#   - Read-only access to SD card (zip reads, never writes)
-#   - Creates new file at destination (never modifies existing backups without confirmation)
+#   - Read-only access to SD card
+#   - Creates new file at destination
 #   - Validates paths before any operations
 #   - Only includes .xml and .wav files (warns about any other files found)
 #

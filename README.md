@@ -66,9 +66,53 @@ python3 scripts/sd-to-repo.py
 ./scripts/sync-samples.sh
 ```
 
+### deluge_sdk.py
+
+A Python library for parsing and working with Deluge SD card contents. This module provides reusable data structures and functions for reading Deluge XML files (kits, synths, songs) and tracking sample usage.
+
+> ⚠️ **Read-Only:** This library only reads data. It will never modify any `.XML` or `.wav` files.
+
+**Requirements:**
+- Python 3.9+
+
+**Usage:**
+```python
+from deluge_sdk import parse_kit, parse_synth, parse_song, KitInfo, SynthInfo, SongInfo
+from pathlib import Path
+
+# Parse a kit preset
+kit = parse_kit(Path("DELUGE/KITS/KIT000.XML"))
+print(f"Kit uses {len(kit.samples)} samples")
+
+# Parse a synth preset
+synth = parse_synth(Path("DELUGE/SYNTHS/MySynth.XML"))
+print(f"Synth firmware: {synth.firmware_version}")
+
+# Parse a song
+song = parse_song(Path("DELUGE/SONGS/MySong.XML"))
+print(f"Song uses {len(song.kits)} kits and {len(song.synths)} synths")
+print(f"Has arrangement: {song.has_arrangement}")
+```
+
+**Available components:**
+
+| Category | Components |
+|----------|------------|
+| **Data Structures** | `KitInfo`, `SynthInfo`, `SongInfo`, `SampleInfo`, `ManifestData` |
+| **High-level Parsing** | `parse_kit()`, `parse_synth()`, `parse_song()` |
+| **Low-level XML** | `parse_deluge_xml()`, `extract_firmware_version()`, `get_actual_root()` |
+| **Sample Extraction** | `extract_sample_paths()`, `extract_audio_clip_samples()`, `extract_embedded_instrument_samples()` |
+| **Instrument Extraction** | `extract_instruments_from_song()` |
+| **Utilities** | `format_size()`, `format_date()` |
+
+**Handles multiple XML formats:**
+- Old format (no firmware version, multiple root elements)
+- v2.x format (`<firmwareVersion>` as separate element)
+- v4.x format (`firmwareVersion` as attribute on root)
+
 ### create-manifest.py
 
-Generates manifests of all SD card contents for quick reference. Outputs both markdown and CSV formats for each category.
+Generates manifests of all SD card contents for quick reference. Outputs both markdown and CSV formats for each category. Uses `deluge_sdk.py` for XML parsing.
 
 > ⚠️ **Work in Progress:** This script is under active development and has not been thoroughly tested. Sample tracking and XML parsing may have edge cases that produce inaccurate results. Please verify critical information manually.
 
@@ -119,11 +163,10 @@ The script warns about samples referenced in XML files that don't exist on disk.
 ## TODO
 
 - figure out general formatting of files and folders
-- script to clean unused samples
+- script to clean unused REC samples
 - rearrange sample folder structure
 - script to save in-use patches to specific folder
 - a script to sync to SD card?
 - update to latest community firmware
+- resave... everything?  So xml files are consistent.  Idk, this is probably excessive. 
 - get presets from latest community competition
-- ~~script to produce a list of patches?~~ ✅ `create-manifest.py`
-- ~~script to produce a list of samples and their usage data?~~ ✅ `create-manifest.py`
