@@ -52,6 +52,11 @@ Syncs SD card contents to this repository.
 python3 scripts/sd-to-repo.py
 ```
 
+**Safety features:**
+- Shows a dry-run preview of all changes before applying
+- Requires explicit confirmation (`y`) before modifying any files
+- Never writes to the SD card (read-only source)
+
 **Behavior:**
 - New/modified files are copied from SD card to `DELUGE/`
 - Files deleted from SD card are moved to `DELUGE/.trash/`
@@ -59,12 +64,16 @@ python3 scripts/sd-to-repo.py
 
 ### sync-samples.sh
 
-`DELUGE/SAMPLES/` is too large to store on GitHub and may contain copyrighted material. Use this script to sync to a another cloud-synced folder for back-up.
+`DELUGE/SAMPLES/` is too large to store on GitHub and may contain copyrighted material. Use this script to sync the local SAMPLES folder to a another cloud-synced folder for back-up.
 
 **Usage:**
 ```bash
 ./scripts/sync-samples.sh
 ```
+
+**Safety features:**
+- Validates source contains `.wav` files before syncing (prevents accidental backup deletion)
+- Prompts for confirmation before deleting files from backup destination
 
 ### deluge_sdk.py
 
@@ -157,6 +166,96 @@ The script warns about samples referenced in XML files that don't exist on disk.
 - Samples that were moved or renamed
 - Samples that were deleted but still referenced
 - Path case-sensitivity issues
+
+### Sample Migration Scripts
+
+A set of three scripts for safely reorganizing your `SAMPLES/` folder without breaking XML references. Uses file hashing to detect moved files regardless of path or filename changes.
+
+> 📖 **New to hashing?** See [docs/hashing-eli5.md](docs/hashing-eli5.md) for an explanation of how these scripts work and why hashing is useful.
+
+**Requirements:**
+- Python 3.9+
+
+#### verify-refs.py
+
+Checks that all sample references in XML files point to files that actually exist. Run this before and after reorganizing samples.
+
+```bash
+# Check for broken references
+python scripts/verify-refs.py
+
+# Show all references (valid and broken)  
+python scripts/verify-refs.py --all
+
+# Group broken refs by sample instead of by file
+python scripts/verify-refs.py --by-sample
+```
+
+#### scan-samples.py
+
+Creates hash manifests of your samples folder. Run `--before` before reorganizing, then `--after` afterwards to detect what moved.
+
+```bash
+# Create baseline manifest
+python scripts/scan-samples.py --before
+
+# After reorganizing, detect moves and generate migration map
+python scripts/scan-samples.py --after
+
+# Preview without saving
+python scripts/scan-samples.py --before --dry-run
+```
+
+**Output files (in `docs/`):**
+- `sample-manifest-before.json` - Baseline with SHA256 hashes
+- `sample-manifest-after.json` - Post-reorganization state  
+- `sample-migration-map.json` - Old path → new path mapping
+
+#### update-refs.py
+
+Applies the migration map to update all XML files with new sample paths.
+
+```bash
+# Preview changes without modifying files
+python scripts/update-refs.py --dry-run
+
+# Apply changes (creates .bak backups)
+python scripts/update-refs.py
+
+# Apply without backups (if using git)
+python scripts/update-refs.py --no-backup
+```
+
+#### Complete Migration Workflow
+
+```bash
+# 1. Verify current state is clean
+python scripts/verify-refs.py
+
+# 2. Create baseline manifest  
+python scripts/scan-samples.py --before
+
+# 3. Reorganize SAMPLES folder however you want
+#    (move files, rename folders, etc.)
+
+# 4. Detect what moved
+python scripts/scan-samples.py --after
+
+# 5. Preview XML changes
+python scripts/update-refs.py --dry-run
+
+# 6. Apply changes
+python scripts/update-refs.py
+
+# 7. Verify everything still works
+python scripts/verify-refs.py
+```
+
+**Handles edge cases:**
+- Detects **duplicate files** (same content, different paths) and flags them for manual review
+- Works even if you **rename files** (matching is by content, not filename)
+- Preserves **case sensitivity** (important for the Deluge)
+- Creates **backups** before modifying any XML files
 
 ---
 

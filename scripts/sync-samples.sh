@@ -34,8 +34,30 @@ if [[ ! -d "$SAMPLES_SOURCE" ]]; then
     exit 1
 fi
 
+# SAFETY CHECK: Ensure source has .wav files before syncing
+# This prevents accidental deletion of backup if source is empty/wrong
+WAV_COUNT=$(find "$SAMPLES_SOURCE" -type f -iname "*.wav" 2>/dev/null | head -1)
+if [[ -z "$WAV_COUNT" ]]; then
+    echo "Error: No .wav files found in source directory: $SAMPLES_SOURCE"
+    echo "This safety check prevents accidental deletion of your backup."
+    echo "Please verify SAMPLES_SOURCE is correct in .env"
+    exit 1
+fi
+
 # Create backup directory if it doesn't exist
 mkdir -p "$SAMPLES_BACKUP"
+
+# SAFETY CHECK: If backup exists and has files, require confirmation for --delete
+BACKUP_FILE_COUNT=$(find "$SAMPLES_BACKUP" -type f -iname "*.wav" 2>/dev/null | wc -l)
+if [[ "$BACKUP_FILE_COUNT" -gt 0 ]]; then
+    echo "Backup destination contains $BACKUP_FILE_COUNT .wav files."
+    echo "Files not in source will be DELETED from backup."
+    read -p "Continue? (y/N): " confirm
+    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+        echo "Aborted."
+        exit 0
+    fi
+fi
 
 echo "Syncing SAMPLES..."
 echo "  From: $SAMPLES_SOURCE"

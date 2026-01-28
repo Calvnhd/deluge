@@ -4,7 +4,6 @@
 #
 # Creates a complete archive of the SD card for cloud backup.
 #
-# Safety guarantees:
 #   - Read-only access to SD card
 #   - Creates new file at destination
 #   - Validates paths before any operations
@@ -128,21 +127,37 @@ if [[ -n "$SD_SIZE" ]]; then
 fi
 echo ""
 
-# Create the zip archive
+# Create the zip archive using 7-Zip (commonly available on Windows)
+# -tzip: create zip format
 # -r: recursive
-# -i: include only matching patterns
-# We cd into the SD card so paths in zip are relative
+# We use include filters for xml and wav files
 echo "Creating backup archive..."
 echo "(This may take several minutes for large sample libraries)"
 echo ""
 
+# Find 7-Zip (check common locations)
+SEVENZIP=""
+if command -v 7z &> /dev/null; then
+    SEVENZIP="7z"
+elif [[ -f "/c/Program Files/7-Zip/7z.exe" ]]; then
+    SEVENZIP="/c/Program Files/7-Zip/7z.exe"
+elif [[ -f "/c/Program Files (x86)/7-Zip/7z.exe" ]]; then
+    SEVENZIP="/c/Program Files (x86)/7-Zip/7z.exe"
+fi
+
+if [[ -z "$SEVENZIP" ]]; then
+    echo "Error: 7-Zip not found. Please install 7-Zip or add it to PATH."
+    echo "Download from: https://www.7-zip.org/"
+    exit 1
+fi
+
 cd "$SD_CARD_PATH"
-zip -r "$ZIP_FULLPATH" . -i "*.xml" "*.XML" "*.wav" "*.WAV"
+"$SEVENZIP" a -tzip -r "$ZIP_FULLPATH" "*.xml" "*.XML" "*.wav" "*.WAV"
 
 # Verify the archive
 echo ""
 echo "Verifying archive integrity..."
-if zip -T "$ZIP_FULLPATH" > /dev/null 2>&1; then
+if "$SEVENZIP" t "$ZIP_FULLPATH" > /dev/null 2>&1; then
     echo "✓ Archive verified successfully"
     BACKUP_STATUS="SUCCESS"
     ERROR_MSG=""
