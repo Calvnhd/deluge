@@ -1,3 +1,5 @@
+# Untested and out of date.  Use with caution!
+
 """
 Deluge SDK - Library for parsing and working with Deluge SD card contents.
 
