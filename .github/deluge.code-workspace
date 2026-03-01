@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../DelugeFirmware"
+		},
+		{
+			"path": "../../DelugeFirmware.wiki"
+		}
+	],
+	"settings": {}
+}

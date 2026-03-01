@@ -1,0 +1,11 @@
+---
+agent: agent
+---
+- A file will be provided to you containing the desired functionality of a script
+- Your task is to implement the specified script
+- Convert the spec file itself into the final script by clearing its contents, adding the appropriate file extension, and writing the code
+- You should analyse the spec ensure that the required functionality is clear
+- Ask clarifying questions if any part of the spec is ambiguous or unclear
+- Suggest improvement or changes thaat you believe to be important for the final script
+- Refer to the Deluge firmware, current SD card contents under DELUGE/ and the existing scripts under scripts/. if required to better understand this project overall
+- The final script should be in either python or bash - choose the most appropriate file format and provide your reasoning

@@ -206,6 +206,9 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Audio files
+# Deluge
 *.wav
 *.WAV
+DELUGE/SAMPLES/
+DELUGE/.trash/
+scripts/.env
