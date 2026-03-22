@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <song
-	firmwareVersion="4.0.1"
-	earliestCompatibleFirmware="4.0.0"
+	firmwareVersion="c1.2.1"
+	earliestCompatibleFirmware="4.1.0-alpha"
 	previewNumPads="144"
 	preview="0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B35020235020235020235020235020235020235020235020200FF06005AA500000000000000000000000073008C00000092006D1F0218000000000000000000000000C1003E00000000000000000000FF06005AA52C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B00FF06005AA52C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B35020235020235020235020235020235020235020235020200FF06005AA52C020B2C020B2C020B2C020B2C020B2C020B2C020B2C020B35020235020235020235020235020235020235020235020200FF06005AA525DA0000000000000000000025DA0000000000000000000025DA000000000100FE00000025DA000000000100FE0100FE00FF06005AA5"
 	arrangementAutoScrollOn="0"
@@ -19,10 +19,15 @@
 	swingInterval="7"
 	affectEntire="0"
 	activeModFunction="1"
-	lpfMode="24dB"
-	modFXType="flanger"
 	modFXCurrentParam="feedback"
-	currentFilterType="lpf">
+	currentFilterType="lpf"
+	modFXType="flanger"
+	lpfMode="24dB"
+	hpfMode="HPLadder"
+	filterRoute="H2L"
+	songGridScrollX="0"
+	songGridScrollY="0"
+	sessionLayout="0">
 	<modeNotes>
 		<modeNote>0</modeNote>
 		<modeNote>2</modeNote>
@@ -36,7 +41,9 @@
 		roomSize="1288490496"
 		dampening="1546188288"
 		width="2147483647"
-		pan="0">
+		hpf="0"
+		pan="0"
+		model="0">
 		<compressor
 			attack="327244"
 			release="936"
@@ -47,11 +54,20 @@
 	<delay
 		pingPong="1"
 		analog="0"
-		syncLevel="7" />
-	<compressor
-		syncLevel="6"
+		syncLevel="7"
+		syncType="0" />
+	<sidechain
 		attack="327244"
-		release="936" />
+		release="936"
+		syncLevel="6"
+		syncType="0" />
+	<audioCompressor
+		attack="83886080"
+		release="83886080"
+		thresh="0"
+		ratio="1073741824"
+		compHPF="0"
+		compBlend="2147483647" />
 	<songParams
 		reverbAmount="0x80000000"
 		volume="0x3504F334"
@@ -63,7 +79,11 @@
 		sampleRateReduction="0x80000000"
 		bitCrush="0x80000000"
 		modFXOffset="0x00000000"
-		modFXFeedback="0x80000000">
+		modFXFeedback="0x80000000"
+		compressorThreshold="0x00000000"
+		lpfMorph="0x80000000"
+		hpfMorph="0x80000000"
+		tempo="0x00002710">
 		<delay
 			rate="0x00000000"
 			feedback="0x80000000" />
@@ -81,18 +101,21 @@
 	</songParams>
 	<instruments>
 		<sound
-			presetSlot="14"
-			presetSubSlot="-1"
+			presetName="014"
 			presetFolder="SYNTHS"
 			defaultVelocity="64"
 			isArmedForRecording="0"
 			activeModFunction="1"
+			colour="0"
 			polyphonic="mono"
 			voicePriority="1"
 			mode="subtractive"
-			lpfMode="24dB"
 			modFXType="none"
-			clippingAmount="7">
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L"
+			clippingAmount="7"
+			maxVoices="8">
 			<osc1
 				type="sine"
 				transpose="12"
@@ -103,17 +126,9 @@
 				transpose="0"
 				cents="0"
 				retrigPhase="-1" />
-			<lfo1 type="sine" syncLevel="0" />
-			<lfo2 type="sine" />
-			<unison num="1" detune="8" />
-			<delay
-				pingPong="1"
-				analog="0"
-				syncLevel="7" />
-			<compressor
-				syncLevel="6"
-				attack="327244"
-				release="936" />
+			<lfo1 type="sine" syncLevel="0" syncType="0" />
+			<lfo2 type="sine" syncLevel="0" syncType="0" />
+			<unison num="1" detune="8" spread="0" />
 			<modKnobs>
 				<modKnob controlsParam="pan" />
 				<modKnob controlsParam="volumePostFX" />
@@ -132,20 +147,40 @@
 				<modKnob controlsParam="oscBVolume" />
 				<modKnob controlsParam="sampleRateReduction" />
 			</modKnobs>
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
 		</sound>
 		<sound
-			presetSlot="25"
-			presetSubSlot="-1"
+			presetName="025"
 			presetFolder="SYNTHS"
 			defaultVelocity="64"
 			isArmedForRecording="0"
 			activeModFunction="4"
+			colour="0"
 			polyphonic="poly"
 			voicePriority="1"
 			mode="subtractive"
 			transpose="12"
+			modFXType="none"
 			lpfMode="24dBDrive"
-			modFXType="none">
+			hpfMode="HPLadder"
+			filterRoute="H2L"
+			maxVoices="8">
 			<osc1
 				type="triangle"
 				transpose="0"
@@ -156,17 +191,9 @@
 				transpose="12"
 				cents="0"
 				retrigPhase="-1" />
-			<lfo1 type="triangle" syncLevel="0" />
-			<lfo2 type="sine" />
-			<unison num="1" detune="3" />
-			<delay
-				pingPong="1"
-				analog="1"
-				syncLevel="7" />
-			<compressor
-				syncLevel="6"
-				attack="327244"
-				release="936" />
+			<lfo1 type="triangle" syncLevel="0" syncType="0" />
+			<lfo2 type="sine" syncLevel="0" syncType="0" />
+			<unison num="1" detune="3" spread="0" />
 			<modKnobs>
 				<modKnob controlsParam="pan" />
 				<modKnob controlsParam="volumePostFX" />
@@ -185,19 +212,39 @@
 				<modKnob controlsParam="noiseVolume" />
 				<modKnob controlsParam="oscBPhaseWidth" />
 			</modKnobs>
+			<delay
+				pingPong="1"
+				analog="1"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
 		</sound>
 		<sound
-			presetSlot="170"
-			presetSubSlot="-1"
+			presetName="170"
 			presetFolder="SYNTHS"
 			defaultVelocity="64"
 			isArmedForRecording="0"
 			activeModFunction="4"
+			colour="0"
 			polyphonic="poly"
 			voicePriority="1"
 			mode="subtractive"
+			modFXType="none"
 			lpfMode="12dB"
-			modFXType="none">
+			hpfMode="HPLadder"
+			filterRoute="H2L"
+			maxVoices="8">
 			<osc1
 				type="sample"
 				loopMode="0"
@@ -384,17 +431,9 @@
 				transpose="0"
 				cents="0"
 				retrigPhase="-1" />
-			<lfo1 type="triangle" syncLevel="0" />
-			<lfo2 type="triangle" />
-			<unison num="1" detune="8" />
-			<delay
-				pingPong="1"
-				analog="0"
-				syncLevel="7" />
-			<compressor
-				syncLevel="6"
-				attack="327244"
-				release="936" />
+			<lfo1 type="triangle" syncLevel="0" syncType="0" />
+			<lfo2 type="triangle" syncLevel="0" syncType="0" />
+			<unison num="1" detune="8" spread="0" />
 			<modKnobs>
 				<modKnob controlsParam="pan" />
 				<modKnob controlsParam="volumePostFX" />
@@ -413,19 +452,39 @@
 				<modKnob controlsParam="bitcrushAmount" />
 				<modKnob controlsParam="sampleRateReduction" />
 			</modKnobs>
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
 		</sound>
 		<sound
-			presetSlot="165"
-			presetSubSlot="-1"
+			presetName="165"
 			presetFolder="SYNTHS"
 			defaultVelocity="64"
 			isArmedForRecording="0"
 			activeModFunction="1"
+			colour="0"
 			polyphonic="mono"
 			voicePriority="1"
 			mode="subtractive"
+			modFXType="none"
 			lpfMode="12dB"
-			modFXType="none">
+			hpfMode="HPLadder"
+			filterRoute="H2L"
+			maxVoices="8">
 			<osc1
 				type="square"
 				transpose="-36"
@@ -436,17 +495,9 @@
 				transpose="-24"
 				cents="0"
 				retrigPhase="-1" />
-			<lfo1 type="sine" syncLevel="0" />
-			<lfo2 type="sine" />
-			<unison num="1" detune="8" />
-			<delay
-				pingPong="1"
-				analog="0"
-				syncLevel="7" />
-			<compressor
-				syncLevel="6"
-				attack="327244"
-				release="936" />
+			<lfo1 type="sine" syncLevel="0" syncType="0" />
+			<lfo2 type="sine" syncLevel="0" syncType="0" />
+			<unison num="1" detune="8" spread="0" />
 			<modKnobs>
 				<modKnob controlsParam="pan" />
 				<modKnob controlsParam="volumePostFX" />
@@ -465,26 +516,54 @@
 				<modKnob controlsParam="oscAPhaseWidth" />
 				<modKnob controlsParam="sampleRateReduction" />
 			</modKnobs>
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
 		</sound>
 		<kit
-			presetSlot="3"
-			presetSubSlot="-1"
+			presetName="003"
 			presetFolder="KITS"
 			defaultVelocity="64"
 			isArmedForRecording="0"
 			activeModFunction="0"
-			lpfMode="24dB"
-			modFXType="flanger"
+			colour="0"
 			modFXCurrentParam="feedback"
-			currentFilterType="lpf">
+			currentFilterType="lpf"
+			modFXType="flanger"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
 			<delay
 				pingPong="1"
 				analog="0"
-				syncLevel="7" />
-			<compressor
-				syncLevel="6"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
 				attack="327244"
-				release="936" />
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
 			<soundSources>
 				<sound
 					name="KICK"
@@ -492,8 +571,12 @@
 					voicePriority="1"
 					sideChainSend="2147483647"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -516,21 +599,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -549,14 +629,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="SNAR"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -579,21 +680,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -612,14 +710,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="HATC"
 					polyphonic="choke"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -642,21 +761,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -675,14 +791,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="HATO"
 					polyphonic="choke"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -705,21 +842,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -738,14 +872,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="RIDE"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -768,21 +923,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -801,14 +953,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="CRAS"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -831,21 +1004,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -864,21 +1034,42 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="CLAP"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Clap/909 Clap.wav">
+						fileName="SAMPLES/DRUMS/Clap/909 Clap.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="17760" />
@@ -894,21 +1085,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -927,14 +1115,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="RIM"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -957,21 +1166,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -990,14 +1196,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="TOML"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -1020,21 +1247,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -1053,14 +1277,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="TOMM"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -1083,21 +1328,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -1116,14 +1358,35 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 				<sound
 					name="TOMH"
 					polyphonic="auto"
 					voicePriority="1"
 					mode="subtractive"
+					modFXType="none"
 					lpfMode="24dB"
-					modFXType="none">
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
 					<osc1
 						type="sample"
 						loopMode="1"
@@ -1146,21 +1409,18 @@
 							startSamplePos="0"
 							endSamplePos="0" />
 					</osc2>
-					<lfo1 type="sine" syncLevel="0" />
-					<lfo2 type="sine" />
-					<unison num="1" detune="8" />
-					<delay
-						pingPong="1"
-						analog="0"
-						syncLevel="7" />
-					<compressor
-						syncLevel="6"
-						attack="327244"
-						release="936" />
+					<lfo1 type="sine" syncLevel="0" syncType="0" />
+					<lfo2 type="sine" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
 					<arpeggiator
 						mode="off"
 						numOctaves="2"
-						syncLevel="7" />
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
@@ -1179,23 +1439,43 @@
 						<modKnob controlsParam="bitcrushAmount" />
 						<modKnob controlsParam="sampleRateReduction" />
 					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
 				</sound>
 			</soundSources>
 			<selectedDrumIndex>0</selectedDrumIndex>
 		</kit>
 		<sound
-			presetSlot="168"
-			presetSubSlot="-1"
+			presetName="168"
 			presetFolder="SYNTHS"
 			defaultVelocity="64"
 			isArmedForRecording="0"
 			activeModFunction="2"
+			colour="0"
 			polyphonic="poly"
 			voicePriority="1"
 			mode="subtractive"
-			lpfMode="24dB"
 			modFXType="none"
-			clippingAmount="1">
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L"
+			clippingAmount="1"
+			maxVoices="8">
 			<osc1
 				type="sample"
 				loopMode="0"
@@ -1228,17 +1508,9 @@
 				transpose="0"
 				cents="0"
 				retrigPhase="-1" />
-			<lfo1 type="triangle" syncLevel="0" />
-			<lfo2 type="triangle" />
-			<unison num="1" detune="8" />
-			<delay
-				pingPong="1"
-				analog="0"
-				syncLevel="7" />
-			<compressor
-				syncLevel="6"
-				attack="327244"
-				release="936" />
+			<lfo1 type="triangle" syncLevel="0" syncType="0" />
+			<lfo2 type="triangle" syncLevel="0" syncType="0" />
+			<unison num="1" detune="8" spread="0" />
 			<modKnobs>
 				<modKnob controlsParam="pan" />
 				<modKnob controlsParam="volumePostFX" />
@@ -1257,6 +1529,23 @@
 				<modKnob controlsParam="bitcrushAmount" />
 				<modKnob controlsParam="sampleRateReduction" />
 			</modKnobs>
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
 		</sound>
 	</instruments>
 	<sections>
@@ -1275,22 +1564,33 @@
 	</sections>
 	<sessionClips>
 		<instrumentClip
+			clipName=""
 			inKeyMode="1"
 			yScroll="29"
 			yScrollKeyboard="25"
-			instrumentPresetSlot="25"
-			instrumentPresetSubSlot="-1"
+			instrumentPresetName="025"
 			instrumentPresetFolder="SYNTHS"
 			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="3072"
 			colourOffset="-60"
-			section="0">
+			section="0"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
 			<arpeggiator
-				mode="down"
+				mode="arp"
+				syncLevel="6"
 				numOctaves="3"
-				syncLevel="6" />
+				syncType="0"
+				arpMode="arp"
+				noteMode="down"
+				octaveMode="down"
+				mpeVelocity="off" />
 			<soundParams
 				arpeggiatorGate="0x99999995"
 				portamento="0x80000000"
@@ -1326,7 +1626,15 @@
 				sampleRateReduction="0x80000000"
 				bitCrush="0x80000000"
 				modFXOffset="0x00000000"
-				modFXFeedback="0x80000000">
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				waveFold="0x80000000"
+				ratchetProbability="0x80000000"
+				ratchetAmount="0x80000000"
+				sequenceLength="0x80000000"
+				rhythm="0x80000000">
 				<envelope1
 					attack="0xC28F5C1D"
 					decay="0xB851EB7B"
@@ -1387,6 +1695,12 @@
 					bassFrequency="0x00000000"
 					trebleFrequency="0x00000000" />
 			</soundParams>
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
 			<noteRows>
 				<noteRow
 					y="24" />
@@ -1433,18 +1747,33 @@
 			</noteRows>
 		</instrumentClip>
 		<instrumentClip
+			clipName=""
 			inKeyMode="1"
 			yScroll="34"
 			yScrollKeyboard="50"
-			instrumentPresetSlot="14"
-			instrumentPresetSubSlot="-1"
+			instrumentPresetName="014"
 			instrumentPresetFolder="SYNTHS"
 			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="3072"
 			colourOffset="20"
-			section="0">
+			section="0"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
+			<arpeggiator
+				mode="off"
+				syncLevel="6"
+				numOctaves="2"
+				syncType="0"
+				arpMode="off"
+				noteMode="up"
+				octaveMode="up"
+				mpeVelocity="off" />
 			<soundParams
 				arpeggiatorGate="0x00000000"
 				portamento="0x80000000"
@@ -1480,7 +1809,15 @@
 				sampleRateReduction="0x80000000"
 				bitCrush="0x80000000"
 				modFXOffset="0x00000000"
-				modFXFeedback="0x00000000">
+				modFXFeedback="0x00000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				waveFold="0x80000000"
+				ratchetProbability="0x80000000"
+				ratchetAmount="0x80000000"
+				sequenceLength="0x80000000"
+				rhythm="0x80000000">
 				<envelope1
 					attack="0x80000000"
 					decay="0xE6666654"
@@ -1515,6 +1852,12 @@
 					bassFrequency="0x00000000"
 					trebleFrequency="0x00000000" />
 			</soundParams>
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
 			<noteRows>
 				<noteRow
 					y="55"
@@ -1545,18 +1888,33 @@
 			</noteRows>
 		</instrumentClip>
 		<instrumentClip
+			clipName=""
 			inKeyMode="1"
 			yScroll="34"
 			yScrollKeyboard="25"
-			instrumentPresetSlot="170"
-			instrumentPresetSubSlot="-1"
+			instrumentPresetName="170"
 			instrumentPresetFolder="SYNTHS"
 			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="6144"
 			colourOffset="-60"
-			section="0">
+			section="0"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
+			<arpeggiator
+				mode="off"
+				syncLevel="6"
+				numOctaves="2"
+				syncType="0"
+				arpMode="off"
+				noteMode="up"
+				octaveMode="up"
+				mpeVelocity="off" />
 			<soundParams
 				arpeggiatorGate="0x00000000"
 				portamento="0x80000000"
@@ -1592,7 +1950,15 @@
 				sampleRateReduction="0x80000000"
 				bitCrush="0x80000000"
 				modFXOffset="0x00000000"
-				modFXFeedback="0x00000000">
+				modFXFeedback="0x00000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				waveFold="0x80000000"
+				ratchetProbability="0x80000000"
+				ratchetAmount="0x80000000"
+				sequenceLength="0x80000000"
+				rhythm="0x80000000">
 				<envelope1
 					attack="0x80000000"
 					decay="0xE6666654"
@@ -1623,6 +1989,12 @@
 					bassFrequency="0x00000000"
 					trebleFrequency="0x00000000" />
 			</soundParams>
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
 			<noteRows>
 				<noteRow
 					y="24" />
@@ -1666,18 +2038,33 @@
 			</noteRows>
 		</instrumentClip>
 		<instrumentClip
+			clipName=""
 			inKeyMode="1"
 			yScroll="30"
 			yScrollKeyboard="25"
-			instrumentPresetSlot="168"
-			instrumentPresetSubSlot="-1"
+			instrumentPresetName="168"
 			instrumentPresetFolder="SYNTHS"
 			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="3072"
 			colourOffset="-60"
-			section="0">
+			section="0"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
+			<arpeggiator
+				mode="off"
+				syncLevel="6"
+				numOctaves="2"
+				syncType="0"
+				arpMode="off"
+				noteMode="up"
+				octaveMode="up"
+				mpeVelocity="off" />
 			<soundParams
 				arpeggiatorGate="0x00000000"
 				portamento="0x80000000"
@@ -1713,7 +2100,15 @@
 				sampleRateReduction="0x80000000"
 				bitCrush="0x80000000"
 				modFXOffset="0x00000000"
-				modFXFeedback="0x00000000">
+				modFXFeedback="0x00000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				waveFold="0x80000000"
+				ratchetProbability="0x80000000"
+				ratchetAmount="0x80000000"
+				sequenceLength="0x80000000"
+				rhythm="0x80000000">
 				<envelope1
 					attack="0xB333332A"
 					decay="0xE6666654"
@@ -1760,6 +2155,12 @@
 					bassFrequency="0x00000000"
 					trebleFrequency="0x00000000" />
 			</soundParams>
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
 			<noteRows>
 				<noteRow
 					y="24" />
@@ -1806,22 +2207,33 @@
 			</noteRows>
 		</instrumentClip>
 		<instrumentClip
+			clipName=""
 			inKeyMode="1"
 			yScroll="34"
 			yScrollKeyboard="25"
-			instrumentPresetSlot="165"
-			instrumentPresetSubSlot="-1"
+			instrumentPresetName="165"
 			instrumentPresetFolder="SYNTHS"
 			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="3072"
 			colourOffset="-60"
-			section="0">
+			section="0"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
 			<arpeggiator
-				mode="up"
+				mode="arp"
+				syncLevel="6"
 				numOctaves="4"
-				syncLevel="6" />
+				syncType="0"
+				arpMode="arp"
+				noteMode="up"
+				octaveMode="up"
+				mpeVelocity="off" />
 			<soundParams
 				arpeggiatorGate="0x51EB84F9"
 				portamento="0x80000000"
@@ -1857,7 +2269,15 @@
 				sampleRateReduction="0x80000000"
 				bitCrush="0x80000000"
 				modFXOffset="0x00000000"
-				modFXFeedback="0x00000000">
+				modFXFeedback="0x00000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				waveFold="0x80000000"
+				ratchetProbability="0x80000000"
+				ratchetAmount="0x80000000"
+				sequenceLength="0x80000000"
+				rhythm="0x80000000">
 				<envelope1
 					attack="0x92000000"
 					decay="0xE6666654"
@@ -1908,6 +2328,12 @@
 					bassFrequency="0x00000000"
 					trebleFrequency="0x00000000" />
 			</soundParams>
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
 			<noteRows>
 				<noteRow
 					y="24" />
@@ -1954,12 +2380,12 @@
 			</noteRows>
 		</instrumentClip>
 		<instrumentClip
+			clipName=""
 			inKeyMode="1"
 			yScroll="-2"
 			yScrollKeyboard="50"
 			affectEntire="0"
-			instrumentPresetSlot="3"
-			instrumentPresetSubSlot="-1"
+			instrumentPresetName="003"
 			instrumentPresetFolder="KITS"
 			isPlaying="1"
 			isSoloing="0"
@@ -1967,7 +2393,13 @@
 			length="768"
 			colourOffset="52"
 			section="0"
-			selected="1">
+			selected="1"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
 			<kitParams
 				reverbAmount="0x80000000"
 				volume="0x3504F334"
@@ -1979,7 +2411,11 @@
 				sampleRateReduction="0x80000000"
 				bitCrush="0x80000000"
 				modFXOffset="0x00000000"
-				modFXFeedback="0x80000000">
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
 				<delay
 					rate="0x00000000"
 					feedback="0x80000000" />
@@ -1995,6 +2431,12 @@
 					bassFrequency="0x00000000"
 					trebleFrequency="0x00000000" />
 			</kitParams>
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
 			<noteRows>
 				<noteRow
 					colourOffset="43"
@@ -2035,7 +2477,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2106,7 +2556,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2177,7 +2635,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2247,7 +2713,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2317,7 +2791,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2387,7 +2869,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2457,7 +2947,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2527,7 +3025,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2597,7 +3103,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2667,7 +3181,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2737,7 +3259,15 @@
 						sampleRateReduction="0x80000000"
 						bitCrush="0x80000000"
 						modFXOffset="0x00000000"
-						modFXFeedback="0x00000000">
+						modFXFeedback="0x00000000"
+						compressorThreshold="0x00000000"
+						lpfMorph="0x80000000"
+						hpfMorph="0x80000000"
+						waveFold="0x80000000"
+						ratchetProbability="0x80000000"
+						ratchetAmount="0x80000000"
+						sequenceLength="0x80000000"
+						rhythm="0x80000000">
 						<envelope1
 							attack="0x80000000"
 							decay="0xE6666654"
@@ -2772,4 +3302,8 @@
 			</noteRows>
 		</instrumentClip>
 	</sessionClips>
+	<scales>
+		<userScale>0</userScale>
+		<disabledPresetScales>0</disabledPresetScales>
+	</scales>
 </song>
