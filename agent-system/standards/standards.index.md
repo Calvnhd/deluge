@@ -32,7 +32,6 @@ Programming language standards for consistent development practices.
 | Language | Path | Description |
 |----------|------|-------------|
 | Bash | `standards/languages/bash/` | Portable shell scripting with ShellCheck and shfmt |
-| Dotnet | `standards/languages/dotnet/` | .NET (C#) development with Roslyn analyzers, xUnit, and strict typing |
 | Python | `standards/languages/python/` | Modern Python with uv, Ruff, and strict typing |
 
 ### Loading Language Standards

@@ -1,25 +1,34 @@
 # Deluge
 
-Deluge SD card back-up and scripts for managing its contents
+Back-up and management scripts for a [Synthstrom Deluge](https://synthstrom.com/product/deluge/) SD card.
+
+XML presets for kits, synths, and songs are backed up in version control. Audio samples are gitignored and synced to cloud backup via scripts.
+
+> **Note:** This repository is a work in progress. Some folders (e.g. `scripts/`) may be empty or incomplete.
 
 ---
 
-## SD card file and folder structure
+## Repository structure
 
-- **DELUGE**:
-    - **KITS** - Kit presets
-    - **SONGS** - Song presets
-    - **SYNTHS** - Synth presets
-    - **SAMPLES** - Audio samples
-        - **ARTISTS** - Pre-made samples from various artists shipped with the Deluge
-        - **CLIPS** - User recordings created with the internal mic or line-in during AUDIO CLIP VIEW
-            - **TEMP** - Clip recordings are initially saved here and moved into the parent folder when the SONG is saved
-        - **RECORD** - User recordings created with the internal mic or line-in during KIT CLIP VIEW
-        - **RESAMPLE** - User recordings created with the resample feature
-        ... 
-        Additional user created folders
+```
+deluge/
+├── DELUGE/        # SD card backup (see below)
+├── scripts/       # Scripts for managing SD card contents
+├── docs/          # Project documentation
+└── agent-system/  # AI-assisted development configuration
+```
 
-**NOTE:** SONGS store kit and synth information within their own .xml files, therefore KITS and SYNTHS can be altered independently without breaking SONGS. Care must be taken to not break references when moving SAMPLES.
+### SD card structure
+
+The `DELUGE/` folder mirrors the contents of the Deluge SD card:
+
+- **KITS/** — Kit presets
+- **SYNTHS/** — Synth presets
+- **SONGS/** — Song presets (include embedded kit and synth data)
+- **SAMPLES/** — Audio samples (gitignored)
+- **MIDIFollow.XML** — MIDI Follow Mode config mapping MIDI CCs to Deluge parameters
+
+SONGS store their own kit and synth data, so KITS and SYNTHS can be altered independently. Sample paths in XMLs are hardcoded and case-sensitive — moving or renaming samples breaks referencing presets.
 
 ---
 
@@ -29,7 +38,7 @@ Deluge SD card back-up and scripts for managing its contents
 
 All scripts read configuration from `scripts/.env`
 
-### Script ideas
+### Ideas
 
 - Creates a complete backup of the SD card as a `.zip` file 
 - Sync SD card contents to this repository
@@ -43,5 +52,7 @@ All scripts read configuration from `scripts/.env`
 
 ## Other Todos
 
-- Re-arrange your samples into a structure that is actually usable 
+- Re-arrange your samples into a structure that is actually usable
+- Same with synths
+- Same with kits
 

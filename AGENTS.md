@@ -1,4 +1,63 @@
-# MonoGame Toybox
+# Deluge agent instructions
+
+## Project overview
+
+This repository contains a back-up of a Synthstrom Deluge (hardware sampler/synth) SD card and scripts for managing its contents. XML presets for kits, synths, and songs are backed up in version control, audio files are backed up separately in cloud storage and synced via scripts.
+
+**Note:** This repository is a work in progress. Some folders (e.g. `scripts/`) may be empty or incomplete. `SAMPLES/` is gitignored and will not contain audio files in the repo — samples are synced to cloud backup via scripts.
+
+### Repository structure
+
+```
+deluge/
+├── DELUGE/        # SD card backup (see below)
+├── scripts/       # Scripts for managing SD card contents
+├── docs/          # Project documentation
+└── agent-system/  # AI-assisted development configuration
+```
+
+---
+
+## Deluge SD card 
+
+### Directory layout
+
+```
+DELUGE/
+├── KITS/         # Kit XMLs
+├── SYNTHS/       # Synth XMLs
+├── SONGS/        # Song XMLs
+├── SAMPLES/      # Audio samples (gitignored)
+│   ├── ARTISTS/  # Pre-made samples from various artists shipped with the Deluge
+    ├── CLIPS/    # User recordings created with the internal mic or line-in during AUDIO CLIP VIEW
+    │   └── TEMP/ # Clip recordings are initially saved here and moved into CLIPS/ when the SONG is saved
+    ├── RECORD/   # User recordings created with the internal mic or line-in during KIT CLIP VIEW
+│   ├── RESAMPLE/ # User recordings created with the resample feature
+│   └── .../      # Additional user-created folders
+└── MIDIFollow.XML # MIDI Follow Mode config — maps MIDI CCs to Deluge parameters
+```
+
+This structure mirrors that of a Deluge SD card, where DELUGE is the name of the SD card while KITS, SYNTHS, SONGS, SAMPLES are the four top level folders the card contains.
+
+### Dependencies and interactions
+
+- Song XMLs store their own kit and synth information to maintain song-specific edits to presets loaded from KITS and SYNTHS, therefore KITS and SYNTHS can be altered without breaking SONGS
+- Kit, song, and synth XMLs reference audio samples using hardcoded, case-sensitive paths from `DELUGE/` e.g. `fileName="SAMPLES/DRUMS/Kick/XV5080 Kick.wav"`, therefore moving or renaming samples breaks all referencing presets
+
+### Firmware version
+
+- The Deluge associated with this repository is currently running the latest Community Firmware version `firmwareVersion="c1.2.1"`
+- Each XML file specifies the firmware version that produced it
+- The XML structures have significantly changed over time.
+
+---
+
+## Additional resources
+
+- The firmware used by the Deluge is available in this workspace in the repository `DelugeFirmware/.`
+- The wiki for the Deluge firmware is available in this workspace in the repository `DelugeFirmware.wiki/.`
+
+---
 
 ## AI-Assisted Development
 
@@ -15,13 +74,3 @@ Before responding to ANY user request:
 **DO NOT PROCEED** until you have completed the checklist.
 
 ---
-
-## Project overview
-
-This repository contains a back-up of a Synthstrom Deluge SD card and scripts for managing its contents
-See README.md for more information
-
-## Additional Resources
-
-- The firmware for the Synthstrom Deluge is available in the repository `DelugeFirmware` in this workspace
-- Documentation for the Synthstrom Deluge firmware is available in the repository `DelugeFirmware.wiki` in this workspace

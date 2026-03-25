@@ -55,10 +55,6 @@ When working with an AI assistant, reference the appropriate agent for your task
 
 | Task | Agent | Example Prompt |
 |------|-------|----------------|
-| Create/review devcontainer | DevContainer-Expert | "Review my devcontainer configuration" |
-| Commit changes | Git-Workflow-Expert | "Help me commit these changes" |
-| Create a branch | Git-Workflow-Expert | "Create a feature branch for user auth" |
-| Create a pull request | Git-Workflow-Expert | "Create a PR for my changes" |
 | Document a decision | Decision-Record-Expert | "Create a decision record for choosing PostgreSQL" |
 
 ## Quick Reference
