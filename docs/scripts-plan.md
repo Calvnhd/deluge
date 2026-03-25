@@ -1,5 +1,7 @@
 # Scripts Overview
 
+**NOTE:**  This is old! None of these scripts exist. Keeping for future reference when redeveloping a bunch of scripts.
+
 ## Configuration
 
 ### `.env` / `.env.example`

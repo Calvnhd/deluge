@@ -45,9 +45,10 @@ Skills will typically bundle their own standards in `skills/<skill>/standards/`.
 
 **MANDATORY:** When a query matches a specific domain, you **MUST** delegate to the appropriate subagent for isolated, focused processing. Do not attempt to handle the task directly - subagents load skill-specific standards and provide higher quality outcomes.
 
-| Domain           | Domain Keywords                                                                                  | Subagent                 | Skill                      |
-| ---------------- | ------------------------------------------------------------------------------------------------ | ------------------------ | -------------------------- |
-| Decision Records | decision record, DR, architectural decision, ADR                                                 | `decision-record-expert` | `skills/decision-records/` |
+| Domain           | Domain Keywords                                                                                  | Subagent                 | Skill                            |
+| ---------------- | ------------------------------------------------------------------------------------------------ | ------------------------ | -------------------------------- |
+| Decision Records | decision record, DR, architectural decision, ADR                                                 | `decision-record-expert` | `skills/decision-records/`       |
+| Agent System     | agent system, create agent, update agent, create skill, update skill, create standard, update standard, sync | `agent-system-manager`   | `skills/agent-system-management/` |
 
 ### How to Route
 

@@ -47,6 +47,8 @@ flowchart TB
 | **Skills** | `skills/<domain>/` | Self-contained capability packages with actions and invariant standards |
 | **Standards** | `standards/` | Customizable project/org-specific policies |
 
+---
+
 ## Getting Started
 
 ### Using an Agent
@@ -56,6 +58,8 @@ When working with an AI assistant, reference the appropriate agent for your task
 | Task | Agent | Example Prompt |
 |------|-------|----------------|
 | Document a decision | Decision-Record-Expert | "Create a decision record for choosing PostgreSQL" |
+
+---
 
 ## Quick Reference
 
@@ -71,3 +75,17 @@ When working with an AI assistant, reference the appropriate agent for your task
 |------|-------------|
 | [`agent-system/AGENTS.md`](AGENTS.md) | Main routing table and skill references |
 | [`agent-system/standards/standards.index.md`](standards/standards.index.md) | Index of all shared standards |
+
+---
+
+## Future plans
+
+### Agents
+
+- Something to update README and AGENTS files when updating SD card structure, firmware version, add scripts etc
+- Something to update the agent system itself.  Review for project specifics, updates, stale information, new standards / skills / agents
+- Agent(s) to do the research / plan / implement pattern
+- Repo discovery / research agent. Use for exploring Firmware, for example. Human context vs agent context?
+- Implement in a slower, step by step way
+- Documentation creation, for reference and for learning
+- Conversational tutor agent
