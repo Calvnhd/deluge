@@ -57,6 +57,7 @@ Bullet list of specific questions this research aimed to answer.
 
 Clear description of:
 - The feature's purpose and value
+- Key benefits — what problems it solves and what capabilities it enables
 - Primary use case(s)
 - Inputs and outputs
 - Scope boundaries (in scope / out of scope)
@@ -93,11 +94,26 @@ At least one viable approach with structured comparison:
 | Option A | Benefits | Drawbacks | Low/Medium/High |
 ```
 
-### 8. Recommendation
+### 8. Cross-Cutting Concerns
 
-Clear statement of the recommended approach with rationale linking back to project constraints and existing patterns.
+Analysis of how this feature interacts with other parts of the system:
+- Which existing files, scripts, or processes are affected
+- Shared resources (XML schemas, sample paths, naming conventions) involved
+- Implications for SD card sync, backup integrity, or other system-wide workflows
 
-### 9. Open Questions
+### 9. Risk Analysis
+
+Identified risks with assessment and mitigation:
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|-----------|--------|------------|
+| {Risk description} | Low/Medium/High | Low/Medium/High | {Mitigation strategy} |
+
+### 10. Recommendation
+
+Clear statement of the recommended approach with rationale linking back to project constraints, existing patterns, and the risk/benefit trade-offs.
+
+### 11. Open Questions
 
 Unresolved questions requiring decisions. Each question MUST include:
 - The question itself
@@ -114,7 +130,7 @@ Unresolved questions requiring decisions. Each question MUST include:
    - **Blocking:** Yes / No
 ```
 
-### 10. References
+### 12. References
 
 All sources consulted, organised by category:
 
@@ -129,7 +145,7 @@ All sources consulted, organised by category:
 - [{Title}]({URL}) — {What it provides}
 ```
 
-### 11. Next Steps
+### 13. Next Steps
 
 What should happen after this research, specifically referencing the pipeline:
 
@@ -142,8 +158,6 @@ What should happen after this research, specifically referencing the pipeline:
 
 Include when relevant:
 
-- **Risk Analysis** — Identified risks with likelihood and mitigation strategies
-- **Cross-Cutting Concerns** — How this feature interacts with other parts of the system
 - **Firmware Compatibility** — Differences across firmware versions if applicable
 
 ## Document Principles

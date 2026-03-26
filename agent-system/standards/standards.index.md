@@ -62,4 +62,4 @@ When working with a specific language:
 
 Domain-specific standards are bundled with their skills rather than in this shared standards folder.
 
-When working in these domains, load standards from the skill's `standards/` folder instead of looking here.
+When working in these domains, load standards from the skill's `standards/` folder in addition to the relevant project-wide standards listed here.

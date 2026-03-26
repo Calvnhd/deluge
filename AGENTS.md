@@ -4,7 +4,7 @@
 
 This repository contains a back-up of a Synthstrom Deluge (hardware sampler/synth) SD card and scripts for managing its contents. XML presets for kits, synths, and songs are backed up in version control, audio files are backed up separately in cloud storage and synced via scripts.
 
-**Note:** This repository is a work in progress. Some folders (e.g. `scripts/`) may be empty or incomplete. `SAMPLES/` is gitignored and will not contain audio files in the repo — samples are synced to cloud backup via scripts.
+**Note:** This repository is a work in progress. Some folders (e.g. `scripts/`) may be empty or incomplete
 
 ### Repository structure
 
@@ -54,8 +54,8 @@ This structure mirrors that of a Deluge SD card, where DELUGE is the name of the
 
 ## Additional resources
 
-- The firmware used by the Deluge is available in this workspace in the repository `DelugeFirmware/.`
-- The wiki for the Deluge firmware is available in this workspace in the repository `DelugeFirmware.wiki/.`
+- The firmware used by the Deluge is available in this workspace in the repository `DelugeFirmware`
+- The wiki for the Deluge firmware is available in this workspace in the repository `DelugeFirmware.wiki`
 
 ---
 

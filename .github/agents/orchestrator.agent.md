@@ -1,7 +1,7 @@
 ---
-description: Routes tasks to specialist agents. Cannot edit files directly — must delegate to subagents for all file modifications.
+description: Routes tasks to specialist agents
 name: orchestrator
-tools: [read, search, agent, todo, vscode, web]
+tools: [vscode, read, agent, search, todo]
 model: Claude Opus 4.6
 ---
 
@@ -10,10 +10,6 @@ model: Claude Opus 4.6
 ## Overview
 
 This is the default working mode for the Deluge repository. It routes tasks to specialist agents based on the routing table and handles general queries that don't match a specific domain. It deliberately **cannot edit files** — all modifications must be delegated to specialist subagents.
-
-## Why No Edit Tools?
-
-This agent's `tools` list excludes `edit` and `execute`. This is intentional enforcement: without these tools, the orchestrator is physically unable to create, modify, or delete files, or run terminal commands. It **must** delegate to a specialist subagent for any work that changes the repository. This prevents the routing bypass that occurs when an agent reads the routing rules but proceeds to do the work itself.
 
 ## Routing
 
@@ -33,7 +29,7 @@ The routing table is the authoritative source at `agent-system/AGENTS.md`. Alway
 When delegating to a subagent, provide:
 
 1. **Full context** — Include the user's complete request and any clarifications
-2. **Skill path** — Tell the subagent which skill to load (from the routing table)
+2. **Skill path** — Tell the subagent which skill(s) to load (from the routing table)
 3. **Standards** — Remind the subagent to load `agent-system/standards/project.md`
 4. **Scope** — Clarify what the subagent should do and what it should return
 

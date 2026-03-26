@@ -126,9 +126,18 @@ Search the firmware source and wiki when the feature involves:
 
 **Investigate by:**
 - Searching `DelugeFirmware/` for relevant source code
-- Reading `DelugeFirmware/contrib/` for community tools related to the feature
+- Checking `DelugeFirmware/contrib/` subdirectories for community tools related to the feature:
+  - `analysis/` — analysis scripts and tools
+  - `debug/` — debugging utilities
+  - `dx7/` — DX7 patch conversion tools
+  - `midi_follow/` — MIDI Follow configuration tools
+  - `midi-guide-csv2xml/` — MIDI guide CSV to XML conversion
+  - `midi2deluge/` — MIDI to Deluge conversion tools
+  - `sd_card/` — SD card management utilities
 - Searching `DelugeFirmware.wiki/` for documentation
 - Reading `DelugeFirmware.wiki/XML-file-format-documentation.md` for XML format details
+
+> **Tip:** For complex or multi-step firmware/codebase searches, consider delegating to a subagent via the `agent` tool for focused, isolated exploration.
 
 **Success Criteria:**
 - [ ] SD card structure understood (where relevant)
@@ -146,12 +155,17 @@ Conduct external research when:
 - The feature involves third-party libraries, APIs, or tools
 - Best practices or established patterns exist for the feature type
 - Technical specifications are needed (file formats, protocols, etc.)
-- Community resources (Deluge forums, documentation) have relevant information
+- Community resources have relevant information
 
 **Investigate by:**
 - Fetching relevant web pages and documentation
 - Searching for established patterns for similar tools/scripts
 - Checking for existing open-source tools that solve similar problems
+- Searching Deluge community resources:
+  - Synthstrom Deluge official documentation
+  - Deluge community forums and discussions
+  - Community firmware documentation and release notes
+  - Third-party Deluge tools, utilities, and libraries
 
 > ⚠️ **CRITICAL**: Always verify external information against the actual codebase. External sources may be outdated or inaccurate for this specific project.
 
@@ -174,13 +188,25 @@ Before writing the document, consolidate:
    - Dependencies and complexity
    - Fit with existing codebase patterns
 
-2. **Recommendation** — State which approach is recommended and why, considering:
+2. **Cross-Cutting Concerns** — Analyse how this feature interacts with other parts of the system:
+   - Which existing files, scripts, or processes does this feature touch?
+   - Could changes break or alter existing behaviour?
+   - Are there shared resources (XML schemas, sample paths, naming conventions) that this feature depends on or affects?
+   - Does this feature have implications for the SD card sync workflow, backup integrity, or other system-wide concerns?
+
+3. **Risk and Benefit Analysis** — Evaluate risks and benefits:
+   - **Benefits** — What value does this feature provide? What problems does it solve? What new capabilities does it enable?
+   - **Risks** — What could go wrong? Consider data loss, breaking changes, complexity creep, maintenance burden
+   - **Mitigations** — For each identified risk, suggest a mitigation strategy
+   - **Reversibility** — How easy is it to undo this change if needed?
+
+4. **Recommendation** — State which approach is recommended and why, considering:
    - Consistency with existing code patterns
    - Complexity vs. value
    - Maintainability and extensibility
    - Risk and reversibility
 
-3. **Open Questions** — Compile all unresolved questions with:
+5. **Open Questions** — Compile all unresolved questions with:
    - The question itself
    - Why it matters
    - A recommended default or suggested answer where possible
@@ -188,6 +214,8 @@ Before writing the document, consolidate:
 
 **Success Criteria:**
 - [ ] At least one viable approach identified with trade-offs
+- [ ] Cross-cutting concerns analysed
+- [ ] Risks and benefits evaluated
 - [ ] Clear recommendation stated with rationale
 - [ ] Open questions compiled with context for decision-making
 

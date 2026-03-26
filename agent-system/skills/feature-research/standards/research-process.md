@@ -35,7 +35,7 @@ The following investigations MUST be performed for every research task, regardle
 |---------------|---------------|-----|
 | XML format documentation | Feature involves XML files | Read `DelugeFirmware.wiki/XML-file-format-documentation.md` |
 | XML community changes | Feature involves XML files | Read `DelugeFirmware.wiki/XML-files--‐-community-changes-documentation.md` |
-| Contrib tools | Feature overlaps with community tools | Search `DelugeFirmware/contrib/` |
+| Contrib tools | Feature overlaps with community tools | Search `DelugeFirmware/contrib/` subdirectories: `analysis/`, `debug/`, `dx7/`, `midi_follow/`, `midi-guide-csv2xml/`, `midi2deluge/`, `sd_card/` |
 | Source code | Implementation details needed | Search `DelugeFirmware/src/` for relevant code |
 
 ## Clarifying Questions
