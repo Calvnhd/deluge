@@ -59,6 +59,7 @@ Skills will typically bundle their own standards in `skills/<skill>/standards/`.
 | Decision Records | decision record, DR, architectural decision, ADR                                                 | `decision-record-expert` | `skills/decision-records/`       |
 | Feature Research | research feature, investigate feature, research topic, feature research, research script         | `feature-researcher`     | `skills/feature-research/`       |
 | Feature Planning | plan feature, feature plan, create plan, implementation plan, plan script                         | `feature-planner`        | `skills/feature-planning/`       |
+| Feature Implementation | implement feature, implement plan, build feature, execute plan, implement script            | `feature-implementer`    | `skills/feature-implementation/` |
 | Agent System     | agent system, create agent, update agent, create skill, update skill, create standard, update standard, sync | `agent-system-manager`   | `skills/agent-system-management/` |
 
 ### Orchestrator Enforcement

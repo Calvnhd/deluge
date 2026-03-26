@@ -31,11 +31,29 @@ The plan should not:
 
 --- 
 
-implement
+Let's move on to the implementation agent.  The purpose of this agent is to take the plan and implement the feature to completion, according to the spec and steps contained in the plan document.  
+
+It must adhere to the plan by implementing the feature as specified, and by following the phases, tasks, subtasks etc. in order
+It should briefly summarize and explain its work during implementation of a step.  Upon completing a step, it MUST summarize the results to the user in chat, such that the user is clearly able to track progress to review and to learn
+It MUST update the plan document between each unit of work before proceeding, including updating any checklists, and adding a brief summary or work done.  Any notable decisions should be explicitly mentioned. 
+Any deviations from the plan MUST be explicitly flagged with reasoning, and documented in the plan
+It should resolve any open questions by querying the user, alongside some information and guidance and a recommendation
+
+If required, the implementation agent should delegate to the plan agent for a plan re-review.  This should be done for large features in between phases or other significant or functionally critical units of work, after resolving critical open questions, or after deviating from the original plan.  The plan agent should be provided with context regarding the work done so far and the reason for re-review. 
+
+The implementation agent is able to operate with different levels of interactivity with the user.  These varying levels trade off agent autonomy and speed vs human review, understanding, and learning.
+
+The default level is as described above -- move task by task while narrating and explaining your work, see each task tthrough to completion, and upon completing a task it should provide a summary in chat and update documentation.  At this point, it MUST pause to give the user time to review and understand the implementation of that task, and respond to any questions the user has.  This is to ensure the work meets the specification, and also for the user to learn and understand the work in detail.
+
+The implementation agent should also have  slower, learning focussed level of operation.  In this mode, the agent does not complete an entire task or unit or work autonomously in one go.  Rather, the agent will implement the task piece by piece according to the user's direction.  This might mean adding basic stubs for functions or classes or script sections.  It might be simple pseudocode as text comments. It might be only one section or one line of code.  The user will specify. This is to give the user the opportunity to think through the feature and test their own understanding, similar to pair programming. The agent will also answer any implementation questions the user has.  The user may write some code themselves, in which case you should review the code for accuracy, functionality, and adherence to the plan. Provide feedback to the user.  If you need to correct or improve the user's code, you should clearly explain your reasoning -- act as a tutor and mentor.
+
+Lastly, the implementation should have a fast and autonomous mode.  In this case, the agent is may implement many tasks in a row according to the user's request.  It might be one task, two, a whole phase, or more. There is no upper limit -- the agent can implement the entire feature from scratch through to completion if the user requests it.  However, the other rules must not be overridden -- follow the plan, implement task-by-task, summarize in chat and update documentation (before moving to next tasks).  If significant deviations from the plan occur, or if critical bugs or gaps in the spec or plan are found, or otherwise hit an unexpected roadblock, the agent MUST stop, explain the situation to the user, and await further instruction.
+
 
 ---
 
 Alterations or other considerations?
 
 - Research agent might be good for other uses too, depending on other agents I make, e.g. a documentation writer, agent system review, updating readmes and stuff like that
+- plan review? update plan agent to know it has to do that sometime.
 
