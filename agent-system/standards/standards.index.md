@@ -4,10 +4,23 @@
 
 This file is the entry point for all shared standards in the agent-system. When you need to apply standards:
 
-1. Identify the relevant standards category below
-2. Navigate to the specified path
-3. For folder-based standards, read the category files applicable to your task
-4. Load all relevant standards before performing work
+1. **Always** load `standards/project.md` first — it contains project-wide rules that apply to all work
+2. Identify the relevant standards category below
+3. Navigate to the specified path
+4. For folder-based standards, read the category files applicable to your task
+5. Load all relevant standards before performing work
+
+---
+
+## Project
+
+Project-wide standards that apply to all code and scripts in this repository.
+
+**Path:** `standards/project.md`
+
+| Topic | Description |
+|-------|-------------|
+| SD Card Safety | Rules preventing accidental modification of the `DELUGE/` backup directory |
 
 ---
 

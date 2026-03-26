@@ -6,7 +6,7 @@ Standards for Bash/Shell script development including script structure, naming c
 
 ## Principles
 
-1. **Portability** — Scripts should work across local DevContainers, GitHub Codespaces, and CI/CD pipelines
+1. **Portability** — Scripts should work across common Linux and macOS environments
 2. **Safety** — Use strict mode and error handling
 3. **Readability** — Clear structure and documentation
 4. **Security** — Avoid common security pitfalls
@@ -131,3 +131,20 @@ my_function() {
 | Functions | snake_case | `process_file`, `validate_input` |
 | Scripts | kebab-case or snake_case | `deploy-app.sh`, `post_create.sh` |
 | Constants | UPPER_SNAKE_CASE | `MAX_RETRIES`, `DEFAULT_TIMEOUT` |
+
+---
+
+## Dependency Checking
+
+Scripts that rely on external tools **MUST** verify availability before use:
+
+```bash
+require_command() {
+    if ! command -v "$1" &>/dev/null; then
+        error_exit "$1 is required but not installed"
+    fi
+}
+
+require_command rsync
+require_command zip
+```

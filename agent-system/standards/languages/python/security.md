@@ -68,6 +68,37 @@ import json
 data = json.loads(user_input)
 ```
 
+### Safe XML Parsing
+
+XML parsers are vulnerable to entity expansion attacks (XXE) by default. When parsing XML from external or untrusted sources, disable entity resolution:
+
+```python
+from lxml import etree
+
+# Create a parser that disables network access and entity resolution
+parser = etree.XMLParser(resolve_entities=False, no_network=True)
+tree = etree.parse(str(xml_path), parser)
+```
+
+For XML files originating from the local `DELUGE/` directory, the standard `etree.parse()` is acceptable since the files are under version control. Use the safe parser when processing XML from external sources (e.g. community presets, downloads).
+
+### Path Validation
+
+When scripts accept file paths as input, validate that resolved paths stay within expected directories to prevent path traversal:
+
+```python
+from pathlib import Path
+
+def validate_path(user_path: Path, allowed_root: Path) -> Path:
+    """Resolve a path and ensure it falls within the allowed root."""
+    resolved = (allowed_root / user_path).resolve()
+    if not resolved.is_relative_to(allowed_root.resolve()):
+        raise ValueError(f"Path escapes allowed directory: {user_path}")
+    return resolved
+```
+
+See `standards/project.md` for SD card safety rules — scripts must never write to the physical SD card without explicit user confirmation.
+
 ---
 
 ## Compliance Checklist
@@ -78,3 +109,5 @@ data = json.loads(user_input)
 - [ ] Subprocess calls use argument lists (no `shell=True`)
 - [ ] Input validation uses proper libraries (Pydantic, etc.)
 - [ ] Secrets loaded from environment variables
+- [ ] XML parsing is safe (no entity expansion from untrusted sources)
+- [ ] File path operations validated against expected directories

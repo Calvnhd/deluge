@@ -1,8 +1,7 @@
 ---
 description: Specialised agent for creating and reviewing architectural decision records.
 name: decision-record-expert
-tools: ['search/codebase', 'edit/editFiles', 'runCommands']
-model: Claude Opus 4.6
+tools: [vscode/runCommand, read, edit, search, web, todo]
 ---
 
 # Decision Record Expert Agent

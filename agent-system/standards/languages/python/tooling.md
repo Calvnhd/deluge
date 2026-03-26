@@ -74,7 +74,7 @@ Add to `pyproject.toml`:
 [tool.ruff]
 target-version = "py311"
 line-length = 100
-src = ["src"]
+src = ["scripts"]
 
 [tool.ruff.lint]
 select = [
@@ -87,13 +87,14 @@ select = [
     "UP",     # pyupgrade
     "ARG",    # flake8-unused-arguments
     "SIM",    # flake8-simplify
+    "PTH",    # flake8-use-pathlib
 ]
 ignore = [
     "E501",   # line too long (handled by formatter)
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["my_project"]
+known-first-party = ["lib"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -114,6 +115,7 @@ docstring-code-format = true
 | pyupgrade | `UP` | Upgrade syntax for newer Python |
 | flake8-unused-arguments | `ARG` | Detect unused function arguments |
 | flake8-simplify | `SIM` | Simplify code patterns |
+| flake8-use-pathlib | `PTH` | Enforce pathlib over os.path |
 
 ---
 
@@ -125,7 +127,7 @@ For CI/CD, use **mypy**:
 
 ```bash
 uv add --dev mypy
-uv run mypy src/
+uv run mypy scripts/
 ```
 
 ### Mypy Configuration
@@ -170,23 +172,4 @@ python_functions = ["test_*"]
 addopts = "-v --tb=short"
 ```
 
----
 
-## Post-Start Hook
-
-Add to `.devcontainer/post-start.d/10-sync-pyproject-dependencies.sh`:
-
-```bash
-#!/bin/bash
-#
-# Script Name: 10-sync-pyproject-dependencies.sh
-# Description: Sync dependencies if pyproject.toml exists
-#
-# Usage: Executed automatically by post-start.sh
-#
-set -euo pipefail
-
-if [ -f "pyproject.toml" ]; then
-    uv sync
-fi
-```

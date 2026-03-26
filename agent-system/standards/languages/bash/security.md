@@ -61,6 +61,23 @@ echo $user_input
 echo "${user_input}"
 ```
 
+### SD Card Mount Safety
+
+Scripts that interact with the physical SD card must validate the mount point and respect the read-only rules defined in `standards/project.md`:
+
+```bash
+# Validate that the SD card mount point exists and is actually mounted
+validate_mount() {
+    local mount_point="$1"
+    if [[ ! -d "${mount_point}" ]]; then
+        error_exit "SD card mount point does not exist: ${mount_point}"
+    fi
+    if ! mountpoint -q "${mount_point}" 2>/dev/null; then
+        error_exit "SD card is not mounted at: ${mount_point}"
+    fi
+}
+```
+
 ---
 
 ## Compliance Checklist
@@ -72,3 +89,4 @@ echo "${user_input}"
 - [ ] ShellCheck passes without errors
 - [ ] No hardcoded secrets or credentials
 - [ ] Input validation for user-provided data
+- [ ] SD card write operations require explicit user confirmation (see `standards/project.md`)

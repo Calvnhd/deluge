@@ -10,12 +10,34 @@ Standards for Python development including project structure, naming conventions
 2. **Modern Tooling** — Use fast, modern tools (uv, Ruff) over legacy alternatives
 3. **Type Safety** — Leverage type hints for better code quality
 4. **Reproducibility** — Ensure consistent environments across machines
+5. **Simplicity** — Favour simple scripts and lightweight modules over heavy package architecture
 
 ---
 
 ## Project Structure
 
-### Recommended Layout
+### Recommended Layout (Scripts)
+
+For repositories primarily containing utility scripts (rather than distributable packages), use a flat layout:
+
+```
+scripts/
+├── .env                    # Configuration (gitignored if sensitive)
+├── .python-version         # Python version pin
+├── pyproject.toml          # Dependencies and tool config
+├── backup_sd_card.py
+├── sync_samples.py
+├── lib/                    # Shared modules (if needed)
+│   ├── __init__.py
+│   └── xml_helpers.py
+└── tests/
+    ├── conftest.py
+    └── test_xml_helpers.py
+```
+
+### Package Layout (Informational)
+
+The scripts layout above is the primary recommendation for this repository. For distributable packages or larger applications, the `src/` layout is an alternative:
 
 ```
 project/
@@ -35,14 +57,6 @@ project/
 └── .python-version
 ```
 
-### Source Layout
-
-Use the `src/` layout for packages:
-
-- Prevents accidental imports of development code
-- Clear separation between source and tests
-- Better compatibility with build tools
-
 ### Python Version File
 
 Create `.python-version` to specify Python version:
@@ -53,11 +67,106 @@ Create `.python-version` to specify Python version:
 
 ---
 
+## Script Patterns
+
+### Entry Point
+
+All scripts **MUST** use the `if __name__ == "__main__"` guard:
+
+```python
+import argparse
+import sys
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description="Brief description of the script")
+    parser.add_argument("--dry-run", action="store_true", help="Show what would be done without making changes")
+    args = parser.parse_args(argv)
+
+    # Script logic here
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**Rationale:** Separating `main()` from the guard enables testing and reuse. The `argv` parameter allows tests to pass arguments directly.
+
+### Configuration from `.env`
+
+Scripts read configuration from `scripts/.env`. Use `python-dotenv` or parse manually:
+
+```python
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).parent / ".env")
+sd_card_path = os.environ.get("SD_CARD_PATH")
+```
+
+### Path Operations
+
+Use `pathlib.Path` for **all** file and directory operations. Do not use `os.path`.
+
+```python
+from pathlib import Path
+
+deluge_dir = Path("DELUGE")
+sample_path = deluge_dir / "SAMPLES" / "DRUMS" / "Kick.wav"
+
+if sample_path.exists():
+    content = sample_path.read_text()
+
+for xml_file in deluge_dir.glob("KITS/**/*.XML"):
+    process(xml_file)
+```
+
+### XML Handling
+
+Use `lxml` for XML parsing and manipulation. It is significantly faster than the standard library `xml.etree` module and provides better XPath support.
+
+```python
+from lxml import etree
+
+tree = etree.parse(str(xml_path))
+root = tree.getroot()
+file_names = root.xpath("//fileName/text()")
+```
+
+---
+
 ## Project Configuration
 
 ### pyproject.toml (PEP-621)
 
-All Python projects **MUST** use `pyproject.toml` for project metadata:
+All Python projects **MUST** use `pyproject.toml` for project metadata and dependency management.
+
+#### Scripts Project
+
+For a scripts-focused project (no build/distribution needed):
+
+```toml
+[project]
+name = "deluge-scripts"
+version = "0.1.0"
+description = "Management scripts for a Deluge SD card"
+requires-python = ">=3.11"
+dependencies = [
+    "lxml>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "pytest>=7.0.0",
+]
+```
+
+> **Note:** A `[build-system]` section is not required for scripts-only projects managed with `uv`.
+
+#### Distributable Package
+
+For projects that will be built and distributed:
 
 ```toml
 [project]
@@ -150,18 +259,18 @@ def parse_json_response(response: str) -> dict[str, Any]:
 ## Docstrings (Google Style)
 
 ```python
-def fetch_user(user_id: str, include_profile: bool = False) -> User:
-    """Fetch a user by their ID.
+def find_broken_references(kit_path: Path, samples_dir: Path) -> list[str]:
+    """Find broken sample references in a kit XML.
 
     Args:
-        user_id: The unique identifier of the user.
-        include_profile: Whether to include the full profile data.
+        kit_path: Path to the kit XML file.
+        samples_dir: Root directory containing audio samples.
 
     Returns:
-        The User object with the requested data.
+        A list of sample file paths that could not be found on disk.
 
     Raises:
-        UserNotFoundError: If no user exists with the given ID.
+        FileNotFoundError: If the kit XML does not exist.
     """
     ...
 ```
@@ -178,9 +287,8 @@ import os
 from pathlib import Path
 
 # Third-party
-import requests
-from pydantic import BaseModel
+from lxml import etree
 
 # Local
-from my_project.utils import helpers
+from lib.xml_helpers import parse_kit
 ```

@@ -1,8 +1,7 @@
 ---
 description: Specialised agent for managing the agent system — creating and updating agents, skills, and standards.
 name: agent-system-manager
-tools: ['search', 'edit', 'read']
-model: Claude Opus 4.6
+tools: [vscode/runCommand, read, edit, search, web, todo]
 ---
 
 # Agent System Manager
