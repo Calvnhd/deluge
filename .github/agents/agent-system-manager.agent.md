@@ -12,11 +12,11 @@ This agent manages the agent system itself. It creates and updates agents, skill
 
 ## Skill
 
-Load the Agent System Management skill from `skills/agent-system-management/SKILL.md` and use the skill to support the following capabilities:
+Load the Agent System Management skill from `agent-system/skills/agent-system-management/SKILL.md` and use the skill to support the following capabilities:
 
 | Capability | Description |
 |---|---|
-| Create Agent | Scaffold a new agent definition in `agents/` |
+| Create Agent | Scaffold a new agent definition in `.github/agents/` |
 | Update Agent | Modify an existing agent definition |
 | Create Skill | Scaffold a full skill package (manifest, actions, standards) |
 | Update Skill | Modify an existing skill — add capabilities, actions, or standards |

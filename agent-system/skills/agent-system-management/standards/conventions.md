@@ -7,9 +7,13 @@ Rules for naming, structuring, and formatting all agent system artefacts.
 ## Directory Structure
 
 ```
+.github/
+└── agents/                   # Agent definitions (VS Code discovery path)
+    ├── orchestrator.agent.md # Default mode — routes to specialists
+    └── <agent>.agent.md      # Specialist agents
+
 agent-system/
 ├── AGENTS.md                 # System overview and routing table
-├── agents/                   # Agent definitions (one file per agent)
 ├── skills/                   # Skill packages (one folder per skill)
 │   ├── SKILL.template.md     # Canonical skill template
 │   └── <skill-name>/
@@ -35,7 +39,7 @@ agent-system/
 |---|---|---|
 | Filename | `{name}.agent.md` | `decision-record-expert.agent.md` |
 | Frontmatter `name` | Matches filename stem | `decision-record-expert` |
-| Location | `agents/` | `agents/decision-record-expert.agent.md` |
+| Location | `.github/agents/` | `.github/agents/decision-record-expert.agent.md` |
 
 ### Skills
 
@@ -70,7 +74,7 @@ model: {model-name}
 ### Required Sections
 
 1. **Overview** — 1-2 sentences describing the agent's role
-2. **Skill** — Which skill(s) to load, with path to `SKILL.md` and capabilities table
+2. **Skill** — Which skill(s) to load, with path to `SKILL.md` relative to workspace root (e.g., `agent-system/skills/{skill}/SKILL.md`) and capabilities table
 3. **Response Format** — How the agent should structure its output
 
 ### Tool IDs

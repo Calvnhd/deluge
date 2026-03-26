@@ -14,9 +14,13 @@ This agent system provides a structured approach to AI-assisted development thro
 ## Structure
 
 ```bash
+.github/
+└── agents/                   # Agent definitions (VS Code discovery path)
+    ├── orchestrator.agent.md # Default mode — routes to specialists
+    └── <agent>.agent.md      # Specialist agents
+
 agent-system/
 ├── AGENTS.md                 # This file - system overview and routing
-├── agents/                   # Agent definitions
 ├── skills/                   # Self-contained skill packages
 │   └── <skill>/
 │       ├── SKILL.md          # Skill manifest
@@ -25,6 +29,11 @@ agent-system/
 └── standards/                # Project specific standards
     └── standards.index.md    # Standards registry
 ```
+
+### Why Two Directories?
+
+- **`.github/agents/`** — VS Code's agent discovery path. Files here are automatically registered as invocable agent modes and subagents. This is the **integration** layer.
+- **`agent-system/`** — Skills, standards, and documentation. This is the **knowledge** layer. Agents reference skills here by path.
 
 ## Standards
 
@@ -48,7 +57,12 @@ Skills will typically bundle their own standards in `skills/<skill>/standards/`.
 | Domain           | Domain Keywords                                                                                  | Subagent                 | Skill                            |
 | ---------------- | ------------------------------------------------------------------------------------------------ | ------------------------ | -------------------------------- |
 | Decision Records | decision record, DR, architectural decision, ADR                                                 | `decision-record-expert` | `skills/decision-records/`       |
+| Feature Research | research feature, investigate feature, research topic, feature research, research script         | `feature-researcher`     | `skills/feature-research/`       |
 | Agent System     | agent system, create agent, update agent, create skill, update skill, create standard, update standard, sync | `agent-system-manager`   | `skills/agent-system-management/` |
+
+### Orchestrator Enforcement
+
+The `orchestrator` agent mode (`.github/agents/orchestrator.agent.md`) is the recommended default working mode. It deliberately lacks `edit` and `execute` tools, forcing all file modifications to be delegated to specialist subagents. This provides structural enforcement of the routing system.
 
 ### How to Route
 

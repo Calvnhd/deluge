@@ -39,13 +39,13 @@ Check against `standards/conventions.md` naming rules:
 - [ ] Lowercase with hyphens only
 - [ ] 2-5 words, descriptive
 - [ ] Filename: `{name}.agent.md`
-- [ ] No collision with existing agents in `agents/`
+- [ ] No collision with existing agents in `.github/agents/`
 
 ---
 
 ### Step 3: Scaffold Agent File
 
-Create `agents/{name}.agent.md` using this structure:
+Create `.github/agents/{name}.agent.md` using this structure:
 
 ```markdown
 ---
@@ -63,7 +63,7 @@ model: {model}
 
 ## Skill
 
-Load the {Skill Name} skill from `skills/{skill-name}/SKILL.md`...
+Load the {Skill Name} skill from `agent-system/skills/{skill-name}/SKILL.md`...
 
 | Capability | Description |
 |---|---|
@@ -95,7 +95,7 @@ If no existing skill covers this agent's domain:
 If yes, hand off to the Create Skill action (`actions/create-skill.md`).
 
 **Success Criteria:**
-- [ ] Agent file created at `agents/{name}.agent.md`
+- [ ] Agent file created at `.github/agents/{name}.agent.md`
 - [ ] Frontmatter is valid (name, description, tools, model)
 - [ ] Routing table updated in `AGENTS.md`
 - [ ] Associated skill exists or has been created

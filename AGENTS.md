@@ -63,6 +63,10 @@ This structure mirrors that of a Deluge SD card, where DELUGE is the name of the
 
 This repository uses the agent-system for AI-assisted engineering.
 
+- **Agents** are registered in `.github/agents/` (VS Code discovery path)
+- **Skills, standards, and routing** live in `agent-system/`
+- The **orchestrator** (`.github/agents/orchestrator.agent.md`) is the recommended default mode — it enforces routing by lacking edit/execute tools
+
 ### Pre-Flight Checklist (MANDATORY)
 
 Before responding to ANY user request:

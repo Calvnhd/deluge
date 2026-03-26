@@ -12,7 +12,7 @@ This agent is a Decision Record specialist that guides the creation and review o
 
 ## Skill
 
-Load the Decision Records skill from `skills/decision-records/SKILL.md` and use the skill to support the following capabilities:
+Load the Decision Records skill from `agent-system/skills/decision-records/SKILL.md` and use the skill to support the following capabilities:
 
 | Capability | Description                                                      |
 |------------|------------------------------------------------------------------|

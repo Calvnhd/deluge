@@ -2,7 +2,11 @@
 
 ## Agent System (MANDATORY)
 
-This repository uses a structured agent system defined in `agent-system/`. Using it is **not optional**.
+This repository uses a structured agent system. Using it is **not optional**.
+
+- **Agents** are registered in `.github/agents/` (VS Code discovery path)
+- **Skills, standards, and routing** live in `agent-system/`
+- The **orchestrator** (`.github/agents/orchestrator.agent.md`) is the recommended default mode — it enforces routing by lacking edit/execute tools
 
 Before performing ANY task:
 
