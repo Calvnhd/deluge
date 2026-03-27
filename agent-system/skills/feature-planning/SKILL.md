@@ -16,6 +16,7 @@ This skill transforms research documents into structured, actionable implementat
 | Capability | Action | Description |
 |------------|--------|-------------|
 | Plan | `actions/plan.md` | Create an actionable implementation plan from a research document |
+| Review | `actions/review.md` | Revise an existing plan during implementation based on new context |
 
 ### Bundled Standards
 
@@ -51,6 +52,7 @@ The planning agent operates within a multi-repository workspace:
 
 - [ ] Verify `docs/plans/` directory exists (create if missing)
 - [ ] Verify research document exists at the specified path
+- [ ] If Review: Verify plan document exists and has been partially implemented
 - [ ] Load bundled standards: `standards/plan-document.md`, `standards/planning-process.md`
 - [ ] Load project standard: `standards/project.md` (SD Card safety rules)
 
@@ -60,4 +62,4 @@ The planning agent operates within a multi-repository workspace:
 2. Identify the required capability from the Capabilities table above
 3. Load bundled standards: `standards/plan-document.md`, `standards/planning-process.md`
 4. Load customisable standard: `standards/project.md`
-5. Execute the action: `actions/plan.md`
+5. Execute the appropriate action: `actions/plan.md` (new plan) or `actions/review.md` (re-review)

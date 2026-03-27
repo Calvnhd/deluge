@@ -124,3 +124,32 @@ The plan is a living document. The following elements support updates during imp
 3. **Consistency** — Technical choices must be consistent with each other and with existing codebase patterns
 4. **Honesty** — If the plan has known weaknesses or areas of uncertainty, document them — don't hide them
 5. **SD Card Safety** — All plans involving `DELUGE/` or the physical SD card must comply with `standards/project.md`
+
+## Re-Review Mode
+
+The planner may be invoked mid-implementation by the Implement agent for plan revision. This mode has different rules from initial planning.
+
+### Input Requirements (Re-Review)
+
+Instead of a research document, the planner receives implementation context:
+
+| Input | Description |
+|-------|-------------|
+| Work completed | Which tasks and phases are done, with implementation notes |
+| Reason for re-review | What triggered the review (phase transition, deviation, resolved question, incorrect assumption) |
+| Sections to revise | Which plan sections the Implement agent believes need attention |
+| New information | Constraints, discoveries, or decisions from implementation |
+
+### Scope Rules (Re-Review)
+
+1. **Preserve completed work** — Do not modify implementation notes, checked acceptance criteria, or other records of completed tasks
+2. **Minimise disruption** — Make the smallest changes necessary to address the issue. Avoid restructuring the entire plan when a targeted fix will do.
+3. **Maintain traceability** — Every change must reference the implementation context that motivated it
+4. **Update the Change Log** — All re-review changes must be recorded
+5. **No new research** — The re-review operates on existing information plus implementation findings. Do not investigate the codebase or external sources.
+
+### Decision-Making (Re-Review)
+
+The same autonomous decision and user consultation rules from initial planning apply, with this addition:
+
+- **Consistency with completed work** — Decisions must be consistent with what has already been implemented. If a change would require reworking completed tasks, flag this explicitly to the user.

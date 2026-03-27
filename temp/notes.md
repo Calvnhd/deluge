@@ -57,3 +57,37 @@ Alterations or other considerations?
 - Research agent might be good for other uses too, depending on other agents I make, e.g. a documentation writer, agent system review, updating readmes and stuff like that
 - plan review? update plan agent to know it has to do that sometime.
 
+---
+
+## Pipeline Review Notes (27 March 2026)
+
+All 3 agents created and reviewed as a coherent system. Requirements from above all met. Below are identified issues and improvement actions.
+
+### Issues Found
+
+**1. Planner doesn't know about re-review from implementer (HIGH priority)**
+The implementer knows to delegate to the planner for mid-implementation re-review, but the planner agent and planning action have no awareness they may be invoked mid-implementation (rather than from a fresh research document). The planner's Step 1 assumes a research document as input and its flow doesn't account for receiving context of partially-completed work.
+- **Action:** Add a "Review" capability to the planner skill alongside the existing "Plan" capability. Create `actions/review.md` for handling mid-implementation re-review. Update agent definition and SKILL.md.
+
+**2. No explicit mode-switching protocol in implementer (LOW priority)**
+Agent says "user may switch modes at any time" but no protocol defined for what happens during a switch (e.g., summarise progress? pause? what if mid-task in fast mode?).
+- **Action:** Add mode-switching section to implementation-process.md.
+
+**3. Implementer lacks explicit lint/format step (LOW priority)**
+Language standards reference tooling but implement.md doesn't include an explicit "run lint + format" step in Default/Fast mode task completion flow.
+- **Action:** Add lint/format verification to implement.md Step 5b.
+
+### Future Considerations
+
+**Researcher reusability** — Currently tightly coupled to feature pipeline (docs/research/ output, pipeline metadata in document). A second "Investigate" capability could enable general-purpose research for documentation writers, agent system review, README updates etc. Architecture supports this cleanly. No change needed now.
+
+### Completed Actions
+
+- [x] Research agent created and reviewed
+- [x] Plan agent created and reviewed  
+- [x] Implement agent created and reviewed
+- [x] Routing table updated for all 3 agents
+- [ ] Planner re-review capability (in progress)
+- [x] Mode-switching protocol
+- [x] Lint/format step
+

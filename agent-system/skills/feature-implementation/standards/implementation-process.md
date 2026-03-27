@@ -112,6 +112,18 @@ When encountering an open question during implementation:
   - Unexpected roadblocks
   - Open questions requiring user input
 
+## Mode Switching
+
+The user may switch between interactivity modes at any time. Mode switches occur during pauses between tasks, invoked by the user's prompt.
+
+### Rules
+
+1. **Timing** — Mode switches happen at task boundaries, during a 🛑 PAUSE. The agent does not interrupt a task in progress to switch modes.
+2. **No special protocol** — The user simply states the desired mode (e.g., "switch to learning mode", "let's go fast", "do the next 3 tasks"). The agent acknowledges and proceeds in the new mode.
+3. **Fast mode scope** — When switching to Fast mode, the user specifies the scope (next task, next phase, everything remaining). If no scope is given, ask.
+4. **State preservation** — All progress, plan updates, and implementation notes carry over. A mode switch does not reset or alter any work done.
+5. **Mid-scope switch in Fast mode** — If the agent is executing a Fast mode scope and hits a mandatory stop condition, the user may choose to continue in a different mode rather than resuming Fast mode. This is a normal mode switch.
+
 ## Coding Standards
 
 ### Standard Loading

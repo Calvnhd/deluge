@@ -117,18 +117,19 @@ For each task in the implementation roadmap:
    - Write code according to the technical spec and language standards
    - Create files in the planned locations
    - Run commands as needed (install dependencies, run tests, etc.)
-2. Verify all acceptance criteria are met
-3. Summarise the work in chat:
+2. Run lint and format checks if the plan's Technical Specification includes a linter/formatter. Fix any issues before proceeding.
+3. Verify all acceptance criteria are met
+4. Summarise the work in chat:
    - What was done
    - Key files created/modified
    - Any notable decisions
    - Any deviations from the plan
-4. **Update the plan document:**
+5. **Update the plan document:**
    - Check off completed acceptance criteria
    - Add implementation notes
    - Update progress tracker
    - Add to change log if deviations occurred
-5. **🛑 PAUSE**: Wait for user review before proceeding to next task
+6. **🛑 PAUSE**: Wait for user review before proceeding to next task
 
 **Learning Mode:**
 1. Present the task to the user and explain what needs to be done
@@ -143,11 +144,12 @@ For each task in the implementation roadmap:
    - Provide constructive feedback with clear explanations
    - Correct issues with thorough reasoning
 5. After the task is complete through collaboration:
+   - Run lint and format checks if applicable. Fix any issues collaboratively — explain fixes to the user.
    - Summarise and update the plan as in Default mode
 6. **🛑 PAUSE**: Wait for user before proceeding
 
 **Fast Mode:**
-1. Implement the task fully (same as Default step 1-2)
+1. Implement the task fully (same as Default steps 1-3)
 2. Provide a brief summary in chat (more concise than Default)
 3. Update the plan document (same as Default step 4)
 4. **Do NOT pause** — proceed to the next task within the approved scope

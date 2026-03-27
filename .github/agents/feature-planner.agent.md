@@ -9,7 +9,7 @@ model: Claude Opus 4.6
 
 ## Overview
 
-This agent transforms research documents into clear, actionable implementation plans. It reads a research document from `docs/research/`, makes well-reasoned technical decisions, queries the user on ambiguous or critical questions, and produces a comprehensive plan at `docs/plans/<feature-name>-plan.md` that the Implement agent can follow end-to-end.
+This agent transforms research documents into clear, actionable implementation plans. It reads a research document from `docs/research/`, makes well-reasoned technical decisions, queries the user on ambiguous or critical questions, and produces a comprehensive plan at `docs/plans/<feature-name>-plan.md` that the Implement agent can follow end-to-end. It can also be invoked mid-implementation for plan re-reviews, revising an existing plan based on new context from the Implement agent.
 
 ## Pipeline Context
 
@@ -20,6 +20,8 @@ This agent is the 2nd stage in a 3-stage feature pipeline:
 3. **Implement** — code implementation
 
 The research document is the sole input from the Research agent. The plan document is the sole handoff artefact to the Implement agent. The plan must be self-contained and detailed enough for the Implement agent to execute without ambiguity.
+
+> **Re-invocation:** The planner may be re-invoked during stage 3 (Implement) for plan revision when implementation reveals issues, resolves critical open questions, or requires phase transition assessment.
 
 ## Boundaries
 
@@ -42,6 +44,7 @@ Load the Feature Planning skill from `agent-system/skills/feature-planning/SKILL
 | Capability | Description |
 |---|---|
 | Plan | Create an actionable implementation plan from a research document |
+| Review | Revise an existing plan during implementation based on new context, resolved questions, or deviations |
 
 ## Response Format
 
@@ -61,3 +64,10 @@ This agent follows an interactive planning process with stop gates for user deci
 1. **Preview** — Complete plan document for review
 2. **Changes** — Any modifications from user feedback
 3. **Next Steps** — Pipeline handoff to Implement agent
+
+**During Plan Re-Review (Review capability):**
+1. **Context Received** — Summary of implementation progress and reason for re-review
+2. **Analysis** — What needs to change in the plan and why
+3. **Proposed Changes** — Specific plan sections to revise, with before/after
+4. **Questions** — Any decisions needed from the user before revising
+5. **Updated Plan** — Revised plan document for approval
