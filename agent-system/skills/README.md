@@ -53,3 +53,13 @@ The template uses a **Config-First** document structure where Configuration sect
 ## Future Enhancement
 
 A **skill-builder** skill may be introduced to automate skill creation with guided discovery. Until then, manually copy and adapt the template.
+
+## Available Skills
+
+| Skill | Capabilities | Description |
+|-------|-------------|-------------|
+| `feature-research` | Research | Feature investigation and authoritative document production |
+| `feature-planning` | Plan, Review | Implementation planning and mid-implementation plan revision |
+| `feature-implementation` | Implement | End-to-end feature implementation with 3 interactivity modes |
+| `decision-records` | Create, Review | Architectural decision record management |
+| `agent-system-management` | Create Agent, Update Agent, Create Skill, Update Skill, Create Standard, Update Standard, Sync | Agent system scaffolding and maintenance |

@@ -15,19 +15,26 @@ This agent system provides a structured approach to AI-assisted development thro
 
 ```bash
 .github/
-└── agents/                   # Agent definitions (VS Code discovery path)
-    ├── orchestrator.agent.md # Default mode — routes to specialists
-    └── <agent>.agent.md      # Specialist agents
+└── agents/                          # Agent definitions (VS Code discovery path)
+    ├── orchestrator.agent.md        # Default mode — routes to specialists
+    ├── feature-researcher.agent.md  # Feature pipeline: stage 1 (Research)
+    ├── feature-planner.agent.md     # Feature pipeline: stage 2 (Plan)
+    ├── feature-implementer.agent.md # Feature pipeline: stage 3 (Implement)
+    ├── decision-record-expert.agent.md
+    └── agent-system-manager.agent.md
 
 agent-system/
-├── AGENTS.md                 # This file - system overview and routing
+├── AGENTS.md                 # This file — system overview and routing
 ├── skills/                   # Self-contained skill packages
-│   └── <skill>/
-│       ├── SKILL.md          # Skill manifest
-│       ├── actions/          # Executable actions
-│       └── standards/        # Skill-specific standards
-└── standards/                # Project specific standards
-    └── standards.index.md    # Standards registry
+│   ├── feature-research/     # Research skill (1 action, 2 standards)
+│   ├── feature-planning/     # Planning skill (2 actions: plan, review)
+│   ├── feature-implementation/ # Implementation skill (1 action, 1 standard)
+│   ├── decision-records/     # Decision record skill
+│   └── agent-system-management/ # Agent system management skill
+└── standards/                # Shared project standards
+    ├── standards.index.md    # Standards registry
+    ├── project.md            # SD Card safety and project rules
+    └── languages/            # Language-specific standards (bash, python)
 ```
 
 ### Why Two Directories?

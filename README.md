@@ -56,3 +56,11 @@ All scripts read configuration from `scripts/.env`
 - Same with synths
 - Same with kits
 
+---
+
+## AI-Assisted Development
+
+This repository uses a structured agent system. See [AGENTS.md](AGENTS.md) for full details.
+
+Key workflow: **Research → Plan → Implement** feature pipeline using specialist agents. Use the `orchestrator` agent mode as the default entry point.
+

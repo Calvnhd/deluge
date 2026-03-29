@@ -61,11 +61,34 @@ This structure mirrors that of a Deluge SD card, where DELUGE is the name of the
 
 ## AI-Assisted Development
 
-This repository uses the agent-system for AI-assisted engineering.
+This repository uses a structured agent system for AI-assisted engineering.
 
 - **Agents** are registered in `.github/agents/` (VS Code discovery path)
 - **Skills, standards, and routing** live in `agent-system/`
 - The **orchestrator** (`.github/agents/orchestrator.agent.md`) is the recommended default mode — it enforces routing by lacking edit/execute tools
+
+### Feature Pipeline
+
+The primary workflow is a 3-stage feature pipeline:
+
+| Stage | Agent | Input | Output |
+|-------|-------|-------|--------|
+| 1. Research | `feature-researcher` | User request | `docs/research/<feature>-research.md` |
+| 2. Plan | `feature-planner` | Research document | `docs/plans/<feature>-plan.md` |
+| 3. Implement | `feature-implementer` | Plan document | Working feature |
+
+The planner can be re-invoked during implementation for plan revision.
+
+### Available Agents
+
+| Agent | Domain | Description |
+|-------|--------|-------------|
+| `orchestrator` | Routing | Default mode — routes to specialist agents |
+| `feature-researcher` | Feature Research | Interactive research producing authoritative documents |
+| `feature-planner` | Feature Planning | Technical specs, task breakdowns, and living plans |
+| `feature-implementer` | Feature Implementation | End-to-end implementation with 3 interactivity modes |
+| `decision-record-expert` | Decision Records | Architectural decision record creation and review |
+| `agent-system-manager` | Agent System | Agent, skill, and standard management |
 
 ### Pre-Flight Checklist (MANDATORY)
 
@@ -76,5 +99,3 @@ Before responding to ANY user request:
 3. [ ] Delegate to subagent if domain match found
 
 **DO NOT PROCEED** until you have completed the checklist.
-
----
