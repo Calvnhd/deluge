@@ -20,7 +20,6 @@ This agent system provides a structured approach to AI-assisted development thro
     ├── feature-researcher.agent.md  # Feature pipeline: stage 1 (Research)
     ├── feature-planner.agent.md     # Feature pipeline: stage 2 (Plan)
     ├── feature-implementer.agent.md # Feature pipeline: stage 3 (Implement)
-    ├── decision-record-expert.agent.md
     └── agent-system-manager.agent.md
 
 agent-system/
@@ -29,7 +28,6 @@ agent-system/
 │   ├── feature-research/     # Research skill (1 action, 2 standards)
 │   ├── feature-planning/     # Planning skill (2 actions: plan, review)
 │   ├── feature-implementation/ # Implementation skill (1 action, 1 standard)
-│   ├── decision-records/     # Decision record skill
 │   └── agent-system-management/ # Agent system management skill
 └── standards/                # Shared project standards
     ├── standards.index.md    # Standards registry
@@ -63,7 +61,6 @@ Skills will typically bundle their own standards in `skills/<skill>/standards/`.
 
 | Domain           | Domain Keywords                                                                                  | Subagent                 | Skill                            |
 | ---------------- | ------------------------------------------------------------------------------------------------ | ------------------------ | -------------------------------- |
-| Decision Records | decision record, DR, architectural decision, ADR                                                 | `decision-record-expert` | `skills/decision-records/`       |
 | Feature Research | research feature, investigate feature, research topic, feature research, research script         | `feature-researcher`     | `skills/feature-research/`       |
 | Feature Planning | plan feature, feature plan, create plan, implementation plan, plan script                         | `feature-planner`        | `skills/feature-planning/`       |
 | Feature Implementation | implement feature, implement plan, build feature, execute plan, implement script            | `feature-implementer`    | `skills/feature-implementation/` |

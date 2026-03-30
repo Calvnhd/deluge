@@ -76,7 +76,7 @@ For each capability, create `actions/{capability}.md` with:
 1. **Purpose** — one sentence
 2. **Flow** — placeholder steps with `🛑 STOP` gates where user input is needed
 
-Action stubs should follow the patterns in existing actions (see `skills/decision-records/actions/` for reference).
+Action stubs should follow the patterns in existing actions (see `skills/feature-research/actions/` for reference).
 
 ---
 

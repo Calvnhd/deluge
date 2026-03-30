@@ -87,7 +87,6 @@ The planner can be re-invoked during implementation for plan revision.
 | `feature-researcher` | Feature Research | Interactive research producing authoritative documents |
 | `feature-planner` | Feature Planning | Technical specs, task breakdowns, and living plans |
 | `feature-implementer` | Feature Implementation | End-to-end implementation with 3 interactivity modes |
-| `decision-record-expert` | Decision Records | Architectural decision record creation and review |
 | `agent-system-manager` | Agent System | Agent, skill, and standard management |
 
 ### Pre-Flight Checklist (MANDATORY)

@@ -1,7 +1,7 @@
 ---
 description: Routes tasks to specialist agents
 name: orchestrator
-tools: [vscode, read, agent, search, todo]
+tools: [web, vscode, read, agent, search, todo]
 model: Claude Opus 4.6
 ---
 
@@ -47,6 +47,40 @@ When delegating to a subagent, provide:
 - **Any file creation, modification, or deletion**
 - **Any terminal command execution**
 - **Any task matching a routing table domain**
+
+### Multi-Domain Requests
+
+When a request spans multiple domains:
+
+1. Identify the domains involved and determine the correct sequence
+2. Delegate to each agent in order, passing prior results as context
+3. Summarise combined results back to the user
+
+Example: "research and plan a feature" → route to `feature-researcher` first, then pass the research document to `feature-planner`.
+
+## Pipeline Coordination
+
+This repository uses a 3-stage feature pipeline: **Research → Plan → Implement**.
+
+| Stage | Agent | Artefact |
+|---|---|---|
+| Research | `feature-researcher` | `docs/research/<feature>-research.md` |
+| Plan | `feature-planner` | `docs/plans/<feature>-plan.md` |
+| Implement | `feature-implementer` | Working feature |
+
+### Stage Selection
+
+When a user's request implies a full feature (e.g. "I want to build a script that..."), suggest starting at the appropriate pipeline stage — usually **research** — rather than routing directly to implement.
+
+Use existing artefacts to determine the entry point:
+
+- **No artefacts exist** → Start at research
+- **Research doc exists** (`docs/research/`) → Route to planner
+- **Plan doc exists** (`docs/plans/`) → Route to implementer
+
+### Mid-Pipeline Revision
+
+The planner can be re-invoked during implementation for plan revision. If the implementer encounters ambiguity or scope changes, route back to the planner with the updated context before continuing.
 
 ## Response Format
 

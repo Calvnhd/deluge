@@ -57,7 +57,7 @@ When working with an AI assistant, reference the appropriate agent for your task
 
 | Task | Agent | Example Prompt |
 |------|-------|----------------|
-| Document a decision | Decision-Record-Expert | "Create a decision record for choosing PostgreSQL" |
+| Plan a feature | Feature-Planner | "Create a plan for implementing sample management scripts" |
 
 ---
 
@@ -67,7 +67,7 @@ When working with an AI assistant, reference the appropriate agent for your task
 
 | Agent | Skill | Capabilities |
 |-------|-------|--------------|
-| Decision-Record-Expert | `skills/decision-records/` | create, review |
+| Feature-Researcher | `skills/feature-research/` | research |
 
 ### Key Files
 

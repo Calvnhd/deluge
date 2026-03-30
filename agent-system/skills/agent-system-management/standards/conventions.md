@@ -37,16 +37,16 @@ agent-system/
 
 | Item | Convention | Example |
 |---|---|---|
-| Filename | `{name}.agent.md` | `decision-record-expert.agent.md` |
-| Frontmatter `name` | Matches filename stem | `decision-record-expert` |
-| Location | `.github/agents/` | `.github/agents/decision-record-expert.agent.md` |
+| Filename | `{name}.agent.md` | `feature-planner.agent.md` |
+| Frontmatter `name` | Matches filename stem | `feature-planner` |
+| Location | `.github/agents/` | `.github/agents/feature-planner.agent.md` |
 
 ### Skills
 
 | Item | Convention | Example |
 |---|---|---|
-| Folder name | `{skill-name}/` | `decision-records/` |
-| Manifest | `SKILL.md` (always) | `skills/decision-records/SKILL.md` |
+| Folder name | `{skill-name}/` | `feature-research/` |
+| Manifest | `SKILL.md` (always) | `skills/feature-research/SKILL.md` |
 | Actions | `{verb or verb-noun}.md` | `actions/create.md`, `actions/review.md` |
 | Standards | `{topic}.md` | `standards/core.md`, `standards/checklist.md` |
 
