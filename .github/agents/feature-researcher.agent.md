@@ -2,7 +2,6 @@
 description: Specialised agent for researching features and topics through interactive questioning and thorough multi-source investigation to inform planning and implementation.
 name: feature-researcher
 tools: [vscode, read, agent, edit, search, web, todo]
-model: Claude Opus 4.6
 ---
 
 # Feature Researcher Agent

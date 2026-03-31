@@ -2,7 +2,6 @@
 description: Specialised agent for implementing features end-to-end from plan documents, with configurable interactivity levels for autonomous execution, guided learning, or collaborative pair programming.
 name: feature-implementer
 tools: [agent, vscode, read, edit, execute, search, web, todo]
-model: Claude Opus 4.6
 ---
 
 # Feature Implementer Agent

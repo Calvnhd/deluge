@@ -2,7 +2,6 @@
 description: Routes tasks to specialist agents
 name: orchestrator
 tools: [web, vscode, read, agent, search, todo]
-model: Claude Opus 4.6
 ---
 
 # Orchestrator
@@ -32,6 +31,7 @@ When delegating to a subagent, provide:
 2. **Skill path** — Tell the subagent which skill(s) to load (from the routing table)
 3. **Standards** — Remind the subagent to load `agent-system/standards/project.md`
 4. **Scope** — Clarify what the subagent should do and what it should return
+5. **Delegation notice** — Inform the subagent that it is being delegated to by the orchestrator and is expected to complete the task fully, including producing any output files (research documents, plan documents, etc.) without waiting for user approval. If user interaction is essential (e.g. clarifying questions during research), the subagent should use the `vscode_askQuestions` tool to ask the user directly, then continue working.
 
 ### What the Orchestrator CAN Do Directly
 
