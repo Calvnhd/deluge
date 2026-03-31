@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture: attribute-style synth with multisamples (3.x+ firmware)
+     Covers: Pattern 3 — fileName="..." attribute on <osc1>
+             Pattern 4 — fileName="..." attribute on <sampleRange>
+     - osc1 uses <sampleRanges> with two attribute-style <sampleRange> entries
+     - osc2 is a non-sample oscillator (saw wave, no fileName)
+-->
+<sound
+	firmwareVersion="4.0.1"
+	earliestCompatibleFirmware="4.0.0"
+	polyphonic="poly"
+	voicePriority="1"
+	mode="subtractive"
+	lpfMode="24dB"
+	modFXType="none">
+	<osc1
+		type="sample"
+		loopMode="0"
+		reversed="0"
+		timeStretchEnable="0"
+		timeStretchAmount="0">
+		<sampleRanges>
+			<sampleRange
+				rangeTopNote="37"
+				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/36 b.WAV"
+				transpose="24">
+				<zone
+					startSamplePos="0"
+					endSamplePos="324506" />
+			</sampleRange>
+			<sampleRange
+				rangeTopNote="41"
+				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/39 b.WAV"
+				transpose="21">
+				<zone
+					startSamplePos="0"
+					endSamplePos="180147" />
+			</sampleRange>
+		</sampleRanges>
+	</osc1>
+	<osc2
+		type="saw"
+		transpose="0"
+		cents="0"
+		retrigPhase="-1" />
+	<polyphonic>poly</polyphonic>
+	<mode>subtractive</mode>
+</sound>

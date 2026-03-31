@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture: element-style synth with multisamples (pre-3.x firmware)
+     Covers: Pattern 1 — <fileName>text</fileName> element on <osc1>
+             Pattern 2 — <fileName>text</fileName> element within <sampleRange>
+     - osc1 uses <sampleRanges> with two <sampleRange> entries (multisample)
+     - osc2 uses a non-sample oscillator type (no fileName)
+     Note: Real element-style synths have <firmwareVersion> sibling elements that make the
+     document not well-formed XML. This fixture omits them for parseability — the SDK's
+     handling of non-well-formed headers is tested separately against real DELUGE/ files.
+-->
+<sound>
+	<osc1>
+		<type>sample</type>
+		<loopMode>0</loopMode>
+		<reversed>0</reversed>
+		<timeStretchEnable>0</timeStretchEnable>
+		<timeStretchAmount>0</timeStretchAmount>
+		<sampleRanges>
+			<sampleRange>
+				<rangeTopNote>72</rangeTopNote>
+				<fileName>SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/1.wav</fileName>
+				<zone>
+					<startSamplePos>0</startSamplePos>
+					<endSamplePos>146506</endSamplePos>
+				</zone>
+			</sampleRange>
+			<sampleRange>
+				<fileName>SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/2.wav</fileName>
+				<zone>
+					<startSamplePos>0</startSamplePos>
+					<endSamplePos>137227</endSamplePos>
+				</zone>
+				<transpose>-12</transpose>
+			</sampleRange>
+		</sampleRanges>
+	</osc1>
+	<osc2>
+		<type>square</type>
+		<transpose>0</transpose>
+		<cents>0</cents>
+		<retrigPhase>-1</retrigPhase>
+	</osc2>
+	<polyphonic>poly</polyphonic>
+	<mode>subtractive</mode>
+</sound>

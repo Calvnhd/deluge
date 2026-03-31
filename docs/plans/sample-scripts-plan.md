@@ -221,36 +221,36 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Description:** Create the directory structure, configuration files, and install dependencies.
 - **Outputs:** Working Python project — `uv sync`, `ruff check`, and `pytest` all succeed.
 - **Acceptance Criteria:**
-  - [ ] `scripts/pyproject.toml` created with project metadata, dependencies (`lxml`, `python-dotenv`), and dev dependencies (`ruff`, `mypy`, `pytest`, `lxml-stubs`)
-  - [ ] Ruff configuration in `pyproject.toml` per Python Tooling Standard (rule sets: E, W, F, I, B, C4, UP, ARG, SIM, PTH)
-  - [ ] mypy configuration in `pyproject.toml` per Python Tooling Standard (`strict = true`)
-  - [ ] pytest configuration in `pyproject.toml` (`testpaths = ["tests"]`)
-  - [ ] `scripts/.python-version` created with `3.12`
-  - [ ] `scripts/.env.example` updated — add `DELUGE_ROOT=./DELUGE` while preserving existing variables
-  - [ ] `scripts/lib/__init__.py` created (empty)
-  - [ ] `scripts/tests/conftest.py` created (empty initially)
-  - [ ] `scripts/tests/fixtures/` directory created
-  - [ ] `uv sync` succeeds
-  - [ ] `uv run ruff check .` passes (no files to lint yet is OK)
-  - [ ] `uv run pytest` runs without errors (0 tests collected)
+  - [x] `scripts/pyproject.toml` created with project metadata, dependencies (`lxml`, `python-dotenv`), and dev dependencies (`ruff`, `mypy`, `pytest`, `lxml-stubs`)
+  - [x] Ruff configuration in `pyproject.toml` per Python Tooling Standard (rule sets: E, W, F, I, B, C4, UP, ARG, SIM, PTH)
+  - [x] mypy configuration in `pyproject.toml` per Python Tooling Standard (`strict = true`)
+  - [x] pytest configuration in `pyproject.toml` (`testpaths = ["tests"]`)
+  - [x] `scripts/.python-version` created with `3.12`
+  - [x] `scripts/.env.example` updated — add `DELUGE_ROOT=./DELUGE` while preserving existing variables
+  - [x] `scripts/lib/__init__.py` created (empty)
+  - [x] `scripts/tests/conftest.py` created (empty initially)
+  - [x] `scripts/tests/fixtures/` directory created
+  - [x] `uv sync` succeeds
+  - [x] `uv run ruff check .` passes (no files to lint yet is OK)
+  - [x] `uv run pytest` runs without errors (0 tests collected)
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 31 Mar 2026. All files created per spec. `uv` installed from astral.sh installer (was not pre-installed). Used `--all-extras` to pull dev dependencies. `.gitkeep` added to `tests/fixtures/` for git tracking. `tests/__init__.py` also created to ensure the tests directory is a proper package. `pyproject.toml` targets `py312` matching `.python-version`. pytest exit code 5 (no tests collected) is expected at this stage.
 
 #### Task 1.2: Test Fixtures
 
 - **Description:** Create minimal hand-crafted XML files covering all 5 reference patterns plus empty-reference edge cases. These fixtures are the foundation for all subsequent tests.
 - **Outputs:** 6 fixture XML files in `scripts/tests/fixtures/`
 - **Acceptance Criteria:**
-  - [ ] `element_kit.xml` — element-style kit with `<fileName>` elements on `<osc1>` and `<osc2>`, one with a sample and one empty (pattern 1)
-  - [ ] `element_synth_multisample.xml` — element-style synth with `<sampleRanges>` containing `<fileName>` elements (patterns 1, 2)
-  - [ ] `attribute_kit.xml` — attribute-style kit with `fileName` attributes on `<osc1>` and `<osc2>` (pattern 3). One osc element should use `type="wavetable"` with a `fileName` to verify extraction is not filtered on `type="sample"`
-  - [ ] `attribute_synth_multisample.xml` — attribute-style synth with `<sampleRanges>` containing `fileName` attributes (patterns 3, 4)
-  - [ ] `song_with_clips.xml` — attribute-style song with embedded kit (pattern 3), embedded synth with sampleRanges (pattern 4), and `<audioClip>` with `filePath` (pattern 5)
-  - [ ] `empty_refs.xml` — XML with `<fileName></fileName>`, `fileName=""`, and an osc element missing the `fileName` attribute entirely
-  - [ ] Each fixture is minimal — smallest valid XML that exercises the target pattern(s)
-  - [ ] Each fixture includes a comment header documenting which patterns it covers
+  - [x] `element_kit.xml` — element-style kit with `<fileName>` elements on `<osc1>` and `<osc2>`, one with a sample and one empty (pattern 1)
+  - [x] `element_synth_multisample.xml` — element-style synth with `<sampleRanges>` containing `<fileName>` elements (patterns 1, 2)
+  - [x] `attribute_kit.xml` — attribute-style kit with `fileName` attributes on `<osc1>` and `<osc2>` (pattern 3). One osc element should use `type="wavetable"` with a `fileName` to verify extraction is not filtered on `type="sample"`
+  - [x] `attribute_synth_multisample.xml` — attribute-style synth with `<sampleRanges>` containing `fileName` attributes (patterns 3, 4)
+  - [x] `song_with_clips.xml` — attribute-style song with embedded kit (pattern 3), embedded synth with sampleRanges (pattern 4), and `<audioClip>` with `filePath` (pattern 5)
+  - [x] `empty_refs.xml` — XML with `<fileName></fileName>`, `fileName=""`, and an osc element missing the `fileName` attribute entirely
+  - [x] Each fixture is minimal — smallest valid XML that exercises the target pattern(s)
+  - [x] Each fixture includes a comment header documenting which patterns it covers
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 31 Mar 2026. All 6 fixture XML files created, verified as well-formed XML via lxml parsing, and pattern coverage validated programmatically. Structures modelled from real DELUGE/ XMLs (KIT000.XML, KIT027.XML, Deeper.XML, SYNT168.XML, Kg.XML, K01Sink.XML). Element-style synth fixture omits the `<firmwareVersion>` sibling elements that real pre-3.x files have (which make the document not well-formed XML) — the SDK's handling of non-well-formed headers will be tested against real DELUGE/ files separately. `empty_refs.xml` includes one valid reference alongside the empties to verify extraction still works when empty refs are present. `attribute_kit.xml` second sound uses `type="wavetable"` on osc1 with a fileName. Removed `.gitkeep` from fixtures directory.
 
 #### Task 1.3: `cli_utils.py` — Environment and Output Utilities
 
@@ -626,7 +626,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
-| Phase 1: Project Setup + Shared Library | Not Started | 0/4 | |
+| Phase 1: Project Setup + Shared Library | In Progress | 2/4 | Tasks 1.1, 1.2 complete |
 | Phase 2: Reference Verifier | Not Started | 0/1 | |
 | Phase 3: Sample Manifest Generator | Not Started | 0/2 | |
 | Phase 4: Reference Fixer | Not Started | 0/3 | |

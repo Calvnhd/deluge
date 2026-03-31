@@ -82,6 +82,28 @@ Use existing artefacts to determine the entry point:
 
 The planner can be re-invoked during implementation for plan revision. If the implementer encounters ambiguity or scope changes, route back to the planner with the updated context before continuing.
 
+### Step-by-Step Implementation
+
+When the user asks to implement a plan, delegate to the `feature-implementer` one task at a time:
+
+1. Tell the implementer which plan to work from and which task to start on
+2. The implementer completes one task, updates the plan, and returns a summary
+3. Present the summary to the user and wait for confirmation to continue
+4. For the next task, delegate to the implementer again — it will read the plan's progress tracker to determine where to resume
+
+Use the plan document's Progress Tracker to track which phase and task is current. If the user asks to go faster, you may tell the implementer to complete an entire phase before returning.
+
+## Subagent Result Tracking
+
+After every subagent delegation that produces results, the orchestrator MUST record the subagent's summary in session memory:
+
+1. **Create** a session memory file on first delegation: `/memories/session/implementation-progress.md`
+2. **Append** each subagent's result summary to the file after the delegation returns
+3. **Include** in each entry: task identifier, files created/modified, verification results, decisions made, deviations from plan
+4. **Read** the session memory file before each new delegation to maintain continuity across tasks
+
+This ensures no context is lost between stateless subagent invocations during multi-step work like pipeline implementation.
+
 ## Response Format
 
 When routing:

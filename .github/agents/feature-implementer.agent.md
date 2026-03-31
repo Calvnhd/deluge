@@ -50,6 +50,8 @@ The default operating mode. The agent implements one task (or sub-task) at a tim
 4. Update the plan document (checklists, implementation notes, progress tracker)
 5. **🛑 PAUSE** — Wait for the user to review, ask questions, and confirm before proceeding
 
+> **When delegated by the orchestrator:** A 🛑 PAUSE is a handoff point. Complete the current task, update the plan document, and return to the orchestrator with a summary of the work done. The orchestrator will re-invoke you for the next task when the user is ready to continue.
+
 This mode balances autonomy with user oversight. The user can review each task's output, ask questions, and course-correct before the next task begins.
 
 ### Learning Mode (Guided)
