@@ -4,11 +4,11 @@
 > **Date:** 31 March 2026
 > **Research:** [sample-scripts-research.md](../research/sample-scripts-research.md)
 > **Pipeline:** Research → **Plan** → Implement
-> **Status:** Draft
+> **Status:** In Progress
 
 ## Executive Summary
 
-Build a suite of four modular Python scripts and a shared library (`deluge_sdk`) for managing samples on a Deluge SD card backup. The scripts provide: (1) a sample manifest generator for decision support, (2) a SHA256-based reference fixer for post-reorganisation repair, (3) a standalone reference verifier, and (4) a single-sample usage lookup tool. All scripts share XML parsing logic via `scripts/lib/deluge_sdk.py`, use `lxml` for parsing, and follow a compute-then-confirm workflow for XML modifications. A Makefile orchestrates common workflows. This plan follows the research recommendation of modular Python scripts with a shared library architecture (Research §Recommendation).
+Build two modular Python scripts and a shared library (`deluge_sdk`) for managing samples on a Deluge SD card backup. The scripts provide: (1) a SHA256-based reference fixer for post-reorganisation repair (`fix_references.py`), and (2) a standalone reference verifier (`verify_references.py`). Both scripts share XML parsing logic via `scripts/lib/deluge_sdk.py`, use `lxml` for parsing, and follow a compute-then-confirm workflow for XML modifications. Together they enable the core workflow: **snapshot → reorganise → fix → verify**. This plan follows the research recommendation of modular Python scripts with a shared library architecture (Research §Recommendation).
 
 ## Research Summary
 
@@ -39,14 +39,11 @@ Build a suite of four modular Python scripts and a shared library (`deluge_sdk`)
 | D4 | Flat scripts layout — `scripts/lib/` for shared modules, scripts at `scripts/` root | Python Core Standard §Project Structure — recommended layout for utility scripts | `src/` layout (over-engineered for scripts project) |
 | D5 | Compute-then-confirm workflow: compute all changes → preview → prompt → apply without re-scan | Research §6.1, user requirement. Avoids slow re-scanning on apply | Separate dry-run/apply commands (requires re-scan), changeset file (extra complexity) |
 | D6 | `fix` subcommand re-scans current filesystem as "after" state — only "before" snapshot is stored | Simpler workflow: user manages one snapshot file. Current filesystem IS the after state after rearrangement | Require separate before/after snapshot files (extra step, confusion about ordering) |
-| D7 | Include audio metadata for ALL samples, not just referenced ones | Research §OQ2. Metadata on unused samples helps decision-making (keep/delete). Overhead trivial at ~1000 files | Metadata only for referenced samples (misses manifest purpose) |
 | D8 | All-or-none reference fixing for v1 | Research §OQ3. Simpler implementation. User can re-run after resolving issues | Per-reference accept/skip (complex UI, deferred to future) |
-| D9 | Flat CSV structure — one row per sample | Research §OQ5. Directly usable in spreadsheet tools. Counts as numeric columns; song lists as delimited strings | Nested/multi-row (not spreadsheet-friendly) |
 | D10 | Minimal hand-crafted test fixture XMLs covering all 5 reference patterns | Small, focused fixtures are faster and less brittle than real files. Each fixture covers specific patterns with comments | Using real DELUGE/ XMLs (too large, brittle, change over time) |
 | D11 | Format detection and preservation on XML write — element-style stays element-style, attribute-style stays attribute-style | Research §9 critical requirement. `lxml` preserves structure naturally when updating attributes/text in-place | Rewrite all refs to one format (changes XML structure unnecessarily, noisy git diffs) |
-| D12 | Makefile for workflow orchestration | User preference. Simple, no dependencies beyond `make`. Wraps `uv run` commands | Bash wrapper scripts (less standard), Python CLI with subcommands (over-engineered for orchestration) |
 | D13 | Snapshot format: JSON with `hash → [paths]` mapping | Naturally groups duplicate content (same hash, multiple paths). JSON is human-inspectable and Python-native | `path → hash` (doesn't group duplicates), CSV (less structured) |
-| D14 | Defer `SampleCategory` and folder-based categorisation to a future version | Categorisation infers from folder structure which is about to be rearranged — output would be immediately stale. Core value is usage tracking and audio metadata, not path-based inference. Can be added later once folder structure stabilises | Build categorisation in v1 (scope creep, folder-dependent) |
+| D15 | Reduce scope to 2 scripts + shared library; defer manifest generator, sample usage tool, and Makefile | Independent review found the plan overengineered for the core need (snapshot → reorganise → fix → verify). The manifest generator, usage tool, and Makefile are not essential to this workflow. `hash_file` moved into `fix_references.py` directly to unblock the fixer from a non-essential dependency. See Deferred Scope section | Keep full 4-script suite (blocks critical path behind non-essential work) |
 
 ## Technical Specification
 
@@ -60,7 +57,6 @@ Build a suite of four modular Python scripts and a shared library (`deluge_sdk`)
 | Type Checker | mypy (CI), Pylance (IDE) | Standard: `standards/languages/python/tooling.md` |
 | Test Framework | pytest | Standard: `standards/languages/python/tooling.md` |
 | XML Parsing | `lxml >=5.0.0` | Standard: `standards/languages/python/core.md` §XML Handling |
-| Audio Metadata | `wave` (stdlib) | Research §3.2 — zero dependency, WAV-only |
 | Hashing | `hashlib` (stdlib) | Research §4.1 — SHA256 |
 | Env Loading | `python-dotenv` | Standard: `standards/languages/python/core.md` §Configuration |
 | CLI Parsing | `argparse` (stdlib) | Standard: `standards/languages/python/core.md` §Entry Point |
@@ -75,15 +71,11 @@ scripts/
 ├── .env                      # Gitignored — user's local config
 ├── .python-version           # "3.12"
 ├── pyproject.toml            # Dependencies, tool config (ruff, mypy, pytest)
-├── Makefile                  # Workflow orchestration
-├── generate_manifest.py      # Script 1: Sample manifest generator
-├── fix_references.py         # Script 2: Reference fixer (snapshot + fix subcommands)
-├── verify_references.py      # Script 3: Reference verifier
-├── sample_usage.py           # Script 4: Single-sample usage lookup
+├── fix_references.py         # Script 1: Reference fixer (snapshot + fix subcommands)
+├── verify_references.py      # Script 2: Reference verifier
 ├── lib/
 │   ├── __init__.py
 │   ├── deluge_sdk.py         # XML parsing, reference extraction, reference updating
-│   ├── sample_utils.py       # SHA256 hashing, WAV metadata
 │   └── cli_utils.py          # Env loading, dry-run/confirm workflow, output formatting
 └── tests/
     ├── conftest.py           # Shared fixtures (paths to fixture files, tmp_path helpers)
@@ -92,7 +84,7 @@ scripts/
     │   ├── SYNTHS/           # Synth fixtures (element_synth_multisample.xml, attribute_synth_multisample.xml)
     │   └── SONGS/            # Song fixtures (song_with_clips.xml)
     ├── test_deluge_sdk.py
-    ├── test_sample_utils.py
+    ├── test_fix_references.py
     └── test_cli_utils.py
 ```
 
@@ -107,19 +99,15 @@ scripts/
 
 **Sample reference** (implemented as `SampleRef` in Phase 1): Represents a single sample reference found in an XML file. Carries the sample path, source XML file (relative to DELUGE_ROOT), XML type (kit/synth/song), preset name, reference format (element-style vs attribute-style fileName vs filePath), and the element tag where it was found.
 
-**WAV metadata**: Audio properties extracted from a WAV file — duration in seconds, sample rate, channel count, and bit depth. The implementer decides the appropriate return type (could be a NamedTuple, dataclass, or dict depending on usage). Returns `None` for corrupt/unreadable files.
-
 ### Interface Design
 
 #### Inputs
 
 | Script | CLI Arguments | Environment |
 |--------|--------------|-------------|
-| `generate_manifest.py` | `--output-dir` (optional, default `docs/manifests/`) | `DELUGE_ROOT` |
 | `fix_references.py snapshot` | _(none)_ | `DELUGE_ROOT` |
 | `fix_references.py fix` | `--snapshot <path>` (required), `--apply` (skip prompt) | `DELUGE_ROOT` |
 | `verify_references.py` | _(none)_ | `DELUGE_ROOT` |
-| `sample_usage.py` | `<sample_path>` (positional, required) | `DELUGE_ROOT` |
 
 All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, falling back to `<repo_root>/DELUGE` if unset. Repo root is derived from script location: `Path(__file__).resolve().parent.parent`.
 
@@ -127,11 +115,9 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 | Script | File Output | Console Output |
 |--------|-------------|----------------|
-| `generate_manifest.py` | `docs/manifests/sample-manifest-<YYYY-MM-DD>.json` + `.csv` | Summary: total samples, referenced count, unreferenced count |
 | `fix_references.py snapshot` | `docs/manifests/snapshot-<YYYY-MM-DD>.json` | Summary: files hashed, duplicate warnings, snapshot path |
 | `fix_references.py fix` | Modified XML files (on confirm) | Preview of all changes + errors, then apply summary |
 | `verify_references.py` | _(none)_ | Reference check results, directory check results, pass/fail summary |
-| `sample_usage.py` | _(none)_ | Detailed usage listing grouped by XML type |
 
 #### Error Handling Strategy
 
@@ -139,7 +125,6 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 |----------|-----------|
 | Non-existent `DELUGE_ROOT` | `SystemExit` with clear error message |
 | No XMLs found | Warning (not error) — empty DELUGE/ is valid |
-| Unreadable WAV file | Log warning, continue. Metadata fields set to `None` |
 | Malformed XML | Log error with filename, skip file, continue processing remaining files |
 | Broken reference in fix preview | Flag as **ERROR** — prominently displayed, distinct from fixable changes |
 | Ambiguous hash mapping | Flag as **WARNING** — user must resolve manually |
@@ -149,17 +134,15 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 | Script | Interaction |
 |--------|-------------|
-| `generate_manifest.py` | Non-interactive — generate and exit |
 | `fix_references.py fix` | Interactive — compute → preview → prompt `"Apply N changes to M files? [y/N]"` → apply. `--apply` skips prompt |
 | `verify_references.py` | Non-interactive — report and exit with code 0 (pass) or 1 (fail) |
-| `sample_usage.py` | Non-interactive — report and exit |
 
 ### Integration Points
 
 | Integration | Notes |
 |-------------|-------|
 | **Existing `.env.example`** | Add `DELUGE_ROOT=./DELUGE` line. Preserve existing variables for future scripts |
-| **`docs/manifests/` directory** | Created by scripts if it doesn't exist. Manifests and snapshots live here |
+| **`docs/manifests/` directory** | Created by `fix_references.py snapshot` if it doesn't exist. Snapshots live here |
 | **Git workflow** | All XML changes captured by git. No script-level backup needed (per user: "I am relying on git for backups") |
 | **Future scripts** | `deluge_sdk.py` functions (`find_all_xml_files`, `extract_sample_refs`, `detect_xml_type`) designed for reuse by planned scripts like `rename_songs.py`, `sd-to-repo.py` |
 | **SD Card safety** | All scripts operate on `DELUGE/` in the repo only. No SD card write paths. Compliant with `standards/project.md` |
@@ -372,73 +355,12 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 ---
 
-### Phase 3: Sample Manifest Generator
+### Phase 3: Reference Fixer
 
-> **Goal:** Build `generate_manifest.py` and `sample_utils.py` — full manifest with audio metadata and usage tracking.
-> **Prerequisites:** Phase 2 complete (`deluge_sdk` proven end-to-end, verifier available).
+> **Goal:** Build `fix_references.py` with `snapshot` and `fix` subcommands — the most complex script. Adds write capability to `deluge_sdk.py`. `hash_file` is self-contained within this script (no dependency on a separate utility module).
+> **Prerequisites:** Phase 2 complete (SDK extraction proven, verifier available as post-fix validation).
 
-#### Task 3.1: `sample_utils.py` — Hashing and Metadata
-
-- **Description:** Build the sample utilities module.
-- **Outputs:** `scripts/lib/sample_utils.py` with tests in `scripts/tests/test_sample_utils.py`
-
-##### Sub-task 3.1.1: SHA256 File Hashing
-
-- **Description:** Chunked SHA256 hashing for sample files (Research §4.2).
-- **Acceptance Criteria:**
-  - [ ] `hash_file(path: Path) -> str` — returns hex digest
-  - [ ] Chunked reading (8192 bytes) for memory efficiency
-  - [ ] Test with a known file producing a known hash
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-##### Sub-task 3.1.2: WAV Metadata Extraction
-
-- **Description:** Extract audio properties from WAV files using `wave` stdlib (Research §3.2).
-- **Acceptance Criteria:**
-  - [ ] Function that extracts WAV metadata (duration, sample rate, channels, bit depth) from a file path
-  - [ ] Returns `None` with logged warning for corrupt/unreadable files
-  - [ ] Test with a small WAV file (generate programmatically in test or include a tiny fixture)
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-#### Task 3.2: `generate_manifest.py` — Manifest Generation
-
-- **Description:** Full sample manifest combining metadata and usage tracking.
-- **Outputs:** `scripts/generate_manifest.py`
-
-##### Sub-task 3.2.1: Manifest Data Collection
-
-- **Description:** Scan all samples under `DELUGE/SAMPLES/`, collect file metadata and WAV properties, then cross-reference against all XML sample refs to build a complete per-sample usage picture. This is the core logic of the manifest — collecting and joining the two data sources (filesystem and XML references).
-- **Acceptance Criteria:**
-  - [ ] Recursive scan of `SAMPLES/` for `.wav`/`.WAV` files (case-insensitive extension)
-  - [ ] For each sample: relative path, file size, mtime, SHA256 hash, WAV metadata
-  - [ ] Flag non-WAV files in `SAMPLES/` as warnings
-  - [ ] Cross-reference with XML refs: for each sample path, track which songs, kits, and synths reference it (with counts and names)
-  - [ ] Unreferenced samples identified (present on disk but zero XML references)
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-##### Sub-task 3.2.2: Output Formats and CLI Entry Point
-
-- **Description:** Write the collected manifest data to dated JSON and CSV files, print a console summary, and wire up the `main(argv)` entry point.
-- **Acceptance Criteria:**
-  - [ ] JSON output at `docs/manifests/sample-manifest-<YYYY-MM-DD>.json` — per-sample entries with file metadata, audio properties, and usage summary; top-level metadata with totals. Pretty-printed
-  - [ ] CSV output at `docs/manifests/sample-manifest-<YYYY-MM-DD>.csv` — one row per sample, flat columns for metadata and usage counts. List values (e.g. song names) semicolon-delimited within cells. Uses `csv` module for proper escaping
-  - [ ] Creates `docs/manifests/` if it doesn't exist
-  - [ ] `main(argv)` entry point with `--output-dir` argument (default: `docs/manifests/`)
-  - [ ] Console summary: total samples scanned, referenced/unreferenced counts, output file paths
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
----
-
-### Phase 4: Reference Fixer
-
-> **Goal:** Build `fix_references.py` with `snapshot` and `fix` subcommands — the most complex script. Adds write capability to `deluge_sdk.py`.
-> **Prerequisites:** Phase 3 complete (`sample_utils.hash_file` available, SDK extraction proven).
-
-#### Task 4.1: `deluge_sdk.py` — Reference Updating (Write)
+#### Task 3.1: `deluge_sdk.py` — Reference Updating (Write)
 
 - **Description:** Add write capability to the SDK: update sample references in XML files while preserving format and structure.
 - **Outputs:** `update_sample_refs()` in `scripts/lib/deluge_sdk.py` with round-trip tests
@@ -455,13 +377,14 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-#### Task 4.2: `fix_references.py snapshot` Subcommand
+#### Task 3.2: `fix_references.py snapshot` Subcommand
 
-- **Description:** Hash all samples and save the state to a dated JSON snapshot file.
+- **Description:** Hash all samples and save the state to a dated JSON snapshot file. Includes a self-contained `hash_file` function (chunked SHA256 hashing via `hashlib` stdlib — ~6 lines).
 - **Outputs:** `snapshot` subcommand in `scripts/fix_references.py`
 - **Acceptance Criteria:**
+  - [ ] `hash_file(path: Path) -> str` — chunked SHA256 hex digest, defined in `fix_references.py`
   - [ ] Scans `DELUGE/SAMPLES/` for all `.wav`/`.WAV` files
-  - [ ] Computes SHA256 hash for each (via `sample_utils.hash_file`)
+  - [ ] Computes SHA256 hash for each (via `hash_file`)
   - [ ] Saves to `docs/manifests/snapshot-<YYYY-MM-DD>.json`
   - [ ] Format: `{ "date": "...", "deluge_root": "...", "hashes": { "<hash>": ["<path>", ...], ... } }`
   - [ ] Console: total files hashed, snapshot path, warnings for duplicate content (same hash, multiple paths)
@@ -469,12 +392,12 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-#### Task 4.3: `fix_references.py fix` Subcommand
+#### Task 3.3: `fix_references.py fix` Subcommand
 
 - **Description:** Load before-snapshot, re-scan current state, compute migration map, find broken references, preview, confirm, apply.
 - **Outputs:** `fix` subcommand in `scripts/fix_references.py`
 
-##### Sub-task 4.3.1: Migration Map Computation
+##### Sub-task 3.3.1: Migration Map Computation
 
 - **Description:** Build the migration map from before-snapshot vs current filesystem.
 - **Acceptance Criteria:**
@@ -486,7 +409,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-##### Sub-task 4.3.2: Broken Reference Detection
+##### Sub-task 3.3.2: Broken Reference Detection
 
 - **Description:** Find XML references that need updating or are broken.
 - **Acceptance Criteria:**
@@ -498,7 +421,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-##### Sub-task 4.3.3: Preview and Confirm Workflow
+##### Sub-task 3.3.3: Preview and Confirm Workflow
 
 - **Description:** Display all changes and errors, then prompt for confirmation per D5.
 - **Acceptance Criteria:**
@@ -514,7 +437,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-##### Sub-task 4.3.4: CLI Entry Point with Subcommands
+##### Sub-task 3.3.4: CLI Entry Point with Subcommands
 
 - **Description:** Wire up argparse with `snapshot` and `fix` subcommands.
 - **Acceptance Criteria:**
@@ -529,69 +452,46 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 ---
 
-### Phase 5: Sample Usage Lookup + Makefile + Integration
+### Phase 4: Integration Verification + Test Cleanup
 
-> **Goal:** Build the final utility script, Makefile, and verify all scripts work together end-to-end.
-> **Prerequisites:** Phase 4 complete (all core scripts functional).
+> **Goal:** Verify all scripts work together end-to-end against real data. Clean up accumulated test debt from Phase 1.
+> **Prerequisites:** Phase 3 complete (reference fixer functional).
 
-#### Task 5.1: `sample_usage.py` — Detailed Usage Lookup
+#### Task 4.1: Integration Verification
 
-- **Description:** Single-sample usage tool for deep investigation when the manifest shows a sample is referenced.
-- **Outputs:** `scripts/sample_usage.py`
+- **Description:** Run both scripts against the real `DELUGE/` directory to verify end-to-end functionality.
 - **Acceptance Criteria:**
-  - [ ] Positional argument: sample path relative to `DELUGE/` (e.g. `SAMPLES/DRUMS/Kick/808 Kick.wav`)
-  - [ ] Scans all XMLs using `deluge_sdk` for references matching the given path
-  - [ ] For each match: XML file, XML type, preset name, element context (osc1/osc2/sampleRange/audioClip)
-  - [ ] Output grouped by type: Songs → Kits → Synths
-  - [ ] Summary: total references found
-  - [ ] If sample file doesn't exist on disk: warning (but still search XMLs — path may be in old references)
-  - [ ] Exit code 0 = found references, 1 = no references found
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-#### Task 5.2: Makefile — Workflow Orchestration
-
-- **Description:** Create a Makefile wrapping all scripts with `uv run`.
-- **Outputs:** `scripts/Makefile`
-- **Acceptance Criteria:**
-  - [ ] `make manifest` — `uv run python generate_manifest.py`
-  - [ ] `make verify` — `uv run python verify_references.py`
-  - [ ] `make snapshot` — `uv run python fix_references.py snapshot`
-  - [ ] `make fix SNAPSHOT=<path>` — `uv run python fix_references.py fix --snapshot $(SNAPSHOT)`
-  - [ ] `make usage SAMPLE=<path>` — `uv run python sample_usage.py $(SAMPLE)`
-  - [ ] `make pre-rearrange` — snapshot, then manifest, then verify (sequential)
-  - [ ] `make post-rearrange SNAPSHOT=<path>` — fix, then verify (sequential)
-  - [ ] `make lint` — `uv run ruff check .`
-  - [ ] `make test` — `uv run pytest`
-  - [ ] Default target (`make` with no args) displays help listing available targets
-  - [ ] `.PHONY` declarations for all targets
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-#### Task 5.3: Integration Verification
-
-- **Description:** Run all scripts against the real `DELUGE/` directory to verify end-to-end functionality.
-- **Acceptance Criteria:**
-  - [ ] `make verify` runs successfully against real data — check output makes sense
-  - [ ] `make manifest` generates valid JSON and CSV from real data — spot-check entries
-  - [ ] `make usage SAMPLE=<known-sample>` returns expected references for a sample known to be in use
-  - [ ] All scripts produce clear, well-formatted console output
+  - [ ] `verify_references.py` runs successfully against real data — check output makes sense
+  - [ ] `fix_references.py snapshot` produces a valid snapshot from real data — spot-check entries
+  - [ ] Both scripts produce clear, well-formatted console output
   - [ ] Edge cases handled: scripts cope with the full diversity of firmware versions in real XMLs
   - [ ] `uv run ruff check .` passes on all code
   - [ ] `uv run pytest` passes all tests
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-#### Task 5.4: Test Cleanup (Opportunistic)
+#### Task 4.2: Test Cleanup
 
-- **Description:** Phase 1 accumulated some over-tested code (e.g. 6 tests for a 2-line function, tests verifying stdlib behaviour). With updated Python Core Standard rules ("do not test stdlib behaviour", "prefer simple types"), this pattern should not recur in new phases. Clean up Phase 1 test debt opportunistically when touching those files — no dedicated implementation pass needed.
-- **Outputs:** N/A — folded into ongoing work
+- **Description:** Phase 1 accumulated some over-tested code (e.g. 6 tests for a 2-line function, tests verifying stdlib behaviour). Clean up Phase 1 test debt.
+- **Outputs:** Reduced test count in `test_cli_utils.py` and `test_deluge_sdk.py`
 - **Acceptance Criteria:**
-  - [ ] Noted: reduce `TestConfirmApply` from 6 to 2 tests when next modifying `test_cli_utils.py`
-  - [ ] Noted: review `test_loads_env_from_scripts_dir` when next modifying `test_cli_utils.py`
-  - [ ] New phases follow the updated standards — no trivial tests, no tests for stdlib behaviour
+  - [ ] Reduce `TestConfirmApply` from 6 to 2 tests (one true, one false)
+  - [ ] Review `test_loads_env_from_scripts_dir` — remove if testing implementation detail
+  - [ ] Remove tests that verify stdlib behaviour (e.g. `test_returns_absolute_paths`, `test_sorted_output`)
+  - [ ] New Phase 3 tests follow the updated standards — focus on non-trivial behaviour: migration map computation, ambiguous hash handling, XML write round-trips
 - **Implementation Notes:**
   > _(Space for implementer notes)_
+
+## Deferred Scope
+
+The following components were removed from the active plan based on an independent review (D15). They are not essential to the core workflow (snapshot → reorganise → fix → verify) and can be scoped as separate features if needed in the future.
+
+| Component | Original Phase | Reason Deferred |
+|-----------|---------------|-----------------|
+| `generate_manifest.py` — sample manifest with usage tracking and audio metadata | Phase 3 | Decision-support tool, not part of the critical fix workflow. The user can inspect files and `git status` for reorganisation decisions |
+| `sample_utils.py` — WAV metadata extraction | Phase 3 | Only needed by the manifest generator. `hash_file` (the only function the fixer needs) moved into `fix_references.py` directly |
+| `sample_usage.py` — single-sample usage lookup | Phase 5 | `grep` provides equivalent functionality for ad-hoc lookups |
+| `Makefile` — workflow orchestration | Phase 5 | Two scripts don't need a build orchestration layer. `uv run` commands are sufficient |
 
 ## Progress Tracker
 
@@ -599,9 +499,8 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 |-------|--------|---------------|-------|
 | Phase 1: Project Setup + Shared Library | Complete | 4/4 | Tasks 1.1, 1.2, 1.3, 1.4 complete |
 | Phase 2: Reference Verifier | Complete | 1/1 | Sub-tasks 2.1.1–2.1.4 complete |
-| Phase 3: Sample Manifest Generator | Not Started | 0/2 | |
-| Phase 4: Reference Fixer | Not Started | 0/3 | |
-| Phase 5: Usage Lookup + Makefile + Integration | Not Started | 0/3 | Task 5.4 downgraded to opportunistic |
+| Phase 3: Reference Fixer | Not Started | 0/3 | Was Phase 4; renumbered after scope reduction (D15) |
+| Phase 4: Integration Verification + Test Cleanup | Not Started | 0/2 | Simplified from old Phase 5; dropped sample_usage.py and Makefile |
 
 ## Change Log
 
@@ -615,3 +514,4 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 | 1 Apr 2026 | Added Sub-task 2.1.2: Unextracted Reference Detection | Safeguard against missed reference patterns from firmware updates or imported presets. Regex-scans raw XML for sample paths and compares against extracted refs |
 | 1 Apr 2026 | Created `docs/glossary.md` | Captures Deluge domain terminology and script terminology for consistency |
 | 1 Apr 2026 | Plan re-review: reduce over-engineering in remaining phases | Updated standards prohibit code blocks in plans and prescribe simpler types. Changes: (1) Replaced Core Data Types code block with prose descriptions, (2) softened "Dataclass API" pattern to "structured return types", (3) updated 2.1.3 description to remove subdirectory checking, (4) changed 2.1.4 exit codes so missing dirs are warnings not failures, (5) removed prescribed type name from 3.1.2, (6) collapsed Phase 3 Task 3.2 from 5 sub-tasks to 2, (7) removed prescribed type names from 4.3.2, (8) downgraded Task 5.4 from dedicated task to opportunistic cleanup note, (9) updated Progress Tracker |
+| 1 Apr 2026 | Plan re-review: scope reduction based on independent status review | Adopted recommendations from `temp/sample-feature-status.md`. Changes: (1) Removed old Phase 3 (manifest generator, `sample_utils.py`) entirely, (2) renumbered old Phase 4 → Phase 3 (reference fixer), with `hash_file` self-contained in `fix_references.py`, (3) replaced old Phase 5 with simplified Phase 4 (integration verification + test cleanup only — dropped `sample_usage.py` and Makefile), (4) added D15 to Decisions Log, (5) removed D7, D9, D12, D14 (no longer applicable), (6) updated Executive Summary, module structure, interface tables, and tooling table, (7) added Deferred Scope section. Net effect: 5 phases → 4 phases, 4 scripts → 2 scripts |
