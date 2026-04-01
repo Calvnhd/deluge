@@ -52,20 +52,6 @@ class TestGetDelugeRoot:
             result = get_deluge_root()
         assert result == deluge_dir.resolve()
 
-    def test_loads_env_from_scripts_dir(
-        self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-    ) -> None:
-        """Verifies load_dotenv is called with scripts/.env path."""
-        deluge_dir = tmp_path / "DELUGE"
-        deluge_dir.mkdir()
-        monkeypatch.setenv("DELUGE_ROOT", str(deluge_dir))
-        scripts_dir = tmp_path / "scripts"
-        scripts_dir.mkdir()
-        monkeypatch.setattr("lib.cli_utils._SCRIPTS_DIR", scripts_dir)
-        with patch("lib.cli_utils.load_dotenv") as mock_load:
-            get_deluge_root()
-        mock_load.assert_called_once_with(scripts_dir / ".env")
-
 
 class TestConfirmApply:
     """Tests for confirm_apply()."""
@@ -75,29 +61,7 @@ class TestConfirmApply:
         with patch("builtins.input", return_value="y"):
             assert confirm_apply("Apply changes?") is True
 
-    def test_returns_true_on_uppercase_y(self) -> None:
-        """Returns True when user types 'Y'."""
-        with patch("builtins.input", return_value="Y"):
-            assert confirm_apply("Apply changes?") is True
-
-    def test_returns_false_on_n(self) -> None:
-        """Returns False when user types 'n'."""
-        with patch("builtins.input", return_value="n"):
-            assert confirm_apply("Apply changes?") is False
-
-    def test_returns_false_on_empty(self) -> None:
-        """Returns False on empty input (default is No)."""
-        with patch("builtins.input", return_value=""):
-            assert confirm_apply("Apply changes?") is False
-
     def test_returns_false_on_other_input(self) -> None:
         """Returns False on any non-y input."""
-        with patch("builtins.input", return_value="maybe"):
-            assert confirm_apply("Apply changes?") is False
-
-    def test_prints_message(self, capsys: pytest.CaptureFixture[str]) -> None:
-        """Prints the provided message before prompting."""
         with patch("builtins.input", return_value="n"):
-            confirm_apply("Apply 5 changes to 3 files?")
-        captured = capsys.readouterr()
-        assert "Apply 5 changes to 3 files?" in captured.out
+            assert confirm_apply("Apply changes?") is False

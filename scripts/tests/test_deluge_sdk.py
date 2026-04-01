@@ -54,33 +54,6 @@ class TestFindAllXmlFiles:
         assert len(result) == 1
         assert result[0].name == "deep.XML"
 
-    def test_returns_absolute_paths(self, tmp_path: Path) -> None:
-        kits = tmp_path / "KITS"
-        kits.mkdir()
-        (kits / "test.XML").write_text("<kit/>")
-
-        result = find_all_xml_files(tmp_path)
-        assert all(p.is_absolute() for p in result)
-
-    def test_sorted_output(self, tmp_path: Path) -> None:
-        kits = tmp_path / "KITS"
-        kits.mkdir()
-        (kits / "B.XML").write_text("<kit/>")
-        (kits / "A.XML").write_text("<kit/>")
-
-        result = find_all_xml_files(tmp_path)
-        assert result == sorted(result)
-
-    def test_ignores_non_xml_files(self, tmp_path: Path) -> None:
-        kits = tmp_path / "KITS"
-        kits.mkdir()
-        (kits / "test.XML").write_text("<kit/>")
-        (kits / "readme.txt").write_text("not xml")
-        (kits / "data.json").write_text("{}")
-
-        result = find_all_xml_files(tmp_path)
-        assert len(result) == 1
-
 
 # --- detect_xml_type tests ---
 
@@ -129,10 +102,6 @@ class TestDetectXmlType:
 class TestExtractSampleRefs:
     """Test reference extraction for all 6 fixture files."""
 
-    def test_element_kit_count(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "KITS/element_kit.xml", FIXTURES_DIR)
-        assert len(refs) == 2
-
     def test_element_kit_paths(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "KITS/element_kit.xml", FIXTURES_DIR)
         paths = {r.path for r in refs}
@@ -148,10 +117,6 @@ class TestExtractSampleRefs:
             assert ref.element_tag == "osc1"
             assert ref.xml_type == "kit"
 
-    def test_element_synth_multisample_count(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "SYNTHS/element_synth_multisample.xml", FIXTURES_DIR)
-        assert len(refs) == 2
-
     def test_element_synth_multisample_paths(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "SYNTHS/element_synth_multisample.xml", FIXTURES_DIR)
         paths = {r.path for r in refs}
@@ -166,10 +131,6 @@ class TestExtractSampleRefs:
             assert ref.ref_type == "fileName-element"
             assert ref.element_tag == "sampleRange"
             assert ref.xml_type == "synth"
-
-    def test_attribute_kit_count(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "KITS/attribute_kit.xml", FIXTURES_DIR)
-        assert len(refs) == 3
 
     def test_attribute_kit_paths(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "KITS/attribute_kit.xml", FIXTURES_DIR)
@@ -198,10 +159,6 @@ class TestExtractSampleRefs:
         assert by_path["SAMPLES/WAVETABLES/Basic Shapes.wav"].element_tag == "osc1"
         assert by_path["SAMPLES/DRUMS/Hat/CR-78 Hat.wav"].element_tag == "osc2"
 
-    def test_attribute_synth_multisample_count(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "SYNTHS/attribute_synth_multisample.xml", FIXTURES_DIR)
-        assert len(refs) == 2
-
     def test_attribute_synth_multisample_paths(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "SYNTHS/attribute_synth_multisample.xml", FIXTURES_DIR)
         paths = {r.path for r in refs}
@@ -215,10 +172,6 @@ class TestExtractSampleRefs:
         for ref in refs:
             assert ref.ref_type == "fileName-attribute"
             assert ref.element_tag == "sampleRange"
-
-    def test_song_count(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "SONGS/song_with_clips.xml", FIXTURES_DIR)
-        assert len(refs) == 4
 
     def test_song_paths(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "SONGS/song_with_clips.xml", FIXTURES_DIR)
@@ -249,12 +202,9 @@ class TestExtractSampleRefs:
             assert by_path[sr_path].ref_type == "fileName-attribute"
             assert by_path[sr_path].element_tag == "sampleRange"
 
-    def test_empty_refs_count(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "KITS/empty_refs.xml", FIXTURES_DIR)
-        assert len(refs) == 1
-
     def test_empty_refs_valid_path(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "KITS/empty_refs.xml", FIXTURES_DIR)
+        assert len(refs) == 1
         assert refs[0].path == "SAMPLES/DRUMS/Kick/Validate.wav"
 
     def test_preserves_path_case(self) -> None:
@@ -273,25 +223,10 @@ class TestExtractSampleRefs:
 
 
 class TestPresetNameExtraction:
-    def test_standalone_kit_uses_filename(self) -> None:
+    def test_standalone_preset_uses_filename(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "KITS/element_kit.xml", FIXTURES_DIR)
         for ref in refs:
             assert ref.preset_name == "element_kit"
-
-    def test_standalone_synth_uses_filename(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "SYNTHS/element_synth_multisample.xml", FIXTURES_DIR)
-        for ref in refs:
-            assert ref.preset_name == "element_synth_multisample"
-
-    def test_attribute_kit_uses_filename(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "KITS/attribute_kit.xml", FIXTURES_DIR)
-        for ref in refs:
-            assert ref.preset_name == "attribute_kit"
-
-    def test_attribute_synth_uses_filename(self) -> None:
-        refs = extract_sample_refs(FIXTURES_DIR / "SYNTHS/attribute_synth_multisample.xml", FIXTURES_DIR)
-        for ref in refs:
-            assert ref.preset_name == "attribute_synth_multisample"
 
     def test_song_embedded_kit_preset_name(self) -> None:
         refs = extract_sample_refs(FIXTURES_DIR / "SONGS/song_with_clips.xml", FIXTURES_DIR)

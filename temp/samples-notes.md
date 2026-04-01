@@ -88,4 +88,6 @@ Phase 1 was implemented once... and then corrupted and lost.  Here are some gene
         - regarding arrangements: This is an automated sequence of clips. It may also contain extra clips that are only in the arrangement, not the regular set of clips (these are coloured white, instead of an actual colour.)
 - We currently cover 5 structures based on the firmware used in the present set of xmls. The firmware may be updated, or xmls shared from other users may use different firmware that doesn't match the existing patterns. We do not want to over engineer a solution here -- we can't predict what formats might appear or change -- but we need some way of verifying if a sample reference was missed.  This should be added to the plan in phase 2. 
 
+---
 
+Phase 2 complete. Can check current refs with `uv run python verify_references.py`

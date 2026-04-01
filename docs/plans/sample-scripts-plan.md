@@ -99,32 +99,15 @@ scripts/
 #### Key Design Patterns
 
 1. **Shared library** — All XML parsing and reference logic lives in `lib/deluge_sdk.py`. Scripts import from it; they never parse XML directly.
-2. **Dataclass API** — Typed return values (`SampleRef`, `WavMetadata`) for all library functions.
+2. **Structured return types** — Library functions return typed values with named fields rather than raw tuples or dicts. The implementer chooses the appropriate type (dataclass, NamedTuple, etc.) based on the data modelling rules in the Python Core Standard.
 3. **Compute-then-confirm** — XML-modifying scripts compute all changes first, hold in memory, preview, then apply on confirmation. No re-scanning.
 4. **Entry point pattern** — All scripts use `def main(argv: list[str] | None = None) -> None` with `if __name__ == "__main__"` guard per Python Core Standard.
 
-#### Core Data Types
+#### Core Data Concepts
 
-```python
-@dataclass
-class SampleRef:
-    """A single sample reference found in an XML file."""
-    path: str               # e.g. "SAMPLES/DRUMS/Kick/808 Kick.wav"
-    xml_file: Path          # Path relative to DELUGE_ROOT (e.g. "KITS/KIT001.XML")
-    xml_type: str           # "kit" | "synth" | "song"
-    preset_name: str        # Preset/track name (e.g. "K01Perc2", "AUDIO2", "KIT001")
-    ref_type: str           # "fileName-element" | "fileName-attribute" | "filePath-attribute"
-    element_tag: str        # "osc1" | "osc2" | "sampleRange" | "audioClip"
+**Sample reference** (implemented as `SampleRef` in Phase 1): Represents a single sample reference found in an XML file. Carries the sample path, source XML file (relative to DELUGE_ROOT), XML type (kit/synth/song), preset name, reference format (element-style vs attribute-style fileName vs filePath), and the element tag where it was found.
 
-@dataclass
-class WavMetadata:
-    """Audio metadata extracted from a WAV file."""
-    duration_seconds: float
-    sample_rate: int
-    channels: int
-    bit_depth: int
-
-```
+**WAV metadata**: Audio properties extracted from a WAV file — duration in seconds, sample rate, channel count, and bit depth. The implementer decides the appropriate return type (could be a NamedTuple, dataclass, or dict depending on usage). Returns `None` for corrupt/unreadable files.
 
 ### Interface Design
 
@@ -345,48 +328,47 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 - **Description:** For every `SampleRef` extracted from all XMLs, verify the referenced file exists on disk.
 - **Acceptance Criteria:**
-  - [ ] Uses `deluge_sdk.find_all_xml_files()` and `extract_sample_refs()` to collect all references
-  - [ ] Checks each `SampleRef.path` exists relative to `DELUGE_ROOT`
-  - [ ] Collects broken references: XML file, preset name, missing sample path
-  - [ ] Groups broken references by XML file for readable output
-  - [ ] Reports summary: total references checked, total broken
+  - [x] Uses `deluge_sdk.find_all_xml_files()` and `extract_sample_refs()` to collect all references
+  - [x] Checks each `SampleRef.path` exists relative to `DELUGE_ROOT`
+  - [x] Collects broken references: XML file, preset name, missing sample path
+  - [x] Groups broken references by XML file for readable output
+  - [x] Reports summary: total references checked, total broken
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Created `verify_references.py` with three data types: `BrokenRef` (xml_file, preset_name, sample_path), `ReferenceCheckResult` (total_refs, broken list, `all_valid` property, `broken_by_xml_file()` grouping method), and `check_references(deluge_root)` function. The function collects all refs via the SDK, checks each path with `Path.is_file()`, and returns a structured result. 9 tests in `test_verify_references.py` cover: all valid, broken detected, mixed, preset name propagation, multiple XML files, empty directory, fixture integration, and grouping logic.
 
 ##### Sub-task 2.1.2: Unextracted Reference Detection
 
 - **Description:** Cross-check extracted references against a raw text scan of each XML to detect sample paths that `extract_sample_refs()` may have missed (e.g. from a new firmware pattern or imported preset).
 - **Acceptance Criteria:**
-  - [ ] For each XML file, regex-scan the raw text for strings matching `SAMPLES/...*.wav` (case-insensitive)
-  - [ ] Compare raw matches against the set of paths returned by `extract_sample_refs()`
-  - [ ] Any paths found in raw text but not in extracted refs are reported as warnings ("possible unextracted reference")
-  - [ ] Does not cause the verifier to fail (exit code 1) — these are informational warnings only
-  - [ ] Test with a fixture containing a sample path in an unexpected element
+  - [x] For each XML file, regex-scan the raw text for strings matching `SAMPLES/...*.wav` (case-insensitive)
+  - [x] Compare raw matches against the set of paths returned by `extract_sample_refs()`
+  - [x] Any paths found in raw text but not in extracted refs are reported as warnings ("possible unextracted reference")
+  - [x] Does not cause the verifier to fail (exit code 1) — these are informational warnings only
+  - [x] Test with a fixture containing a sample path in an unexpected element
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Added `UnextractedRef` dataclass, `find_unextracted_refs()` function, and `_SAMPLE_PATH_RE` regex to `verify_references.py`. The regex `SAMPLES/[^\s"'<>]+\.wav` (case-insensitive) scans raw XML text. `ReferenceCheckResult` gained an `unextracted` field (default empty list) — does not affect `all_valid`. `check_references()` now builds a per-file ref map and calls `find_unextracted_refs()` for each XML file. Created `tests/fixtures/KITS/unextracted_ref_kit.xml` fixture with a `<customData>` element containing a sample path. 7 new tests (5 unit + 1 fixture integration + 1 check_references integration), 71 total passing, ruff clean.
 
 ##### Sub-task 2.1.3: CLIPS/RECORD/RESAMPLE Directory Validation
 
-- **Description:** Check that CLIPS/, RECORD/, RESAMPLE/ directories exist under SAMPLES/ and contain no subdirectories.
+- **Description:** Check that CLIPS/, RECORD/, RESAMPLE/ directories exist under SAMPLES/. Missing directories are warnings only.
 - **Acceptance Criteria:**
-  - [ ] Checks `SAMPLES/CLIPS/`, `SAMPLES/RECORD/`, `SAMPLES/RESAMPLE/` exist under `DELUGE_ROOT`
-  - [ ] Missing directories reported as warnings (they may not exist yet on a fresh setup)
-  - [ ] Existing directories checked for subdirectories — any found are reported as errors
-  - [ ] Tests using `tmp_path` for both passing and failing scenarios
+  - [x] Checks `SAMPLES/CLIPS/`, `SAMPLES/RECORD/`, `SAMPLES/RESAMPLE/` exist under `DELUGE_ROOT`
+  - [x] Missing directories reported as warnings (they may not exist yet on a fresh setup)
+  - [x] Tests using `tmp_path` for both passing and failing scenarios
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Added `DirWarning`, `DirError`, `DirectoryCheckResult` dataclasses and `check_special_dirs()` function to `verify_references.py`. `_SPECIAL_DIRS` tuple defines the three checked directories. `DirectoryCheckResult.ok` returns `True` when there are no errors (warnings alone don't fail). 9 new tests across `TestCheckSpecialDirs` (7 tests) and `TestDirectoryCheckResult` (2 tests), 80 total passing, ruff clean.
 
 ##### Sub-task 2.1.4: CLI Entry Point and Exit Codes
 
 - **Description:** Wire up `main(argv)` with output formatting and exit codes.
 - **Acceptance Criteria:**
-  - [ ] `main(argv)` entry point per Python Core Standard
-  - [ ] Exit code 0 = all references valid, all directory checks pass
-  - [ ] Exit code 1 = one or more broken references or directory issues
-  - [ ] Console output separates: reference check results → directory check results → summary line
-  - [ ] Test for pass scenario and fail scenario
+  - [x] `main(argv)` entry point per Python Core Standard
+  - [x] Exit code 0 = all references valid (directory warnings do not affect exit code)
+  - [x] Exit code 1 = one or more broken references found
+  - [x] Console output: reference check results, directory warnings (if any), summary line
+  - [x] Test for pass scenario and fail scenario
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Added `main(argv)` to `verify_references.py` with `if __name__ == "__main__"` guard. Uses `get_deluge_root()` from `lib/cli_utils.py`. Console output sections: broken refs (or "All references valid"), unextracted warnings, missing special directory warnings, summary line with counts. `sys.exit(1)` only when broken refs exist — missing dirs are warnings only. 3 new tests in `TestMain`: exit 0 (all valid), exit 1 (broken refs), missing dirs stay exit 0. 61 total passing, ruff clean.
 
 ---
 
@@ -414,8 +396,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 - **Description:** Extract audio properties from WAV files using `wave` stdlib (Research §3.2).
 - **Acceptance Criteria:**
-  - [ ] `get_wav_metadata(path: Path) -> WavMetadata | None`
-  - [ ] Extracts: `duration_seconds` (frames/rate, rounded 2dp), `sample_rate`, `channels`, `bit_depth` (sampwidth × 8)
+  - [ ] Function that extracts WAV metadata (duration, sample rate, channels, bit depth) from a file path
   - [ ] Returns `None` with logged warning for corrupt/unreadable files
   - [ ] Test with a small WAV file (generate programmatically in test or include a tiny fixture)
 - **Implementation Notes:**
@@ -426,62 +407,27 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Description:** Full sample manifest combining metadata and usage tracking.
 - **Outputs:** `scripts/generate_manifest.py`
 
-##### Sub-task 3.2.1: Sample Scanning
+##### Sub-task 3.2.1: Manifest Data Collection
 
-- **Description:** Walk `DELUGE/SAMPLES/` for all audio files, extract metadata.
+- **Description:** Scan all samples under `DELUGE/SAMPLES/`, collect file metadata and WAV properties, then cross-reference against all XML sample refs to build a complete per-sample usage picture. This is the core logic of the manifest — collecting and joining the two data sources (filesystem and XML references).
 - **Acceptance Criteria:**
-  - [ ] Recursive scan of `SAMPLES/` for `.wav` and `.WAV` files (case-insensitive extension)
-  - [ ] For each: relative path (from `DELUGE/`), file size (bytes), mtime, SHA256 hash, WAV metadata
-  - [ ] Flag non-WAV files encountered in `SAMPLES/` as warnings
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-##### Sub-task 3.2.2: Usage Tracking — Reference Map
-
-- **Description:** Build a map: for each sample path → which XMLs reference it and with what instrument context.
-- **Acceptance Criteria:**
-  - [ ] Scan all XMLs using `deluge_sdk` functions
-  - [ ] Group `SampleRef` instances by `path`
-  - [ ] **Songs:** List ALL referencing songs, each with its embedded instrument name(s) using the sample
-  - [ ] **Songs count:** Number of distinct song files (a song counts as 1 even if multiple embedded instruments use the sample)
-  - [ ] **Standalone kits:** List first standalone kit as example, count total
-  - [ ] **Standalone synths:** List first standalone synth as example, count total
+  - [ ] Recursive scan of `SAMPLES/` for `.wav`/`.WAV` files (case-insensitive extension)
+  - [ ] For each sample: relative path, file size, mtime, SHA256 hash, WAV metadata
+  - [ ] Flag non-WAV files in `SAMPLES/` as warnings
+  - [ ] Cross-reference with XML refs: for each sample path, track which songs, kits, and synths reference it (with counts and names)
   - [ ] Unreferenced samples identified (present on disk but zero XML references)
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-##### Sub-task 3.2.3: JSON Output
+##### Sub-task 3.2.2: Output Formats and CLI Entry Point
 
-- **Description:** Generate dated JSON manifest.
+- **Description:** Write the collected manifest data to dated JSON and CSV files, print a console summary, and wire up the `main(argv)` entry point.
 - **Acceptance Criteria:**
-  - [ ] Path: `docs/manifests/sample-manifest-<YYYY-MM-DD>.json`
+  - [ ] JSON output at `docs/manifests/sample-manifest-<YYYY-MM-DD>.json` — per-sample entries with file metadata, audio properties, and usage summary; top-level metadata with totals. Pretty-printed
+  - [ ] CSV output at `docs/manifests/sample-manifest-<YYYY-MM-DD>.csv` — one row per sample, flat columns for metadata and usage counts. List values (e.g. song names) semicolon-delimited within cells. Uses `csv` module for proper escaping
   - [ ] Creates `docs/manifests/` if it doesn't exist
-  - [ ] Per-sample entry: `path`, `file_size_bytes`, `mtime`, `hash`, `duration_seconds`, `sample_rate`, `channels`, `bit_depth`, `usage` object
-  - [ ] `usage` object: `song_count`, `kit_count`, `synth_count`, `songs` (list of `{name, instruments: [...]}`), `first_kit`, `first_synth`
-  - [ ] Top-level metadata: `generated`, `deluge_root`, `total_samples`, `total_referenced`, `total_unreferenced`
-  - [ ] Pretty-printed (indent=2)
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-##### Sub-task 3.2.4: CSV Output
-
-- **Description:** Flat CSV companion for spreadsheet use.
-- **Acceptance Criteria:**
-  - [ ] Path: `docs/manifests/sample-manifest-<YYYY-MM-DD>.csv`
-  - [ ] One row per sample
-  - [ ] Columns: `path`, `file_size_bytes`, `duration_seconds`, `sample_rate`, `channels`, `bit_depth`, `mtime`, `hash`, `song_count`, `kit_count`, `synth_count`, `songs`, `first_kit`, `first_synth`
-  - [ ] List columns (songs) use semicolon delimiter within cells
-  - [ ] Uses Python `csv` module for proper escaping
-- **Implementation Notes:**
-  > _(Space for implementer notes)_
-
-##### Sub-task 3.2.5: Console Summary and Entry Point
-
-- **Description:** CLI entry point with summary output.
-- **Acceptance Criteria:**
   - [ ] `main(argv)` entry point with `--output-dir` argument (default: `docs/manifests/`)
   - [ ] Console summary: total samples scanned, referenced/unreferenced counts, output file paths
-  - [ ] Warnings for non-WAV files, unreadable WAVs
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
@@ -548,7 +494,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
   - [ ] For each ref: if path is in migration map → **planned change** (old → new)
   - [ ] For each ref: if path is in "deleted" set → **error** (file removed but still referenced)
   - [ ] For each ref: if path is in "ambiguous" set → **warning** (cannot auto-resolve)
-  - [ ] Build structured results: `changes: list[PlannedChange]`, `errors: list[FixError]`
+  - [ ] Build structured results separating fixable changes, errors, and ambiguous warnings
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
@@ -636,16 +582,14 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-#### Task 5.4: Test Cleanup
+#### Task 5.4: Test Cleanup (Opportunistic)
 
-- **Description:** Review and reduce overkill tests identified during Phase 1 review. Remove trivial test cases that verify stdlib behaviour or test implementation details rather than meaningful behaviour. Ensure this pattern is not repeated in Phases 2–4 tests.
-- **Outputs:** Reduced test count in `test_cli_utils.py` and `test_deluge_sdk.py`, no change to production code.
+- **Description:** Phase 1 accumulated some over-tested code (e.g. 6 tests for a 2-line function, tests verifying stdlib behaviour). With updated Python Core Standard rules ("do not test stdlib behaviour", "prefer simple types"), this pattern should not recur in new phases. Clean up Phase 1 test debt opportunistically when touching those files — no dedicated implementation pass needed.
+- **Outputs:** N/A — folded into ongoing work
 - **Acceptance Criteria:**
-  - [ ] `TestConfirmApply` reduced from 6 tests to 2 (one true case, one false case) — the remaining 4 all exercise the same `response == "y"` branch
-  - [ ] `test_loads_env_from_scripts_dir` removed or reworked — tests an implementation detail (that `load_dotenv` is called with a specific path) rather than observable behaviour
-  - [ ] Evaluate `test_returns_absolute_paths`, `test_sorted_output`, `test_ignores_non_xml_files` in `TestFindAllXmlFiles` — these verify behaviour trivially guaranteed by the stdlib. Remove if they add no value, keep only if they document a contract downstream code depends on
-  - [ ] Review Phase 2–4 tests for the same pattern — no trivial cases, no tests for stdlib behaviour, no production code complexity added solely for test scenarios
-  - [ ] All remaining tests pass after cleanup
+  - [ ] Noted: reduce `TestConfirmApply` from 6 to 2 tests when next modifying `test_cli_utils.py`
+  - [ ] Noted: review `test_loads_env_from_scripts_dir` when next modifying `test_cli_utils.py`
+  - [ ] New phases follow the updated standards — no trivial tests, no tests for stdlib behaviour
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
@@ -654,10 +598,10 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
 | Phase 1: Project Setup + Shared Library | Complete | 4/4 | Tasks 1.1, 1.2, 1.3, 1.4 complete |
-| Phase 2: Reference Verifier | Not Started | 0/1 | |
+| Phase 2: Reference Verifier | Complete | 1/1 | Sub-tasks 2.1.1–2.1.4 complete |
 | Phase 3: Sample Manifest Generator | Not Started | 0/2 | |
 | Phase 4: Reference Fixer | Not Started | 0/3 | |
-| Phase 5: Usage Lookup + Makefile + Integration | Not Started | 0/4 | |
+| Phase 5: Usage Lookup + Makefile + Integration | Not Started | 0/3 | Task 5.4 downgraded to opportunistic |
 
 ## Change Log
 
@@ -670,3 +614,4 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 | 1 Apr 2026 | Moved test fixtures into `fixtures/KITS/`, `fixtures/SYNTHS/`, `fixtures/SONGS/` subdirectories | Required after removing content-based fallback — fixtures must be under valid directories for path-based detection |
 | 1 Apr 2026 | Added Sub-task 2.1.2: Unextracted Reference Detection | Safeguard against missed reference patterns from firmware updates or imported presets. Regex-scans raw XML for sample paths and compares against extracted refs |
 | 1 Apr 2026 | Created `docs/glossary.md` | Captures Deluge domain terminology and script terminology for consistency |
+| 1 Apr 2026 | Plan re-review: reduce over-engineering in remaining phases | Updated standards prohibit code blocks in plans and prescribe simpler types. Changes: (1) Replaced Core Data Types code block with prose descriptions, (2) softened "Dataclass API" pattern to "structured return types", (3) updated 2.1.3 description to remove subdirectory checking, (4) changed 2.1.4 exit codes so missing dirs are warnings not failures, (5) removed prescribed type name from 3.1.2, (6) collapsed Phase 3 Task 3.2 from 5 sub-tasks to 2, (7) removed prescribed type names from 4.3.2, (8) downgraded Task 5.4 from dedicated task to opportunistic cleanup note, (9) updated Progress Tracker |
