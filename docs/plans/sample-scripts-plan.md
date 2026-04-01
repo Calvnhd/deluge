@@ -88,12 +88,9 @@ scripts/
 └── tests/
     ├── conftest.py           # Shared fixtures (paths to fixture files, tmp_path helpers)
     ├── fixtures/             # Test XML files (minimal, hand-crafted)
-    │   ├── element_kit.xml
-    │   ├── element_synth_multisample.xml
-    │   ├── attribute_kit.xml
-    │   ├── attribute_synth_multisample.xml
-    │   ├── song_with_clips.xml
-    │   └── empty_refs.xml
+    │   ├── KITS/             # Kit fixtures (element_kit.xml, attribute_kit.xml, empty_refs.xml)
+    │   ├── SYNTHS/           # Synth fixtures (element_synth_multisample.xml, attribute_synth_multisample.xml)
+    │   └── SONGS/            # Song fixtures (song_with_clips.xml)
     ├── test_deluge_sdk.py
     ├── test_sample_utils.py
     └── test_cli_utils.py
@@ -113,10 +110,9 @@ scripts/
 class SampleRef:
     """A single sample reference found in an XML file."""
     path: str               # e.g. "SAMPLES/DRUMS/Kick/808 Kick.wav"
-    xml_file: Path          # Absolute path to the XML file containing this reference
+    xml_file: Path          # Path relative to DELUGE_ROOT (e.g. "KITS/KIT001.XML")
     xml_type: str           # "kit" | "synth" | "song"
-    instrument_name: str    # Preset/sound name (e.g. "K01Perc2", "Rhythmace Kick")
-    instrument_folder: str  # presetFolder for songs (e.g. "KITS/KERERU"), empty for standalone
+    preset_name: str        # Preset/track name (e.g. "K01Perc2", "AUDIO2", "KIT001")
     ref_type: str           # "fileName-element" | "fileName-attribute" | "filePath-attribute"
     element_tag: str        # "osc1" | "osc2" | "sampleRange" | "audioClip"
 
@@ -250,20 +246,22 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
   - [x] Each fixture is minimal — smallest valid XML that exercises the target pattern(s)
   - [x] Each fixture includes a comment header documenting which patterns it covers
 - **Implementation Notes:**
-  > Completed 31 Mar 2026. All 6 fixture XML files created, verified as well-formed XML via lxml parsing, and pattern coverage validated programmatically. Structures modelled from real DELUGE/ XMLs (KIT000.XML, KIT027.XML, Deeper.XML, SYNT168.XML, Kg.XML, K01Sink.XML). Element-style synth fixture omits the `<firmwareVersion>` sibling elements that real pre-3.x files have (which make the document not well-formed XML) — the SDK's handling of non-well-formed headers will be tested against real DELUGE/ files separately. `empty_refs.xml` includes one valid reference alongside the empties to verify extraction still works when empty refs are present. `attribute_kit.xml` second sound uses `type="wavetable"` on osc1 with a fileName. Removed `.gitkeep` from fixtures directory.
+  > Completed 31 Mar 2026, revised 1 Apr 2026. All 6 fixture XML files created and moved into `fixtures/KITS/`, `fixtures/SYNTHS/`, `fixtures/SONGS/` subdirectories to mirror the real DELUGE directory structure (required after removing `detect_xml_type` content-based fallback). Verified as well-formed XML via lxml parsing. Structures modelled from real DELUGE/ XMLs. `empty_refs.xml` includes one valid reference alongside the empties. `attribute_kit.xml` second sound uses `type="wavetable"` on osc1 with a fileName.
 
 #### Task 1.3: `cli_utils.py` — Environment and Output Utilities
 
 - **Description:** Create shared CLI utilities: environment loading, and the dry-run/confirm workflow pattern. These are used by all scripts.
 - **Outputs:** `scripts/lib/cli_utils.py` with tests in `scripts/tests/test_cli_utils.py`
 - **Acceptance Criteria:**
-  - [ ] `get_deluge_root() -> Path` — loads `DELUGE_ROOT` from `scripts/.env` via `python-dotenv`, falls back to `<repo_root>/DELUGE`, validates directory exists
-  - [ ] Repo root derived as `Path(__file__).resolve().parent.parent` (from `lib/` up to `scripts/` up to repo root)
-  - [ ] Raises `SystemExit` with clear message if `DELUGE_ROOT` directory doesn't exist
-  - [ ] `confirm_apply(message: str) -> bool` — print message, prompt `[y/N]`, return boolean
-  - [ ] Tests verify: env loading, fallback when env unset, `SystemExit` on missing directory (using `tmp_path`)
+  - [x] `get_deluge_root() -> Path` — loads `DELUGE_ROOT` from `scripts/.env` via `python-dotenv`, falls back to `<repo_root>/DELUGE`, validates directory exists
+  - [x] Repo root derived as `Path(__file__).resolve().parent.parent` (from `lib/` up to `scripts/` up to repo root)
+  - [x] Raises `SystemExit` with clear message if `DELUGE_ROOT` directory doesn't exist
+  - [x] `confirm_apply(message: str) -> bool` — print message, prompt `[y/N]`, return boolean
+  - [x] Tests verify: env loading, fallback when env unset, `SystemExit` on missing directory (using `tmp_path`)
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Created `lib/cli_utils.py` with `get_deluge_root()` and `confirm_apply()`. `_SCRIPTS_DIR` derived as `Path(__file__).resolve().parent.parent` (file → lib/ → scripts/); `_REPO_ROOT` is `_SCRIPTS_DIR.parent`. Relative `DELUGE_ROOT` values resolved against `_REPO_ROOT` for CWD-independence. 11 tests pass, ruff clean.
+  >
+  > **Review (1 Apr 2026):** `TestConfirmApply` has 6 tests for a 2-line function — 5 inputs (`y`, `Y`, `n`, empty, `other`) all exercise the same `response == "y"` line. Only 2 needed (one true, one false). `test_loads_env_from_scripts_dir` tests an implementation detail rather than behaviour. Deferred to Task 5.4.
 
 #### Task 1.4: `deluge_sdk.py` — XML Discovery and Reference Extraction (Read-Only)
 
@@ -274,42 +272,41 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 - **Description:** Implement `find_all_xml_files()` to recursively locate all `.XML` files in KITS/, SYNTHS/, SONGS/.
 - **Acceptance Criteria:**
-  - [ ] `find_all_xml_files(deluge_root: Path) -> list[Path]` — returns absolute paths to all `.XML` files in `KITS/`, `SYNTHS/`, `SONGS/` (recursive)
-  - [ ] Case-insensitive extension matching (`.XML`, `.xml`)
-  - [ ] Handles missing subdirectories gracefully (e.g. no `SONGS/` → empty list, not error)
-  - [ ] Test with minimal directory structure using `tmp_path` pytest fixture
+  - [x] `find_all_xml_files(deluge_root: Path) -> list[Path]` — returns absolute paths to all `.XML` files in `KITS/`, `SYNTHS/`, `SONGS/` (recursive)
+  - [x] Case-insensitive extension matching (`.XML`, `.xml`)
+  - [x] Handles missing subdirectories gracefully (e.g. no `SONGS/` → empty list, not error)
+  - [x] Test with minimal directory structure using `tmp_path` pytest fixture
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Uses `Path.rglob("*")` with `.suffix.upper() == ".XML"` for case-insensitive matching. Returns sorted list for consistent ordering. 8 tests cover: all subdirs, case-insensitive extension, missing/partial subdirs, recursive discovery, absolute paths, sorted output, non-XML file exclusion.
 
 ##### Sub-task 1.4.2: XML Type Detection
 
 - **Description:** Implement helper to detect XML type (kit, synth, song) from file path and/or root element.
 - **Acceptance Criteria:**
-  - [ ] `detect_xml_type(xml_path: Path) -> str` — returns `"kit"`, `"synth"`, or `"song"`
-  - [ ] Primary: path-based detection — files under `KITS/` → kit, `SYNTHS/` → synth, `SONGS/` → song
-  - [ ] Fallback: content-based — root element `<kit>` → kit, `<sound>` → synth, `<song>` → song
-  - [ ] Handles both old format (root element is the type) and new format (root element has `firmwareVersion` attribute)
-  - [ ] Tests cover path-based and content-based detection for all fixture files
+  - [x] `detect_xml_type(xml_path: Path) -> str` — returns `"kit"`, `"synth"`, or `"song"`
+  - [x] Path-based detection only — files under `KITS/` → kit, `SYNTHS/` → synth, `SONGS/` → song
+  - [x] Raises `ValueError` if the path doesn't contain one of these directories
+  - [x] Tests cover path-based detection and ValueError on unknown paths
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Path-based only — content-based fallback removed as unnecessary (all XMLs come from `find_all_xml_files()` which only searches under KITS/SYNTHS/SONGS). Raises `ValueError` for paths outside these directories. 7 tests.
 
 ##### Sub-task 1.4.3: Reference Extraction — Core Logic
 
 - **Description:** Implement `extract_sample_refs()` to find all sample references in a single XML file, handling all 5 reference patterns from Research §1.5.
 - **Acceptance Criteria:**
-  - [ ] `extract_sample_refs(xml_path: Path) -> list[SampleRef]`
-  - [ ] Pattern 1: `<fileName>text</fileName>` element on `<osc1>`/`<osc2>` (element-style)
-  - [ ] Pattern 2: `<fileName>text</fileName>` element within `<sampleRange>` (element-style)
-  - [ ] Pattern 3: `fileName="..."` attribute on `<osc1>`/`<osc2>` (attribute-style)
-  - [ ] Pattern 4: `fileName="..."` attribute on `<sampleRange>` (attribute-style)
-  - [ ] Pattern 5: `filePath="..."` attribute on `<audioClip>` (songs only)
-  - [ ] Skips empty references: `<fileName></fileName>`, `fileName=""`, missing attribute
-  - [ ] Preserves original path case exactly
-  - [ ] `ref_type` distinguishes format: `"fileName-element"`, `"fileName-attribute"`, `"filePath-attribute"`
-  - [ ] Extraction must NOT filter on `type="sample"` — must capture `fileName` from oscillators regardless of osc `type` value (including `type="wavetable"`)
-  - [ ] Tests cover all 6 fixture files, verifying correct count and paths extracted
+  - [x] `extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]`
+  - [x] Pattern 1: `<fileName>text</fileName>` element on `<osc1>`/`<osc2>` (element-style)
+  - [x] Pattern 2: `<fileName>text</fileName>` element within `<sampleRange>` (element-style)
+  - [x] Pattern 3: `fileName="..."` attribute on `<osc1>`/`<osc2>` (attribute-style)
+  - [x] Pattern 4: `fileName="..."` attribute on `<sampleRange>` (attribute-style)
+  - [x] Pattern 5: `filePath="..."` attribute on `<audioClip>` (songs only)
+  - [x] Skips empty references: `<fileName></fileName>`, `fileName=""`, missing attribute
+  - [x] Preserves original path case exactly
+  - [x] `ref_type` distinguishes format: `"fileName-element"`, `"fileName-attribute"`, `"filePath-attribute"`
+  - [x] Extraction must NOT filter on `type="sample"` — must capture `fileName` from oscillators regardless of osc `type` value (including `type="wavetable"`)
+  - [x] Tests cover all 6 fixture files, verifying correct count and paths extracted
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Three-phase extraction: (1) `root.iter("fileName")` for element-style patterns 1/2, (2) `root.iter(tag)` for osc1/osc2/sampleRange attribute-style patterns 3/4, (3) `root.iter("audioClip")` for pattern 5. `xml_file` stored as relative path to `deluge_root`. 21 tests cover all fixtures.
 
 ##### Sub-task 1.4.4: Instrument Name Extraction
 
@@ -319,13 +316,18 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
   - **Songs — embedded synths:** `presetName` attribute on the `<sound>` element that is a direct child of `<instruments>`
   - **Songs — audioClip:** `trackName` attribute on the `<audioClip>` element
 - **Acceptance Criteria:**
-  - [ ] `instrument_name` correctly populated for all `SampleRef` instances
-  - [ ] `instrument_folder` populated from `presetFolder` attribute for song-embedded instruments; empty string for standalone kits/synths and audioClips
-  - [ ] Song fixture tests verify embedded kit, synth, and audioClip instrument names
-  - [ ] Standalone kit/synth fixture tests verify filename-based instrument names
-  - [ ] Graceful fallback if name attribute is missing (e.g. `"unknown"`)
+  - [x] `preset_name` correctly populated for all `SampleRef` instances
+  - [x] Song fixture tests verify embedded kit, synth, and audioClip preset names
+  - [x] Standalone kit/synth fixture tests verify filename-based preset names
+  - [x] Graceful fallback if name attribute is missing (e.g. `"unknown"`)
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 1 Apr 2026. Internal `_get_preset_info()` walks up the element tree. For songs, walks up until it finds an element whose parent is `<instruments>`, then reads `presetName`. For standalone, returns `xml_path.stem`. audioClip handled directly using `trackName`. 8 tests.
+
+#### Phase 1 Review Notes
+
+> **Review (1 Apr 2026):** All acceptance criteria met. Terminology (`SampleRef` fields, `ref_type` values, `element_tag` values) is consistent throughout. No production code complexity added for test-only scenarios.
+>
+> **Test quality:** Three tests in `TestFindAllXmlFiles` are trivial — `test_returns_absolute_paths`, `test_sorted_output`, `test_ignores_non_xml_files` verify behaviour guaranteed by the stdlib. Not adding complexity to production code, so low priority. Should not be used as a pattern going forward — Phase 2+ tests should focus on non-trivial behaviour only. Deferred to Task 5.4.
 
 ---
 
@@ -345,13 +347,25 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Acceptance Criteria:**
   - [ ] Uses `deluge_sdk.find_all_xml_files()` and `extract_sample_refs()` to collect all references
   - [ ] Checks each `SampleRef.path` exists relative to `DELUGE_ROOT`
-  - [ ] Collects broken references: XML file, instrument name, missing sample path
+  - [ ] Collects broken references: XML file, preset name, missing sample path
   - [ ] Groups broken references by XML file for readable output
   - [ ] Reports summary: total references checked, total broken
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-##### Sub-task 2.1.2: CLIPS/RECORD/RESAMPLE Directory Validation
+##### Sub-task 2.1.2: Unextracted Reference Detection
+
+- **Description:** Cross-check extracted references against a raw text scan of each XML to detect sample paths that `extract_sample_refs()` may have missed (e.g. from a new firmware pattern or imported preset).
+- **Acceptance Criteria:**
+  - [ ] For each XML file, regex-scan the raw text for strings matching `SAMPLES/...*.wav` (case-insensitive)
+  - [ ] Compare raw matches against the set of paths returned by `extract_sample_refs()`
+  - [ ] Any paths found in raw text but not in extracted refs are reported as warnings ("possible unextracted reference")
+  - [ ] Does not cause the verifier to fail (exit code 1) — these are informational warnings only
+  - [ ] Test with a fixture containing a sample path in an unexpected element
+- **Implementation Notes:**
+  > _(Space for implementer notes)_
+
+##### Sub-task 2.1.3: CLIPS/RECORD/RESAMPLE Directory Validation
 
 - **Description:** Check that CLIPS/, RECORD/, RESAMPLE/ directories exist under SAMPLES/ and contain no subdirectories.
 - **Acceptance Criteria:**
@@ -362,7 +376,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
-##### Sub-task 2.1.3: CLI Entry Point and Exit Codes
+##### Sub-task 2.1.4: CLI Entry Point and Exit Codes
 
 - **Description:** Wire up `main(argv)` with output formatting and exit codes.
 - **Acceptance Criteria:**
@@ -581,7 +595,7 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Acceptance Criteria:**
   - [ ] Positional argument: sample path relative to `DELUGE/` (e.g. `SAMPLES/DRUMS/Kick/808 Kick.wav`)
   - [ ] Scans all XMLs using `deluge_sdk` for references matching the given path
-  - [ ] For each match: XML file, XML type, instrument name, element context (osc1/osc2/sampleRange/audioClip)
+  - [ ] For each match: XML file, XML type, preset name, element context (osc1/osc2/sampleRange/audioClip)
   - [ ] Output grouped by type: Songs → Kits → Synths
   - [ ] Summary: total references found
   - [ ] If sample file doesn't exist on disk: warning (but still search XMLs — path may be in old references)
@@ -622,12 +636,37 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Implementation Notes:**
   > _(Space for implementer notes)_
 
+#### Task 5.4: Test Cleanup
+
+- **Description:** Review and reduce overkill tests identified during Phase 1 review. Remove trivial test cases that verify stdlib behaviour or test implementation details rather than meaningful behaviour. Ensure this pattern is not repeated in Phases 2–4 tests.
+- **Outputs:** Reduced test count in `test_cli_utils.py` and `test_deluge_sdk.py`, no change to production code.
+- **Acceptance Criteria:**
+  - [ ] `TestConfirmApply` reduced from 6 tests to 2 (one true case, one false case) — the remaining 4 all exercise the same `response == "y"` branch
+  - [ ] `test_loads_env_from_scripts_dir` removed or reworked — tests an implementation detail (that `load_dotenv` is called with a specific path) rather than observable behaviour
+  - [ ] Evaluate `test_returns_absolute_paths`, `test_sorted_output`, `test_ignores_non_xml_files` in `TestFindAllXmlFiles` — these verify behaviour trivially guaranteed by the stdlib. Remove if they add no value, keep only if they document a contract downstream code depends on
+  - [ ] Review Phase 2–4 tests for the same pattern — no trivial cases, no tests for stdlib behaviour, no production code complexity added solely for test scenarios
+  - [ ] All remaining tests pass after cleanup
+- **Implementation Notes:**
+  > _(Space for implementer notes)_
+
 ## Progress Tracker
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
-| Phase 1: Project Setup + Shared Library | In Progress | 2/4 | Tasks 1.1, 1.2 complete |
+| Phase 1: Project Setup + Shared Library | Complete | 4/4 | Tasks 1.1, 1.2, 1.3, 1.4 complete |
 | Phase 2: Reference Verifier | Not Started | 0/1 | |
 | Phase 3: Sample Manifest Generator | Not Started | 0/2 | |
 | Phase 4: Reference Fixer | Not Started | 0/3 | |
-| Phase 5: Usage Lookup + Makefile + Integration | Not Started | 0/3 | |
+| Phase 5: Usage Lookup + Makefile + Integration | Not Started | 0/4 | |
+
+## Change Log
+
+| Date | Change | Reason |
+|------|--------|--------|
+| 1 Apr 2026 | Renamed `SampleRef.instrument_name` → `preset_name`, removed `instrument_folder` / `preset_folder` | `preset_name` aligns with Deluge firmware XML attribute `presetName`. `preset_folder` was unused by any script |
+| 1 Apr 2026 | Changed `SampleRef.xml_file` from absolute to relative (relative to `DELUGE_ROOT`) | Absolute paths are machine-specific; all paths should be relative to `DELUGE_ROOT` |
+| 1 Apr 2026 | Added `deluge_root` parameter to `extract_sample_refs()` | Needed to compute relative `xml_file` paths |
+| 1 Apr 2026 | Removed `detect_xml_type()` content-based fallback; now raises `ValueError` on unknown paths | Content-based fallback was only needed for test fixtures. All real usage goes through `find_all_xml_files()` which guarantees valid paths |
+| 1 Apr 2026 | Moved test fixtures into `fixtures/KITS/`, `fixtures/SYNTHS/`, `fixtures/SONGS/` subdirectories | Required after removing content-based fallback — fixtures must be under valid directories for path-based detection |
+| 1 Apr 2026 | Added Sub-task 2.1.2: Unextracted Reference Detection | Safeguard against missed reference patterns from firmware updates or imported presets. Regex-scans raw XML for sample paths and compares against extracted refs |
+| 1 Apr 2026 | Created `docs/glossary.md` | Captures Deluge domain terminology and script terminology for consistency |

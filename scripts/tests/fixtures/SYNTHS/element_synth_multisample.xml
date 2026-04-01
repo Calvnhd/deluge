@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Test fixture: element-style synth with multisamples (pre-3.x firmware)
-     Covers: Pattern 1 — <fileName>text</fileName> element on <osc1>
-             Pattern 2 — <fileName>text</fileName> element within <sampleRange>
+     Covers: Pattern 2 — <fileName>text</fileName> element within <sampleRange>
      - osc1 uses <sampleRanges> with two <sampleRange> entries (multisample)
      - osc2 uses a non-sample oscillator type (no fileName)
      Note: Real element-style synths have <firmwareVersion> sibling elements that make the
