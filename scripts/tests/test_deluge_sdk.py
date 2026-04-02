@@ -1,11 +1,13 @@
 """Tests for deluge_sdk.py — XML discovery and reference extraction."""
 
+import shutil
 from pathlib import Path
 
 from lib.deluge_sdk import (
     detect_xml_type,
     extract_sample_refs,
     find_all_xml_files,
+    update_sample_refs,
 )
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -249,3 +251,242 @@ class TestPresetNameExtraction:
         refs = extract_sample_refs(FIXTURES_DIR / "KITS/empty_refs.xml", FIXTURES_DIR)
         assert len(refs) == 1
         assert refs[0].preset_name == "empty_refs"
+
+
+# --- update_sample_refs tests ---
+
+
+def _copy_fixture(fixture_rel: str, tmp_path: Path) -> Path:
+    """Copy a fixture file to tmp_path preserving directory structure."""
+    src = FIXTURES_DIR / fixture_rel
+    dest = tmp_path / fixture_rel
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, dest)
+    return dest
+
+
+class TestUpdateSampleRefsElementKit:
+    """Round-trip tests for element-style kit."""
+
+    def test_updates_targeted_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/element_kit.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        new_path = "SAMPLES/DRUMS/Kick/New Kick.wav"
+
+        count = update_sample_refs(xml_path, {target.path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_after) == len(refs_before)
+        assert any(r.path == new_path for r in refs_after)
+        assert not any(r.path == target.path for r in refs_after)
+
+    def test_leaves_other_refs_unchanged(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/element_kit.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        other_paths_before = {r.path for r in refs_before if r.path != target.path}
+
+        update_sample_refs(xml_path, {target.path: "SAMPLES/NEW.wav"})
+
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        other_paths_after = {r.path for r in refs_after if r.path != "SAMPLES/NEW.wav"}
+        assert other_paths_after == other_paths_before
+
+
+class TestUpdateSampleRefsElementSynth:
+    """Round-trip tests for element-style synth with multisamples."""
+
+    def test_updates_targeted_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("SYNTHS/element_synth_multisample.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        new_path = "SAMPLES/Artists/Replaced/new.wav"
+
+        count = update_sample_refs(xml_path, {target.path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_after) == len(refs_before)
+        assert any(r.path == new_path for r in refs_after)
+        assert not any(r.path == target.path for r in refs_after)
+
+    def test_leaves_other_refs_unchanged(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("SYNTHS/element_synth_multisample.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        other_paths_before = {r.path for r in refs_before if r.path != target.path}
+
+        update_sample_refs(xml_path, {target.path: "SAMPLES/NEW.wav"})
+
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        other_paths_after = {r.path for r in refs_after if r.path != "SAMPLES/NEW.wav"}
+        assert other_paths_after == other_paths_before
+
+
+class TestUpdateSampleRefsAttributeKit:
+    """Round-trip tests for attribute-style kit."""
+
+    def test_updates_targeted_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/attribute_kit.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        new_path = "SAMPLES/DRUMS/Kick/Replaced Kick.wav"
+
+        count = update_sample_refs(xml_path, {target.path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_after) == len(refs_before)
+        assert any(r.path == new_path for r in refs_after)
+        assert not any(r.path == target.path for r in refs_after)
+
+    def test_leaves_other_refs_unchanged(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/attribute_kit.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        other_paths_before = {r.path for r in refs_before if r.path != target.path}
+
+        update_sample_refs(xml_path, {target.path: "SAMPLES/NEW.wav"})
+
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        other_paths_after = {r.path for r in refs_after if r.path != "SAMPLES/NEW.wav"}
+        assert other_paths_after == other_paths_before
+
+
+class TestUpdateSampleRefsAttributeSynth:
+    """Round-trip tests for attribute-style synth with multisamples."""
+
+    def test_updates_targeted_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("SYNTHS/attribute_synth_multisample.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        new_path = "SAMPLES/Artists/Replaced/new bass.WAV"
+
+        count = update_sample_refs(xml_path, {target.path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_after) == len(refs_before)
+        assert any(r.path == new_path for r in refs_after)
+        assert not any(r.path == target.path for r in refs_after)
+
+    def test_leaves_other_refs_unchanged(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("SYNTHS/attribute_synth_multisample.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        target = refs_before[0]
+        other_paths_before = {r.path for r in refs_before if r.path != target.path}
+
+        update_sample_refs(xml_path, {target.path: "SAMPLES/NEW.wav"})
+
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        other_paths_after = {r.path for r in refs_after if r.path != "SAMPLES/NEW.wav"}
+        assert other_paths_after == other_paths_before
+
+
+class TestUpdateSampleRefsSong:
+    """Round-trip tests for song with embedded instruments and audioClip."""
+
+    def test_updates_filename_attribute_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("SONGS/song_with_clips.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        kick = [r for r in refs_before if "Rhythmace Kick" in r.path][0]
+        new_path = "SAMPLES/DRUMS/Kick/New Kick.wav"
+
+        count = update_sample_refs(xml_path, {kick.path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_after) == len(refs_before)
+        assert any(r.path == new_path for r in refs_after)
+        assert not any(r.path == kick.path for r in refs_after)
+
+    def test_updates_filepath_attribute_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("SONGS/song_with_clips.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        clip = [r for r in refs_before if "REC00040" in r.path][0]
+        new_path = "SAMPLES/CLIPS/REC99999.WAV"
+
+        count = update_sample_refs(xml_path, {clip.path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert any(r.path == new_path for r in refs_after)
+        assert not any(r.path == clip.path for r in refs_after)
+
+    def test_leaves_other_refs_unchanged(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("SONGS/song_with_clips.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        kick = [r for r in refs_before if "Rhythmace Kick" in r.path][0]
+        other_paths_before = {r.path for r in refs_before if r.path != kick.path}
+
+        update_sample_refs(xml_path, {kick.path: "SAMPLES/NEW.wav"})
+
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        other_paths_after = {r.path for r in refs_after if r.path != "SAMPLES/NEW.wav"}
+        assert other_paths_after == other_paths_before
+
+
+class TestUpdateSampleRefsEmptyRefs:
+    """Round-trip tests for empty_refs fixture (one valid ref among empties)."""
+
+    def test_updates_the_valid_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/empty_refs.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_before) == 1
+        new_path = "SAMPLES/DRUMS/Kick/Replaced.wav"
+
+        count = update_sample_refs(xml_path, {refs_before[0].path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_after) == 1
+        assert refs_after[0].path == new_path
+
+
+class TestUpdateSampleRefsUnextractedKit:
+    """Round-trip tests for unextracted_ref_kit fixture."""
+
+    def test_updates_normal_ref(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/unextracted_ref_kit.xml", tmp_path)
+        refs_before = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_before) == 1
+        new_path = "SAMPLES/DRUMS/Kick/ReplacedNormal.wav"
+
+        count = update_sample_refs(xml_path, {refs_before[0].path: new_path})
+
+        assert count == 1
+        refs_after = extract_sample_refs(xml_path, tmp_path)
+        assert len(refs_after) == 1
+        assert refs_after[0].path == new_path
+
+
+class TestUpdateSampleRefsNoMatch:
+    """Test that non-matching mappings produce no changes."""
+
+    def test_no_match_returns_zero(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/attribute_kit.xml", tmp_path)
+        mapping = {"NONEXISTENT/path.wav": "OTHER/path.wav"}
+
+        count = update_sample_refs(xml_path, mapping)
+
+        assert count == 0
+
+    def test_no_match_leaves_file_unchanged(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/attribute_kit.xml", tmp_path)
+        original_bytes = xml_path.read_bytes()
+        mapping = {"NONEXISTENT/path.wav": "OTHER/path.wav"}
+
+        update_sample_refs(xml_path, mapping)
+
+        assert xml_path.read_bytes() == original_bytes
+
+    def test_empty_mapping(self, tmp_path: Path) -> None:
+        xml_path = _copy_fixture("KITS/attribute_kit.xml", tmp_path)
+        original_bytes = xml_path.read_bytes()
+
+        count = update_sample_refs(xml_path, {})
+
+        assert count == 0
+        assert xml_path.read_bytes() == original_bytes

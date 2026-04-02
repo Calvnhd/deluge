@@ -365,32 +365,32 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 - **Description:** Add write capability to the SDK: update sample references in XML files while preserving format and structure.
 - **Outputs:** `update_sample_refs()` in `scripts/lib/deluge_sdk.py` with round-trip tests
 - **Acceptance Criteria:**
-  - [ ] `update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int` — update all matching refs in one file, return count updated
-  - [ ] Element-style `<fileName>`: updates element text content
-  - [ ] Attribute-style `fileName`: updates attribute value
-  - [ ] Attribute-style `filePath` on `<audioClip>`: updates attribute value
-  - [ ] Only modifies references where the current path matches a key in `mapping`
-  - [ ] Preserves original XML structure, attributes, and declaration
-  - [ ] Non-matching references are untouched
-  - [ ] **Round-trip tests** for every fixture: parse → update one ref → write → parse again → verify only the targeted ref changed
-  - [ ] Test with mapping containing paths not present in the file (no changes, no errors)
+  - [x] `update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int` — update all matching refs in one file, return count updated
+  - [x] Element-style `<fileName>`: updates element text content
+  - [x] Attribute-style `fileName`: updates attribute value
+  - [x] Attribute-style `filePath` on `<audioClip>`: updates attribute value
+  - [x] Only modifies references where the current path matches a key in `mapping`
+  - [x] Preserves original XML structure, attributes, and declaration
+  - [x] Non-matching references are untouched
+  - [x] **Round-trip tests** for every fixture: parse → update one ref → write → parse again → verify only the targeted ref changed
+  - [x] Test with mapping containing paths not present in the file (no changes, no errors)
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 2 Apr 2026. Three-phase in-place update mirroring `extract_sample_refs` structure: (1) `root.iter("fileName")` for element-style text content, (2) `root.iter(tag)` for osc1/osc2/sampleRange `fileName` attributes, (3) `root.iter("audioClip")` for `filePath` attributes. File only rewritten when `count > 0` to avoid unnecessary I/O. Uses `tree.write()` with `xml_declaration=True, encoding="UTF-8"`. 16 new tests across 7 test classes: round-trip tests for all 6 fixture directories (element_kit, element_synth_multisample, attribute_kit, attribute_synth_multisample, song_with_clips, empty_refs, unextracted_ref_kit) plus no-match and empty-mapping edge cases. 77 total tests passing, ruff clean.
 
 #### Task 3.2: `fix_references.py snapshot` Subcommand
 
 - **Description:** Hash all samples and save the state to a dated JSON snapshot file. Includes a self-contained `hash_file` function (chunked SHA256 hashing via `hashlib` stdlib — ~6 lines).
 - **Outputs:** `snapshot` subcommand in `scripts/fix_references.py`
 - **Acceptance Criteria:**
-  - [ ] `hash_file(path: Path) -> str` — chunked SHA256 hex digest, defined in `fix_references.py`
-  - [ ] Scans `DELUGE/SAMPLES/` for all `.wav`/`.WAV` files
-  - [ ] Computes SHA256 hash for each (via `hash_file`)
-  - [ ] Saves to `docs/manifests/snapshot-<YYYY-MM-DD>.json`
-  - [ ] Format: `{ "date": "...", "deluge_root": "...", "hashes": { "<hash>": ["<path>", ...], ... } }`
-  - [ ] Console: total files hashed, snapshot path, warnings for duplicate content (same hash, multiple paths)
-  - [ ] Creates `docs/manifests/` if needed
+  - [x] `hash_file(path: Path) -> str` — chunked SHA256 hex digest, defined in `fix_references.py`
+  - [x] Scans `DELUGE/SAMPLES/` for all `.wav`/`.WAV` files
+  - [x] Computes SHA256 hash for each (via `hash_file`)
+  - [x] Saves to `docs/manifests/snapshot-<YYYY-MM-DD>.json`
+  - [x] Format: `{ "date": "...", "deluge_root": "...", "hashes": { "<hash>": ["<path>", ...], ... } }`
+  - [x] Console: total files hashed, snapshot path, warnings for duplicate content (same hash, multiple paths)
+  - [x] Creates `docs/manifests/` if needed
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 2 Apr 2026. Created `scripts/fix_references.py` with `hash_file()` (chunked SHA256, 64 KiB reads), `_find_wav_files()` (case-insensitive `.wav` scan via `suffix.upper()`), and `snapshot()` function. Argparse structure set up with `snapshot` and `fix` subcommands (`fix` raises `SystemExit` as placeholder for Task 3.3). `snapshot()` accepts optional `output_dir` parameter for testability — defaults to `<repo_root>/docs/manifests/` via `_default_manifests_dir()`. Uses `main(argv)` entry point per Python Core Standard. 17 new tests in `test_fix_references.py` covering: hash correctness, case-insensitive WAV discovery, JSON structure, snapshot filename, relative paths, duplicate hash grouping and warnings, console summary, directory creation, empty/missing SAMPLES, and CLI subcommands. 94 total tests passing, ruff clean.
 
 #### Task 3.3: `fix_references.py fix` Subcommand
 
@@ -401,54 +401,54 @@ All scripts load `DELUGE_ROOT` from `scripts/.env` using `python-dotenv`, fallin
 
 - **Description:** Build the migration map from before-snapshot vs current filesystem.
 - **Acceptance Criteria:**
-  - [ ] Load before-snapshot from `--snapshot <path>`
-  - [ ] Hash all current samples to build "after" state
-  - [ ] Compare hashes: for each hash present in both, map old path(s) to new path(s)
-  - [ ] Categorise results: **moved** (1 old → 1 new, fixable), **deleted** (in before, not in after), **added** (in after, not in before), **ambiguous** (1 hash → multiple paths in before or after)
-  - [ ] Migration map: `dict[str, str]` — `{ old_path: new_path }` for unambiguous moves
+  - [x] Load before-snapshot from `--snapshot <path>`
+  - [x] Hash all current samples to build "after" state
+  - [x] Compare hashes: for each hash present in both, map old path(s) to new path(s)
+  - [x] Categorise results: **moved** (1 old → 1 new, fixable), **deleted** (in before, not in after), **added** (in after, not in before), **ambiguous** (1 hash → multiple paths in before or after)
+  - [x] Migration map: `dict[str, str]` — `{ old_path: new_path }` for unambiguous moves
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 2 Apr 2026. Added `MigrationResult` dataclass (fields: `moved`, `deleted`, `added`, `ambiguous`) and `compute_migration_map(before_snapshot, deluge_root)` to `fix_references.py`. Function takes parsed snapshot dict and DELUGE_ROOT, builds "after" state using existing `hash_file()` and `_find_wav_files()`, then categorises every hash. Unchanged files (same hash, same path) are silently skipped. 10 new tests in `TestComputeMigrationMap` covering: simple move, deleted, added, ambiguous (multiple before paths, multiple after paths), unchanged, empty states, multiple independent moves, and mixed categories. 104 total tests passing, ruff clean.
 
 ##### Sub-task 3.3.2: Broken Reference Detection
 
 - **Description:** Find XML references that need updating or are broken.
 - **Acceptance Criteria:**
-  - [ ] Extract all sample refs from all XMLs
-  - [ ] For each ref: if path is in migration map → **planned change** (old → new)
-  - [ ] For each ref: if path is in "deleted" set → **error** (file removed but still referenced)
-  - [ ] For each ref: if path is in "ambiguous" set → **warning** (cannot auto-resolve)
-  - [ ] Build structured results separating fixable changes, errors, and ambiguous warnings
+  - [x] Extract all sample refs from all XMLs
+  - [x] For each ref: if path is in migration map → **planned change** (old → new)
+  - [x] For each ref: if path is in "deleted" set → **error** (file removed but still referenced)
+  - [x] For each ref: if path is in "ambiguous" set → **warning** (cannot auto-resolve)
+  - [x] Build structured results separating fixable changes, errors, and ambiguous warnings
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Completed 2 Apr 2026. Added four dataclasses (`PlannedChange`, `BrokenRefError`, `AmbiguousRefWarning`, `BrokenRefResult`) and `detect_broken_refs(migration, deluge_root)` to `fix_references.py`. The function flattens `MigrationResult.deleted` values and `MigrationResult.ambiguous` before-paths into lookup sets, then iterates all XML refs via `find_all_xml_files()` + `extract_sample_refs()`, classifying each ref by priority: moved → deleted → ambiguous. Valid refs (not in any set) are omitted. 8 new tests in `TestDetectBrokenRefs` covering: planned change, deleted error, ambiguous warning, valid ref exclusion, multiple refs across multiple XMLs, empty result, SampleRef metadata propagation, and multiple deleted paths per hash. 112 total tests passing, ruff clean.
 
 ##### Sub-task 3.3.3: Preview and Confirm Workflow
 
 - **Description:** Display all changes and errors, then prompt for confirmation per D5.
 - **Acceptance Criteria:**
-  - [ ] Preview changes grouped by XML file: `file.XML: "old/path" → "new/path"` (× N refs)
-  - [ ] Errors displayed prominently (section header: "ERRORS — Requires Manual Resolution")
-  - [ ] Ambiguous warnings displayed with context (which paths share the hash)
-  - [ ] Summary line: "N changes across M files. X errors, Y warnings."
-  - [ ] If errors exist: additional warning recommending resolution before applying
-  - [ ] Prompt: `"Apply N changes to M files? [y/N]:"` — or skip prompt if `--apply`
-  - [ ] On confirm: apply via `deluge_sdk.update_sample_refs()` for each affected XML file
-  - [ ] On decline: `"No changes applied."`
-  - [ ] Post-apply summary: files modified, total references updated
+  - [x] Preview changes grouped by XML file: `file.XML: "old/path" → "new/path"` (× N refs)
+  - [x] Errors displayed prominently (section header: "ERRORS — Requires Manual Resolution")
+  - [x] Ambiguous warnings displayed with context (which paths share the hash)
+  - [x] Summary line: "N changes across M files. X errors, Y warnings."
+  - [x] If errors exist: additional warning recommending resolution before applying
+  - [x] Prompt: `"Apply N changes to M files? [y/N]:"` — or skip prompt if `--apply`
+  - [x] On confirm: apply via `deluge_sdk.update_sample_refs()` for each affected XML file
+  - [x] On decline: `"No changes applied."`
+  - [x] Post-apply summary: files modified, total references updated
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Added `preview_and_apply()` function to `fix_references.py`. Takes `BrokenRefResult`, `deluge_root`, and `auto_apply` flag. Groups `PlannedChange` items by `ref.xml_file`, deduplicates same old→new pairs per file with count display. Wired the `fix` subcommand in `main()` to call `compute_migration_map` → `detect_broken_refs` → `preview_and_apply`. Uses `confirm_apply()` from `cli_utils.py` for the prompt. Updated existing "not yet implemented" test to verify snapshot-file-not-found error. 12 new tests in `TestPreviewAndApply` class (124 total).
 
 ##### Sub-task 3.3.4: CLI Entry Point with Subcommands
 
 - **Description:** Wire up argparse with `snapshot` and `fix` subcommands.
 - **Acceptance Criteria:**
-  - [ ] `fix_references.py snapshot` — runs snapshot
-  - [ ] `fix_references.py fix --snapshot <path>` — runs fix with before-snapshot
-  - [ ] `fix_references.py fix --snapshot <path> --apply` — fix and apply without prompt
-  - [ ] Missing `--snapshot` on `fix` → clear error message
-  - [ ] `--help` and per-subcommand help text
-  - [ ] Exit code 0 = success (changes applied or nothing to do), exit code 1 = errors found
+  - [x] `fix_references.py snapshot` — runs snapshot
+  - [x] `fix_references.py fix --snapshot <path>` — runs fix with before-snapshot
+  - [x] `fix_references.py fix --snapshot <path> --apply` — fix and apply without prompt
+  - [x] Missing `--snapshot` on `fix` → clear error message
+  - [x] `--help` and per-subcommand help text
+  - [x] Exit code 0 = success (changes applied or nothing to do), exit code 1 = errors found
 - **Implementation Notes:**
-  > _(Space for implementer notes)_
+  > Changed `preview_and_apply()` return type from `None` to `bool` — returns `True` when `BrokenRefError` items exist. `main()` checks the return value and raises `SystemExit(1)` when errors are found. Snapshot subcommand always exits 0. argparse `required=True` on `--snapshot` already produced clear error messages; help text verified working via argparse auto-generation. 7 new tests: 3 in `TestPreviewAndApply` (return value correctness) + 4 in new `TestMainExitCodes` class (exit codes through `main()`). 131 total tests.
 
 ---
 
@@ -499,7 +499,7 @@ The following components were removed from the active plan based on an independe
 |-------|--------|---------------|-------|
 | Phase 1: Project Setup + Shared Library | Complete | 4/4 | Tasks 1.1, 1.2, 1.3, 1.4 complete |
 | Phase 2: Reference Verifier | Complete | 1/1 | Sub-tasks 2.1.1–2.1.4 complete |
-| Phase 3: Reference Fixer | Not Started | 0/3 | Was Phase 4; renumbered after scope reduction (D15) |
+| Phase 3: Reference Fixer | Complete | 3/3 | Tasks 3.1, 3.2, 3.3 complete. Sub-tasks 3.3.1–3.3.4 all complete. Was Phase 4; renumbered after scope reduction (D15) |
 | Phase 4: Integration Verification + Test Cleanup | Not Started | 0/2 | Simplified from old Phase 5; dropped sample_usage.py and Makefile |
 
 ## Change Log
