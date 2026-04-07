@@ -89,6 +89,8 @@ Detailed technical design covering:
 - Key design patterns used
 - File and directory structure (planned layout)
 
+**Boundary:** This section describes architecture in prose — module responsibilities, data flows, and relationships between components. It must not contain code blocks, class definitions, method signatures, type annotations, or implementation-level detail. For example, write "each broken reference carries its source XML file, preset name, and sample path" rather than defining a dataclass or typed interface. The implementer decides how to express designs in code.
+
 #### 5c. Interface Design
 
 - **Inputs** — CLI arguments, config, environment variables, file inputs

@@ -2,7 +2,7 @@
 
 Back-up and management scripts for a [Synthstrom Deluge](https://synthstrom.com/product/deluge/) SD card.
 
-XML presets for kits, synths, and songs are backed up in version control. Audio samples are gitignored and synced to cloud backup via scripts.
+XML presets for kits, synths, and songs are backed up in version control. Due to their size, samples are gitignored and synced to cloud backup via scripts.
 
 > **Note:** This repository is a work in progress. Some folders (e.g. `scripts/`) may be empty or incomplete.
 
@@ -38,10 +38,21 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 
 All scripts read configuration from `scripts/.env`
 
+### `sync_from_sd.py`
+
+Syncs the mounted SD card into the local `DELUGE/` directory so it mirrors the card exactly. The SD card is never modified — all changes flow one way (SD card → repo).
+
+**Usage** (run from the `scripts/` directory):
+
+```
+python sync_from_sd.py            # preview changes, then prompt to apply
+python sync_from_sd.py --dry-run  # preview only, no changes
+python sync_from_sd.py --confirm  # skip preview, go straight to confirmation
+```
+
 ### Ideas
 
 - Creates a complete backup of the SD card as a `.zip` file 
-- Sync SD card contents to this repository
 - Sync the local gitignored `SAMPLES` folder to a another cloud-synced folder for back-up
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference

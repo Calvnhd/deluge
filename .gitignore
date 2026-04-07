@@ -15,6 +15,7 @@ downloads/
 eggs/
 .eggs/
 lib/
+!scripts/lib/  # un-ignore project code
 lib64/
 parts/
 sdist/
