@@ -1,0 +1,235 @@
+"""Deluge SDK — XML discovery, reference extraction, and in-place updating."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+
+from lxml import etree
+
+# The three standard Deluge SD card subdirectories containing XML presets.
+_DELUGE_SUBDIRS = ("KITS", "SYNTHS", "SONGS")
+
+# Tag-to-type mapping for path-based XML type detection.
+_PATH_TYPE_MAP = {"KITS": "kit", "SYNTHS": "synth", "SONGS": "song"}
+
+# Tags that carry element-style or attribute-style fileName references.
+_OSC_AND_RANGE_TAGS = ("osc1", "osc2", "sampleRange")
+
+
+@dataclass
+class SampleRef:
+    """A single sample reference found in a Deluge XML file."""
+
+    # Sample path as written in the XML, relative to DELUGE/ (e.g. "SAMPLES/DRUMS/Kick/808 Kick.wav")
+    path: str
+    # Path to the XML file containing this reference, relative to DELUGE_ROOT (e.g. "KITS/KIT001.XML")
+    xml_file: Path
+    # Type of the XML file: "kit", "synth", or "song"
+    xml_type: str
+    # Name of the preset/track containing this reference:
+    #   Standalone kit/synth: XML filename without extension (e.g. "KIT001")
+    #   Song-embedded kit/synth: presetName attribute (e.g. "K01Perc2")
+    #   Song audioClip: trackName attribute (e.g. "AUDIO2")
+    preset_name: str
+    # XML format of the reference: "fileName-element", "fileName-attribute", or "filePath-attribute"
+    ref_type: str
+    # XML element holding the reference: "osc1", "osc2", "sampleRange", or "audioClip"
+    element_tag: str
+
+
+def find_all_xml_files(deluge_root: Path) -> list[Path]:
+    """Recursively find all XML files in KITS/, SYNTHS/, SONGS/ under *deluge_root*.
+
+    Returns a sorted list of absolute paths.  Missing subdirectories are skipped.
+    """
+    results: list[Path] = []
+    for subdir in _DELUGE_SUBDIRS:
+        d = deluge_root / subdir
+        if not d.is_dir():
+            continue
+        for f in d.rglob("*"):
+            if f.is_file() and f.suffix.upper() == ".XML":
+                results.append(f)
+    return sorted(results)
+
+
+def detect_xml_type(xml_path: Path) -> str:
+    """Determine the Deluge XML type from the file's path.
+
+    Returns ``"kit"``, ``"synth"``, or ``"song"``.
+    Raises :class:`ValueError` if the path does not contain a recognised directory.
+    """
+    parts = xml_path.parts
+    for part in parts:
+        if part in _PATH_TYPE_MAP:
+            return _PATH_TYPE_MAP[part]
+    msg = f"{xml_path} does not contain KITS, SYNTHS, or SONGS in its path"
+    raise ValueError(msg)
+
+
+def _get_preset_name(
+    element: etree._Element,
+    xml_type: str,
+    xml_path: Path,
+) -> str:
+    """Walk up the element tree to determine the preset/instrument name.
+
+    - **Standalone presets** (kit/synth outside a song): use ``xml_path.stem``.
+    - **Song-embedded instruments**: walk up until we find the element whose
+      parent is ``<instruments>``, then read its ``presetName`` attribute.
+    - **audioClip**: use the ``trackName`` attribute on the element itself.
+    """
+    if element.tag == "audioClip":
+        return element.get("trackName", "unknown")
+
+    if xml_type != "song":
+        return xml_path.stem
+
+    # Song-embedded instrument: walk up to find the instrument element
+    # (direct child of <instruments>).
+    current: etree._Element | None = element
+    while current is not None:
+        parent = current.getparent()
+        if parent is not None and parent.tag == "instruments":
+            name = current.get("presetName")
+            return name if name else "unknown"
+        current = parent
+
+    return "unknown"
+
+
+def extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]:
+    """Extract all sample references from a single Deluge XML file.
+
+    Handles all 5 reference patterns:
+
+    1. ``<fileName>text</fileName>`` element on ``<osc1>``/``<osc2>`` (element-style)
+    2. ``<fileName>text</fileName>`` element within ``<sampleRange>`` (element-style)
+    3. ``fileName="..."`` attribute on ``<osc1>``/``<osc2>`` (attribute-style)
+    4. ``fileName="..."`` attribute on ``<sampleRange>`` (attribute-style)
+    5. ``filePath="..."`` attribute on ``<audioClip>`` (songs only)
+
+    The ``xml_file`` field on each :class:`SampleRef` is stored as a path
+    relative to *deluge_root*.  Empty references are skipped.
+    """
+    tree = etree.parse(xml_path)  # noqa: S320
+    root = tree.getroot()
+    xml_type = detect_xml_type(xml_path)
+    xml_rel = xml_path.relative_to(deluge_root)
+    refs: list[SampleRef] = []
+
+    # Phase 1: element-style <fileName>text</fileName>
+    for fn_el in root.iter("fileName"):
+        text = fn_el.text
+        if not text:
+            continue
+        parent = fn_el.getparent()
+        if parent is None:
+            continue
+        tag = parent.tag
+        if tag not in _OSC_AND_RANGE_TAGS:
+            continue
+        preset_name = _get_preset_name(fn_el, xml_type, xml_path)
+        refs.append(
+            SampleRef(
+                path=text,
+                xml_file=xml_rel,
+                xml_type=xml_type,
+                preset_name=preset_name,
+                ref_type="fileName-element",
+                element_tag=tag,
+            )
+        )
+
+    # Phase 2: attribute-style fileName="..." on osc1/osc2/sampleRange
+    for tag in _OSC_AND_RANGE_TAGS:
+        for el in root.iter(tag):
+            value = el.get("fileName")
+            if not value:
+                continue
+            preset_name = _get_preset_name(el, xml_type, xml_path)
+            refs.append(
+                SampleRef(
+                    path=value,
+                    xml_file=xml_rel,
+                    xml_type=xml_type,
+                    preset_name=preset_name,
+                    ref_type="fileName-attribute",
+                    element_tag=tag,
+                )
+            )
+
+    # Phase 3: attribute-style filePath="..." on audioClip
+    for clip_el in root.iter("audioClip"):
+        value = clip_el.get("filePath")
+        if not value:
+            continue
+        preset_name = _get_preset_name(clip_el, xml_type, xml_path)
+        refs.append(
+            SampleRef(
+                path=value,
+                xml_file=xml_rel,
+                xml_type=xml_type,
+                preset_name=preset_name,
+                ref_type="filePath-attribute",
+                element_tag="audioClip",
+            )
+        )
+
+    return refs
+
+
+def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
+    """Update sample references in *xml_path* according to *mapping*.
+
+    For each reference whose current path appears as a key in *mapping*, the
+    value is written as the new path.  The file is only rewritten when at least
+    one reference was changed.
+
+    Returns the number of references updated.
+    """
+    if not mapping:
+        return 0
+
+    tree = etree.parse(xml_path)  # noqa: S320
+    root = tree.getroot()
+    count = 0
+
+    # Phase 1: element-style <fileName>text</fileName>
+    for fn_el in root.iter("fileName"):
+        text = fn_el.text
+        if not text:
+            continue
+        parent = fn_el.getparent()
+        if parent is None:
+            continue
+        if parent.tag not in _OSC_AND_RANGE_TAGS:
+            continue
+        if text in mapping:
+            fn_el.text = mapping[text]
+            count += 1
+
+    # Phase 2: attribute-style fileName="..." on osc1/osc2/sampleRange
+    for tag in _OSC_AND_RANGE_TAGS:
+        for el in root.iter(tag):
+            value = el.get("fileName")
+            if not value:
+                continue
+            if value in mapping:
+                el.set("fileName", mapping[value])
+                count += 1
+
+    # Phase 3: attribute-style filePath="..." on audioClip
+    for clip_el in root.iter("audioClip"):
+        value = clip_el.get("filePath")
+        if not value:
+            continue
+        if value in mapping:
+            clip_el.set("filePath", mapping[value])
+            count += 1
+
+    if count > 0:
+        tree.write(xml_path, xml_declaration=True, encoding="UTF-8")
+
+    return count
