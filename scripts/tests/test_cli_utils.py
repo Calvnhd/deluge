@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 import pytest
 
-from lib.cli_utils import confirm_apply, get_deluge_root
+from deluge_lib.cli_utils import confirm_apply, get_deluge_root
 
 
 class TestGetDelugeRoot:
@@ -18,14 +18,14 @@ class TestGetDelugeRoot:
         deluge_dir = tmp_path / "DELUGE"
         deluge_dir.mkdir()
         monkeypatch.setenv("DELUGE_ROOT", str(deluge_dir))
-        with patch("lib.cli_utils.load_dotenv"):
+        with patch("deluge_lib.cli_utils.load_dotenv"):
             result = get_deluge_root()
         assert result == deluge_dir
 
     def test_system_exit_when_unset(self, monkeypatch: pytest.MonkeyPatch) -> None:
         """Raises SystemExit when DELUGE_ROOT is not set."""
         monkeypatch.delenv("DELUGE_ROOT", raising=False)
-        with patch("lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="DELUGE_ROOT is not set"):
+        with patch("deluge_lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="DELUGE_ROOT is not set"):
             get_deluge_root()
 
     def test_system_exit_on_missing_directory(
@@ -33,7 +33,7 @@ class TestGetDelugeRoot:
     ) -> None:
         """Raises SystemExit when resolved directory doesn't exist."""
         monkeypatch.setenv("DELUGE_ROOT", str(tmp_path / "nonexistent"))
-        with patch("lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="does not exist"):
+        with patch("deluge_lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="does not exist"):
             get_deluge_root()
 
     def test_relative_path_resolved_to_absolute(
@@ -44,7 +44,7 @@ class TestGetDelugeRoot:
         deluge_dir.mkdir()
         monkeypatch.chdir(tmp_path)
         monkeypatch.setenv("DELUGE_ROOT", "./DELUGE")
-        with patch("lib.cli_utils.load_dotenv"):
+        with patch("deluge_lib.cli_utils.load_dotenv"):
             result = get_deluge_root()
         assert result == deluge_dir.resolve()
 

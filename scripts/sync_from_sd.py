@@ -11,7 +11,7 @@ import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
+from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
 
 # FAT32 has 2-second mtime resolution — allow tolerance when comparing timestamps.
 _MTIME_TOLERANCE_S = 2.0

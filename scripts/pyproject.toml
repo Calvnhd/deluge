@@ -39,7 +39,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["lib"]
+known-first-party = ["deluge_lib"]
 
 [tool.ruff.format]
 quote-style = "double"

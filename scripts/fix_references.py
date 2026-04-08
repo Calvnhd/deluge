@@ -10,8 +10,13 @@ from datetime import date
 from pathlib import Path
 from typing import Any
 
-from lib.cli_utils import confirm_apply, get_deluge_root
-from lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files, update_sample_refs
+from deluge_lib.cli_utils import confirm_apply, get_deluge_root
+from deluge_lib.deluge_sdk import (
+    SampleRef,
+    extract_sample_refs,
+    find_all_xml_files,
+    update_sample_refs,
+)
 
 # 64 KiB read chunks for hashing large WAV files
 _HASH_CHUNK_SIZE = 65536

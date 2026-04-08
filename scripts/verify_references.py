@@ -8,8 +8,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import NamedTuple
 
-from lib.cli_utils import get_deluge_root
-from lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files
+from deluge_lib.cli_utils import get_deluge_root
+from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files
 
 # Regex to find sample paths in raw XML text. Case-insensitive.
 # Matches paths like SAMPLES/any/path.wav (possibly inside quotes or element text).

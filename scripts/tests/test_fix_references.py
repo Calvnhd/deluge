@@ -22,7 +22,7 @@ from fix_references import (
     snapshot,
 )
 
-from lib.deluge_sdk import SampleRef
+from deluge_lib.deluge_sdk import SampleRef
 
 
 class TestHashFile:

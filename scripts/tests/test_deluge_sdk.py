@@ -3,7 +3,7 @@
 import shutil
 from pathlib import Path
 
-from lib.deluge_sdk import (
+from deluge_lib.deluge_sdk import (
     detect_xml_type,
     extract_sample_refs,
     find_all_xml_files,

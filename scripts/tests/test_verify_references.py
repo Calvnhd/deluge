@@ -11,7 +11,7 @@ from verify_references import (
     main,
 )
 
-from lib.deluge_sdk import SampleRef
+from deluge_lib.deluge_sdk import SampleRef
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
@@ -220,7 +220,7 @@ class TestFindUnextractedRefs:
 
     def test_with_fixture(self) -> None:
         """Integration test using the unextracted_ref_kit fixture."""
-        from lib.deluge_sdk import extract_sample_refs
+        from deluge_lib.deluge_sdk import extract_sample_refs
 
         fixture = FIXTURES_DIR / "KITS" / "unextracted_ref_kit.xml"
         extracted = extract_sample_refs(fixture, FIXTURES_DIR)
