@@ -117,6 +117,17 @@ The plan is a living document. The following elements support updates during imp
 - Modifying existing code or files (other than creating the plan document)
 - Modifying the research document
 
+## No Code in Plans
+
+Plan documents must not contain code blocks that prescribe implementation. This includes class definitions, dataclass declarations, method signatures, type annotations, function stubs, and import statements. The plan describes *what* — data flows, responsibilities, inputs and outputs, and behavioural constraints — in prose. The implementer decides *how* to express those designs in code.
+
+The only permitted code blocks in a plan are:
+- CLI usage examples illustrating the user-facing interface (e.g., `script.py --dry-run`)
+- Short command invocations for tooling setup (e.g., `uv init`)
+- File path or directory structure illustrations
+
+If a design involves structured data, describe the fields and their purpose in prose or a table — do not write a class or dataclass definition.
+
 ## Quality Rules
 
 1. **Traceability** — Every decision must reference its basis (research finding, user answer, standard, or best practice)

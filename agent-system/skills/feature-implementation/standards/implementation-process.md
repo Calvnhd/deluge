@@ -148,6 +148,26 @@ Per `standards/project.md`:
 - Implement error handling as specified in the plan's Interface Design
 - Write tests if the plan specifies a testing approach
 
+### Simplicity
+
+The implementer owns implementation decisions. When the plan describes something that could be expressed more simply in code, simplify it — the plan describes *what*, not *how*.
+
+**Data modelling:**
+- Prefer built-in types and standard library types over single-field or two-field wrapper classes
+- Only create a custom type when there are 3+ fields or it has behaviour beyond data storage
+- Do not wrap a standard collection in a class just to add one computed property
+
+**Testing:**
+- Tests must cover behaviour, not implementation structure. If removing a test would not let a bug through, the test should not exist.
+- Do not test standard library behaviour
+- Do not write multiple tests for a trivial function — one test that exercises the meaningful behaviour is enough
+- Prioritise tests at system boundaries (CLI entry points, file I/O, parsing) over internal helpers
+
+**General:**
+- Prioritise accuracy, safety, and reliability — but achieve them with the simplest correct solution
+- Do not add abstraction layers, registries, or plugin architectures unless the plan explicitly requires extensibility
+- A function that could be a plain loop should be a plain loop, not a pipeline of map/filter/reduce with helper lambdas
+
 ## Plan Re-Review
 
 ### When to Trigger

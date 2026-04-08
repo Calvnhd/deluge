@@ -277,6 +277,21 @@ def find_broken_references(kit_path: Path, samples_dir: Path) -> list[str]:
 
 ---
 
+## Simplicity
+
+Python-specific guidance extending the general simplicity rules in the implementation process standard.
+
+### Data Modelling
+
+- Prefer `str`, `list`, `dict`, `tuple`, `NamedTuple` over single-field dataclasses
+- Only create a `dataclass` when there are 3+ fields or the type has behaviour beyond data storage
+
+### Testing
+
+- Do not test stdlib behaviour (e.g. that `sorted()` sorts, that `Path.exists()` works)
+
+---
+
 ## Import Organisation
 
 Ruff handles import sorting automatically. Manual organisation:

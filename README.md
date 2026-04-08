@@ -2,7 +2,7 @@
 
 Back-up and management scripts for a [Synthstrom Deluge](https://synthstrom.com/product/deluge/) SD card.
 
-XML presets for kits, synths, and songs are backed up in version control. Audio samples are gitignored and synced to cloud backup via scripts.
+XML presets for kits, synths, and songs are backed up in version control. Due to their size, samples are gitignored and synced to cloud backup via scripts.
 
 > **Note:** This repository is a work in progress. Some folders (e.g. `scripts/`) may be empty or incomplete.
 
@@ -34,14 +34,43 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 
 ## Scripts
 
-### Config
+### Setup
 
-All scripts read configuration from `scripts/.env`
+Scripts require **Python 3.12+**. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) to manage Python and dependencies:
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+On Windows (PowerShell):
+
+```
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Copy the example config and set paths for your machine:
+
+```
+cp scripts/.env.example scripts/.env
+```
+
+All scripts read configuration from `scripts/.env`. See `.env.example` for available options.
+
+### `sync_from_sd.py`
+
+Syncs the mounted SD card into the local `DELUGE/` directory so it mirrors the card exactly. The SD card is never modified — all changes flow one way (SD card → repo).
+
+**Usage** (run from the `scripts/` directory):
+
+```
+uv run sync_from_sd.py            # preview changes, then prompt to apply
+uv run sync_from_sd.py --dry-run  # preview only, no changes
+uv run sync_from_sd.py --confirm  # skip preview, go straight to confirmation
+```
 
 ### Ideas
 
 - Creates a complete backup of the SD card as a `.zip` file 
-- Sync SD card contents to this repository
 - Sync the local gitignored `SAMPLES` folder to a another cloud-synced folder for back-up
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference
