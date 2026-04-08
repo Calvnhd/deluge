@@ -22,15 +22,11 @@ class TestGetDelugeRoot:
             result = get_deluge_root()
         assert result == deluge_dir
 
-    def test_fallback_when_unset(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-        """Falls back to <repo_root>/DELUGE when DELUGE_ROOT is not set."""
-        deluge_dir = tmp_path / "DELUGE"
-        deluge_dir.mkdir()
+    def test_system_exit_when_unset(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        """Raises SystemExit when DELUGE_ROOT is not set."""
         monkeypatch.delenv("DELUGE_ROOT", raising=False)
-        monkeypatch.setattr("lib.cli_utils._REPO_ROOT", tmp_path)
-        with patch("lib.cli_utils.load_dotenv"):
-            result = get_deluge_root()
-        assert result == deluge_dir
+        with patch("lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="DELUGE_ROOT is not set"):
+            get_deluge_root()
 
     def test_system_exit_on_missing_directory(
         self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
@@ -40,14 +36,14 @@ class TestGetDelugeRoot:
         with patch("lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="does not exist"):
             get_deluge_root()
 
-    def test_relative_path_resolved_against_repo_root(
+    def test_relative_path_resolved_to_absolute(
         self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     ) -> None:
-        """Relative DELUGE_ROOT is resolved against repo root."""
+        """Relative DELUGE_ROOT is resolved to absolute via CWD."""
         deluge_dir = tmp_path / "DELUGE"
         deluge_dir.mkdir()
+        monkeypatch.chdir(tmp_path)
         monkeypatch.setenv("DELUGE_ROOT", "./DELUGE")
-        monkeypatch.setattr("lib.cli_utils._REPO_ROOT", tmp_path)
         with patch("lib.cli_utils.load_dotenv"):
             result = get_deluge_root()
         assert result == deluge_dir.resolve()

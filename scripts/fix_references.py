@@ -383,7 +383,6 @@ def main(argv: list[str] | None = None) -> None:
         help="Hash all samples and save a dated JSON snapshot.",
     )
 
-    # fix subcommand (placeholder — implemented in Task 3.3)
     fix_parser = subparsers.add_parser(
         "fix",
         help="Fix broken references using a before-snapshot.",
