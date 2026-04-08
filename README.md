@@ -34,9 +34,27 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 
 ## Scripts
 
-### Config
+### Setup
 
-All scripts read configuration from `scripts/.env`
+Scripts require **Python 3.12+**. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) to manage Python and dependencies:
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+On Windows (PowerShell):
+
+```
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Copy the example config and set paths for your machine:
+
+```
+cp scripts/.env.example scripts/.env
+```
+
+All scripts read configuration from `scripts/.env`. See `.env.example` for available options.
 
 ### `sync_from_sd.py`
 
@@ -45,9 +63,9 @@ Syncs the mounted SD card into the local `DELUGE/` directory so it mirrors the c
 **Usage** (run from the `scripts/` directory):
 
 ```
-python sync_from_sd.py            # preview changes, then prompt to apply
-python sync_from_sd.py --dry-run  # preview only, no changes
-python sync_from_sd.py --confirm  # skip preview, go straight to confirmation
+uv run sync_from_sd.py            # preview changes, then prompt to apply
+uv run sync_from_sd.py --dry-run  # preview only, no changes
+uv run sync_from_sd.py --confirm  # skip preview, go straight to confirmation
 ```
 
 ### Ideas
