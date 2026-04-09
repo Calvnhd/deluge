@@ -1,8 +1,8 @@
 """Generic filtered file scanner with stat capture.
 
-Accepts any root directory and returns a case-normalised path dict plus
-a list of empty directories.  Only .xml and .wav files are yielded;
-.trash directories and symlinks are silently skipped.
+Accepts any root directory and returns a case-normalised path dict.
+Only .xml and .wav files are yielded; .trash directories and symlinks
+are silently skipped.
 """
 
 from __future__ import annotations
@@ -47,15 +47,13 @@ class ScanResult:
     Attributes:
         files: Mapping of normalised key (lowercase, forward-slash) to
             ``FileEntry`` containing the actual relative path, size, and mtime.
-        empty_dirs: Relative paths of empty directories found during the scan.
     """
 
     files: dict[str, FileEntry] = field(default_factory=dict)
-    empty_dirs: list[Path] = field(default_factory=list)
 
 
 def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> ScanResult:
-    """Walk *root* and collect filtered file entries and empty directories.
+    """Walk *root* and collect filtered file entries.
 
     Parameters
     ----------
@@ -72,7 +70,6 @@ def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> Sc
     ScanResult
         A dataclass containing:
         - ``files``: dict mapping normalised keys to ``FileEntry`` objects.
-        - ``empty_dirs``: list of relative ``Path`` objects for empty dirs.
     """
     result = ScanResult()
     file_count = 0
@@ -90,9 +87,6 @@ def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> Sc
             if d.lower() not in _SKIP_DIRS and not Path(dir_path / d).is_symlink()
         ]
 
-        # Track whether this directory has any qualifying content.
-        has_content = False
-
         for fname in filenames:
             file_path = dir_path / fname
 
@@ -103,8 +97,6 @@ def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> Sc
             ext = file_path.suffix.lower()
             if ext not in _ALLOWED_EXTENSIONS:
                 continue
-
-            has_content = True
 
             try:
                 st = file_path.stat()
@@ -121,14 +113,6 @@ def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> Sc
             file_count += 1
             if progress and file_count % _PROGRESS_INTERVAL == 0:
                 print(f"\rScanning {label}... {file_count} files", end="", flush=True)
-
-        # A directory is "empty" if it has no qualifying files AND no
-        # remaining subdirectories after pruning.
-        if not has_content and not dirnames:
-            rel_dir = dir_path.relative_to(root)
-            # Don't record the root itself as an empty directory.
-            if rel_dir != Path():
-                result.empty_dirs.append(rel_dir)
 
     if progress:
         print(f"\rScanning {label}... {file_count} files found.")

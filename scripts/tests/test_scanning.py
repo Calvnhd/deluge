@@ -121,28 +121,6 @@ class TestSymlinks:
         assert "link_dir/inside.xml" not in result.files
 
 
-# -- Empty directories -------------------------------------------------------
-
-
-class TestEmptyDirectories:
-    def test_empty_dir_detected(self, tmp_path: Path) -> None:
-        (tmp_path / "empty_kit").mkdir()
-        result = scan_tree(tmp_path, progress=False)
-        assert Path("empty_kit") in result.empty_dirs
-
-    def test_dir_with_files_not_empty(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "KITS" / "kit.xml")
-        result = scan_tree(tmp_path, progress=False)
-        assert result.empty_dirs == []
-
-    def test_dir_with_only_excluded_files_is_empty(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "junk_dir" / ".DS_Store")
-        result = scan_tree(tmp_path, progress=False)
-        # .DS_Store is excluded, so the directory has no qualifying content
-        # and no subdirs → counted as empty.
-        assert Path("junk_dir") in result.empty_dirs
-
-
 # -- Stat capture ------------------------------------------------------------
 
 

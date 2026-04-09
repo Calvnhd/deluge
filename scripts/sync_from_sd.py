@@ -31,23 +31,41 @@ class SyncPlan:
 
     files_to_copy: list[tuple[Path, Path]] = field(default_factory=list)
     files_to_delete: list[Path] = field(default_factory=list)
-    dirs_to_delete: list[Path] = field(default_factory=list)
-    dirs_to_create: list[Path] = field(default_factory=list)
     files_unchanged: int = 0
+
+
+class SyncError(Exception):
+    """Raised when a sync operation fails mid-execution.
+
+    Carries context about the failure: which file, what went wrong,
+    how many operations completed, and how many were left.
+    """
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        file: str,
+        copied: int = 0,
+        trashed: int = 0,
+        unchanged: int = 0,
+        remaining: int = 0,
+    ) -> None:
+        super().__init__(message)
+        self.file = file
+        self.copied = copied
+        self.trashed = trashed
+        self.unchanged = unchanged
+        self.remaining = remaining
 
 
 @dataclass
 class SyncResult:
-    """Outcome of executing a sync plan."""
+    """Outcome of executing a sync plan — counts only."""
 
-    success: bool
     copied: int = 0
-    dirs_created: int = 0
     trashed: int = 0
     unchanged: int = 0
-    error_file: str | None = None
-    error_message: str | None = None
-    remaining: int = 0
 
 
 _MTIME_TOLERANCE_S = 2.0
@@ -142,45 +160,6 @@ def compute_sync(
         if key not in src_scan.files:
             plan.files_to_delete.append(dest / dst_entry.rel_path)
 
-    # --- directories in dest not on source → trash ---
-    # Build the set of all directories implied by source files + empty dirs.
-    src_dir_keys: set[str] = set()
-    for src_entry in src_scan.files.values():
-        for parent in src_entry.rel_path.parents:
-            if parent != Path():
-                src_dir_keys.add(normalise_key(parent))
-    for empty_dir in src_scan.empty_dirs:
-        src_dir_keys.add(normalise_key(empty_dir))
-
-    # Build a map of all directories implied by dest files + empty dirs.
-    dst_dirs: dict[str, Path] = {}
-    for dst_entry in dst_scan.files.values():
-        for parent in dst_entry.rel_path.parents:
-            if parent != Path():
-                key = normalise_key(parent)
-                if key not in dst_dirs:
-                    dst_dirs[key] = dest / parent
-    for empty_dir in dst_scan.empty_dirs:
-        key = normalise_key(empty_dir)
-        if key not in dst_dirs:
-            dst_dirs[key] = dest / empty_dir
-
-    # Dirs in dest with no source equivalent, sorted deepest-first.
-    orphan_dirs = [dst_dirs[key] for key in dst_dirs if key not in src_dir_keys]
-    orphan_dirs.sort(key=lambda p: len(p.parts), reverse=True)
-    plan.dirs_to_delete = orphan_dirs
-
-    # --- empty dirs on source not in dest → create ---
-    dst_dir_keys: set[str] = set(dst_dirs.keys())
-    for dst_entry in dst_scan.files.values():
-        for parent in dst_entry.rel_path.parents:
-            if parent != Path():
-                dst_dir_keys.add(normalise_key(parent))
-    for empty_dir in src_scan.empty_dirs:
-        key = normalise_key(empty_dir)
-        if key not in dst_dir_keys:
-            plan.dirs_to_create.append(dest / empty_dir)
-
     return plan, src_scan
 
 
@@ -193,31 +172,24 @@ def print_plan(plan: SyncPlan, *, dest: Path) -> None:
         else:
             print(f"  copy    {rel}")
 
-    for path in plan.dirs_to_create:
-        print(f"  mkdir   {path.relative_to(dest)}/")
-
     for path in plan.files_to_delete:
         print(f"  trash   {path.relative_to(dest)}")
-    for path in plan.dirs_to_delete:
-        print(f"  trash   {path.relative_to(dest)}/")
 
     print()
     print(
         f"  {len(plan.files_to_copy)} to copy, "
-        f"{len(plan.dirs_to_create)} dirs to create, "
-        f"{len(plan.files_to_delete) + len(plan.dirs_to_delete)} to trash, "
+        f"{len(plan.files_to_delete)} to trash, "
         f"{plan.files_unchanged} unchanged"
     )
 
 
 def execute_plan(plan: SyncPlan, *, dest: Path) -> SyncResult:
-    """Execute the sync plan: copy files, rename, create dirs, trash extras.
+    """Execute the sync plan: copy files and trash extras.
 
-    Stops immediately on any failure and returns a SyncResult with
-    ``success=False``.  On success, returns a SyncResult with counts.
+    Raises ``SyncError`` on any failure. On success, returns a
+    ``SyncResult`` with counts.
     """
     copied = 0
-    dirs_created = 0
     total_copy = len(plan.files_to_copy)
 
     # --- copies ---
@@ -237,42 +209,19 @@ def execute_plan(plan: SyncPlan, *, dest: Path) -> SyncResult:
         print(f"  {exc}")
         print(f"  {copied}/{total_copy} files copied before failure")
         print(f"  {remaining} files remaining (unattempted)")
-        return SyncResult(
-            success=False,
+        raise SyncError(
+            str(exc),
+            file=str(src),
             copied=copied,
-            dirs_created=dirs_created,
             unchanged=plan.files_unchanged,
-            error_file=str(src),
-            error_message=str(exc),
             remaining=remaining,
-        )
+        ) from exc
     if total_copy:
         print()
 
-    # --- empty dirs ---
-    try:
-        for dir_path in plan.dirs_to_create:
-            dir_path.mkdir(parents=True, exist_ok=True)
-            dirs_created += 1
-    except OSError as exc:
-        print()
-        print(f"ERROR: Failed to create directory: {dir_path}")
-        print(f"  {exc}")
-        return SyncResult(
-            success=False,
-            copied=copied,
-            dirs_created=dirs_created,
-            unchanged=plan.files_unchanged,
-            error_file=str(dir_path),
-            error_message=str(exc),
-            remaining=len(plan.dirs_to_create) - dirs_created - 1,
-        )
-    if plan.dirs_to_create:
-        print(f"Created {dirs_created} empty directories.")
-
     # --- trash ---
     trashed = 0
-    trash_count = len(plan.files_to_delete) + len(plan.dirs_to_delete)
+    trash_count = len(plan.files_to_delete)
     if trash_count:
         trash_base = dest / _TRASH_DIR_NAME / datetime.now().strftime("%Y%m%d_%H%M%S")
         try:
@@ -282,49 +231,28 @@ def execute_plan(plan: SyncPlan, *, dest: Path) -> SyncResult:
                 trash_dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.move(str(path), str(trash_dest))
                 trashed += 1
-
-            for path in plan.dirs_to_delete:
-                if not path.is_dir():
-                    continue
-                if any(path.iterdir()):
-                    rel = path.relative_to(dest)
-                    trash_dest = trash_base / rel
-                    trash_dest.parent.mkdir(parents=True, exist_ok=True)
-                    shutil.move(str(path), str(trash_dest))
-                else:
-                    path.rmdir()
-                trashed += 1
         except OSError as exc:
             print()
             print(f"ERROR: Trash operation failed on: {path}")
             print(f"  {exc}")
-            return SyncResult(
-                success=False,
+            raise SyncError(
+                str(exc),
+                file=str(path),
                 copied=copied,
-                dirs_created=dirs_created,
                 trashed=trashed,
                 unchanged=plan.files_unchanged,
-                error_file=str(path),
-                error_message=str(exc),
                 remaining=trash_count - trashed - 1,
-            )
+            ) from exc
 
     return SyncResult(
-        success=True,
         copied=copied,
-        dirs_created=dirs_created,
         trashed=trashed,
         unchanged=plan.files_unchanged,
     )
 
 
 def _plan_is_empty(plan: SyncPlan) -> bool:
-    return (
-        not plan.files_to_copy
-        and not plan.dirs_to_create
-        and not plan.files_to_delete
-        and not plan.dirs_to_delete
-    )
+    return not plan.files_to_copy and not plan.files_to_delete
 
 
 def _build_post_sync_manifest(
@@ -378,6 +306,7 @@ def append_sync_log(
     result: SyncResult,
     *,
     elapsed_seconds: float,
+    error: str | None = None,
     log_path: Path | None = None,
 ) -> None:
     """Append a structured entry to the sync execution log."""
@@ -385,7 +314,7 @@ def append_sync_log(
         log_path = _default_log_path()
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
-    status = "SUCCESS" if result.success else "FAILED"
+    status = "FAILED" if error else "SUCCESS"
     elapsed_m = int(elapsed_seconds) // 60
     elapsed_s = int(elapsed_seconds) % 60
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -398,10 +327,9 @@ def append_sync_log(
         f.write(f"files_copied: {result.copied}\n")
         f.write(f"files_trashed: {result.trashed}\n")
         f.write(f"files_unchanged: {result.unchanged}\n")
-        f.write(f"dirs_created: {result.dirs_created}\n")
         f.write(f"elapsed: {elapsed_m}m {elapsed_s}s\n")
-        if not result.success and result.error_message:
-            f.write(f"error: {result.error_message}\n")
+        if error:
+            f.write(f"error: {error}\n")
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -464,16 +392,23 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     start_time = time.monotonic()
-    result = execute_plan(plan, dest=deluge_root)
-    elapsed = time.monotonic() - start_time
-
-    # Always log, success or failure.
-    append_sync_log(result, elapsed_seconds=elapsed)
-
-    if not result.success:
+    try:
+        result = execute_plan(plan, dest=deluge_root)
+    except SyncError as exc:
+        elapsed = time.monotonic() - start_time
+        error_result = SyncResult(
+            copied=exc.copied,
+            trashed=exc.trashed,
+            unchanged=exc.unchanged,
+        )
+        append_sync_log(error_result, elapsed_seconds=elapsed, error=str(exc))
         print()
         print("Sync FAILED. Manifest was NOT updated.")
-        raise SystemExit(1)
+        raise SystemExit(1) from None
+    elapsed = time.monotonic() - start_time
+
+    # Always log on success.
+    append_sync_log(result, elapsed_seconds=elapsed)
 
     # Build and write updated manifest after successful sync.
     new_manifest = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_data)
@@ -482,7 +417,7 @@ def main(argv: list[str] | None = None) -> None:
     print()
     print(
         f"Sync complete: {result.copied} copied, "
-        f"{result.dirs_created} dirs created, {result.trashed} trashed."
+        f"{result.trashed} trashed."
     )
     if result.trashed:
         print(f"Trashed files are in: {deluge_root / _TRASH_DIR_NAME}")
