@@ -2,7 +2,6 @@
 description: Specialised agent for creating actionable implementation plans from research documents, providing technical specs, phased task breakdowns, and living checklists for the implement agent.
 name: feature-planner
 tools: [vscode, read, edit, search, todo]
-model: Claude Opus 4.6
 ---
 
 # Feature Planner Agent

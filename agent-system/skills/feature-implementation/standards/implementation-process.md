@@ -139,7 +139,7 @@ Before writing any code:
 Per `standards/project.md`:
 - Scripts may freely read and write to `DELUGE/` (the repository copy)
 - Scripts MUST NOT write to the physical SD card without explicit user confirmation
-- When implementing SD card sync features: dry-run must be the default, writes require a `--confirm` flag or interactive prompt
+- When implementing SD card sync features: dry-run must be the default, writes require an interactive prompt
 
 ### Code Quality
 

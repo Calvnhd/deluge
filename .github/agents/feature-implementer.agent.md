@@ -2,7 +2,6 @@
 description: Specialised agent for implementing features end-to-end from plan documents, with configurable interactivity levels for autonomous execution, guided learning, or collaborative pair programming.
 name: feature-implementer
 tools: [agent, vscode, read, edit, execute, search, web, todo]
-model: Claude Opus 4.6
 ---
 
 # Feature Implementer Agent
@@ -50,6 +49,8 @@ The default operating mode. The agent implements one task (or sub-task) at a tim
 3. Summarise the work in chat with a brief explanation
 4. Update the plan document (checklists, implementation notes, progress tracker)
 5. **🛑 PAUSE** — Wait for the user to review, ask questions, and confirm before proceeding
+
+> **When delegated by the orchestrator:** A 🛑 PAUSE is a handoff point. Complete the current task, update the plan document, and return to the orchestrator with a summary of the work done. The orchestrator will re-invoke you for the next task when the user is ready to continue.
 
 This mode balances autonomy with user oversight. The user can review each task's output, ask questions, and course-correct before the next task begins.
 

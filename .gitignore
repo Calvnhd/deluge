@@ -15,7 +15,6 @@ downloads/
 eggs/
 .eggs/
 lib/
-!scripts/lib/  # un-ignore project code
 lib64/
 parts/
 sdist/
@@ -213,3 +212,6 @@ __marimo__/
 DELUGE/SAMPLES/
 DELUGE/.trash/
 scripts/.env
+
+# Machine-specific sync data (manifest and logs)
+scripts/data/
