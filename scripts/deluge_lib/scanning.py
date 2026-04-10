@@ -21,6 +21,17 @@ def normalise_key(path: str | Path) -> str:
     return str(PurePosixPath(path)).lower()
 
 
+def normalise_mtime(raw_mtime: float) -> float:
+    """Truncate a timestamp to FAT32's 2-second resolution.
+
+    FAT32 stores modification times with 2-second granularity (the seconds
+    field is divided by 2 and truncated).  This function maps any timestamp
+    onto that same grid so that values from FAT32 sources, NTFS sources,
+    and manifest files are directly comparable.
+    """
+    return 2.0 * (raw_mtime // 2.0)
+
+
 # Extensions to include (lowercased, with leading dot).
 _ALLOWED_EXTENSIONS: frozenset[str] = frozenset({".xml", ".wav"})
 
@@ -95,7 +106,7 @@ def scan_tree(root: Path, *, label: str = "source") -> ScanResult:
 
             rel = file_path.relative_to(root)
             key = normalise_key(rel)
-            entry = FileEntry(rel_path=rel, size=st.st_size, mtime=st.st_mtime)
+            entry = FileEntry(rel_path=rel, size=st.st_size, mtime=normalise_mtime(st.st_mtime))
             result.files[key] = entry
 
             file_count += 1

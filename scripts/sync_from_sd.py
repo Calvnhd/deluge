@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import TypedDict
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
-from deluge_lib.scanning import ScanResult, normalise_key, scan_tree
+from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime, scan_tree
 
 # -- Manifest types and helpers -----------------------------------------------
 
@@ -62,7 +62,7 @@ def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
     files: dict[str, FileRecord] = {}
     for key, val in data.get("files", {}).items():
         if isinstance(val, dict) and "size" in val and "mtime" in val:
-            files[key] = {"size": int(val["size"]), "mtime": float(val["mtime"])}
+            files[key] = {"size": int(val["size"]), "mtime": normalise_mtime(float(val["mtime"]))}
 
     return (timestamp, files)
 
@@ -342,14 +342,8 @@ def _build_post_sync_manifest(
     new_files: dict[str, FileRecord] = {}
     for key, src_entry in src_scan.files.items():
         if key in copied_keys:
-            # Copied: read the new destination stat.
-            dst_path = dest / src_entry.rel_path
-            try:
-                st = dst_path.stat()
-                new_files[key] = {"size": st.st_size, "mtime": st.st_mtime}
-            except OSError:
-                # Fallback to source stat if dest stat fails unexpectedly.
-                new_files[key] = {"size": src_entry.size, "mtime": src_entry.mtime}
+            # Copied: use the normalised source mtime (already on FAT32 grid).
+            new_files[key] = {"size": src_entry.size, "mtime": src_entry.mtime}
         elif key in old_files:
             # Unchanged with existing manifest entry: preserve.
             old = old_files[key]
