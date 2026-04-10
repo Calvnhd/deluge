@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 
 _SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 
+
 def get_deluge_root() -> Path:
     """Load DELUGE_ROOT from scripts/.env.
 
@@ -18,9 +19,7 @@ def get_deluge_root() -> Path:
 
     env_value = os.environ.get("DELUGE_ROOT")
     if not env_value:
-        raise SystemExit(
-            "DELUGE_ROOT is not set. Set it in scripts/.env"
-        )
+        raise SystemExit("DELUGE_ROOT is not set. Set it in scripts/.env")
 
     root = Path(env_value).resolve()
     if not root.is_dir():
@@ -38,9 +37,7 @@ def get_sd_card_path() -> Path:
 
     env_value = os.environ.get("SD_CARD_PATH")
     if not env_value:
-        raise SystemExit(
-            "SD_CARD_PATH is not set. Set it in scripts/.env"
-        )
+        raise SystemExit("SD_CARD_PATH is not set. Set it in scripts/.env")
 
     path = Path(env_value).resolve()
     if not path.is_dir():

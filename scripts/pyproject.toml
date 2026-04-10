@@ -8,6 +8,9 @@ dependencies = [
     "python-dotenv>=1.0.0",
 ]
 
+[project.scripts]
+deluge-sync = "sync_from_sd:main"
+
 [project.optional-dependencies]
 dev = [
     "lxml-stubs",

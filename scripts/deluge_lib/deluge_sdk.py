@@ -7,6 +7,8 @@ from pathlib import Path
 
 from lxml import etree
 
+from deluge_lib.scanning import scan_tree
+
 # The three standard Deluge SD card subdirectories containing XML presets.
 _DELUGE_SUBDIRS = ("KITS", "SYNTHS", "SONGS")
 
@@ -48,9 +50,10 @@ def find_all_xml_files(deluge_root: Path) -> list[Path]:
         d = deluge_root / subdir
         if not d.is_dir():
             continue
-        for f in d.rglob("*"):
-            if f.is_file() and f.suffix.upper() == ".XML":
-                results.append(f)
+        scan = scan_tree(d)
+        for entry in scan.files.values():
+            if entry.rel_path.suffix.upper() == ".XML":
+                results.append(d / entry.rel_path)
     return sorted(results)
 
 
