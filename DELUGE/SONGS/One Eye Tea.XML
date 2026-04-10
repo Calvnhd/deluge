@@ -3,11 +3,11 @@
 	firmwareVersion="c1.2.1"
 	earliestCompatibleFirmware="4.1.0-alpha"
 	previewNumPads="144"
-	preview="00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF06005AA5738C004D3E31738C00476B4B738C004D3E31738C00000000738C00000000738C00000000738C00000000738C0000000000FF06005AA5"
+	preview="0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004D3E31000000000000000000000000000000FFA0002E180600000000000000000000000000E61900000000000000000000000000E61900000000000000E61900000000000000000000FF0600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF0600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF06000000F00F00000000000000000000F00F00000000000000000000F00F00000000000000000000F00F0000000000000000000000FF06000000738C00000000738C00000000738C00000000738C00000000738C00000000738C00000000738C00000000738C0000000000FF06000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 	arrangementAutoScrollOn="0"
-	xScroll="1920"
+	xScroll="768"
 	xZoom="24"
-	yScrollSongView="-6"
+	yScrollSongView="-2"
 	yScrollArrangementView="-6"
 	xScrollArrangementView="0"
 	xZoomArrangementView="192"
@@ -38,7 +38,7 @@
 		<modeNote>10</modeNote>
 	</modeNotes>
 	<reverb
-		roomSize="1288490112"
+		roomSize="1288489984"
 		dampening="1546188288"
 		width="2147483647"
 		hpf="0"
@@ -100,6 +100,51 @@
 			trebleFrequency="0x00000000" />
 	</songParams>
 	<instruments>
+		<audioTrack
+			name="AUDIO1"
+			inputChannel="left"
+			outputRecordingIndex="0"
+			isArmedForRecording="0"
+			activeModFunction="7"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="hpf"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</audioTrack>
+		<midi
+			channel="0"
+			suffix="-1"
+			defaultVelocity="64"
+			isArmedForRecording="0"
+			activeModFunction="0"
+			colour="0" />
+		<midi
+			channel="1"
+			suffix="-1"
+			defaultVelocity="64"
+			isArmedForRecording="0"
+			activeModFunction="0"
+			colour="0" />
 		<sound
 			presetName="YAZO-LEAD2"
 			presetFolder="SYNTHS"
@@ -167,9 +212,9 @@
 		<kit
 			presetName="Deeper"
 			presetFolder="KITS"
-			defaultVelocity="64"
+			defaultVelocity="59"
 			isArmedForRecording="0"
-			activeModFunction="0"
+			activeModFunction="1"
 			colour="0"
 			modFXCurrentParam="feedback"
 			currentFilterType="lpf"
@@ -240,8 +285,8 @@
 					<modKnobs>
 						<modKnob controlsParam="pan" />
 						<modKnob controlsParam="volumePostFX" />
-						<modKnob controlsParam="lpfResonance" />
-						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="hpfResonance" />
+						<modKnob controlsParam="hpfFrequency" />
 						<modKnob controlsParam="env1Release" />
 						<modKnob controlsParam="env1Attack" />
 						<modKnob controlsParam="delayFeedback" />
@@ -680,6 +725,128 @@
 		<instrumentClip
 			clipName=""
 			inKeyMode="1"
+			yScroll="60"
+			yScrollKeyboard="25"
+			midiChannel="0"
+			isPlaying="1"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="2304"
+			colourOffset="27"
+			section="2"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
+			<arpeggiator
+				mode="off"
+				syncLevel="6"
+				numOctaves="2"
+				gate="0"
+				rate="0"
+				ratchetProbability="0"
+				ratchetAmount="0"
+				sequenceLength="0"
+				rhythm="0"
+				syncType="0"
+				arpMode="off"
+				noteMode="up"
+				octaveMode="up"
+				mpeVelocity="off" />
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
+			<noteRows>
+				<noteRow
+					y="52"
+					noteDataWithLift="0x00000690000000D8404014" />
+				<noteRow
+					y="60"
+					noteDataWithLift="0x00000210000000F0404014000005A00000004840401400000600000000C0404014" />
+				<noteRow
+					y="62"
+					noteDataWithLift="0x0000048000000138404014000005D000000030404014" />
+				<noteRow
+					y="64"
+					noteDataWithLift="0x000001200000003040401400000180000000C0404014" />
+				<noteRow
+					y="66" />
+				<noteRow
+					y="67"
+					noteDataWithLift="0x00000000000001504040140000015000000030404014" />
+				<noteRow
+					y="76" />
+			</noteRows>
+		</instrumentClip>
+		<instrumentClip
+			clipName=""
+			inKeyMode="1"
+			yScroll="60"
+			yScrollKeyboard="25"
+			midiChannel="1"
+			isPlaying="1"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="2304"
+			colourOffset="27"
+			section="1"
+			keyboardLayout="0"
+			keyboardRowInterval="5"
+			drumsScrollOffset="0"
+			drumsEdgeSize="4"
+			inKeyScrollOffset="21"
+			inKeyRowInterval="3">
+			<arpeggiator
+				mode="off"
+				syncLevel="6"
+				numOctaves="2"
+				gate="0"
+				rate="0"
+				ratchetProbability="0"
+				ratchetAmount="0"
+				sequenceLength="0"
+				rhythm="0"
+				syncType="0"
+				arpMode="off"
+				noteMode="up"
+				octaveMode="up"
+				mpeVelocity="off" />
+			<columnControls>
+				<leftCol
+					type="velocity" />
+				<rightCol
+					type="mod" />
+			</columnControls>
+			<noteRows>
+				<noteRow
+					y="52"
+					noteDataWithLift="0x00000690000000D8404014" />
+				<noteRow
+					y="60"
+					noteDataWithLift="0x00000210000000F0404014000005A00000004840401400000600000000C0404014" />
+				<noteRow
+					y="62"
+					noteDataWithLift="0x0000048000000138404014000005D000000030404014" />
+				<noteRow
+					y="64"
+					noteDataWithLift="0x000001200000003040401400000180000000C0404014" />
+				<noteRow
+					y="66" />
+				<noteRow
+					y="67"
+					noteDataWithLift="0x00000000000001504040140000015000000030404014" />
+				<noteRow
+					y="76" />
+			</noteRows>
+		</instrumentClip>
+		<instrumentClip
+			clipName=""
+			inKeyMode="1"
 			yScroll="51"
 			yScrollKeyboard="25"
 			instrumentPresetName="YAZO-LEAD2"
@@ -814,7 +981,7 @@
 		<instrumentClip
 			clipName=""
 			inKeyMode="1"
-			yScroll="0"
+			yScroll="-1"
 			yScrollKeyboard="50"
 			affectEntire="0"
 			instrumentPresetName="Deeper"
@@ -825,7 +992,7 @@
 			length="2304"
 			colourOffset="-60"
 			section="0"
-			selected="1"
+			beingEdited="1"
 			keyboardLayout="0"
 			keyboardRowInterval="5"
 			drumsScrollOffset="0"
@@ -840,7 +1007,7 @@
 				modFXDepth="0x00000000"
 				modFXRate="0xE0000000"
 				stutterRate="0x00000000"
-				sampleRateReduction="0x80000000"
+				sampleRateReduction="0xD4000000"
 				bitCrush="0x80000000"
 				modFXOffset="0x00000000"
 				modFXFeedback="0x80000000"
@@ -852,7 +1019,7 @@
 					rate="0x00000000"
 					feedback="0x80000000" />
 				<lpf
-					frequency="0x7FFFFFFF"
+					frequency="0x30000000"
 					resonance="0x80000000" />
 				<hpf
 					frequency="0x80000000"
@@ -871,8 +1038,9 @@
 			</columnControls>
 			<noteRows>
 				<noteRow
+					muted="1"
 					colourOffset="51"
-					noteDataWithLift="0x000000000000001840401400000030000000184040140000026F00000001404014000002FE000000014040140000032E00000001404014000003F30000000140401400000569000000014040140000062C000000014040140000068C00000001404014000006BD00000001404014000006EA00000001404014000007AE000000014040140000080C00000001404014"
+					noteDataWithLift="0x000000000000001840401400000030000000184040140000026F00000001404014000002FE000000013A4014000003F3000000013040140000062C000000014040140000068C00000001344014000006EA00000001354014000007AE000000014040140000080C00000001404014"
 					drumIndex="0">
 					<soundParams
 						arpeggiatorGate="0x00000000"
@@ -889,7 +1057,7 @@
 						pan="0x00000000"
 						lpfFrequency="0x7FFFFFFF"
 						lpfResonance="0x80000000"
-						hpfFrequency="0x80000000"
+						hpfFrequency="0x96000000"
 						hpfResonance="0x80000000"
 						lfo1Rate="0x1999997E"
 						lfo2Rate="0x00000000"
@@ -1200,7 +1368,7 @@
 						oscBPulseWidth="0x00000000"
 						oscBWavetablePosition="0x00000000"
 						noiseVolume="0x80000000"
-						volume="0x360000004CCCCCA80000000036000000000000604CCCCCA8000000C034000000000001204CCCCCA80000018034000000000001E04CCCCCA80000024032000000000002A04CCCCCA80000030036000000000003604CCCCCA8000003C034000000000004204CCCCCA80000048034000000000004E04CCCCCA80000054032000000000005A0"
+						volume="0x340000004CCCCCA80000000036000000000000604CCCCCA8000000C034000000000001204CCCCCA80000018034000000000001E04CCCCCA80000024032000000000002A04CCCCCA80000030036000000000003604CCCCCA8000003C034000000000004204CCCCCA80000048034000000000004E04CCCCCA80000054032000000000005A0"
 						pan="0x00000000"
 						lpfFrequency="0x2A000000"
 						lpfResonance="0x80000000"
@@ -1349,6 +1517,60 @@
 				</noteRow>
 			</noteRows>
 		</instrumentClip>
+		<audioClip
+			trackName="AUDIO1"
+			filePath="SAMPLES/CLIPS/One Eye Tea 2/left_000.wav"
+			startSamplePos="2086"
+			endSamplePos="1589742"
+			pitchSpeedIndependent="1"
+			attack="-1546188233"
+			priority="1"
+			overdubsShouldCloneAudioTrack="0"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="6912"
+			colourOffset="50"
+			section="0"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="6912"
+			colourOffset="50"
+			section="0">
+			<params
+				reverbAmount="0x10000000"
+				volume="0xE0000000"
+				pan="0x00000000"
+				sidechainCompressorVolume="0x1A000000"
+				sidechainCompressorShape="0xDC28F5B2"
+				modFXDepth="0x00000000"
+				modFXRate="0xE0000000"
+				stutterRate="0x00000000"
+				sampleRateReduction="0x14000000"
+				bitCrush="0x80000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
+				<delay
+					rate="0x00000000"
+					feedback="0x80000000" />
+				<lpf
+					frequency="0x7FFFFFFF"
+					resonance="0x80000000" />
+				<hpf
+					frequency="0x96000000"
+					resonance="0x80000000" />
+				<equalizer
+					bass="0xD2000000"
+					treble="0x16000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
+			</params>
+		</audioClip>
 	</sessionClips>
 	<scales>
 		<userScale>0</userScale>
