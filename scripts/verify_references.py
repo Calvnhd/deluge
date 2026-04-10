@@ -8,6 +8,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import NamedTuple
 
+from lxml import etree
+
 from deluge_lib.cli_utils import get_deluge_root
 from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files
 
@@ -70,7 +72,12 @@ def check_references(deluge_root: Path) -> CheckResult:
     all_refs: list[SampleRef] = []
     refs_by_file: dict[Path, list[SampleRef]] = {}
     for xml_file in xml_files:
-        file_refs = extract_sample_refs(xml_file, deluge_root)
+        try:
+            file_refs = extract_sample_refs(xml_file, deluge_root)
+        except etree.XMLSyntaxError as e:
+            relative_path = xml_file.resolve().relative_to(deluge_root.resolve())
+            print(f"Warning: skipping {relative_path} (malformed XML: {e})")
+            continue
         all_refs.extend(file_refs)
         refs_by_file[xml_file] = file_refs
 

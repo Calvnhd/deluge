@@ -101,6 +101,40 @@ def _get_preset_name(
     return "unknown"
 
 
+def _parse_deluge_xml(
+    xml_path: Path,
+) -> tuple[etree._ElementTree | None, etree._Element, bool]:
+    """Parse a Deluge XML file with a three-stage fallback strategy.
+
+    1. **Strict parse** via ``etree.parse()``.
+    2. **Synthetic root wrapper** — wraps raw content in ``<root>...</root>``
+       to handle old firmware (2.0.0–2.1.0) files with multiple root elements.
+    3. **Recovering parser** — uses ``etree.XMLParser(recover=True)`` to
+       handle files with duplicate attributes, unclosed tags, etc.  These
+       files are readable by the Deluge hardware but not by a strict XML
+       parser.  Recovered trees may have silently dropped data and MUST NOT
+       be written back to disk.
+
+    Returns ``(tree, root, recovered)`` where *tree* is ``None`` when a
+    wrapper fallback was used, and *recovered* is ``True`` when the lenient
+    parser was needed.
+    """
+    try:
+        tree = etree.parse(xml_path)  # noqa: S320
+        return tree, tree.getroot(), False
+    except etree.XMLSyntaxError:
+        raw = xml_path.read_bytes()
+        raw = raw.replace(b'<?xml version="1.0" encoding="UTF-8"?>', b"", 1)
+        try:
+            root = etree.fromstring(b"<root>" + raw + b"</root>")  # noqa: S320
+            return None, root, False
+        except etree.XMLSyntaxError:
+            # Lenient parse for files with duplicate attributes, unclosed tags, etc.
+            parser = etree.XMLParser(recover=True)
+            root = etree.fromstring(b"<root>" + raw + b"</root>", parser=parser)  # noqa: S320
+            return None, root, True
+
+
 def extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]:
     """Extract all sample references from a single Deluge XML file.
 
@@ -115,8 +149,7 @@ def extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]:
     The ``xml_file`` field on each :class:`SampleRef` is stored as a path
     relative to *deluge_root*.  Empty references are skipped.
     """
-    tree = etree.parse(xml_path)  # noqa: S320
-    root = tree.getroot()
+    _tree, root, _recovered = _parse_deluge_xml(xml_path)
     xml_type = detect_xml_type(xml_path)
     xml_rel = xml_path.relative_to(deluge_root)
     refs: list[SampleRef] = []
@@ -194,8 +227,7 @@ def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
     if not mapping:
         return 0
 
-    tree = etree.parse(xml_path)  # noqa: S320
-    root = tree.getroot()
+    tree, root, recovered = _parse_deluge_xml(xml_path)
     count = 0
 
     # Phase 1: element-style <fileName>text</fileName>
@@ -232,6 +264,19 @@ def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
             count += 1
 
     if count > 0:
-        tree.write(xml_path, xml_declaration=True, encoding="UTF-8")
+        if recovered:
+            # Recovery parser may have silently dropped data — refuse to write.
+            return 0
+        if tree is not None:
+            tree.write(xml_path, xml_declaration=True, encoding="UTF-8")
+        else:
+            # Old multi-root format: reconstruct from synthetic wrapper children
+            parts = [b"<?xml version='1.0' encoding='UTF-8'?>\n"]
+            for child in root:
+                parts.append(
+                    etree.tostring(child, encoding="UTF-8", xml_declaration=False)
+                )
+                parts.append(b"\n")
+            xml_path.write_bytes(b"".join(parts))
 
     return count

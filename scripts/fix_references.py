@@ -10,6 +10,8 @@ from datetime import date
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from lxml import etree
+
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
 from deluge_lib.scanning import scan_tree
 from deluge_lib.deluge_sdk import (
@@ -255,7 +257,12 @@ def detect_broken_refs(
 
     xml_files = find_all_xml_files(deluge_root)
     for xml_path in xml_files:
-        refs = extract_sample_refs(xml_path, deluge_root)
+        try:
+            refs = extract_sample_refs(xml_path, deluge_root)
+        except etree.XMLSyntaxError as e:
+            relative_path = xml_path.resolve().relative_to(deluge_root.resolve())
+            print(f"Warning: skipping {relative_path} (malformed XML: {e})")
+            continue
         for ref in refs:
             if ref.path in migration.moved:
                 result.changes.append(
