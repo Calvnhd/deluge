@@ -8,16 +8,23 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import tempfile
 import time
-from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import TypedDict
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
-from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime, scan_tree
+from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
+from deluge_lib.syncing import (
+    SyncError,
+    SyncPlan,
+    SyncResult,
+    append_sync_log,
+    compute_sync,
+    execute_plan,
+    print_plan,
+)
 
 # -- Manifest types and helpers -----------------------------------------------
 
@@ -107,217 +114,6 @@ def _write_manifest(
         raise
 
 
-@dataclass
-class SyncPlan:
-    """Holds the list of planned sync actions."""
-
-    files_to_copy: list[tuple[Path, Path]] = field(default_factory=list)
-    files_to_delete: list[Path] = field(default_factory=list)
-    files_unchanged: int = 0
-
-
-class SyncError(Exception):
-    """Raised when a sync operation fails mid-execution.
-
-    Carries context about the failure: which file, what went wrong,
-    how many operations completed, and how many were left.
-    """
-
-    def __init__(
-        self,
-        message: str,
-        *,
-        file: str,
-        copied: int = 0,
-        trashed: int = 0,
-        unchanged: int = 0,
-        remaining: int = 0,
-    ) -> None:
-        super().__init__(message)
-        self.file = file
-        self.copied = copied
-        self.trashed = trashed
-        self.unchanged = unchanged
-        self.remaining = remaining
-
-
-@dataclass
-class SyncResult:
-    """Outcome of executing a sync plan — counts only."""
-
-    copied: int = 0
-    trashed: int = 0
-    unchanged: int = 0
-
-
-_MTIME_TOLERANCE_S = 2.0
-_TRASH_DIR_NAME = ".trash"
-
-
-def _mtime_matches(mtime_a: float, mtime_b: float) -> bool:
-    """Return True if two mtimes are equal within FAT32 tolerance.
-
-    FAT32 has 2-second mtime resolution, so mtimes within ±2 seconds
-    are treated as equal.
-    """
-    return abs(mtime_a - mtime_b) <= _MTIME_TOLERANCE_S
-
-
-def compute_sync(
-    source: Path,
-    dest: Path,
-    *,
-    manifest: FilesDict | None = None,
-) -> tuple[SyncPlan, ScanResult]:
-    """Walk both trees and build a plan of copy/delete/rename actions.
-
-    Parameters
-    ----------
-    source:
-        Root of the SD card (or any source directory).
-    dest:
-        Root of the local ``DELUGE/`` directory.
-    manifest:
-        Optional manifest dict mapping normalised keys to
-        ``{"size": int, "mtime": float, ...}`` entries.  When an entry
-        exists, the SD card stat is compared against the manifest instead
-        of the destination file stat.
-
-    Returns
-    -------
-    tuple[SyncPlan, ScanResult]
-        The sync plan and the source scan result (needed for manifest
-        updates after execution).
-    """
-    plan = SyncPlan()
-
-    # --- scan source (SD card) ---
-    src_scan = scan_tree(source, label="source")
-
-    # --- scan destination (DELUGE/) ---
-    dst_scan = scan_tree(dest, label="destination")
-
-    # --- compare source → dest (file-level) ---
-    for key, src_entry in src_scan.files.items():
-        src_path = source / src_entry.rel_path
-        dst_path = dest / src_entry.rel_path
-
-        if key not in dst_scan.files:
-            # On SD, not in repo → copy
-            plan.files_to_copy.append((src_path, dst_path))
-            continue
-
-        dst_entry = dst_scan.files[key]
-
-        # Choose comparison target: manifest entry if it exists, otherwise use destination stat
-        if manifest is not None and key in manifest:
-            cmp_size: int = manifest[key]["size"]
-            cmp_mtime: float = manifest[key]["mtime"]
-        else:
-            cmp_size = dst_entry.size
-            cmp_mtime = dst_entry.mtime
-
-        if src_entry.size != cmp_size:
-            # Size differs → copy (overwrite)
-            plan.files_to_copy.append((src_path, dst_path))
-        elif not _mtime_matches(src_entry.mtime, cmp_mtime):
-            # Same size, mtime differs → copy (overwrite)
-            plan.files_to_copy.append((src_path, dst_path))
-        else:
-            # Identical (or case-only difference) → skip
-            plan.files_unchanged += 1
-
-    # --- files in dest not on source → trash ---
-    for key, dst_entry in dst_scan.files.items():
-        if key not in src_scan.files:
-            plan.files_to_delete.append(dest / dst_entry.rel_path)
-
-    return plan, src_scan
-
-
-def print_plan(plan: SyncPlan, *, dest: Path) -> None:
-    """Print a human-readable summary of what the sync would do."""
-    for _src, dst in plan.files_to_copy:
-        rel = dst.relative_to(dest)
-        if dst.exists():
-            print(f"  update  {rel}")
-        else:
-            print(f"  copy    {rel}")
-
-    for path in plan.files_to_delete:
-        print(f"  trash   {path.relative_to(dest)}")
-
-    print()
-    print(
-        f"  {len(plan.files_to_copy)} to copy, "
-        f"{len(plan.files_to_delete)} to trash, "
-        f"{plan.files_unchanged} unchanged"
-    )
-
-
-def execute_plan(plan: SyncPlan, *, dest: Path) -> SyncResult:
-    """Execute the sync plan: copy files and trash extras.
-
-    Raises ``SyncError`` on any failure. On success, returns a
-    ``SyncResult`` with counts.
-    """
-    copied = 0
-    total_copy = len(plan.files_to_copy)
-
-    # --- copies ---
-    try:
-        for i, (src, dst) in enumerate(plan.files_to_copy, 1):
-            print(f"\rCopying... {i}/{total_copy}", end="", flush=True)
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src, dst)
-            copied += 1
-    except OSError as exc:
-        if total_copy:
-            print()
-        remaining = total_copy - copied - 1
-        raise SyncError(
-            str(exc),
-            file=str(src),
-            copied=copied,
-            unchanged=plan.files_unchanged,
-            remaining=remaining,
-        ) from exc
-    if total_copy:
-        print()
-
-    # --- trash ---
-    trashed = 0
-    trash_count = len(plan.files_to_delete)
-    if trash_count:
-        trash_base = dest / _TRASH_DIR_NAME / datetime.now().strftime("%Y%m%d_%H%M%S")
-        try:
-            for path in plan.files_to_delete:
-                rel = path.relative_to(dest)
-                trash_dest = trash_base / rel
-                trash_dest.parent.mkdir(parents=True, exist_ok=True)
-                shutil.move(str(path), str(trash_dest))
-                trashed += 1
-        except OSError as exc:
-            raise SyncError(
-                str(exc),
-                file=str(path),
-                copied=copied,
-                trashed=trashed,
-                unchanged=plan.files_unchanged,
-                remaining=trash_count - trashed - 1,
-            ) from exc
-
-    return SyncResult(
-        copied=copied,
-        trashed=trashed,
-        unchanged=plan.files_unchanged,
-    )
-
-
-def _plan_is_empty(plan: SyncPlan) -> bool:
-    return not plan.files_to_copy and not plan.files_to_delete
-
-
 def _build_post_sync_manifest(
     plan: SyncPlan,
     src_scan: ScanResult,
@@ -356,42 +152,6 @@ def _build_post_sync_manifest(
     return (timestamp, new_files)
 
 
-def _default_log_path() -> Path:
-    """Return the default path for the sync execution log."""
-    return Path(__file__).resolve().parent / "data" / "sync.log"
-
-
-def append_sync_log(
-    result: SyncResult,
-    *,
-    elapsed_seconds: float,
-    error: str | None = None,
-    log_path: Path | None = None,
-) -> None:
-    """Append a structured entry to the sync execution log."""
-    if log_path is None:
-        log_path = _default_log_path()
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-
-    status = "FAILED" if error else "SUCCESS"
-    elapsed_m = int(elapsed_seconds) // 60
-    elapsed_s = int(elapsed_seconds) % 60
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-    line = (
-        f"{timestamp} {status}"
-        f" copied={result.copied}"
-        f" trashed={result.trashed}"
-        f" unchanged={result.unchanged}"
-        f" elapsed={elapsed_m}m {elapsed_s}s"
-    )
-    if error:
-        line += f' error="{error}"'
-
-    with log_path.open("a") as f:
-        f.write(line + "\n")
-
-
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         description="Sync Deluge SD card contents into the local DELUGE/ directory."
@@ -416,7 +176,7 @@ def main(argv: list[str] | None = None) -> None:
 
     plan, src_scan = compute_sync(sd_path, deluge_root, manifest=manifest_files)
 
-    if _plan_is_empty(plan):
+    if not plan.files_to_copy and not plan.files_to_delete:
         print("Already up to date.")
         return
 

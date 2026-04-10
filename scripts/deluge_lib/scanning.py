@@ -10,6 +10,9 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
+from typing import Literal
+
+FileFilter = Literal["wav", "xml", "both"]
 
 
 def normalise_key(path: str | Path) -> str:
@@ -32,8 +35,12 @@ def normalise_mtime(raw_mtime: float) -> float:
     return 2.0 * (raw_mtime // 2.0)
 
 
-# Extensions to include (lowercased, with leading dot).
-_ALLOWED_EXTENSIONS: frozenset[str] = frozenset({".xml", ".wav"})
+# Mapping from FileFilter literals to extension frozensets.
+_FILTER_MAP: dict[str, frozenset[str]] = {
+    "wav": frozenset({".wav"}),
+    "xml": frozenset({".xml"}),
+    "both": frozenset({".xml", ".wav"}),
+}
 
 # Directory names to skip entirely (case-insensitive).
 _SKIP_DIRS: frozenset[str] = frozenset({".trash"})
@@ -60,7 +67,12 @@ class ScanResult:
     files: dict[str, FileEntry] = field(default_factory=dict)
 
 
-def scan_tree(root: Path, *, label: str = "source") -> ScanResult:
+def scan_tree(
+    root: Path,
+    *,
+    label: str = "source",
+    file_filter: FileFilter = "both",
+) -> ScanResult:
     """Walk *root* and collect filtered file entries.
 
     Parameters
@@ -70,6 +82,9 @@ def scan_tree(root: Path, *, label: str = "source") -> ScanResult:
     label:
         Human-readable name shown in progress messages (e.g. ``"source"``,
         ``"destination"``).
+    file_filter:
+        Which file types to include: ``"wav"``, ``"xml"``, or ``"both"``
+        (the default).
 
     Returns
     -------
@@ -77,6 +92,7 @@ def scan_tree(root: Path, *, label: str = "source") -> ScanResult:
         A dataclass containing:
         - ``files``: dict mapping normalised keys to ``FileEntry`` objects.
     """
+    allowed = _FILTER_MAP[file_filter]
     result = ScanResult()
     file_count = 0
 
@@ -92,7 +108,7 @@ def scan_tree(root: Path, *, label: str = "source") -> ScanResult:
             file_path = current_dir / fname
 
             ext = file_path.suffix.lower()
-            if ext not in _ALLOWED_EXTENSIONS:
+            if ext not in allowed:
                 rel = file_path.relative_to(root)
                 print(f"\n  Skipping {rel} (unsupported extension)", flush=True)
                 continue

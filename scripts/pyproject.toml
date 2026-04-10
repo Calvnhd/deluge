@@ -10,6 +10,7 @@ dependencies = [
 
 [project.scripts]
 deluge-sync = "sync_from_sd:main"
+deluge-cloud-sync = "sync_samples_to_cloud:main"
 
 [project.optional-dependencies]
 dev = [

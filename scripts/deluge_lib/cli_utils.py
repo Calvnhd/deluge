@@ -49,6 +49,24 @@ def get_sd_card_path() -> Path:
     return path
 
 
+def get_cloud_backup_path() -> Path:
+    """Load CLOUD_BACKUP_PATH from scripts/.env.
+
+    Raises SystemExit if CLOUD_BACKUP_PATH is not set or the directory does not exist.
+    """
+    load_dotenv(_SCRIPTS_DIR / ".env")
+
+    env_value = os.environ.get("CLOUD_BACKUP_PATH")
+    if not env_value:
+        raise SystemExit("CLOUD_BACKUP_PATH is not set. Set it in scripts/.env")
+
+    path = Path(env_value).resolve()
+    if not path.is_dir():
+        raise SystemExit(f"CLOUD_BACKUP_PATH directory does not exist: {path}")
+
+    return path
+
+
 def confirm_apply(message: str) -> bool:
     """Print message and prompt user for confirmation.
 

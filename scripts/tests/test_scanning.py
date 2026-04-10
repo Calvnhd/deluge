@@ -91,3 +91,46 @@ class TestNormaliseKey:
 
     def test_root_level_file(self) -> None:
         assert normalise_key("MIDIFollow.XML") == "midifollow.xml"
+
+
+# -- file_filter parameter ----------------------------------------------------
+
+
+class TestFileFilterParameter:
+    def test_wav_only_scan(self, tmp_path: Path) -> None:
+        _touch(tmp_path / "kick.wav")
+        _touch(tmp_path / "preset.xml")
+        _touch(tmp_path / "readme.txt")
+
+        result = scan_tree(tmp_path, file_filter="wav")
+
+        assert len(result.files) == 1
+        assert "kick.wav" in result.files
+
+    def test_xml_only_scan(self, tmp_path: Path) -> None:
+        _touch(tmp_path / "kit.xml")
+        _touch(tmp_path / "sample.wav")
+        _touch(tmp_path / "notes.txt")
+
+        result = scan_tree(tmp_path, file_filter="xml")
+
+        assert len(result.files) == 1
+        assert "kit.xml" in result.files
+
+    def test_default_scan_unchanged(self, tmp_path: Path) -> None:
+        _touch(tmp_path / "kit.xml")
+        _touch(tmp_path / "sample.wav")
+        _touch(tmp_path / "notes.txt")
+
+        result = scan_tree(tmp_path)
+
+        assert len(result.files) == 2
+        assert "kit.xml" in result.files
+        assert "sample.wav" in result.files
+
+    def test_file_filter_case_insensitive_extension(self, tmp_path: Path) -> None:
+        _touch(tmp_path / "sample.WAV")
+
+        result = scan_tree(tmp_path, file_filter="wav")
+
+        assert len(result.files) == 1
