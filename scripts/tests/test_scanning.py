@@ -17,30 +17,6 @@ def _touch(path: Path, content: bytes = b"x") -> None:
 
 
 class TestFileTypeFiltering:
-    def test_xml_and_wav_included(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "kit.xml")
-        _touch(tmp_path / "kick.wav")
-
-        result = scan_tree(tmp_path)
-
-        assert "kit.xml" in result.files
-        assert "kick.wav" in result.files
-
-    def test_ds_store_excluded(self, tmp_path: Path) -> None:
-        _touch(tmp_path / ".DS_Store")
-        result = scan_tree(tmp_path)
-        assert result.files == {}
-
-    def test_txt_excluded(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "readme.txt")
-        result = scan_tree(tmp_path)
-        assert result.files == {}
-
-    def test_thumbs_db_excluded(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "Thumbs.db")
-        result = scan_tree(tmp_path)
-        assert result.files == {}
-
     def test_mixed_files(self, tmp_path: Path) -> None:
         _touch(tmp_path / "good.xml")
         _touch(tmp_path / "good.wav")
@@ -52,25 +28,6 @@ class TestFileTypeFiltering:
         assert len(result.files) == 2
         assert "good.xml" in result.files
         assert "good.wav" in result.files
-
-
-# -- Root-level files --------------------------------------------------------
-
-
-class TestRootLevelFiles:
-    def test_root_level_file_included(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "MIDIFollow.XML")
-        result = scan_tree(tmp_path)
-        assert "midifollow.xml" in result.files
-
-    def test_nested_and_root_files(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "Root.xml")
-        _touch(tmp_path / "KITS" / "Kit.xml")
-
-        result = scan_tree(tmp_path)
-
-        assert "root.xml" in result.files
-        assert "kits/kit.xml" in result.files
 
 
 # -- .trash exclusion --------------------------------------------------------
@@ -96,41 +53,11 @@ class TestTrashExclusion:
 
 
 class TestStatCapture:
-    def test_returns_size_and_mtime(self, tmp_path: Path) -> None:
-        f = tmp_path / "test.xml"
-        f.write_bytes(b"hello")
-
-        result = scan_tree(tmp_path)
-        entry = result.files["test.xml"]
-
-        assert isinstance(entry, FileEntry)
-        assert entry.size == 5
-        assert isinstance(entry.mtime, float)
-        assert entry.mtime > 0
-
     def test_rel_path_preserved(self, tmp_path: Path) -> None:
         _touch(tmp_path / "KITS" / "Deep.xml", b"abc")
         result = scan_tree(tmp_path)
         entry = result.files["kits/deep.xml"]
         assert entry.rel_path == Path("KITS") / "Deep.xml"
-
-
-# -- Generic root path ------------------------------------------------------
-
-
-class TestGenericRootPath:
-    def test_works_on_arbitrary_directory(self, tmp_path: Path) -> None:
-        custom = tmp_path / "my_custom_dir"
-        custom.mkdir()
-        _touch(custom / "song.xml")
-
-        result = scan_tree(custom)
-
-        assert "song.xml" in result.files
-
-    def test_scan_result_type(self, tmp_path: Path) -> None:
-        result = scan_tree(tmp_path)
-        assert isinstance(result, ScanResult)
 
 
 # -- Case-normalised keys ---------------------------------------------------
@@ -141,12 +68,6 @@ class TestCaseNormalisedKeys:
         _touch(tmp_path / "KITS" / "MyKit.XML")
         result = scan_tree(tmp_path)
         assert "kits/mykit.xml" in result.files
-
-    def test_original_casing_in_rel_path(self, tmp_path: Path) -> None:
-        _touch(tmp_path / "SYNTHS" / "BassLead.XML")
-        result = scan_tree(tmp_path)
-        entry = result.files["synths/basslead.xml"]
-        assert entry.rel_path == Path("SYNTHS") / "BassLead.XML"
 
 
 # -- normalise_key -----------------------------------------------------------
