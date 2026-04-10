@@ -15,7 +15,7 @@ This repository manages a backup of a physical Deluge SD card. The physical SD c
 1. **The physical SD card is read-only.** Scripts MUST NOT write to, modify, or delete data on the mounted SD card. The only permitted operations on the SD card are **read** and **copy-from**.
 2. **The `DELUGE/` directory in this repository is editable.** Modifying, reorganising, and fixing files within `DELUGE/` is a core purpose of this repository. Scripts may freely read and write to `DELUGE/`.
 3. When syncing from the SD card into the repository, the sync direction is **SD card → `DELUGE/`**, treating the SD card as the source of truth.
-4. When syncing from the repository back to the SD card for deployment, the sync direction is **`DELUGE/` → SD card**. This is the only scenario where writing to the SD card is permitted, and it must require explicit user confirmation (e.g. a `--confirm` flag or interactive prompt). Dry-run should be the default behaviour.
+4. When syncing from the repository back to the SD card for deployment, the sync direction is **`DELUGE/` → SD card**. This is the only scenario where writing to the SD card is permitted, and it must require explicit user confirmation (e.g. an interactive prompt). Dry-run should be the default behaviour.
 5. Scripts must never assume the SD card is mounted. Always validate the mount point before attempting read operations.
 
 ### Rationale

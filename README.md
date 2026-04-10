@@ -65,7 +65,6 @@ Syncs the mounted SD card into the local `DELUGE/` directory so it mirrors the c
 ```
 uv run sync_from_sd.py            # preview changes, then prompt to apply
 uv run sync_from_sd.py --dry-run  # preview only, no changes
-uv run sync_from_sd.py --confirm  # skip preview, go straight to confirmation
 ```
 
 ### Ideas

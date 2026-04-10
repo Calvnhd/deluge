@@ -50,7 +50,7 @@ def find_all_xml_files(deluge_root: Path) -> list[Path]:
         d = deluge_root / subdir
         if not d.is_dir():
             continue
-        scan = scan_tree(d, progress=False)
+        scan = scan_tree(d)
         for entry in scan.files.values():
             if entry.rel_path.suffix.upper() == ".XML":
                 results.append(d / entry.rel_path)

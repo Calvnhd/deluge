@@ -1,8 +1,8 @@
 """Generic filtered file scanner with stat capture.
 
 Accepts any root directory and returns a case-normalised path dict.
-Only .xml and .wav files are yielded; .trash directories and symlinks
-are silently skipped.
+Only .xml and .wav files are yielded; .trash directories are silently
+skipped.
 """
 
 from __future__ import annotations
@@ -27,9 +27,6 @@ _ALLOWED_EXTENSIONS: frozenset[str] = frozenset({".xml", ".wav"})
 # Directory names to skip entirely (case-insensitive).
 _SKIP_DIRS: frozenset[str] = frozenset({".trash"})
 
-# Print a progress message every N files.
-_PROGRESS_INTERVAL: int = 500
-
 
 @dataclass(frozen=True)
 class FileEntry:
@@ -52,15 +49,13 @@ class ScanResult:
     files: dict[str, FileEntry] = field(default_factory=dict)
 
 
-def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> ScanResult:
+def scan_tree(root: Path, *, label: str = "source") -> ScanResult:
     """Walk *root* and collect filtered file entries.
 
     Parameters
     ----------
     root:
         Any directory to scan.  Does not need to be an SD card.
-    progress:
-        If ``True``, print scanning progress every 500 files.
     label:
         Human-readable name shown in progress messages (e.g. ``"source"``,
         ``"destination"``).
@@ -74,28 +69,21 @@ def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> Sc
     result = ScanResult()
     file_count = 0
 
-    if progress:
-        print(f"Scanning {label}...", end="", flush=True)
+    print(f"Scanning {label}...", end="", flush=True)
 
-    for dirpath, dirnames, filenames in os.walk(root, followlinks=False):
-        dir_path = Path(dirpath)
+    for dirpath, dirnames, filenames in os.walk(root):
+        current_dir = Path(dirpath)
 
         # Prune skipped directories in-place so os.walk does not descend.
-        dirnames[:] = [
-            d
-            for d in dirnames
-            if d.lower() not in _SKIP_DIRS and not Path(dir_path / d).is_symlink()
-        ]
+        dirnames[:] = [d for d in dirnames if d.lower() not in _SKIP_DIRS]
 
         for fname in filenames:
-            file_path = dir_path / fname
-
-            # Skip symlinks silently.
-            if file_path.is_symlink():
-                continue
+            file_path = current_dir / fname
 
             ext = file_path.suffix.lower()
             if ext not in _ALLOWED_EXTENSIONS:
+                rel = file_path.relative_to(root)
+                print(f"\n  Skipping {rel} (unsupported extension)", flush=True)
                 continue
 
             try:
@@ -111,10 +99,7 @@ def scan_tree(root: Path, *, progress: bool = True, label: str = "source") -> Sc
             result.files[key] = entry
 
             file_count += 1
-            if progress and file_count % _PROGRESS_INTERVAL == 0:
-                print(f"\rScanning {label}... {file_count} files", end="", flush=True)
 
-    if progress:
-        print(f"\rScanning {label}... {file_count} files found.")
+    print(f"\rScanning {label}... {file_count} files found.")
 
     return result

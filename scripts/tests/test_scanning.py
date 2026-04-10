@@ -21,24 +21,24 @@ class TestFileTypeFiltering:
         _touch(tmp_path / "kit.xml")
         _touch(tmp_path / "kick.wav")
 
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
 
         assert "kit.xml" in result.files
         assert "kick.wav" in result.files
 
     def test_ds_store_excluded(self, tmp_path: Path) -> None:
         _touch(tmp_path / ".DS_Store")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         assert result.files == {}
 
     def test_txt_excluded(self, tmp_path: Path) -> None:
         _touch(tmp_path / "readme.txt")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         assert result.files == {}
 
     def test_thumbs_db_excluded(self, tmp_path: Path) -> None:
         _touch(tmp_path / "Thumbs.db")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         assert result.files == {}
 
     def test_mixed_files(self, tmp_path: Path) -> None:
@@ -47,7 +47,7 @@ class TestFileTypeFiltering:
         _touch(tmp_path / "bad.txt")
         _touch(tmp_path / ".DS_Store")
 
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
 
         assert len(result.files) == 2
         assert "good.xml" in result.files
@@ -60,14 +60,14 @@ class TestFileTypeFiltering:
 class TestRootLevelFiles:
     def test_root_level_file_included(self, tmp_path: Path) -> None:
         _touch(tmp_path / "MIDIFollow.XML")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         assert "midifollow.xml" in result.files
 
     def test_nested_and_root_files(self, tmp_path: Path) -> None:
         _touch(tmp_path / "Root.xml")
         _touch(tmp_path / "KITS" / "Kit.xml")
 
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
 
         assert "root.xml" in result.files
         assert "kits/kit.xml" in result.files
@@ -81,44 +81,15 @@ class TestTrashExclusion:
         _touch(tmp_path / ".trash" / "deleted.xml")
         _touch(tmp_path / "keep.xml")
 
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
 
         assert len(result.files) == 1
         assert "keep.xml" in result.files
 
     def test_trash_case_insensitive(self, tmp_path: Path) -> None:
         _touch(tmp_path / ".Trash" / "junk.wav")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         assert result.files == {}
-
-
-# -- Symlinks ----------------------------------------------------------------
-
-
-class TestSymlinks:
-    def test_symlinked_file_skipped(self, tmp_path: Path) -> None:
-        real = tmp_path / "real.xml"
-        _touch(real)
-        link = tmp_path / "link.xml"
-        link.symlink_to(real)
-
-        result = scan_tree(tmp_path, progress=False)
-
-        assert "real.xml" in result.files
-        assert "link.xml" not in result.files
-
-    def test_symlinked_dir_skipped(self, tmp_path: Path) -> None:
-        real_dir = tmp_path / "real_dir"
-        real_dir.mkdir()
-        _touch(real_dir / "inside.xml")
-        link_dir = tmp_path / "link_dir"
-        link_dir.symlink_to(real_dir)
-
-        result = scan_tree(tmp_path, progress=False)
-
-        # Files inside the real dir are found, but the symlinked dir is not traversed.
-        assert "real_dir/inside.xml" in result.files
-        assert "link_dir/inside.xml" not in result.files
 
 
 # -- Stat capture ------------------------------------------------------------
@@ -129,7 +100,7 @@ class TestStatCapture:
         f = tmp_path / "test.xml"
         f.write_bytes(b"hello")
 
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         entry = result.files["test.xml"]
 
         assert isinstance(entry, FileEntry)
@@ -139,7 +110,7 @@ class TestStatCapture:
 
     def test_rel_path_preserved(self, tmp_path: Path) -> None:
         _touch(tmp_path / "KITS" / "Deep.xml", b"abc")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         entry = result.files["kits/deep.xml"]
         assert entry.rel_path == Path("KITS") / "Deep.xml"
 
@@ -153,12 +124,12 @@ class TestGenericRootPath:
         custom.mkdir()
         _touch(custom / "song.xml")
 
-        result = scan_tree(custom, progress=False)
+        result = scan_tree(custom)
 
         assert "song.xml" in result.files
 
     def test_scan_result_type(self, tmp_path: Path) -> None:
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         assert isinstance(result, ScanResult)
 
 
@@ -168,12 +139,12 @@ class TestGenericRootPath:
 class TestCaseNormalisedKeys:
     def test_keys_are_lowercase(self, tmp_path: Path) -> None:
         _touch(tmp_path / "KITS" / "MyKit.XML")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         assert "kits/mykit.xml" in result.files
 
     def test_original_casing_in_rel_path(self, tmp_path: Path) -> None:
         _touch(tmp_path / "SYNTHS" / "BassLead.XML")
-        result = scan_tree(tmp_path, progress=False)
+        result = scan_tree(tmp_path)
         entry = result.files["synths/basslead.xml"]
         assert entry.rel_path == Path("SYNTHS") / "BassLead.XML"
 

@@ -2,22 +2,26 @@
 
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 
 import pytest
 from sync_from_sd import (
+    FileRecord,
+    FilesDict,
     SyncError,
     SyncPlan,
     SyncResult,
     _build_post_sync_manifest,
     _mtime_matches,
+    _read_manifest,
+    _write_manifest,
     append_sync_log,
     compute_sync,
     execute_plan,
 )
 
-from deluge_lib.manifest import ManifestData
 from deluge_lib.scanning import FileEntry, ScanResult
 
 
@@ -170,7 +174,7 @@ class TestComputeSyncManifest:
         _touch(dst / "KITS" / "Kit.XML", content, mtime=1_600_000_000.0)
 
         # Manifest records the correct mtime from last sync
-        manifest = {"kits/kit.xml": {"size": len(content), "mtime": src_mtime}}
+        manifest: FilesDict = {"kits/kit.xml": {"size": len(content), "mtime": src_mtime}}
 
         plan, _ = compute_sync(src, dst, manifest=manifest)
 
@@ -187,7 +191,7 @@ class TestComputeSyncManifest:
         _touch(dst / "KITS" / "Kit.XML", content, mtime=mtime)
 
         # Manifest exists but has no entry for this file
-        manifest = {"other/file.xml": {"size": 10, "mtime": 1.0}}
+        manifest: FilesDict = {"other/file.xml": {"size": 10, "mtime": 1.0}}
 
         plan, _ = compute_sync(src, dst, manifest=manifest)
 
@@ -278,14 +282,14 @@ class TestBuildPostSyncManifest:
         plan = SyncPlan(
             files_to_copy=[(tmp_path / "src" / "KITS" / "Kit.XML", kit_file)],
         )
-        old_manifest = ManifestData()
+        old_files: dict[str, FileRecord] = {}
 
-        result = _build_post_sync_manifest(plan, src_scan, dest, old_manifest)
+        ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
-        assert "kits/kit.xml" in result.files
-        entry = result.files["kits/kit.xml"]
+        assert "kits/kit.xml" in files
+        entry = files["kits/kit.xml"]
         assert entry["size"] == kit_file.stat().st_size
-        assert result.last_sync_direction == "sd-to-local"
+        assert ts != ""
 
     def test_trashed_files_excluded(self, tmp_path: Path) -> None:
         dest = tmp_path / "dst"
@@ -305,17 +309,15 @@ class TestBuildPostSyncManifest:
         plan = SyncPlan(
             files_to_delete=[dest / "KITS" / "Trashed.XML"],
         )
-        old_manifest = ManifestData(
-            files={
-                "kits/kept.xml": {"size": 6, "mtime": 1_700_000_000.0},
-                "kits/trashed.xml": {"size": 10, "mtime": 1_600_000_000.0},
-            },
-        )
+        old_files: dict[str, FileRecord] = {
+            "kits/kept.xml": {"size": 6, "mtime": 1_700_000_000.0},
+            "kits/trashed.xml": {"size": 10, "mtime": 1_600_000_000.0},
+        }
 
-        result = _build_post_sync_manifest(plan, src_scan, dest, old_manifest)
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
-        assert "kits/kept.xml" in result.files
-        assert "kits/trashed.xml" not in result.files
+        assert "kits/kept.xml" in files
+        assert "kits/trashed.xml" not in files
 
     def test_manifest_not_written_on_failure(self, tmp_path: Path) -> None:
         """Verify the main() contract: manifest is only written on success.
@@ -351,11 +353,15 @@ class TestAppendSyncLog:
         append_sync_log(result, elapsed_seconds=65.0, log_path=log_path)
 
         content = log_path.read_text(encoding="utf-8")
-        assert "SUCCESS" in content
-        assert "files_copied: 5" in content
-        assert "files_trashed: 3" in content
-        assert "files_unchanged: 10" in content
-        assert "1m 5s" in content
+        lines = content.strip().splitlines()
+        assert len(lines) == 1
+        line = lines[0]
+        assert "SUCCESS" in line
+        assert "copied=5" in line
+        assert "trashed=3" in line
+        assert "unchanged=10" in line
+        assert "elapsed=1m 5s" in line
+        assert "error=" not in line
 
     def test_creates_entry_on_failure_with_error(self, tmp_path: Path) -> None:
         log_path = tmp_path / "data" / "sync.log"
@@ -371,9 +377,12 @@ class TestAppendSyncLog:
         )
 
         content = log_path.read_text(encoding="utf-8")
-        assert "FAILED" in content
-        assert "files_copied: 2" in content
-        assert "error: Permission denied: /mnt/sd/file.wav" in content
+        lines = content.strip().splitlines()
+        assert len(lines) == 1
+        line = lines[0]
+        assert "FAILED" in line
+        assert "copied=2" in line
+        assert 'error="Permission denied: /mnt/sd/file.wav"' in line
 
     def test_log_file_created_in_data_directory(self, tmp_path: Path) -> None:
         log_path = tmp_path / "data" / "sync.log"
@@ -392,6 +401,82 @@ class TestAppendSyncLog:
         append_sync_log(r1, elapsed_seconds=1.0, log_path=log_path)
         append_sync_log(r2, elapsed_seconds=2.0, log_path=log_path)
 
-        content = log_path.read_text(encoding="utf-8")
-        assert content.count("---") == 2
-        assert content.count("SUCCESS") == 2
+        lines = log_path.read_text(encoding="utf-8").strip().splitlines()
+        assert len(lines) == 2
+        assert "copied=1" in lines[0]
+        assert "copied=2" in lines[1]
+        assert "---" not in log_path.read_text(encoding="utf-8")
+
+
+# =============================================================================
+# _read_manifest / _write_manifest (inlined manifest functions)
+# =============================================================================
+
+
+class TestReadManifest:
+    def test_missing_file_returns_empty(self, tmp_path: Path) -> None:
+        ts, files = _read_manifest(tmp_path / "nonexistent.json")
+        assert ts == ""
+        assert files == {}
+
+    def test_corrupt_json_returns_empty(self, tmp_path: Path) -> None:
+        bad = tmp_path / "manifest.json"
+        bad.write_text("{invalid json!!!", encoding="utf-8")
+
+        ts, files = _read_manifest(bad)
+
+        assert ts == ""
+        assert files == {}
+
+    def test_corrupt_json_prints_warning(self, tmp_path: Path, capsys: object) -> None:
+        bad = tmp_path / "manifest.json"
+        bad.write_text("{broken", encoding="utf-8")
+
+        _read_manifest(bad)
+
+        import _pytest.capture
+
+        assert isinstance(capsys, _pytest.capture.CaptureFixture)
+        captured = capsys.readouterr()
+        assert "Warning" in captured.out
+        assert "corrupt" in captured.out.lower()
+
+    def test_valid_manifest_round_trip(self, tmp_path: Path) -> None:
+        mf = tmp_path / "manifest.json"
+        files: dict[str, FileRecord] = {
+            "kits/mykit.xml": {"size": 1234, "mtime": 1712600000.0},
+            "samples/kick.wav": {"size": 56789, "mtime": 1712600100.0},
+        }
+        ts = "2026-04-09T12:00:00+00:00"
+
+        _write_manifest(mf, timestamp=ts, files=files)
+        read_ts, read_files = _read_manifest(mf)
+
+        assert read_ts == ts
+        assert len(read_files) == 2
+        assert read_files["kits/mykit.xml"]["size"] == 1234
+        assert read_files["samples/kick.wav"]["mtime"] == 1712600100.0
+
+
+class TestWriteManifest:
+    def test_creates_file(self, tmp_path: Path) -> None:
+        mf_path = tmp_path / "manifest.json"
+        _write_manifest(mf_path, timestamp="2026-04-09T00:00:00+00:00", files={})
+
+        assert mf_path.exists()
+        raw = json.loads(mf_path.read_text(encoding="utf-8"))
+        assert "last_sync_timestamp" in raw
+        assert "files" in raw
+
+    def test_atomic_write_no_temp_file_lingers(self, tmp_path: Path) -> None:
+        mf_path = tmp_path / "manifest.json"
+        _write_manifest(mf_path, timestamp="", files={})
+
+        tmp_files = list(tmp_path.glob("*.tmp"))
+        assert tmp_files == []
+
+    def test_creates_parent_directory(self, tmp_path: Path) -> None:
+        mf_path = tmp_path / "scripts" / "data" / "manifest.json"
+        _write_manifest(mf_path, timestamp="", files={})
+
+        assert mf_path.parent.is_dir()
