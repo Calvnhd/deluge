@@ -410,10 +410,10 @@ def main(argv: list[str] | None = None) -> None:
         deluge_root = get_deluge_root()
         snapshot(deluge_root)
     elif args.command == "fix":
-        deluge_root = get_deluge_root()
         snapshot_path = Path(args.snapshot_path)
         if not snapshot_path.is_file():
             raise SystemExit(f"Snapshot file not found: {snapshot_path}")
+        deluge_root = get_deluge_root()
         before_snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
         migration = compute_migration_map(before_snapshot, deluge_root)
         broken = detect_broken_refs(migration, deluge_root)

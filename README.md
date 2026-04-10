@@ -67,13 +67,49 @@ uv run sync_from_sd.py            # preview changes, then prompt to apply
 uv run sync_from_sd.py --dry-run  # preview only, no changes
 ```
 
+### `verify_references.py`
+
+**Status:** Work in progress
+
+Checks that all sample paths referenced in XML presets point to existing files under `DELUGE/`. Reports any broken references. Exit code `0` means all references are valid; exit code `1` means broken references were found.
+
+**Usage** (run from the `scripts/` directory):
+
+```
+uv run verify_references.py
+```
+
+### `fix_references.py`
+
+**Status:** Work in progress
+
+Fixes broken sample references after samples have been moved or renamed. Works in two steps:
+
+1. **Snapshot** — hash all samples and save a manifest before reorganising:
+
+   ```
+   uv run fix_references.py snapshot
+   ```
+
+   This writes a dated JSON snapshot to `docs/manifests/`.
+
+2. **Fix** — compare the snapshot against the current filesystem, find moved/renamed samples, and update XML references:
+
+   ```
+   uv run fix_references.py fix --snapshot docs/manifests/<snapshot>.json
+   uv run fix_references.py fix --snapshot docs/manifests/<snapshot>.json --apply  # skip confirmation prompt
+   ```
+
+   Without `--apply`, the script previews the changes and prompts before writing.
+
+Both scripts read `DELUGE_ROOT` from `scripts/.env`.
+
 ### Ideas
 
 - Creates a complete backup of the SD card as a `.zip` file 
 - Sync the local gitignored `SAMPLES` folder to a another cloud-synced folder for back-up
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference
-- Identify and fix broken sample references
 - List of used and unused samples
 - Lift kits and synths from songs to a dedicated location 
 - Bulk rename songs with trailing numbers (after manually deleting old versions)
