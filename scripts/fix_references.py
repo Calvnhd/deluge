@@ -7,10 +7,11 @@ import json
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import date
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
+from deluge_lib.scanning import scan_tree
 from deluge_lib.deluge_sdk import (
     SampleRef,
     extract_sample_refs,
@@ -45,9 +46,8 @@ def _find_wav_files(samples_dir: Path) -> list[Path]:
     """
     if not samples_dir.is_dir():
         return []
-    return sorted(
-        f for f in samples_dir.rglob("*") if f.is_file() and f.suffix.upper() == ".WAV"
-    )
+    scan = scan_tree(samples_dir, label="samples", file_filter="wav")
+    return sorted(samples_dir / entry.rel_path for entry in scan.files.values())
 
 
 def _default_manifests_dir() -> Path:
@@ -71,7 +71,7 @@ def snapshot(deluge_root: Path, *, output_dir: Path | None = None) -> Path:
     hashes: dict[str, list[str]] = defaultdict(list)
     for wav_path in wav_files:
         digest = hash_file(wav_path)
-        rel_path = str(wav_path.relative_to(deluge_root))
+        rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
         hashes[digest].append(rel_path)
 
     # Build snapshot data
@@ -150,7 +150,7 @@ def compute_migration_map(
     after_hashes: dict[str, list[str]] = defaultdict(list)
     for wav_path in wav_files:
         digest = hash_file(wav_path)
-        rel_path = str(wav_path.relative_to(deluge_root))
+        rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
         after_hashes[digest].append(rel_path)
 
     moved: dict[str, str] = {}

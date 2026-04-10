@@ -2,20 +2,13 @@
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 from unittest.mock import patch
 
 import pytest
 from sync_samples_to_cloud import main
 
-
-def _touch(path: Path, content: bytes = b"x", mtime: float | None = None) -> None:
-    """Create a tiny file with optional content and mtime."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(content)
-    if mtime is not None:
-        os.utime(path, (mtime, mtime))
+from tests.conftest import _touch
 
 
 def _setup_env(

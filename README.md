@@ -104,10 +104,22 @@ Fixes broken sample references after samples have been moved or renamed. Works i
 
 Both scripts read `DELUGE_ROOT` from `scripts/.env`.
 
+### `sync_samples_to_cloud.py`
+
+Syncs all WAV files from `DELUGE/SAMPLES/` to a configurable local folder for cloud backup, preserving directory structure. Only WAV files are copied. Files removed from the source are deleted from the destination. Non-WAV files already at the destination are left untouched.
+
+`CLOUD_BACKUP_PATH` must be set in `scripts/.env`.
+
+**Usage** (run from the `scripts/` directory):
+
+```
+uv run sync_samples_to_cloud.py            # preview changes, then prompt to apply
+uv run sync_samples_to_cloud.py --dry-run  # preview only, no changes
+```
+
 ### Ideas
 
 - Creates a complete backup of the SD card as a `.zip` file 
-- Sync the local gitignored `SAMPLES` folder to a another cloud-synced folder for back-up
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference
 - List of used and unused samples

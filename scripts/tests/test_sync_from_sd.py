@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 
 import pytest
@@ -14,16 +13,9 @@ from sync_from_sd import (
     _write_manifest,
 )
 
+from tests.conftest import _touch
 from deluge_lib.scanning import FileEntry, ScanResult
 from deluge_lib.syncing import SyncError, SyncPlan, SyncResult, execute_plan
-
-
-def _touch(path: Path, content: bytes = b"x", mtime: float | None = None) -> None:
-    """Create a tiny file with optional content and mtime."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(content)
-    if mtime is not None:
-        os.utime(path, (mtime, mtime))
 
 
 # =============================================================================

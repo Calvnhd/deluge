@@ -4,13 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path, PurePosixPath
 
+from tests.conftest import _touch
 from deluge_lib.scanning import FileEntry, ScanResult, normalise_key, scan_tree
-
-
-def _touch(path: Path, content: bytes = b"x") -> None:
-    """Create a tiny file with some content so it has non-zero size."""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(content)
 
 
 # -- File-type filtering -----------------------------------------------------

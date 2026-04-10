@@ -109,8 +109,6 @@ def scan_tree(
 
             ext = file_path.suffix.lower()
             if ext not in allowed:
-                rel = file_path.relative_to(root)
-                print(f"\n  Skipping {rel} (unsupported extension)", flush=True)
                 continue
 
             try:
