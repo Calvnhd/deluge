@@ -50,7 +50,9 @@ def find_all_xml_files(deluge_root: Path) -> list[Path]:
         d = deluge_root / subdir
         if not d.is_dir():
             continue
-        scan = scan_tree(d, file_filter="xml")
+        # Not optimal to use scan_tree because we throw away so much of the result
+        # Consider writing something bespoke
+        scan = scan_tree(d, label=subdir, file_filter="xml")
         for entry in scan.files.values():
             results.append(d / entry.rel_path)
     return sorted(results)
@@ -124,14 +126,18 @@ def _parse_deluge_xml(
         return tree, tree.getroot(), False
     except etree.XMLSyntaxError:
         raw = xml_path.read_bytes()
-        raw = raw.replace(b'<?xml version="1.0" encoding="UTF-8"?>', b"", 1)
+        # remove xml declaration
+        raw = raw.replace(b'<?xml version="1.0" encoding="UTF-8"?>', b"", 1) 
         try:
+            # wrap entire xml in new root element
             root = etree.fromstring(b"<root>" + raw + b"</root>")  # noqa: S320
+            print(f"Warning: {xml_path} has multiple root elements")
             return None, root, False
-        except etree.XMLSyntaxError:
+        except etree.XMLSyntaxError as exc:
             # Lenient parse for files with duplicate attributes, unclosed tags, etc.
             parser = etree.XMLParser(recover=True)
             root = etree.fromstring(b"<root>" + raw + b"</root>", parser=parser)  # noqa: S320
+            print(f"Warning: {xml_path} has malformed XML and was parsed with recover=true \n\tExc: {exc}")
             return None, root, True
 
 
