@@ -67,6 +67,42 @@ def get_cloud_backup_path() -> Path:
     return path
 
 
+def get_zip_source_path() -> Path:
+    """Load ZIP_SOURCE_PATH from scripts/.env.
+
+    Raises SystemExit if ZIP_SOURCE_PATH is not set or the directory does not exist.
+    """
+    load_dotenv(_SCRIPTS_DIR / ".env")
+
+    env_value = os.environ.get("ZIP_SOURCE_PATH")
+    if not env_value:
+        raise SystemExit("ZIP_SOURCE_PATH is not set. Set it in scripts/.env")
+
+    path = Path(env_value).resolve()
+    if not path.is_dir():
+        raise SystemExit(f"ZIP_SOURCE_PATH directory does not exist: {path}")
+
+    return path
+
+
+def get_zip_dest_path() -> Path:
+    """Load ZIP_DEST_PATH from scripts/.env.
+
+    Raises SystemExit if ZIP_DEST_PATH is not set or the directory does not exist.
+    """
+    load_dotenv(_SCRIPTS_DIR / ".env")
+
+    env_value = os.environ.get("ZIP_DEST_PATH")
+    if not env_value:
+        raise SystemExit("ZIP_DEST_PATH is not set. Set it in scripts/.env")
+
+    path = Path(env_value).resolve()
+    if not path.is_dir():
+        raise SystemExit(f"ZIP_DEST_PATH directory does not exist: {path}")
+
+    return path
+
+
 def confirm_apply(message: str) -> bool:
     """Print message and prompt user for confirmation.
 
