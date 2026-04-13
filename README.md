@@ -54,13 +54,11 @@ Copy the example config and set paths for your machine:
 cp scripts/.env.example scripts/.env
 ```
 
-All scripts read configuration from `scripts/.env`. See `.env.example` for available options.
+All scripts read configuration from `scripts/.env`. See `.env.example` for available options. Run all scripts from the `scripts/` directory.
 
 ### `sync_from_sd.py`
 
 Syncs the mounted SD card into the local `DELUGE/` directory so it mirrors the card exactly. The SD card is never modified — all changes flow one way (SD card → repo).
-
-**Usage** (run from the `scripts/` directory):
 
 ```
 uv run sync_from_sd.py            # preview changes, then prompt to apply
@@ -69,14 +67,19 @@ uv run sync_from_sd.py --dry-run  # preview only, no changes
 
 ### `verify_references.py`
 
-**Status:** Work in progress
-
-Checks that all sample paths referenced in XML presets point to existing files under `DELUGE/`. Reports any broken references. Exit code `0` means all references are valid; exit code `1` means broken references were found.
-
-**Usage** (run from the `scripts/` directory):
+Checks that all samples (.WAV) referenced in all XML presets point to existing files under `DELUGE/`. Reports any broken references.
 
 ```
 uv run verify_references.py
+```
+
+### `create_backup.py`
+
+Creates a timestamped `.zip` archive of the SD card (or any configured source directory). Archives all XML and WAV files with compression.
+
+```
+uv run create_backup.py            # create a backup
+uv run create_backup.py --dry-run  # preview file count and size only
 ```
 
 ### `fix_references.py`
@@ -110,8 +113,6 @@ Syncs all WAV files from `DELUGE/SAMPLES/` to a configurable local folder for cl
 
 `CLOUD_BACKUP_PATH` must be set in `scripts/.env`.
 
-**Usage** (run from the `scripts/` directory):
-
 ```
 uv run sync_samples_to_cloud.py            # preview changes, then prompt to apply
 uv run sync_samples_to_cloud.py --dry-run  # preview only, no changes
@@ -119,7 +120,7 @@ uv run sync_samples_to_cloud.py --dry-run  # preview only, no changes
 
 ### Ideas
 
-- Creates a complete backup of the SD card as a `.zip` file 
+- sync script can specify whether or not to sync samples?
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference
 - List of used and unused samples
