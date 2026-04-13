@@ -1,12 +1,13 @@
 """Create a timestamped .zip backup of the Deluge SD card or repo DELUGE/ directory.
 
-Archives all XML and WAV files (excluding .trash) into a compressed zip file.
-Pass --dry-run to preview file count and estimated size without creating an archive.
+Archives all XML and WAV files into a compressed zip file.
+Pass --dry-run to preview file count and estimated size
 """
 
 from __future__ import annotations
 
 import argparse
+import time
 import zipfile
 from datetime import datetime
 from pathlib import PurePosixPath
@@ -33,7 +34,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Show file count and estimated size without creating an archive.",
+        help="Show file count and estimated size without creating an archive",
     )
     args = parser.parse_args(argv)
 
@@ -48,7 +49,7 @@ def main(argv: list[str] | None = None) -> None:
     files = scan.files
 
     if not files:
-        print("No files found to archive.")
+        print("No files found to archive")
         return
 
     total_size = sum(entry.size for entry in files.values())
@@ -57,7 +58,7 @@ def main(argv: list[str] | None = None) -> None:
         print(f"Files:           {len(files)}")
         print(f"Uncompressed:    {_format_size(total_size)}")
         print()
-        print("Dry run complete.")
+        print("Dry run complete")
         return
 
     timestamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
@@ -67,12 +68,22 @@ def main(argv: list[str] | None = None) -> None:
     file_count = len(files)
     archived = 0
 
+    # ZIP requires dates >= 1980-01-01 (unix timestamp 315532800).
+    # FAT32 SD cards often have bogus timestamps (e.g. 1601-01-01 on Windows)
+    # so we clamp to the ZIP minimum unconditionally.
+    _ZIP_MIN_EPOCH = 315532800
+
     try:
         with zipfile.ZipFile(archive_path, "w", zipfile.ZIP_DEFLATED) as zf:
             for entry in files.values():
                 abs_path = source / entry.rel_path
                 arcname = str(PurePosixPath(entry.rel_path))
-                zf.write(abs_path, arcname)
+                info = zipfile.ZipInfo(arcname)
+                info.compress_type = zipfile.ZIP_DEFLATED
+                mtime = max(abs_path.stat().st_mtime, _ZIP_MIN_EPOCH)
+                info.date_time = time.localtime(mtime)[:6]
+                with abs_path.open("rb") as f:
+                    zf.writestr(info, f.read())
                 archived += 1
                 print(f"\rArchiving... {archived}/{file_count}", end="", flush=True)
         print()
