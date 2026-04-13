@@ -13,7 +13,7 @@ from typing import Any
 from lxml import etree
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
-from deluge_lib.scanning import scan_tree
+from deluge_lib.scanning import print_path, scan_tree
 from deluge_lib.deluge_sdk import (
     SampleRef,
     extract_sample_refs,
@@ -321,7 +321,7 @@ def preview_and_apply(
                 pair_counts[(change.old_path, change.new_path)] += 1
             for (old, new), count in pair_counts.items():
                 suffix = f" (× {count} refs)" if count > 1 else ""
-                print(f'  {xml_file}: "{old}" → "{new}"{suffix}')
+                print(f'  {print_path(xml_file)}: "{old}" → "{new}"{suffix}')
 
     # --- Errors ---
     if result.errors:
@@ -329,7 +329,7 @@ def preview_and_apply(
         print("ERRORS — Requires Manual Resolution")
         print("------------------------------------")
         for error in result.errors:
-            print(f"  {error.ref.xml_file}: \"{error.deleted_path}\" — sample deleted")
+            print(f"  {print_path(error.ref.xml_file)}: \"{error.deleted_path}\" — sample deleted")
 
     # --- Warnings ---
     if result.warnings:
@@ -338,7 +338,7 @@ def preview_and_apply(
         print("-----------------------------")
         for warning in result.warnings:
             print(
-                f"  {warning.ref.xml_file}: \"{warning.ambiguous_path}\""
+                f"  {print_path(warning.ref.xml_file)}: \"{warning.ambiguous_path}\""
                 " — multiple files share this hash"
             )
 

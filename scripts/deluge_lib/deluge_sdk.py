@@ -137,7 +137,7 @@ def _parse_deluge_xml(
             # Lenient parse for files with duplicate attributes, unclosed tags, etc.
             parser = etree.XMLParser(recover=True)
             root = etree.fromstring(b"<root>" + raw + b"</root>", parser=parser)  # noqa: S320
-            print(f"Warning: {xml_path} has malformed XML and was parsed with recover=true \n\tExc: {exc}")
+            print(f"Warning: {xml_path} has malformed XML and was parsed with recover=true. {exc}")
             return None, root, True
 
 

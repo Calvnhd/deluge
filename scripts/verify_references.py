@@ -9,7 +9,7 @@ from typing import NamedTuple
 
 from deluge_lib.cli_utils import get_deluge_root
 from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files
-from deluge_lib.scanning import normalise_key, scan_tree
+from deluge_lib.scanning import print_path, normalise_key, scan_tree
 
 # Regex to find sample paths in raw XML text. Case-insensitive.
 # Matches paths like SAMPLES/any/path.wav (possibly inside quotes or element text).
@@ -108,9 +108,9 @@ def main(argv: list[str] | None = None) -> None:  # noqa: ARG001
         print(f"Broken references ({len(result.broken)}):")
         for ref in result.broken:
             if ref.xml_type == "song":
-                print(f"  {ref.xml_file} ({ref.preset_name}) — {ref.sample_path}")
+                print(f"  {print_path(ref.xml_file)} ({ref.preset_name}) — {ref.sample_path}")
             else:
-                print(f"  {ref.xml_file} — {ref.sample_path}")
+                print(f"  {print_path(ref.xml_file)} — {ref.sample_path}")
     else:
         print("All references valid.")
 
@@ -119,7 +119,7 @@ def main(argv: list[str] | None = None) -> None:  # noqa: ARG001
         print()
         print(f"Unextracted sample paths ({len(result.unextracted)}):")
         for xml_file, sample_path in result.unextracted:
-            print(f"  {xml_file} — {sample_path}")
+            print(f"  {print_path(xml_file)} — {sample_path}")
 
     # Summary
     print()

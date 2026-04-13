@@ -24,6 +24,11 @@ def normalise_key(path: str | Path) -> str:
     return str(PurePosixPath(path)).lower()
 
 
+def print_path(path: str | Path) -> str:
+    """Cosmetic consistency. Format *path* forward slashes, preserving case."""
+    return str(PurePosixPath(path))
+
+
 def normalise_mtime(raw_mtime: float) -> float:
     """Truncate a timestamp to FAT32's 2-second resolution.
 

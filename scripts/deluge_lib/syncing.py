@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from deluge_lib.scanning import FileFilter, ScanResult, normalise_key, normalise_mtime, scan_tree
+from deluge_lib.scanning import FileFilter, ScanResult, print_path, normalise_key, normalise_mtime, scan_tree
 
 if TYPE_CHECKING:
     from typing import TypedDict
@@ -198,12 +198,12 @@ def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> No
     for _src, dst in plan.files_to_copy:
         rel = dst.relative_to(dest)
         if dst.exists():
-            print(f"  update  {rel}")
+            print(f"  update  {print_path(rel)}")
         else:
-            print(f"  copy    {rel}")
+            print(f"  copy    {print_path(rel)}")
 
     for path in plan.files_to_delete:
-        print(f"  {delete_label:<8}{path.relative_to(dest)}")
+        print(f"  {delete_label:<8}{print_path(path.relative_to(dest))}")
 
     print()
     print(
