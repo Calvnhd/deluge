@@ -202,7 +202,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 |---|---|---|
 | Extracted presets produce unexpected audio | Transformation recipes from Section 13.5 are verified against real standalone presets. Volume/pan normalisation uses init preset reference values. | User should spot-check a few extractions on hardware |
 | Kit row drumIndex mismatch | Validate drumIndex against soundSources count. Warn and skip mismatched rows. | Minimal — user confirms this scenario indicates broken XML |
-| Special characters cause filesystem issues | Spaces preserved (Deluge handles them). No additional sanitisation unless characters unsafe on FAT32 (`\ / : * ? " < > |`) are found — strip those with warning. | Low — observed names only contain spaces, hyphens, digits |
+| Special characters cause filesystem issues | Spaces preserved (Deluge handles them). FAT32 sanitisation deemed unnecessary — filenames originate from the FAT32 SD card, so unsafe characters cannot appear. | None |
 | Orphaned instruments produce stale presets | Skip orphaned instruments with warning (D7). | None — user aware and can revisit |
 | `.trash` replacement deletes user files | Only trash contents of `SONG-SYNTHS/` and `SONG-KITS/`. Never touch parent directories or user preset folders. | Minimal — output dirs are clearly script-managed |
 | Synth arpeggiator missed | Extraction explicitly handles clip-level arpeggiator for synths (D12). Strip extra numeric attrs. | Low if tests verify arpeggiator presence |
@@ -346,7 +346,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [ ] Colour abbreviation map: 0=Lbl, 1=Pnk, 2=Gld, 3=Cyn, 4=Red, 5=Ylw, 6=Dbl, 7=Orn, 8=Pur, 9=Lme, 10=Grn, 11=Mag
   - [ ] Collision resolution: if filename already used, append `-2`, `-3`, etc.
   - [ ] Spaces, hyphens, and digits in names preserved as-is
-  - [ ] Characters unsafe on FAT32 (`\ / : * ? " < > |`) stripped with warning if found
+  - [ ] ~~FAT32 sanitisation removed — filenames originate from FAT32 SD card, so unsafe characters cannot appear~~
 - **Implementation Notes:**
   > {Space for the Implement agent to add notes during execution}
 
@@ -506,11 +506,11 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 
 ## Open Questions
 
-1. **What is the correct indentation/whitespace style for output XML?**
+1. **What is the correct indentation/whitespace style for output XML?** ✅ Resolved
    - **Impact:** The Deluge firmware may be sensitive to XML formatting. If Init-Synth.XML uses tabs or specific indentation, the output should match.
    - **Recommendation:** Inspect Init-Synth.XML formatting during implementation and replicate it. lxml's `pretty_print` option with appropriate indentation should suffice.
    - **Blocking:** No — can be resolved during Task 3.2
-   - **Resolution:** _{To be filled during implementation}_
+   - **Resolution:** Hardware-tested. lxml's `pretty_print=True` with `encoding="UTF-8"` produces output that the Deluge firmware (c1.2.1) loads without issue. The Deluge re-normalises formatting to its preferred tab-indented style when the user saves the preset. No custom serialiser needed — use lxml's default pretty-print output.
 
 2. **Should the manifest be one file per output directory or one combined file?**
    - **Impact:** Minor organisational choice. Two manifests (one per output dir) is slightly cleaner; one combined file is simpler to parse.

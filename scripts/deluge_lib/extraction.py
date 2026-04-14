@@ -1,4 +1,6 @@
-"""Core extraction logic for extracting standalone presets from Deluge song XMLs.
+"""WORK IN PROGRESS
+
+Core extraction logic for extracting standalone presets from Deluge song XMLs.
 
 This module contains all reusable functions for:
 - Song parsing and instrument/clip discovery
@@ -13,7 +15,6 @@ No CLI concerns, no user interaction. Receives parsed XML trees and returns data
 from __future__ import annotations
 
 import copy
-import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -78,9 +79,6 @@ SECTION_COLOURS: dict[int, tuple[str, str]] = {
 # differ by > DIFF_PARAM_PERCENT_THRESHOLD (as a fraction of the full range).
 DIFF_PARAM_COUNT_THRESHOLD = 3
 DIFF_PARAM_PERCENT_THRESHOLD = 0.10
-
-# Characters unsafe on FAT32 filesystems — must be stripped from filenames.
-FAT32_UNSAFE_CHARS = re.compile(r'[\\/:*?"<>|]')
 
 # The standalone synth child element order for c1.2.1 firmware.
 # Elements are reordered to match this sequence during extraction.
@@ -477,11 +475,10 @@ def generate_filename(
         1. Construct base name: "<song_name>-<preset_name>"
         2. If extended, append "-<Abbr>" using SECTION_COLOURS[section_id]
         3. Append ".XML" extension
-        4. Strip any FAT32-unsafe characters (warn if found)
-        5. If filename is already in used_filenames, append "-2", "-3", etc.
+        4. If filename is already in used_filenames, append "-2", "-3", etc.
            until unique
-        6. Add the final filename to used_filenames
-        7. Return the filename
+        5. Add the final filename to used_filenames
+        6. Return the filename
     """
     raise NotImplementedError("Task 3.1: Filename generation")
 
@@ -502,11 +499,11 @@ def serialise_xml(element: etree._Element, output_path: Path) -> None:
         output_path: Absolute path for the output file.
 
     Steps:
-        1. Use lxml.etree.tostring() with xml_declaration=True, encoding="UTF-8"
-        2. Investigate and match the whitespace/indentation style of Init-Synth.XML
-           (the Deluge may be sensitive to formatting)
-        3. Write the resulting bytes to output_path
-        4. Ensure parent directories exist (create if needed)
+        1. Use lxml.etree.tostring() with xml_declaration=True, encoding="UTF-8",
+           pretty_print=True — hardware-tested and confirmed compatible with
+           Deluge firmware c1.2.1 (the Deluge re-normalises formatting on save)
+        2. Write the resulting bytes to output_path
+        3. Ensure parent directories exist (create if needed)
     """
     raise NotImplementedError("Task 3.2: XML serialisation")
 
@@ -741,11 +738,4 @@ def _parse_hex_value(hex_str: str) -> int:
     raise NotImplementedError("Helper: Parse Deluge hex value")
 
 
-def _sanitise_filename(name: str) -> tuple[str, list[str]]:
-    """Remove FAT32-unsafe characters from a filename component.
 
-    Returns:
-        Tuple of (sanitised_name, warnings) where warnings lists any characters
-        that were stripped.
-    """
-    raise NotImplementedError("Helper: Sanitise filename for FAT32")

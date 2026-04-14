@@ -1,4 +1,6 @@
-"""Extract standalone synth and kit presets from Deluge song XMLs.
+"""WORK IN PROGRESS
+
+Extract standalone synth and kit presets from Deluge song XMLs.
 
 Scans all song XMLs in DELUGE/SONGS/, extracts embedded instruments as
 standalone preset XMLs, and writes them to DELUGE/SYNTHS/SONG-SYNTHS/ and

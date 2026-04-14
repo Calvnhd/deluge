@@ -284,10 +284,6 @@ class TestGenerateFilename:
         """Should keep spaces and hyphens in names."""
         pytest.skip("Not implemented")
 
-    def test_strips_fat32_unsafe_chars(self) -> None:
-        """Should remove \\ / : * ? \" < > | with warning."""
-        pytest.skip("Not implemented")
-
 
 # ---------------------------------------------------------------------------
 # Task 3.2: XML serialisation

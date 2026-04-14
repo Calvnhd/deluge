@@ -6,6 +6,8 @@ Existing code changes — Inline comments work but are easy to lose track of. Ta
 
 One addition to consider: Write the CLI entry point (extract_instruments.py) as a real skeleton that calls the stubbed functions in order. That way you can actually run the script early and watch it progress through the flow (hitting NotImplementedError at each unimplemented step). It's a useful sanity check for the overall pipeline structure.
 
+---
+
 Delegating to implementer...
 
 Skill
