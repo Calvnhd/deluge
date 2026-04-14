@@ -22,6 +22,7 @@ deluge-fix = "fix_references:main"
 deluge-verify = "verify_references:main"
 deluge-backup = "create_backup:main"
 deluge-to-sd = "sync_to_sd:main"
+deluge-extract = "extract_instruments:main"
 
 [project.optional-dependencies]
 dev = [
