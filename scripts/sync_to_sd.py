@@ -1,7 +1,9 @@
-"""Sync the local DELUGE/ directory back to a mounted Deluge SD card.
+"""WORK IN PROGRESS
+
+Sync the local DELUGE/ directory back to a mounted Deluge SD card.
 
 By default, shows a preview of changes then prompts to apply.
-Pass --dry-run to preview only (no prompt).
+Pass --dry-run to preview only.
 
 Safety measures:
 - All copies (repo → SD) execute before any deletions
