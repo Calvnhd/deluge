@@ -71,10 +71,14 @@ def snapshot(deluge_root: Path, *, output_dir: Path | None = None) -> Path:
     wav_files = _find_wav_files(samples_dir)
 
     hashes: dict[str, list[str]] = defaultdict(list)
-    for wav_path in wav_files:
+    total = len(wav_files)
+    for i, wav_path in enumerate(wav_files, 1):
+        print(f"\rHashing {i}/{total}...", end="", flush=True)
         digest = hash_file(wav_path)
         rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
         hashes[digest].append(rel_path)
+    if total:
+        print()
 
     # Build snapshot data
     snapshot_date = date.today().isoformat()
@@ -150,10 +154,14 @@ def compute_migration_map(
     wav_files = _find_wav_files(samples_dir)
 
     after_hashes: dict[str, list[str]] = defaultdict(list)
-    for wav_path in wav_files:
+    total = len(wav_files)
+    for i, wav_path in enumerate(wav_files, 1):
+        print(f"\rHashing {i}/{total}...", end="", flush=True)
         digest = hash_file(wav_path)
         rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
         after_hashes[digest].append(rel_path)
+    if total:
+        print()
 
     moved: dict[str, str] = {}
     deleted: dict[str, list[str]] = {}
@@ -401,9 +409,9 @@ def main(argv: list[str] | None = None) -> None:
     )
     fix_parser.add_argument(
         "--snapshot",
-        required=True,
+        required=False,
         dest="snapshot_path",
-        help="Path to the before-snapshot JSON file.",
+        help="Path to the before-snapshot JSON file. Defaults to the most recent snapshot.",
     )
     fix_parser.add_argument(
         "--apply",
@@ -416,8 +424,16 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "snapshot":
         deluge_root = get_deluge_root()
         snapshot(deluge_root)
-    elif args.command == "fix":
-        snapshot_path = Path(args.snapshot_path)
+    elif True: # args.command == "fix":
+        if False:# args.snapshot_path:
+            snapshot_path = Path(args.snapshot_path)
+        else:
+            manifests_dir = _default_manifests_dir()
+            snapshots = sorted(manifests_dir.glob("snapshot-*.json"))
+            if not snapshots:
+                raise SystemExit(f"No snapshots found in {manifests_dir}")
+            snapshot_path = snapshots[-1]
+            print(f"Using latest snapshot: {snapshot_path.name}")
         if not snapshot_path.is_file():
             raise SystemExit(f"Snapshot file not found: {snapshot_path}")
         deluge_root = get_deluge_root()
@@ -429,8 +445,6 @@ def main(argv: list[str] | None = None) -> None:
             raise SystemExit(1)
     else:
         parser.print_help()
-        raise SystemExit(1)
-
 
 if __name__ == "__main__":
     main()
