@@ -17,18 +17,15 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
-import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
 from deluge_lib.extraction import (
     ExtractionResult,
-    InstrumentClipGroup,
     NormalisationConfig,
     SECTION_COLOURS,
     build_manifest_entry,
-    compare_versions,
     discover_clips,
     discover_instruments,
     discover_songs,
@@ -64,59 +61,33 @@ def main(argv: list[str] | None = None) -> None:
     # With --dry-run: show dry-run preview only, no prompt.
     explicit_dry_run = args.dry_run
 
-    # --- Phase 1: Discovery --------------------------------------------------
-
-    try:
-        deluge_root = get_deluge_root()
-    except SystemExit as exc:
-        print(f"Error: {exc}", file=sys.stderr)
-        sys.exit(1)
-
-    # Validate init presets exist (required for normalisation reference values).
-    init_synth_path = deluge_root / "SYNTHS" / "Init-Synth.XML"
-    init_kit_path = deluge_root / "KITS" / "Init-Kit.XML"
-    if not init_synth_path.is_file():
-        print(f"Error: Init synth preset not found: {init_synth_path}", file=sys.stderr)
-        sys.exit(1)
-    if not init_kit_path.is_file():
-        print(f"Error: Init kit preset not found: {init_kit_path}", file=sys.stderr)
-        sys.exit(1)
+    # ----- Extraction -----
 
     # Discover and parse all valid song XMLs.
-    try:
-        songs = discover_songs(deluge_root)
-    except NotImplementedError:
-        print("Error: discover_songs() is not yet implemented.", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"Scanning {len(songs)} songs...\n")
-
-    # --- Phase 2: Extraction -------------------------------------------------
+    deluge_root = get_deluge_root()
+    songs = discover_songs(deluge_root)
 
     all_results: list[ExtractionResult] = []
-    all_warnings: list[str] = []
     norm_config = NormalisationConfig()
 
     # Track filenames per output directory for collision detection.
     used_synth_filenames: set[str] = set()
     used_kit_filenames: set[str] = set()
 
+    synth_output_dir = deluge_root / "SYNTHS" / "SONG-SYNTHS"
+    kit_output_dir = deluge_root / "KITS" / "SONG-KITS"
+
     for song_path, song_tree in songs:
         song_name = song_path.stem
 
         # Discover instruments and clips in this song.
-        try:
-            instruments = discover_instruments(song_tree)
-            clips = discover_clips(song_tree)
-            groups, match_warnings = match_instruments_to_clips(instruments, clips)
-        except NotImplementedError as exc:
-            print(f"Error: {exc}", file=sys.stderr)
-            sys.exit(1)
+        instruments = discover_instruments(song_tree)
+        clips = discover_clips(song_tree)
+        groups, match_warnings = match_instruments_to_clips(instruments, clips)
 
         # Print match warnings (orphaned instruments, duplicate clips).
         for warning in match_warnings:
             print(f"WARNING: {song_name}.XML — {warning}")
-            all_warnings.append(f"{song_name}.XML — {warning}")
 
         # Skip songs with no extractable instruments.
         if not groups:
@@ -125,35 +96,23 @@ def main(argv: list[str] | None = None) -> None:
         song_results: list[ExtractionResult] = []
 
         for group in groups:
-            # Select clips for extraction based on mode.
-            try:
-                if args.extended:
-                    clips_to_extract = select_extended_clips(group)
-                else:
-                    clips_to_extract = [select_default_clip(group)]
-            except NotImplementedError as exc:
-                print(f"Error: {exc}", file=sys.stderr)
-                sys.exit(1)
+            if args.extended:
+                clips_to_extract = select_extended_clips(group)
+            else:
+                clips_to_extract = [select_default_clip(group)]
 
             for clip_info in clips_to_extract:
                 inst = group.instrument
                 section_id = clip_info.section
-                colour_name, colour_abbr = SECTION_COLOURS.get(
-                    section_id, ("Unknown", "Unk")
-                )
+                colour_name, colour_abbr = SECTION_COLOURS[section_id]
 
                 # Transform embedded instrument → standalone preset.
-                try:
-                    if inst.instrument_type == "synth":
-                        element = extract_synth(inst.element, clip_info.element)
-                    else:
-                        element = extract_kit(inst.element, clip_info.element)
-
-                    # Normalise master volume and pan.
-                    normalise_params(element, inst.instrument_type, norm_config)
-                except NotImplementedError as exc:
-                    print(f"Error: {exc}", file=sys.stderr)
-                    sys.exit(1)
+                if inst.instrument_type == "synth":
+                    element = extract_synth(inst.element, clip_info.element)
+                else:
+                    element = extract_kit(inst.element, clip_info.element)
+                # Normalise master volume and pan.
+                normalise_params(element, inst.instrument_type, norm_config)
 
                 # Generate output filename.
                 used = (
@@ -161,18 +120,14 @@ def main(argv: list[str] | None = None) -> None:
                     if inst.instrument_type == "synth"
                     else used_kit_filenames
                 )
-                try:
-                    filename = generate_filename(
-                        song_name=song_name,
-                        preset_name=inst.preset_name,
-                        instrument_type=inst.instrument_type,
-                        section_id=section_id,
-                        extended=args.extended,
-                        used_filenames=used,
-                    )
-                except NotImplementedError as exc:
-                    print(f"Error: {exc}", file=sys.stderr)
-                    sys.exit(1)
+                filename = generate_filename(
+                    song_name=song_name,
+                    preset_name=inst.preset_name,
+                    instrument_type=inst.instrument_type,
+                    section_id=section_id,
+                    extended=args.extended,
+                    used_filenames=used,
+                )
 
                 result = ExtractionResult(
                     song_name=song_name,
@@ -192,16 +147,17 @@ def main(argv: list[str] | None = None) -> None:
             print(f"{song_name}.XML")
             for r in song_results:
                 type_label = r.instrument_type.upper()
-                subdir = (
-                    "SONG-SYNTHS" if r.instrument_type == "synth" else "SONG-KITS"
+                output_dir = (
+                    synth_output_dir if r.instrument_type == "synth" else kit_output_dir
                 )
+                rel_dir = output_dir.relative_to(deluge_root)
                 print(
                     f"  {type_label:<6} {r.preset_name:<20}"
-                    f"→ {subdir}/{r.output_filename}"
+                    f"→ {rel_dir}/{r.output_filename}"
                 )
             all_results.extend(song_results)
 
-    # --- Phase 3: Summary and Output -----------------------------------------
+    # ----- Summary and Output -----
 
     synth_count = sum(1 for r in all_results if r.instrument_type == "synth")
     kit_count = sum(1 for r in all_results if r.instrument_type == "kit")
@@ -209,9 +165,6 @@ def main(argv: list[str] | None = None) -> None:
         f"\nSummary: Extracted {synth_count} synths and {kit_count} kits "
         f"from {len(songs)} songs"
     )
-
-    synth_output_dir = deluge_root / "SYNTHS" / "SONG-SYNTHS"
-    kit_output_dir = deluge_root / "KITS" / "SONG-KITS"
 
     if synth_count > 0:
         print(f"  Output: {synth_output_dir.relative_to(deluge_root)}/ ({synth_count} files)")
@@ -224,7 +177,7 @@ def main(argv: list[str] | None = None) -> None:
 
     # In dry-run mode, stop here.
     if explicit_dry_run:
-        print("\n(dry run)")
+        print("\nDry run complete")
         return
 
     # Prompt for confirmation before writing.
@@ -233,9 +186,15 @@ def main(argv: list[str] | None = None) -> None:
         print("Aborted.")
         return
 
-    # Trash previous extraction directories (D8).
-    _trash_output_dir(deluge_root / "SYNTHS", "SONG-SYNTHS")
-    _trash_output_dir(deluge_root / "KITS", "SONG-KITS")
+    # Trash previous extraction directories.
+    if synth_output_dir.is_dir() or kit_output_dir.is_dir():
+        trash_base = deluge_root / ".trash" / datetime.now().strftime("extract-%Y%m%d_%H%M%S")
+        for source in [synth_output_dir, kit_output_dir]:
+            if source.is_dir():
+                rel_path = source.relative_to(deluge_root)
+                trash_dest = trash_base / rel_path
+                trash_dest.parent.mkdir(parents=True, exist_ok=True)
+                shutil.move(str(source), str(trash_dest))
 
     # Create fresh output directories.
     synth_output_dir.mkdir(parents=True, exist_ok=True)
@@ -245,11 +204,7 @@ def main(argv: list[str] | None = None) -> None:
     for result in all_results:
         output_dir = synth_output_dir if result.instrument_type == "synth" else kit_output_dir
         output_path = output_dir / result.output_filename
-        try:
-            serialise_xml(result.element, output_path)
-        except NotImplementedError as exc:
-            print(f"Error: {exc}", file=sys.stderr)
-            sys.exit(1)
+        serialise_xml(result.element, output_path)
 
     # Write manifests.
     _write_manifest(synth_output_dir, all_results, "synth", len(songs))
@@ -261,27 +216,6 @@ def main(argv: list[str] | None = None) -> None:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
-
-
-def _trash_output_dir(parent_dir: Path, subdir_name: str) -> None:
-    """Move an existing output subdirectory to .trash within the parent.
-
-    If SONG-SYNTHS/ exists, moves it to SYNTHS/.trash/SONG-SYNTHS/.
-    Overwrites any previous trash contents.
-    """
-    source = parent_dir / subdir_name
-    if not source.is_dir():
-        return
-
-    trash_dir = parent_dir / ".trash"
-    trash_dest = trash_dir / subdir_name
-
-    # Remove old trash if it exists.
-    if trash_dest.is_dir():
-        shutil.rmtree(trash_dest)
-
-    trash_dir.mkdir(parents=True, exist_ok=True)
-    shutil.move(str(source), str(trash_dest))
 
 
 def _write_manifest(

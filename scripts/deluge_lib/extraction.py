@@ -230,7 +230,39 @@ def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
         4. If firmwareVersion != "c1.2.1", print warning and skip
         5. Collect and return valid (path, root) tuples
     """
-    raise NotImplementedError("Task 1.2: Song discovery and firmware validation")
+    songs_dir = deluge_root / "SONGS"
+    if not songs_dir.is_dir():
+        return []
+
+    results: list[tuple[Path, etree._Element]] = []
+
+    for xml_path in sorted(songs_dir.glob("*.XML")):
+        if not xml_path.is_file():
+            continue
+
+        try:
+            _tree, root, _recovered = _parse_deluge_xml(xml_path)
+        except Exception as exc:
+            print(f"WARNING: Skipping {xml_path.name} — failed to parse XML: {exc}")
+            continue
+
+        # If the parser wrapped content in a <root> element, find the <song> child.
+        song_el = root if root.tag == "song" else root.find("song")
+        if song_el is None:
+            print(f"WARNING: Skipping {xml_path.name} — no <song> root element found")
+            continue
+
+        firmware = song_el.get("firmwareVersion", "")
+        if firmware != FIRMWARE_VERSION:
+            print(
+                f"WARNING: Skipping {xml_path.name}"
+                f" — firmware {firmware!r} (expected {FIRMWARE_VERSION!r})"
+            )
+            continue
+
+        results.append((xml_path, song_el))
+
+    return results
 
 
 # ---------------------------------------------------------------------------

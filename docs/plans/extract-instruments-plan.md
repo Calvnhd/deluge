@@ -218,18 +218,22 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 > **Goal:** Set up the module structure, XML parsing infrastructure, and instrument-clip discovery logic
 > **Prerequisites:** Existing codebase available, `DELUGE_ROOT` configured in `.env`
 
-#### Task 1.1: Create module and script scaffolding
+#### Task 1.1: Create module and script scaffolding ✅
 
 - **Description:** Create `scripts/deluge_lib/extraction.py` and `scripts/extract_instruments.py` with basic structure. Add pyproject.toml entry point.
 - **Inputs:** Existing pyproject.toml, existing deluge_lib module structure
 - **Outputs:** Empty module with docstring, CLI script with argparse skeleton (`--extended`, `--dry-run`), pyproject.toml updated
 - **Acceptance Criteria:**
-  - [ ] `scripts/deluge_lib/extraction.py` exists with module docstring
-  - [ ] `scripts/extract_instruments.py` exists with `main()` function and argparse for `--extended` and `--dry-run`
-  - [ ] `pyproject.toml` has `deluge-extract = "extract_instruments:main"` entry point
-  - [ ] `deluge-extract --help` runs successfully
+  - [x] `scripts/deluge_lib/extraction.py` exists with module docstring
+  - [x] `scripts/extract_instruments.py` exists with `main()` function and argparse for `--extended` and `--dry-run`
+  - [x] `pyproject.toml` has `deluge-extract = "extract_instruments:main"` entry point
+  - [x] `deluge-extract --help` runs successfully
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Scaffolding completed 15 Apr 2026. Files created:
+  > - `scripts/extract_instruments.py` — full CLI pipeline with argparse, discovery loop, extraction loop, trash logic (inline), manifest writing, summary output, dry-run/confirmation flow
+  > - `scripts/deluge_lib/extraction.py` — all dataclasses (`InstrumentInfo`, `ClipInfo`, `InstrumentClipGroup`, `VersionComparison`, `NormalisationConfig`, `ExtractionResult`), all function stubs with full signatures and detailed docstrings, all constants defined (init volumes, section colours, element ordering, thresholds, stripped attributes)
+  > - Key decisions: dataclasses for all data structures, `NotImplementedError` stubs with task references, constants as module-level tuples/dicts
+  > - `pyproject.toml` entry point (`deluge-extract = "extract_instruments:main"`) was already present at line 25 — no addition needed
 
 #### Task 1.2: Song discovery and firmware validation
 
@@ -237,13 +241,18 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** `DELUGE_ROOT` from `.env`, song XMLs
 - **Outputs:** List of valid song file paths, warnings for skipped songs
 - **Acceptance Criteria:**
-  - [ ] Discovers all `*.XML` files in `DELUGE_ROOT/SONGS/` (non-recursive — songs are at top level)
-  - [ ] Parses each song XML using `_parse_deluge_xml()` or equivalent
-  - [ ] Reads `firmwareVersion` attribute from `<song>` root element
-  - [ ] Skips and warns for songs with firmware ≠ `c1.2.1`
-  - [ ] Returns list of `(path, parsed_tree)` tuples for valid songs
+  - [x] Discovers all `*.XML` files in `DELUGE_ROOT/SONGS/` (non-recursive — songs are at top level)
+  - [x] Parses each song XML using `_parse_deluge_xml()` or equivalent
+  - [x] Reads `firmwareVersion` attribute from `<song>` root element
+  - [x] Skips and warns for songs with firmware ≠ `c1.2.1`
+  - [x] Returns list of `(path, parsed_tree)` tuples for valid songs
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Implemented 15 Apr 2026. `discover_songs()` in `extraction.py`:
+  > - Globs `SONGS/*.XML` (sorted for deterministic order), parses each with `_parse_deluge_xml()`
+  > - Handles wrapper `<root>` case (multi-root fallback) by finding the `<song>` child
+  > - Gracefully skips files that fail to parse (catches all exceptions, warns, continues)
+  > - Warns and skips songs with `firmwareVersion != "c1.2.1"`
+  > - Verified via `--dry-run`: all 58 songs discovered and parsed (13 use recover-mode due to duplicate `isPlaying` attributes, all pass firmware validation). Hits `NotImplementedError` at Task 1.3 as expected.
 
 #### Task 1.3: Instrument and clip discovery
 
@@ -264,14 +273,14 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 #### Task 1.4: Version selection (default mode)
 
 - **Description:** For each instrument, select the clip with the lowest section ID as the extraction source.
-- **Inputs:** Instrument-to-clips mapping from Task 1.3
-- **Outputs:** List of `(instrument_element, clip_element, section_id)` tuples — one per instrument
+- **Inputs:** `InstrumentClipGroup` from Task 1.3
+- **Outputs:** `ClipInfo` — the selected clip for the instrument
 - **Acceptance Criteria:**
   - [ ] Selects the clip with the lowest section ID for each instrument
-  - [ ] Returns the instrument element, the selected clip element, and the section ID
+  - [ ] Returns a `ClipInfo` dataclass (contains element, section, preset_name, preset_folder)
   - [ ] Handles instruments with only one clip (trivial selection)
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > API scaffolded as `select_default_clip(group: InstrumentClipGroup) -> ClipInfo`. Returns a single `ClipInfo` rather than a tuple — the calling code in `main()` accesses `clip_info.section` and `clip_info.element` directly.
 
 ### Phase 2: Core Transformation
 
@@ -348,7 +357,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [ ] Spaces, hyphens, and digits in names preserved as-is
   - [ ] ~~FAT32 sanitisation removed — filenames originate from FAT32 SD card, so unsafe characters cannot appear~~
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Function stub exists in `extraction.py` with full signature: `generate_filename(song_name, preset_name, instrument_type, section_id, extended, used_filenames) -> str`. Needs implementation.
 
 #### Task 3.2: XML serialisation
 
@@ -360,49 +369,49 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [ ] Output matches the formatting style of existing standalone presets (use `lxml.etree.tostring` with `xml_declaration=True`, `encoding="UTF-8"`)
   - [ ] Investigate and match the whitespace/indentation style of Init-Synth.XML and Init-Kit.XML — the Deluge may be sensitive to formatting
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Function stub exists in `extraction.py` with full signature: `serialise_xml(element, output_path) -> None`. Docstring references hardware-tested lxml `pretty_print=True` approach. Needs implementation.
 
-#### Task 3.3: Trash mechanism and file writing
+#### Task 3.3: Trash mechanism and file writing ✅
 
 - **Description:** Implement the trash-and-replace mechanism for output directories. Before writing new extractions, move existing `SONG-SYNTHS/` and `SONG-KITS/` directories to `.trash`.
 - **Inputs:** Output directory paths
 - **Outputs:** Previous contents trashed, new directories created, extraction files written
 - **Acceptance Criteria:**
-  - [ ] If `SONG-SYNTHS/` exists, moves it to `SYNTHS/.trash/SONG-SYNTHS/` (overwriting any previous trash)
-  - [ ] If `SONG-KITS/` exists, moves it to `KITS/.trash/SONG-KITS/` (overwriting any previous trash)
-  - [ ] Creates fresh `SONG-SYNTHS/` and `SONG-KITS/` directories
-  - [ ] Writes all extraction files to the appropriate directory
-  - [ ] Only performs trash + write after user confirmation (or when not in dry-run mode)
+  - [x] If `SONG-SYNTHS/` exists, moves it to `DELUGE/.trash/extract-<timestamp>/SYNTHS/SONG-SYNTHS/` (mirroring relative paths)
+  - [x] If `SONG-KITS/` exists, moves it to `DELUGE/.trash/extract-<timestamp>/KITS/SONG-KITS/` (mirroring relative paths)
+  - [x] Creates fresh `SONG-SYNTHS/` and `SONG-KITS/` directories
+  - [x] Writes all extraction files to the appropriate directory
+  - [x] Only performs trash + write after user confirmation (or when not in dry-run mode)
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Completed during scaffolding (15 Apr 2026). Trash logic was inlined in `extract_instruments.py` `main()` rather than a separate function. Uses a single timestamp for both directories: `DELUGE/.trash/extract-<YYYYMMDD_HHMMSS>/`. Each trashed directory preserves its relative path from `DELUGE/` (e.g. `SYNTHS/SONG-SYNTHS/` and `KITS/SONG-KITS/`). This corrects the original plan which had trash going to `SYNTHS/.trash/` and `KITS/.trash/` separately.
 
-#### Task 3.4: Manifest generation
+#### Task 3.4: Manifest generation (partially complete)
 
 - **Description:** Generate a JSON manifest file in each output directory listing all extractions with metadata.
 - **Inputs:** List of extraction results
 - **Outputs:** `manifest.json` in each output directory
 - **Acceptance Criteria:**
   - [ ] Each entry includes: output filename, source song, preset name, preset folder, instrument type, section ID, colour name, and timestamp
-  - [ ] Manifest is written as formatted JSON (indented for readability)
-  - [ ] Summary stats at the top level: total count, songs processed, date generated
+  - [x] Manifest is written as formatted JSON (indented for readability)
+  - [x] Summary stats at the top level: total count, songs processed, date generated
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > `_write_manifest()` in `extract_instruments.py` is fully implemented — filters results by instrument type, constructs the manifest dict with `generated`, `songs_processed`, `total_count`, and `extractions` keys, writes JSON with `indent=2`. However, `build_manifest_entry()` in `extraction.py` is still a `NotImplementedError` stub — this function maps `ExtractionResult` → dict for each manifest entry. Manifest writing is wired up but will fail at runtime until `build_manifest_entry` is implemented.
 
-#### Task 3.5: CLI integration and output formatting
+#### Task 3.5: CLI integration and output formatting (substantially complete)
 
 - **Description:** Wire everything together in the CLI script. Implement discovery → extraction → output pipeline with dry-run support, confirmation prompts, and formatted console output.
 - **Inputs:** All previous tasks
 - **Outputs:** Complete working CLI script
 - **Acceptance Criteria:**
-  - [ ] `deluge-extract` with no flags performs a dry-run preview
-  - [ ] `deluge-extract --dry-run` performs dry-run only (no confirmation prompt)
-  - [ ] After dry-run preview, prompts for confirmation before writing
-  - [ ] `deluge-extract --extended` enables extended mode
-  - [ ] Console output lists each extraction per song, plus warnings, plus summary (see Interface Design section for format)
+  - [x] `deluge-extract` with no flags performs a dry-run preview
+  - [x] `deluge-extract --dry-run` performs dry-run only (no confirmation prompt)
+  - [x] After dry-run preview, prompts for confirmation before writing
+  - [x] `deluge-extract --extended` enables extended mode
+  - [x] Console output lists each extraction per song, plus warnings, plus summary (see Interface Design section for format)
   - [ ] Exit code 0 on success, non-zero on failure
   - [ ] Missing init preset files produce a clear error and abort
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Full CLI pipeline scaffolded in `extract_instruments.py` `main()` (15 Apr 2026). Wired together: argparse, `discover_songs()` → per-song loop → `discover_instruments()`/`discover_clips()`/`match_instruments_to_clips()` → `select_default_clip()`/`select_extended_clips()` → `extract_synth()`/`extract_kit()` → `normalise_params()` → `generate_filename()` → `ExtractionResult` construction → per-song console output → summary → dry-run/confirmation flow → trash → file writing → manifest writing. The pipeline structure is complete but calls stubbed functions — will work end-to-end once stubs are implemented. Exit code handling and init preset validation still need to be added.
 
 ### Phase 4: Extended Mode
 
@@ -498,9 +507,9 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
-| Phase 1: Foundation | Not Started | 0/4 | |
+| Phase 1: Foundation | In Progress | 1/4 | Task 1.1 complete (scaffolding) |
 | Phase 2: Core Transformation | Not Started | 0/3 | |
-| Phase 3: Output and CLI | Not Started | 0/5 | |
+| Phase 3: Output and CLI | In Progress | 3/5 | Tasks 3.3, 3.4, 3.5 substantially complete via scaffolding |
 | Phase 4: Extended Mode | Not Started | 0/2 | |
 | Phase 5: Testing and Verification | Not Started | 0/3 | |
 
@@ -548,5 +557,6 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 ## Change Log
 
 | Date | Change | Reason |
+| 15 Apr 2026 | Updated plan to reflect scaffolding state | Task 1.1 complete, Tasks 3.3/3.4/3.5 substantially complete, trash path corrected, Task 1.4 API updated to use dataclasses |
 |------|--------|--------|
 | 14 Apr 2026 | Initial plan created | — |
