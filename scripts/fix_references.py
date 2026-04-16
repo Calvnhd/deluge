@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from collections import defaultdict
 from dataclasses import dataclass, field
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 from typing import Any
 
 from lxml import etree
@@ -16,9 +16,8 @@ from deluge_lib.deluge_sdk import (
     SampleRef,
     default_manifests_dir,
     extract_sample_refs,
-    find_all_wav_files,
     find_all_xml_files,
-    hash_file,
+    hash_all_samples,
     update_sample_refs,
 )
 
@@ -62,18 +61,9 @@ def compute_migration_map(
     before_hashes: dict[str, list[str]] = before_snapshot["hashes"]
 
     # Build "after" state by hashing current samples
-    samples_dir = deluge_root / "SAMPLES"
-    wav_files = find_all_wav_files(samples_dir)
-
     after_hashes: dict[str, list[str]] = defaultdict(list)
-    total = len(wav_files)
-    for i, wav_path in enumerate(wav_files, 1):
-        print(f"\rHashing {i}/{total}...", end="", flush=True)
-        digest = hash_file(wav_path)
-        rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
-        after_hashes[digest].append(rel_path)
-    if total:
-        print()
+    for digest, paths in hash_all_samples(deluge_root).items():
+        after_hashes[digest].extend(paths)
 
     moved: dict[str, str] = {}
     deleted: dict[str, list[str]] = {}
@@ -145,7 +135,7 @@ class BrokenRefResult:
     warnings: list[AmbiguousRefWarning] = field(default_factory=list)
 
 
-def detect_broken_refs(
+def classify_ref_changes(
     migration: MigrationResult,
     deluge_root: Path,
 ) -> BrokenRefResult:
@@ -177,12 +167,7 @@ def detect_broken_refs(
 
     xml_files = find_all_xml_files(deluge_root)
     for xml_path in xml_files:
-        try:
-            refs = extract_sample_refs(xml_path, deluge_root)
-        except etree.XMLSyntaxError as e:
-            relative_path = xml_path.resolve().relative_to(deluge_root.resolve())
-            print(f"Warning: skipping {relative_path} (malformed XML: {e})")
-            continue
+        refs = extract_sample_refs(xml_path, deluge_root)
         for ref in refs:
             if ref.path in migration.moved:
                 result.changes.append(
@@ -213,7 +198,7 @@ def preview_and_apply(
     """Display planned changes, errors, and warnings, then optionally apply.
 
     Args:
-        result: Output from :func:`detect_broken_refs`.
+        result: Output from :func:`classify_ref_changes`.
         deluge_root: Absolute path to the DELUGE directory.
         auto_apply: If True, skip the confirmation prompt and apply immediately.
 
@@ -335,7 +320,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
     before_snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
     migration = compute_migration_map(before_snapshot, deluge_root)
-    broken = detect_broken_refs(migration, deluge_root)
+    broken = classify_ref_changes(migration, deluge_root)
     has_errors = preview_and_apply(broken, deluge_root, auto_apply=args.apply)
     if has_errors:
         raise SystemExit(1)

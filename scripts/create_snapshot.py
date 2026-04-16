@@ -3,15 +3,13 @@
 from __future__ import annotations
 
 import json
-from collections import defaultdict
 from datetime import date
-from pathlib import Path, PurePosixPath
+from pathlib import Path
 
 from deluge_lib.cli_utils import get_deluge_root
 from deluge_lib.deluge_sdk import (
     default_manifests_dir,
-    find_all_wav_files,
-    hash_file,
+    hash_all_samples,
 )
 
 
@@ -24,18 +22,7 @@ def snapshot(deluge_root: Path) -> Path:
     Returns:
         Path to the created snapshot file.
     """
-    samples_dir = deluge_root / "SAMPLES"
-    wav_files = find_all_wav_files(samples_dir)
-
-    hashes: dict[str, list[str]] = defaultdict(list)
-    total = len(wav_files)
-    for i, wav_path in enumerate(wav_files, 1):
-        print(f"\rHashing {i}/{total}...", end="", flush=True)
-        digest = hash_file(wav_path)
-        rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
-        hashes[digest].append(rel_path)
-    if total:
-        print()
+    hashes = hash_all_samples(deluge_root)
 
     # Build snapshot data
     snapshot_date = date.today().isoformat()

@@ -15,11 +15,11 @@ from fix_references import (
     MigrationResult,
     PlannedChange,
     compute_migration_map,
-    detect_broken_refs,
+    classify_ref_changes,
     preview_and_apply,
 )
 
-from deluge_lib.deluge_sdk import SampleRef, find_all_wav_files
+from deluge_lib.deluge_sdk import SampleRef
 
 
 def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
@@ -247,8 +247,8 @@ def _write_minimal_kit_xml(path: Path, sample_paths: list[str]) -> None:
     )
 
 
-class TestDetectBrokenRefs:
-    """Tests for detect_broken_refs."""
+class TestClassifyRefChanges:
+    """Tests for classify_ref_changes."""
 
     def test_ref_in_migration_map_is_planned_change(self, tmp_path: Path) -> None:
         """A reference whose path is in moved dict appears as a planned change."""
@@ -261,7 +261,7 @@ class TestDetectBrokenRefs:
             moved={"SAMPLES/DRUMS/OldKick.wav": "SAMPLES/DRUMS/NewKick.wav"},
         )
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         assert len(result.changes) == 1
         assert result.changes[0].old_path == "SAMPLES/DRUMS/OldKick.wav"
@@ -280,7 +280,7 @@ class TestDetectBrokenRefs:
             deleted={"somehash": ["SAMPLES/DRUMS/Gone.wav"]},
         )
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         assert not result.changes
         assert len(result.errors) == 1
@@ -303,7 +303,7 @@ class TestDetectBrokenRefs:
             },
         )
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         assert not result.changes
         assert not result.errors
@@ -319,7 +319,7 @@ class TestDetectBrokenRefs:
         )
         migration = MigrationResult()
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         assert not result.changes
         assert not result.errors
@@ -341,7 +341,7 @@ class TestDetectBrokenRefs:
             deleted={"delhash": ["SAMPLES/DRUMS/Deleted.wav"]},
         )
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         assert len(result.changes) == 1
         assert result.changes[0].old_path == "SAMPLES/DRUMS/Moved.wav"
@@ -358,7 +358,7 @@ class TestDetectBrokenRefs:
         )
         migration = MigrationResult()
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         assert result == BrokenRefResult()
 
@@ -373,7 +373,7 @@ class TestDetectBrokenRefs:
             moved={"SAMPLES/OldPath.wav": "SAMPLES/NewPath.wav"},
         )
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         change = result.changes[0]
         assert change.ref.xml_type == "kit"
@@ -391,7 +391,7 @@ class TestDetectBrokenRefs:
             deleted={"hash1": ["SAMPLES/A.wav", "SAMPLES/B.wav"]},
         )
 
-        result = detect_broken_refs(migration, deluge_root)
+        result = classify_ref_changes(migration, deluge_root)
 
         assert len(result.errors) == 2
         deleted_paths = {e.deleted_path for e in result.errors}

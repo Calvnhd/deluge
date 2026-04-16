@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import hashlib
+from collections import defaultdict
 from dataclasses import dataclass
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from lxml import etree
 
@@ -74,6 +75,32 @@ def find_all_wav_files(samples_dir: Path) -> list[Path]:
         return []
     scan = scan_tree(samples_dir, label="samples", file_filter="wav")
     return sorted(samples_dir / entry.rel_path for entry in scan.files.values())
+
+
+def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
+    """Hash all WAV files under ``deluge_root / "SAMPLES"`` and group by digest.
+
+    Args:
+        deluge_root: Absolute path to the DELUGE directory.
+
+    Returns:
+        Mapping of SHA-256 hex digests to lists of relative paths
+        (POSIX-style, relative to *deluge_root*).
+    """
+    samples_dir = deluge_root / "SAMPLES"
+    wav_files = find_all_wav_files(samples_dir)
+
+    hashes: dict[str, list[str]] = defaultdict(list)
+    total = len(wav_files)
+    for i, wav_path in enumerate(wav_files, 1):
+        print(f"\rHashing {i}/{total}...", end="", flush=True)
+        digest = hash_file(wav_path)
+        rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
+        hashes[digest].append(rel_path)
+    if total > 0:
+        print()
+
+    return dict(hashes)
 
 
 def find_all_xml_files(deluge_root: Path) -> list[Path]:
