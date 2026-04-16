@@ -125,13 +125,9 @@ def main(argv: list[str] | None = None) -> None:  # noqa: ARG001
     print()
     print(
         f"Summary: {result.total_refs} references checked, "
-        f"{len(result.broken)} broken, "
-        f"{len(result.unextracted)} unextracted warnings "
+        f"{len(result.broken)} broken "
     )
     print()
-
-
-
 
 if __name__ == "__main__":
     main()

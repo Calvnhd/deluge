@@ -291,61 +291,43 @@ def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
     value is written as the new path.  The file is only rewritten when at least
     one reference was changed.
 
+    Uses targeted string-level replacement so that only the path values change
+    and the rest of the file stays identical.
+
     Returns the number of references updated.
     """
     if not mapping:
         return 0
 
-    tree, root, recovered = parse_deluge_xml(xml_path)
+    data = xml_path.read_text(encoding="utf-8")
     count = 0
 
-    # Phase 1: element-style <fileName>text</fileName>
-    for fn_el in root.iter("fileName"):
-        text = fn_el.text
-        if not text:
-            continue
-        parent = fn_el.getparent()
-        if parent is None:
-            continue
-        if parent.tag not in _OSC_AND_RANGE_TAGS:
-            continue
-        if text in mapping:
-            fn_el.text = mapping[text]
-            count += 1
+    for old_path, new_path in mapping.items():
+        # Pattern 1: attribute-style fileName="old_path" on osc1/osc2/sampleRange
+        old_attr = 'fileName="' + old_path + '"'
+        new_attr = 'fileName="' + new_path + '"'
+        occurrences = data.count(old_attr)
+        if occurrences:
+            data = data.replace(old_attr, new_attr)
+            count += occurrences
 
-    # Phase 2: attribute-style fileName="..." on osc1/osc2/sampleRange
-    for tag in _OSC_AND_RANGE_TAGS:
-        for el in root.iter(tag):
-            value = el.get("fileName")
-            if not value:
-                continue
-            if value in mapping:
-                el.set("fileName", mapping[value])
-                count += 1
+        # Pattern 2: element-style <fileName>old_path</fileName>
+        old_el = "<fileName>" + old_path + "</fileName>"
+        new_el = "<fileName>" + new_path + "</fileName>"
+        occurrences = data.count(old_el)
+        if occurrences:
+            data = data.replace(old_el, new_el)
+            count += occurrences
 
-    # Phase 3: attribute-style filePath="..." on audioClip
-    for clip_el in root.iter("audioClip"):
-        value = clip_el.get("filePath")
-        if not value:
-            continue
-        if value in mapping:
-            clip_el.set("filePath", mapping[value])
-            count += 1
+        # Pattern 3: attribute-style filePath="old_path" on audioClip
+        old_fp = 'filePath="' + old_path + '"'
+        new_fp = 'filePath="' + new_path + '"'
+        occurrences = data.count(old_fp)
+        if occurrences:
+            data = data.replace(old_fp, new_fp)
+            count += occurrences
 
     if count > 0:
-        if recovered:
-            # Recovery parser may have silently dropped data — refuse to write.
-            return 0
-        if tree is not None:
-            tree.write(xml_path, xml_declaration=True, encoding="UTF-8")
-        else:
-            # Old multi-root format: reconstruct from synthetic wrapper children
-            parts = [b"<?xml version='1.0' encoding='UTF-8'?>\n"]
-            for child in root:
-                parts.append(
-                    etree.tostring(child, encoding="UTF-8", xml_declaration=False)
-                )
-                parts.append(b"\n")
-            xml_path.write_bytes(b"".join(parts))
+        xml_path.write_text(data, encoding="utf-8")
 
     return count

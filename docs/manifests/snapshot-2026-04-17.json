@@ -1,5 +1,5 @@
 {
-  "date": "2026-04-16",
+  "date": "2026-04-17",
   "deluge_root": "C:\\source\\deluge\\DELUGE",
   "hashes": {
     "d7584a457e3f4885bc98fe79dd8095030e3ed4167281dbdf5d39821be81dd22a": [
@@ -3948,33 +3948,6 @@
     "1a9360bf0b1dc3470500c617c93b2b170dcf95a0c87cc045d2ae80334d829bcd": [
       "SAMPLES/DRUMS/TomM/XV5080 Tom medium.wav"
     ],
-    "d3e8196f1adbb59250b8bdb81fd2220d1f43442ca8783d980733771c56a326eb": [
-      "SAMPLES/FIELD/TuiChirpPop.wav"
-    ],
-    "6ca0ff903719644458eff303472ec79ac84a54a6220964bd5889743c8f438357": [
-      "SAMPLES/FIELD/TuiHonk.wav"
-    ],
-    "53cd6d59420af5e24cb72211f6ee5a8fc7f71e7cf9125ea312e58606b1b8f126": [
-      "SAMPLES/FIELD/TuiSkrch.wav"
-    ],
-    "d99713f5ea5f4bce7f41c26beae09df47aa6ddc6038ac5fc25139d8fcb713a01": [
-      "SAMPLES/FIELD/TuiSkrch2.wav"
-    ],
-    "1fd045733a1d15e57b4a43fffdd2d0cf8b29227d419ebeb9163f7b85f6e54eb1": [
-      "SAMPLES/FIELD/TuiSqwk.wav"
-    ],
-    "ad45d439eb1a512d732dd0094a901a46497c7dc8245e07350e00fa09a4f40ab1": [
-      "SAMPLES/FIELD/TuiSqwk2.wav"
-    ],
-    "45cee67eb47fdf64ede20c4a1b82d765b61a37cf1166fd758fa4d50501e427e9": [
-      "SAMPLES/FIELD/TuiTweet.wav"
-    ],
-    "fb23206aa42bcf41b162ccbc853f71a3aa8f1d5491e4088218eb43699cdae068": [
-      "SAMPLES/FIELD/TuiTwitter.wav"
-    ],
-    "b57920eed7b218cc9b2bd9288026ce40caac5077500c487e13f5ca1ebd838ca1": [
-      "SAMPLES/FIELD/TuiWeo.wav"
-    ],
     "c82f303b4bee74d5be0d5f216501f9f8ca975a4ad7024eeeeb805ed10efa6742": [
       "SAMPLES/FOUND/KG-PG-Drums.wav"
     ],
@@ -4019,6 +3992,33 @@
     ],
     "1297fd050792fc70d9911ddfcdf0015b6eed47bc956ff48cd0f9b4e9d04311d5": [
       "SAMPLES/FOUND/Mario Coin.wav"
+    ],
+    "d3e8196f1adbb59250b8bdb81fd2220d1f43442ca8783d980733771c56a326eb": [
+      "SAMPLES/FOUND/TuiChirpPop.wav"
+    ],
+    "6ca0ff903719644458eff303472ec79ac84a54a6220964bd5889743c8f438357": [
+      "SAMPLES/FOUND/TuiHonk.wav"
+    ],
+    "53cd6d59420af5e24cb72211f6ee5a8fc7f71e7cf9125ea312e58606b1b8f126": [
+      "SAMPLES/FOUND/TuiSkrch.wav"
+    ],
+    "d99713f5ea5f4bce7f41c26beae09df47aa6ddc6038ac5fc25139d8fcb713a01": [
+      "SAMPLES/FOUND/TuiSkrch2.wav"
+    ],
+    "1fd045733a1d15e57b4a43fffdd2d0cf8b29227d419ebeb9163f7b85f6e54eb1": [
+      "SAMPLES/FOUND/TuiSqwk.wav"
+    ],
+    "ad45d439eb1a512d732dd0094a901a46497c7dc8245e07350e00fa09a4f40ab1": [
+      "SAMPLES/FOUND/TuiSqwk2.wav"
+    ],
+    "45cee67eb47fdf64ede20c4a1b82d765b61a37cf1166fd758fa4d50501e427e9": [
+      "SAMPLES/FOUND/TuiTweet.wav"
+    ],
+    "fb23206aa42bcf41b162ccbc853f71a3aa8f1d5491e4088218eb43699cdae068": [
+      "SAMPLES/FOUND/TuiTwitter.wav"
+    ],
+    "b57920eed7b218cc9b2bd9288026ce40caac5077500c487e13f5ca1ebd838ca1": [
+      "SAMPLES/FOUND/TuiWeo.wav"
     ],
     "e7dc2e51a4c86c7fdd2261f2b2a68f1723b589d4c5dd6786567cd303d842740c": [
       "SAMPLES/KERERU/DrumLoops/SLPSPK-Drumloop1-120bpm.wav"
@@ -4072,67 +4072,67 @@
       "SAMPLES/KERERU/Sink/ModMel-120bpm.wav"
     ],
     "ecdced9479bff7a1016d44dcb985bc78129cd7163605c9ea55420a8e3adc8d48": [
-      "SAMPLES/KERERU/SleepSpeak/SS-BassV-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-BassV-120bpm.wav"
     ],
     "660dfcdaf0998f2dd624f213bf2c5a77086e675e3bbf68cf874ca836fbed7371": [
-      "SAMPLES/KERERU/SleepSpeak/SS-GatC-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatC-120bpm.wav"
     ],
     "48d77d2f486709bf6f37a4c957d8274753c1d17593d03eda6c408dc2af079cb0": [
-      "SAMPLES/KERERU/SleepSpeak/SS-GatPreV-new-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatPreV-new-120bpm.wav"
     ],
     "050d88e15f2445c3be2c2e22a5e8e44d49900f0a6bc13166ff776de49b8a22f6": [
-      "SAMPLES/KERERU/SleepSpeak/SS-GatV-new-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatV-new-120bpm.wav"
     ],
     "faafbf871802f28e28d5161b8d7330fbd6f7c760388b37f89095b96632d90c00": [
-      "SAMPLES/KERERU/SleepSpeak/SS-GatVL-120bpm..wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatVL-120bpm..wav"
     ],
     "386cf1d9329545d103be032b967b3bcf460a02a82731ef93a1181df56a8c60a5": [
-      "SAMPLES/KERERU/SleepSpeak/SS-GatVPlus-new-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatVPlus-new-120bpm.wav"
     ],
     "db9f665b240b668a69c0fefd7f58a271cd0c69f7cc3aa57c2e961faf969bc44b": [
-      "SAMPLES/KERERU/SleepSpeak/SS-GatVS-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatVS-120bpm.wav"
     ],
     "304cfe400108bcdc29011700c32c390b56cba9637fa43b5d802f7551d0b41750": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-1-Intro.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-1-Intro.wav"
     ],
     "76154c0f69efb422169bc66e139e0732f33f8b74135f3ee03fe1c2e912385729": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-2-V0.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-2-V0.wav"
     ],
     "d63a8f18c1d4028f85524b58b354361e319d4ea58e5e50e170302c4fa90796be": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-3-V1.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-3-V1.wav"
     ],
     "e52a15018a676d11ed4c1814ef6588a220f2884cb3bd8e4841c53d3d9d2f3240": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-4-C1-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-4-C1-120bpm.wav"
     ],
     "288779c0bb5bb043ba97dffc36c79db90fc104081377156dcf855b1997dd30c5": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav"
     ],
     "aceabcd6fd658d11d56a100ff6ee4bdfcb06c74a590837b0954efbaad0a0c5c8": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-6-V2-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-6-V2-120bpm.wav"
     ],
     "e2fce840356035c0be4bd769cadc0e6d51cc93aa5dadb3c0cdee093b5dd4a7cd": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-7-C2-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-7-C2-120bpm.wav"
     ],
     "d1cfda0e04c90b61169697a5d64539a781c7f7edd7c64b709052328599f61a21": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-8-CX-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-8-CX-120bpm.wav"
     ],
     "17532adc333601a71193dae7dd13be7ef6b70cbeb06486e4805cdbeacd2ffe6e": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Inst-9-Outro-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-9-Outro-120bpm.wav"
     ],
     "ffa2341472601ba744a3eb58bdd012e619074245a45e89bc84c818cc11b0caed": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav"
     ],
     "11d2906f80df085e086ef2ef0b3186a7d77a112de987d8355daadeedec7402fb": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav"
     ],
     "85c84acb9033c2ad98f91e3e173b5c031b56da1e10b266db0464d5671561a770": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Vox-3-V2-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-3-V2-120bpm.wav"
     ],
     "f4e1e24be438ff50884fa18f835eef592ce0a58765ed368f56caed142bcec068": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Vox-4-C2-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-4-C2-120bpm.wav"
     ],
     "c2c20f04b9058aa6cd7bfec1d051383be23bf16f55c11c772685ef36f84b7296": [
-      "SAMPLES/KERERU/SleepSpeak/SS-Vox-5-CX-120bpm.wav"
+      "SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-5-CX-120bpm.wav"
     ],
     "0498282e468540eb2bab9091f5a19987272279b9ddc4232ba818c2056e40ca03": [
       "SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav"
@@ -4177,7 +4177,8 @@
       "SAMPLES/KERERU/SSJAM-VV.wav"
     ],
     "09175f40f304147000623f6a7bbfddf151d8b841611fcf69e437ebd822eee45c": [
-      "SAMPLES/LANDR/Alt Pop Vocal Blues/Loop/LANDR_APVB_Vocal_01_keyDbMaj_135bpm.wav"
+      "SAMPLES/LANDR/Alt Pop Vocal Blues/Loop/LANDR_APVB_Vocal_01_keyDbMaj_135bpm.wav",
+      "SAMPLES/LANDR/Alt Pop Vocal Blues/Loop/LANDR_APVB_Vocal_15_keyEbmin_150bpm.wav"
     ],
     "69f3938abee07b6cd7fd779a812511b1141a1ca3d67fd254b3e442028ab1d878": [
       "SAMPLES/LANDR/Alt Pop Vocal Blues/Loop/LANDR_APVB_Vocal_02_keyAbmin_135bpm.wav"
@@ -5368,7 +5369,8 @@
       "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_2_keyAmin_80bpm.wav"
     ],
     "31a3147c961a26e6e1e2f0938826d5690d9d1ad39ec28b237808f845a1b31eef": [
-      "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_2_keyDmin_100bpm.wav"
+      "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_2_keyDmin_100bpm.wav",
+      "SAMPLES/LANDR/Premium Bass/LL_AFB_Bass Guitar_2_keyDmin_100bpm.wav"
     ],
     "aeb18128747bdb3ae6b42ec410b9133234890a2e15c0f8f6e4d5109567469169": [
       "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_2_keyDmin_125bpm.wav"
@@ -5458,7 +5460,8 @@
       "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_3c_keyEmin_100bpm.wav"
     ],
     "71865d886d9704cce6f5c2eaca855910f22fb3c06037b911eb851eab834ef133": [
-      "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_4_keyDmin_125bpm.wav"
+      "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_4_keyDmin_125bpm.wav",
+      "SAMPLES/LANDR/Premium Bass/LL_AFB_Bass Guitar_4_keyDmin_125bpm.wav"
     ],
     "7684498c11b98d80edf12b81a40f79b26a39a6f607b9ae5bbdf287f145d28ca1": [
       "SAMPLES/LANDR/Analog Funk Bass/Loop/LANDR_AFB_Bass Guitar_4_keyEmin_90bpm.wav"
@@ -7231,7 +7234,8 @@
       "SAMPLES/LANDR/Computer SFX/FS_COM_Computer_Glitch_SFX 259.wav"
     ],
     "67603d04b80cbbfcc62b062391de2355b5dcec71a5289ccb35a69744ebe8f473": [
-      "SAMPLES/LANDR/Computer SFX/FS_COM_Computer_Glitch_SFX 26.wav"
+      "SAMPLES/LANDR/Computer SFX/FS_COM_Computer_Glitch_SFX 26.wav",
+      "SAMPLES/LANDR/Premium SFX/One_Shot/FS_COM_Computer_Glitch_SFX 26.wav"
     ],
     "416d1d6248fedb9e80110e906f602955f6d0ccb238830a22c6a8f39531bf6592": [
       "SAMPLES/LANDR/Computer SFX/FS_COM_Computer_Glitch_SFX 260.wav"
@@ -8965,7 +8969,8 @@
       "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Strings_Pad_01_keyAmin_140bpm.wav"
     ],
     "ab48900431d166f27408bb60f78e36d0e82673fca72aa1f7e5b316e7d47d368c": [
-      "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Strings_Pad_02_keyAmin_140bpm.wav"
+      "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Strings_Pad_02_keyAmin_140bpm.wav",
+      "SAMPLES/LANDR/Premium Trap/LANDR_DTB_Strings_Pad_02_keyAmin_140bpm.wav"
     ],
     "36f30f8360ceb0a6e6dbf96651bc0b7af42a0f278eff485a856993e06598840e": [
       "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Strings_Pad_03_keyEmin_140bpm.wav"
@@ -8998,7 +9003,8 @@
       "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Vocal_03_keyEmin_136bpm.wav"
     ],
     "7821b24323b5e9083f8b7fbe4be96bd64852fcb7974039a06151533c97a22b07": [
-      "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Vocal_Choir_keyAmin_140bpm.wav"
+      "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Vocal_Choir_keyAmin_140bpm.wav",
+      "SAMPLES/LANDR/Premium Trap/LANDR_DTB_Vocal_Choir_keyAmin_140bpm.wav"
     ],
     "7f72a0a9a6602edfbde705765a9a01147dcd89fe74aa1872807c81f1bb3b010a": [
       "SAMPLES/LANDR/Drill Trap Beatstarters/Loop/LANDR_DTB_Vocal_Laughter_01_keyEmin_140bpm.wav"
@@ -10726,7 +10732,8 @@
       "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano & Vocal_keyAbMaj_75bpm.wav"
     ],
     "2bbe83b7960da44db10aedbc19bd0dbdacd328dc01b74d07191a2bbcfccfdfee": [
-      "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano_01_keyFMaj_75bpm.wav"
+      "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano_01_keyFMaj_75bpm.wav",
+      "SAMPLES/LANDR/Premium Beats/LANDR_LH_Electric Piano_01_keyFMaj_75bpm.wav"
     ],
     "e0c236edc269caed396364fa3060eea324465d790be3e42452f8968d42ed4cfe": [
       "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano_02_keyEbMaj_75bpm.wav"
@@ -10735,7 +10742,8 @@
       "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano_03_keyEbMaj_75bpm.wav"
     ],
     "9c918ed12d825c1da6dceb9e6fd741dc21cf07f3a3ca1602863d415cd5f0eb43": [
-      "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano_04_keyDMaj_75bpm.wav"
+      "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano_04_keyDMaj_75bpm.wav",
+      "SAMPLES/LANDR/Premium Beats/LANDR_LH_Electric Piano_04_keyDMaj_75bpm.wav"
     ],
     "1e4a71aee3f98b77342d0a15ee5ef42d94213dc1d613c89f283ad00a754aaab2": [
       "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Electric Piano_05_keyAmin_65bpm.wav"
@@ -10843,7 +10851,8 @@
       "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Synth Pad & Vocal_keyGMaj_75bpm.wav"
     ],
     "6da4af1b5676bad7816441726ae76d8205ed5268009ed5d9fa54f2e0d7520dd5": [
-      "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Synth Pad_keyCMaj_75bpm.wav"
+      "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Synth Pad_keyCMaj_75bpm.wav",
+      "SAMPLES/LANDR/Premium Beats/LANDR_LH_Synth Pad_keyCMaj_75bpm.wav"
     ],
     "990de8bc64c7c6626c947ae0d149f97a6df8930b4cb860508643edfce465a28d": [
       "SAMPLES/LANDR/Lofi Hip Hop/LANDR_LH_Synth String_keyEbMaj_75bpm.wav"
@@ -12372,6 +12381,10 @@
     "e8524913baefaa762ff69eff550cd9f054e7436d0a1e4ba2bd1b34c79a7db326": [
       "SAMPLES/LANDR/Premium Beats/Acoustic Hip Hop Drum Beat_9_95bpm.wav"
     ],
+    "1088677d16d4ec02c9bef54735a455e1429f0b4a633e6a6b853f27fcde8312ed": [
+      "SAMPLES/LANDR/Premium Beats/Acoustic_Organic_Drum_Loop_02_120bpm.wav",
+      "SAMPLES/LANDR/Premium Rock/Acoustic_Organic_Drum_Loop_02_120bpm.wav"
+    ],
     "af5d4fb052ebdf8e66132e2472f372a448e588689a226704e30096aa2f0af35e": [
       "SAMPLES/LANDR/Premium Beats/Acoustic_Organic_Drum_Loop_37_120bpm.wav"
     ],
@@ -12474,6 +12487,10 @@
     "641c240a0fb0830ddae3f92312721e126b4f1d5c60575d259b5a1693acc1d180": [
       "SAMPLES/LANDR/Premium Beats/SSDD2_Doomsday_Drums_90BPM.wav"
     ],
+    "504b2bd73f341c0433961d721a7864828ab38542fbf3a47d588bea02a35ced41": [
+      "SAMPLES/LANDR/Premium Beats/SSDD2_Snakes_Drums_78BPM.wav",
+      "SAMPLES/LANDR/Premium Lo-Fi/SSDD2_Snakes_Drums_78BPM.wav"
+    ],
     "f1f368c34f442e266983b7831b5e0b69d1341bba636cc51c1df641656071d0a6": [
       "SAMPLES/LANDR/Premium Beats/Synth_26_keyCmin_95bpm.wav"
     ],
@@ -12485,6 +12502,14 @@
     ],
     "baca0d2aa6b1b53eeafbde2af44ef7626255c753c55c9d9cd3f98058159d9cf3": [
       "SAMPLES/LANDR/Premium BoomBap/04_SA_City Never Sleeps_Piano_Cm_bpm_90_Layered Melodic.wav"
+    ],
+    "74fbedd6616da1301724f9fe9220dc652e9f8818c1fe9b5ec71646af0682ad90": [
+      "SAMPLES/LANDR/Premium BoomBap/05_electric bass._114bpm_Cmwav.wav",
+      "SAMPLES/LANDR/Premium Hip-Hop Kits/05_electric bass._114bpm_Cmwav.wav"
+    ],
+    "68fd91ee3f2bef0d9fe54cec761764bb2e794b60ddd5e9343f6e76108183ad87": [
+      "SAMPLES/LANDR/Premium BoomBap/07_SA_Sinister_Piano_Fm_bpm_83_Layered Melodic.wav",
+      "SAMPLES/LANDR/Premium Hip-Hop Kits/07_SA_Sinister_Piano_Fm_bpm_83_Layered Melodic.wav"
     ],
     "45be11e16560ee09eb76d2ddeb27e7f8a3ad4d1bff0218185a9ec9a2b9db922f": [
       "SAMPLES/LANDR/Premium BoomBap/08 Piano 90bpm Am Deep Dark.wav"
@@ -12720,17 +12745,11 @@
     "e295538e00aeb29c900453e06060b2deb6fa7d6c723b2e89051e2c02580c72e5": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/04.bass_84bpm_Ebm.wav"
     ],
-    "74fbedd6616da1301724f9fe9220dc652e9f8818c1fe9b5ec71646af0682ad90": [
-      "SAMPLES/LANDR/Premium Hip-Hop Kits/05_electric bass._114bpm_Cmwav.wav"
-    ],
     "d20ac9fab5011d49293adaf7de34439102284eb4c69764598a029b5f625d0540": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/05_SA_City Never Sleeps_Piano_Gm_bpm_87_Layered Melodic.wav"
     ],
     "b851b0a28f48c436bf19da48cc676ccb6e1ee3925895b3f5987d407e92b3b684": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/06 Drums 90bpm Bm Analog Layered.wav"
-    ],
-    "68fd91ee3f2bef0d9fe54cec761764bb2e794b60ddd5e9343f6e76108183ad87": [
-      "SAMPLES/LANDR/Premium Hip-Hop Kits/07_SA_Sinister_Piano_Fm_bpm_83_Layered Melodic.wav"
     ],
     "e8e7cb81d490f551cba1ee5d69fa8cfc64bae47ae7818d1385e12b32b1233877": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/95_Groove3BDrums_SG_7.wav"
@@ -12768,6 +12787,10 @@
     "6f5ca9051eeb26ca371d20bc120db69e7ac7ba8dbf838b1d490bb30636e444fe": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/Drum Loop_4_72BPM.wav"
     ],
+    "0d2fa382aa52135b340124dfae766dfc32b1b42478a0bf72c7e948aa1a72613d": [
+      "SAMPLES/LANDR/Premium Hip-Hop Kits/ESALD2_Lofi_Full_Drum_Loop_90bpm_Forest Whispers.wav",
+      "SAMPLES/LANDR/Premium Lo-Fi/ESALD2_Lofi_Full_Drum_Loop_90bpm_Forest Whispers.wav"
+    ],
     "4d8ee906a707ce883ec4db255b03d48ceca67dd5373c0db5284db1fd9338c8e7": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/HHM2_loop 20_guitar_80 bpm_G#.wav"
     ],
@@ -12782,6 +12805,10 @@
     ],
     "e4414395993c4f9f683c82c121f5c337542ec9c3b9609ea5c02f44541d2dbc5d": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/LSHHC_Music_Loop_05_90BPM_Fm.wav"
+    ],
+    "c8d2bf0052b1b36939629743f709adbbd11d3b69b97d234adc4dd148e017bc35": [
+      "SAMPLES/LANDR/Premium Hip-Hop Kits/Male Vocal Hip Hop Phrase_29_90bpm_Em.wav",
+      "SAMPLES/LANDR/Premium Vox/Male Vocal Hip Hop Phrase_29_90bpm_Em.wav"
     ],
     "c33d9fd7b9689bec197d258bb113d63c9ee2f378d80700ae0c2a3c1250788beb": [
       "SAMPLES/LANDR/Premium Hip-Hop Kits/Melody_Layer_3_87bpm_G.wav"
@@ -12835,7 +12862,8 @@
       "SAMPLES/LANDR/Premium Hooks/23_I Can See it in Your Eyes_130bpm_C.wav"
     ],
     "32d153ca3996c8c3e54f5c579d575ebe8a62f0131fdf12d4f5a3d645e0b0a68e": [
-      "SAMPLES/LANDR/Premium Hooks/702 RnB Vocals 2 - 117 BPM - F#.wav"
+      "SAMPLES/LANDR/Premium Hooks/702 RnB Vocals 2 - 117 BPM - F#.wav",
+      "SAMPLES/LANDR/Premium R&B Vocals/702 RnB Vocals 2 - 117 BPM - F#.wav"
     ],
     "a1cedda439b9156d661138c16617214989d5cfda7b38b7215782ae8cc2032e91": [
       "SAMPLES/LANDR/Premium Hooks/75 Gm Dream Chaser - Vocal Dry 21.wav"
@@ -12993,9 +13021,6 @@
     "7d3984560bc54e344cbba4e062ca7f1feced89e2a0ab3c86bb4cd7917f1b27dc": [
       "SAMPLES/LANDR/Premium Lo-Fi/Dreamz_Piano_E_80bpm.wav"
     ],
-    "0d2fa382aa52135b340124dfae766dfc32b1b42478a0bf72c7e948aa1a72613d": [
-      "SAMPLES/LANDR/Premium Lo-Fi/ESALD2_Lofi_Full_Drum_Loop_90bpm_Forest Whispers.wav"
-    ],
     "ad81f7eb049e72bd0e1f96eb81234f947b1b7a97f42d96f33e9622ab5217dc45": [
       "SAMPLES/LANDR/Premium Lo-Fi/FS_LWA_Loop 39_Keys_100bpm_Gm.wav"
     ],
@@ -13052,9 +13077,6 @@
     ],
     "d4f8dfab87b80baeb5d485305c0c9934a1ff9df0cb7da86c3e5ab13100894128": [
       "SAMPLES/LANDR/Premium Lo-Fi/SOF5_PIANO_77BPM - Bm.wav"
-    ],
-    "504b2bd73f341c0433961d721a7864828ab38542fbf3a47d588bea02a35ced41": [
-      "SAMPLES/LANDR/Premium Lo-Fi/SSDD2_Snakes_Drums_78BPM.wav"
     ],
     "646a515b3b7a14ac7a9ff3491d08bd53412aabf2b66fed4db9eb9505e4c2d032": [
       "SAMPLES/LANDR/Premium Lo-Fi/Utopia_Vinyl - texture.wav"
@@ -13270,7 +13292,8 @@
       "SAMPLES/LANDR/Premium Reggaeton/PM_RGS_Exotic_Loop_02_Amin_100BPM.wav"
     ],
     "800b0ca3c7f7a75a14ada393f858f34305038483ff27d53d97ede9e0494a6633": [
-      "SAMPLES/LANDR/Premium Reggaeton/PMBR_Bass_90_Amin_Modern_Slam_808.wav"
+      "SAMPLES/LANDR/Premium Reggaeton/PMBR_Bass_90_Amin_Modern_Slam_808.wav",
+      "SAMPLES/LANDR/Premium Subs/PMBR_Bass_90_Amin_Modern_Slam_808.wav"
     ],
     "034552c8255241c2677d748c6f6c66bee4d0b64a9be92ad5321520f49b3288c1": [
       "SAMPLES/LANDR/Premium Reggaeton/PMBR_Vocal_90_Gmin_Pass_It.wav"
@@ -13334,9 +13357,6 @@
     ],
     "cb24e0a21c85c0d85b294b03631ec8b0b272799aeb8de646c9e731323eda0b6b": [
       "SAMPLES/LANDR/Premium Rock/Acoustic Drums_Rhythm_6_90bpm.wav"
-    ],
-    "1088677d16d4ec02c9bef54735a455e1429f0b4a633e6a6b853f27fcde8312ed": [
-      "SAMPLES/LANDR/Premium Rock/Acoustic_Organic_Drum_Loop_02_120bpm.wav"
     ],
     "537605cc6796ff3c5bea19dbfb30b8296021d09462f2a8df81e9d50dd25bbf7b": [
       "SAMPLES/LANDR/Premium Rock/Acoustic_Organic_Drum_Loop_31_122bpm.wav"
@@ -13505,6 +13525,10 @@
     ],
     "d39fd4bf2689566a0246c33089bdeb8c89c4f97db84ba88e976a004294544fa6": [
       "SAMPLES/LANDR/Premium SFX/One_Shot/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav"
+    ],
+    "401ccbe229394fff9c7251d47d9f804da0c128c40d5977a9663618f08943a5a9": [
+      "SAMPLES/LANDR/Premium SFX/One_Shot/CS-SCI-FI Sustain Breath 2.wav",
+      "SAMPLES/LANDR/Sci-Fi Ambiences/CS-SCI-FI Sustain Breath 2.wav"
     ],
     "d9dfeec768fd7ddb0239f20be18f267a30fbf203e70be3b51c83888e19388699": [
       "SAMPLES/LANDR/Premium SFX/One_Shot/CS_TM_Kit_05_Fx_02_Emin_128bpm.wav"
@@ -13951,13 +13975,18 @@
       "SAMPLES/LANDR/Premium Synths/CLSLS_Melody_Lowrider 137BPM Gm.wav"
     ],
     "14c615b5640e2c24503e4f6b4f5f40950c9a60d82ec96fca27ba3e7154c843d2": [
-      "SAMPLES/LANDR/Premium Synths/CS_DR_synth_lake_melody_Amin_140bpm.wav"
+      "SAMPLES/LANDR/Premium Synths/CS_DR_synth_lake_melody_Amin_140bpm.wav",
+      "SAMPLES/LANDR/Premium Trap/CS_DR_synth_lake_melody_Amin_140bpm.wav"
     ],
     "f8e7fa32a9f570d25e3bda0bbffe9c0a133c44a804dfbbaca9468070312b2e23": [
       "SAMPLES/LANDR/Premium Synths/CS_Kit_03_Pad_Vintage_Wet_Bm_120bpm.wav"
     ],
     "c6cf0464411fa206dfb085925cb11ec78c2de867541f47f3072079bd22b9a7d5": [
       "SAMPLES/LANDR/Premium Synths/DN_VC2_Clarity_SynthLead_2_KeyAbmin_122bpm.wav"
+    ],
+    "b9b872ab62811bf1a8d61caa612f810a211aba2b6b503c0cd0d0fb84b3b78754": [
+      "SAMPLES/LANDR/Premium Synths/Elevate_5_Texture_92bpm_Ebmaj.wav",
+      "SAMPLES/LANDR/Textures/Elevate_5_Texture_92bpm_Ebmaj.wav"
     ],
     "7a77bf1ab5e62e13b4225c98bf2011b78f151aa321ac4c2faeae46c8f4f3f025": [
       "SAMPLES/LANDR/Premium Synths/FL_HRS_Kit05_Synth_Loop_Melody_Harpsichord_Degraded_140_Em.wav"
@@ -14388,6 +14417,10 @@
     "397f5d84724696754b6ee9dd2ec5d22d05bba6eb4427bc04d168680e2900c461": [
       "SAMPLES/LANDR/Premium Trap/ZAZA_TRAP_Drum Loop_02_121BPM.wav"
     ],
+    "6a9ef13034dbaaf7c95a7cec8b75231a25a6681f1b8ec47946d20f3afabe249a": [
+      "SAMPLES/LANDR/Premium Trap/ZAZA_TRAP_SFX_03_ Reverse Riser.wav",
+      "SAMPLES/LANDR/Risers/ZAZA_TRAP_SFX_03_ Reverse Riser.wav"
+    ],
     "e8976a10584d33147cbd4124ee147e9950449632d7d6a9cfba7a8ffa05c0294a": [
       "SAMPLES/LANDR/Premium Vox/AAVE_vocal_loop_140_faded_full vocal.wav"
     ],
@@ -14498,9 +14531,6 @@
     ],
     "cdfd770429986cf2be7f38acbd77e53345713e056a407aff4f1911a6461ee28f": [
       "SAMPLES/LANDR/Premium Vox/Male Vocal Hip Hop Phrase_16_90bpm_Em.wav"
-    ],
-    "c8d2bf0052b1b36939629743f709adbbd11d3b69b97d234adc4dd148e017bc35": [
-      "SAMPLES/LANDR/Premium Vox/Male Vocal Hip Hop Phrase_29_90bpm_Em.wav"
     ],
     "e8cad5cb3c4a1a83c8675be6065a6ebb08ff19b003cce1fa7f4786537953a629": [
       "SAMPLES/LANDR/Premium Vox/RS_ER_Alli_Lead_Vocals_100_Emin_Wet_02.wav"
@@ -14889,9 +14919,6 @@
     "212fabbf3d8ecd24cb8cd4361999945d31b6f2606820e590a654caf50cc1a207": [
       "SAMPLES/LANDR/Risers/WABFH_FX_07 Riser_Short.wav"
     ],
-    "6a9ef13034dbaaf7c95a7cec8b75231a25a6681f1b8ec47946d20f3afabe249a": [
-      "SAMPLES/LANDR/Risers/ZAZA_TRAP_SFX_03_ Reverse Riser.wav"
-    ],
     "db91d9dd1745d1c80dd9a51ef5307641ed7c3dbc40b49c0420bf5eb759307e92": [
       "SAMPLES/LANDR/RnB Vocal Hooks/LANDR_SV_Clap_NeverQuestion_keyEbMaj_130bpm.wav"
     ],
@@ -15245,9 +15272,6 @@
     ],
     "6f28c18e091c303a84db0eaddb89ff86cf2c0df9ee66103b1f696cf0ccb2b30a": [
       "SAMPLES/LANDR/Sci-Fi Ambiences/CS-SCI-FI Sci Fi Scan.wav"
-    ],
-    "401ccbe229394fff9c7251d47d9f804da0c128c40d5977a9663618f08943a5a9": [
-      "SAMPLES/LANDR/Sci-Fi Ambiences/CS-SCI-FI Sustain Breath 2.wav"
     ],
     "0a5a3a34cb2849845c8516222ba6b7828dd165751df5a51ae35586a378f58e71": [
       "SAMPLES/LANDR/Sci-Fi Ambiences/CS-SCI-FI Sustain Breath.wav"
@@ -16010,9 +16034,6 @@
     ],
     "56c73cb03b50901f946b80ba01dbb3a1dc6ab928c5925c076a6c21765a2f9d95": [
       "SAMPLES/LANDR/Textures/DelayNoise_3_SG_20.wav"
-    ],
-    "b9b872ab62811bf1a8d61caa612f810a211aba2b6b503c0cd0d0fb84b3b78754": [
-      "SAMPLES/LANDR/Textures/Elevate_5_Texture_92bpm_Ebmaj.wav"
     ],
     "39c178f236e635b8b7bf72b7e9554e03c056b490cf522cfd52910730e8ba52b7": [
       "SAMPLES/LANDR/Textures/ES_NECESSITY_Ambience_Texture_Loop_08_120bom.wav"
