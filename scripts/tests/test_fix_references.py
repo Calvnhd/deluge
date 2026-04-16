@@ -1,4 +1,4 @@
-"""Tests for fix_references.py — snapshot subcommand."""
+"""Tests for fix_references.py."""
 
 from __future__ import annotations
 
@@ -14,75 +14,12 @@ from fix_references import (
     BrokenRefResult,
     MigrationResult,
     PlannedChange,
-    _find_wav_files,
     compute_migration_map,
     detect_broken_refs,
-    hash_file,
     preview_and_apply,
-    snapshot,
 )
 
-from deluge_lib.deluge_sdk import SampleRef
-
-
-class TestHashFile:
-    """Tests for the hash_file function."""
-
-    def test_correct_sha256(self, tmp_path: Path) -> None:
-        """hash_file returns the correct SHA256 hex digest for known content."""
-        f = tmp_path / "test.wav"
-        content = b"known content for hashing"
-        f.write_bytes(content)
-
-        expected = hashlib.sha256(content).hexdigest()
-
-        assert hash_file(f) == expected
-
-    def test_empty_file(self, tmp_path: Path) -> None:
-        """hash_file handles an empty file (SHA256 of empty bytes)."""
-        f = tmp_path / "empty.wav"
-        f.write_bytes(b"")
-
-        expected = hashlib.sha256(b"").hexdigest()
-
-        assert hash_file(f) == expected
-
-
-class TestFindWavFiles:
-    """Tests for the _find_wav_files helper."""
-
-    def test_finds_wav_case_insensitive(self, tmp_path: Path) -> None:
-        """Finds .wav and .WAV files regardless of extension case."""
-        (tmp_path / "kick.wav").write_bytes(b"\x00")
-        (tmp_path / "snare.WAV").write_bytes(b"\x00")
-        (tmp_path / "hat.Wav").write_bytes(b"\x00")
-        (tmp_path / "not_audio.txt").write_bytes(b"\x00")
-
-        result = _find_wav_files(tmp_path)
-
-        names = [p.name for p in result]
-        assert "kick.wav" in names
-        assert "snare.WAV" in names
-        assert "hat.Wav" in names
-        assert "not_audio.txt" not in names
-        assert len(result) == 3
-
-    def test_recursive_scan(self, tmp_path: Path) -> None:
-        """Finds WAV files in subdirectories."""
-        sub = tmp_path / "DRUMS" / "Kicks"
-        sub.mkdir(parents=True)
-        (sub / "deep.wav").write_bytes(b"\x00")
-
-        result = _find_wav_files(tmp_path)
-
-        assert len(result) == 1
-        assert result[0].name == "deep.wav"
-
-    def test_missing_directory(self) -> None:
-        """Returns empty list when directory does not exist."""
-        result = _find_wav_files(Path("/nonexistent/path"))
-
-        assert result == []
+from deluge_lib.deluge_sdk import SampleRef, find_all_wav_files
 
 
 def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
@@ -104,163 +41,15 @@ def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
     return deluge_root
 
 
-class TestSnapshot:
-    """Tests for the snapshot function."""
-
-    def test_json_structure(self, tmp_path: Path) -> None:
-        """Snapshot JSON has the required top-level keys and format."""
-        deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": b"kick"})
-        output_dir = tmp_path / "manifests"
-
-        with patch("fix_references.date") as mock_date:
-            mock_date.today.return_value.isoformat.return_value = "2026-04-02"
-            result_path = snapshot(deluge_root, output_dir=output_dir)
-
-        data = json.loads(result_path.read_text())
-        assert data["date"] == "2026-04-02"
-        assert data["deluge_root"] == str(deluge_root)
-        assert "hashes" in data
-
-        # Verify the hash entry
-        expected_hash = hashlib.sha256(b"kick").hexdigest()
-        assert expected_hash in data["hashes"]
-        assert data["hashes"][expected_hash] == ["SAMPLES/kick.wav"]
-
-    def test_snapshot_filename(self, tmp_path: Path) -> None:
-        """Snapshot file is named snapshot-<date>.json."""
-        deluge_root = _make_deluge_tree(tmp_path, {"a.wav": b"a"})
-        output_dir = tmp_path / "manifests"
-
-        with patch("fix_references.date") as mock_date:
-            mock_date.today.return_value.isoformat.return_value = "2026-04-02"
-            result_path = snapshot(deluge_root, output_dir=output_dir)
-
-        assert result_path.name == "snapshot-2026-04-02.json"
-
-    def test_paths_relative_to_deluge_root(self, tmp_path: Path) -> None:
-        """Paths in the snapshot are relative to DELUGE_ROOT."""
-        deluge_root = _make_deluge_tree(
-            tmp_path, {"DRUMS/Kicks/808.wav": b"808"}
-        )
-        output_dir = tmp_path / "manifests"
-
-        result_path = snapshot(deluge_root, output_dir=output_dir)
-        data = json.loads(result_path.read_text())
-
-        all_paths = [p for paths in data["hashes"].values() for p in paths]
-        assert "SAMPLES/DRUMS/Kicks/808.wav" in all_paths
-
-    def test_duplicate_hash_grouping(self, tmp_path: Path) -> None:
-        """Files with identical content are grouped under the same hash."""
-        content = b"identical audio data"
-        deluge_root = _make_deluge_tree(tmp_path, {
-            "kick1.wav": content,
-            "kick2.wav": content,
-        })
-        output_dir = tmp_path / "manifests"
-
-        result_path = snapshot(deluge_root, output_dir=output_dir)
-        data = json.loads(result_path.read_text())
-
-        expected_hash = hashlib.sha256(content).hexdigest()
-        paths = data["hashes"][expected_hash]
-        assert len(paths) == 2
-        assert "SAMPLES/kick1.wav" in paths
-        assert "SAMPLES/kick2.wav" in paths
-
-    def test_duplicate_hash_warning(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-        """Duplicate content produces a console warning."""
-        content = b"duplicate content"
-        deluge_root = _make_deluge_tree(tmp_path, {
-            "a.wav": content,
-            "b.wav": content,
-        })
-        output_dir = tmp_path / "manifests"
-
-        snapshot(deluge_root, output_dir=output_dir)
-
-        captured = capsys.readouterr()
-        assert "WARNING: duplicate content" in captured.out
-
-    def test_console_summary(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-        """Console output includes total files hashed and snapshot path."""
-        deluge_root = _make_deluge_tree(tmp_path, {
-            "a.wav": b"a",
-            "b.wav": b"b",
-        })
-        output_dir = tmp_path / "manifests"
-
-        result_path = snapshot(deluge_root, output_dir=output_dir)
-
-        captured = capsys.readouterr()
-        assert "Hashed 2 files" in captured.out
-        assert str(result_path) in captured.out
-
-    def test_creates_output_directory(self, tmp_path: Path) -> None:
-        """Snapshot creates the output directory if it doesn't exist."""
-        deluge_root = _make_deluge_tree(tmp_path, {"a.wav": b"a"})
-        output_dir = tmp_path / "new" / "nested" / "manifests"
-
-        assert not output_dir.exists()
-
-        snapshot(deluge_root, output_dir=output_dir)
-
-        assert output_dir.is_dir()
-
-    def test_empty_samples_dir(self, tmp_path: Path) -> None:
-        """Snapshot handles empty SAMPLES directory (no WAV files)."""
-        deluge_root = tmp_path / "DELUGE"
-        (deluge_root / "SAMPLES").mkdir(parents=True)
-        output_dir = tmp_path / "manifests"
-
-        result_path = snapshot(deluge_root, output_dir=output_dir)
-        data = json.loads(result_path.read_text())
-
-        assert data["hashes"] == {}
-
-    def test_no_samples_dir(self, tmp_path: Path) -> None:
-        """Snapshot handles missing SAMPLES directory gracefully."""
-        deluge_root = tmp_path / "DELUGE"
-        deluge_root.mkdir()
-        output_dir = tmp_path / "manifests"
-
-        result_path = snapshot(deluge_root, output_dir=output_dir)
-        data = json.loads(result_path.read_text())
-
-        assert data["hashes"] == {}
-
-
 class TestMain:
     """Tests for the CLI entry point."""
 
-    def test_snapshot_subcommand(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
-        """The 'snapshot' subcommand calls snapshot() with the resolved root."""
-        from fix_references import main
-
-        deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": b"kick"})
-        output_dir = tmp_path / "manifests"
-
-        with patch("fix_references.get_deluge_root", return_value=deluge_root), patch(
-            "fix_references._default_manifests_dir", return_value=output_dir
-        ):
-            main(["snapshot"])
-
-        captured = capsys.readouterr()
-        assert "Hashed 1 files" in captured.out
-
-    def test_no_subcommand_exits(self) -> None:
-        """Running without a subcommand exits with code 1."""
-        from fix_references import main
-
-        with pytest.raises(SystemExit, match="1"):
-            main([])
-
-    def test_fix_subcommand_missing_snapshot(self) -> None:
-        """The 'fix' subcommand exits with error when snapshot file is missing."""
+    def test_missing_snapshot_file_exits(self) -> None:
+        """Exits with error when snapshot file is missing."""
         from fix_references import main
 
         with pytest.raises(SystemExit, match="Snapshot file not found"):
-            main(["fix", "--snapshot", "nonexistent-file.json"])
+            main(["--snapshot", "nonexistent-file.json"])
 
 
 class TestComputeMigrationMap:
@@ -958,20 +747,8 @@ class TestPreviewAndApply:
 class TestMainExitCodes:
     """Tests for CLI exit codes via main()."""
 
-    def test_snapshot_exits_0(self, tmp_path: Path) -> None:
-        """The snapshot subcommand exits 0 (no SystemExit raised)."""
-        from fix_references import main
-
-        deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": b"kick"})
-        output_dir = tmp_path / "manifests"
-
-        with patch("fix_references.get_deluge_root", return_value=deluge_root), patch(
-            "fix_references._default_manifests_dir", return_value=output_dir
-        ):
-            main(["snapshot"])  # Should not raise SystemExit
-
     def test_fix_exits_0_no_errors(self, tmp_path: Path) -> None:
-        """fix subcommand exits 0 when no broken references found."""
+        """Exits 0 when no broken references found."""
         from fix_references import main
 
         # Create a DELUGE root with one sample, snapshot matches current state
@@ -987,10 +764,10 @@ class TestMainExitCodes:
         snap_file.write_text(json.dumps(snap_data), encoding="utf-8")
 
         with patch("fix_references.get_deluge_root", return_value=deluge_root):
-            main(["fix", "--snapshot", str(snap_file)])  # Should not raise
+            main(["--snapshot", str(snap_file)])  # Should not raise
 
     def test_fix_exits_1_when_errors(self, tmp_path: Path) -> None:
-        """fix subcommand exits 1 when deleted references are detected."""
+        """Exits 1 when deleted references are detected."""
         from fix_references import main
 
         deluge_root = tmp_path / "DELUGE"
@@ -1011,11 +788,11 @@ class TestMainExitCodes:
 
         with patch("fix_references.get_deluge_root", return_value=deluge_root):
             with pytest.raises(SystemExit) as exc_info:
-                main(["fix", "--snapshot", str(snap_file)])
+                main(["--snapshot", str(snap_file)])
             assert exc_info.value.code == 1
 
     def test_fix_apply_skips_prompt(self, tmp_path: Path) -> None:
-        """fix --apply skips the confirmation prompt and applies changes."""
+        """--apply skips the confirmation prompt and applies changes."""
         from fix_references import main
 
         content = b"kick_audio"
@@ -1037,6 +814,6 @@ class TestMainExitCodes:
         with patch("fix_references.get_deluge_root", return_value=deluge_root), patch(
             "fix_references.confirm_apply"
         ) as mock_confirm:
-            main(["fix", "--snapshot", str(snap_file), "--apply"])
+            main(["--snapshot", str(snap_file), "--apply"])
 
         mock_confirm.assert_not_called()

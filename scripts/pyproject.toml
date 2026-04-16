@@ -19,6 +19,7 @@ packages = ["deluge_lib"]
 deluge-sync = "sync_from_sd:main"
 deluge-cloud-sync = "sync_samples_to_cloud:main"
 deluge-fix = "fix_references:main"
+deluge-snapshot = "create_snapshot:main"
 deluge-verify = "verify_references:main"
 deluge-backup = "create_backup:main"
 deluge-to-sd = "sync_to_sd:main"

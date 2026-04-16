@@ -2,113 +2,25 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from collections import defaultdict
 from dataclasses import dataclass, field
-from datetime import date
 from pathlib import Path, PurePosixPath
 from typing import Any
 
 from lxml import etree
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
-from deluge_lib.scanning import print_path, scan_tree
+from deluge_lib.scanning import print_path
 from deluge_lib.deluge_sdk import (
     SampleRef,
+    default_manifests_dir,
     extract_sample_refs,
+    find_all_wav_files,
     find_all_xml_files,
+    hash_file,
     update_sample_refs,
 )
-
-# 64 KiB read chunks for hashing large WAV files
-_HASH_CHUNK_SIZE = 65536
-
-
-def hash_file(path: Path) -> str:
-    """Compute a SHA256 hex digest for a file, reading in chunks.
-
-    Args:
-        path: Path to the file to hash.
-
-    Returns:
-        Lowercase hex digest string.
-    """
-    h = hashlib.sha256()
-    with path.open("rb") as f:
-        while chunk := f.read(_HASH_CHUNK_SIZE):
-            h.update(chunk)
-    return h.hexdigest()
-
-
-def _find_wav_files(samples_dir: Path) -> list[Path]:
-    """Recursively find all .wav/.WAV files under a directory.
-
-    Returns sorted absolute paths for consistent ordering.
-    """
-    if not samples_dir.is_dir():
-        return []
-    scan = scan_tree(samples_dir, label="samples", file_filter="wav")
-    return sorted(samples_dir / entry.rel_path for entry in scan.files.values())
-
-
-def _default_manifests_dir() -> Path:
-    """Return the default manifests directory: <repo_root>/docs/manifests/."""
-    return Path(__file__).resolve().parent.parent / "docs" / "manifests"
-
-
-def snapshot(deluge_root: Path, *, output_dir: Path | None = None) -> Path:
-    """Hash all samples and save a dated JSON snapshot.
-
-    Args:
-        deluge_root: Absolute path to the DELUGE directory.
-        output_dir: Directory for snapshot file. Defaults to ``docs/manifests/``.
-
-    Returns:
-        Path to the created snapshot file.
-    """
-    samples_dir = deluge_root / "SAMPLES"
-    wav_files = _find_wav_files(samples_dir)
-
-    hashes: dict[str, list[str]] = defaultdict(list)
-    total = len(wav_files)
-    for i, wav_path in enumerate(wav_files, 1):
-        print(f"\rHashing {i}/{total}...", end="", flush=True)
-        digest = hash_file(wav_path)
-        rel_path = str(PurePosixPath(wav_path.relative_to(deluge_root)))
-        hashes[digest].append(rel_path)
-    if total:
-        print()
-
-    # Build snapshot data
-    snapshot_date = date.today().isoformat()
-    data = {
-        "date": snapshot_date,
-        "deluge_root": str(deluge_root),
-        "hashes": dict(hashes),
-    }
-
-    # Ensure output directory exists
-    manifests_dir = output_dir or _default_manifests_dir()
-    manifests_dir.mkdir(parents=True, exist_ok=True)
-
-    snapshot_path = manifests_dir / f"snapshot-{snapshot_date}.json"
-    snapshot_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
-
-    # Console output
-    total = sum(len(paths) for paths in hashes.values())
-    print(f"Hashed {total} files.")
-    print(f"Snapshot saved to {snapshot_path}")
-
-    # Warn about duplicate content
-    for digest, paths in hashes.items():
-        if len(paths) > 1:
-            print(f"WARNING: duplicate content ({digest[:12]}…):")
-            for p in paths:
-                print(f"  {p}")
-
-    return snapshot_path
-
 
 @dataclass
 class MigrationResult:
@@ -151,7 +63,7 @@ def compute_migration_map(
 
     # Build "after" state by hashing current samples
     samples_dir = deluge_root / "SAMPLES"
-    wav_files = _find_wav_files(samples_dir)
+    wav_files = find_all_wav_files(samples_dir)
 
     after_hashes: dict[str, list[str]] = defaultdict(list)
     total = len(wav_files)
@@ -395,25 +307,13 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         description="Fix sample references in Deluge XML files after reorganising samples.",
     )
-    subparsers = parser.add_subparsers(dest="command")
-
-    # snapshot subcommand
-    subparsers.add_parser(
-        "snapshot",
-        help="Hash all samples and save a dated JSON snapshot.",
-    )
-
-    fix_parser = subparsers.add_parser(
-        "fix",
-        help="Fix broken references using a before-snapshot.",
-    )
-    fix_parser.add_argument(
+    parser.add_argument(
         "--snapshot",
         required=False,
         dest="snapshot_path",
         help="Path to the before-snapshot JSON file. Defaults to the most recent snapshot.",
     )
-    fix_parser.add_argument(
+    parser.add_argument(
         "--apply",
         action="store_true",
         help="Apply changes without prompting for confirmation.",
@@ -421,30 +321,24 @@ def main(argv: list[str] | None = None) -> None:
 
     args = parser.parse_args(argv)
 
-    if args.command == "snapshot":
-        deluge_root = get_deluge_root()
-        snapshot(deluge_root)
-    elif True: # args.command == "fix":
-        if False:# args.snapshot_path:
-            snapshot_path = Path(args.snapshot_path)
-        else:
-            manifests_dir = _default_manifests_dir()
-            snapshots = sorted(manifests_dir.glob("snapshot-*.json"))
-            if not snapshots:
-                raise SystemExit(f"No snapshots found in {manifests_dir}")
-            snapshot_path = snapshots[-1]
-            print(f"Using latest snapshot: {snapshot_path.name}")
-        if not snapshot_path.is_file():
-            raise SystemExit(f"Snapshot file not found: {snapshot_path}")
-        deluge_root = get_deluge_root()
-        before_snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
-        migration = compute_migration_map(before_snapshot, deluge_root)
-        broken = detect_broken_refs(migration, deluge_root)
-        has_errors = preview_and_apply(broken, deluge_root, auto_apply=args.apply)
-        if has_errors:
-            raise SystemExit(1)
+    if args.snapshot_path:
+        snapshot_path = Path(args.snapshot_path)
     else:
-        parser.print_help()
+        manifests_dir = default_manifests_dir()
+        snapshots = sorted(manifests_dir.glob("snapshot-*.json"))
+        if not snapshots:
+            raise SystemExit(f"No snapshots found in {manifests_dir}")
+        snapshot_path = snapshots[-1]
+        print(f"Using latest snapshot: {snapshot_path.name}")
+    if not snapshot_path.is_file():
+        raise SystemExit(f"Snapshot file not found: {snapshot_path}")
+    deluge_root = get_deluge_root()
+    before_snapshot = json.loads(snapshot_path.read_text(encoding="utf-8"))
+    migration = compute_migration_map(before_snapshot, deluge_root)
+    broken = detect_broken_refs(migration, deluge_root)
+    has_errors = preview_and_apply(broken, deluge_root, auto_apply=args.apply)
+    if has_errors:
+        raise SystemExit(1)
 
 if __name__ == "__main__":
     main()

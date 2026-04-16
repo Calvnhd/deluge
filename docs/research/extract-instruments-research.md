@@ -56,7 +56,7 @@ The user runs the script periodically after syncing their SD card. The script sc
 
 | Capability | Status | Location | Notes |
 |------------|--------|----------|-------|
-| XML parsing with lxml | ✅ Ready | [deluge_sdk.py](scripts/deluge_lib/deluge_sdk.py) | Three-stage fallback parser (`_parse_deluge_xml`), handles multi-root and malformed XML |
+| XML parsing with lxml | ✅ Ready | [deluge_sdk.py](scripts/deluge_lib/deluge_sdk.py) | Three-stage fallback parser (`parse_deluge_xml`), handles multi-root and malformed XML |
 | XML file discovery | ✅ Ready | [deluge_sdk.py](scripts/deluge_lib/deluge_sdk.py) | `find_all_xml_files()` scans KITS/, SYNTHS/, SONGS/ |
 | Sample reference extraction | ✅ Ready | [deluge_sdk.py](scripts/deluge_lib/deluge_sdk.py) | `extract_sample_refs()` with preset name lookup logic |
 | .env configuration | ✅ Ready | [cli_utils.py](scripts/deluge_lib/cli_utils.py) | `get_deluge_root()` loads DELUGE_ROOT from `scripts/.env` |
@@ -432,7 +432,7 @@ The user's proposed filename format is: `<SongName>-<PresetName>-<ClipIdentifier
 | Pattern | Example | Description |
 |---------|---------|-------------|
 | `.env` configuration | `get_deluge_root()` in [cli_utils.py](scripts/deluge_lib/cli_utils.py) | All paths loaded from `scripts/.env` via `python-dotenv` |
-| lxml for XML parsing | `_parse_deluge_xml()` in [deluge_sdk.py](scripts/deluge_lib/deluge_sdk.py) | Three-stage fallback (strict → synthetic root → recover) |
+| lxml for XML parsing | `parse_deluge_xml()` in [deluge_sdk.py](scripts/deluge_lib/deluge_sdk.py) | Three-stage fallback (strict → synthetic root → recover) |
 | `pathlib.Path` everywhere | All scripts | Cross-platform path handling |
 | Dry-run as default | [sync_from_sd.py](scripts/sync_from_sd.py) | Preview changes, prompt before applying |
 | Dataclass result types | `SyncPlan`, `MigrationResult`, `SampleRef` | Typed, structured return values |
@@ -1074,7 +1074,7 @@ Approach B is not viable for active instruments — it would produce synths with
 ### Shared resources
 
 - **lxml dependency** — already in pyproject.toml
-- **XML parsing fallback** — `_parse_deluge_xml()` handles edge cases; the extraction script should reuse this
+- **XML parsing fallback** — `parse_deluge_xml()` handles edge cases; the extraction script should reuse this
 - **scan_tree** — can be used to discover song XMLs; or `find_all_xml_files()` which already scans SONGS/
 
 ## Risk Analysis
@@ -1107,7 +1107,7 @@ Implement in two modes as proposed in the feature notes:
 **Filename convention:** `<SongName>-<PresetName>.XML` for default mode; `<SongName>-<PresetName>-<SectionId>.XML` (or `<SongName>-<PresetName>-<ColourName>.XML`) for extended mode. Sanitise for filesystem safety.
 
 **Key implementation decisions:**
-- Reuse `_parse_deluge_xml()` from `deluge_sdk.py` for robust XML parsing
+- Reuse `parse_deluge_xml()` from `deluge_sdk.py` for robust XML parsing
 - Reuse `get_deluge_root()` from `cli_utils.py` for configuration
 - Add a `pyproject.toml` entry point for the new script
 - Follow existing patterns: dry-run preview, confirmation before writing, `.trash` for replaced files

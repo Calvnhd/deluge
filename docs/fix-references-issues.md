@@ -15,7 +15,7 @@ Issues discovered during the first real-data test of `fix_references.py` and rel
 ## Bugs
 
 ### 2. Recovered XML silent skip
-When an XML file triggers the recovery parser (3rd fallback in `_parse_deluge_xml`), `update_sample_refs` detects matching references, increments the count internally, but then silently returns 0 without writing the file. Meanwhile, `extract_sample_refs` discards the `recovered` flag, so these refs appear normal during detection.
+When an XML file triggers the recovery parser (3rd fallback in `parse_deluge_xml`), `update_sample_refs` detects matching references, increments the count internally, but then silently returns 0 without writing the file. Meanwhile, `extract_sample_refs` discards the `recovered` flag, so these refs appear normal during detection.
 
 **Result:**
 - Preview shows planned changes for the file

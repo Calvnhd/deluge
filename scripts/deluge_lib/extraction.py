@@ -20,7 +20,7 @@ from pathlib import Path
 
 from lxml import etree
 
-from deluge_lib.deluge_sdk import _parse_deluge_xml
+from deluge_lib.deluge_sdk import parse_deluge_xml
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -225,7 +225,7 @@ def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
 
     Steps:
         1. Glob DELUGE_ROOT/SONGS/*.XML (case-insensitive on content, uppercase ext)
-        2. For each file, parse with _parse_deluge_xml()
+        2. For each file, parse with parse_deluge_xml()
         3. Read firmwareVersion attribute from <song> root element
         4. If firmwareVersion != "c1.2.1", print warning and skip
         5. Collect and return valid (path, root) tuples
@@ -241,7 +241,7 @@ def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
             continue
 
         try:
-            _tree, root, _recovered = _parse_deluge_xml(xml_path)
+            _tree, root, _recovered = parse_deluge_xml(xml_path)
         except Exception as exc:
             print(f"WARNING: Skipping {xml_path.name} — failed to parse XML: {exc}")
             continue

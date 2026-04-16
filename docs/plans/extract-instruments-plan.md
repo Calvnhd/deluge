@@ -17,7 +17,7 @@ Key findings from the [research document](../research/extract-instruments-resear
 - **Split architecture (Section 3):** Instrument structure lives in `<instruments>`, tuneable parameters live in clip-level `<soundParams>`/`<kitParams>`, and synth arpeggiators live at clip level. Extraction requires merging these sources.
 - **Transformation recipes (Section 13.5):** Precise, verified step-by-step procedures for both synth and kit extraction, including element reordering, attribute stripping, and tag renaming.
 - **Kit arpeggiator asymmetry (Section 13.6):** Kit sounds keep their arpeggiator in the instrument definition; synth arpeggiators live at clip level. Different handling required.
-- **Existing assets (Section 10):** `_parse_deluge_xml()`, `get_deluge_root()`, `scan_tree()`, `confirm_apply()`, dataclass patterns, and `pyproject.toml` entry points are all reusable.
+- **Existing assets (Section 10):** `parse_deluge_xml()`, `get_deluge_root()`, `scan_tree()`, `confirm_apply()`, dataclass patterns, and `pyproject.toml` entry points are all reusable.
 - **All 58 songs use `c1.2.1` firmware (Section 11):** Single format target simplifies extraction. Warn and skip songs with other firmware.
 - **Recommended approach:** Merge instrument + clip params (Approach A) — the only viable approach since active instruments lack `<defaultParams>`.
 
@@ -165,7 +165,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - Orphaned instrument → warn, skip, continue (D7)
 - Duplicate clip in same section → warn, take first, continue (D14)
 - Missing init preset files → abort with clear error (these are required for normalisation values)
-- XML parse failure → warn, skip song, continue (reuse `_parse_deluge_xml()` fallback logic)
+- XML parse failure → warn, skip song, continue (reuse `parse_deluge_xml()` fallback logic)
 - drumIndex mismatch in kit noteRows → warn, skip that noteRow, continue
 - Filename collision → append incrementing number (D5)
 
@@ -179,7 +179,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 ### 5d. Integration Points
 
 - **`deluge_lib/cli_utils.py`** — Reuse `get_deluge_root()` for environment loading
-- **`deluge_lib/deluge_sdk.py`** — Reuse `_parse_deluge_xml()` for XML parsing. Consider whether `find_all_xml_files()` is suitable or if a simpler song-specific discovery is better (it currently scans all three subdirectories)
+- **`deluge_lib/deluge_sdk.py`** — Reuse `parse_deluge_xml()` for XML parsing. Consider whether `find_all_xml_files()` is suitable or if a simpler song-specific discovery is better (it currently scans all three subdirectories)
 - **`deluge_lib/scanning.py`** — Reuse `scan_tree()` if needed for file discovery, though a simpler `Path.glob()` for `SONGS/*.XML` may suffice
 - **`pyproject.toml`** — Add `deluge-extract = "extract_instruments:main"` entry point
 - **SD card safety compliance:** The script reads from `DELUGE/SONGS/` and writes to `DELUGE/SYNTHS/SONG-SYNTHS/` and `DELUGE/KITS/SONG-KITS/`. All operations are within the repository `DELUGE/` directory (permitted per project standard). No SD card writes. Song XMLs are never modified.
@@ -242,13 +242,13 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Outputs:** List of valid song file paths, warnings for skipped songs
 - **Acceptance Criteria:**
   - [x] Discovers all `*.XML` files in `DELUGE_ROOT/SONGS/` (non-recursive — songs are at top level)
-  - [x] Parses each song XML using `_parse_deluge_xml()` or equivalent
+  - [x] Parses each song XML using `parse_deluge_xml()` or equivalent
   - [x] Reads `firmwareVersion` attribute from `<song>` root element
   - [x] Skips and warns for songs with firmware ≠ `c1.2.1`
   - [x] Returns list of `(path, parsed_tree)` tuples for valid songs
 - **Implementation Notes:**
   > Implemented 15 Apr 2026. `discover_songs()` in `extraction.py`:
-  > - Globs `SONGS/*.XML` (sorted for deterministic order), parses each with `_parse_deluge_xml()`
+  > - Globs `SONGS/*.XML` (sorted for deterministic order), parses each with `parse_deluge_xml()`
   > - Handles wrapper `<root>` case (multi-root fallback) by finding the `<song>` child
   > - Gracefully skips files that fail to parse (catches all exceptions, warns, continues)
   > - Warns and skips songs with `firmwareVersion != "c1.2.1"`
@@ -549,7 +549,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 ### Project Files
 - [Init-Synth.XML](../../DELUGE/SYNTHS/Init-Synth.XML) — Reference synth volume (`0x4CCCCCA8`) and pan (`0x00000000`)
 - [Init-Kit.XML](../../DELUGE/KITS/Init-Kit.XML) — Reference kit volume (`0x3504F334`) and pan (`0x00000000`)
-- [deluge_sdk.py](../../scripts/deluge_lib/deluge_sdk.py) — XML parsing (`_parse_deluge_xml()`), file discovery
+- [deluge_sdk.py](../../scripts/deluge_lib/deluge_sdk.py) — XML parsing (`parse_deluge_xml()`), file discovery
 - [cli_utils.py](../../scripts/deluge_lib/cli_utils.py) — `get_deluge_root()`, `confirm_apply()`
 - [scanning.py](../../scripts/deluge_lib/scanning.py) — `scan_tree()`, `.trash` skipping
 - [pyproject.toml](../../scripts/pyproject.toml) — Dependencies, entry points, tool config

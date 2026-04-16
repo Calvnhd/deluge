@@ -1,13 +1,17 @@
-"""Deluge SDK — XML discovery, reference extraction, and in-place updating."""
+"""Deluge SDK — Deluge filesystem discovery, reference extraction, and in-place updating."""
 
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 
 from lxml import etree
 
 from deluge_lib.scanning import scan_tree
+
+# 64 KiB read chunks for hashing large WAV files
+_HASH_CHUNK_SIZE = 1024 * 64
 
 # The three standard Deluge SD card subdirectories containing XML presets.
 _DELUGE_SUBDIRS = ("KITS", "SYNTHS", "SONGS")
@@ -38,6 +42,38 @@ class SampleRef:
     ref_type: str
     # XML element holding the reference: "osc1", "osc2", "sampleRange", or "audioClip"
     element_tag: str
+
+
+def hash_file(path: Path) -> str:
+    """Compute a SHA256 hex digest for a file, reading in chunks.
+
+    Args:
+        path: Path to the file to hash.
+
+    Returns:
+        Lowercase hex digest string.
+    """
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        while chunk := f.read(_HASH_CHUNK_SIZE):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def default_manifests_dir() -> Path:
+    """Return the default manifests directory: <repo_root>/docs/manifests/."""
+    return Path(__file__).resolve().parent.parent.parent / "docs" / "manifests"
+
+
+def find_all_wav_files(samples_dir: Path) -> list[Path]:
+    """Recursively find all .wav/.WAV files under a directory.
+
+    Returns sorted absolute paths for consistent ordering.
+    """
+    if not samples_dir.is_dir():
+        return []
+    scan = scan_tree(samples_dir, label="samples", file_filter="wav")
+    return sorted(samples_dir / entry.rel_path for entry in scan.files.values())
 
 
 def find_all_xml_files(deluge_root: Path) -> list[Path]:
@@ -103,7 +139,7 @@ def _get_preset_name(
     return "unknown"
 
 
-def _parse_deluge_xml(
+def parse_deluge_xml(
     xml_path: Path,
 ) -> tuple[etree._ElementTree | None, etree._Element, bool]:
     """Parse a Deluge XML file with a three-stage fallback strategy.
@@ -155,7 +191,7 @@ def extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]:
     The ``xml_file`` field on each :class:`SampleRef` is stored as a path
     relative to *deluge_root*.  Empty references are skipped.
     """
-    _tree, root, _recovered = _parse_deluge_xml(xml_path)
+    _tree, root, _recovered = parse_deluge_xml(xml_path)
     xml_type = detect_xml_type(xml_path)
     xml_rel = xml_path.relative_to(deluge_root)
     refs: list[SampleRef] = []
@@ -233,7 +269,7 @@ def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
     if not mapping:
         return 0
 
-    tree, root, recovered = _parse_deluge_xml(xml_path)
+    tree, root, recovered = parse_deluge_xml(xml_path)
     count = 0
 
     # Phase 1: element-style <fileName>text</fileName>
