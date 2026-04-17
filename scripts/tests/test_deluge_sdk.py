@@ -7,8 +7,8 @@ from deluge_lib.deluge_sdk import (
     detect_xml_type,
     extract_sample_refs,
     find_all_xml_files,
-    update_sample_refs,
 )
+from fix_references import update_sample_refs
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
 

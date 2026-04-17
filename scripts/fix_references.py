@@ -18,7 +18,6 @@ from deluge_lib.deluge_sdk import (
     extract_sample_refs,
     find_all_xml_files,
     hash_all_samples,
-    update_sample_refs,
 )
 
 @dataclass
@@ -187,6 +186,33 @@ def classify_ref_changes(
                 )
 
     return result
+
+
+def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
+    """Update sample references in *xml_path* according to *mapping*.
+
+    For each reference whose current path appears as a key in *mapping*, the
+    value is written as the new path.  The file is only rewritten when at least
+    one reference was changed.
+
+    Returns the number of replacements made.
+    """
+    if not mapping:
+        return 0
+
+    data = xml_path.read_text(encoding="utf-8")
+    count = 0
+
+    for old_path, new_path in mapping.items():
+        occurrences = data.count(old_path)
+        if occurrences:
+            data = data.replace(old_path, new_path)
+            count += occurrences
+
+    if count > 0:
+        xml_path.write_text(data, encoding="utf-8")
+
+    return count
 
 
 def preview_and_apply(
