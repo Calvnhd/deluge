@@ -9,7 +9,7 @@ from pathlib import Path, PurePosixPath
 
 from lxml import etree
 
-from deluge_lib.scanning import scan_tree
+from deluge_lib.scanning import normalise_key, scan_tree
 
 # 64 KiB read chunks for hashing large WAV files
 _HASH_CHUNK_SIZE = 1024 * 64
@@ -75,6 +75,19 @@ def find_all_wav_files(samples_dir: Path) -> list[Path]:
         return []
     scan = scan_tree(samples_dir, label="samples", file_filter="wav")
     return sorted(samples_dir / entry.rel_path for entry in scan.files.values())
+
+
+def get_existing_samples(deluge_root: Path) -> set[str]:
+    """Build a normalised set of all WAV sample paths under DELUGE/SAMPLES/.
+
+    Returns a set of lowercase, forward-slash paths relative to *deluge_root*,
+    suitable for case-insensitive existence checks via ``normalise_key()``.
+    """
+    samples_dir = deluge_root / "SAMPLES"
+    if not samples_dir.is_dir():
+        return set()
+    scan = scan_tree(samples_dir, label="SAMPLES", file_filter="wav")
+    return {normalise_key(Path("SAMPLES") / e.rel_path) for e in scan.files.values()}
 
 
 def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:

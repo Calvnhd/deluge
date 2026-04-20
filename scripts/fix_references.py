@@ -11,12 +11,13 @@ from typing import Any
 from lxml import etree
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
-from deluge_lib.scanning import print_path
+from deluge_lib.scanning import normalise_key, print_path
 from deluge_lib.deluge_sdk import (
     SampleRef,
     default_manifests_dir,
     extract_sample_refs,
     find_all_xml_files,
+    get_existing_samples,
     hash_all_samples,
 )
 
@@ -120,6 +121,14 @@ class AmbiguousRefWarning:
 
 
 @dataclass
+class MissingRefError:
+    """A sample reference that doesn't match any file on disk — wrong name or never existed."""
+
+    ref: SampleRef
+    missing_path: str
+
+
+@dataclass
 class BrokenRefResult:
     """Result of scanning XML references against a migration map.
 
@@ -132,6 +141,7 @@ class BrokenRefResult:
     changes: list[PlannedChange] = field(default_factory=list)
     errors: list[BrokenRefError] = field(default_factory=list)
     warnings: list[AmbiguousRefWarning] = field(default_factory=list)
+    missing: list[MissingRefError] = field(default_factory=list)
 
 
 def classify_ref_changes(
@@ -162,6 +172,7 @@ def classify_ref_changes(
     for before_paths, _after_paths in migration.ambiguous.values():
         ambiguous_paths.update(before_paths)
 
+    existing = get_existing_samples(deluge_root)
     result = BrokenRefResult()
 
     xml_files = find_all_xml_files(deluge_root)
@@ -183,6 +194,10 @@ def classify_ref_changes(
             elif ref.path in ambiguous_paths:
                 result.warnings.append(
                     AmbiguousRefWarning(ref=ref, ambiguous_path=ref.path)
+                )
+            elif normalise_key(ref.path) not in existing:
+                result.missing.append(
+                    MissingRefError(ref=ref, missing_path=ref.path)
                 )
 
     return result
@@ -232,7 +247,7 @@ def preview_and_apply(
         True if errors (deleted references) were found, False otherwise.
     """
     # Nothing to do
-    if not result.changes and not result.errors and not result.warnings:
+    if not result.changes and not result.errors and not result.warnings and not result.missing:
         print("No broken references found. Nothing to do.")
         return False
 
@@ -273,25 +288,37 @@ def preview_and_apply(
                 " — multiple files share this hash"
             )
 
+    # --- Missing ---
+    if result.missing:
+        print()
+        print("MISSING — Sample Path Not Found")
+        print("--------------------------------")
+        for miss in result.missing:
+            print(
+                f"  {print_path(miss.ref.xml_file)}: \"{miss.missing_path}\""
+                " — no matching file on disk"
+            )
+
     # --- Summary ---
     n_changes = len(result.changes)
     n_files = len(changes_by_file)
     n_errors = len(result.errors)
     n_warnings = len(result.warnings)
+    n_missing = len(result.missing)
     print()
-    print(f"{n_changes} changes across {n_files} files. {n_errors} errors, {n_warnings} warnings.")
+    print(f"{n_changes} changes across {n_files} files. {n_errors} errors, {n_warnings} warnings, {n_missing} missing.")
 
     if result.errors:
         print("WARNING: Resolve errors before applying to avoid broken references.")
 
     # Nothing to apply
     if not result.changes:
-        return bool(result.errors)
+        return bool(result.errors) or bool(result.missing)
 
     # --- Confirm ---
     if not auto_apply and not confirm_apply(f"Apply {n_changes} changes to {n_files} files?"):
         print("No changes applied.")
-        return bool(result.errors)
+        return bool(result.errors) or bool(result.missing)
 
     # --- Apply ---
     # Build per-file mappings and apply
@@ -308,7 +335,7 @@ def preview_and_apply(
 
     print(f"Applied: {files_modified} files modified, {total_updated} references updated.")
 
-    return bool(result.errors)
+    return bool(result.errors) or bool(result.missing)
 
 
 def main(argv: list[str] | None = None) -> None:

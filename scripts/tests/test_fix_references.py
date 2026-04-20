@@ -13,6 +13,7 @@ from fix_references import (
     BrokenRefError,
     BrokenRefResult,
     MigrationResult,
+    MissingRefError,
     PlannedChange,
     compute_migration_map,
     classify_ref_changes,
@@ -312,7 +313,7 @@ class TestClassifyRefChanges:
 
     def test_valid_ref_not_in_results(self, tmp_path: Path) -> None:
         """A reference not in any migration category does not appear in results."""
-        deluge_root = tmp_path / "DELUGE"
+        deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/StillHere.wav": b"audio"})
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/StillHere.wav"],
@@ -324,10 +325,11 @@ class TestClassifyRefChanges:
         assert not result.changes
         assert not result.errors
         assert not result.warnings
+        assert not result.missing
 
     def test_multiple_refs_across_multiple_xmls(self, tmp_path: Path) -> None:
         """References from multiple XML files are all classified correctly."""
-        deluge_root = tmp_path / "DELUGE"
+        deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/OK.wav": b"audio"})
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/Moved.wav"],
@@ -351,7 +353,10 @@ class TestClassifyRefChanges:
 
     def test_no_broken_refs(self, tmp_path: Path) -> None:
         """When all references are valid, result is empty."""
-        deluge_root = tmp_path / "DELUGE"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "DRUMS/Fine.wav": b"audio",
+            "DRUMS/AlsoFine.wav": b"audio",
+        })
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/Fine.wav", "SAMPLES/DRUMS/AlsoFine.wav"],
@@ -396,6 +401,39 @@ class TestClassifyRefChanges:
         assert len(result.errors) == 2
         deleted_paths = {e.deleted_path for e in result.errors}
         assert deleted_paths == {"SAMPLES/A.wav", "SAMPLES/B.wav"}
+
+    def test_missing_ref_not_on_disk(self, tmp_path: Path) -> None:
+        """A reference not in migration map and not on disk appears as missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/Other.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/DRUMS/CB1-BD~1.WAV"],
+        )
+        migration = MigrationResult()
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.changes
+        assert not result.errors
+        assert not result.warnings
+        assert len(result.missing) == 1
+        assert result.missing[0].missing_path == "SAMPLES/DRUMS/CB1-BD~1.WAV"
+
+    def test_case_insensitive_ref_not_missing(self, tmp_path: Path) -> None:
+        """A reference differing only in case from a current path is not missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {"Artists/Chaz/CB1-bdrum1.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/ARTISTS/CHAZ/CB1-BDRUM1.WAV"],
+        )
+        migration = MigrationResult()
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.changes
+        assert not result.errors
+        assert not result.warnings
+        assert not result.missing
 
 
 def _make_ref(xml_file: str = "KITS/KIT001.XML", path: str = "SAMPLES/old.wav") -> SampleRef:
@@ -541,7 +579,7 @@ class TestPreviewAndApply:
             preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert "2 changes across 2 files. 1 errors, 1 warnings." in captured.out
+        assert "2 changes across 2 files. 1 errors, 1 warnings, 0 missing." in captured.out
 
     def test_error_warning_recommends_resolution(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
@@ -675,6 +713,41 @@ class TestPreviewAndApply:
         captured = capsys.readouterr()
         assert "2 files modified" in captured.out
         assert "2 references updated" in captured.out
+
+    def test_missing_section_displayed(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Missing refs are displayed under the 'MISSING' section header."""
+        result = BrokenRefResult(
+            missing=[
+                MissingRefError(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/DRUMS/CB1-BD~1.WAV"),
+                    missing_path="SAMPLES/DRUMS/CB1-BD~1.WAV",
+                ),
+            ],
+        )
+
+        preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert "MISSING — Sample Path Not Found" in captured.out
+        assert "SAMPLES/DRUMS/CB1-BD~1.WAV" in captured.out
+        assert "no matching file on disk" in captured.out
+
+    def test_returns_true_when_missing(self, tmp_path: Path) -> None:
+        """Returns True when missing refs exist."""
+        result = BrokenRefResult(
+            missing=[
+                MissingRefError(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/DRUMS/CB1-BD~1.WAV"),
+                    missing_path="SAMPLES/DRUMS/CB1-BD~1.WAV",
+                ),
+            ],
+        )
+
+        has_errors = preview_and_apply(result, tmp_path)
+
+        assert has_errors is True
 
     def test_only_errors_no_apply_prompt(self, tmp_path: Path) -> None:
         """When there are only errors (no changes), no apply prompt is shown."""

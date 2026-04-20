@@ -34,6 +34,8 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 
 ## Scripts
 
+To cover 7 distinct steps...
+
 ### Setup
 
 Scripts require **Python 3.12+**. Install [uv](https://docs.astral.sh/uv/getting-started/installation/) to manage Python and dependencies:

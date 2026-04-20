@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import NamedTuple
 
 from deluge_lib.cli_utils import get_deluge_root
-from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files
-from deluge_lib.scanning import print_path, normalise_key, scan_tree
+from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files, get_existing_samples
+from deluge_lib.scanning import print_path, normalise_key
 
 # Regex to find sample paths in raw XML text. Case-insensitive.
 # Matches paths like SAMPLES/any/path.wav (possibly inside quotes or element text).
@@ -57,12 +57,7 @@ def check_references(deluge_root: Path) -> CheckResult:
     print()
 
     print("Finding all samples...")
-    samples_dir = deluge_root / "SAMPLES"
-    # case insensitive for accurate comparison. Do not write out to file
-    existing_samples_normalised: set[str] = set()
-    if samples_dir.is_dir():
-        scan = scan_tree(samples_dir, label="SAMPLES", file_filter="wav")
-        existing_samples_normalised = {normalise_key(Path("SAMPLES") / e.rel_path) for e in scan.files.values()}
+    existing_samples_normalised = get_existing_samples(deluge_root)
     print()
 
     total_refs = 0
