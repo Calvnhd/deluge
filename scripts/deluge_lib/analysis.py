@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from deluge_lib.deluge_sdk import SampleRef
-from deluge_lib.scanning import ScanResult, normalise_key
+from deluge_lib.scanning import ScanResult, normalise_key, print_path
 
 # Normalised prefix used by SampleRef.path values (relative to DELUGE/).
 _SAMPLES_PREFIX = "samples/"
@@ -144,7 +144,7 @@ def build_usage_index(
     # 1. Seed the index with every file found on disk.
     for norm_key, file_entry in sample_scan.files.items():
         entries[norm_key] = SampleUsage(
-            path=str(file_entry.rel_path),
+            path=print_path(file_entry.rel_path),
             size=file_entry.size,
             refs=[],
             on_disk=True,

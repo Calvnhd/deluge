@@ -42,6 +42,13 @@ def _group_by_folder(
     return dict(sorted(groups.items()))
 
 
+def _strip_folder(path: str, folder: str) -> str:
+    """Remove the top-level folder prefix from a sample path for grouped display."""
+    if folder:
+        return path[len(folder) + 1:]
+    return path
+
+
 def _format_ref(ref: SampleRef) -> str:
     """Format a single SampleRef for display.
 
@@ -50,8 +57,8 @@ def _format_ref(ref: SampleRef) -> str:
 
     xml_name = print_path(ref.xml_file)
     if ref.xml_type == "song":
-        return f"{xml_name} \u2192 {ref.preset_name} ({ref.xml_type})"
-    return f"{xml_name} ({ref.xml_type})"
+        return f"{xml_name} \u2192 {ref.preset_name}"
+    return xml_name
 
 
 # ---------------------------------------------------------------------------
@@ -119,16 +126,16 @@ def cmd_unused(index, args):
     print("=" * len(header))
     print(header)
     print("=" * len(header))
-    max_path_length = max(len(print_path(s.path)) for s in unreferenced)
     groups = _group_by_folder(unreferenced)
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.size or 0, reverse=True)
         folder_size = sum(s.size or 0 for s in samples)
         label = f"{folder}/" if folder else "(root)"
+        max_path_length = max(len(print_path(_strip_folder(s.path, folder))) for s in samples)
         print()
         print(f"{label} \u2014 {len(samples):,} files, {format_size(folder_size)}")
         for s in samples:
-            print(f"  {print_path(s.path):<{max_path_length}}  {format_size(s.size or 0):>8}")
+            print(f"  {print_path(_strip_folder(s.path, folder)):<{max_path_length}}  {format_size(s.size or 0):>8}")
 
 # todo - update formatting.  IT's a mess.
 def cmd_missing(index, _args):
@@ -152,7 +159,7 @@ def cmd_missing(index, _args):
         print()
         print(label)
         for s in samples:
-            print(f"  {print_path(s.path)}")
+            print(f"  {print_path(_strip_folder(s.path, folder))}")
             for ref in sorted(s.refs, key=lambda r: (str(r.xml_file), r.preset_name)):
                 print(f"    {_format_ref(ref)}")
 
@@ -162,7 +169,8 @@ def cmd_usage(index, args):
 
     matches = filter_by_pattern(index, args.pattern)
     if not matches:
-        print(f'No samples matching "{args.pattern}".')
+        print()
+        print(f'No samples matching "{args.pattern}"')
         return
 
     header = f'Samples matching "{args.pattern}" ({len(matches):,} matches)'
@@ -174,17 +182,21 @@ def cmd_usage(index, args):
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.path.lower())
         label = f"{folder}/" if folder else "(root)"
+        max_path_length = max(len(print_path(_strip_folder(s.path, folder))) for s in samples)
+        all_refs = [
+            _format_ref(ref)
+            for s in samples
+            for ref in s.refs
+        ]
+        max_ref_length = max(len(r) for r in all_refs) if all_refs else 0
         print()
         print(label)
         for s in samples:
-            size_str = f" ({format_size(s.size)})" if s.size is not None else ""
-            print(f"  {print_path(s.path)}{size_str}")
+            size_str = format_size(s.size) if s.size is not None else ""
+            ref_count_str = f"  {s.ref_count} {'ref' if s.ref_count == 1 else 'refs'}" if s.ref_count > 0 else ""
+            print(f"  {print_path(_strip_folder(s.path, folder)):<{max_path_length}}  {size_str:>10}{ref_count_str}")
             for ref in sorted(s.refs, key=lambda r: (str(r.xml_file), r.preset_name)):
-                print(f"    {_format_ref(ref)}")
-            if s.ref_count > 0:
-                label_text = "shared" if s.ref_count > 1 else "exclusive"
-                print(f"    {s.ref_count} {'ref' if s.ref_count == 1 else 'refs'} ({label_text})")
-
+                print(f"    {_format_ref(ref):<{max_ref_length}}")
 
 # ---------------------------------------------------------------------------
 # CLI
