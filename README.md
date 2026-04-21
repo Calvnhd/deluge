@@ -42,25 +42,25 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 |------|-------------|--------|--------|
 | 1 | Pull everything off the SD card into the repo | `sync_from_sd.py` | ✅ |
 | 2 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
-| 3 | Create a .zip backup (optional) | `create_backup.py` | ✅ |
-| 4 | Take a sample snapshot for future reference fixing | `create_snapshot.py` | ✅ |
+| 3 | Take a snapshot of samples | `create_snapshot.py` | ✅ |
+| 4 | Create a .zip backup (optional) | `create_backup.py` | ✅ |
 
 **Phase 2: Organise**
 
 | Step | What you do | Script | Status |
 |------|-------------|--------|--------|
 | 1 | Clean up songs — delete old versions, rename | (manual) | — |
-| 2 | Rearrange samples into a usable folder structure | (manual) | — |
-| 3 | Rearrange synth and kit presets | (manual) | — |
+| 2 | Extract kit and synth presets from songs | `extract_instruments.py` | 🚧 |
+| 3 | Add, remove, or rearrange synths and kits presets as desired | (manual) | — |
+| 4 | Add, remove, or rearrange samples as desired | (manual) | — |
 
 **Phase 3: Update**
 
 | Step | What you do | Script | Status |
 |------|-------------|--------|--------|
-| 1 | Extract kit and synth presets from songs | `extract_instruments.py` | 🚧 |
 | 2 | Verify sample references are intact | `verify_references.py` | ✅ |
 | 3 | Fix any broken references | `fix_references.py` | ✅ |
-| 4 | Sync samples to cloud backup (if samples were reorganised) | `sync_samples_to_cloud.py` | ✅ |
+| 4 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
 | 5 | Sync repo back to SD card | `sync_to_sd.py` | 🚧 |
 | 6 | Take a fresh sample snapshot | `create_snapshot.py` | ✅ |
 
@@ -86,66 +86,86 @@ cp scripts/.env.example scripts/.env
 
 All scripts read configuration from `scripts/.env`. See `.env.example` for available options. Run all scripts from the `scripts/` directory.
 
-### `sync_from_sd.py`
+### Script reference
 
-Syncs the mounted SD card into the local `DELUGE/` directory so it mirrors the card exactly. The SD card is never modified — all changes flow one way (SD card → repo).
+#### `sync_from_sd.py`
+
+Syncs the mounted SD card into the local `DELUGE/` directory. The SD card is not modified.
 
 ```
 uv run sync_from_sd.py            # preview changes, then prompt to apply
-uv run sync_from_sd.py --dry-run  # preview only, no changes
+uv run sync_from_sd.py --dry-run  # preview only
 ```
 
-### `verify_references.py`
+#### `sync_samples_to_cloud.py`
 
-Checks that all samples (.WAV) referenced in all XML presets point to existing files under `DELUGE/`. Reports any broken references.
+Syncs WAV files from `DELUGE/SAMPLES/` to a local folder for cloud backup, preserving directory structure. Files removed from the source are deleted from the destination.
+
+```
+uv run sync_samples_to_cloud.py            # preview changes, then prompt to apply
+uv run sync_samples_to_cloud.py --dry-run  # preview only
+```
+
+#### `create_snapshot.py`
+
+Hashes all samples and saves a dated JSON snapshot to `docs/manifests/`. Take a snapshot before reorganising samples so `fix_references.py` can detect what moved.
+
+```
+uv run create_snapshot.py
+```
+
+#### `create_backup.py`
+
+Creates a timestamped `.zip` archive of all XML and WAV files.
+
+```
+uv run create_backup.py            # create backup
+uv run create_backup.py --dry-run  # preview file count and size only
+```
+
+#### `extract_instruments.py` 🚧
+
+Extracts standalone synth and kit presets from song XMLs into `SYNTHS/SONG-SYNTHS/` and `KITS/SONG-KITS/`.
+
+```
+uv run extract_instruments.py              # preview, then prompt to apply
+uv run extract_instruments.py --dry-run    # preview only
+uv run extract_instruments.py --extended   # extract multiple versions when params differ
+```
+
+#### `verify_references.py`
+
+Checks that all sample paths referenced in XML presets point to existing files under `DELUGE/`.
 
 ```
 uv run verify_references.py
 ```
 
-### `create_backup.py`
+#### `fix_references.py`
 
-Creates a timestamped `.zip` archive of the SD card (or any configured source directory). Archives all XML and WAV files with compression.
-
-```
-uv run create_backup.py            # create a backup
-uv run create_backup.py --dry-run  # preview file count and size only
-```
-
-### `fix_references.py`
-
-**Status:** Work in progress
-
-Fixes broken sample references after samples have been moved or renamed. Works in two steps:
-
-1. **Snapshot** — hash all samples and save a manifest before reorganising:
-
-   ```
-   uv run fix_references.py snapshot
-   ```
-
-   This writes a dated JSON snapshot to `docs/manifests/`.
-
-2. **Fix** — compare the snapshot against the current filesystem, find moved/renamed samples, and update XML references:
-
-   ```
-   uv run fix_references.py fix --snapshot docs/manifests/<snapshot>.json
-   uv run fix_references.py fix --snapshot docs/manifests/<snapshot>.json --apply  # skip confirmation prompt
-   ```
-
-   Without `--apply`, the script previews the changes and prompts before writing.
-
-Both scripts read `DELUGE_ROOT` from `scripts/.env`.
-
-### `sync_samples_to_cloud.py`
-
-Syncs all WAV files from `DELUGE/SAMPLES/` to a configurable local folder for cloud backup, preserving directory structure. Only WAV files are copied. Files removed from the source are deleted from the destination. Non-WAV files already at the destination are left untouched.
-
-`CLOUD_BACKUP_PATH` must be set in `scripts/.env`.
+Fixes broken sample references after samples have been moved or renamed. Compares a before-snapshot against the current filesystem and updates XML paths. Auto-finds the latest snapshot if `--snapshot` is omitted.
 
 ```
-uv run sync_samples_to_cloud.py            # preview changes, then prompt to apply
-uv run sync_samples_to_cloud.py --dry-run  # preview only, no changes
+uv run fix_references.py                                             # use latest snapshot, preview and prompt
+uv run fix_references.py --snapshot docs/manifests/<snapshot>.json   # use specific snapshot
+uv run fix_references.py --apply                                     # skip confirmation prompt
+```
+
+#### `sync_to_sd.py` 🚧
+
+Syncs the local `DELUGE/` directory back to the mounted SD card. Files to be deleted from the SD card are first backed up to `DELUGE/.trash/` in the repo before removal.
+
+```
+uv run sync_to_sd.py            # preview changes, then prompt to apply
+uv run sync_to_sd.py --dry-run  # preview only
+```
+
+#### `list_samples.py`
+
+Utility script, not part of the main workflow. Lists all unique sample paths referenced across all XML presets.
+
+```
+uv run list_samples.py
 ```
 
 ### Ideas
