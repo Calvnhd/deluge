@@ -160,12 +160,16 @@ uv run sync_to_sd.py            # preview changes, then prompt to apply
 uv run sync_to_sd.py --dry-run  # preview only
 ```
 
-#### `list_samples.py`
+#### `sample_overview.py`
 
-Utility script, not part of the main workflow. Lists all unique sample paths referenced across all XML presets.
+Sample library overview tool. Cross-references XML presets with the filesystem to show what's in use, what's unused, and what's missing.
 
 ```
-uv run list_samples.py
+uv run sample_overview.py                  # library summary with totals and folder breakdown
+uv run sample_overview.py unused           # unreferenced samples grouped by folder
+uv run sample_overview.py unused --top 10  # top 10 largest unreferenced samples
+uv run sample_overview.py missing          # samples referenced in XML but missing from disk
+uv run sample_overview.py usage "Kick"     # usage detail for samples matching a pattern
 ```
 
 ### Ideas

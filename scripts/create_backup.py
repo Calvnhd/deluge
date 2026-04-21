@@ -13,18 +13,7 @@ from datetime import datetime
 from pathlib import PurePosixPath
 
 from deluge_lib.cli_utils import get_zip_dest_path, get_zip_source_path
-from deluge_lib.scanning import scan_tree
-
-
-def _format_size(size_bytes: int) -> str:
-    """Format a byte count as a human-readable string."""
-    if size_bytes < 1024:
-        return f"{size_bytes} B"
-    if size_bytes < 1024 * 1024:
-        return f"{size_bytes / 1024:.1f} KB"
-    if size_bytes < 1024 * 1024 * 1024:
-        return f"{size_bytes / (1024 * 1024):.1f} MB"
-    return f"{size_bytes / (1024 * 1024 * 1024):.2f} GB"
+from deluge_lib.scanning import format_size, scan_tree
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -56,7 +45,7 @@ def main(argv: list[str] | None = None) -> None:
 
     if args.dry_run:
         print(f"Files:           {len(files)}")
-        print(f"Uncompressed:    {_format_size(total_size)}")
+        print(f"Uncompressed:    {format_size(total_size)}")
         print()
         print("Dry run complete")
         return
@@ -105,7 +94,7 @@ def main(argv: list[str] | None = None) -> None:
     print()
     print(f"Archive:     {archive_path}")
     print(f"Files:       {file_count}")
-    print(f"Size:        {_format_size(archive_size)}")
+    print(f"Size:        {format_size(archive_size)}")
 
 
 if __name__ == "__main__":
