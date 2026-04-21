@@ -34,7 +34,35 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 
 ## Scripts
 
-To cover 7 distinct steps...
+### Overview
+
+**Phase 1: Backup**
+
+| Step | What you do | Script | Status |
+|------|-------------|--------|--------|
+| 1 | Pull everything off the SD card into the repo | `sync_from_sd.py` | ✅ |
+| 2 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
+| 3 | Create a .zip backup (optional) | `create_backup.py` | ✅ |
+| 4 | Take a sample snapshot for future reference fixing | `create_snapshot.py` | ✅ |
+
+**Phase 2: Organise**
+
+| Step | What you do | Script | Status |
+|------|-------------|--------|--------|
+| 1 | Clean up songs — delete old versions, rename | (manual) | — |
+| 2 | Rearrange samples into a usable folder structure | (manual) | — |
+| 3 | Rearrange synth and kit presets | (manual) | — |
+
+**Phase 3: Update**
+
+| Step | What you do | Script | Status |
+|------|-------------|--------|--------|
+| 1 | Extract kit and synth presets from songs | `extract_instruments.py` | 🚧 |
+| 2 | Verify sample references are intact | `verify_references.py` | ✅ |
+| 3 | Fix any broken references | `fix_references.py` | ✅ |
+| 4 | Sync samples to cloud backup (if samples were reorganised) | `sync_samples_to_cloud.py` | ✅ |
+| 5 | Sync repo back to SD card | `sync_to_sd.py` | 🚧 |
+| 6 | Take a fresh sample snapshot | `create_snapshot.py` | ✅ |
 
 ### Setup
 
