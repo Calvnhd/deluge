@@ -24,6 +24,7 @@ from deluge_lib.scanning import format_size, print_path, scan_tree
 
 def _top_folder(path: str) -> str:
     """Extract the first path component (top-level folder under SAMPLES/)."""
+
     slash = path.find("/")
     if slash == -1:
         return ""
@@ -34,6 +35,7 @@ def _group_by_folder(
     samples: list[SampleUsage],
 ) -> dict[str, list[SampleUsage]]:
     """Group samples by top-level folder, sorted alphabetically by folder."""
+
     groups: dict[str, list[SampleUsage]] = defaultdict(list)
     for s in samples:
         groups[_top_folder(s.path)].append(s)
@@ -45,6 +47,7 @@ def _format_ref(ref: SampleRef) -> str:
 
     Songs show ``→ presetName`` after the XML filename.
     """
+
     xml_name = print_path(ref.xml_file)
     if ref.xml_type == "song":
         return f"{xml_name} \u2192 {ref.preset_name} ({ref.xml_type})"
@@ -52,12 +55,13 @@ def _format_ref(ref: SampleRef) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Subcommand: summary
+# Subcommands
 # ---------------------------------------------------------------------------
 
 
 def cmd_summary(index, args):
     """Print the library overview with totals, folder breakdown, and top refs."""
+
     summary = compute_summary(index)
     folders = compute_folder_breakdown(index)
     top_n = args.top
@@ -67,52 +71,55 @@ def cmd_summary(index, args):
     print("Sample Library Overview")
     print("=======================")
     print()
-    print(f"On disk:       {summary.on_disk_count:,} samples ({format_size(summary.on_disk_size)})")
-    print(f"Referenced:    {summary.referenced_count:,} samples ({format_size(summary.referenced_size)})")
-    print(f"Unreferenced:  {summary.unreferenced_count:,} samples ({format_size(summary.unreferenced_size)})")
-    print(f"Missing:       {summary.missing_count:,} samples")
+    print(f"On disk:       {summary.on_disk_count:>6,} samples ({format_size(summary.on_disk_size):>8})")
+    print(f"Referenced:    {summary.referenced_count:>6,} samples ({format_size(summary.referenced_size):>8})")
+    print(f"Unreferenced:  {summary.unreferenced_count:>6,} samples ({format_size(summary.unreferenced_size):>8})")
+    print(f"Missing:       {summary.missing_count:>6,} samples")
     print()
 
     if folders:
         print("By folder:")
-        max_name = max(len(f.folder) + 1 for f in folders)  # +1 for trailing /
+        max_name_length = max(len(f.folder) + 1 for f in folders)  # +1 for trailing /
         for f in folders:
             name = f"{f.folder}/" if f.folder else "(root)"
-            print(f"  {name:<{max_name}}  {f.file_count:>6,} files   {format_size(f.total_size):>8}")
+            print(f"  {name:<{max_name_length}}  {f.file_count:>6,} files   {format_size(f.total_size):>8}")
         print()
 
     top = top_by_refs(index, top_n)
     if top:
-        print(f"Top {top_n} most-referenced:")
+        print(f"Top {len(top)} most-referenced (on disk):")
+        max_path_length = max(len(print_path(s.path)) for s in top)
         for s in top:
-            print(f"  {print_path(s.path):<45} {s.ref_count:>4} refs")
+            print(f"  {print_path(s.path):<{max_path_length}}  {s.ref_count:>4} refs")
         print()
-
-
-# ---------------------------------------------------------------------------
-# Subcommand: unused
-# ---------------------------------------------------------------------------
 
 
 def cmd_unused(index, args):
     """Print unreferenced samples, grouped by folder or as a flat top-N list."""
+
     unreferenced = list(index.unreferenced.values())
     total_count = len(unreferenced)
     total_size = sum(s.size or 0 for s in unreferenced)
 
     if args.top is not None:
         top = sorted(unreferenced, key=lambda u: u.size or 0, reverse=True)[: args.top]
-        header = f"Top {args.top} largest unreferenced samples ({total_count:,} total, {format_size(total_size)})"
+        max_path_length = max(len(print_path(s.path)) for s in top)
+        header = f"Top {len(top)} largest unreferenced samples ({total_count:,} total, {format_size(total_size)})"
+        print()
+        print("=" * len(header))
         print(header)
         print("=" * len(header))
+        print()
         for s in top:
-            print(f"  {print_path(s.path):<45} {format_size(s.size or 0):>8}")
+            print(f"  {print_path(s.path):<{max_path_length}}  {format_size(s.size or 0):>8}")
         return
 
     header = f"Unreferenced samples ({total_count:,} files, {format_size(total_size)})"
+    print()
+    print("=" * len(header))
     print(header)
     print("=" * len(header))
-
+    max_path_length = max(len(print_path(s.path)) for s in unreferenced)
     groups = _group_by_folder(unreferenced)
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.size or 0, reverse=True)
@@ -121,16 +128,12 @@ def cmd_unused(index, args):
         print()
         print(f"{label} \u2014 {len(samples):,} files, {format_size(folder_size)}")
         for s in samples:
-            print(f"  {print_path(s.path):<45} {format_size(s.size or 0):>8}")
+            print(f"  {print_path(s.path):<{max_path_length}}  {format_size(s.size or 0):>8}")
 
-
-# ---------------------------------------------------------------------------
-# Subcommand: missing
-# ---------------------------------------------------------------------------
-
-
+# todo - update formatting.  IT's a mess.
 def cmd_missing(index, _args):
     """Print samples referenced in XML but missing from disk."""
+
     missing = list(index.missing.values())
 
     if not missing:
@@ -138,9 +141,10 @@ def cmd_missing(index, _args):
         return
 
     header = f"Missing samples ({len(missing):,})"
+    print()
+    print("=" * len(header))
     print(header)
     print("=" * len(header))
-
     groups = _group_by_folder(missing)
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.path.lower())
@@ -153,23 +157,19 @@ def cmd_missing(index, _args):
                 print(f"    {_format_ref(ref)}")
 
 
-# ---------------------------------------------------------------------------
-# Subcommand: usage
-# ---------------------------------------------------------------------------
-
-
 def cmd_usage(index, args):
     """Print usage detail for samples matching a pattern."""
-    matches = filter_by_pattern(index, args.pattern)
 
+    matches = filter_by_pattern(index, args.pattern)
     if not matches:
         print(f'No samples matching "{args.pattern}".')
         return
 
     header = f'Samples matching "{args.pattern}" ({len(matches):,} matches)'
+    print()
+    print("=" * len(header))
     print(header)
     print("=" * len(header))
-
     groups = _group_by_folder(matches)
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.path.lower())
@@ -242,7 +242,7 @@ def main(argv: list[str] | None = None) -> None:
         args.command = "summary"
         args.top = 5
 
-    # Data collection — shared by all subcommands
+    # Data collection
     deluge_root = get_deluge_root()
     sample_scan = scan_tree(deluge_root / "SAMPLES", label="SAMPLES", file_filter="wav")
     xml_files = find_all_xml_files(deluge_root)
@@ -251,6 +251,7 @@ def main(argv: list[str] | None = None) -> None:
         refs.extend(extract_sample_refs(xml_file, deluge_root))
     index = build_usage_index(refs, sample_scan)
 
+    # Branch to subcommand
     commands = {
         "summary": cmd_summary,
         "unused": cmd_unused,

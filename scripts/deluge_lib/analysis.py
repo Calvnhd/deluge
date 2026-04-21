@@ -232,16 +232,16 @@ def compute_folder_breakdown(index: UsageIndex) -> list[FolderStats]:
 
 
 def top_by_refs(index: UsageIndex, n: int) -> list[SampleUsage]:
-    """Return the *n* most-referenced samples, sorted by reference count descending."""
+    """Return the *n* most-referenced samples currently on-disk, sorted by reference count descending."""
     return sorted(
-        (u for u in index.entries.values() if u.ref_count > 0),
+        (u for u in index.entries.values() if u.ref_count > 0 and u.on_disk),
         key=lambda u: u.ref_count,
         reverse=True,
     )[:n]
 
 
 def top_by_size(index: UsageIndex, n: int) -> list[SampleUsage]:
-    """Return the *n* largest on-disk samples, sorted by size descending."""
+    """Return the *n* largest samples currently on-disk, sorted by size descending."""
     return sorted(
         (u for u in index.entries.values() if u.on_disk and u.size is not None),
         key=lambda u: u.size,  # type: ignore[arg-type, return-value]
