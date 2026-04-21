@@ -52,13 +52,6 @@ This structure mirrors that of a Deluge SD card, where DELUGE is the name of the
 
 ---
 
-## Additional resources
-
-- The firmware used by the Deluge is available in this workspace in the repository `DelugeFirmware`
-- The wiki for the Deluge firmware is available in this workspace in the repository `DelugeFirmware.wiki`
-
----
-
 ## AI-Assisted Development
 
 This repository uses a structured agent system for AI-assisted engineering.

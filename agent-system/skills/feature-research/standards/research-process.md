@@ -11,9 +11,7 @@ Research MUST follow this priority order. Earlier sources take precedence when i
 | Priority | Source | When to Use |
 |----------|--------|-------------|
 | 1 | Repository contents (`DELUGE/`, `scripts/`, `docs/`) | Always — this is the ground truth |
-| 2 | Firmware wiki (`DelugeFirmware.wiki/`) | When feature involves Deluge functionality, XML, or hardware behaviour |
-| 3 | Firmware source (`DelugeFirmware/`, `DelugeFirmware/contrib/`) | When wiki is insufficient or implementation details are needed |
-| 4 | External resources (web, documentation) | When internal sources are insufficient |
+| 2 | External resources (web, documentation) | When internal sources are insufficient |
 
 ## Mandatory Investigations
 
@@ -28,15 +26,6 @@ The following investigations MUST be performed for every research task, regardle
 | `scripts/` audit | Read every file in `scripts/` including `.env.example` |
 | `docs/` review | Read every file in `docs/` |
 | `docs/scripts-plan.md` | Always read — contains planned but unimplemented script designs |
-
-### Firmware Investigation (when applicable)
-
-| Investigation | When Required | How |
-|---------------|---------------|-----|
-| XML format documentation | Feature involves XML files | Read `DelugeFirmware.wiki/XML-file-format-documentation.md` |
-| XML community changes | Feature involves XML files | Read `DelugeFirmware.wiki/XML-files--‐-community-changes-documentation.md` |
-| Contrib tools | Feature overlaps with community tools | Search `DelugeFirmware/contrib/` subdirectories: `analysis/`, `debug/`, `dx7/`, `midi_follow/`, `midi-guide-csv2xml/`, `midi2deluge/`, `sd_card/` |
-| Source code | Implementation details needed | Search `DelugeFirmware/src/` for relevant code |
 
 ## Clarifying Questions
 
