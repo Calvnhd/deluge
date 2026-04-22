@@ -159,8 +159,10 @@ Sample library overview and reference checking tool. Cross-references XML preset
 ```
 uv run sample_overview.py                  # library summary (equivalent to "summary --top 5")
 uv run sample_overview.py summary --top N  # summary with custom top-N most-referenced
-uv run sample_overview.py unused           # unreferenced samples grouped by folder
-uv run sample_overview.py unused  --top N  # top N largest unreferenced samples
+uv run sample_overview.py unused                  # condensed per-folder summary of unreferenced samples
+uv run sample_overview.py unused --all             # full listing of all unreferenced samples grouped by folder
+uv run sample_overview.py unused --folder DRUMS    # full listing filtered to specific folder(s)
+uv run sample_overview.py unused --top N           # top N largest unreferenced samples
 uv run sample_overview.py missing          # samples referenced in XML but missing from disk
 uv run sample_overview.py duplicates                        # find duplicate samples by content hash (hashes live)
 uv run sample_overview.py duplicates -s latest              # find duplicates using the latest snapshot

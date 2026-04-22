@@ -43,11 +43,11 @@ The user will be able to use a single command (`delly`, short for deluge) that i
 `delly backup` with optional `--zip` or `-z`
 
     1. Run `sync_from_sd.py` 
-    2. Run `sync_samples_to_cloud.py`
-    3. Run `create_snapshot.py`
-    4. Run `sample_overview.py duplicates --snapshot latest`
-    5. if `--zip` or `-z`, run `create_backup.py`
-    6. Run `sample_overview.py summary`
+    2. If new samples were added:   Run `sync_samples_to_cloud.py`
+                                    Run `create_snapshot.py`
+    3. Run `sample_overview.py duplicates --snapshot latest`
+    4. if `--zip` or `-z`, run `create_backup.py`
+    5. Run `sample_overview.py summary`
 
 `delly prep`
 
@@ -83,7 +83,10 @@ Optionally add `--dry-run` or `-n` where applicable for dry run functionality
 `delly samples` —> `sample_overview.py summary`
     optionally add `--top` or `-t` for custom output list length
 `delly samples unused` —> `sample_overview.py unused`
-    optionally add `--top` or `-t` for custom output list length
+    default: condensed per-folder summary (folder name, file count, total size)
+    optionally add `--all` or `-a` for full listing of every unreferenced file grouped by folder
+    optionally add `--folder` or `-f` with folder name(s) for filtered full listing
+    optionally add `--top` or `-t` for top N largest unreferenced samples
 `delly samples missing` —> `sample_overview.py missing`
 `delly samples usage <term>` —> `sample_overview.py usage <term>`
 `delly samples duplicates` —> `sample_overview.py duplicates`

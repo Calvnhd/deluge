@@ -22,6 +22,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
+from deluge_lib.scanning import print_path
 from deluge_lib.extraction import (
     ExtractionResult,
     NormalisationConfig,
@@ -48,7 +49,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument(
         "--extended",
         action="store_true",
-        help="Extract multiple versions per instrument when parameters differ significantly",
+        help="Extract multiple versions per instrument when parameters differ (not yet implemented)",
     )
     parser.add_argument(
         "--dry-run",
@@ -56,6 +57,10 @@ def main(argv: list[str] | None = None) -> None:
         help="List extractions without writing files (default behaviour when no flag given)",
     )
     args = parser.parse_args(argv)
+
+    if args.extended:
+        print("ERROR: --extended mode is not yet implemented.", file=sys.stderr)
+        sys.exit(1)
 
     # Dry-run is the default behaviour (matches existing script conventions).
     # With no flags: show dry-run preview, then prompt to apply.
@@ -68,7 +73,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
 
     # Validate init preset files exist (sanity check).
-    init_synth = deluge_root / "SYNTHS" / "Init-Synth.XML"
+    init_synth = deluge_root / "SYNTHS" / "Init.XML"
     init_kit = deluge_root / "KITS" / "Init-Kit.XML"
     missing: list[str] = []
     if not init_synth.is_file():
@@ -165,7 +170,7 @@ def main(argv: list[str] | None = None) -> None:
                 output_dir = (
                     synth_output_dir if r.instrument_type == "synth" else kit_output_dir
                 )
-                rel_dir = output_dir.relative_to(deluge_root)
+                rel_dir = print_path(output_dir.relative_to(deluge_root))
                 print(
                     f"  {type_label:<6} {r.preset_name:<20}"
                     f"→ {rel_dir}/{r.output_filename}"
@@ -182,9 +187,9 @@ def main(argv: list[str] | None = None) -> None:
     )
 
     if synth_count > 0:
-        print(f"  Output: {synth_output_dir.relative_to(deluge_root)}/ ({synth_count} files)")
+        print(f"  Output: {print_path(synth_output_dir.relative_to(deluge_root))}/ ({synth_count} files)")
     if kit_count > 0:
-        print(f"  Output: {kit_output_dir.relative_to(deluge_root)}/ ({kit_count} files)")
+        print(f"  Output: {print_path(kit_output_dir.relative_to(deluge_root))}/ ({kit_count} files)")
 
     if not all_results:
         print("\nNo instruments to extract.")

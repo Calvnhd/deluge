@@ -132,44 +132,8 @@ def cmd_summary(index, args):
         print()
 
 
-def cmd_unused(index, args):
-    """Print unreferenced samples, grouped by folder or as a flat top-N list."""
-
-    unreferenced = list(index.unreferenced.values())
-    if not unreferenced:
-        print()
-        print("No unreferenced samples")
-        print()
-        return
-
-    if args.top is not None:
-        top = sorted(unreferenced, key=lambda u: u.size or 0, reverse=True)[: args.top]
-        if not top:
-            print()
-            print("Top 0? That's not how this works!")
-            print()
-            return
-        max_path_length = max(len(print_path(s.path)) for s in top)
-        if len(top) == 1:
-            _print_header(" Largest unreferenced sample ")
-        else:
-            _print_header(f" Top {len(top)} largest unreferenced samples ")
-        print()
-        size_strs = [format_size(s.size or 0) for s in top]
-        top_total = sum(s.size or 0 for s in top)
-        total_str = format_size(top_total)
-        max_size_len = max(max(len(ss) for ss in size_strs), len(total_str))
-        for s, ss in zip(top, size_strs):
-            print(f"  {print_path(s.path):<{max_path_length}}  {ss:>{max_size_len}}")
-        print()
-        print(f"  {'Total:':>{max_path_length}}  {total_str:>{max_size_len}}")
-        print()
-        return
-
-    total_size = sum(s.size or 0 for s in unreferenced)
-    noun = "file" if len(unreferenced) == 1 else "files"
-    header = f" Unreferenced samples ({len(unreferenced):,} {noun}, {format_size(total_size)}) "
-    _print_header(header)
+def _print_unused_full(unreferenced: list[SampleUsage]) -> None:
+    """Print the full listing of unreferenced samples grouped by folder."""
     groups = _group_by_folder(unreferenced)
 
     # First pass: compute global alignment values
@@ -221,6 +185,110 @@ def cmd_unused(index, args):
         for s, ss in zip(samples, all_size_strings[folder]):
             print(f"  {print_path(_strip_folder(s.path, folder)):<{global_max_path}}  {ss:>{global_max_size}}")
     print()
+
+
+def _print_unused_condensed(unreferenced: list[SampleUsage]) -> None:
+    """Print a per-folder summary table of unreferenced samples."""
+    groups = _group_by_folder(unreferenced)
+
+    rows: list[tuple[str, int, str]] = []
+    for folder, samples in groups.items():
+        label = _folder_label(folder)
+        count = len(samples)
+        folder_size = sum(s.size or 0 for s in samples)
+        rows.append((label, count, format_size(folder_size)))
+
+    max_count = max(c for _, c, _ in rows)
+    max_count_len = len(f"{max_count:,}")
+    max_size_len = max(len(s) for _, _, s in rows)
+    max_label_len = max(len(r[0]) for r in rows)
+
+    # Line width: ensure minimum 10 dashes for the longest label
+    min_dashes = 10
+    right_sample = f"{max_count:>{max_count_len},} files  {'X' * max_size_len}"
+    line_width = max_label_len + 1 + min_dashes + 1 + len(right_sample)
+
+    print()
+    for label, count, size_str in rows:
+        file_word = "file" if count == 1 else "files"
+        right = f"{count:>{max_count_len},} {file_word:<5}  {size_str:>{max_size_len}}"
+        dash_count = line_width - len(label) - 1 - 1 - len(right)
+        print(f"{label} {'-' * dash_count} {right}")
+    print()
+
+
+def cmd_unused(index, args):
+    """Print unreferenced samples with multiple output modes."""
+
+    unreferenced = list(index.unreferenced.values())
+    if not unreferenced:
+        print()
+        print("No unreferenced samples")
+        print()
+        return
+
+    # --top: flat list of N largest (existing behavior, unchanged)
+    if args.top is not None:
+        top = sorted(unreferenced, key=lambda u: u.size or 0, reverse=True)[: args.top]
+        if not top:
+            print()
+            print("Top 0? That's not how this works!")
+            print()
+            return
+        max_path_length = max(len(print_path(s.path)) for s in top)
+        if len(top) == 1:
+            _print_header(" Largest unreferenced sample ")
+        else:
+            _print_header(f" Top {len(top)} largest unreferenced samples ")
+        print()
+        size_strs = [format_size(s.size or 0) for s in top]
+        top_total = sum(s.size or 0 for s in top)
+        total_str = format_size(top_total)
+        max_size_len = max(max(len(ss) for ss in size_strs), len(total_str))
+        for s, ss in zip(top, size_strs):
+            print(f"  {print_path(s.path):<{max_path_length}}  {ss:>{max_size_len}}")
+        print()
+        print(f"  {'Total:':>{max_path_length}}  {total_str:>{max_size_len}}")
+        print()
+        return
+
+    # --folder: filter to specific top-level folder(s)
+    if args.folder:
+        requested = [f.upper() for f in args.folder]
+        filtered = [s for s in unreferenced if top_folder(s.path).upper() in requested]
+
+        # Report folders with no unreferenced samples
+        found_folders = {top_folder(s.path).upper() for s in filtered}
+        for req in requested:
+            if req not in found_folders:
+                print()
+                print(f"No unreferenced samples in {req}/")
+
+        if not filtered:
+            return
+
+        total_size = sum(s.size or 0 for s in filtered)
+        noun = "file" if len(filtered) == 1 else "files"
+        header = f" Unreferenced samples ({len(filtered):,} {noun}, {format_size(total_size)}) "
+        _print_header(header)
+        _print_unused_full(filtered)
+        return
+
+    # --all: full listing of all unreferenced samples
+    if args.all:
+        total_size = sum(s.size or 0 for s in unreferenced)
+        noun = "file" if len(unreferenced) == 1 else "files"
+        header = f" Unreferenced samples ({len(unreferenced):,} {noun}, {format_size(total_size)}) "
+        _print_header(header)
+        _print_unused_full(unreferenced)
+        return
+
+    # Default: condensed per-folder summary
+    total_size = sum(s.size or 0 for s in unreferenced)
+    noun = "file" if len(unreferenced) == 1 else "files"
+    header = f" Unreferenced samples ({len(unreferenced):,} {noun}, {format_size(total_size)}) "
+    _print_header(header)
+    _print_unused_condensed(unreferenced)
 
 def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], deluge_root: Path):
     """Print samples referenced in XML but missing from disk, grouped by XML file."""
@@ -448,8 +516,20 @@ def main(argv: list[str] | None = None) -> None:
 
     # unused
     sp_unused = subparsers.add_parser("unused", help="List unreferenced samples")
-    sp_unused.add_argument(
-        "--top",
+    unused_mode = sp_unused.add_mutually_exclusive_group()
+    unused_mode.add_argument(
+        "--all", "-a",
+        action="store_true",
+        help="Show full listing of all unreferenced samples grouped by folder",
+    )
+    unused_mode.add_argument(
+        "--folder", "-f",
+        nargs="+",
+        metavar="FOLDER",
+        help="Show full listing filtered to specific top-level folder(s)",
+    )
+    unused_mode.add_argument(
+        "--top", "-t",
         type=int,
         default=None,
         help="Show only the N largest unreferenced samples",
