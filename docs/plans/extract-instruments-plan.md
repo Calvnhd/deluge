@@ -124,7 +124,7 @@ DELUGE/
 | `--extended` | CLI flag | Enable extended mode (extract multiple versions per instrument) |
 | `--dry-run` | CLI flag | List extractions without writing files. Default behaviour when no flag is given — matches existing script conventions |
 | Song XMLs | `DELUGE_ROOT/SONGS/*.XML` | All song XMLs discovered recursively |
-| Init presets | `DELUGE_ROOT/SYNTHS/Init.XML`, `DELUGE_ROOT/KITS/Init-Kit.XML` | Reference volume/pan values for normalisation |
+| Init presets | `DELUGE_ROOT/SYNTHS/Init-Synth.XML`, `DELUGE_ROOT/KITS/Init-Kit.XML` | Reference volume/pan values for normalisation |
 
 **Outputs:**
 
@@ -386,7 +386,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Acceptance Criteria:**
   - [x] XML declaration: `<?xml version="1.0" encoding="UTF-8"?>`
   - [x] Output matches the formatting style of existing standalone presets (use `lxml.etree.tostring` with `xml_declaration=True`, `encoding="UTF-8"`)
-  - [x] Investigate and match the whitespace/indentation style of Init.XML and Init-Kit.XML — the Deluge may be sensitive to formatting
+  - [x] Investigate and match the whitespace/indentation style of Init-Synth.XML and Init-Kit.XML — the Deluge may be sensitive to formatting
 - **Implementation Notes:**
   > Implemented 22 Apr 2026. `serialise_xml()` in `extraction.py`: uses `etree.tostring()` with `xml_declaration=True`, `encoding="UTF-8"`, `pretty_print=True`. Creates parent directories with `mkdir(parents=True)`. Writes bytes directly. 2 tests in `TestSerialiseXml` — all passing.
 
@@ -430,7 +430,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [x] Exit code 0 on success, non-zero on failure
   - [x] Missing init preset files produce a clear error and abort
 - **Implementation Notes:**
-  > Full CLI pipeline scaffolded in `extract_instruments.py` `main()` (15 Apr 2026). Wired together: argparse, `discover_songs()` → per-song loop → `discover_instruments()`/`discover_clips()`/`match_instruments_to_clips()` → `select_default_clip()`/`select_extended_clips()` → `extract_synth()`/`extract_kit()` → `normalise_params()` → `generate_filename()` → `ExtractionResult` construction → per-song console output → summary → dry-run/confirmation flow → trash → file writing → manifest writing. All stubs now implemented. Exit codes added 22 Apr 2026: `__main__` block wraps `main()` in try/except, calling `sys.exit(1)` on unhandled exceptions. Init preset validation added at startup — checks `SYNTHS/Init.XML` and `KITS/Init-Kit.XML` exist before proceeding, exits with error message if missing.
+  > Full CLI pipeline scaffolded in `extract_instruments.py` `main()` (15 Apr 2026). Wired together: argparse, `discover_songs()` → per-song loop → `discover_instruments()`/`discover_clips()`/`match_instruments_to_clips()` → `select_default_clip()`/`select_extended_clips()` → `extract_synth()`/`extract_kit()` → `normalise_params()` → `generate_filename()` → `ExtractionResult` construction → per-song console output → summary → dry-run/confirmation flow → trash → file writing → manifest writing. All stubs now implemented. Exit codes added 22 Apr 2026: `__main__` block wraps `main()` in try/except, calling `sys.exit(1)` on unhandled exceptions. Init preset validation added at startup — checks `SYNTHS/Init-Synth.XML` and `KITS/Init-Kit.XML` exist before proceeding, exits with error message if missing.
 
 ### Phase 4: Extended Mode
 
@@ -476,7 +476,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 #### Task 5.1: Create test fixtures
 
 - **Description:** Create minimal XML fixture files for testing. These should be small, hand-crafted XMLs that exercise the key extraction scenarios without being full-size song files.
-- **Inputs:** Research document XML examples, Init.XML, Init-Kit.XML structure
+- **Inputs:** Research document XML examples, Init-Synth.XML, Init-Kit.XML structure
 - **Outputs:** Fixture files in `scripts/tests/fixtures/`
 - **Acceptance Criteria:**
   - [ ] Fixture: minimal song with one synth instrument and one session clip
@@ -485,7 +485,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [ ] Fixture: song with an orphaned instrument (no clips)
   - [ ] Fixture: song with clip arpeggiator having extra numeric attributes
   - [ ] Fixture: song with non-c1.2.1 firmware version
-  - [ ] Fixture: init synth and init kit reference files (can use actual Init.XML and Init-Kit.XML)
+  - [ ] Fixture: init synth and init kit reference files (can use actual Init-Synth.XML and Init-Kit.XML)
 - **Implementation Notes:**
   > {Space for the Implement agent to add notes during execution}
 
@@ -535,8 +535,8 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 ## Open Questions
 
 1. **What is the correct indentation/whitespace style for output XML?** ✅ Resolved
-   - **Impact:** The Deluge firmware may be sensitive to XML formatting. If Init.XML uses tabs or specific indentation, the output should match.
-   - **Recommendation:** Inspect Init.XML formatting during implementation and replicate it. lxml's `pretty_print` option with appropriate indentation should suffice.
+   - **Impact:** The Deluge firmware may be sensitive to XML formatting. If Init-Synth.XML uses tabs or specific indentation, the output should match.
+   - **Recommendation:** Inspect Init-Synth.XML formatting during implementation and replicate it. lxml's `pretty_print` option with appropriate indentation should suffice.
    - **Blocking:** No — can be resolved during Task 3.2
    - **Resolution:** Hardware-tested. lxml's `pretty_print=True` with `encoding="UTF-8"` produces output that the Deluge firmware (c1.2.1) loads without issue. The Deluge re-normalises formatting to its preferred tab-indented style when the user saves the preset. No custom serialiser needed — use lxml's default pretty-print output.
 
@@ -566,7 +566,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - [standards/languages/python/](../../agent-system/standards/languages/python/) — Python coding standards (to be loaded by implementer)
 
 ### Project Files
-- [Init.XML](../../DELUGE/SYNTHS/Init.XML) — Reference synth volume (`0x4CCCCCA8`) and pan (`0x00000000`)
+- [Init-Synth.XML](../../DELUGE/SYNTHS/Init-Synth.XML) — Reference synth volume (`0x4CCCCCA8`) and pan (`0x00000000`)
 - [Init-Kit.XML](../../DELUGE/KITS/Init-Kit.XML) — Reference kit volume (`0x3504F334`) and pan (`0x00000000`)
 - [deluge_sdk.py](../../scripts/deluge_lib/deluge_sdk.py) — XML parsing (`parse_deluge_xml()`), file discovery
 - [cli_utils.py](../../scripts/deluge_lib/cli_utils.py) — `get_deluge_root()`, `confirm_apply()`
@@ -579,7 +579,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 |------|--------|--------|
 | 22 Apr 2026 | Task 1.4 implemented — Phase 1 complete | `select_default_clip()` implemented with `min()` on `clips_by_section` keys. 3 tests added in `TestSelectDefaultClip`. Phase 1 marked complete (4/4). |
 | 22 Apr 2026 | Plan revised to reflect true implementation state after code audit | Phase 1 progress corrected (2/4 — Task 1.2 confirmed complete). Phase 3 status clarified (1/5 — only Task 3.3 truly complete; Tasks 3.4/3.5 partially scaffolded but depend on unimplemented stubs). Codebase audit note added to Research Summary. `print_path()` noted in Integration Points. |
-| 22 Apr 2026 | Tasks 3.1, 3.2, 3.4, 3.5 implemented — Phase 3 complete | `generate_filename()` implemented with collision handling. `serialise_xml()` implemented with lxml pretty_print. `build_manifest_entry()` implemented mapping ExtractionResult to dict. CLI exit codes added (try/except + sys.exit(1)). Init preset validation added at startup (checks Init.XML and Init-Kit.XML). 7 new tests (5 filename + 2 serialisation), all passing. Phase 3 marked complete (5/5). |
+| 22 Apr 2026 | Tasks 3.1, 3.2, 3.4, 3.5 implemented — Phase 3 complete | `generate_filename()` implemented with collision handling. `serialise_xml()` implemented with lxml pretty_print. `build_manifest_entry()` implemented mapping ExtractionResult to dict. CLI exit codes added (try/except + sys.exit(1)). Init preset validation added at startup (checks Init-Synth.XML and Init-Kit.XML). 7 new tests (5 filename + 2 serialisation), all passing. Phase 3 marked complete (5/5). |
 | 22 Apr 2026 | Tasks 2.2 and 2.3 implemented — Phase 2 complete | `extract_kit()` with helpers `_reorder_kit_children()`, `_reorder_kit_sound_children()`, `_merge_noterow_params()` implemented. `normalise_params()` implemented. 17 new tests (11 kit + 6 normalisation), all passing. Phase 2 marked complete (3/3). |
 | 15 Apr 2026 | Updated plan to reflect scaffolding state | Task 1.1 complete, Tasks 3.3/3.4/3.5 substantially complete, trash path corrected, Task 1.4 API updated to use dataclasses |
 | 14 Apr 2026 | Initial plan created | — |

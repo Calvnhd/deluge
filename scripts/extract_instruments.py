@@ -73,7 +73,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
 
     # Validate init preset files exist (sanity check).
-    init_synth = deluge_root / "SYNTHS" / "Init.XML"
+    init_synth = deluge_root / "SYNTHS" / "Init-Synth.XML"
     init_kit = deluge_root / "KITS" / "Init-Kit.XML"
     missing: list[str] = []
     if not init_synth.is_file():
