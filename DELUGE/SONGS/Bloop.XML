@@ -126,6 +126,7 @@
 				type="saw"
 				transpose="12"
 				cents="0"
+				poop="SAMPLES/bum.wav"
 				retrigPhase="-1" />
 			<lfo1 type="triangle" syncLevel="0" syncType="0" />
 			<lfo2 type="triangle" syncLevel="0" syncType="0" />

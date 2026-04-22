@@ -57,7 +57,7 @@ def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError, ValueError) as exc:
-        print(f"Warning: corrupt manifest at {path} ({exc}) — treating as empty")
+        print(f"Warning: corrupt manifest at {path} ({exc}) \u2014 treating as empty")
         return ("", {})
 
     # Support old format (metadata.last_sync_timestamp) and new (top-level).

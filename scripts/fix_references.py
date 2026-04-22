@@ -272,31 +272,31 @@ def preview_and_apply(
     # --- Errors ---
     if result.errors:
         print()
-        print("ERRORS — Requires Manual Resolution")
+        print("ERRORS \u2014 Requires Manual Resolution")
         print("------------------------------------")
         for error in result.errors:
-            print(f"  {print_path(error.ref.xml_file)}: \"{error.deleted_path}\" — sample deleted")
+            print(f"  {print_path(error.ref.xml_file)}: \"{error.deleted_path}\" \u2014 sample deleted")
 
     # --- Warnings ---
     if result.warnings:
         print()
-        print("WARNINGS — Ambiguous Mappings")
+        print("WARNINGS \u2014 Ambiguous Mappings")
         print("-----------------------------")
         for warning in result.warnings:
             print(
                 f"  {print_path(warning.ref.xml_file)}: \"{warning.ambiguous_path}\""
-                " — multiple files share this hash"
+                " \u2014 multiple files share this hash"
             )
 
     # --- Missing ---
     if result.missing:
         print()
-        print("MISSING — Sample Path Not Found")
+        print("MISSING \u2014 Sample Path Not Found")
         print("--------------------------------")
         for miss in result.missing:
             print(
                 f"  {print_path(miss.ref.xml_file)}: \"{miss.missing_path}\""
-                " — no matching file on disk"
+                " \u2014 no matching file on disk"
             )
 
     # --- Summary ---

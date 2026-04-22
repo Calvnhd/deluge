@@ -87,7 +87,7 @@ def main(argv: list[str] | None = None) -> None:
 
         # Print match warnings (orphaned instruments, duplicate clips).
         for warning in match_warnings:
-            print(f"WARNING: {song_name}.XML — {warning}")
+            print(f"WARNING: {song_name}.XML \u2014 {warning}")
 
         # Skip songs with no extractable instruments.
         if not groups:

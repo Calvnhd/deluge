@@ -248,6 +248,881 @@
 			inputMidiChannel="9">
 			<inputMidiDevice port="din" />
 		</midi>
+		<kit
+			presetName="Creeper"
+			presetFolder="KITS"
+			defaultVelocity="50"
+			isArmedForRecording="0"
+			activeModFunction="7"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="hpf"
+			modFXType="flanger"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+			<soundSources>
+				<sound
+					name="Deep Sky Kick HQ9094"
+					polyphonic="auto"
+					voicePriority="1"
+					sideChainSend="2147483647"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Kick/Deep Sky Kick HQ9094.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="17471" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="Rhythmace Snare"
+					polyphonic="auto"
+					voicePriority="1"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224344].wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="5100" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="909 Clap"
+					polyphonic="auto"
+					voicePriority="1"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Clap/909 Clap.WAV">
+						<zone
+							startSamplePos="0"
+							endSamplePos="17760" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="Linndrum Crash"
+					polyphonic="auto"
+					voicePriority="1"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="1"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Crash/Linndrum Crash.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="54400" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="808 Closed hihat"
+					polyphonic="auto"
+					voicePriority="1"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/HatC/808 Closed hihat.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="11025" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="Rhythmace Kick"
+					polyphonic="auto"
+					voicePriority="1"
+					sideChainSend="2147483647"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="29015" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="Rhythmace Kick2"
+					polyphonic="auto"
+					voicePriority="1"
+					sideChainSend="2147483647"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="29015" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="Rhythmace Kick3"
+					polyphonic="auto"
+					voicePriority="1"
+					sideChainSend="2147483647"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="29015" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="Rhythmace Kick4"
+					polyphonic="auto"
+					voicePriority="1"
+					sideChainSend="2147483647"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="29015" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+				<sound
+					name="RX-5 Kick"
+					polyphonic="auto"
+					voicePriority="1"
+					sideChainSend="2147483647"
+					mode="subtractive"
+					modFXType="none"
+					lpfMode="24dB"
+					hpfMode="HPLadder"
+					filterRoute="H2L"
+					path=""
+					maxVoices="8">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Kick/RX-5 Kick.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="4857" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+					<lfo1 type="triangle" syncLevel="0" syncType="0" />
+					<lfo2 type="triangle" syncLevel="0" syncType="0" />
+					<unison num="1" detune="8" spread="0" />
+					<arpeggiator
+						mode="off"
+						numOctaves="2"
+						syncLevel="7"
+						syncType="0"
+						arpMode="off"
+						noteMode="up"
+						octaveMode="up"
+						mpeVelocity="off" />
+					<modKnobs>
+						<modKnob controlsParam="pan" />
+						<modKnob controlsParam="volumePostFX" />
+						<modKnob controlsParam="lpfResonance" />
+						<modKnob controlsParam="lpfFrequency" />
+						<modKnob controlsParam="env1Release" />
+						<modKnob controlsParam="env1Attack" />
+						<modKnob controlsParam="delayFeedback" />
+						<modKnob controlsParam="delayRate" />
+						<modKnob controlsParam="reverbAmount" />
+						<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+						<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+						<modKnob controlsParam="lfo1Rate" />
+						<modKnob controlsParam="pitch" />
+						<modKnob controlsParam="stutterRate" />
+						<modKnob controlsParam="bitcrushAmount" />
+						<modKnob controlsParam="sampleRateReduction" />
+					</modKnobs>
+					<delay
+						pingPong="1"
+						analog="0"
+						syncLevel="7"
+						syncType="0" />
+					<sidechain
+						attack="327244"
+						release="936"
+						syncLevel="6"
+						syncType="0" />
+					<audioCompressor
+						attack="83886080"
+						release="83886080"
+						thresh="0"
+						ratio="1073741824"
+						compHPF="0"
+						compBlend="2147483647" />
+				</sound>
+			</soundSources>
+			<selectedDrumIndex>4</selectedDrumIndex>
+		</kit>
+		<sound
+			presetName="Schmibes WT"
+			presetFolder="SYNTHS/COMMUNITY/1.2 Presets"
+			defaultVelocity="64"
+			isArmedForRecording="0"
+			activeModFunction="3"
+			colour="0"
+			polyphonic="legato"
+			voicePriority="1"
+			mode="subtractive"
+			modFXType="StereoChorus"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L"
+			maxVoices="16">
+			<osc1
+				type="wavetable"
+				transpose="0"
+				cents="0"
+				retrigPhase="-1"
+				fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224345].wav" />
+			<osc2
+				type="triangle"
+				transpose="12"
+				cents="0"
+				retrigPhase="-1" />
+			<lfo1 type="triangle" syncLevel="0" syncType="0" />
+			<lfo2 type="sine" syncLevel="0" syncType="0" />
+			<unison num="1" detune="8" spread="0" />
+			<modKnobs>
+				<modKnob controlsParam="pan" />
+				<modKnob controlsParam="volumePostFX" />
+				<modKnob controlsParam="lpfResonance" />
+				<modKnob controlsParam="lpfFrequency" />
+				<modKnob controlsParam="env1Release" />
+				<modKnob controlsParam="env1Attack" />
+				<modKnob controlsParam="delayFeedback" />
+				<modKnob controlsParam="delayRate" />
+				<modKnob controlsParam="reverbAmount" />
+				<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+				<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+				<modKnob controlsParam="lfo1Rate" />
+				<modKnob controlsParam="oscAPhaseWidth" />
+				<modKnob controlsParam="stutterRate" />
+				<modKnob controlsParam="oscAWavetablePosition" patchAmountFromSource="lfo2" />
+				<modKnob controlsParam="oscAWavetablePosition" />
+			</modKnobs>
+			<delay
+				pingPong="0"
+				analog="1"
+				syncLevel="6"
+				syncType="19" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</sound>
 		<audioTrack
 			name="AUDIO3"
 			inputChannel="none"

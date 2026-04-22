@@ -139,4 +139,5 @@
 		<modKnob controlsParam="oscBPitch" />
 		<modKnob controlsParam="oscAPhaseWidth" />
 	</modKnobs>
+	<somerandomthing>SAMPLES/wahwah/wahwahwewah.wav</somerandomthing>
 </sound>

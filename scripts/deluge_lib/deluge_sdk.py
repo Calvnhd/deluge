@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
@@ -295,3 +296,22 @@ def extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]:
         )
 
     return refs
+
+
+# ---------------------------------------------------------------------------
+# Regex fallback for unextracted sample paths
+# ---------------------------------------------------------------------------
+
+_SAMPLE_PATH_RE = re.compile(r"SAMPLES/[^\"'<>\t\n\r]+\.wav", re.IGNORECASE)
+
+
+def find_unextracted_refs(xml_file: Path, extracted: list[SampleRef]) -> list[str]:
+    """Find sample paths in raw XML text not captured by the structured extractor.
+
+    Reads the raw XML and finds all SAMPLES/...wav paths via regex, then
+    returns any paths not present in the *extracted* set.
+    """
+    raw_text = xml_file.read_text(encoding="utf-8")
+    raw_paths = set(_SAMPLE_PATH_RE.findall(raw_text))
+    extracted_paths = {ref.path for ref in extracted}
+    return sorted(raw_paths - extracted_paths)

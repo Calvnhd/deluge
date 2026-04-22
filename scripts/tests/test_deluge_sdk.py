@@ -1,12 +1,14 @@
-"""Tests for deluge_sdk.py — XML discovery and reference extraction."""
+"""Tests for deluge_sdk.py — XML discovery, reference extraction, and unextracted ref detection."""
 
 import shutil
 from pathlib import Path
 
 from deluge_lib.deluge_sdk import (
+    SampleRef,
     detect_xml_type,
     extract_sample_refs,
     find_all_xml_files,
+    find_unextracted_refs,
 )
 from fix_references import update_sample_refs
 
@@ -490,3 +492,105 @@ class TestUpdateSampleRefsNoMatch:
 
         assert count == 0
         assert xml_path.read_bytes() == original_bytes
+
+
+# --- find_unextracted_refs tests ---
+
+
+class TestFindUnextractedRefs:
+    """Tests for the find_unextracted_refs function."""
+
+    def test_no_unextracted_when_all_refs_extracted(self, tmp_path: Path) -> None:
+        """When regex finds only paths that were already extracted, returns empty."""
+        kits = tmp_path / "KITS"
+        kits.mkdir()
+        xml_file = kits / "test.XML"
+        xml_file.write_text(
+            '<?xml version="1.0"?>'
+            '<kit><soundSources><sound>'
+            '<osc1 fileName="SAMPLES/kick.wav"/>'
+            "</sound></soundSources></kit>"
+        )
+        extracted = [
+            SampleRef(
+                path="SAMPLES/kick.wav",
+                xml_file=Path("KITS/test.XML"),
+                xml_type="kit",
+                preset_name="test",
+                ref_type="fileName-attribute",
+                element_tag="osc1",
+            )
+        ]
+
+        result = find_unextracted_refs(xml_file, extracted)
+
+        assert result == []
+
+    def test_detects_path_in_unexpected_element(self, tmp_path: Path) -> None:
+        """A sample path inside an element not handled by extract_sample_refs() is detected."""
+        kits = tmp_path / "KITS"
+        kits.mkdir()
+        xml_file = kits / "test.XML"
+        xml_file.write_text(
+            '<?xml version="1.0"?>'
+            '<kit><soundSources><sound>'
+            '<osc1 fileName="SAMPLES/kick.wav"/>'
+            "<customData>SAMPLES/HIDDEN/secret.wav</customData>"
+            "</sound></soundSources></kit>"
+        )
+        extracted = [
+            SampleRef(
+                path="SAMPLES/kick.wav",
+                xml_file=Path("KITS/test.XML"),
+                xml_type="kit",
+                preset_name="test",
+                ref_type="fileName-attribute",
+                element_tag="osc1",
+            )
+        ]
+
+        result = find_unextracted_refs(xml_file, extracted)
+
+        assert len(result) == 1
+        assert result[0] == "SAMPLES/HIDDEN/secret.wav"
+
+    def test_case_insensitive_regex(self, tmp_path: Path) -> None:
+        """Regex matches sample paths regardless of case."""
+        kits = tmp_path / "KITS"
+        kits.mkdir()
+        xml_file = kits / "test.XML"
+        xml_file.write_text(
+            '<?xml version="1.0"?>'
+            "<kit><note>samples/Drums/kick.WAV</note></kit>"
+        )
+
+        result = find_unextracted_refs(xml_file, [])
+
+        assert len(result) == 1
+        assert result[0] == "samples/Drums/kick.WAV"
+
+    def test_no_sample_paths_in_raw_text(self, tmp_path: Path) -> None:
+        """When no sample paths appear in raw text, returns empty."""
+        kits = tmp_path / "KITS"
+        kits.mkdir()
+        xml_file = kits / "test.XML"
+        xml_file.write_text(
+            '<?xml version="1.0"?>'
+            "<kit><soundSources></soundSources></kit>"
+        )
+
+        result = find_unextracted_refs(xml_file, [])
+
+        assert result == []
+
+    def test_with_fixture(self) -> None:
+        """Integration test using the unextracted_ref_kit fixture."""
+        fixture = FIXTURES_DIR / "KITS" / "unextracted_ref_kit.xml"
+        extracted = extract_sample_refs(fixture, FIXTURES_DIR)
+
+        result = find_unextracted_refs(fixture, extracted)
+
+        # The fixture has SAMPLES/HIDDEN/SecretSample.wav in <customData>
+        # which is not a known reference pattern
+        assert len(result) == 1
+        assert result[0] == "SAMPLES/HIDDEN/SecretSample.wav"
