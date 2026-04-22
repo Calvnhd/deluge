@@ -49,6 +49,8 @@ The user will be able to use a single command (`delly`, short for deluge) that i
     4. if `--zip` or `-z`, run `create_backup.py`
     5. Run `sample_overview.py summary`
 
+    `-e` ? to do like a backup and extract round trip
+
 `delly prep`
 
     1. Run `sample_overview.py missing`
@@ -76,6 +78,7 @@ Optionally add `--dry-run` or `-n` where applicable for dry run functionality
 `delly zip` —> `create_backup.py`
 `delly get-inst` -> `extract_instruments.py`
     optionally add `--extended` or `-x` for multi version extraction
+    `--sd-direct` ?
 `delly fix` —> `fix_references.py`
     optionally add `--snapshot` or `-s` for specific snapshot
     optionally add `--apply` or `-a` to skip confirmation (note: fix refs is WIP, this flag may change)

@@ -663,9 +663,10 @@ class TestExtractKit:
         result = extract_kit(instrument, clip)
         sound_sources = result.find("soundSources")
         sounds = list(sound_sources)
-        # Sound 0 should NOT have <defaultParams>
-        assert sounds[0].find("defaultParams") is None
-        # Sound 1 should have <defaultParams>
+        # Sound 0 should have <defaultParams> from the safety pass (cloned defaults)
+        dp0 = sounds[0].find("defaultParams")
+        assert dp0 is not None
+        # Sound 1 should have <defaultParams> from the noteRow merge
         dp1 = sounds[1].find("defaultParams")
         assert dp1 is not None
         assert dp1.get("volume") == "0xCCCCCCCC"
@@ -683,10 +684,15 @@ class TestExtractKit:
         result = extract_kit(instrument, clip)
         captured = capsys.readouterr()
         assert "drumIndex 99 out of range" in captured.out
-        # No sound should have defaultParams from the invalid noteRow
+        # Sounds should still have <defaultParams> from the safety pass,
+        # but NOT the invalid noteRow's values
         sound_sources = result.find("soundSources")
         for sound in sound_sources:
-            assert sound.find("defaultParams") is None
+            dp = sound.find("defaultParams")
+            assert dp is not None, "Safety pass should provide defaultParams"
+            assert dp.get("volume") != "0xDDDDDDDD", (
+                "Invalid noteRow values should not appear"
+            )
 
     def test_kit_arpeggiator_stays_in_place(self) -> None:
         """Should leave kit sound <arpeggiator> elements untouched."""
@@ -731,6 +737,166 @@ class TestExtractKit:
             "delay", "sidechain", "audioCompressor",
         ]
         assert tags == expected
+
+
+# ---------------------------------------------------------------------------
+# Kit extraction: defaultParams safety pass
+# ---------------------------------------------------------------------------
+
+
+class TestKitDefaultParamsSafetyPass:
+    """Tests for the safety pass that ensures all kit sounds have <defaultParams>."""
+
+    @staticmethod
+    def _make_embedded_kit(num_sounds: int = 3, sound_names: list[str] | None = None) -> etree._Element:
+        """Build a kit with the given number of sounds, none having <defaultParams>."""
+        kit = etree.Element(
+            "kit",
+            presetName="TestKit",
+            presetFolder="KITS",
+        )
+        etree.SubElement(kit, "delay", pingPong="1")
+        etree.SubElement(kit, "sidechain")
+        etree.SubElement(kit, "audioCompressor")
+        sound_sources = etree.SubElement(kit, "soundSources")
+        names = sound_names or [f"U{i + 1}" for i in range(num_sounds)]
+        for name in names:
+            sound = etree.SubElement(sound_sources, "sound", name=name)
+            etree.SubElement(sound, "osc1", type="sample")
+            etree.SubElement(sound, "osc2", type="square")
+            etree.SubElement(sound, "lfo1", type="sine")
+            etree.SubElement(sound, "lfo2", type="sine")
+            etree.SubElement(sound, "unison", num="1", detune="0")
+            etree.SubElement(sound, "arpeggiator", mode="off")
+            etree.SubElement(sound, "modKnobs")
+            etree.SubElement(sound, "delay", pingPong="0")
+            etree.SubElement(sound, "sidechain")
+            etree.SubElement(sound, "audioCompressor")
+        etree.SubElement(kit, "selectedDrumIndex", value="0")
+        return kit
+
+    @staticmethod
+    def _make_kit_clip(
+        kit_params_attrs: dict[str, str] | None = None,
+        noterows: list[tuple[int, dict[str, str]]] | None = None,
+    ) -> etree._Element:
+        clip = etree.Element("instrumentClip", section="0")
+        etree.SubElement(clip, "kitParams", **(kit_params_attrs or {}))
+        if noterows is not None:
+            note_rows_el = etree.SubElement(clip, "noteRows")
+            for drum_index, sp_attrs in noterows:
+                nr = etree.SubElement(note_rows_el, "noteRow", drumIndex=str(drum_index))
+                etree.SubElement(nr, "soundParams", **sp_attrs)
+        return clip
+
+    def test_sound_without_noterow_gets_default_params(self) -> None:
+        """A sound with no matching noteRow should still get <defaultParams> after extraction."""
+        kit = self._make_embedded_kit(num_sounds=3)
+        # Only provide noteRow for sound 0 — sounds 1 and 2 have no noteRow
+        clip = self._make_kit_clip(
+            noterows=[(0, {"volume": "0xAAAAAAAA", "pan": "0x00000000"})],
+        )
+        result = extract_kit(kit, clip)
+        sound_sources = result.find("soundSources")
+        sounds = list(sound_sources)
+
+        # All three sounds must have <defaultParams>
+        for i, sound in enumerate(sounds):
+            dp = sound.find("defaultParams")
+            assert dp is not None, f"Sound {i} should have <defaultParams>"
+
+        # Sound 0 should have its own values from the noteRow
+        assert sounds[0].find("defaultParams").get("volume") == "0xAAAAAAAA"
+
+    def test_default_params_cloned_from_sibling(self) -> None:
+        """Sounds getting defaults should clone from a sibling that has <defaultParams>."""
+        kit = self._make_embedded_kit(num_sounds=2)
+        clip = self._make_kit_clip(
+            noterows=[(0, {"volume": "0xBBBBBBBB", "pan": "0x11111111"})],
+        )
+        result = extract_kit(kit, clip)
+        sound_sources = result.find("soundSources")
+        sounds = list(sound_sources)
+
+        # Sound 1's <defaultParams> should be a clone of sound 0's
+        dp0 = sounds[0].find("defaultParams")
+        dp1 = sounds[1].find("defaultParams")
+        assert dp1 is not None
+        assert dp1.get("volume") == dp0.get("volume")
+        assert dp1.get("pan") == dp0.get("pan")
+
+    def test_warning_printed_for_defaulted_sound(
+        self, capsys: pytest.CaptureFixture[str],
+    ) -> None:
+        """Should print a warning for each sound that gets default params."""
+        kit = self._make_embedded_kit(
+            num_sounds=3, sound_names=["Kick", "Snare", "HiHat"],
+        )
+        # Only provide noteRow for sound 0
+        clip = self._make_kit_clip(
+            noterows=[(0, {"volume": "0xAAAAAAAA"})],
+        )
+        extract_kit(kit, clip)
+        captured = capsys.readouterr()
+        assert "Kit sound 'Snare' (index 1) has no clip parameters" in captured.out
+        assert "Kit sound 'HiHat' (index 2) has no clip parameters" in captured.out
+        # Sound 0 (Kick) should NOT have a warning
+        assert "Kick" not in captured.out
+
+    def test_no_sounds_have_noterows_uses_init_fallback(self) -> None:
+        """When no sound has <defaultParams>, should fall back to init values."""
+        kit = self._make_embedded_kit(num_sounds=2)
+        # No noteRows at all
+        clip = self._make_kit_clip(noterows=[])
+        result = extract_kit(kit, clip)
+        sound_sources = result.find("soundSources")
+        sounds = list(sound_sources)
+
+        for sound in sounds:
+            dp = sound.find("defaultParams")
+            assert dp is not None
+            # Should have init values from hardcoded fallback
+            assert dp.get("volume") == "0x4CCCCCA8"
+            assert dp.get("pan") == "0x00000000"
+            # Should have child elements
+            assert dp.find("envelope1") is not None
+            assert dp.find("envelope2") is not None
+            assert dp.find("patchCables") is not None
+            assert dp.find("equalizer") is not None
+
+    def test_noterow_without_soundparams_warns(
+        self, capsys: pytest.CaptureFixture[str],
+    ) -> None:
+        """A noteRow with no <soundParams> should warn and the sound gets defaults."""
+        kit = self._make_embedded_kit(num_sounds=1, sound_names=["Kick"])
+        clip = etree.Element("instrumentClip", section="0")
+        etree.SubElement(clip, "kitParams")
+        note_rows_el = etree.SubElement(clip, "noteRows")
+        # noteRow with drumIndex but no <soundParams> child
+        etree.SubElement(note_rows_el, "noteRow", drumIndex="0")
+
+        result = extract_kit(kit, clip)
+        captured = capsys.readouterr()
+        # Should warn about missing soundParams
+        assert "no <soundParams>" in captured.out
+        # Sound should still get <defaultParams> from fallback
+        sound_sources = result.find("soundSources")
+        sounds = list(sound_sources)
+        assert sounds[0].find("defaultParams") is not None
+
+    def test_default_params_inserted_after_unison(self) -> None:
+        """Defaulted <defaultParams> should be inserted after <unison>."""
+        kit = self._make_embedded_kit(num_sounds=2)
+        clip = self._make_kit_clip(noterows=[])
+        result = extract_kit(kit, clip)
+        sound_sources = result.find("soundSources")
+        for sound in sound_sources:
+            tags = [child.tag for child in sound]
+            dp_idx = tags.index("defaultParams")
+            unison_idx = tags.index("unison")
+            assert dp_idx == unison_idx + 1, (
+                f"defaultParams should be right after unison, got order: {tags}"
+            )
 
 
 # ---------------------------------------------------------------------------

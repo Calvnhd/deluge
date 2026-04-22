@@ -600,6 +600,10 @@ def extract_kit(
                 continue
             _merge_noterow_params(sounds[drum_index], noterow)
 
+    # 7. Safety pass: ensure every <sound> has a <defaultParams> child
+    if sound_sources is not None:
+        _ensure_all_sounds_have_default_params(sounds)
+
     # 8. Reorder kit top-level children
     _reorder_kit_children(kit)
 
@@ -1062,7 +1066,10 @@ def _merge_noterow_params(
     """
     sound_params = noterow.find("soundParams")
     if sound_params is None:
-        return [f"WARNING: noteRow has no <soundParams> — skipping"]
+        drum_index = noterow.get("drumIndex", "?")
+        msg = f"WARNING: noteRow (drumIndex={drum_index}) has no <soundParams> — skipping"
+        print(msg)
+        return [msg]
 
     default_params = copy.deepcopy(sound_params)
     default_params.tag = "defaultParams"
@@ -1077,6 +1084,133 @@ def _merge_noterow_params(
         sound.append(default_params)
 
     return []
+
+
+def _ensure_all_sounds_have_default_params(
+    sounds: list[etree._Element],
+) -> None:
+    """Ensure every <sound> in a kit has a <defaultParams> child.
+
+    After the noteRow merge pass, some sounds may still lack <defaultParams>
+    (e.g. drums the user never programmed notes for). A standalone kit preset
+    requires every sound to have <defaultParams> — without it the Deluge
+    cannot load the kit.
+
+    Strategy:
+        1. Find the first sound that already has <defaultParams> → use as template
+        2. For any sound missing <defaultParams>, deep-clone the template and insert it
+        3. If NO sound has <defaultParams> (extremely unlikely), fall back to
+           a minimal hardcoded init structure
+
+    Prints a warning for each sound that receives default params.
+    """
+    # Find a template <defaultParams> from an existing sound
+    template: etree._Element | None = None
+    for sound in sounds:
+        dp = sound.find("defaultParams")
+        if dp is not None:
+            template = dp
+            break
+
+    for idx, sound in enumerate(sounds):
+        if sound.find("defaultParams") is not None:
+            continue
+
+        # Clone from template or create from init values
+        if template is not None:
+            new_dp = copy.deepcopy(template)
+        else:
+            new_dp = _create_init_default_params()
+
+        name = sound.get("name", f"index {idx}")
+        print(
+            f"WARNING: Kit sound {name!r} (index {idx})"
+            " has no clip parameters — using defaults"
+        )
+
+        # Insert after <unison> to match expected element order
+        unison = sound.find("unison")
+        if unison is not None:
+            unison_idx = list(sound).index(unison)
+            sound.insert(unison_idx + 1, new_dp)
+        else:
+            sound.append(new_dp)
+
+
+def _create_init_default_params() -> etree._Element:
+    """Create a minimal <defaultParams> element with init kit sound values.
+
+    Hardcoded from Init-Kit.XML's per-sound <defaultParams>. Used only as a
+    last-resort fallback when no other sound in the kit has <defaultParams>
+    to clone from.
+    """
+    dp = etree.Element(
+        "defaultParams",
+        arpeggiatorGate="0x00000000",
+        portamento="0x80000000",
+        compressorShape="0xDC28F5B2",
+        oscAVolume="0x7FFFFFFF",
+        oscAPulseWidth="0x00000000",
+        oscAWavetablePosition="0x00000000",
+        oscBVolume="0x80000000",
+        oscBPulseWidth="0x00000000",
+        oscBWavetablePosition="0x00000000",
+        noiseVolume="0x80000000",
+        volume="0x4CCCCCA8",
+        pan="0x00000000",
+        lpfFrequency="0x7FFFFFFF",
+        lpfResonance="0x80000000",
+        hpfFrequency="0x80000000",
+        hpfResonance="0x80000000",
+        lfo1Rate="0x1999997E",
+        lfo2Rate="0x00000000",
+        modulator1Amount="0x80000000",
+        modulator1Feedback="0x80000000",
+        modulator2Amount="0x80000000",
+        modulator2Feedback="0x80000000",
+        carrier1Feedback="0x80000000",
+        carrier2Feedback="0x80000000",
+        modFXRate="0x00000000",
+        modFXDepth="0x00000000",
+        delayRate="0x00000000",
+        delayFeedback="0x80000000",
+        reverbAmount="0x80000000",
+        arpeggiatorRate="0x00000000",
+        stutterRate="0x00000000",
+        sampleRateReduction="0x80000000",
+        bitCrush="0x80000000",
+        modFXOffset="0x00000000",
+        modFXFeedback="0x00000000",
+        compressorThreshold="0x00000000",
+        lpfMorph="0x80000000",
+        hpfMorph="0x80000000",
+        waveFold="0x80000000",
+        ratchetProbability="0x80000000",
+        ratchetAmount="0x80000000",
+        sequenceLength="0x80000000",
+        rhythm="0x80000000",
+    )
+    etree.SubElement(
+        dp, "envelope1",
+        attack="0x80000000", decay="0xE6666654",
+        sustain="0x7FFFFFD2", release="0x80000000",
+    )
+    etree.SubElement(
+        dp, "envelope2",
+        attack="0xE6666654", decay="0xE6666654",
+        sustain="0xFFFFFFE9", release="0xE6666654",
+    )
+    patch_cables = etree.SubElement(dp, "patchCables")
+    etree.SubElement(
+        patch_cables, "patchCable",
+        source="velocity", destination="volume", amount="0x3FFFFFE8",
+    )
+    etree.SubElement(
+        dp, "equalizer",
+        bass="0x00000000", treble="0x00000000",
+        bassFrequency="0x00000000", trebleFrequency="0x00000000",
+    )
+    return dp
 
 
 def _parse_hex_value(hex_str: str) -> int:
