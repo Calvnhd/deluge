@@ -14,6 +14,7 @@ from deluge_lib.extraction import (
     InstrumentInfo,
     NormalisationConfig,
     VersionComparison,
+    _strip_automation,
     build_manifest_entry,
     compare_versions,
     discover_clips,
@@ -984,3 +985,47 @@ class TestArpeggiatorHandling:
     def test_kit_arpeggiator_left_in_instrument(self) -> None:
         """Kit sound arpeggiators should remain in the instrument definition."""
         pytest.skip("Not implemented")
+
+
+# ---------------------------------------------------------------------------
+# Automation Stripping
+# ---------------------------------------------------------------------------
+
+
+class TestStripAutomation:
+    def test_truncates_extended_hex_to_base_value(self) -> None:
+        """Extended hex automation string should be truncated to first 8 hex chars."""
+        el = etree.Element("defaultParams", lpfFrequency="0x7FFFFFFF7FFFFFFF000000607FFFFFFF00000120")
+        warnings = _strip_automation(el)
+        assert el.get("lpfFrequency") == "0x7FFFFFFF"
+        assert len(warnings) == 1
+
+    def test_normal_hex_unchanged(self) -> None:
+        """Normal 8-char hex values should not be modified."""
+        el = etree.Element("defaultParams", lpfFrequency="0x7FFFFFFF")
+        warnings = _strip_automation(el)
+        assert el.get("lpfFrequency") == "0x7FFFFFFF"
+        assert warnings == []
+
+    def test_non_hex_attributes_unchanged(self) -> None:
+        """Non-hex attributes like text or numeric values should not be modified."""
+        el = etree.Element("osc1", type="square")
+        warnings = _strip_automation(el)
+        assert el.get("type") == "square"
+        assert warnings == []
+
+    def test_recurses_into_children(self) -> None:
+        """Should process attributes on descendant elements, not just the root."""
+        root = etree.Element("sound")
+        child = etree.SubElement(root, "defaultParams", volume="0x4CCCCCA8AABBCCDD11223344")
+        grandchild = etree.SubElement(child, "envelope1", attack="0x00000000FFFFFFFF99887766")
+        warnings = _strip_automation(root)
+        assert child.get("volume") == "0x4CCCCCA8"
+        assert grandchild.get("attack") == "0x00000000"
+        assert len(warnings) == 2
+
+    def test_returns_warning_strings(self) -> None:
+        """Warning strings should identify the element tag and attribute name."""
+        el = etree.Element("defaultParams", delayFeedback="0x7FFFFFFF7FFFFFFF000000607FFFFFFF")
+        warnings = _strip_automation(el)
+        assert warnings == ["Stripped automation from defaultParams.delayFeedback"]

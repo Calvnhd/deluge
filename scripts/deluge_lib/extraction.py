@@ -15,6 +15,7 @@ No CLI concerns, no user interaction. Receives parsed XML trees and returns data
 from __future__ import annotations
 
 import copy
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -653,6 +654,33 @@ def normalise_params(
     )
     for attr_name, target_value in targets.items():
         default_params.set(attr_name, target_value)
+
+
+# ---------------------------------------------------------------------------
+# Automation Stripping
+# ---------------------------------------------------------------------------
+
+_AUTOMATION_RE = re.compile(r"^0x[0-9A-Fa-f]{9,}$")
+
+
+def _strip_automation(element: etree._Element) -> list[str]:
+    """Truncate extended hex automation strings to base values on element and all descendants.
+
+    Standalone Deluge presets never contain automation data — the Deluge strips
+    it on save.  For every attribute value matching ``0x`` followed by more than
+    8 hex characters, this function truncates to the first 8 hex chars (the base
+    parameter value).
+
+    Returns:
+        List of warning strings for attributes that were truncated.
+    """
+    warnings: list[str] = []
+    for el in element.iter():
+        for attr_name, attr_value in el.attrib.items():
+            if _AUTOMATION_RE.match(attr_value):
+                el.set(attr_name, attr_value[:10])
+                warnings.append(f"Stripped automation from {el.tag}.{attr_name}")
+    return warnings
 
 
 # ---------------------------------------------------------------------------

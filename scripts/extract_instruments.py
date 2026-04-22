@@ -27,6 +27,7 @@ from deluge_lib.extraction import (
     ExtractionResult,
     NormalisationConfig,
     SECTION_COLOURS,
+    _strip_automation,
     build_manifest_entry,
     discover_clips,
     discover_instruments,
@@ -131,6 +132,15 @@ def main(argv: list[str] | None = None) -> None:
                     element = extract_synth(inst.element, clip_info.element)
                 else:
                     element = extract_kit(inst.element, clip_info.element)
+
+                # Strip automation data (extended hex strings → base values).
+                auto_warnings = _strip_automation(element)
+                if auto_warnings:
+                    print(
+                        f"WARNING: {song_name}.XML ({inst.preset_name})"
+                        f" \u2014 Stripped automation from {len(auto_warnings)} attributes"
+                    )
+
                 # Normalise master volume and pan.
                 normalise_params(element, inst.instrument_type, norm_config)
 
