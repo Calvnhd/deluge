@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -16,7 +17,7 @@ from deluge_lib.analysis import (
     top_by_refs,
 )
 from deluge_lib.cli_utils import get_deluge_root
-from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files, find_unextracted_refs
+from deluge_lib.deluge_sdk import SampleRef, default_manifests_dir, extract_sample_refs, find_all_xml_files, find_unextracted_refs, hash_all_samples
 from deluge_lib.scanning import format_size, print_path, scan_tree
 
 # ---------------------------------------------------------------------------
@@ -281,17 +282,61 @@ def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], delu
         print(line)
     print()
 
-def cmd_usage(index, args):
-    """Print usage detail for samples matching a pattern."""
+def cmd_duplicates(deluge_root: Path, hashes: dict[str, list[str]]) -> None:
+    """Find and report duplicate sample files by content hash."""
 
-    matches = filter_by_pattern(index, args.pattern)
-    if not matches:
+    # Filter to only groups with duplicates
+    dupes = {digest: paths for digest, paths in hashes.items() if len(paths) > 1}
+
+    if not dupes:
         print()
-        print(f'No samples matching "{args.pattern}"')
+        print("No duplicate samples found")
         print()
         return
 
-    _print_header(f' Samples matching "{args.pattern}" ({len(matches):,} matches) ')
+    # Compute wasted space (all but one file in each group)
+    total_wasted = 0
+    group_data: list[tuple[str, list[str], int, int]] = []
+    for digest, paths in sorted(dupes.items(), key=lambda kv: len(kv[1]), reverse=True):
+        rep_path = deluge_root / paths[0]
+        try:
+            file_size = rep_path.stat().st_size
+        except OSError:
+            file_size = 0
+        wasted = file_size * (len(paths) - 1)
+        total_wasted += wasted
+        group_data.append((digest, paths, file_size, wasted))
+
+    noun = "group" if len(dupes) == 1 else "groups"
+    header = f" Duplicate samples ({len(dupes)} {noun}, {format_size(total_wasted)} wasted) "
+    _print_header(header)
+
+    for digest, paths, file_size, wasted in group_data:
+        short_hash = digest[:12]
+        print()
+        print(f"{short_hash}\u2026  ({len(paths)} copies, {format_size(file_size)} each)")
+        for p in sorted(paths, key=str.lower):
+            print(f"  {print_path(p)}")
+
+    print()
+    print("-" * len(header))
+    print()
+    print(f"{len(dupes)} duplicate {noun}")
+    print(f"{format_size(total_wasted)} wasted by duplicates")
+    print()
+
+
+def cmd_usage(index, args):
+    """Print usage detail for samples matching a pattern."""
+
+    matches = filter_by_pattern(index, args.term)
+    if not matches:
+        print()
+        print(f'No samples matching "{args.term}"')
+        print()
+        return
+
+    _print_header(f' Samples matching "{args.term}" ({len(matches):,} matches) ')
     groups = _group_by_folder(matches)
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.path.lower())
@@ -418,12 +463,25 @@ def main(argv: list[str] | None = None) -> None:
 
     # usage
     sp_usage = subparsers.add_parser(
-        "usage", help="Show usage detail for samples matching a pattern"
+        "usage", help="Show usage detail for samples matching a search term"
     )
     sp_usage.add_argument(
-        "pattern",
-        metavar="PATTERN",
+        "term",
+        metavar="TERM",
         help="Case-insensitive substring to match against sample paths",
+    )
+
+    # duplicates
+    sp_duplicates = subparsers.add_parser(
+        "duplicates",
+        help="Find duplicate sample files by content hash",
+    )
+    sp_duplicates.add_argument(
+        "-s",
+        "--snapshot",
+        metavar="PATH_OR_LATEST",
+        default=None,
+        help="Use a snapshot JSON instead of hashing live. Pass a file path or 'latest'.",
     )
 
     args = parser.parse_args(argv)
@@ -433,8 +491,30 @@ def main(argv: list[str] | None = None) -> None:
         args.command = "summary"
         args.top = 5
 
-    # Data collection
     deluge_root = get_deluge_root()
+
+    # Duplicates only needs hashing — skip XML scanning
+    if args.command == "duplicates":
+        if args.snapshot is not None:
+            if args.snapshot == "latest":
+                manifests_dir = default_manifests_dir()
+                snapshots = sorted(manifests_dir.glob("snapshot-*.json"))
+                if not snapshots:
+                    raise SystemExit(f"No snapshots found in {manifests_dir}")
+                snapshot_path = snapshots[-1]
+            else:
+                snapshot_path = Path(args.snapshot)
+                if not snapshot_path.exists():
+                    raise SystemExit(f"Snapshot not found: {snapshot_path}")
+            print(f"Using snapshot: {snapshot_path.name}")
+            with open(snapshot_path, encoding="utf-8") as f:
+                hashes = json.load(f)["hashes"]
+        else:
+            hashes = hash_all_samples(deluge_root)
+        cmd_duplicates(deluge_root, hashes)
+        return
+
+    # Data collection for XML-based subcommands
     sample_scan = scan_tree(deluge_root / "SAMPLES", label="SAMPLES", file_filter="wav")
     xml_files = find_all_xml_files(deluge_root)
     refs: list[SampleRef] = []

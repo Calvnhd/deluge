@@ -249,7 +249,7 @@ def top_by_size(index: UsageIndex, n: int) -> list[SampleUsage]:
     )[:n]
 
 
-def filter_by_pattern(index: UsageIndex, pattern: str) -> list[SampleUsage]:
-    """Return samples whose path contains *pattern* (case-insensitive substring match)."""
-    needle = pattern.lower()
+def filter_by_pattern(index: UsageIndex, term: str) -> list[SampleUsage]:
+    """Return samples whose path contains *term* (case-insensitive substring match)."""
+    needle = term.lower()
     return [u for u in index.entries.values() if needle in u.path.lower()]

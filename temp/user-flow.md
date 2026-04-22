@@ -45,8 +45,9 @@ The user will be able to use a single command (`delly`, short for deluge) that i
     1. Run `sync_from_sd.py` 
     2. Run `sync_samples_to_cloud.py`
     3. Run `create_snapshot.py`
-    4. if `--zip` or `-z`, run `create_backup.py`
-    5. Run `sample_overview.py summary`
+    4. Run `sample_overview.py duplicates --snapshot latest`
+    5. if `--zip` or `-z`, run `create_backup.py`
+    6. Run `sample_overview.py summary`
 
 `delly prep`
 
@@ -62,7 +63,8 @@ The user will be able to use a single command (`delly`, short for deluge) that i
     4. If refs are all intact, run `sync_to_sd.py`
     5. Run `sync_samples_to_cloud.py`
     6. Run `create_snapshot.py`
-    7. If `--zip` or `-z`, run `create_backup.py`
+    7. Run `sample_overview.py duplicates --snapshot latest`
+    8. If `--zip` or `-z`, run `create_backup.py`
 
 ### Smaller utility cmds
 
@@ -84,5 +86,7 @@ Optionally add `--dry-run` or `-n` where applicable for dry run functionality
     optionally add `--top` or `-t` for custom output list length
 `delly samples missing` —> `sample_overview.py missing`
 `delly samples usage <term>` —> `sample_overview.py usage <term>`
+`delly samples duplicates` —> `sample_overview.py duplicates`
+    optionally add `--snapshot` or `-s` with a path or `latest` to use existing snapshot
 
 

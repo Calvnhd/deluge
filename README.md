@@ -162,7 +162,10 @@ uv run sample_overview.py summary --top N  # summary with custom top-N most-refe
 uv run sample_overview.py unused           # unreferenced samples grouped by folder
 uv run sample_overview.py unused  --top N  # top N largest unreferenced samples
 uv run sample_overview.py missing          # samples referenced in XML but missing from disk
-uv run sample_overview.py usage "Kick"     # usage detail for samples matching a pattern
+uv run sample_overview.py duplicates                        # find duplicate samples by content hash (hashes live)
+uv run sample_overview.py duplicates -s latest              # find duplicates using the latest snapshot
+uv run sample_overview.py duplicates -s path/to/snap.json   # find duplicates using a specific snapshot
+uv run sample_overview.py usage "Kick"     # usage detail for samples matching a search term
 ```
 
 ### Ideas
