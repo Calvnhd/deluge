@@ -130,7 +130,7 @@ Extracts standalone synth and kit presets from song XMLs into `SYNTHS/SONG-SYNTH
 ```
 uv run extract_instruments.py              # preview, then prompt to apply
 uv run extract_instruments.py --dry-run    # preview only
-uv run extract_instruments.py --extended   # extract multiple versions when params differ
+uv run extract_instruments.py --extended   # extract multiple versions when params differ (WIP)
 ```
 
 #### `fix_references.py`
@@ -170,7 +170,6 @@ uv run sample_overview.py usage "Kick"     # usage detail for samples matching a
 - sync script can specify whether or not to sync samples?
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference
-- Lift kits and synths from songs to a dedicated location 
 - Bulk rename songs with trailing numbers (after manually deleting old versions)
 
 ## Other Todos

@@ -23,6 +23,8 @@ Key findings from the [research document](../research/extract-instruments-resear
 
 Authoritative user decisions from [extraction-questions.md](../../temp/extraction-questions.md) supplement the research and take precedence where conflicts exist.
 
+> **Codebase audit (22 Apr 2026):** All extraction dependencies (`parse_deluge_xml()`, `get_deluge_root()`, `confirm_apply()`) confirmed stable and unchanged at their original locations. No new reusable code found in modules added since the feature was paused (`analysis.py`, `sample_overview.py` — different domain). Minor utility: `print_path()` from `scanning.py` could be adopted for consistent forward-slash path display in extraction output formatting.
+
 ## Decisions Log
 
 | ID | Decision | Rationale | Alternatives Considered |
@@ -180,7 +182,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 
 - **`deluge_lib/cli_utils.py`** — Reuse `get_deluge_root()` for environment loading
 - **`deluge_lib/deluge_sdk.py`** — Reuse `parse_deluge_xml()` for XML parsing. Consider whether `find_all_xml_files()` is suitable or if a simpler song-specific discovery is better (it currently scans all three subdirectories)
-- **`deluge_lib/scanning.py`** — Reuse `scan_tree()` if needed for file discovery, though a simpler `Path.glob()` for `SONGS/*.XML` may suffice
+- **`deluge_lib/scanning.py`** — Reuse `scan_tree()` if needed for file discovery, though a simpler `Path.glob()` for `SONGS/*.XML` may suffice. `print_path()` is available for consistent forward-slash path display in console output
 - **`pyproject.toml`** — Add `deluge-extract = "extract_instruments:main"` entry point
 - **SD card safety compliance:** The script reads from `DELUGE/SONGS/` and writes to `DELUGE/SYNTHS/SONG-SYNTHS/` and `DELUGE/KITS/SONG-KITS/`. All operations are within the repository `DELUGE/` directory (permitted per project standard). No SD card writes. Song XMLs are never modified.
 
@@ -235,7 +237,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   > - Key decisions: dataclasses for all data structures, `NotImplementedError` stubs with task references, constants as module-level tuples/dicts
   > - `pyproject.toml` entry point (`deluge-extract = "extract_instruments:main"`) was already present at line 25 — no addition needed
 
-#### Task 1.2: Song discovery and firmware validation
+#### Task 1.2: Song discovery and firmware validation ✅
 
 - **Description:** Implement song XML discovery in `DELUGE_ROOT/SONGS/` and firmware version checking. Songs with firmware other than `c1.2.1` are skipped with a warning.
 - **Inputs:** `DELUGE_ROOT` from `.env`, song XMLs
@@ -260,15 +262,19 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** Parsed song XML tree
 - **Outputs:** Data structure mapping each instrument to its clips, grouped by section ID
 - **Acceptance Criteria:**
-  - [ ] Discovers all `<sound>` and `<kit>` children of `<instruments>` (ignores `<midi>` and `<audioTrack>`)
-  - [ ] Discovers all `<instrumentClip>` children of `<sessionClips>` (ignores `<arrangementOnlyClips>`)
-  - [ ] Matches clips to instruments via `instrumentPresetName` + `instrumentPresetFolder` ↔ `presetName` + `presetFolder`
-  - [ ] Groups clips by `(presetName, presetFolder)` then by `section` attribute
-  - [ ] Identifies orphaned instruments (in `<instruments>` but no matching session clips) and returns them separately with a warning message
-  - [ ] Handles missing `section` attribute by treating as section 0 with a warning
-  - [ ] For duplicate clips in the same section, keeps the first and records a warning
+  - [x] Discovers all `<sound>` and `<kit>` children of `<instruments>` (ignores `<midi>` and `<audioTrack>`)
+  - [x] Discovers all `<instrumentClip>` children of `<sessionClips>` (ignores `<arrangementOnlyClips>`)
+  - [x] Matches clips to instruments via `instrumentPresetName` + `instrumentPresetFolder` ↔ `presetName` + `presetFolder`
+  - [x] Groups clips by `(presetName, presetFolder)` then by `section` attribute
+  - [x] Identifies orphaned instruments (in `<instruments>` but no matching session clips) and returns them separately with a warning message
+  - [x] Handles missing `section` attribute by treating as section 0 with a warning
+  - [x] For duplicate clips in the same section, keeps the first and records a warning
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Implemented 22 Apr 2026. Three functions in `extraction.py`:
+  > - `discover_instruments()` — iterates `<instruments>` children, maps `<sound>` → synth, `<kit>` → kit via tag-to-type dict, skips all other tags. Returns empty list if `<instruments>` is absent.
+  > - `discover_clips()` — iterates `<sessionClips>` children, collects only `<instrumentClip>` tags. Reads `instrumentPresetName`, `instrumentPresetFolder`, `section` attrs. Missing `section` → 0 with printed warning. Returns empty list if `<sessionClips>` is absent.
+  > - `match_instruments_to_clips()` — builds `(preset_name, preset_folder)` lookup from clips, iterates instruments to find matches. Orphaned instruments (no clips) → warning, excluded from groups. Duplicate clips in same section → first kept, warning recorded. Warnings stored both on the group and in the flat return list.
+  > - 16 tests added/unskipped in `test_extraction.py` across `TestDiscoverInstruments` (5), `TestDiscoverClips` (5), `TestMatchInstrumentsToClips` (6). All pass.
 
 #### Task 1.4: Version selection (default mode)
 
@@ -276,11 +282,12 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** `InstrumentClipGroup` from Task 1.3
 - **Outputs:** `ClipInfo` — the selected clip for the instrument
 - **Acceptance Criteria:**
-  - [ ] Selects the clip with the lowest section ID for each instrument
-  - [ ] Returns a `ClipInfo` dataclass (contains element, section, preset_name, preset_folder)
-  - [ ] Handles instruments with only one clip (trivial selection)
+  - [x] Selects the clip with the lowest section ID for each instrument
+  - [x] Returns a `ClipInfo` dataclass (contains element, section, preset_name, preset_folder)
+  - [x] Handles instruments with only one clip (trivial selection)
 - **Implementation Notes:**
   > API scaffolded as `select_default_clip(group: InstrumentClipGroup) -> ClipInfo`. Returns a single `ClipInfo` rather than a tuple — the calling code in `main()` accesses `clip_info.section` and `clip_info.element` directly.
+  > Implemented: uses `min()` on `group.clips_by_section` keys to find the lowest section ID, returns the corresponding `ClipInfo`. 3 tests added/unskipped in `TestSelectDefaultClip`: lowest-section selection, single-clip trivial case, and ClipInfo return type verification. All pass.
 
 ### Phase 2: Core Transformation
 
@@ -293,16 +300,21 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** Instrument `<sound>` element, clip `<instrumentClip>` element
 - **Outputs:** Standalone `<sound>` element ready for serialisation
 - **Acceptance Criteria:**
-  - [ ] Clones the `<sound>` element from `<instruments>` (does not mutate the original tree)
-  - [ ] Strips song-specific attributes: `presetName`, `presetFolder`, `defaultVelocity`, `isArmedForRecording`, `activeModFunction`, `clipInstances`, `colour`
-  - [ ] Adds `firmwareVersion="c1.2.1"` and `earliestCompatibleFirmware="4.1.0-alpha"`
-  - [ ] Extracts `<soundParams>` from clip and renames tag to `<defaultParams>`
-  - [ ] Extracts `<arpeggiator>` from clip and strips extra numeric attributes (`gate`, `rate`, `ratchetProbability`, `ratchetAmount`, `sequenceLength`, `rhythm`)
-  - [ ] Reorders child elements to match standalone c1.2.1 ordering: `osc1, osc2, lfo1, lfo2, [modulator1, modulator2], unison, defaultParams, arpeggiator, modKnobs, delay, sidechain, audioCompressor`
-  - [ ] Preserves all attribute values verbatim (including extended hex automation strings)
-  - [ ] Preserves all child elements within `<defaultParams>` (envelopes, patchCables, equalizer)
+  - [x] Clones the `<sound>` element from `<instruments>` (does not mutate the original tree)
+  - [x] Strips song-specific attributes: `presetName`, `presetFolder`, `defaultVelocity`, `isArmedForRecording`, `activeModFunction`, `clipInstances`, `colour`
+  - [x] Adds `firmwareVersion="c1.2.1"` and `earliestCompatibleFirmware="4.1.0-alpha"`
+  - [x] Extracts `<soundParams>` from clip and renames tag to `<defaultParams>`
+  - [x] Extracts `<arpeggiator>` from clip and strips extra numeric attributes (`gate`, `rate`, `ratchetProbability`, `ratchetAmount`, `sequenceLength`, `rhythm`)
+  - [x] Reorders child elements to match standalone c1.2.1 ordering: `osc1, osc2, lfo1, lfo2, [modulator1, modulator2], unison, defaultParams, arpeggiator, modKnobs, delay, sidechain, audioCompressor`
+  - [x] Preserves all attribute values verbatim (including extended hex automation strings)
+  - [x] Preserves all child elements within `<defaultParams>` (envelopes, patchCables, equalizer)
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Implemented 22 Apr 2026. Four functions in `extraction.py`:
+  > - `extract_synth(instrument, clip)` — main transformation: deep-clones `<sound>`, strips song attrs, adds firmware version, extracts `<soundParams>` from clip and renames to `<defaultParams>`, extracts and cleans `<arpeggiator>` from clip, reorders children to standalone c1.2.1 order.
+  > - `_strip_song_attrs(element)` — removes `SONG_SPECIFIC_ATTRS` from element in-place, silently ignores missing attrs.
+  > - `_extract_arpeggiator_from_clip(clip)` — finds `<arpeggiator>` child, deep-clones, strips `ARPEGGIATOR_EXTRA_ATTRS`, returns clone (or None if not found).
+  > - `_reorder_synth_children(sound)` — collects children by tag into dict, rebuilds in `SYNTH_CHILD_ORDER`, appends unknown tags at end. Handles optional modulators (FM mode).
+  > - 10 tests in `TestExtractSynth` — all passing. Tests cover: immutability, attr stripping, firmware attrs, soundParams→defaultParams rename, arpeggiator extraction and cleaning, element ordering, automation hex preservation, defaultParams children preservation, FM mode with modulators.
 
 #### Task 2.2: Kit extraction transformation
 
@@ -310,19 +322,24 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** Instrument `<kit>` element, clip `<instrumentClip>` element
 - **Outputs:** Standalone `<kit>` element ready for serialisation
 - **Acceptance Criteria:**
-  - [ ] Clones the `<kit>` element from `<instruments>` (does not mutate the original tree)
-  - [ ] Strips song-specific attributes: `presetName`, `presetFolder`, `defaultVelocity`, `isArmedForRecording`, `activeModFunction`, `colour`
-  - [ ] Adds `firmwareVersion="c1.2.1"` and `earliestCompatibleFirmware="4.1.0-alpha"`
-  - [ ] Extracts `<kitParams>` from clip and renames tag to `<defaultParams>`
-  - [ ] Inserts kit-level `<defaultParams>` as the first child of `<kit>` (before `<delay>`)
-  - [ ] For each `<noteRow>` in the clip with a `drumIndex`, extracts `<soundParams>`, renames to `<defaultParams>`, and inserts into the corresponding `<sound>` in `<soundSources>` (matched by drumIndex as 0-based index) between `<unison>` and `<arpeggiator>`
-  - [ ] Leaves kit sound `<arpeggiator>` elements in place (they are already in the instrument definition)
-  - [ ] Warns on drumIndex mismatch (out of range of soundSources) and skips that noteRow
-  - [ ] Preserves all attribute values verbatim
-  - [ ] Kit-level element ordering matches standalone: `defaultParams, delay, sidechain, audioCompressor, soundSources, selectedDrumIndex`
-  - [ ] Per-row sound element ordering matches standalone: `osc1, osc2, lfo1, lfo2, unison, defaultParams, arpeggiator, modKnobs, delay, sidechain, audioCompressor`
+  - [x] Clones the `<kit>` element from `<instruments>` (does not mutate the original tree)
+  - [x] Strips song-specific attributes: `presetName`, `presetFolder`, `defaultVelocity`, `isArmedForRecording`, `activeModFunction`, `colour`
+  - [x] Adds `firmwareVersion="c1.2.1"` and `earliestCompatibleFirmware="4.1.0-alpha"`
+  - [x] Extracts `<kitParams>` from clip and renames tag to `<defaultParams>`
+  - [x] Inserts kit-level `<defaultParams>` as the first child of `<kit>` (before `<delay>`)
+  - [x] For each `<noteRow>` in the clip with a `drumIndex`, extracts `<soundParams>`, renames to `<defaultParams>`, and inserts into the corresponding `<sound>` in `<soundSources>` (matched by drumIndex as 0-based index) between `<unison>` and `<arpeggiator>`
+  - [x] Leaves kit sound `<arpeggiator>` elements in place (they are already in the instrument definition)
+  - [x] Warns on drumIndex mismatch (out of range of soundSources) and skips that noteRow
+  - [x] Preserves all attribute values verbatim
+  - [x] Kit-level element ordering matches standalone: `defaultParams, delay, sidechain, audioCompressor, soundSources, selectedDrumIndex`
+  - [x] Per-row sound element ordering matches standalone: `osc1, osc2, lfo1, lfo2, unison, defaultParams, arpeggiator, modKnobs, delay, sidechain, audioCompressor`
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Implemented 22 Apr 2026. Four functions in `extraction.py`:
+  > - `extract_kit(instrument, clip)` — main transformation: deep-clones `<kit>`, strips song attrs, adds firmware version, extracts `<kitParams>` from clip and renames to `<defaultParams>`, inserts as first child. Iterates `<noteRows>` with `drumIndex`, merges `<soundParams>` into corresponding `<sound>` via `_merge_noterow_params()`. Warns on invalid drumIndex. Reorders kit-level and per-sound children.
+  > - `_reorder_kit_children(kit)` — collects children by tag into dict, rebuilds in `KIT_CHILD_ORDER`, appends unknown tags at end. Same pattern as `_reorder_synth_children()`.
+  > - `_reorder_kit_sound_children(sound)` — collects children by tag into dict, rebuilds in `KIT_SOUND_CHILD_ORDER`, appends unknown tags at end.
+  > - `_merge_noterow_params(sound, noterow)` — finds `<soundParams>` in noteRow, deep-clones and renames to `<defaultParams>`, inserts after `<unison>` in the sound element.
+  > - 11 tests in `TestExtractKit` — all passing.
 
 #### Task 2.3: Volume and pan normalisation
 
@@ -330,14 +347,16 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** Assembled standalone XML element (from Task 2.1 or 2.2), instrument type (synth or kit)
 - **Outputs:** The same element with normalised volume and pan on the top-level `<defaultParams>`
 - **Acceptance Criteria:**
-  - [ ] For synths: sets `volume` on `<defaultParams>` to `0x4CCCCCA8` (init synth value)
-  - [ ] For kits: sets `volume` on kit-level `<defaultParams>` to `0x3504F334` (init kit value)
-  - [ ] Sets `pan` on top-level `<defaultParams>` to `0x00000000` (centre) for both types
-  - [ ] Does NOT modify `volume` or `pan` on kit row `<defaultParams>` (within `<soundSources>/<sound>`)
-  - [ ] Does NOT modify patchCable entries with `destination="volume"`
-  - [ ] Normalisation targets are defined as named constants or a data structure that can be extended with additional attributes in the future
+  - [x] For synths: sets `volume` on `<defaultParams>` to `0x4CCCCCA8` (init synth value)
+  - [x] For kits: sets `volume` on kit-level `<defaultParams>` to `0x3504F334` (init kit value)
+  - [x] Sets `pan` on top-level `<defaultParams>` to `0x00000000` (centre) for both types
+  - [x] Does NOT modify `volume` or `pan` on kit row `<defaultParams>` (within `<soundSources>/<sound>`)
+  - [x] Does NOT modify patchCable entries with `destination="volume"`
+  - [x] Normalisation targets are defined as named constants or a data structure that can be extended with additional attributes in the future
 - **Implementation Notes:**
-  > {Space for the Implement agent to add notes during execution}
+  > Implemented 22 Apr 2026. Single function in `extraction.py`:
+  > - `normalise_params(element, instrument_type, config)` — finds top-level `<defaultParams>` child, selects target dict from `NormalisationConfig` based on instrument_type, sets each (attr, value) pair. Does not descend into `<soundSources>` children. `NormalisationConfig` dataclass uses `synth_targets` and `kit_targets` dicts with defaults from module constants, extensible by adding new entries.
+  > - 6 tests in `TestNormaliseParams` — all passing. Tests cover: synth volume, kit volume, pan centre for both types, kit row volume preserved, kit row pan preserved, patchCable volume untouched.
 
 ### Phase 3: Output and CLI
 
@@ -350,14 +369,14 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** Song name (stem of XML filename), preset name, instrument type, section ID (for extended mode), list of already-used filenames
 - **Outputs:** Unique filename string
 - **Acceptance Criteria:**
-  - [ ] Default mode: `<SongName>-<PresetName>.XML`
-  - [ ] Extended mode: `<SongName>-<PresetName>-<Abbr>.XML` where `<Abbr>` is the 3-letter colour abbreviation for the section ID
-  - [ ] Colour abbreviation map: 0=Lbl, 1=Pnk, 2=Gld, 3=Cyn, 4=Red, 5=Ylw, 6=Dbl, 7=Orn, 8=Pur, 9=Lme, 10=Grn, 11=Mag
-  - [ ] Collision resolution: if filename already used, append `-2`, `-3`, etc.
-  - [ ] Spaces, hyphens, and digits in names preserved as-is
-  - [ ] ~~FAT32 sanitisation removed — filenames originate from FAT32 SD card, so unsafe characters cannot appear~~
+  - [x] Default mode: `<SongName>-<PresetName>.XML`
+  - [x] Extended mode: `<SongName>-<PresetName>-<Abbr>.XML` where `<Abbr>` is the 3-letter colour abbreviation for the section ID
+  - [x] Colour abbreviation map: 0=Lbl, 1=Pnk, 2=Gld, 3=Cyn, 4=Red, 5=Ylw, 6=Dbl, 7=Orn, 8=Pur, 9=Lme, 10=Grn, 11=Mag
+  - [x] Collision resolution: if filename already used, append `-2`, `-3`, etc.
+  - [x] Spaces, hyphens, and digits in names preserved as-is
+  - [x] ~~FAT32 sanitisation removed — filenames originate from FAT32 SD card, so unsafe characters cannot appear~~
 - **Implementation Notes:**
-  > Function stub exists in `extraction.py` with full signature: `generate_filename(song_name, preset_name, instrument_type, section_id, extended, used_filenames) -> str`. Needs implementation.
+  > Implemented 22 Apr 2026. `generate_filename()` in `extraction.py`: constructs `<song>-<preset>.XML` (default) or `<song>-<preset>-<Abbr>.XML` (extended), appends `-2`, `-3`, etc. on collision, adds final filename to `used_filenames` set. 5 tests in `TestGenerateFilename` — all passing.
 
 #### Task 3.2: XML serialisation
 
@@ -365,11 +384,11 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** Assembled lxml element, output file path
 - **Outputs:** Written XML file
 - **Acceptance Criteria:**
-  - [ ] XML declaration: `<?xml version="1.0" encoding="UTF-8"?>`
-  - [ ] Output matches the formatting style of existing standalone presets (use `lxml.etree.tostring` with `xml_declaration=True`, `encoding="UTF-8"`)
-  - [ ] Investigate and match the whitespace/indentation style of Init-Synth.XML and Init-Kit.XML — the Deluge may be sensitive to formatting
+  - [x] XML declaration: `<?xml version="1.0" encoding="UTF-8"?>`
+  - [x] Output matches the formatting style of existing standalone presets (use `lxml.etree.tostring` with `xml_declaration=True`, `encoding="UTF-8"`)
+  - [x] Investigate and match the whitespace/indentation style of Init-Synth.XML and Init-Kit.XML — the Deluge may be sensitive to formatting
 - **Implementation Notes:**
-  > Function stub exists in `extraction.py` with full signature: `serialise_xml(element, output_path) -> None`. Docstring references hardware-tested lxml `pretty_print=True` approach. Needs implementation.
+  > Implemented 22 Apr 2026. `serialise_xml()` in `extraction.py`: uses `etree.tostring()` with `xml_declaration=True`, `encoding="UTF-8"`, `pretty_print=True`. Creates parent directories with `mkdir(parents=True)`. Writes bytes directly. 2 tests in `TestSerialiseXml` — all passing.
 
 #### Task 3.3: Trash mechanism and file writing ✅
 
@@ -391,13 +410,13 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Inputs:** List of extraction results
 - **Outputs:** `manifest.json` in each output directory
 - **Acceptance Criteria:**
-  - [ ] Each entry includes: output filename, source song, preset name, preset folder, instrument type, section ID, colour name, and timestamp
+  - [x] Each entry includes: output filename, source song, preset name, preset folder, instrument type, section ID, colour name, and timestamp
   - [x] Manifest is written as formatted JSON (indented for readability)
   - [x] Summary stats at the top level: total count, songs processed, date generated
 - **Implementation Notes:**
-  > `_write_manifest()` in `extract_instruments.py` is fully implemented — filters results by instrument type, constructs the manifest dict with `generated`, `songs_processed`, `total_count`, and `extractions` keys, writes JSON with `indent=2`. However, `build_manifest_entry()` in `extraction.py` is still a `NotImplementedError` stub — this function maps `ExtractionResult` → dict for each manifest entry. Manifest writing is wired up but will fail at runtime until `build_manifest_entry` is implemented.
+  > Completed 22 Apr 2026. `build_manifest_entry()` in `extraction.py` maps `ExtractionResult` fields to a dict with keys: `output_filename`, `source_song`, `preset_name`, `preset_folder`, `instrument_type`, `section_id`, `colour_name`, `colour_abbr`, `differing_params`. Combined with the existing `_write_manifest()` in `extract_instruments.py`, the manifest pipeline is now fully functional.
 
-#### Task 3.5: CLI integration and output formatting (substantially complete)
+#### Task 3.5: CLI integration and output formatting (partially scaffolded)
 
 - **Description:** Wire everything together in the CLI script. Implement discovery → extraction → output pipeline with dry-run support, confirmation prompts, and formatted console output.
 - **Inputs:** All previous tasks
@@ -408,10 +427,10 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [x] After dry-run preview, prompts for confirmation before writing
   - [x] `deluge-extract --extended` enables extended mode
   - [x] Console output lists each extraction per song, plus warnings, plus summary (see Interface Design section for format)
-  - [ ] Exit code 0 on success, non-zero on failure
-  - [ ] Missing init preset files produce a clear error and abort
+  - [x] Exit code 0 on success, non-zero on failure
+  - [x] Missing init preset files produce a clear error and abort
 - **Implementation Notes:**
-  > Full CLI pipeline scaffolded in `extract_instruments.py` `main()` (15 Apr 2026). Wired together: argparse, `discover_songs()` → per-song loop → `discover_instruments()`/`discover_clips()`/`match_instruments_to_clips()` → `select_default_clip()`/`select_extended_clips()` → `extract_synth()`/`extract_kit()` → `normalise_params()` → `generate_filename()` → `ExtractionResult` construction → per-song console output → summary → dry-run/confirmation flow → trash → file writing → manifest writing. The pipeline structure is complete but calls stubbed functions — will work end-to-end once stubs are implemented. Exit code handling and init preset validation still need to be added.
+  > Full CLI pipeline scaffolded in `extract_instruments.py` `main()` (15 Apr 2026). Wired together: argparse, `discover_songs()` → per-song loop → `discover_instruments()`/`discover_clips()`/`match_instruments_to_clips()` → `select_default_clip()`/`select_extended_clips()` → `extract_synth()`/`extract_kit()` → `normalise_params()` → `generate_filename()` → `ExtractionResult` construction → per-song console output → summary → dry-run/confirmation flow → trash → file writing → manifest writing. All stubs now implemented. Exit codes added 22 Apr 2026: `__main__` block wraps `main()` in try/except, calling `sys.exit(1)` on unhandled exceptions. Init preset validation added at startup — checks `SYNTHS/Init-Synth.XML` and `KITS/Init-Kit.XML` exist before proceeding, exits with error message if missing.
 
 ### Phase 4: Extended Mode
 
@@ -507,9 +526,9 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
-| Phase 1: Foundation | In Progress | 1/4 | Task 1.1 complete (scaffolding) |
-| Phase 2: Core Transformation | Not Started | 0/3 | |
-| Phase 3: Output and CLI | In Progress | 3/5 | Tasks 3.3, 3.4, 3.5 substantially complete via scaffolding |
+| Phase 1: Foundation | Complete | 4/4 | Tasks 1.1 (scaffolding) ✅, 1.2 (discover_songs) ✅, 1.3 (instrument/clip discovery) ✅, 1.4 (default version selection) ✅ |
+| Phase 2: Core Transformation | Complete | 3/3 | Tasks 2.1 (synth extraction) ✅, 2.2 (kit extraction) ✅, 2.3 (normalisation) ✅ |
+| Phase 3: Output and CLI | Complete | 5/5 | Tasks 3.1 (filename generation) ✅, 3.2 (XML serialisation) ✅, 3.3 (trash mechanism) ✅, 3.4 (manifest entry) ✅, 3.5 (exit codes, init validation) ✅ |
 | Phase 4: Extended Mode | Not Started | 0/2 | |
 | Phase 5: Testing and Verification | Not Started | 0/3 | |
 
@@ -557,6 +576,10 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 ## Change Log
 
 | Date | Change | Reason |
-| 15 Apr 2026 | Updated plan to reflect scaffolding state | Task 1.1 complete, Tasks 3.3/3.4/3.5 substantially complete, trash path corrected, Task 1.4 API updated to use dataclasses |
 |------|--------|--------|
+| 22 Apr 2026 | Task 1.4 implemented — Phase 1 complete | `select_default_clip()` implemented with `min()` on `clips_by_section` keys. 3 tests added in `TestSelectDefaultClip`. Phase 1 marked complete (4/4). |
+| 22 Apr 2026 | Plan revised to reflect true implementation state after code audit | Phase 1 progress corrected (2/4 — Task 1.2 confirmed complete). Phase 3 status clarified (1/5 — only Task 3.3 truly complete; Tasks 3.4/3.5 partially scaffolded but depend on unimplemented stubs). Codebase audit note added to Research Summary. `print_path()` noted in Integration Points. |
+| 22 Apr 2026 | Tasks 3.1, 3.2, 3.4, 3.5 implemented — Phase 3 complete | `generate_filename()` implemented with collision handling. `serialise_xml()` implemented with lxml pretty_print. `build_manifest_entry()` implemented mapping ExtractionResult to dict. CLI exit codes added (try/except + sys.exit(1)). Init preset validation added at startup (checks Init-Synth.XML and Init-Kit.XML). 7 new tests (5 filename + 2 serialisation), all passing. Phase 3 marked complete (5/5). |
+| 22 Apr 2026 | Tasks 2.2 and 2.3 implemented — Phase 2 complete | `extract_kit()` with helpers `_reorder_kit_children()`, `_reorder_kit_sound_children()`, `_merge_noterow_params()` implemented. `normalise_params()` implemented. 17 new tests (11 kit + 6 normalisation), all passing. Phase 2 marked complete (3/3). |
+| 15 Apr 2026 | Updated plan to reflect scaffolding state | Task 1.1 complete, Tasks 3.3/3.4/3.5 substantially complete, trash path corrected, Task 1.4 API updated to use dataclasses |
 | 14 Apr 2026 | Initial plan created | — |

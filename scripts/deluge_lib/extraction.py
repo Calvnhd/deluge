@@ -282,7 +282,31 @@ def discover_instruments(song_tree: etree._Element) -> list[InstrumentInfo]:
         3. Read presetName and presetFolder attributes from each instrument
         4. Return list of InstrumentInfo dataclasses
     """
-    raise NotImplementedError("Task 1.3: Instrument discovery")
+    instruments_el = song_tree.find("instruments")
+    if instruments_el is None:
+        return []
+
+    tag_to_type = {"sound": "synth", "kit": "kit"}
+    results: list[InstrumentInfo] = []
+
+    for child in instruments_el:
+        instrument_type = tag_to_type.get(child.tag)
+        if instrument_type is None:
+            continue
+
+        preset_name = child.get("presetName", "")
+        preset_folder = child.get("presetFolder", "")
+
+        results.append(
+            InstrumentInfo(
+                element=child,
+                instrument_type=instrument_type,
+                preset_name=preset_name,
+                preset_folder=preset_folder,
+            )
+        )
+
+    return results
 
 
 def discover_clips(song_tree: etree._Element) -> list[ClipInfo]:
@@ -298,7 +322,39 @@ def discover_clips(song_tree: etree._Element) -> list[ClipInfo]:
         4. If section attribute is missing, treat as section 0 and log a warning
         5. Return list of ClipInfo dataclasses
     """
-    raise NotImplementedError("Task 1.3: Clip discovery")
+    session_clips_el = song_tree.find("sessionClips")
+    if session_clips_el is None:
+        return []
+
+    results: list[ClipInfo] = []
+
+    for child in session_clips_el:
+        if child.tag != "instrumentClip":
+            continue
+
+        preset_name = child.get("instrumentPresetName", "")
+        preset_folder = child.get("instrumentPresetFolder", "")
+
+        section_str = child.get("section")
+        if section_str is None:
+            print(
+                f"WARNING: <instrumentClip> for {preset_name!r} has no section attribute"
+                " — treating as section 0"
+            )
+            section = 0
+        else:
+            section = int(section_str)
+
+        results.append(
+            ClipInfo(
+                element=child,
+                section=section,
+                preset_name=preset_name,
+                preset_folder=preset_folder,
+            )
+        )
+
+    return results
 
 
 def match_instruments_to_clips(
@@ -319,7 +375,50 @@ def match_instruments_to_clips(
         5. If an instrument has no matching clips, it is orphaned — record a warning (D7)
         6. Return (groups, warnings) where warnings is a flat list of all warning strings
     """
-    raise NotImplementedError("Task 1.3: Instrument-clip matching")
+    # Build lookup: (preset_name, preset_folder) → list of ClipInfo
+    clips_by_key: dict[tuple[str, str], list[ClipInfo]] = {}
+    for clip in clips:
+        key = (clip.preset_name, clip.preset_folder)
+        clips_by_key.setdefault(key, []).append(clip)
+
+    groups: list[InstrumentClipGroup] = []
+    warnings: list[str] = []
+
+    for instrument in instruments:
+        key = (instrument.preset_name, instrument.preset_folder)
+        matching_clips = clips_by_key.get(key, [])
+
+        if not matching_clips:
+            msg = (
+                f"Orphaned instrument {instrument.preset_name!r}"
+                f" (folder={instrument.preset_folder!r}, type={instrument.instrument_type})"
+                " — no matching session clips"
+            )
+            warnings.append(msg)
+            continue
+
+        clips_by_section: dict[int, ClipInfo] = {}
+        group_warnings: list[str] = []
+
+        for clip in matching_clips:
+            if clip.section in clips_by_section:
+                msg = (
+                    f"Duplicate clip for {instrument.preset_name!r}"
+                    f" in section {clip.section}, taking first"
+                )
+                group_warnings.append(msg)
+                continue
+            clips_by_section[clip.section] = clip
+
+        group = InstrumentClipGroup(
+            instrument=instrument,
+            clips_by_section=clips_by_section,
+            warnings=group_warnings,
+        )
+        groups.append(group)
+        warnings.extend(group_warnings)
+
+    return groups, warnings
 
 
 # ---------------------------------------------------------------------------
@@ -338,7 +437,8 @@ def select_default_clip(group: InstrumentClipGroup) -> ClipInfo:
         2. Find the minimum section ID
         3. Return the corresponding ClipInfo
     """
-    raise NotImplementedError("Task 1.4: Default version selection")
+    lowest_section = min(group.clips_by_section)
+    return group.clips_by_section[lowest_section]
 
 
 # ---------------------------------------------------------------------------
@@ -383,7 +483,32 @@ def extract_synth(
         8. Preserve all child elements within <defaultParams>:
            envelope1, envelope2, patchCables, equalizer
     """
-    raise NotImplementedError("Task 2.1: Synth extraction transformation")
+    # 1. Deep-clone the <sound> element
+    sound = copy.deepcopy(instrument)
+
+    # 2. Strip song-specific attributes
+    _strip_song_attrs(sound)
+
+    # 3. Add firmware version attributes
+    sound.set("firmwareVersion", FIRMWARE_VERSION)
+    sound.set("earliestCompatibleFirmware", EARLIEST_COMPATIBLE)
+
+    # 4. Extract <soundParams> from clip → rename tag to <defaultParams>
+    sound_params = clip.find("soundParams")
+    if sound_params is not None:
+        default_params = copy.deepcopy(sound_params)
+        default_params.tag = "defaultParams"
+        sound.append(default_params)
+
+    # 5. Extract <arpeggiator> from clip → strip extra numeric attributes
+    arp = _extract_arpeggiator_from_clip(clip)
+    if arp is not None:
+        sound.append(arp)
+
+    # 6. Reorder child elements to match standalone c1.2.1 ordering
+    _reorder_synth_children(sound)
+
+    return sound
 
 
 # ---------------------------------------------------------------------------
@@ -435,7 +560,55 @@ def extract_kit(
            modKnobs, delay, sidechain, audioCompressor
         10. Preserve all attribute values verbatim (D10)
     """
-    raise NotImplementedError("Task 2.2: Kit extraction transformation")
+    # 1. Deep-clone the <kit> element
+    kit = copy.deepcopy(instrument)
+
+    # 2. Strip song-specific attributes
+    _strip_song_attrs(kit)
+
+    # 3. Add firmware version attributes
+    kit.set("firmwareVersion", FIRMWARE_VERSION)
+    kit.set("earliestCompatibleFirmware", EARLIEST_COMPATIBLE)
+
+    # 4. Extract <kitParams> from clip → rename tag to <defaultParams>
+    kit_params = clip.find("kitParams")
+    if kit_params is not None:
+        default_params = copy.deepcopy(kit_params)
+        default_params.tag = "defaultParams"
+        # 5. Insert kit-level <defaultParams> as the FIRST child of <kit>
+        kit.insert(0, default_params)
+
+    # 6. Merge noteRow soundParams into corresponding kit row sounds
+    sound_sources = kit.find("soundSources")
+    sounds = list(sound_sources) if sound_sources is not None else []
+
+    note_rows_el = clip.find("noteRows")
+    if note_rows_el is not None:
+        for noterow in note_rows_el:
+            if noterow.tag != "noteRow":
+                continue
+            drum_index_str = noterow.get("drumIndex")
+            if drum_index_str is None:
+                continue
+            drum_index = int(drum_index_str)
+            if drum_index < 0 or drum_index >= len(sounds):
+                print(
+                    f"WARNING: drumIndex {drum_index} out of range"
+                    f" (soundSources has {len(sounds)} sounds) — skipping noteRow"
+                )
+                continue
+            _merge_noterow_params(sounds[drum_index], noterow)
+
+    # 8. Reorder kit top-level children
+    _reorder_kit_children(kit)
+
+    # 9. Reorder each kit row sound's children
+    if sound_sources is not None:
+        for sound in sound_sources:
+            if sound.tag == "sound":
+                _reorder_kit_sound_children(sound)
+
+    return kit
 
 
 # ---------------------------------------------------------------------------
@@ -471,7 +644,15 @@ def normalise_params(
         4. Do NOT descend into <soundSources>/<sound>/<defaultParams>
         5. Do NOT touch <patchCables> children with destination="volume"
     """
-    raise NotImplementedError("Task 2.3: Volume and pan normalisation")
+    default_params = element.find("defaultParams")
+    if default_params is None:
+        return
+
+    targets = (
+        config.synth_targets if instrument_type == "synth" else config.kit_targets
+    )
+    for attr_name, target_value in targets.items():
+        default_params.set(attr_name, target_value)
 
 
 # ---------------------------------------------------------------------------
@@ -512,7 +693,21 @@ def generate_filename(
         5. Add the final filename to used_filenames
         6. Return the filename
     """
-    raise NotImplementedError("Task 3.1: Filename generation")
+    base = f"{song_name}-{preset_name}"
+    if extended:
+        _colour_name, abbr = SECTION_COLOURS[section_id]
+        base = f"{base}-{abbr}"
+
+    filename = f"{base}.XML"
+
+    if filename in used_filenames:
+        counter = 2
+        while f"{base}-{counter}.XML" in used_filenames:
+            counter += 1
+        filename = f"{base}-{counter}.XML"
+
+    used_filenames.add(filename)
+    return filename
 
 
 # ---------------------------------------------------------------------------
@@ -537,7 +732,11 @@ def serialise_xml(element: etree._Element, output_path: Path) -> None:
         2. Write the resulting bytes to output_path
         3. Ensure parent directories exist (create if needed)
     """
-    raise NotImplementedError("Task 3.2: XML serialisation")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    xml_bytes = etree.tostring(
+        element, xml_declaration=True, encoding="UTF-8", pretty_print=True
+    )
+    output_path.write_bytes(xml_bytes)
 
 
 # ---------------------------------------------------------------------------
@@ -641,7 +840,17 @@ def build_manifest_entry(result: ExtractionResult) -> dict[str, str | int | list
            colour_abbr, differing_params (for extended mode)
         2. Return the dict
     """
-    raise NotImplementedError("Task 3.4: Manifest entry generation")
+    return {
+        "output_filename": result.output_filename,
+        "source_song": result.song_name,
+        "preset_name": result.preset_name,
+        "preset_folder": result.preset_folder,
+        "instrument_type": result.instrument_type,
+        "section_id": result.section_id,
+        "colour_name": result.colour_name,
+        "colour_abbr": result.colour_abbr,
+        "differing_params": result.differing_params,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -657,7 +866,9 @@ def _strip_song_attrs(element: etree._Element) -> None:
 
     Modifies the element in-place. Silently ignores attributes that are not present.
     """
-    raise NotImplementedError("Helper: Strip song-specific attributes")
+    for attr in SONG_SPECIFIC_ATTRS:
+        if attr in element.attrib:
+            del element.attrib[attr]
 
 
 def _extract_arpeggiator_from_clip(clip: etree._Element) -> etree._Element | None:
@@ -674,7 +885,16 @@ def _extract_arpeggiator_from_clip(clip: etree._Element) -> etree._Element | Non
            ratchetAmount, sequenceLength, rhythm (ARPEGGIATOR_EXTRA_ATTRS)
         5. Return the cleaned <arpeggiator> element
     """
-    raise NotImplementedError("Helper: Extract arpeggiator from clip")
+    arp_el = clip.find("arpeggiator")
+    if arp_el is None:
+        return None
+
+    arp_clone = copy.deepcopy(arp_el)
+    for attr in ARPEGGIATOR_EXTRA_ATTRS:
+        if attr in arp_clone.attrib:
+            del arp_clone.attrib[attr]
+
+    return arp_clone
 
 
 def _reorder_synth_children(sound: etree._Element) -> None:
@@ -695,7 +915,27 @@ def _reorder_synth_children(sound: etree._Element) -> None:
 
     Modifies the element in-place.
     """
-    raise NotImplementedError("Helper: Reorder synth children")
+    children_by_tag: dict[str, etree._Element] = {}
+    for child in list(sound):
+        children_by_tag[child.tag] = child
+
+    ordered: list[etree._Element] = []
+    seen_tags: set[str] = set()
+    for tag in SYNTH_CHILD_ORDER:
+        if tag in children_by_tag:
+            ordered.append(children_by_tag[tag])
+            seen_tags.add(tag)
+
+    # Append any unexpected children at the end (future-proofing)
+    for tag, child in children_by_tag.items():
+        if tag not in seen_tags:
+            ordered.append(child)
+
+    # Clear and re-append in order
+    for child in list(sound):
+        sound.remove(child)
+    for child in ordered:
+        sound.append(child)
 
 
 def _reorder_kit_children(kit: etree._Element) -> None:
@@ -713,7 +953,27 @@ def _reorder_kit_children(kit: etree._Element) -> None:
 
     Modifies the element in-place.
     """
-    raise NotImplementedError("Helper: Reorder kit children")
+    children_by_tag: dict[str, etree._Element] = {}
+    for child in list(kit):
+        children_by_tag[child.tag] = child
+
+    ordered: list[etree._Element] = []
+    seen_tags: set[str] = set()
+    for tag in KIT_CHILD_ORDER:
+        if tag in children_by_tag:
+            ordered.append(children_by_tag[tag])
+            seen_tags.add(tag)
+
+    # Append any unexpected children at the end (future-proofing)
+    for tag, child in children_by_tag.items():
+        if tag not in seen_tags:
+            ordered.append(child)
+
+    # Clear and re-append in order
+    for child in list(kit):
+        kit.remove(child)
+    for child in ordered:
+        kit.append(child)
 
 
 def _reorder_kit_sound_children(sound: etree._Element) -> None:
@@ -731,7 +991,27 @@ def _reorder_kit_sound_children(sound: etree._Element) -> None:
 
     Modifies the element in-place.
     """
-    raise NotImplementedError("Helper: Reorder kit sound children")
+    children_by_tag: dict[str, etree._Element] = {}
+    for child in list(sound):
+        children_by_tag[child.tag] = child
+
+    ordered: list[etree._Element] = []
+    seen_tags: set[str] = set()
+    for tag in KIT_SOUND_CHILD_ORDER:
+        if tag in children_by_tag:
+            ordered.append(children_by_tag[tag])
+            seen_tags.add(tag)
+
+    # Append any unexpected children at the end (future-proofing)
+    for tag, child in children_by_tag.items():
+        if tag not in seen_tags:
+            ordered.append(child)
+
+    # Clear and re-append in order
+    for child in list(sound):
+        sound.remove(child)
+    for child in ordered:
+        sound.append(child)
 
 
 def _merge_noterow_params(
@@ -752,7 +1032,23 @@ def _merge_noterow_params(
     Returns:
         List of warning strings (empty on success).
     """
-    raise NotImplementedError("Helper: Merge noteRow params into kit sound")
+    sound_params = noterow.find("soundParams")
+    if sound_params is None:
+        return [f"WARNING: noteRow has no <soundParams> — skipping"]
+
+    default_params = copy.deepcopy(sound_params)
+    default_params.tag = "defaultParams"
+
+    # Insert after <unison> (before <arpeggiator> in final order)
+    unison = sound.find("unison")
+    if unison is not None:
+        unison_idx = list(sound).index(unison)
+        sound.insert(unison_idx + 1, default_params)
+    else:
+        # Fallback: append (will be reordered later)
+        sound.append(default_params)
+
+    return []
 
 
 def _parse_hex_value(hex_str: str) -> int:

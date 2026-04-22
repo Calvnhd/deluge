@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -65,6 +66,20 @@ def main(argv: list[str] | None = None) -> None:
 
     # Discover and parse all valid song XMLs.
     deluge_root = get_deluge_root()
+
+    # Validate init preset files exist (sanity check).
+    init_synth = deluge_root / "SYNTHS" / "Init-Synth.XML"
+    init_kit = deluge_root / "KITS" / "Init-Kit.XML"
+    missing: list[str] = []
+    if not init_synth.is_file():
+        missing.append(str(init_synth))
+    if not init_kit.is_file():
+        missing.append(str(init_kit))
+    if missing:
+        print(f"ERROR: Missing init preset files: {', '.join(missing)}", file=sys.stderr)
+        print("These files are expected on a valid Deluge SD card.", file=sys.stderr)
+        sys.exit(1)
+
     songs = discover_songs(deluge_root)
 
     all_results: list[ExtractionResult] = []
@@ -250,4 +265,8 @@ def _write_manifest(
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        sys.exit(1)
