@@ -53,8 +53,6 @@ _SKIP_DIRS: frozenset[str] = frozenset({".trash"})
 
 def format_size(size_bytes: int) -> str:
     """Format a byte count as a human-readable string."""
-    if size_bytes < 1024:
-        return f"{size_bytes} B"
     if size_bytes < 1024 * 1024:
         return f"{size_bytes / 1024:.1f} KB"
     if size_bytes < 1024 * 1024 * 1024:

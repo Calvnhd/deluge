@@ -8,6 +8,7 @@ from pathlib import Path
 
 from deluge_lib.analysis import (
     SampleUsage,
+    top_folder,
     build_usage_index,
     compute_folder_breakdown,
     compute_summary,
@@ -23,13 +24,17 @@ from deluge_lib.scanning import format_size, print_path, scan_tree
 # ---------------------------------------------------------------------------
 
 
-def _top_folder(path: str) -> str:
-    """Extract the first path component (top-level folder under SAMPLES/)."""
+def _folder_label(folder: str) -> str:
+    """Format a folder name for display: 'DRUMS/' or '(root)' for empty."""
+    return f"{folder}/" if folder else "(root)"
 
-    slash = path.find("/")
-    if slash == -1:
-        return ""
-    return path[:slash]
+
+def _print_header(text: str) -> None:
+    """Print a section header with === above and below the text"""
+    print()
+    print("=" * len(text))
+    print(text)
+    print("=" * len(text))
 
 
 def _group_by_folder(
@@ -39,7 +44,7 @@ def _group_by_folder(
 
     groups: dict[str, list[SampleUsage]] = defaultdict(list)
     for s in samples:
-        groups[_top_folder(s.path)].append(s)
+        groups[top_folder(s.path)].append(s)
     return dict(sorted(groups.items()))
 
 
@@ -73,7 +78,7 @@ def cmd_summary(index, args):
     folder_rows = []
     if folders:
         for f in folders:
-            name = f"{f.folder}/" if f.folder else "(root)"
+            name = _folder_label(f.folder)
             folder_rows.append((name, f.file_count, "files", format_size(f.total_size)))
 
     # Global alignment widths across both blocks
@@ -90,10 +95,7 @@ def cmd_summary(index, args):
     # Shared left-column width so counts align across both blocks
     left_col = max(max_label_len, 2 + max_folder_len)
 
-    print()
-    print("=======================")
-    print("Sample Library Overview")
-    print("=======================")
+    _print_header(" Sample Library Overview ")
     print()
 
     # Summary rows
@@ -121,7 +123,8 @@ def cmd_summary(index, args):
 
     top = top_by_refs(index, top_n)
     if top:
-        print(f"Top {len(top)} most-referenced (on disk):\n")
+        print(f"Top {len(top)} most-referenced (on disk):")
+        print()
         max_path_length = max(len(print_path(s.path)) for s in top)
         for s in top:
             print(f"  {print_path(s.path):<{max_path_length}}  {s.ref_count:>4} refs")
@@ -132,32 +135,40 @@ def cmd_unused(index, args):
     """Print unreferenced samples, grouped by folder or as a flat top-N list."""
 
     unreferenced = list(index.unreferenced.values())
-    
-
-    if args.top is not None:
-        top = sorted(unreferenced, key=lambda u: u.size or 0, reverse=True)[: args.top]
-        max_path_length = max(len(print_path(s.path)) for s in top)
-        header = f"Top {len(top)} largest unreferenced samples"
+    if not unreferenced:
         print()
-        print("=" * len(header))
-        print(header)
-        print("=" * len(header))
-        print()
-        for s in top:
-            print(f"  {print_path(s.path):<{max_path_length}}  {format_size(s.size or 0):>8}")
-        top_total = sum(s.size or 0 for s in top)
-        print()
-        print(f"  {'Total:':>{max_path_length}}  {format_size(top_total):>8}")
+        print("No unreferenced samples")
         print()
         return
 
-    total_count = len(unreferenced)
+    if args.top is not None:
+        top = sorted(unreferenced, key=lambda u: u.size or 0, reverse=True)[: args.top]
+        if not top:
+            print()
+            print("Top 0? That's not how this works!")
+            print()
+            return
+        max_path_length = max(len(print_path(s.path)) for s in top)
+        if len(top) == 1:
+            _print_header(" Largest unreferenced sample ")
+        else:
+            _print_header(f" Top {len(top)} largest unreferenced samples ")
+        print()
+        size_strs = [format_size(s.size or 0) for s in top]
+        top_total = sum(s.size or 0 for s in top)
+        total_str = format_size(top_total)
+        max_size_len = max(max(len(ss) for ss in size_strs), len(total_str))
+        for s, ss in zip(top, size_strs):
+            print(f"  {print_path(s.path):<{max_path_length}}  {ss:>{max_size_len}}")
+        print()
+        print(f"  {'Total:':>{max_path_length}}  {total_str:>{max_size_len}}")
+        print()
+        return
+
     total_size = sum(s.size or 0 for s in unreferenced)
-    header = f"Unreferenced samples ({total_count:,} files, {format_size(total_size)})"
-    print()
-    print("=" * len(header))
-    print(header)
-    print("=" * len(header))
+    noun = "file" if len(unreferenced) == 1 else "files"
+    header = f" Unreferenced samples ({len(unreferenced):,} {noun}, {format_size(total_size)}) "
+    _print_header(header)
     groups = _group_by_folder(unreferenced)
 
     # First pass: compute global alignment values
@@ -169,7 +180,7 @@ def cmd_unused(index, args):
 
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.path.lower())
-        label = f"{folder}/" if folder else "(root)"
+        label = _folder_label(folder)
         count = len(samples)
         folder_size = sum(s.size or 0 for s in samples)
         folder_size_str = format_size(folder_size)
@@ -225,7 +236,7 @@ def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], delu
 
     if not missing:
         print()
-        print("All referenced samples found on disk.")
+        print("All referenced samples found on disk")
     else:
         # Group by (xml_file, preset_name, xml_type) so songs show per-preset
         by_source: dict[tuple[str, str, str], Counter[str]] = defaultdict(Counter)
@@ -234,11 +245,7 @@ def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], delu
                 source_key = (str(ref.xml_file), ref.preset_name, ref.xml_type)
                 by_source[source_key][ref.path] += 1
 
-        header = f"Missing samples"
-        print()
-        print("=" * len(header))
-        print(header)
-        print("=" * len(header))
+        _print_header(" Missing samples ")
 
         for (xml_file_str, preset_name, xml_type), sample_paths in sorted(by_source.items()):
             label = print_path(xml_file_str)
@@ -252,20 +259,26 @@ def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], delu
                 suffix = f"  [{ref_count} refs]" if ref_count > 1 else ""
                 print(f"  {path}{suffix}")
 
-    print()
-    print("-" * 75)
-    print()
-    # Unextracted warnings
+    # Build footer lines
+    footer_lines: list[str] = []
     if unextracted:
-        if len(unextracted) > 1:
-            print(f"Warning: {len(unextracted)} sample paths detected outside known XML elements")
-        else:
-            print(f"Warning: {len(unextracted)} sample path detected outside known XML elements")
+        count = len(unextracted)
+        noun = "path" if count == 1 else "paths"
+        footer_lines.append(f"Warning: {count} sample {noun} detected outside known XML elements")
+        max_xml_len = max(len(print_path(xml_rel)) for xml_rel, _ in unextracted)
         for xml_rel, sample_path in sorted(unextracted):
-            print(f"  {print_path(xml_rel)} \u2192 {sample_path}")
-        print()
-    # Summary
-    print(f"{total_refs} references checked \n{missing_count} .WAV files are missing ")
+            footer_lines.append(f"  {print_path(xml_rel):<{max_xml_len}}  \u2192 {sample_path}")
+        footer_lines.append("")  # blank line after warnings
+    footer_lines.append(f"{total_refs} references checked")
+    footer_lines.append(f"{missing_count} .WAV files are missing")
+
+    # Separator spans the widest footer line
+    sep_width = max(len(line) for line in footer_lines)
+    print()
+    print("-" * sep_width)
+    print()
+    for line in footer_lines:
+        print(line)
     print()
 
 def cmd_usage(index, args):
@@ -278,15 +291,11 @@ def cmd_usage(index, args):
         print()
         return
 
-    header = f'Samples matching "{args.pattern}" ({len(matches):,} matches)'
-    print()
-    print("=" * len(header))
-    print(header)
-    print("=" * len(header))
+    _print_header(f' Samples matching "{args.pattern}" ({len(matches):,} matches) ')
     groups = _group_by_folder(matches)
     for folder, samples in groups.items():
         samples.sort(key=lambda s: s.path.lower())
-        label = f"{folder}/" if folder else "(root)"
+        label = _folder_label(folder)
         max_path_length = max(len(print_path(_strip_folder(s.path, folder))) for s in samples)
         print()
         print(label)

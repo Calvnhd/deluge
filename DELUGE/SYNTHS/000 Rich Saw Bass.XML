@@ -52,7 +52,6 @@
 		<hpfResonance>0x80000000</hpfResonance>
 		<envelope1>
 			<attack>0x80000000</attack>
-			<somerandomthing>SAMPLES/blahlbbah/wahwah/peepeepoopoo.wav</somerandomthing>
 			<decay>0xE6666654</decay>
 			<sustain>0x7FFFFFFF</sustain>
 			<release>0x851EB851</release>

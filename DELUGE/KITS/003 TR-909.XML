@@ -18,7 +18,6 @@
 		</lpf>
 		<hpf>
 			<frequency>0x80000000</frequency>
-			<somerandomthing>SAMPLES/blahlbbah/wahwah/kitty.wav</somerandomthing>
 			<resonance>0xC0000000</resonance>
 		</hpf>
 		<modFXDepth>0x00000000</modFXDepth>

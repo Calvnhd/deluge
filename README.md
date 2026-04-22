@@ -58,7 +58,7 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 
 | Step | What you do | Script | Status |
 |------|-------------|--------|--------|
-| 2 | Verify sample references are intact | `verify_references.py` | ✅ |
+| 2 | Verify sample references are intact | `sample_overview.py missing` | ✅ |
 | 3 | Fix any broken references | `fix_references.py` | ✅ |
 | 4 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
 | 5 | Sync repo back to SD card | `sync_to_sd.py` | 🚧 |
@@ -133,14 +133,6 @@ uv run extract_instruments.py --dry-run    # preview only
 uv run extract_instruments.py --extended   # extract multiple versions when params differ
 ```
 
-#### `verify_references.py`
-
-Checks that all sample paths referenced in XML presets point to existing files under `DELUGE/`.
-
-```
-uv run verify_references.py
-```
-
 #### `fix_references.py`
 
 Fixes broken sample references after samples have been moved or renamed. Compares a before-snapshot against the current filesystem and updates XML paths. Auto-finds the latest snapshot if `--snapshot` is omitted.
@@ -162,12 +154,13 @@ uv run sync_to_sd.py --dry-run  # preview only
 
 #### `sample_overview.py`
 
-Sample library overview tool. Cross-references XML presets with the filesystem to show what's in use, what's unused, and what's missing.
+Sample library overview and reference checking tool. Cross-references XML presets with the filesystem to show what's in use, what's unused, and what's missing.
 
 ```
-uv run sample_overview.py                  # library summary with totals and folder breakdown
+uv run sample_overview.py                  # library summary (equivalent to "summary --top 5")
+uv run sample_overview.py summary --top N  # summary with custom top-N most-referenced
 uv run sample_overview.py unused           # unreferenced samples grouped by folder
-uv run sample_overview.py unused --top 10  # top 10 largest unreferenced samples
+uv run sample_overview.py unused  --top N  # top N largest unreferenced samples
 uv run sample_overview.py missing          # samples referenced in XML but missing from disk
 uv run sample_overview.py usage "Kick"     # usage detail for samples matching a pattern
 ```
@@ -177,7 +170,6 @@ uv run sample_overview.py usage "Kick"     # usage detail for samples matching a
 - sync script can specify whether or not to sync samples?
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference
-- List of used and unused samples
 - Lift kits and synths from songs to a dedicated location 
 - Bulk rename songs with trailing numbers (after manually deleting old versions)
 

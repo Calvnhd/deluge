@@ -103,12 +103,12 @@ def _ref_key(ref_path: str) -> str:
     return key
 
 
-def _top_folder(path: str) -> str:
+def top_folder(path: str) -> str:
     """Extract the first path component (top-level folder under SAMPLES/).
 
-    >>> _top_folder("DRUMS/Kick/808.wav")
+    >>> top_folder("DRUMS/Kick/808.wav")
     'DRUMS'
-    >>> _top_folder("single.wav")
+    >>> top_folder("single.wav")
     ''
     """
     slash = path.find("/")
@@ -221,7 +221,7 @@ def compute_folder_breakdown(index: UsageIndex) -> list[FolderStats]:
     for usage in index.entries.values():
         if not usage.on_disk:
             continue
-        folder = _top_folder(usage.path)
+        folder = top_folder(usage.path)
         count, size = folders.get(folder, (0, 0))
         folders[folder] = (count + 1, size + (usage.size or 0))
 
