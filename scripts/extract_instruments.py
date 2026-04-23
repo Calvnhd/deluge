@@ -22,13 +22,16 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
-from deluge_lib.scanning import print_path
 from deluge_lib.extraction import (
+    SECTION_COLOURS,
+    ClipInfo,
+    ComparisonConfig,
+    DedupResult,
     ExtractionResult,
     NormalisationConfig,
-    SECTION_COLOURS,
     _strip_automation,
     build_manifest_entry,
+    deduplicate_results,
     discover_clips,
     discover_instruments,
     discover_songs,
@@ -41,6 +44,7 @@ from deluge_lib.extraction import (
     select_extended_clips,
     serialise_xml,
 )
+from deluge_lib.scanning import print_path
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -50,7 +54,12 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument(
         "--extended",
         action="store_true",
-        help="Extract multiple versions per instrument when parameters differ (not yet implemented)",
+        help="Extract multiple versions per instrument when parameters differ",
+    )
+    parser.add_argument(
+        "--no-dedup",
+        action="store_true",
+        help="Disable cross-song deduplication (extract all versions from all songs)",
     )
     parser.add_argument(
         "--dry-run",
@@ -58,10 +67,6 @@ def main(argv: list[str] | None = None) -> None:
         help="List extractions without writing files (default behaviour when no flag given)",
     )
     args = parser.parse_args(argv)
-
-    if args.extended:
-        print("ERROR: --extended mode is not yet implemented.", file=sys.stderr)
-        sys.exit(1)
 
     # Dry-run is the default behaviour (matches existing script conventions).
     # With no flags: show dry-run preview, then prompt to apply.
@@ -90,6 +95,8 @@ def main(argv: list[str] | None = None) -> None:
 
     all_results: list[ExtractionResult] = []
     norm_config = NormalisationConfig()
+    comp_config = ComparisonConfig.default()  # intra-song comparison (extended mode)
+    dedup_config = ComparisonConfig.default()  # inter-song dedup (D22 — threshold independence)
 
     # Track filenames per output directory for collision detection.
     used_synth_filenames: set[str] = set()
@@ -117,14 +124,38 @@ def main(argv: list[str] | None = None) -> None:
         song_results: list[ExtractionResult] = []
 
         for group in groups:
+            # Build the list of (ClipInfo, differing_params) for extraction.
+            clips_with_diffs: list[tuple[ClipInfo, list[str]]] = []
             if args.extended:
-                clips_to_extract = select_extended_clips(group)
+                extended_results = select_extended_clips(
+                    group, comp_config, norm_config,
+                )
+                for clip_info, comparisons in extended_results:
+                    # Collect differing param descriptions from comparisons.
+                    diffs: list[str] = []
+                    for cr in comparisons:
+                        diffs.extend(cr.hard_diffs)
+                        diffs.extend(cr.soft_diffs)
+                    # Deduplicate while preserving order.
+                    seen: set[str] = set()
+                    unique_diffs: list[str] = []
+                    for d in diffs:
+                        if d not in seen:
+                            seen.add(d)
+                            unique_diffs.append(d)
+                    clips_with_diffs.append((clip_info, unique_diffs))
             else:
-                clips_to_extract = [select_default_clip(group)]
+                clips_with_diffs.append((select_default_clip(group), []))
 
-            for clip_info in clips_to_extract:
+            for clip_info, differing_params in clips_with_diffs:
                 inst = group.instrument
                 section_id = clip_info.section
+                if section_id not in SECTION_COLOURS:
+                    print(
+                        f"WARNING: {song_name}.XML ({inst.preset_name})"
+                        f" — unexpected section ID {section_id}, treating as section 0"
+                    )
+                    section_id = 0
                 colour_name, colour_abbr = SECTION_COLOURS[section_id]
 
                 # Transform embedded instrument → standalone preset.
@@ -169,6 +200,7 @@ def main(argv: list[str] | None = None) -> None:
                     output_filename=filename,
                     preset_folder=inst.preset_folder,
                     colour_name=colour_name,
+                    differing_params=differing_params,
                 )
                 song_results.append(result)
 
@@ -181,19 +213,34 @@ def main(argv: list[str] | None = None) -> None:
                     synth_output_dir if r.instrument_type == "synth" else kit_output_dir
                 )
                 rel_dir = print_path(output_dir.relative_to(deluge_root))
+                diff_info = ""
+                if r.differing_params:
+                    diff_info = f"  ({len(r.differing_params)} diffs)"
                 print(
                     f"  {type_label:<6} {r.preset_name:<20}"
-                    f"→ {rel_dir}/{r.output_filename}"
+                    f"→ {rel_dir}/{r.output_filename}{diff_info}"
                 )
             all_results.extend(song_results)
+
+    # ----- Dedup -----
+
+    dedup_result: DedupResult | None = None
+    if not args.no_dedup and all_results:
+        dedup_result = deduplicate_results(all_results, dedup_config)
+        all_results = dedup_result.accepted
+
+    if dedup_result is not None:
+        _print_dedup_report(dedup_result)
 
     # ----- Summary and Output -----
 
     synth_count = sum(1 for r in all_results if r.instrument_type == "synth")
     kit_count = sum(1 for r in all_results if r.instrument_type == "kit")
+    dedup_removed = len(dedup_result.rejected) if dedup_result else 0
+    dedup_suffix = f" ({dedup_removed} duplicates removed)" if dedup_removed else ""
     print(
         f"\nSummary: Extracted {synth_count} synths and {kit_count} kits "
-        f"from {len(songs)} songs"
+        f"from {len(songs)} songs{dedup_suffix}"
     )
 
     if synth_count > 0:
@@ -246,6 +293,41 @@ def main(argv: list[str] | None = None) -> None:
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
+
+def _print_dedup_report(dedup_result: DedupResult) -> None:
+    """Print a summary of duplicates removed during cross-song dedup."""
+    rejected = dedup_result.rejected
+    if not rejected:
+        return
+
+    synth_removed = sum(1 for r in rejected if r.result.instrument_type == "synth")
+    kit_removed = sum(1 for r in rejected if r.result.instrument_type == "kit")
+
+    print(
+        f"\nDedup: Removed {len(rejected)} duplicates"
+        f" ({synth_removed} synths, {kit_removed} kits)"
+    )
+
+    # Group rejected results by (preset_name, instrument_type).
+    groups: dict[tuple[str, str], list[ExtractionResult]] = {}
+    for r in rejected:
+        key = (r.result.preset_name, r.result.instrument_type)
+        groups.setdefault(key, []).append(r.result)
+
+    # Build set of accepted song names per group for the "kept" display.
+    accepted_songs: dict[tuple[str, str], list[str]] = {}
+    for a in dedup_result.accepted:
+        key = (a.preset_name, a.instrument_type)
+        accepted_songs.setdefault(key, []).append(a.song_name)
+
+    for (preset_name, inst_type), removed in sorted(groups.items()):
+        kept = sorted(accepted_songs.get((preset_name, inst_type), []))
+        removed_names = sorted(r.song_name for r in removed)
+        print(
+            f"  {preset_name} ({inst_type}): kept {', '.join(kept)},"
+            f" removed {', '.join(removed_names)}"
+        )
 
 
 def _write_manifest(

@@ -9,14 +9,18 @@ from lxml import etree
 
 from deluge_lib.extraction import (
     ClipInfo,
+    ComparisonConfig,
+    ComparisonResult,
+    DedupResult,
     ExtractionResult,
     InstrumentClipGroup,
     InstrumentInfo,
     NormalisationConfig,
-    VersionComparison,
+    RejectedResult,
     _strip_automation,
     build_manifest_entry,
-    compare_versions,
+    compare_instruments,
+    deduplicate_results,
     discover_clips,
     discover_instruments,
     discover_songs,
@@ -1066,57 +1070,582 @@ class TestSerialiseXml:
 
 
 # ---------------------------------------------------------------------------
-# Task 4.1: Version comparison (extended mode)
+# Task 4.1 / 6.2: Comparison engine (compare_instruments)
 # ---------------------------------------------------------------------------
 
 
-class TestCompareVersions:
-    def test_identical_versions_not_distinct(self) -> None:
-        """Two clips with identical params should not be distinct."""
-        pytest.skip("Not implemented")
+def _make_synth_preset(**overrides: str | dict[str, str] | list[tuple[str, str, str]]) -> etree._Element:
+    """Build a minimal standalone <sound> for comparison tests.
 
-    def test_structural_change_always_distinct(self) -> None:
-        """Any structural change (osc type, filter mode) → distinct."""
-        pytest.skip("Not implemented")
+    Keyword overrides:
+        osc1_type, osc2_type — oscillator types
+        mode — synth mode attribute
+        env1_attack, env1_decay, env1_sustain, env1_release — envelope1 attrs
+        env2_attack, env2_decay, env2_sustain, env2_release — envelope2 attrs
+        volume, pan, lpfFrequency, hpfFrequency — defaultParams attrs
+        patchCables — list of (source, destination, amount) tuples
+        Any other key is set on <defaultParams>.
+    """
+    sound = etree.Element(
+        "sound",
+        mode=overrides.pop("mode", "subtractive"),
+        polyphonic="poly",
+        modFXType="none",
+        lpfMode="24dB",
+        hpfMode="svf",
+        filterRoute="H2L",
+        firmwareVersion="c1.2.1",
+        earliestCompatibleFirmware="4.1.0-alpha",
+    )
+    etree.SubElement(sound, "osc1", type=overrides.pop("osc1_type", "square"))
+    etree.SubElement(sound, "osc2", type=overrides.pop("osc2_type", "square"))
+    etree.SubElement(sound, "lfo1", type="sine")
+    etree.SubElement(sound, "lfo2", type="sine")
+    etree.SubElement(sound, "unison", num="4", detune="10")
 
-    def test_non_numerical_change_always_distinct(self) -> None:
-        """Non-numerical changes in envelopes, patchCables, arpeggiator → distinct."""
-        pytest.skip("Not implemented")
+    dp_attrs = {
+        "volume": overrides.pop("volume", "0x4CCCCCA8"),
+        "pan": overrides.pop("pan", "0x00000000"),
+        "lpfFrequency": overrides.pop("lpfFrequency", "0x7FFFFFFF"),
+        "hpfFrequency": overrides.pop("hpfFrequency", "0x00000000"),
+    }
+    # Allow arbitrary extra defaultParams attrs
+    extra_dp = overrides.pop("extra_dp", {})
+    dp_attrs.update(extra_dp)
 
-    def test_numerical_below_threshold_not_distinct(self) -> None:
-        """Fewer than threshold numerical param changes → not distinct."""
-        pytest.skip("Not implemented")
+    dp = etree.SubElement(sound, "defaultParams", **dp_attrs)
 
-    def test_numerical_above_threshold_distinct(self) -> None:
-        """At or above threshold numerical param changes → distinct."""
-        pytest.skip("Not implemented")
+    env1_attrs = {
+        "attack": overrides.pop("env1_attack", "0x00000000"),
+        "decay": overrides.pop("env1_decay", "0x00000000"),
+        "sustain": overrides.pop("env1_sustain", "0x7FFFFFFF"),
+        "release": overrides.pop("env1_release", "0x00000000"),
+    }
+    etree.SubElement(dp, "envelope1", **env1_attrs)
 
-    def test_ignores_volume_and_pan(self) -> None:
-        """Should exclude volume and pan from numerical comparison."""
-        pytest.skip("Not implemented")
+    env2_attrs = {
+        "attack": overrides.pop("env2_attack", "0x00000000"),
+        "decay": overrides.pop("env2_decay", "0x00000000"),
+        "sustain": overrides.pop("env2_sustain", "0x7FFFFFFF"),
+        "release": overrides.pop("env2_release", "0x00000000"),
+    }
+    etree.SubElement(dp, "envelope2", **env2_attrs)
 
-    def test_ignores_automation_data(self) -> None:
-        """Should use first hex value only for extended automation strings."""
-        pytest.skip("Not implemented")
+    cables = overrides.pop("patchCables", [("velocity", "volume", "0x3FFFFFE8")])
+    pc_el = etree.SubElement(dp, "patchCables")
+    for src, dst, amt in cables:
+        etree.SubElement(pc_el, "patchCable", source=src, destination=dst, amount=amt)
+
+    etree.SubElement(dp, "equalizer", bass="0x00000000", treble="0x00000000")
+
+    etree.SubElement(sound, "arpeggiator", mode="off", noteMode="up", octaveMode="up")
+    etree.SubElement(sound, "modKnobs")
+    etree.SubElement(sound, "delay", pingPong="1", analog="0")
+    etree.SubElement(sound, "sidechain", attack="0", release="0")
+    etree.SubElement(sound, "audioCompressor", attack="0", release="0", thresh="0", ratio="0")
+    return sound
+
+
+def _make_kit_preset(
+    num_sounds: int = 2,
+    sound_overrides: dict[int, dict[str, str]] | None = None,
+    sound_names: list[str] | None = None,
+    kit_volume: str = "0x3504F334",
+    kit_pan: str = "0x00000000",
+) -> etree._Element:
+    """Build a minimal standalone <kit> for comparison tests.
+
+    sound_overrides: dict mapping sound index to overrides.  Keys include:
+        osc1_type — osc1 type attribute
+        volume, pan — defaultParams attrs on that sound
+        patchCables — list of (source, destination, amount) tuples
+    """
+    kit = etree.Element(
+        "kit",
+        firmwareVersion="c1.2.1",
+        earliestCompatibleFirmware="4.1.0-alpha",
+    )
+    etree.SubElement(kit, "defaultParams", volume=kit_volume, pan=kit_pan)
+    etree.SubElement(kit, "delay", pingPong="1")
+    etree.SubElement(kit, "sidechain")
+    etree.SubElement(kit, "audioCompressor")
+
+    names = sound_names or [f"Sound{i}" for i in range(num_sounds)]
+    overrides = sound_overrides or {}
+    ss = etree.SubElement(kit, "soundSources")
+    for i in range(num_sounds):
+        ov = overrides.get(i, {})
+        sound = etree.SubElement(ss, "sound", name=names[i])
+        etree.SubElement(sound, "osc1", type=ov.get("osc1_type", "sample"))
+        etree.SubElement(sound, "osc2", type="square")
+        etree.SubElement(sound, "lfo1", type="sine")
+        etree.SubElement(sound, "lfo2", type="sine")
+        etree.SubElement(sound, "unison", num="1", detune="0")
+        s_dp = etree.SubElement(
+            sound, "defaultParams",
+            volume=ov.get("volume", "0x4CCCCCA8"),
+            pan=ov.get("pan", "0x00000000"),
+        )
+        env1 = etree.SubElement(s_dp, "envelope1", attack="0x00000000", decay="0x00000000",
+                                sustain="0x7FFFFFFF", release="0x00000000")
+        env2 = etree.SubElement(s_dp, "envelope2", attack="0x00000000", decay="0x00000000",
+                                sustain="0x7FFFFFFF", release="0x00000000")
+        pc_el = etree.SubElement(s_dp, "patchCables")
+        for src, dst, amt in ov.get("patchCables", [("velocity", "volume", "0x3FFFFFE8")]):
+            etree.SubElement(pc_el, "patchCable", source=src, destination=dst, amount=amt)
+        etree.SubElement(s_dp, "equalizer", bass="0x00000000", treble="0x00000000")
+        etree.SubElement(sound, "arpeggiator", mode="off")
+        etree.SubElement(sound, "modKnobs")
+        etree.SubElement(sound, "delay", pingPong="0")
+        etree.SubElement(sound, "sidechain")
+        etree.SubElement(sound, "audioCompressor")
+
+    etree.SubElement(kit, "selectedDrumIndex", value="0")
+    return kit
+
+
+class TestCompareInstruments:
+    """Tests for compare_instruments() — comparison engine."""
+
+    CONFIG = ComparisonConfig.default()
+
+    # --- Hard marker: osc type change ---
+
+    def test_osc1_type_change_is_hard_distinct(self) -> None:
+        """Different osc1 types should be detected as hard marker → distinct."""
+        a = _make_synth_preset(osc1_type="square")
+        b = _make_synth_preset(osc1_type="saw")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert len(result.hard_diffs) >= 1
+        assert any("osc1.type" in d for d in result.hard_diffs)
+
+    def test_osc2_type_change_is_hard_distinct(self) -> None:
+        """Different osc2 types should be detected as hard marker → distinct."""
+        a = _make_synth_preset(osc2_type="square")
+        b = _make_synth_preset(osc2_type="analogSaw")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("osc2.type" in d for d in result.hard_diffs)
+
+    # --- Hard marker: patchCable structure change ---
+
+    def test_added_patchcable_is_hard_distinct(self) -> None:
+        """Adding a patchCable routing should be a hard marker → distinct."""
+        a = _make_synth_preset(patchCables=[("velocity", "volume", "0x3FFFFFE8")])
+        b = _make_synth_preset(patchCables=[
+            ("velocity", "volume", "0x3FFFFFE8"),
+            ("lfo1", "pitch", "0x10000000"),
+        ])
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("patchCables structure" in d for d in result.hard_diffs)
+
+    def test_removed_patchcable_is_hard_distinct(self) -> None:
+        """Removing a patchCable routing should be a hard marker → distinct."""
+        a = _make_synth_preset(patchCables=[
+            ("velocity", "volume", "0x3FFFFFE8"),
+            ("lfo1", "pitch", "0x10000000"),
+        ])
+        b = _make_synth_preset(patchCables=[("velocity", "volume", "0x3FFFFFE8")])
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("patchCables structure" in d for d in result.hard_diffs)
+
+    # --- Hard marker: synth mode change ---
+
+    def test_synth_mode_change_is_hard_distinct(self) -> None:
+        """Different synth modes should be a hard marker → distinct."""
+        a = _make_synth_preset(mode="subtractive")
+        b = _make_synth_preset(mode="fm")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("sound.mode" in d for d in result.hard_diffs)
+
+    # --- Soft marker: threshold logic ---
+
+    def test_soft_three_params_above_threshold_is_distinct(self) -> None:
+        """3+ params changed by >10% → distinct (soft markers)."""
+        a = _make_synth_preset(
+            lpfFrequency="0x00000000",
+            hpfFrequency="0x00000000",
+            env1_attack="0x00000000",
+        )
+        # Each param shifted by a large amount (well over 10% of full range)
+        b = _make_synth_preset(
+            lpfFrequency="0x7FFFFFFF",
+            hpfFrequency="0x7FFFFFFF",
+            env1_attack="0x7FFFFFFF",
+        )
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert result.hard_diffs == []
+        assert result.soft_diff_count >= 3
+
+    def test_soft_two_params_below_threshold_not_distinct(self) -> None:
+        """Fewer than 3 params changed → not distinct."""
+        a = _make_synth_preset(
+            lpfFrequency="0x00000000",
+            hpfFrequency="0x00000000",
+        )
+        b = _make_synth_preset(
+            lpfFrequency="0x7FFFFFFF",
+            hpfFrequency="0x7FFFFFFF",
+        )
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.hard_diffs == []
+        assert result.soft_diff_count < 3
+
+    def test_soft_small_change_not_counted(self) -> None:
+        """Params that change by <10% of full range should not count as soft diffs."""
+        # 10% of 0x7FFFFFFF ≈ 0x0CCCCCCC. Keep changes well under that.
+        a = _make_synth_preset(lpfFrequency="0x40000000")
+        b = _make_synth_preset(lpfFrequency="0x41000000")  # ~0.5% change
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.soft_diff_count == 0
+
+    # --- Ignored params: volume/pan ---
+
+    def test_volume_change_does_not_affect_verdict(self) -> None:
+        """Volume is in ignored_attrs — should not count as soft diff."""
+        a = _make_synth_preset(volume="0x00000000")
+        b = _make_synth_preset(volume="0x7FFFFFFF")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.soft_diff_count == 0
+
+    def test_pan_change_does_not_affect_verdict(self) -> None:
+        """Pan is in ignored_attrs — should not count as soft diff."""
+        a = _make_synth_preset(pan="0x80000000")
+        b = _make_synth_preset(pan="0x7FFFFFFF")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.soft_diff_count == 0
+
+    def test_volume_and_pan_combined_with_soft_diffs(self) -> None:
+        """Volume/pan changes should not push soft diff count over threshold."""
+        a = _make_synth_preset(
+            volume="0x00000000", pan="0x00000000",
+            lpfFrequency="0x00000000", hpfFrequency="0x00000000",
+        )
+        # 2 real soft diffs + volume + pan change = still only 2 real soft diffs
+        b = _make_synth_preset(
+            volume="0x7FFFFFFF", pan="0x7FFFFFFF",
+            lpfFrequency="0x7FFFFFFF", hpfFrequency="0x7FFFFFFF",
+        )
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.soft_diff_count == 2
+
+    # --- Envelope attributes as soft markers ---
+
+    def test_envelope_changes_are_soft_markers(self) -> None:
+        """Envelope attribute changes should be counted as soft markers."""
+        a = _make_synth_preset(
+            env1_attack="0x00000000", env1_decay="0x00000000", env1_sustain="0x00000000",
+        )
+        b = _make_synth_preset(
+            env1_attack="0x7FFFFFFF", env1_decay="0x7FFFFFFF", env1_sustain="0x7FFFFFFF",
+        )
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert result.hard_diffs == []
+        assert any("envelope1" in d for d in result.soft_diffs)
+
+    def test_envelope2_changes_are_soft_markers(self) -> None:
+        """Envelope2 attribute changes should also be counted."""
+        a = _make_synth_preset(
+            env2_attack="0x00000000", env2_decay="0x00000000", env2_sustain="0x00000000",
+        )
+        b = _make_synth_preset(
+            env2_attack="0x7FFFFFFF", env2_decay="0x7FFFFFFF", env2_sustain="0x7FFFFFFF",
+        )
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("envelope2" in d for d in result.soft_diffs)
+
+    # --- PatchCable amount as soft marker ---
+
+    def test_patchcable_amount_change_is_soft_marker(self) -> None:
+        """Same patchCable structure but different amounts → soft marker."""
+        a = _make_synth_preset(patchCables=[("velocity", "volume", "0x00000000")])
+        b = _make_synth_preset(patchCables=[("velocity", "volume", "0x7FFFFFFF")])
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        # This is just 1 soft diff, so not distinct (threshold is 3)
+        assert result.is_distinct is False
+        assert any("patchCable" in d for d in result.soft_diffs)
+
+    # --- Identical presets ---
+
+    def test_identical_presets_not_distinct(self) -> None:
+        """Two identical presets should not be distinct."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.hard_diffs == []
+        assert result.soft_diff_count == 0
+
+    # --- ComparisonResult fields ---
+
+    def test_result_fields_hard(self) -> None:
+        """Hard marker result should have correct field values."""
+        a = _make_synth_preset(osc1_type="square")
+        b = _make_synth_preset(osc1_type="saw")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert isinstance(result, ComparisonResult)
+        assert result.is_distinct is True
+        assert len(result.hard_diffs) > 0
+        assert result.soft_diff_count == 0
+        assert result.soft_diffs == []
+        assert "hard" in result.reason
+
+    def test_result_fields_soft(self) -> None:
+        """Soft marker result should have correct field values."""
+        a = _make_synth_preset(
+            lpfFrequency="0x00000000", hpfFrequency="0x00000000",
+            env1_attack="0x00000000",
+        )
+        b = _make_synth_preset(
+            lpfFrequency="0x7FFFFFFF", hpfFrequency="0x7FFFFFFF",
+            env1_attack="0x7FFFFFFF",
+        )
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert result.hard_diffs == []
+        assert result.soft_diff_count >= 3
+        assert len(result.soft_diffs) >= 3
+        assert "soft" in result.reason
+
+    def test_result_fields_similar(self) -> None:
+        """Similar result should have correct field values."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.hard_diffs == []
+        assert "similar" in result.reason
+
+    # --- Kit comparison: structural hard markers ---
+
+    def test_kit_different_sound_count_is_hard_distinct(self) -> None:
+        """Kits with different number of sounds → hard marker → distinct."""
+        a = _make_kit_preset(num_sounds=2)
+        b = _make_kit_preset(num_sounds=3)
+        result = compare_instruments(a, b, "kit", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("soundSources count" in d for d in result.hard_diffs)
+
+    def test_kit_different_sound_names_is_hard_distinct(self) -> None:
+        """Kits with different sound names → hard marker → distinct."""
+        a = _make_kit_preset(sound_names=["Kick", "Snare"])
+        b = _make_kit_preset(sound_names=["Kick", "HiHat"])
+        result = compare_instruments(a, b, "kit", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("soundSources names" in d for d in result.hard_diffs)
+
+    def test_kit_per_sound_osc_type_change_is_hard(self) -> None:
+        """Changing osc1 type on a kit sound → hard marker."""
+        a = _make_kit_preset(sound_overrides={0: {"osc1_type": "sample"}})
+        b = _make_kit_preset(sound_overrides={0: {"osc1_type": "analogSquare"}})
+        result = compare_instruments(a, b, "kit", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("osc1.type" in d for d in result.hard_diffs)
+
+    # --- Kit comparison: per-sound soft markers ---
+
+    def test_kit_one_tweaked_row_makes_kit_distinct(self) -> None:
+        """One heavily tweaked row (3+ params) should make entire kit distinct."""
+        # Row 0 has 3+ large param changes
+        a = _make_kit_preset(num_sounds=2, sound_overrides={
+            0: {"volume": "0x00000000", "pan": "0x00000000"},
+        })
+        b = _make_kit_preset(num_sounds=2, sound_overrides={
+            0: {"volume": "0x00000000", "pan": "0x00000000"},
+        })
+        # Modify 3 params on sound 0 in preset b by large amounts
+        ss_b = b.find("soundSources")
+        sound0_b = list(ss_b)[0]
+        dp_b = sound0_b.find("defaultParams")
+        dp_b.find("envelope1").set("attack", "0x7FFFFFFF")
+        dp_b.find("envelope1").set("decay", "0x7FFFFFFF")
+        dp_b.find("envelope1").set("sustain", "0x00000000")
+        result = compare_instruments(a, b, "kit", self.CONFIG)
+        assert result.is_distinct is True
+        assert result.hard_diffs == []
+        assert result.soft_diff_count >= 3
+
+    def test_kit_minor_tweak_not_distinct(self) -> None:
+        """Minor tweaks to a kit row (fewer than threshold) → not distinct."""
+        a = _make_kit_preset(num_sounds=2)
+        b = _make_kit_preset(num_sounds=2)
+        # Change 1 param on sound 0 by a large amount — still under threshold
+        ss_b = b.find("soundSources")
+        sound0_b = list(ss_b)[0]
+        dp_b = sound0_b.find("defaultParams")
+        dp_b.find("envelope1").set("attack", "0x7FFFFFFF")
+        result = compare_instruments(a, b, "kit", self.CONFIG)
+        assert result.is_distinct is False
 
 
 # ---------------------------------------------------------------------------
-# Task 4.2: Extended mode multi-version selection
+# Task 4.3 / 6.2: Extended mode multi-version selection
 # ---------------------------------------------------------------------------
 
 
 class TestSelectExtendedClips:
+    """Tests for select_extended_clips() — extended mode clip selection."""
+
+    CONFIG = ComparisonConfig.default()
+    NORM_CONFIG = NormalisationConfig()
+
+    @staticmethod
+    def _make_synth_group(
+        sections: dict[int, dict[str, str]],
+    ) -> InstrumentClipGroup:
+        """Build an InstrumentClipGroup with synth clips at the given sections.
+
+        Each section value is a dict of soundParams overrides (e.g. lpfFrequency).
+        The instrument element is a minimal embedded <sound> that will go through
+        extract_synth() internally.
+        """
+        inst_el = etree.Element(
+            "sound",
+            presetName="TestSynth",
+            presetFolder="SYNTHS",
+            mode="subtractive",
+            polyphonic="poly",
+            modFXType="none",
+            lpfMode="24dB",
+            hpfMode="svf",
+            filterRoute="H2L",
+        )
+        etree.SubElement(inst_el, "osc1", type="square")
+        etree.SubElement(inst_el, "osc2", type="square")
+        etree.SubElement(inst_el, "lfo1", type="sine")
+        etree.SubElement(inst_el, "lfo2", type="sine")
+        etree.SubElement(inst_el, "unison", num="4", detune="10")
+        etree.SubElement(inst_el, "modKnobs")
+        etree.SubElement(inst_el, "delay", pingPong="1")
+        etree.SubElement(inst_el, "sidechain")
+        etree.SubElement(inst_el, "audioCompressor")
+
+        instrument = InstrumentInfo(
+            element=inst_el,
+            instrument_type="synth",
+            preset_name="TestSynth",
+            preset_folder="SYNTHS",
+        )
+
+        clips_by_section: dict[int, ClipInfo] = {}
+        for sec, overrides in sections.items():
+            clip_el = etree.Element("instrumentClip", section=str(sec))
+            etree.SubElement(clip_el, "arpeggiator", mode="off")
+            sp_attrs = {
+                "volume": "0x4CCCCCA8",
+                "pan": "0x00000000",
+                "lpfFrequency": "0x7FFFFFFF",
+                "hpfFrequency": "0x00000000",
+            }
+            sp_attrs.update(overrides)
+            sp = etree.SubElement(clip_el, "soundParams", **sp_attrs)
+            env1 = etree.SubElement(sp, "envelope1", attack="0x00000000",
+                                    decay="0x00000000", sustain="0x7FFFFFFF",
+                                    release="0x00000000")
+            env2 = etree.SubElement(sp, "envelope2", attack="0x00000000",
+                                    decay="0x00000000", sustain="0x7FFFFFFF",
+                                    release="0x00000000")
+            pc_el = etree.SubElement(sp, "patchCables")
+            etree.SubElement(pc_el, "patchCable", source="velocity",
+                             destination="volume", amount="0x3FFFFFE8")
+            etree.SubElement(sp, "equalizer", bass="0x00000000", treble="0x00000000")
+            clips_by_section[sec] = ClipInfo(
+                element=clip_el,
+                section=sec,
+                preset_name="TestSynth",
+                preset_folder="SYNTHS",
+            )
+
+        return InstrumentClipGroup(instrument=instrument, clips_by_section=clips_by_section)
+
     def test_baseline_always_included(self) -> None:
         """Lowest section ID clip is always in the result."""
-        pytest.skip("Not implemented")
+        group = self._make_synth_group({
+            0: {},
+            3: {},
+        })
+        result = select_extended_clips(group, self.CONFIG, self.NORM_CONFIG)
+        assert len(result) >= 1
+        assert result[0][0].section == 0
+        assert result[0][1] == []  # baseline has no comparisons
 
-    def test_distinct_versions_included(self) -> None:
-        """Clips that are distinct from baseline should be included."""
-        pytest.skip("Not implemented")
+    def test_distinct_clip_accepted(self) -> None:
+        """Clip that is distinct from baseline should be accepted."""
+        group = self._make_synth_group({
+            0: {"lpfFrequency": "0x00000000", "hpfFrequency": "0x00000000"},
+            3: {"lpfFrequency": "0x7FFFFFFF", "hpfFrequency": "0x7FFFFFFF"},
+        })
+        # Override 3 envelope params on section 3 to ensure 3+ soft diffs
+        clip3 = group.clips_by_section[3].element
+        sp3 = clip3.find("soundParams")
+        sp3.find("envelope1").set("attack", "0x7FFFFFFF")
+        result = select_extended_clips(group, self.CONFIG, self.NORM_CONFIG)
+        assert len(result) == 2
+        sections = [clip.section for clip, _ in result]
+        assert 0 in sections
+        assert 3 in sections
 
-    def test_non_distinct_versions_excluded(self) -> None:
-        """Clips that are not distinct from baseline should be excluded."""
-        pytest.skip("Not implemented")
+    def test_similar_clip_rejected(self) -> None:
+        """Clip that is similar to baseline should be rejected."""
+        group = self._make_synth_group({
+            0: {},
+            3: {},  # identical params
+        })
+        result = select_extended_clips(group, self.CONFIG, self.NORM_CONFIG)
+        assert len(result) == 1
+        assert result[0][0].section == 0
+
+    def test_compare_against_all_accepted(self) -> None:
+        """Third clip should be compared against all accepted, not just baseline.
+
+        Scenario: section 0 (baseline), section 3 (distinct from 0, accepted),
+        section 6 (identical to section 3 but distinct from 0 → rejected
+        because it's similar to accepted section 3).
+        """
+        group = self._make_synth_group({
+            0: {"lpfFrequency": "0x00000000", "hpfFrequency": "0x00000000"},
+            3: {"lpfFrequency": "0x7FFFFFFF", "hpfFrequency": "0x7FFFFFFF"},
+            6: {"lpfFrequency": "0x7FFFFFFF", "hpfFrequency": "0x7FFFFFFF"},
+        })
+        # Make section 3 distinct from section 0 with 3+ diffs
+        clip3 = group.clips_by_section[3].element
+        sp3 = clip3.find("soundParams")
+        sp3.find("envelope1").set("attack", "0x7FFFFFFF")
+        # Section 6 is identical to section 3
+        clip6 = group.clips_by_section[6].element
+        sp6 = clip6.find("soundParams")
+        sp6.set("lpfFrequency", "0x7FFFFFFF")
+        sp6.set("hpfFrequency", "0x7FFFFFFF")
+        sp6.find("envelope1").set("attack", "0x7FFFFFFF")
+
+        result = select_extended_clips(group, self.CONFIG, self.NORM_CONFIG)
+        sections = [clip.section for clip, _ in result]
+        assert 0 in sections
+        assert 3 in sections
+        assert 6 not in sections  # rejected: similar to accepted section 3
+
+    def test_empty_group_returns_empty(self) -> None:
+        """Group with no clips should return empty list."""
+        inst_el = etree.Element("sound", presetName="X", presetFolder="SYNTHS")
+        instrument = InstrumentInfo(
+            element=inst_el, instrument_type="synth",
+            preset_name="X", preset_folder="SYNTHS",
+        )
+        group = InstrumentClipGroup(instrument=instrument, clips_by_section={})
+        result = select_extended_clips(group, self.CONFIG, self.NORM_CONFIG)
+        assert result == []
 
 
 # ---------------------------------------------------------------------------
@@ -1195,3 +1724,157 @@ class TestStripAutomation:
         el = etree.Element("defaultParams", delayFeedback="0x7FFFFFFF7FFFFFFF000000607FFFFFFF")
         warnings = _strip_automation(el)
         assert warnings == ["Stripped automation from defaultParams.delayFeedback"]
+
+
+# ---------------------------------------------------------------------------
+# Task 5.1 / 6.2: Cross-song deduplication (deduplicate_results)
+# ---------------------------------------------------------------------------
+
+
+def _make_extraction_result(
+    song_name: str,
+    preset_name: str,
+    instrument_type: str = "synth",
+    element: etree._Element | None = None,
+    section_id: int = 0,
+) -> ExtractionResult:
+    """Build a minimal ExtractionResult for dedup testing."""
+    if element is None:
+        element = _make_synth_preset()
+    return ExtractionResult(
+        song_name=song_name,
+        preset_name=preset_name,
+        instrument_type=instrument_type,
+        section_id=section_id,
+        colour_abbr="Lbl",
+        element=element,
+        output_filename=f"{song_name}-{preset_name}.XML",
+        preset_folder=f"{'SYNTHS' if instrument_type == 'synth' else 'KITS'}",
+        colour_name="LightBlue",
+    )
+
+
+class TestDeduplicateResults:
+    """Tests for deduplicate_results() — cross-song deduplication."""
+
+    CONFIG = ComparisonConfig.default()
+
+    def test_empty_input_returns_empty(self) -> None:
+        """Empty input should return empty accepted and rejected lists."""
+        result = deduplicate_results([], self.CONFIG)
+        assert isinstance(result, DedupResult)
+        assert result.accepted == []
+        assert result.rejected == []
+
+    def test_single_result_passes_through(self) -> None:
+        """A single result should pass through without comparison."""
+        r = _make_extraction_result("Song1", "Bass")
+        result = deduplicate_results([r], self.CONFIG)
+        assert len(result.accepted) == 1
+        assert result.accepted[0] is r
+        assert result.rejected == []
+
+    def test_single_result_group_passes_through(self) -> None:
+        """Groups with one member pass through, even with multiple groups."""
+        r1 = _make_extraction_result("Song1", "Bass")
+        r2 = _make_extraction_result("Song2", "Lead")
+        result = deduplicate_results([r1, r2], self.CONFIG)
+        assert len(result.accepted) == 2
+        assert result.rejected == []
+
+    def test_preset_name_grouping(self) -> None:
+        """Results with different preset names should never be compared."""
+        # Two different presets — both should be accepted even if elements are identical
+        el = _make_synth_preset()
+        r1 = _make_extraction_result("Song1", "Bass", element=el)
+        r2 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset())
+        result = deduplicate_results([r1, r2], self.CONFIG)
+        assert len(result.accepted) == 2
+        assert result.rejected == []
+
+    def test_identical_presets_deduplicated(self) -> None:
+        """Two identical presets with the same name → second rejected."""
+        el_a = _make_synth_preset()
+        el_b = _make_synth_preset()
+        r1 = _make_extraction_result("Aaa", "Bass", element=el_a)
+        r2 = _make_extraction_result("Bbb", "Bass", element=el_b)
+        result = deduplicate_results([r1, r2], self.CONFIG)
+        assert len(result.accepted) == 1
+        assert len(result.rejected) == 1
+        assert result.accepted[0].song_name == "Aaa"  # first alphabetically
+        assert result.rejected[0].result.song_name == "Bbb"
+
+    def test_distinct_presets_both_accepted(self) -> None:
+        """Two distinct presets with the same name → both accepted."""
+        el_a = _make_synth_preset(osc1_type="square")
+        el_b = _make_synth_preset(osc1_type="saw")
+        r1 = _make_extraction_result("Aaa", "Bass", element=el_a)
+        r2 = _make_extraction_result("Bbb", "Bass", element=el_b)
+        result = deduplicate_results([r1, r2], self.CONFIG)
+        assert len(result.accepted) == 2
+        assert result.rejected == []
+
+    def test_deterministic_ordering_by_song_name(self) -> None:
+        """Results should be sorted by song name within each group."""
+        el = _make_synth_preset()
+        r1 = _make_extraction_result("Zzz", "Bass", element=_make_synth_preset())
+        r2 = _make_extraction_result("Aaa", "Bass", element=_make_synth_preset())
+        r3 = _make_extraction_result("Mmm", "Bass", element=_make_synth_preset())
+        result = deduplicate_results([r1, r2, r3], self.CONFIG)
+        # All identical → only first alphabetically is accepted
+        assert len(result.accepted) == 1
+        assert result.accepted[0].song_name == "Aaa"
+        assert len(result.rejected) == 2
+
+    def test_compare_against_all_accepted(self) -> None:
+        """Third result should be compared against all accepted, not just baseline.
+
+        Scenario: A (baseline), B (distinct from A, accepted), C (identical to B → rejected).
+        """
+        el_a = _make_synth_preset(osc1_type="square")
+        el_b = _make_synth_preset(osc1_type="saw")  # hard distinct from A
+        el_c = _make_synth_preset(osc1_type="saw")  # identical to B
+        r_a = _make_extraction_result("Aaa", "Bass", element=el_a)
+        r_b = _make_extraction_result("Bbb", "Bass", element=el_b)
+        r_c = _make_extraction_result("Ccc", "Bass", element=el_c)
+        result = deduplicate_results([r_a, r_b, r_c], self.CONFIG)
+        assert len(result.accepted) == 2
+        assert len(result.rejected) == 1
+        assert result.rejected[0].result.song_name == "Ccc"
+        # The matched_result should be the one it was similar to (Bbb)
+        assert result.rejected[0].matched_result.song_name == "Bbb"
+
+    def test_instrument_type_grouping(self) -> None:
+        """Same preset name but different instrument types → separate groups."""
+        el_synth = _make_synth_preset()
+        el_kit = _make_kit_preset()
+        r1 = _make_extraction_result("Song1", "Init", instrument_type="synth", element=el_synth)
+        r2 = _make_extraction_result("Song2", "Init", instrument_type="kit", element=el_kit)
+        result = deduplicate_results([r1, r2], self.CONFIG)
+        # Different instrument types → different groups → both accepted
+        assert len(result.accepted) == 2
+        assert result.rejected == []
+
+    def test_rejected_result_has_comparison(self) -> None:
+        """Rejected results should carry the ComparisonResult."""
+        r1 = _make_extraction_result("Aaa", "Bass", element=_make_synth_preset())
+        r2 = _make_extraction_result("Bbb", "Bass", element=_make_synth_preset())
+        result = deduplicate_results([r1, r2], self.CONFIG)
+        assert len(result.rejected) == 1
+        rejected = result.rejected[0]
+        assert isinstance(rejected, RejectedResult)
+        assert isinstance(rejected.comparison, ComparisonResult)
+        assert rejected.comparison.is_distinct is False
+        assert rejected.matched_result is r1
+
+    def test_multiple_groups_independent(self) -> None:
+        """Dedup operates independently per group."""
+        # Group "Bass": 2 identical synths → 1 accepted, 1 rejected
+        r1 = _make_extraction_result("Song1", "Bass", element=_make_synth_preset())
+        r2 = _make_extraction_result("Song2", "Bass", element=_make_synth_preset())
+        # Group "Lead": 2 distinct synths → both accepted
+        r3 = _make_extraction_result("Song1", "Lead", element=_make_synth_preset(osc1_type="saw"))
+        r4 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset(osc1_type="square"))
+        result = deduplicate_results([r1, r2, r3, r4], self.CONFIG)
+        assert len(result.accepted) == 3
+        assert len(result.rejected) == 1

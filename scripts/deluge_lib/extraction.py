@@ -127,6 +127,17 @@ KIT_SOUND_CHILD_ORDER = (
 # Attributes to exclude from numerical comparison (always normalised, so not meaningful).
 COMPARISON_EXCLUDED_ATTRS = ("volume", "pan")
 
+# Regex matching Deluge hex parameter values (0x followed by hex digits).
+_HEX_VALUE_RE = re.compile(r"^0x[0-9A-Fa-f]+$")
+
+# Full range for proportional soft-marker difference calculation.
+# Deluge hex params span 0x80000000 (-2,147,483,648) to 0x7FFFFFFF (+2,147,483,647).
+# User-facing values map to either 0–50 or -50 to +50, using the full signed range.
+# Using 0x7FFFFFFF (positive half) as the denominator means the 10% threshold
+# corresponds to ~2.5 display units on a 0–50 scale.  Using 0xFFFFFFFF (full span)
+# would correspond to ~5 display units.  Adjust during testing if needed.
+_HEX_FULL_RANGE = 0x7FFFFFFF
+
 
 # ---------------------------------------------------------------------------
 # Dataclasses
@@ -163,14 +174,6 @@ class InstrumentClipGroup:
 
 
 @dataclass
-class VersionComparison:
-    """Result of comparing two clip versions of the same instrument."""
-
-    is_distinct: bool
-    differing_params: list[str]  # names of parameters that differ
-
-
-@dataclass
 class NormalisationConfig:
     """Which attributes to normalise on <defaultParams> and their target values.
 
@@ -193,6 +196,150 @@ class NormalisationConfig:
 
 
 @dataclass
+class ComparisonConfig:
+    """Configurable ruleset for the generalised comparison engine.
+
+    Maps element paths to sets of attribute names that constitute hard markers
+    (structural identity).  Sentinel values prefixed with ``_`` signal special
+    comparison logic in the engine:
+
+    * ``_structure`` — compare child-element structure (e.g. patchCable routing)
+    * ``_count``     — compare child-element count
+    * ``_names``     — compare child-element ``name`` attributes as a set
+    """
+
+    # Hard markers — structural attributes that make instruments immediately distinct.
+    # Maps element path → set of attribute names (or sentinel keys).
+    synth_hard_attrs: dict[str, set[str]]
+    kit_hard_attrs: dict[str, set[str]]
+
+    # Soft marker thresholds
+    param_count_threshold: int  # min number of params that must differ
+    param_percent_threshold: float  # min proportional change per param (0.0–1.0)
+
+    # Ignored attributes — excluded from all comparison tiers
+    ignored_attrs: set[str]
+
+    # Child elements whose attributes are walked for soft-marker diffs
+    # (beyond defaultParams, delay, sidechain, audioCompressor which are
+    # already handled).  Maps element tag → set of attributes to SKIP
+    # (because they are hard markers or ignored).
+    synth_soft_elements: dict[str, set[str]]
+    kit_sound_soft_elements: dict[str, set[str]]
+
+    @classmethod
+    def default(cls) -> ComparisonConfig:
+        """Return the standard comparison config.
+
+        Hard markers sourced from research Section 16.2.  Thresholds and
+        ignored attrs consume the existing module-level constants.
+        """
+        return cls(
+            synth_hard_attrs={
+                "sound": {
+                    "mode",
+                    "polyphonic",
+                    "voicePriority",
+                    "maxVoices",
+                    "clippingAmount",
+                    "modFXType",
+                    "lpfMode",
+                    "hpfMode",
+                    "filterRoute",
+                },
+                "osc1": {"type", "fileName", "transpose"},
+                "osc2": {"type", "fileName", "transpose"},
+                "lfo1": {"type"},
+                "lfo2": {"type"},
+                "unison": {"num"},
+                "arpeggiator": {"mode", "noteMode", "octaveMode"},
+                "patchCables": {"_structure"},
+            },
+            kit_hard_attrs={
+                "kit": {"modFXType", "lpfMode", "hpfMode", "filterRoute"},
+                "soundSources": {"_count", "_names"},
+                "soundSources/sound": {
+                    "polyphonic",
+                    "voicePriority",
+                    "mode",
+                    "maxVoices",
+                    "modFXType",
+                    "lpfMode",
+                    "hpfMode",
+                    "filterRoute",
+                },
+                "soundSources/sound/osc1": {
+                    "type",
+                    "fileName",
+                    "transpose",
+                    "loopMode",
+                    "reversed",
+                },
+                "soundSources/sound/osc2": {
+                    "type",
+                    "fileName",
+                    "transpose",
+                    "loopMode",
+                    "reversed",
+                },
+                "soundSources/sound/lfo1": {"type"},
+                "soundSources/sound/lfo2": {"type"},
+                "soundSources/sound/unison": {"num"},
+                "soundSources/sound/arpeggiator": {"mode"},
+            },
+            param_count_threshold=DIFF_PARAM_COUNT_THRESHOLD,
+            param_percent_threshold=DIFF_PARAM_PERCENT_THRESHOLD,
+            ignored_attrs={
+                "volume",
+                "pan",
+                "firmwareVersion",
+                "earliestCompatibleFirmware",
+                "modFXCurrentParam",
+                "currentFilterType",
+            },
+            synth_soft_elements={
+                "osc1": {"type", "fileName", "transpose"},
+                "osc2": {"type", "fileName", "transpose"},
+                "lfo1": {"type"},
+                "lfo2": {"type"},
+                "unison": {"num"},
+                "arpeggiator": {"mode", "noteMode", "octaveMode"},
+            },
+            kit_sound_soft_elements={
+                "osc1": {
+                    "type",
+                    "fileName",
+                    "transpose",
+                    "loopMode",
+                    "reversed",
+                },
+                "osc2": {
+                    "type",
+                    "fileName",
+                    "transpose",
+                    "loopMode",
+                    "reversed",
+                },
+                "lfo1": {"type"},
+                "lfo2": {"type"},
+                "unison": {"num"},
+                "arpeggiator": {"mode"},
+            },
+        )
+
+
+@dataclass
+class ComparisonResult:
+    """Result of comparing two assembled standalone presets."""
+
+    is_distinct: bool
+    hard_diffs: list[str]
+    soft_diff_count: int
+    soft_diffs: list[str]
+    reason: str
+
+
+@dataclass
 class ExtractionResult:
     """Carries all information about a single extracted instrument preset."""
 
@@ -207,6 +354,23 @@ class ExtractionResult:
     preset_folder: str
     colour_name: str
     differing_params: list[str] = field(default_factory=list)  # for extended mode
+
+
+@dataclass
+class RejectedResult:
+    """An extraction result rejected during cross-song deduplication."""
+
+    result: ExtractionResult
+    matched_result: ExtractionResult  # which accepted result it was similar to
+    comparison: ComparisonResult
+
+
+@dataclass
+class DedupResult:
+    """Output of cross-song deduplication."""
+
+    accepted: list[ExtractionResult]
+    rejected: list[RejectedResult]
 
 
 # ---------------------------------------------------------------------------
@@ -772,90 +936,297 @@ def serialise_xml(element: etree._Element, output_path: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Version Comparison — Extended Mode (Task 4.1)
+# Generalised Comparison Engine (Task 4.2)
 # ---------------------------------------------------------------------------
 
 
-def compare_versions(
-    clip_a: etree._Element,
-    clip_b: etree._Element,
-    instrument: etree._Element,
-) -> VersionComparison:
-    """Compare two clip versions to determine if they are sufficiently different.
+def compare_instruments(
+    preset_a: etree._Element,
+    preset_b: etree._Element,
+    instrument_type: str,
+    config: ComparisonConfig,
+) -> ComparisonResult:
+    """Compare two assembled standalone presets for equivalence.
 
-    Used in extended mode to decide whether to extract multiple versions of
-    the same instrument. clip_a is the baseline (lowest section ID).
+    Three-tier comparison operating on post-extraction, post-normalisation
+    preset elements (``<sound>`` for synths, ``<kit>`` for kits).
 
-    The comparison has three tiers:
-    1. Structural/non-numerical changes on the instrument element → always distinct
-    2. Non-numerical changes in params (envelope, patchCable, arpeggiator settings) → always distinct
-    3. Numerical param changes → distinct if >= DIFF_PARAM_COUNT_THRESHOLD params
-       differ by > DIFF_PARAM_PERCENT_THRESHOLD
+    Tier 1 — Hard markers: structural attributes where any single difference
+    means the instruments are immediately distinct.
+
+    Tier 2 — Soft markers: numerical hex params compared with a per-param
+    proportional threshold and a group count threshold.
+
+    Tier 3 — Ignored: attributes in ``config.ignored_attrs`` are skipped
+    throughout all tiers.
 
     Args:
-        clip_a: The baseline <instrumentClip> element.
-        clip_b: The candidate <instrumentClip> element.
-        instrument: The <sound> or <kit> element from <instruments> (shared).
+        preset_a: First assembled standalone element (``<sound>`` or ``<kit>``).
+        preset_b: Second assembled standalone element.
+        instrument_type: ``"synth"`` or ``"kit"``.
+        config: Comparison ruleset (hard markers, thresholds, ignore list).
 
     Returns:
-        VersionComparison with is_distinct flag and list of differing param names.
-
-    Steps:
-        1. Compare structural elements on the instrument <sound> definition:
-           - Root attributes: polyphonic, voicePriority, mode, transpose, modFXType,
-             lpfMode, hpfMode, filterRoute, maxVoices, clippingAmount
-           - <osc1>, <osc2> attributes: type, transpose, cents, retrigPhase,
-             loopMode, reversed, fileName
-           - <lfo1>, <lfo2> attributes: type, syncLevel, syncType
-           - <unison> attributes: num, detune, spread
-           - <modulator1>, <modulator2> if present
-           - <delay>, <sidechain>, <audioCompressor> attributes
-           → Any change here = distinct (structural change)
-        2. Compare non-numerical settings in clip params:
-           - <envelope1>, <envelope2> attributes
-           - <patchCables> structure (source, destination values)
-           - <arpeggiator> attributes (mode, noteMode, octaveMode, etc.)
-           → Any non-numerical change = distinct
-        3. Compare numerical <soundParams>/<kitParams> attributes:
-           - Exclude volume and pan (normalised, not meaningful)
-           - For each attribute present on either clip's params:
-             a. Parse hex values as 32-bit signed integers
-             b. For extended hex strings (automation), use first 10 chars only (D15)
-             c. Calculate absolute difference as proportion of full range (0x00000000–0x7FFFFFFF)
-             d. If difference > DIFF_PARAM_PERCENT_THRESHOLD, count it
-           - If count >= DIFF_PARAM_COUNT_THRESHOLD → distinct
-        4. Return VersionComparison with combined results
+        A :class:`ComparisonResult` carrying the verdict, diffs, and a
+        human-readable reason string.
     """
-    raise NotImplementedError("Task 4.1: Parameter comparison engine")
+    hard_attrs = (
+        config.synth_hard_attrs
+        if instrument_type == "synth"
+        else config.kit_hard_attrs
+    )
+    hard_diffs: list[str] = []
+
+    # --- TIER 1: HARD MARKERS ---
+
+    # Root element attributes
+    root_key = "sound" if instrument_type == "synth" else "kit"
+    if root_key in hard_attrs:
+        for attr in sorted(hard_attrs[root_key]):
+            if attr in config.ignored_attrs:
+                continue
+            val_a = preset_a.get(attr, "")
+            val_b = preset_b.get(attr, "")
+            if val_a != val_b:
+                hard_diffs.append(f"{root_key}.{attr}: {val_a!r} vs {val_b!r}")
+
+    # Direct child element attributes (synth: osc1, osc2, arpeggiator; etc.)
+    for path, attrs in sorted(hard_attrs.items()):
+        if path in (root_key, "patchCables", "soundSources") or "/" in path:
+            continue
+        el_a = preset_a.find(path)
+        el_b = preset_b.find(path)
+        for attr in sorted(attrs):
+            if attr.startswith("_") or attr in config.ignored_attrs:
+                continue
+            val_a = el_a.get(attr, "") if el_a is not None else ""
+            val_b = el_b.get(attr, "") if el_b is not None else ""
+            if val_a != val_b:
+                hard_diffs.append(f"{path}.{attr}: {val_a!r} vs {val_b!r}")
+
+    # PatchCables structure on top-level defaultParams (D19)
+    dp_a = preset_a.find("defaultParams")
+    dp_b = preset_b.find("defaultParams")
+    hard_diffs.extend(_check_patchcable_structure(dp_a, dp_b))
+
+    # Kit-specific structural hard markers
+    if instrument_type == "kit":
+        hard_diffs.extend(
+            _check_kit_structure_hard(preset_a, preset_b, hard_attrs, config)
+        )
+
+    if hard_diffs:
+        reason = f"hard: {hard_diffs[0]}"
+        if len(hard_diffs) > 1:
+            reason += f" (+{len(hard_diffs) - 1} more)"
+        return ComparisonResult(
+            is_distinct=True,
+            hard_diffs=hard_diffs,
+            soft_diff_count=0,
+            soft_diffs=[],
+            reason=reason,
+        )
+
+    # --- TIER 2: SOFT MARKERS ---
+
+    if instrument_type == "kit":
+        return _compare_kit_soft(preset_a, preset_b, config)
+
+    # Synth soft markers
+    soft_diffs = _collect_soft_diffs(
+        dp_a, dp_b, preset_a, preset_b, config,
+        soft_elements=config.synth_soft_elements,
+    )
+    is_distinct = len(soft_diffs) >= config.param_count_threshold
+    count = len(soft_diffs)
+    if is_distinct:
+        reason = (
+            f"soft: {count} params differ"
+            f" >{config.param_percent_threshold:.0%}"
+        )
+    else:
+        reason = (
+            f"similar: {count} soft diffs"
+            f" (threshold: {config.param_count_threshold})"
+        )
+    return ComparisonResult(
+        is_distinct=is_distinct,
+        hard_diffs=[],
+        soft_diff_count=count,
+        soft_diffs=soft_diffs,
+        reason=reason,
+    )
 
 
 # ---------------------------------------------------------------------------
-# Extended Mode Selection (Task 4.2)
+# Extended Mode Selection (Task 4.3)
 # ---------------------------------------------------------------------------
 
 
-def select_extended_clips(group: InstrumentClipGroup) -> list[ClipInfo]:
+def select_extended_clips(
+    group: InstrumentClipGroup,
+    comparison_config: ComparisonConfig,
+    normalisation_config: NormalisationConfig,
+) -> list[tuple[ClipInfo, list[ComparisonResult]]]:
     """Select clips for extended mode extraction based on version comparison.
 
-    The baseline clip (lowest section ID) is always included. Each subsequent
-    section version is compared against the baseline. If distinct, it is
-    included for extraction.
+    The baseline clip (lowest section ID) is always included.  Each subsequent
+    section version is extracted, normalised, and compared against ALL
+    previously accepted assembled presets.  If distinct from every accepted
+    preset it is included; if similar to any it is rejected.
 
     Args:
         group: An InstrumentClipGroup with all clips for one instrument.
+        comparison_config: Ruleset for the generalised comparison engine.
+        normalisation_config: Targets for volume/pan normalisation.
 
     Returns:
-        List of ClipInfo objects to extract (always includes baseline).
-
-    Steps:
-        1. Sort clips_by_section by section ID (ascending)
-        2. Take the first clip as the baseline — always include it
-        3. For each subsequent clip:
-           a. Call compare_versions(baseline_clip, candidate_clip, instrument)
-           b. If is_distinct, add to extraction list
-        4. Return the full list of clips to extract
+        List of ``(ClipInfo, comparisons)`` tuples for accepted clips.
+        The baseline's ``comparisons`` list is empty.  Each subsequent
+        accepted clip carries the :class:`ComparisonResult` for every
+        previously-accepted preset it was compared against.
     """
-    raise NotImplementedError("Task 4.2: Extended mode multi-version selection")
+    inst = group.instrument
+    instrument_type = inst.instrument_type
+
+    # 1. Sort clips by section ID ascending.
+    sorted_clips = [
+        clip for _sid, clip in sorted(group.clips_by_section.items())
+    ]
+
+    if not sorted_clips:
+        return []
+
+    def _assemble(clip: ClipInfo) -> etree._Element:
+        """Extract, strip automation, and normalise a clip for comparison."""
+        if instrument_type == "synth":
+            element = extract_synth(inst.element, clip.element)
+        else:
+            element = extract_kit(inst.element, clip.element)
+        _strip_automation(element)
+        normalise_params(element, instrument_type, normalisation_config)
+        return element
+
+    # 2. Baseline clip (lowest section ID) is always accepted.
+    baseline_clip = sorted_clips[0]
+    baseline_preset = _assemble(baseline_clip)
+
+    accepted: list[tuple[ClipInfo, list[ComparisonResult]]] = [
+        (baseline_clip, [])
+    ]
+    accepted_presets: list[etree._Element] = [baseline_preset]
+
+    # 3. Compare each subsequent clip against ALL accepted presets.
+    for candidate_clip in sorted_clips[1:]:
+        candidate_preset = _assemble(candidate_clip)
+
+        comparisons: list[ComparisonResult] = []
+        is_distinct_from_all = True
+
+        for accepted_preset in accepted_presets:
+            result = compare_instruments(
+                candidate_preset,
+                accepted_preset,
+                instrument_type,
+                comparison_config,
+            )
+            comparisons.append(result)
+            if not result.is_distinct:
+                is_distinct_from_all = False
+                break  # similar to at least one — reject
+
+        if is_distinct_from_all:
+            accepted.append((candidate_clip, comparisons))
+            accepted_presets.append(candidate_preset)
+
+    return accepted
+
+
+# ---------------------------------------------------------------------------
+# Cross-Song Deduplication (Task 5.1)
+# ---------------------------------------------------------------------------
+
+
+def deduplicate_results(
+    results: list[ExtractionResult],
+    config: ComparisonConfig,
+) -> DedupResult:
+    """Filter redundant instruments that appear across multiple songs.
+
+    Groups extraction results by ``(preset_name, instrument_type)`` (ignoring
+    ``preset_folder`` per D21).  Within each group, sorts by song name
+    alphabetically for deterministic ordering.  The first result becomes the
+    baseline and is automatically accepted.  Each subsequent result is compared
+    against ALL accepted results in the group using :func:`compare_instruments`.
+    If distinct from all accepted → accept.  If similar to any → reject.
+
+    Groups with only one result pass through without comparison.
+
+    Args:
+        results: Full list of :class:`ExtractionResult` objects (post-extraction,
+            post-normalisation).
+        config: Comparison ruleset for the generalised comparison engine.
+
+    Returns:
+        A :class:`DedupResult` with accepted and rejected lists.
+    """
+    # 1. Group results by (preset_name, instrument_type)
+    groups: dict[tuple[str, str], list[ExtractionResult]] = {}
+    for r in results:
+        key = (r.preset_name, r.instrument_type)
+        groups.setdefault(key, []).append(r)
+
+    accepted: list[ExtractionResult] = []
+    rejected: list[RejectedResult] = []
+
+    for (_preset_name, _inst_type), group in sorted(groups.items()):
+        # 2. Sort by song name alphabetically for deterministic ordering
+        group.sort(key=lambda r: r.song_name)
+
+        # Single-member groups pass through without comparison
+        if len(group) == 1:
+            accepted.append(group[0])
+            continue
+
+        # 3. First result is the baseline — automatically accepted
+        baseline = group[0]
+        accepted.append(baseline)
+        accepted_in_group: list[ExtractionResult] = [baseline]
+
+        # 4. Compare each subsequent result against ALL accepted in the group
+        for candidate in group[1:]:
+            is_distinct_from_all = True
+            matched: ExtractionResult | None = None
+            matched_comparison: ComparisonResult | None = None
+
+            for accepted_result in accepted_in_group:
+                comparison = compare_instruments(
+                    candidate.element,
+                    accepted_result.element,
+                    candidate.instrument_type,
+                    config,
+                )
+                if not comparison.is_distinct:
+                    is_distinct_from_all = False
+                    matched = accepted_result
+                    matched_comparison = comparison
+                    break  # similar to at least one — reject
+
+            if is_distinct_from_all:
+                accepted.append(candidate)
+                accepted_in_group.append(candidate)
+            else:
+                assert matched is not None
+                assert matched_comparison is not None
+                rejected.append(
+                    RejectedResult(
+                        result=candidate,
+                        matched_result=matched,
+                        comparison=matched_comparison,
+                    )
+                )
+
+    return DedupResult(accepted=accepted, rejected=rejected)
 
 
 # ---------------------------------------------------------------------------
@@ -1218,14 +1589,328 @@ def _parse_hex_value(hex_str: str) -> int:
 
     For extended hex strings containing automation data (longer than 10 chars),
     uses only the first 10 characters (the static value) per D15.
-
-    Steps:
-        1. If len > 10, truncate to first 10 chars (automation prefix)
-        2. Parse as unsigned 32-bit int with int(hex_str, 16)
-        3. Convert to signed 32-bit: if value >= 0x80000000, subtract 0x100000000
-        4. Return the signed integer
     """
-    raise NotImplementedError("Helper: Parse Deluge hex value")
+    if len(hex_str) > 10:
+        hex_str = hex_str[:10]
+    raw = int(hex_str, 16)
+    if raw >= 0x80000000:
+        raw -= 0x100000000
+    return raw
+
+
+def _hex_diff_exceeds(val_a: str, val_b: str, threshold: float) -> bool:
+    """Return True if two hex param values differ by more than *threshold* proportion."""
+    a = _parse_hex_value(val_a)
+    b = _parse_hex_value(val_b)
+    return abs(a - b) / _HEX_FULL_RANGE > threshold
+
+
+def _build_patchcable_dict(
+    default_params: etree._Element | None,
+) -> dict[tuple[str, str], str]:
+    """Build a ``(source, destination) -> amount`` dict from ``<patchCables>``."""
+    result: dict[tuple[str, str], str] = {}
+    if default_params is None:
+        return result
+    patch_cables = default_params.find("patchCables")
+    if patch_cables is None:
+        return result
+    for cable in patch_cables:
+        if cable.tag != "patchCable":
+            continue
+        src = cable.get("source", "")
+        dst = cable.get("destination", "")
+        amount = cable.get("amount", "")
+        result[(src, dst)] = amount
+    return result
+
+
+def _check_patchcable_structure(
+    dp_a: etree._Element | None,
+    dp_b: etree._Element | None,
+) -> list[str]:
+    """Return hard diffs if patchCable ``(source, destination)`` sets differ."""
+    cables_a = _build_patchcable_dict(dp_a)
+    cables_b = _build_patchcable_dict(dp_b)
+    keys_a = set(cables_a)
+    keys_b = set(cables_b)
+    if keys_a == keys_b:
+        return []
+    added = keys_b - keys_a
+    removed = keys_a - keys_b
+    parts: list[str] = []
+    if added:
+        parts.append(f"added {sorted(added)}")
+    if removed:
+        parts.append(f"removed {sorted(removed)}")
+    return [f"patchCables structure: {'; '.join(parts)}"]
+
+
+def _collect_soft_diffs(
+    dp_a: etree._Element | None,
+    dp_b: etree._Element | None,
+    root_a: etree._Element,
+    root_b: etree._Element,
+    config: ComparisonConfig,
+    prefix: str = "",
+    soft_elements: dict[str, set[str]] | None = None,
+) -> list[str]:
+    """Collect soft-marker differences for one comparison scope.
+
+    Walks ``<defaultParams>`` attributes and children (``envelope1``,
+    ``envelope2``, ``equalizer``), matching patchCable amounts,
+    instrument-level ``<delay>``, ``<sidechain>``, ``<audioCompressor>``,
+    and configurable child elements (osc1/osc2 cents, lfo syncLevel, etc.).
+    """
+    diffs: list[str] = []
+    threshold = config.param_percent_threshold
+    ignored = config.ignored_attrs
+    pfx = f"{prefix}." if prefix else ""
+
+    # 1. defaultParams attributes
+    if dp_a is not None and dp_b is not None:
+        all_attrs = set(dp_a.attrib) | set(dp_b.attrib)
+        for attr in sorted(all_attrs):
+            if attr in ignored:
+                continue
+            val_a = dp_a.get(attr, "")
+            val_b = dp_b.get(attr, "")
+            if val_a == val_b:
+                continue
+            if _HEX_VALUE_RE.match(val_a) and _HEX_VALUE_RE.match(val_b):
+                if _hex_diff_exceeds(val_a, val_b, threshold):
+                    diffs.append(f"{pfx}defaultParams.{attr}")
+            else:
+                diffs.append(f"{pfx}defaultParams.{attr}")
+
+    # 2. defaultParams children: envelope1, envelope2, equalizer
+    if dp_a is not None and dp_b is not None:
+        for child_tag in ("envelope1", "envelope2", "equalizer"):
+            el_a = dp_a.find(child_tag)
+            el_b = dp_b.find(child_tag)
+            if el_a is None and el_b is None:
+                continue
+            attrs_a = dict(el_a.attrib) if el_a is not None else {}
+            attrs_b = dict(el_b.attrib) if el_b is not None else {}
+            all_attrs = set(attrs_a) | set(attrs_b)
+            for attr in sorted(all_attrs):
+                if attr in ignored:
+                    continue
+                va = attrs_a.get(attr, "")
+                vb = attrs_b.get(attr, "")
+                if va == vb:
+                    continue
+                if _HEX_VALUE_RE.match(va) and _HEX_VALUE_RE.match(vb):
+                    if _hex_diff_exceeds(va, vb, threshold):
+                        diffs.append(f"{pfx}{child_tag}.{attr}")
+                else:
+                    diffs.append(f"{pfx}{child_tag}.{attr}")
+
+    # 3. PatchCable amounts (matching cables only — structure is a hard marker)
+    cables_a = _build_patchcable_dict(dp_a)
+    cables_b = _build_patchcable_dict(dp_b)
+    for key in sorted(set(cables_a) & set(cables_b)):
+        va = cables_a[key]
+        vb = cables_b[key]
+        if va == vb:
+            continue
+        if _HEX_VALUE_RE.match(va) and _HEX_VALUE_RE.match(vb):
+            if _hex_diff_exceeds(va, vb, threshold):
+                src, dst = key
+                diffs.append(f"{pfx}patchCable({src}->{dst}).amount")
+        else:
+            src, dst = key
+            diffs.append(f"{pfx}patchCable({src}->{dst}).amount")
+
+    # 4. Instrument-level: delay, sidechain, audioCompressor (D24)
+    for elem_tag in ("delay", "sidechain", "audioCompressor"):
+        el_a = root_a.find(elem_tag)
+        el_b = root_b.find(elem_tag)
+        if el_a is None and el_b is None:
+            continue
+        attrs_a = dict(el_a.attrib) if el_a is not None else {}
+        attrs_b = dict(el_b.attrib) if el_b is not None else {}
+        all_attrs = set(attrs_a) | set(attrs_b)
+        for attr in sorted(all_attrs):
+            if attr in ignored:
+                continue
+            va = attrs_a.get(attr, "")
+            vb = attrs_b.get(attr, "")
+            if va == vb:
+                continue
+            if _HEX_VALUE_RE.match(va) and _HEX_VALUE_RE.match(vb):
+                if _hex_diff_exceeds(va, vb, threshold):
+                    diffs.append(f"{pfx}{elem_tag}.{attr}")
+            else:
+                diffs.append(f"{pfx}{elem_tag}.{attr}")
+
+    # 5. Configurable child elements (osc1/osc2 cents, lfo syncLevel, etc.)
+    if soft_elements:
+        for elem_tag, skip_attrs in sorted(soft_elements.items()):
+            el_a = root_a.find(elem_tag)
+            el_b = root_b.find(elem_tag)
+            if el_a is None and el_b is None:
+                continue
+            attrs_a = dict(el_a.attrib) if el_a is not None else {}
+            attrs_b = dict(el_b.attrib) if el_b is not None else {}
+            all_attrs = set(attrs_a) | set(attrs_b)
+            for attr in sorted(all_attrs):
+                if attr in ignored or attr in skip_attrs:
+                    continue
+                va = attrs_a.get(attr, "")
+                vb = attrs_b.get(attr, "")
+                if va == vb:
+                    continue
+                if _HEX_VALUE_RE.match(va) and _HEX_VALUE_RE.match(vb):
+                    if _hex_diff_exceeds(va, vb, threshold):
+                        diffs.append(f"{pfx}{elem_tag}.{attr}")
+                else:
+                    diffs.append(f"{pfx}{elem_tag}.{attr}")
+
+    return diffs
+
+
+def _check_kit_structure_hard(
+    preset_a: etree._Element,
+    preset_b: etree._Element,
+    hard_attrs: dict[str, set[str]],
+    config: ComparisonConfig,
+) -> list[str]:
+    """Check kit structural hard markers: soundSources count/names, per-sound attrs."""
+    diffs: list[str] = []
+
+    ss_a = preset_a.find("soundSources")
+    ss_b = preset_b.find("soundSources")
+    sounds_a = list(ss_a) if ss_a is not None else []
+    sounds_b = list(ss_b) if ss_b is not None else []
+
+    if "soundSources" in hard_attrs:
+        sentinels = hard_attrs["soundSources"]
+        if "_count" in sentinels and len(sounds_a) != len(sounds_b):
+            diffs.append(
+                f"soundSources count: {len(sounds_a)} vs {len(sounds_b)}"
+            )
+            return diffs  # can't compare per-sound if counts differ
+
+        if "_names" in sentinels:
+            names_a = [s.get("name", "") for s in sounds_a]
+            names_b = [s.get("name", "") for s in sounds_b]
+            if names_a != names_b:
+                diffs.append(f"soundSources names: {names_a} vs {names_b}")
+                return diffs  # can't compare per-sound if names differ
+
+    # Per-sound root attrs (soundSources/sound — attrs on the <sound> element itself)
+    if "soundSources/sound" in hard_attrs:
+        sound_root_attrs = hard_attrs["soundSources/sound"]
+        for i, (sa, sb) in enumerate(zip(sounds_a, sounds_b, strict=True)):
+            for attr in sorted(sound_root_attrs):
+                if attr.startswith("_") or attr in config.ignored_attrs:
+                    continue
+                va = sa.get(attr, "")
+                vb = sb.get(attr, "")
+                if va != vb:
+                    name = sa.get("name", f"index {i}")
+                    diffs.append(
+                        f"sound[{name}].{attr}: {va!r} vs {vb!r}"
+                    )
+
+    # Per-sound child hard attrs (e.g. soundSources/sound/osc1)
+    for path_key, attrs in sorted(hard_attrs.items()):
+        if not path_key.startswith("soundSources/sound/"):
+            continue
+        child_tag = path_key.rsplit("/", 1)[-1]
+        for i, (sa, sb) in enumerate(zip(sounds_a, sounds_b, strict=True)):
+            el_a = sa.find(child_tag)
+            el_b = sb.find(child_tag)
+            for attr in sorted(attrs):
+                if attr.startswith("_") or attr in config.ignored_attrs:
+                    continue
+                va = el_a.get(attr, "") if el_a is not None else ""
+                vb = el_b.get(attr, "") if el_b is not None else ""
+                if va != vb:
+                    name = sa.get("name", f"index {i}")
+                    diffs.append(
+                        f"sound[{name}].{child_tag}.{attr}: {va!r} vs {vb!r}"
+                    )
+
+    # Per-sound patchCable structure
+    for i, (sa, sb) in enumerate(zip(sounds_a, sounds_b, strict=True)):
+        sdp_a = sa.find("defaultParams")
+        sdp_b = sb.find("defaultParams")
+        pc_diffs = _check_patchcable_structure(sdp_a, sdp_b)
+        if pc_diffs:
+            name = sa.get("name", f"index {i}")
+            diffs.extend(f"sound[{name}].{d}" for d in pc_diffs)
+
+    return diffs
+
+
+def _compare_kit_soft(
+    preset_a: etree._Element,
+    preset_b: etree._Element,
+    config: ComparisonConfig,
+) -> ComparisonResult:
+    """Evaluate soft markers for kits with per-sound threshold checking."""
+    all_soft_diffs: list[str] = []
+
+    # Kit-level soft markers
+    dp_a = preset_a.find("defaultParams")
+    dp_b = preset_b.find("defaultParams")
+    kit_diffs = _collect_soft_diffs(dp_a, dp_b, preset_a, preset_b, config)
+
+    if len(kit_diffs) >= config.param_count_threshold:
+        return ComparisonResult(
+            is_distinct=True,
+            hard_diffs=[],
+            soft_diff_count=len(kit_diffs),
+            soft_diffs=kit_diffs,
+            reason=(
+                f"soft: {len(kit_diffs)} kit-level params differ"
+                f" >{config.param_percent_threshold:.0%}"
+            ),
+        )
+    all_soft_diffs.extend(kit_diffs)
+
+    # Per-sound soft markers
+    ss_a = preset_a.find("soundSources")
+    ss_b = preset_b.find("soundSources")
+    sounds_a = list(ss_a) if ss_a is not None else []
+    sounds_b = list(ss_b) if ss_b is not None else []
+
+    for sa, sb in zip(sounds_a, sounds_b, strict=True):
+        sdp_a = sa.find("defaultParams")
+        sdp_b = sb.find("defaultParams")
+        name = sa.get("name", "")
+        sound_diffs = _collect_soft_diffs(
+            sdp_a, sdp_b, sa, sb, config, prefix=f"sound[{name}]",
+            soft_elements=config.kit_sound_soft_elements,
+        )
+
+        if len(sound_diffs) >= config.param_count_threshold:
+            all_soft_diffs.extend(sound_diffs)
+            return ComparisonResult(
+                is_distinct=True,
+                hard_diffs=[],
+                soft_diff_count=len(all_soft_diffs),
+                soft_diffs=all_soft_diffs,
+                reason=(
+                    f"soft: sound[{name}] has {len(sound_diffs)} params differ"
+                    f" >{config.param_percent_threshold:.0%}"
+                ),
+            )
+        all_soft_diffs.extend(sound_diffs)
+
+    count = len(all_soft_diffs)
+    return ComparisonResult(
+        is_distinct=False,
+        hard_diffs=[],
+        soft_diff_count=count,
+        soft_diffs=all_soft_diffs,
+        reason=(
+            f"similar: {count} soft diffs"
+            f" (threshold: {config.param_count_threshold})"
+        ),
+    )
 
 
 

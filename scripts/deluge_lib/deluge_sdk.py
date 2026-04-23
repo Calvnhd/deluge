@@ -198,6 +198,10 @@ def parse_deluge_xml(
     wrapper fallback was used, and *recovered* is ``True`` when the lenient
     parser was needed.
     """
+    # Known firmware bug: audioClip elements have duplicate attributes
+    # (isPlaying, isSoloing, etc.) — harmless, suppress the warning.
+    _KNOWN_DUPE_ATTR_RE = re.compile(r"Attribute \w+ redefined")
+
     try:
         tree = etree.parse(xml_path)  # noqa: S320
         return tree, tree.getroot(), False
@@ -214,7 +218,8 @@ def parse_deluge_xml(
             # Lenient parse for files with duplicate attributes, unclosed tags, etc.
             parser = etree.XMLParser(recover=True)
             root = etree.fromstring(b"<root>" + raw + b"</root>", parser=parser)  # noqa: S320
-            print(f"Warning: {xml_path} has malformed XML and was parsed with recover=true. {exc}")
+            if not _KNOWN_DUPE_ATTR_RE.search(str(exc)):
+                print(f"Warning: {xml_path} has malformed XML and was parsed with recover=true. {exc}")
             return None, root, True
 
 
