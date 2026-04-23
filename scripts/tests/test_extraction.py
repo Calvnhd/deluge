@@ -597,7 +597,7 @@ class TestExtractKit:
         """Should remove presetName, presetFolder, defaultVelocity, etc."""
         instrument = self._make_embedded_kit()
         clip = self._make_kit_clip()
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         for attr in (
             "presetName", "presetFolder", "defaultVelocity",
             "isArmedForRecording", "activeModFunction", "colour",
@@ -608,7 +608,7 @@ class TestExtractKit:
         """Should add firmwareVersion and earliestCompatibleFirmware."""
         instrument = self._make_embedded_kit()
         clip = self._make_kit_clip()
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         assert result.get("firmwareVersion") == "c1.2.1"
         assert result.get("earliestCompatibleFirmware") == "4.1.0-alpha"
 
@@ -618,7 +618,7 @@ class TestExtractKit:
         clip = self._make_kit_clip(
             kit_params_attrs={"volume": "0x50000000", "pan": "0x00000000"},
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         dp = result.find("defaultParams")
         assert dp is not None, "Should have <defaultParams>"
         assert dp.get("volume") == "0x50000000"
@@ -630,7 +630,7 @@ class TestExtractKit:
         clip = self._make_kit_clip(
             kit_params_attrs={"volume": "0x50000000"},
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         children = list(result)
         assert children[0].tag == "defaultParams"
 
@@ -643,7 +643,7 @@ class TestExtractKit:
                 (1, {"volume": "0xBBBBBBBB", "pan": "0x22222222"}),
             ],
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         sound_sources = result.find("soundSources")
         sounds = list(sound_sources)
         # Sound 0 should have <defaultParams> with the first noteRow's values
@@ -664,7 +664,7 @@ class TestExtractKit:
                 (1, {"volume": "0xCCCCCCCC"}),  # Only drum index 1
             ],
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         sound_sources = result.find("soundSources")
         sounds = list(sound_sources)
         # Sound 0 should have <defaultParams> from the safety pass (cloned defaults)
@@ -685,7 +685,7 @@ class TestExtractKit:
                 (99, {"volume": "0xDDDDDDDD"}),
             ],
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         captured = capsys.readouterr()
         assert "drumIndex 99 out of range" in captured.out
         # Sounds should still have <defaultParams> from the safety pass,
@@ -704,7 +704,7 @@ class TestExtractKit:
         clip = self._make_kit_clip(
             noterows=[(0, {"volume": "0xAAAAAAAA"})],
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         sound_sources = result.find("soundSources")
         sound0 = list(sound_sources)[0]
         arp = sound0.find("arpeggiator")
@@ -717,7 +717,7 @@ class TestExtractKit:
         clip = self._make_kit_clip(
             kit_params_attrs={"volume": "0x50000000"},
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         tags = [child.tag for child in result]
         expected = [
             "defaultParams", "delay", "sidechain", "audioCompressor",
@@ -731,7 +731,7 @@ class TestExtractKit:
         clip = self._make_kit_clip(
             noterows=[(0, {"volume": "0xAAAAAAAA"})],
         )
-        result = extract_kit(instrument, clip)
+        result, _ = extract_kit(instrument, clip)
         sound_sources = result.find("soundSources")
         sound0 = list(sound_sources)[0]
         tags = [child.tag for child in sound0]
@@ -800,7 +800,7 @@ class TestKitDefaultParamsSafetyPass:
         clip = self._make_kit_clip(
             noterows=[(0, {"volume": "0xAAAAAAAA", "pan": "0x00000000"})],
         )
-        result = extract_kit(kit, clip)
+        result, _ = extract_kit(kit, clip)
         sound_sources = result.find("soundSources")
         sounds = list(sound_sources)
 
@@ -818,7 +818,7 @@ class TestKitDefaultParamsSafetyPass:
         clip = self._make_kit_clip(
             noterows=[(0, {"volume": "0xBBBBBBBB", "pan": "0x11111111"})],
         )
-        result = extract_kit(kit, clip)
+        result, _ = extract_kit(kit, clip)
         sound_sources = result.find("soundSources")
         sounds = list(sound_sources)
 
@@ -830,9 +830,9 @@ class TestKitDefaultParamsSafetyPass:
         assert dp1.get("pan") == dp0.get("pan")
 
     def test_warning_printed_for_defaulted_sound(
-        self, capsys: pytest.CaptureFixture[str],
+        self,
     ) -> None:
-        """Should print a warning for each sound that gets default params."""
+        """Should return a warning for each sound that gets default params."""
         kit = self._make_embedded_kit(
             num_sounds=3, sound_names=["Kick", "Snare", "HiHat"],
         )
@@ -840,19 +840,19 @@ class TestKitDefaultParamsSafetyPass:
         clip = self._make_kit_clip(
             noterows=[(0, {"volume": "0xAAAAAAAA"})],
         )
-        extract_kit(kit, clip)
-        captured = capsys.readouterr()
-        assert "Kit sound 'Snare' (index 1) has no clip parameters" in captured.out
-        assert "Kit sound 'HiHat' (index 2) has no clip parameters" in captured.out
+        _, warnings = extract_kit(kit, clip)
+        warning_text = "\n".join(warnings)
+        assert "Kit sound 'Snare' (index 1) has no clip parameters" in warning_text
+        assert "Kit sound 'HiHat' (index 2) has no clip parameters" in warning_text
         # Sound 0 (Kick) should NOT have a warning
-        assert "Kick" not in captured.out
+        assert "Kick" not in warning_text
 
     def test_no_sounds_have_noterows_uses_init_fallback(self) -> None:
         """When no sound has <defaultParams>, should fall back to init values."""
         kit = self._make_embedded_kit(num_sounds=2)
         # No noteRows at all
         clip = self._make_kit_clip(noterows=[])
-        result = extract_kit(kit, clip)
+        result, _ = extract_kit(kit, clip)
         sound_sources = result.find("soundSources")
         sounds = list(sound_sources)
 
@@ -879,7 +879,7 @@ class TestKitDefaultParamsSafetyPass:
         # noteRow with drumIndex but no <soundParams> child
         etree.SubElement(note_rows_el, "noteRow", drumIndex="0")
 
-        result = extract_kit(kit, clip)
+        result, _ = extract_kit(kit, clip)
         captured = capsys.readouterr()
         # Should warn about missing soundParams
         assert "no <soundParams>" in captured.out
@@ -892,7 +892,7 @@ class TestKitDefaultParamsSafetyPass:
         """Defaulted <defaultParams> should be inserted after <unison>."""
         kit = self._make_embedded_kit(num_sounds=2)
         clip = self._make_kit_clip(noterows=[])
-        result = extract_kit(kit, clip)
+        result, _ = extract_kit(kit, clip)
         sound_sources = result.find("soundSources")
         for sound in sound_sources:
             tags = [child.tag for child in sound]
@@ -1776,21 +1776,34 @@ class TestDeduplicateResults:
 
     def test_single_result_group_passes_through(self) -> None:
         """Groups with one member pass through, even with multiple groups."""
-        r1 = _make_extraction_result("Song1", "Bass")
-        r2 = _make_extraction_result("Song2", "Lead")
+        r1 = _make_extraction_result("Song1", "Bass", element=_make_synth_preset(osc1_type="saw"))
+        r2 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset(osc1_type="triangle"))
         result = deduplicate_results([r1, r2], self.CONFIG)
         assert len(result.accepted) == 2
         assert result.rejected == []
 
     def test_preset_name_grouping(self) -> None:
-        """Results with different preset names should never be compared."""
-        # Two different presets — both should be accepted even if elements are identical
-        el = _make_synth_preset()
-        r1 = _make_extraction_result("Song1", "Bass", element=el)
-        r2 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset())
+        """Results with different preset names are separate in the name pass.
+
+        Note: with the global (cross-name) pass, structurally identical presets
+        with different names *will* be caught. Use distinct elements to test
+        name-pass independence.
+        """
+        r1 = _make_extraction_result("Song1", "Bass", element=_make_synth_preset(osc1_type="saw"))
+        r2 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset(osc1_type="triangle"))
         result = deduplicate_results([r1, r2], self.CONFIG)
         assert len(result.accepted) == 2
         assert result.rejected == []
+
+    def test_cross_name_duplicates_caught_by_global_pass(self) -> None:
+        """Structurally identical presets with different names → global pass rejects one."""
+        r1 = _make_extraction_result("Song1", "Bass", element=_make_synth_preset())
+        r2 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset())
+        result = deduplicate_results([r1, r2], self.CONFIG)
+        assert len(result.accepted) == 1
+        assert len(result.rejected) == 1
+        assert result.name_pass_rejected == []
+        assert len(result.global_pass_rejected) == 1
 
     def test_identical_presets_deduplicated(self) -> None:
         """Two identical presets with the same name → second rejected."""
@@ -1868,13 +1881,17 @@ class TestDeduplicateResults:
         assert rejected.matched_result is r1
 
     def test_multiple_groups_independent(self) -> None:
-        """Dedup operates independently per group."""
-        # Group "Bass": 2 identical synths → 1 accepted, 1 rejected
-        r1 = _make_extraction_result("Song1", "Bass", element=_make_synth_preset())
-        r2 = _make_extraction_result("Song2", "Bass", element=_make_synth_preset())
-        # Group "Lead": 2 distinct synths → both accepted
+        """Dedup operates independently per group in the name pass."""
+        # Group "Bass": 2 identical synths → 1 accepted, 1 rejected (name pass)
+        r1 = _make_extraction_result("Song1", "Bass", element=_make_synth_preset(mode="fm"))
+        r2 = _make_extraction_result("Song2", "Bass", element=_make_synth_preset(mode="fm"))
+        # Group "Lead": 2 distinct synths → both accepted (name pass)
+        # Use osc1_type="saw" and mode="ringmod" so all 3 surviving presets
+        # are hard-distinct from each other (avoiding global-pass rejection).
         r3 = _make_extraction_result("Song1", "Lead", element=_make_synth_preset(osc1_type="saw"))
-        r4 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset(osc1_type="square"))
+        r4 = _make_extraction_result("Song2", "Lead", element=_make_synth_preset(mode="ringmod"))
         result = deduplicate_results([r1, r2, r3, r4], self.CONFIG)
         assert len(result.accepted) == 3
         assert len(result.rejected) == 1
+        assert len(result.name_pass_rejected) == 1
+        assert result.global_pass_rejected == []

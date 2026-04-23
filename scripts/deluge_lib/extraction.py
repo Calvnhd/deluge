@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import copy
 import re
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -371,6 +372,9 @@ class DedupResult:
 
     accepted: list[ExtractionResult]
     rejected: list[RejectedResult]
+    # Per-stage breakdown for reporting
+    name_pass_rejected: list[RejectedResult] = field(default_factory=list)
+    global_pass_rejected: list[RejectedResult] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -695,7 +699,8 @@ def extract_kit(
         clip: The corresponding <instrumentClip> element.
 
     Returns:
-        A standalone <kit> element ready for serialisation.
+        A tuple of (standalone <kit> element, list of warning strings).
+        The warnings describe any sounds that received default params.
 
     Steps:
         1. Deep-clone the <kit> element from <instruments>
@@ -765,8 +770,9 @@ def extract_kit(
             _merge_noterow_params(sounds[drum_index], noterow)
 
     # 7. Safety pass: ensure every <sound> has a <defaultParams> child
+    default_param_warnings: list[str] = []
     if sound_sources is not None:
-        _ensure_all_sounds_have_default_params(sounds)
+        default_param_warnings = _ensure_all_sounds_have_default_params(sounds)
 
     # 8. Reorder kit top-level children
     _reorder_kit_children(kit)
@@ -777,7 +783,7 @@ def extract_kit(
             if sound.tag == "sound":
                 _reorder_kit_sound_children(sound)
 
-    return kit
+    return kit, default_param_warnings
 
 
 # ---------------------------------------------------------------------------
@@ -1102,7 +1108,7 @@ def select_extended_clips(
         if instrument_type == "synth":
             element = extract_synth(inst.element, clip.element)
         else:
-            element = extract_kit(inst.element, clip.element)
+            element, _warnings = extract_kit(inst.element, clip.element)
         _strip_automation(element)
         normalise_params(element, instrument_type, normalisation_config)
         return element
@@ -1147,53 +1153,65 @@ def select_extended_clips(
 # ---------------------------------------------------------------------------
 
 
-def deduplicate_results(
+def _dedup_pass(
     results: list[ExtractionResult],
     config: ComparisonConfig,
+    group_key: Callable[[ExtractionResult], tuple],
+    sort_key: Callable[[ExtractionResult], tuple],
+    *,
+    verbose: bool = False,
+    label: str = "dedup",
 ) -> DedupResult:
-    """Filter redundant instruments that appear across multiple songs.
+    """Run a single deduplication pass with configurable grouping and sorting.
 
-    Groups extraction results by ``(preset_name, instrument_type)`` (ignoring
-    ``preset_folder`` per D21).  Within each group, sorts by song name
-    alphabetically for deterministic ordering.  The first result becomes the
-    baseline and is automatically accepted.  Each subsequent result is compared
-    against ALL accepted results in the group using :func:`compare_instruments`.
-    If distinct from all accepted → accept.  If similar to any → reject.
-
-    Groups with only one result pass through without comparison.
-
-    Args:
-        results: Full list of :class:`ExtractionResult` objects (post-extraction,
-            post-normalisation).
-        config: Comparison ruleset for the generalised comparison engine.
+    Groups extraction results by *group_key*, sorts within each group by
+    *sort_key*, then applies incremental acceptance: the first result in each
+    group is the baseline; subsequent results are compared against all accepted
+    results in the group.  If distinct from all → accept; if similar to any →
+    reject.
 
     Returns:
         A :class:`DedupResult` with accepted and rejected lists.
     """
-    # 1. Group results by (preset_name, instrument_type)
-    groups: dict[tuple[str, str], list[ExtractionResult]] = {}
+    _LABEL_MAP = {
+        "dedup-name": "Deduplication (by name)",
+        "dedup-global": "Deduplication (global)",
+    }
+    friendly_label = _LABEL_MAP.get(label, label)
+
+    groups: dict[tuple, list[ExtractionResult]] = {}
     for r in results:
-        key = (r.preset_name, r.instrument_type)
-        groups.setdefault(key, []).append(r)
+        groups.setdefault(group_key(r), []).append(r)
 
     accepted: list[ExtractionResult] = []
     rejected: list[RejectedResult] = []
 
-    for (_preset_name, _inst_type), group in sorted(groups.items()):
-        # 2. Sort by song name alphabetically for deterministic ordering
-        group.sort(key=lambda r: r.song_name)
+    total = len(results)
+    compared = 0
 
-        # Single-member groups pass through without comparison
+    for _key, group in sorted(groups.items()):
+        group.sort(key=sort_key)
+
         if len(group) == 1:
             accepted.append(group[0])
+            compared += 1
+            if not verbose:
+                print(f"\r{friendly_label}... compared {compared}/{total}", end="", flush=True)
             continue
 
-        # 3. First result is the baseline — automatically accepted
+        if verbose:
+            print(f"[{label}] Group: {_key} — {len(group)} versions")
+
         baseline = group[0]
         accepted.append(baseline)
         accepted_in_group: list[ExtractionResult] = [baseline]
+        compared += 1
+        if not verbose:
+            print(f"\r{friendly_label}... compared {compared}/{total}", end="", flush=True)
 
-        # 4. Compare each subsequent result against ALL accepted in the group
+        if verbose:
+            print(f"[{label}]   baseline: {baseline.song_name}")
+
         for candidate in group[1:]:
             is_distinct_from_all = True
             matched: ExtractionResult | None = None
@@ -1206,15 +1224,27 @@ def deduplicate_results(
                     candidate.instrument_type,
                     config,
                 )
+                if verbose:
+                    verdict = "distinct" if comparison.is_distinct else "similar"
+                    print(
+                        f"[{label}]   {candidate.song_name} vs"
+                        f" {accepted_result.song_name}"
+                        f" → {verdict} ({comparison.reason})"
+                    )
                 if not comparison.is_distinct:
                     is_distinct_from_all = False
                     matched = accepted_result
                     matched_comparison = comparison
-                    break  # similar to at least one — reject
+                    break
 
             if is_distinct_from_all:
                 accepted.append(candidate)
                 accepted_in_group.append(candidate)
+                compared += 1
+                if not verbose:
+                    print(f"\r{friendly_label}... compared {compared}/{total}", end="", flush=True)
+                if verbose:
+                    print(f"[{label}]   → accepted {candidate.song_name}")
             else:
                 assert matched is not None
                 assert matched_comparison is not None
@@ -1225,8 +1255,76 @@ def deduplicate_results(
                         comparison=matched_comparison,
                     )
                 )
+                compared += 1
+                if not verbose:
+                    print(f"\r{friendly_label}... compared {compared}/{total}", end="", flush=True)
+                if verbose:
+                    print(
+                        f"[{label}]   → rejected {candidate.song_name}"
+                        f" (matches {matched.song_name})"
+                    )
+
+    if not verbose and total > 0:
+        print(f"\r{friendly_label}... compared {total}/{total} — COMPLETE")
 
     return DedupResult(accepted=accepted, rejected=rejected)
+
+
+def deduplicate_results(
+    results: list[ExtractionResult],
+    config: ComparisonConfig,
+    *,
+    verbose: bool = False,
+) -> DedupResult:
+    """Filter redundant instruments across songs using two dedup passes.
+
+    **Pass 1 (by name):** Groups by ``(preset_name, instrument_type)`` and
+    sorts by ``song_name``.  This catches duplicates of the same named preset
+    across multiple songs.
+
+    **Pass 2 (global):** Groups accepted results from pass 1 by
+    ``(instrument_type,)`` only and sorts by ``(preset_name, song_name)``.
+    This catches cross-name duplicates (e.g. "000" vs "000 TR-808").
+
+    Args:
+        results: Full list of :class:`ExtractionResult` objects (post-extraction,
+            post-normalisation).
+        config: Comparison ruleset for the generalised comparison engine.
+        verbose: Print detailed comparison logging.
+
+    Returns:
+        A :class:`DedupResult` with accepted, rejected, and per-stage lists.
+    """
+
+    # Pass 1: group by (preset_name, instrument_type)
+    name_result = _dedup_pass(
+        results,
+        config,
+        group_key=lambda r: (r.preset_name, r.instrument_type),
+        sort_key=lambda r: (r.song_name,),
+        verbose=verbose,
+        label="dedup-name",
+    )
+
+    # Pass 2: group accepted results by (instrument_type,) only
+    global_result = _dedup_pass(
+        name_result.accepted,
+        config,
+        group_key=lambda r: (r.instrument_type,),
+        sort_key=lambda r: (r.preset_name, r.song_name),
+        verbose=verbose,
+        label="dedup-global",
+    )
+
+    # Combine rejected from both passes
+    all_rejected = name_result.rejected + global_result.rejected
+
+    return DedupResult(
+        accepted=global_result.accepted,
+        rejected=all_rejected,
+        name_pass_rejected=name_result.rejected,
+        global_pass_rejected=global_result.rejected,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -1459,7 +1557,7 @@ def _merge_noterow_params(
 
 def _ensure_all_sounds_have_default_params(
     sounds: list[etree._Element],
-) -> None:
+) -> list[str]:
     """Ensure every <sound> in a kit has a <defaultParams> child.
 
     After the noteRow merge pass, some sounds may still lack <defaultParams>
@@ -1473,7 +1571,8 @@ def _ensure_all_sounds_have_default_params(
         3. If NO sound has <defaultParams> (extremely unlikely), fall back to
            a minimal hardcoded init structure
 
-    Prints a warning for each sound that receives default params.
+    Returns:
+        A list of warning strings for each sound that received default params.
     """
     # Find a template <defaultParams> from an existing sound
     template: etree._Element | None = None
@@ -1483,6 +1582,7 @@ def _ensure_all_sounds_have_default_params(
             template = dp
             break
 
+    warnings: list[str] = []
     for idx, sound in enumerate(sounds):
         if sound.find("defaultParams") is not None:
             continue
@@ -1494,8 +1594,8 @@ def _ensure_all_sounds_have_default_params(
             new_dp = _create_init_default_params()
 
         name = sound.get("name", f"index {idx}")
-        print(
-            f"WARNING: Kit sound {name!r} (index {idx})"
+        warnings.append(
+            f"Kit sound {name!r} (index {idx})"
             " has no clip parameters — using defaults"
         )
 
@@ -1506,6 +1606,8 @@ def _ensure_all_sounds_have_default_params(
             sound.insert(unison_idx + 1, new_dp)
         else:
             sound.append(new_dp)
+
+    return warnings
 
 
 def _create_init_default_params() -> etree._Element:

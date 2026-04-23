@@ -66,6 +66,11 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="List extractions without writing files (default behaviour when no flag given)",
     )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Print detailed comparison logging during deduplication",
+    )
     args = parser.parse_args(argv)
 
     # Dry-run is the default behaviour (matches existing script conventions).
@@ -105,6 +110,8 @@ def main(argv: list[str] | None = None) -> None:
     synth_output_dir = deluge_root / "SYNTHS" / "SONG-SYNTHS"
     kit_output_dir = deluge_root / "KITS" / "SONG-KITS"
 
+    line_width = 60
+
     for song_path, song_tree in songs:
         song_name = song_path.stem
 
@@ -113,11 +120,18 @@ def main(argv: list[str] | None = None) -> None:
         clips = discover_clips(song_tree)
         groups, match_warnings = match_instruments_to_clips(instruments, clips)
 
-        # Print match warnings (orphaned instruments, duplicate clips).
-        for warning in match_warnings:
-            print(f"WARNING: {song_name}.XML \u2014 {warning}")
+        # Only print songs that have warnings or extractable instruments.
+        if not match_warnings and not groups:
+            continue
 
-        # Skip songs with no extractable instruments.
+        # Song header with dash separator.
+        header = f"{song_name}.XML "
+        print(header + "-" * max(0, line_width - len(header)))
+
+        # Print match warnings immediately (orphaned instruments, duplicate clips).
+        for w in match_warnings:
+            print(f"  WARNING: {w}")
+
         if not groups:
             continue
 
@@ -152,8 +166,9 @@ def main(argv: list[str] | None = None) -> None:
                 section_id = clip_info.section
                 if section_id not in SECTION_COLOURS:
                     print(
-                        f"WARNING: {song_name}.XML ({inst.preset_name})"
-                        f" — unexpected section ID {section_id}, treating as section 0"
+                        f"  WARNING: ({inst.preset_name})"
+                        f" — unexpected section ID {section_id},"
+                        f" treating as section 0"
                     )
                     section_id = 0
                 colour_name, colour_abbr = SECTION_COLOURS[section_id]
@@ -162,15 +177,18 @@ def main(argv: list[str] | None = None) -> None:
                 if inst.instrument_type == "synth":
                     element = extract_synth(inst.element, clip_info.element)
                 else:
-                    element = extract_kit(inst.element, clip_info.element)
+                    element, default_param_warnings = extract_kit(
+                        inst.element, clip_info.element,
+                    )
+                    for w in default_param_warnings:
+                        print(
+                            f"  WARNING: ({inst.preset_name},"
+                            f" section {section_id}/{colour_name})"
+                            f" — {w}"
+                        )
 
                 # Strip automation data (extended hex strings → base values).
-                auto_warnings = _strip_automation(element)
-                if auto_warnings:
-                    print(
-                        f"WARNING: {song_name}.XML ({inst.preset_name})"
-                        f" \u2014 Stripped automation from {len(auto_warnings)} attributes"
-                    )
+                _strip_automation(element)
 
                 # Normalise master volume and pan.
                 normalise_params(element, inst.instrument_type, norm_config)
@@ -204,62 +222,60 @@ def main(argv: list[str] | None = None) -> None:
                 )
                 song_results.append(result)
 
-        # Print per-song extraction listing.
-        if song_results:
-            print(f"{song_name}.XML")
-            for r in song_results:
-                type_label = r.instrument_type.upper()
-                output_dir = (
-                    synth_output_dir if r.instrument_type == "synth" else kit_output_dir
-                )
-                rel_dir = print_path(output_dir.relative_to(deluge_root))
+                # Print extraction line immediately.
+                type_label = result.instrument_type.upper()
                 diff_info = ""
-                if r.differing_params:
-                    diff_info = f"  ({len(r.differing_params)} diffs)"
+                if result.differing_params:
+                    diff_info = f"  ({len(result.differing_params)} diffs)"
                 print(
-                    f"  {type_label:<6} {r.preset_name:<20}"
-                    f"→ {rel_dir}/{r.output_filename}{diff_info}"
+                    f"    {type_label:<6} {result.preset_name:<20}"
+                    f"→ {result.output_filename}{diff_info}"
                 )
-            all_results.extend(song_results)
+
+        all_results.extend(song_results)
 
     # ----- Dedup -----
-
+    print()
+    print("-" * line_width)
+    print()
     dedup_result: DedupResult | None = None
     if not args.no_dedup and all_results:
-        dedup_result = deduplicate_results(all_results, dedup_config)
+        dedup_result = deduplicate_results(all_results, dedup_config, verbose=args.verbose)
         all_results = dedup_result.accepted
-
     if dedup_result is not None:
         _print_dedup_report(dedup_result)
 
     # ----- Summary and Output -----
 
+    if not all_results:
+        print(f"\n{'-' * line_width}")
+        print("\nNo instruments to extract")
+        return
+
     synth_count = sum(1 for r in all_results if r.instrument_type == "synth")
     kit_count = sum(1 for r in all_results if r.instrument_type == "kit")
     dedup_removed = len(dedup_result.rejected) if dedup_result else 0
-    dedup_suffix = f" ({dedup_removed} duplicates removed)" if dedup_removed else ""
-    print(
-        f"\nSummary: Extracted {synth_count} synths and {kit_count} kits "
-        f"from {len(songs)} songs{dedup_suffix}"
-    )
-
+    print(f"\n{'-' * line_width}")
+    print()
+    print(f"Extracted {synth_count} synths and {kit_count} kits from {len(songs)} songs")
+    if dedup_removed:
+        print(f"({dedup_removed} duplicates removed)")
+    print()
+    print("Output:")
     if synth_count > 0:
-        print(f"  Output: {print_path(synth_output_dir.relative_to(deluge_root))}/ ({synth_count} files)")
+        print(f"\t{print_path(synth_output_dir.relative_to(deluge_root))}/ \t({synth_count} files)")
     if kit_count > 0:
-        print(f"  Output: {print_path(kit_output_dir.relative_to(deluge_root))}/ ({kit_count} files)")
-
-    if not all_results:
-        print("\nNo instruments to extract.")
-        return
+        print(f"\t{print_path(kit_output_dir.relative_to(deluge_root))}/ \t({kit_count} files)")
 
     # In dry-run mode, stop here.
     if explicit_dry_run:
-        print("\nDry run complete")
+        print(f"\n{'-' * line_width}")
+        print("\nDry run complete\n")
         return
 
     # Prompt for confirmation before writing.
     print()
-    if not confirm_apply("Apply these changes?"):
+    if not confirm_apply("Apply these changes? \nExisting content will be overwritten"):
         print("Aborted.")
         return
 
@@ -277,6 +293,19 @@ def main(argv: list[str] | None = None) -> None:
     synth_output_dir.mkdir(parents=True, exist_ok=True)
     kit_output_dir.mkdir(parents=True, exist_ok=True)
 
+    # Print file listing grouped by output directory.
+    print("\nWriting files...\n")
+    for label, dir_path, inst_type in [
+        (synth_output_dir, synth_output_dir, "synth"),
+        (kit_output_dir, kit_output_dir, "kit"),
+    ]:
+        group_files = [r.output_filename for r in all_results if r.instrument_type == inst_type]
+        if group_files:
+            print(f"{print_path(dir_path.relative_to(deluge_root))}/")
+            for fname in group_files:
+                print(f"  {fname}")
+            print()
+
     # Write extraction files.
     for result in all_results:
         output_dir = synth_output_dir if result.instrument_type == "synth" else kit_output_dir
@@ -287,7 +316,8 @@ def main(argv: list[str] | None = None) -> None:
     _write_manifest(synth_output_dir, all_results, "synth", len(songs))
     _write_manifest(kit_output_dir, all_results, "kit", len(songs))
 
-    print(f"\nDone. Wrote {len(all_results)} preset files.")
+    print(f"\nInstrument extraction complete")
+    print()
 
 
 # ---------------------------------------------------------------------------
@@ -297,7 +327,34 @@ def main(argv: list[str] | None = None) -> None:
 
 def _print_dedup_report(dedup_result: DedupResult) -> None:
     """Print a summary of duplicates removed during cross-song dedup."""
-    rejected = dedup_result.rejected
+    if not dedup_result.rejected:
+        return
+
+    # --- Name pass ---
+    _print_dedup_stage(
+        stage_label="Deduplication (by name)",
+        rejected=dedup_result.name_pass_rejected,
+        accepted=dedup_result.accepted,
+        show_match_info=False,
+    )
+
+    # --- Global pass ---
+    _print_dedup_stage(
+        stage_label="Deduplication (global)",
+        rejected=dedup_result.global_pass_rejected,
+        accepted=dedup_result.accepted,
+        show_match_info=True,
+    )
+
+
+def _print_dedup_stage(
+    *,
+    stage_label: str,
+    rejected: list,
+    accepted: list[ExtractionResult],
+    show_match_info: bool,
+) -> None:
+    """Print a single dedup stage report section."""
     if not rejected:
         return
 
@@ -305,29 +362,51 @@ def _print_dedup_report(dedup_result: DedupResult) -> None:
     kit_removed = sum(1 for r in rejected if r.result.instrument_type == "kit")
 
     print(
-        f"\nDedup: Removed {len(rejected)} duplicates"
+        f"\n{stage_label}: Removed {len(rejected)} duplicates"
         f" ({synth_removed} synths, {kit_removed} kits)"
     )
 
     # Group rejected results by (preset_name, instrument_type).
-    groups: dict[tuple[str, str], list[ExtractionResult]] = {}
+    groups: dict[tuple[str, str], list] = {}
     for r in rejected:
         key = (r.result.preset_name, r.result.instrument_type)
-        groups.setdefault(key, []).append(r.result)
+        groups.setdefault(key, []).append(r)
 
-    # Build set of accepted song names per group for the "kept" display.
+    # Build set of accepted song names per (preset_name, instrument_type).
     accepted_songs: dict[tuple[str, str], list[str]] = {}
-    for a in dedup_result.accepted:
+    for a in accepted:
         key = (a.preset_name, a.instrument_type)
         accepted_songs.setdefault(key, []).append(a.song_name)
 
-    for (preset_name, inst_type), removed in sorted(groups.items()):
-        kept = sorted(accepted_songs.get((preset_name, inst_type), []))
-        removed_names = sorted(r.song_name for r in removed)
-        print(
-            f"  {preset_name} ({inst_type}): kept {', '.join(kept)},"
-            f" removed {', '.join(removed_names)}"
-        )
+    sorted_groups = sorted(groups.items())
+
+    # Compute column widths for aligned output.
+    max_name = max(len(name) for (name, _), _ in sorted_groups) if sorted_groups else 0
+    type_width = len("(synth)")
+
+    indent = "  "
+    for (preset_name, inst_type), rejected_items in sorted_groups:
+        tag = f"({inst_type})"
+        prefix = f"{indent}{preset_name:<{max_name}} {tag:<{type_width}}"
+        padding = " " * len(prefix)
+
+        if show_match_info:
+            # Global pass: show what each rejected item matched against
+            removed_parts: list[str] = []
+            for rr in sorted(rejected_items, key=lambda r: r.result.song_name):
+                m = rr.matched_result
+                removed_parts.append(
+                    f"{rr.result.song_name} (matches {m.preset_name} from {m.song_name})"
+                )
+            kept = sorted(accepted_songs.get((preset_name, inst_type), []))
+            print(f"{prefix} kept:    {', '.join(kept) if kept else '(none in this group)'}")
+            print(f"{padding} removed: {', '.join(removed_parts)}")
+        else:
+            # Name pass: simple kept/removed listing
+            kept = sorted(accepted_songs.get((preset_name, inst_type), []))
+            removed_names = sorted(r.result.song_name for r in rejected_items)
+            print(f"{prefix} kept:    {', '.join(kept)}")
+            print(f"{padding} removed: {', '.join(removed_names)}")
 
 
 def _write_manifest(
