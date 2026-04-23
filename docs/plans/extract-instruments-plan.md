@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-Build a script that scans all song XMLs in `DELUGE/SONGS/`, extracts embedded synth and kit instruments as standalone preset XMLs, and writes them to `DELUGE/SYNTHS/SONG-SYNTHS/` and `DELUGE/KITS/SONG-KITS/`. The script merges the split instrument structure (from `<instruments>`) with clip-level parameters (from `<sessionClips>`) and arpeggiator data, normalises master volume and pan, and outputs firmware `c1.2.1` standalone presets. Two modes are supported: default mode extracts one version per instrument (lowest section ID), and extended mode extracts multiple versions when parameters differ significantly. Research Section 13.5 provides the definitive transformation recipes.
+Build a script that scans all song XMLs in `DELUGE/SONGS/`, extracts embedded synth and kit instruments as standalone preset XMLs, and writes them to `DELUGE/SYNTHS/SONG-SYNTHS/` and `DELUGE/KITS/SONG-KITS/`. The script merges the split instrument structure (from `<instruments>`) with clip-level parameters (from `<sessionClips>`) and arpeggiator data, normalises master volume and pan, and outputs firmware `c1.2.1` standalone presets. Two modes are supported: default mode extracts one version per instrument (lowest section ID), and extended mode extracts multiple versions when parameters differ significantly. A generalised comparison engine (research Section 16) classifies parameters into hard markers, soft markers, and ignorable params — used by both intra-song extended selection and cross-song deduplication. Cross-song dedup (research Section 17) filters redundant extractions where the same preset appears in multiple songs, using a baseline + incremental acceptance algorithm grouped by preset name. Dedup is enabled by default (`--no-dedup` to disable). Research Section 13.5 provides the definitive transformation recipes.
 
 ## Research Summary
 
@@ -20,6 +20,10 @@ Key findings from the [research document](../research/extract-instruments-resear
 - **Existing assets (Section 10):** `parse_deluge_xml()`, `get_deluge_root()`, `scan_tree()`, `confirm_apply()`, dataclass patterns, and `pyproject.toml` entry points are all reusable.
 - **All 58 songs use `c1.2.1` firmware (Section 11):** Single format target simplifies extraction. Warn and skip songs with other firmware.
 - **Recommended approach:** Merge instrument + clip params (Approach A) — the only viable approach since active instruments lack `<defaultParams>`.
+- **Generalised comparison engine (Section 16):** A single `compare_instruments()` function with a three-tier model — hard markers (structural identity: osc type, sample file, patchCable structure, arp mode, etc.), soft markers (numerical params with per-param and group thresholds), and an ignore list (volume, pan). Configured via a `ComparisonConfig` dataclass with a `default()` classmethod. Operates on assembled standalone presets post-normalisation.
+- **Cross-song deduplication (Section 17):** Post-extraction filter using baseline + incremental acceptance. Groups results by `(preset_name, instrument_type)`, ignoring preset folder. First alphabetically becomes baseline; subsequent results compared against all accepted. Dedup on by default, `--no-dedup` to disable.
+- **Impact on extended mode (Section 18):** Existing `compare_versions()` replaced by `compare_instruments()`. `select_extended_clips()` updated to compare against all accepted (not just baseline). Both use cases share the generalised engine with independently configurable thresholds.
+- **Duplication analysis (Section 19):** Kit "000" appears in 10+ songs, "Deeper" in 5, "K01Bass" in 4. Estimated 20-30% reduction in output files from dedup.
 
 Authoritative user decisions from [extraction-questions.md](../../temp/extraction-questions.md) supplement the research and take precedence where conflicts exist.
 
@@ -44,6 +48,15 @@ Authoritative user decisions from [extraction-questions.md](../../temp/extractio
 | D13 | Ignore arrangement-only clips and `<arrangementOnlyClips>` entirely | User decision (Q4). Session clips only. | Include arrangement clips (deferred) |
 | D14 | Duplicate clips in same section: take first, warn about second | User decision (Q9). | Take both (rejected — would produce near-identical extractions) |
 | D15 | Extended mode comparison ignores automation data | User decision (Q10 clarification). Automation is song-specific playback data, not a meaningful instrument difference. For comparison, use the raw attribute value; if it's an extended hex string (automation), treat the value as unchanged from other versions that also have automation or use the first hex value segment. | Include automation in comparison (rejected) |
+| D16 | Generalised comparison engine — single `compare_instruments()` function for both extended mode and dedup | Research Section 16.1. Both use cases need the same comparison logic. A single engine with configurable rulesets avoids divergence and duplication. Operates on assembled standalone presets post-normalisation, so the engine doesn't need to understand the split instrument/clip architecture. | Two separate comparison implementations (rejected — divergence risk) |
+| D17 | Three-tier comparison model: hard markers, soft markers, ignore list | Research Section 16.2. Hard markers (structural identity) trigger immediate "distinct" — osc type, sample file, patchCable structure, arp mode, etc. Soft markers use per-param threshold + group count threshold. Ignore list covers normalised params (volume, pan). | Binary identical/different (rejected — too coarse); single threshold (rejected — doesn't capture structural vs numerical) |
+| D18 | ComparisonConfig as a dataclass with `default()` classmethod | Research Section 16.3. Type-safe, IDE-completable, testable. `default()` returns the standard config matching existing constants. Easily overridden for testing. Not user-facing config — developer tuning only. | TOML/YAML config file (rejected — not user-facing, adds parsing complexity) |
+| D19 | PatchCables hybrid comparison — structure is hard, amounts are soft | Research Section 16.6. Adding/removing a cable is structural (hard marker). Changing amount on an existing cable is numerical (soft marker). Compare set of `(source, destination)` pairs for structure, then `amount` values for soft comparison. | Treat all patchCable changes as hard (rejected — too aggressive); treat all as soft (rejected — misses structural routing changes) |
+| D20 | Cross-song dedup enabled by default, `--no-dedup` to disable | Research Section 17.5. The primary user runs the script periodically and wants clean output. Most songs share common starting-point presets (e.g., kit "000" in 10+ songs). | Dedup off by default (rejected — cluttered output is the common complaint) |
+| D21 | Dedup groups by `(preset_name, instrument_type)`, ignoring preset_folder | Research Section 17.3 (Option A) and 17.4. Preset folder indicates load location, not identity. Two instruments named "K01Bass" from different folders are the same base preset. Cross-name dedup deferred — hard markers would catch structurally identical instruments under different names if later needed. | Global cross-name comparison (rejected — O(n²), high false-positive risk); hybrid with `--global-dedup` flag (deferred) |
+| D22 | Threshold independence — both use cases get separate `ComparisonConfig` instances with identical defaults | Research Section 17.7. Allows independent tuning during testing (e.g., more aggressive dedup thresholds vs. more permissive extended selection). | Single shared config (rejected — limits tuning flexibility) |
+| D23 | Extended mode `select_extended_clips()` compares against ALL accepted clips, not just baseline | Research Section 18.2. Prevents accepting clips that are similar to each other but both differ from baseline. Same pattern as dedup algorithm. | Compare only against baseline (original plan — rejected for consistency and quality) |
+| D24 | Envelope and delay/sidechain/compressor attributes treated as soft markers | Research Sections 16.7 and 16.8. These are numerical/tweakable settings, not structural identity. Included in soft param count. | Treat as hard markers (rejected — too aggressive for numerical tweaks) |
 
 ## Technical Specification
 
@@ -64,8 +77,8 @@ The feature follows the existing codebase pattern: a thin CLI script imports reu
 
 **Module responsibilities:**
 
-- `scripts/deluge_lib/extraction.py` — Core extraction logic. Contains all reusable functions: song parsing, instrument-clip matching, synth/kit transformation, version comparison, normalisation, and XML serialisation. This module has no CLI concerns, no I/O side effects (except receiving parsed XML trees and returning data structures), and no user interaction.
-- `scripts/extract_instruments.py` — CLI entry point. Handles argument parsing, file discovery, dry-run logic, trash management, file writing, manifest generation, and console output. Calls into `extraction.py` for all domain logic.
+- `scripts/deluge_lib/extraction.py` — Core extraction logic. Contains all reusable functions: song parsing, instrument-clip matching, synth/kit transformation, version comparison via the generalised comparison engine, cross-song deduplication, normalisation, and XML serialisation. This module has no CLI concerns, no I/O side effects (except receiving parsed XML trees and returning data structures), and no user interaction.
+- `scripts/extract_instruments.py` — CLI entry point. Handles argument parsing, file discovery, dry-run logic, trash management, file writing, manifest generation, dedup reporting, and console output. Calls into `extraction.py` for all domain logic.
 
 **Data flow:**
 
@@ -73,12 +86,15 @@ The feature follows the existing codebase pattern: a thin CLI script imports reu
 2. CLI discovers all song XMLs in `DELUGE_ROOT/SONGS/`
 3. For each song, CLI passes the parsed XML tree to extraction functions
 4. Extraction functions return structured results (dataclasses) describing what to extract
-5. CLI handles output: trash previous runs, write XML files, generate manifest, print summary
+5. CLI collects all results across all songs into a flat list
+6. If dedup is enabled (default), the dedup function groups results by `(preset_name, instrument_type)` and applies baseline + incremental acceptance using the comparison engine, returning only accepted results
+7. CLI handles output: trash previous runs, write XML files, generate manifest, print summary with dedup stats
 
 **Key data structures (conceptual — the implementer defines the concrete representation):**
 
 - An extraction result for each instrument: carries the song name, preset name, instrument type (synth/kit), section ID, colour abbreviation, the assembled standalone XML element tree, and metadata for the manifest
-- A version comparison result: carries whether two clip versions are considered distinct, and the parameters that differ
+- A comparison config: carries hard marker attribute sets (per element path, per instrument type), soft marker thresholds (param count threshold, per-param percentage threshold), and the set of ignored attribute names. Provides a `default()` classmethod returning standard thresholds. Separate instances used for intra-song and inter-song comparison to support independent tuning.
+- A comparison result: carries whether two instruments are distinct, any hard marker differences found, the count and names of soft params exceeding threshold, and a human-readable reason string
 - A normalisation config: which attributes to normalise and their target values, stored as a data structure that can be extended
 
 **File layout after implementation:**
@@ -122,6 +138,7 @@ DELUGE/
 |-------|--------|-------------|
 | `DELUGE_ROOT` | `scripts/.env` | Path to `DELUGE/` directory. Loaded via `get_deluge_root()` |
 | `--extended` | CLI flag | Enable extended mode (extract multiple versions per instrument) |
+| `--no-dedup` | CLI flag | Disable cross-song deduplication (extract all versions from all songs) |
 | `--dry-run` | CLI flag | List extractions without writing files. Default behaviour when no flag is given — matches existing script conventions |
 | Song XMLs | `DELUGE_ROOT/SONGS/*.XML` | All song XMLs discovered recursively |
 | Init presets | `DELUGE_ROOT/SYNTHS/Init-Synth.XML`, `DELUGE_ROOT/KITS/Init-Kit.XML` | Reference volume/pan values for normalisation |
@@ -152,9 +169,14 @@ K01Sink.XML
   SYNTH  K01Arp             → SONG-SYNTHS/K01Sink-K01Arp.XML
   ...
 
-Summary: Extracted 45 synths and 12 kits from 58 songs
-  Output: DELUGE/SYNTHS/SONG-SYNTHS/ (45 files)
-  Output: DELUGE/KITS/SONG-KITS/ (12 files)
+Dedup: Removed 12 duplicates (8 synths, 4 kits)
+  000 (kit): kept Alr, removed Ape, Beginagain, Bingbong, Bloop, ...
+  K01Bass (synth): kept Ambient-Fishes, removed K01Sink, Wf, Wf 7
+  Deeper (kit): kept Ell, removed K05BeautifulStranger, No-More-Colour, Noize, One Eye Tea
+
+Summary: Extracted 33 synths and 8 kits from 58 songs (12 duplicates removed)
+  Output: DELUGE/SYNTHS/SONG-SYNTHS/ (33 files)
+  Output: DELUGE/KITS/SONG-KITS/ (8 files)
 
 Apply these changes? [y/N]
 ```
@@ -197,6 +219,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 | **Naming collisions** | Dedicated output subdirectories prevent overwriting user presets. Within the output directory, incrementing numbers resolve same-name instruments. |
 | **.env configuration** | Uses existing `DELUGE_ROOT`. No new environment variables. |
 | **Cross-platform** | Python + pathlib + lxml. No platform-specific tools. Spaces in filenames are kept (Deluge handles them; both platforms support them). |
+| **Comparison engine** | The generalised `compare_instruments()` function is used by both extended mode (`select_extended_clips()`) and cross-song dedup (`deduplicate_results()`). Changes to comparison logic or thresholds affect both features. Both use cases get independent `ComparisonConfig` instances to allow separate tuning. |
 
 ## Risk Mitigation
 
@@ -212,6 +235,9 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 | Element ordering mismatch | Follow verified c1.2.1 standalone ordering from research Sections 6 and 7. | Low if tests compare output ordering with Init presets |
 | Parameter automation in soundParams | Strip automation: truncate extended hex values to base (first 8 hex chars after `0x`). Standalone presets never contain automation data. | `_strip_automation()` called from CLI after `extract_synth()`/`extract_kit()`, before `normalise_params()` |
 | Extended mode comparison noise | Configurable thresholds (D4). Automation ignored for comparison (D15). Structural/non-numerical changes always trigger extraction. | May need threshold tuning — constants are easily editable |
+| Dedup removes legitimately different instruments | Hard marker comparison catches structural differences regardless of thresholds. Instruments with different osc types, sample files, or patchCable structure are always kept. Soft threshold defaults (3 params, 10%) are conservative. `--no-dedup` flag provides escape hatch. | Possible false negatives for instruments with identical structure but subtly different numerical settings below threshold — user can lower thresholds or disable dedup |
+| Dedup ordering affects which version is kept | Deterministic alphabetical ordering by song name ensures reproducible results. The "first alphabetically" convention is consistent with default mode's "lowest section ID" strategy. | User may prefer a specific song's version — not controllable without manual intervention |
+| Comparison engine performance on large preset sets | Grouping by preset name keeps comparison groups small (typically 2-10 instruments per group). Each comparison is in-memory XML traversal — no I/O. Extended mode has at most ~6 pairwise comparisons per instrument per song. | Negligible unless preset counts grow significantly |
 
 ## Implementation Roadmap
 
@@ -432,48 +458,121 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Implementation Notes:**
   > Full CLI pipeline scaffolded in `extract_instruments.py` `main()` (15 Apr 2026). Wired together: argparse, `discover_songs()` → per-song loop → `discover_instruments()`/`discover_clips()`/`match_instruments_to_clips()` → `select_default_clip()`/`select_extended_clips()` → `extract_synth()`/`extract_kit()` → `normalise_params()` → `generate_filename()` → `ExtractionResult` construction → per-song console output → summary → dry-run/confirmation flow → trash → file writing → manifest writing. All stubs now implemented. Exit codes added 22 Apr 2026: `__main__` block wraps `main()` in try/except, calling `sys.exit(1)` on unhandled exceptions. Init preset validation added at startup — checks `SYNTHS/Init-Synth.XML` and `KITS/Init-Kit.XML` exist before proceeding, exits with error message if missing.
 
-### Phase 4: Extended Mode
+### Phase 4: Generalised Comparison Engine and Extended Mode
 
-> **Goal:** Implement multi-version extraction with parameter comparison
+> **Goal:** Build the three-tier comparison engine (hard/soft/ignore markers) and use it for both intra-song extended mode selection and (later, Phase 5) cross-song dedup
 > **Prerequisites:** Phase 3 complete — default mode fully working end-to-end
 
-#### Task 4.1: Parameter comparison engine
+#### Task 4.1: ComparisonConfig and ComparisonResult data structures
 
-- **Description:** Implement the version comparison logic that determines whether two clips of the same instrument are sufficiently different to warrant separate extraction. This compares structural elements, non-numerical settings, and numerical parameter values.
-- **Inputs:** Two clip elements for the same instrument, the instrument element
-- **Outputs:** Boolean (distinct or not) and a list of differing parameters
+- **Description:** Define the `ComparisonConfig` dataclass (research Section 16.3) and `ComparisonResult` dataclass (research Section 16.4). `ComparisonConfig` carries hard marker attribute sets per element path and instrument type, soft marker thresholds, and ignored attributes. `ComparisonResult` carries the distinct/duplicate verdict, hard diffs, soft diffs, and a human-readable reason string. Provide a `ComparisonConfig.default()` classmethod that consumes the existing module-level constants (`DIFF_PARAM_COUNT_THRESHOLD`, `DIFF_PARAM_PERCENT_THRESHOLD`, `COMPARISON_EXCLUDED_ATTRS`). The existing `VersionComparison` dataclass can be removed or replaced by `ComparisonResult`.
+- **Inputs:** Research Section 16.2 (hard marker tables), 16.3 (config structure), 16.4 (result structure)
+- **Outputs:** Two dataclasses in `extraction.py` with sensible defaults
 - **Acceptance Criteria:**
-  - [ ] Compares structural elements on the instrument `<sound>` definition (oscillator types, filter modes, polyphonic mode, etc.) — any structural/non-numerical change = distinct
-  - [ ] Compares envelope, patchCable, and arpeggiator settings — any non-numerical setting change = distinct
-  - [ ] Compares numerical `<soundParams>` attributes (excluding `volume` and `pan`) — if ≥ threshold count differ by > threshold percentage, versions are distinct
-  - [ ] Count threshold and percentage threshold are module-level constants (default: 3 params, 10%)
-  - [ ] Percentage calculation: absolute difference as proportion of the full parameter range. For hex values, parse as 32-bit signed integers. For extended hex strings (automation), treat as unchanged or use first value segment
-  - [ ] Returns the list of parameters that differ (for logging/manifest)
-  - [ ] Ignores automation data for comparison purposes per D15
+  - [ ] `ComparisonConfig` dataclass exists with fields for synth hard attrs, kit hard attrs, soft thresholds (param count, param percent), and ignored attrs
+  - [ ] `ComparisonConfig.default()` returns a config populated with all hard markers from research Section 16.2 (synth: mode, polyphonic, osc types, sample files, filter route, lpfMode, hpfMode, modFXType, arp mode/noteMode/octaveMode, patchCable structure; kit: sound count, sound names, per-sound sample files, per-sound osc types, per-sound arp mode, kit-level modFXType, kit-level filter modes)
+  - [ ] `ComparisonConfig.default()` uses existing constants for thresholds: `param_count_threshold=3`, `param_percent_threshold=0.10`, `ignored_attrs={"volume", "pan"}`
+  - [ ] `ComparisonResult` dataclass exists with fields: `is_distinct` (bool), `hard_diffs` (list of strings), `soft_diff_count` (int), `soft_diffs` (list of strings), `reason` (string)
+  - [ ] Existing `VersionComparison` dataclass removed or replaced
 - **Implementation Notes:**
   > {Space for the Implement agent to add notes during execution}
 
-#### Task 4.2: Multi-version selection and extraction
+#### Task 4.2: Generalised comparison engine — `compare_instruments()`
 
-- **Description:** When `--extended` is active, compare all section versions of each instrument and extract distinct versions with colour-abbreviated filenames.
-- **Inputs:** Instrument-to-clips mapping (all sections), comparison engine from Task 4.1
-- **Outputs:** List of extraction results — one or more per instrument
+- **Description:** Implement the generalised comparison function (research Section 16.4) that compares two assembled standalone presets for equivalence. Operates post-extraction, post-normalisation. Replaces the existing `compare_versions()` stub. The function walks the XML trees applying the three-tier comparison model: first checks hard markers (any single hard diff = immediately distinct), then counts soft marker diffs (must meet both per-param threshold and group count threshold), skipping ignored attrs throughout.
+- **Inputs:** Two assembled standalone preset elements (post-extraction, post-normalisation), instrument type, comparison config
+- **Outputs:** `ComparisonResult` with verdict, diffs, and reason
 - **Acceptance Criteria:**
-  - [ ] Uses lowest section ID as the baseline version (always extracted)
-  - [ ] Compares each subsequent section version against the baseline
-  - [ ] Extracts additional versions only if they are distinct from the baseline
-  - [ ] Each extracted version uses the `<SongName>-<PresetName>-<Abbr>.XML` filename format
-  - [ ] Manifest includes which parameters differ for each additional version
-  - [ ] Console output indicates when multiple versions are extracted and why
+  - [ ] Accepts two assembled standalone preset elements (the root `<sound>` or `<kit>` element), instrument type string, and a `ComparisonConfig`
+  - [ ] **Hard markers — synths:** Checks all synth hard markers from research Section 16.2 table — root `<sound>` attributes (`mode`, `polyphonic`, `modFXType`, `lpfMode`, `hpfMode`, `filterRoute`), oscillator attributes (`type`, `fileName` on `<osc1>` and `<osc2>`), arpeggiator attributes (`mode`, `noteMode`, `octaveMode`). Any single difference = immediately distinct.
+  - [ ] **Hard markers — kits:** Checks kit hard markers from research Section 16.2 — sound count in `<soundSources>`, sound names/identity, per-sound sample files and osc types, per-sound arp mode, kit-level modFXType, kit-level filter modes. Any single difference = immediately distinct.
+  - [ ] **Hard markers — patchCables (D19):** Compares the set of `(source, destination)` tuples from `<patchCables>`. Added/removed cables = hard diff. Amount differences are soft markers.
+  - [ ] **Soft markers:** For `<defaultParams>` attributes (excluding ignored), parses hex values as 32-bit signed integers. For extended hex strings (automation), uses first 10 chars only (D15). Calculates absolute difference as proportion of full range (`0x00000000` to `0x7FFFFFFF`). A param "differs" if proportional difference exceeds `config.param_percent_threshold`. Instrument is distinct if count of differing soft params ≥ `config.param_count_threshold`.
+  - [ ] **Soft markers — child elements (D24):** Walks into `<defaultParams>` children (`<envelope1>`, `<envelope2>`, `<equalizer>`) and compares their hex attributes using the same threshold logic. PatchCable `amount` values on matching cables are included as soft markers.
+  - [ ] **Soft markers — instrument-level settings (D24):** Includes attributes on `<delay>`, `<sidechain>`, and `<audioCompressor>` elements in the soft param count.
+  - [ ] **Kit per-sound comparison (research Section 16.5):** If kit structure matches (same sounds), applies soft-marker comparison per-sound. If any sound has enough soft diffs to be distinct, the whole kit is distinct.
+  - [ ] **Ignored attrs:** Skips attributes in `config.ignored_attrs` (default: volume, pan) throughout all tiers.
+  - [ ] Returns a `ComparisonResult` with `is_distinct`, `hard_diffs`, `soft_diff_count`, `soft_diffs`, and a human-readable `reason`.
+  - [ ] Old `compare_versions()` stub removed
 - **Implementation Notes:**
   > {Space for the Implement agent to add notes during execution}
 
-### Phase 5: Testing and Verification
+#### Task 4.3: Updated extended mode selection — `select_extended_clips()`
 
-> **Goal:** Create test fixtures and automated tests to verify extraction correctness
-> **Prerequisites:** Phase 4 complete (or Phase 3 if testing default mode only first)
+- **Description:** Update the `select_extended_clips()` stub to use the generalised comparison engine. The existing stub compares candidates against the baseline only. The updated version (D23) compares each candidate against ALL previously accepted clips — same pattern as cross-song dedup (research Section 18.2). Each candidate is first extracted and normalised to produce an assembled standalone preset, then compared using `compare_instruments()`.
+- **Inputs:** `InstrumentClipGroup` with all clips for one instrument, `ComparisonConfig` instance
+- **Outputs:** List of `ClipInfo` objects to extract (always includes baseline) plus comparison metadata
+- **Acceptance Criteria:**
+  - [ ] Accepts an `InstrumentClipGroup` and a `ComparisonConfig`
+  - [ ] Sorts clips by section ID ascending
+  - [ ] Baseline clip (lowest section ID) is always accepted
+  - [ ] For each subsequent clip: extracts and normalises the candidate, then calls `compare_instruments()` against ALL previously accepted assembled presets
+  - [ ] If distinct from all accepted → accept. If similar to any accepted → reject.
+  - [ ] Returns accepted `ClipInfo` list plus the `ComparisonResult` metadata for each comparison (for manifest/logging)
+  - [ ] CLI code updated to pass `ComparisonConfig` to `select_extended_clips()` and remove the `--extended` early-exit error
+  - [ ] Console output indicates when multiple versions are extracted and which parameters differ
+- **Implementation Notes:**
+  > {Space for the Implement agent to add notes during execution}
 
-#### Task 5.1: Create test fixtures
+### Phase 5: Cross-Song Deduplication
+
+> **Goal:** Implement post-extraction dedup that filters redundant instruments appearing in multiple songs
+> **Prerequisites:** Phase 4 complete — comparison engine working
+
+#### Task 5.1: Dedup function — `deduplicate_results()`
+
+- **Description:** Implement the baseline + incremental acceptance algorithm (research Section 17.2) as a function in `extraction.py`. Groups extraction results by `(preset_name, instrument_type)`, ignoring preset folder (D21). Within each group, sorts by song name for deterministic ordering, accepts the first as baseline, then compares each subsequent result against all accepted using `compare_instruments()`. Returns accepted results and rejected results (for reporting).
+- **Inputs:** Full list of `ExtractionResult` objects (post-extraction), `ComparisonConfig` instance
+- **Outputs:** Accepted results list, rejected results list with metadata (which accepted result they matched)
+- **Acceptance Criteria:**
+  - [ ] Groups results by `(preset_name, instrument_type)`, ignoring `preset_folder`
+  - [ ] Within each group, sorts by song name alphabetically for deterministic ordering
+  - [ ] First result in each group becomes baseline — automatically accepted
+  - [ ] Each subsequent result is compared against ALL accepted results in the group (not just baseline)
+  - [ ] If distinct from all accepted → accept. If similar to any accepted → reject.
+  - [ ] Returns both accepted and rejected lists, with rejected entries carrying the reason and which accepted result they matched
+  - [ ] Groups with only one result are passed through without comparison
+  - [ ] Handles both synth and kit instrument types correctly
+- **Implementation Notes:**
+  > {Space for the Implement agent to add notes during execution}
+
+#### Task 5.2: CLI integration — dedup in the pipeline
+
+- **Description:** Wire `deduplicate_results()` into the CLI pipeline in `extract_instruments.py`. Dedup runs after all songs are processed and before file writing (research Section 17.1). Add `--no-dedup` flag to disable. Update the summary output to include dedup stats. Only write accepted results to disk.
+- **Inputs:** All extraction results from the per-song loop, `ComparisonConfig` instance
+- **Outputs:** Filtered results written to disk, updated console output
+- **Acceptance Criteria:**
+  - [ ] `--no-dedup` argparse flag added (disables dedup; dedup is on by default per D20)
+  - [ ] Dedup runs after the per-song extraction loop and before the summary/write phase
+  - [ ] Only accepted results are written to disk and included in manifests
+  - [ ] Summary line shows dedup stats: "Extracted X synths and Y kits from Z songs (N duplicates removed)"
+  - [ ] `--no-dedup` skips the dedup step entirely and writes all results
+  - [ ] `--extended --no-dedup` extracts everything from every song without any filtering
+  - [ ] `--extended` (without `--no-dedup`) applies intra-song extended selection then inter-song dedup
+  - [ ] Separate `ComparisonConfig` instances for intra-song (extended) and inter-song (dedup) comparison, both using `ComparisonConfig.default()` initially
+- **Implementation Notes:**
+  > {Space for the Implement agent to add notes during execution}
+
+#### Task 5.3: Dedup reporting
+
+- **Description:** Implement dedup reporting in the console output (research Section 17.6). After dedup runs, print a summary of removed duplicates grouped by preset name. The per-song extraction listing remains unchanged — it shows all extractions before dedup. The dedup summary appears between the per-song listing and the final summary.
+- **Inputs:** Rejected results from `deduplicate_results()`
+- **Outputs:** Formatted console output
+- **Acceptance Criteria:**
+  - [ ] Prints "Dedup: Removed N duplicates (X synths, Y kits)" header
+  - [ ] For each preset name with removals, prints which song was kept and which songs were removed
+  - [ ] Format matches research Section 17.6 example: `000 (kit): kept Alr, removed Ape, Beginagain, ...`
+  - [ ] When dedup removes nothing, no dedup section is printed
+  - [ ] When `--no-dedup` is used, no dedup section is printed
+- **Implementation Notes:**
+  > {Space for the Implement agent to add notes during execution}
+
+### Phase 6: Testing and Verification
+
+> **Goal:** Create test fixtures and automated tests to verify extraction correctness, comparison engine, and dedup
+> **Prerequisites:** Phase 5 complete (or Phase 3 if testing default mode only first)
+
+#### Task 6.1: Create test fixtures
 
 - **Description:** Create minimal XML fixture files for testing. These should be small, hand-crafted XMLs that exercise the key extraction scenarios without being full-size song files.
 - **Inputs:** Research document XML examples, Init-Synth.XML, Init-Kit.XML structure
@@ -481,15 +580,19 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 - **Acceptance Criteria:**
   - [ ] Fixture: minimal song with one synth instrument and one session clip
   - [ ] Fixture: minimal song with one kit instrument and one session clip with noteRows
-  - [ ] Fixture: song with multiple sections of the same instrument (for version comparison testing)
+  - [ ] Fixture: song with multiple sections of the same instrument (for comparison engine testing)
   - [ ] Fixture: song with an orphaned instrument (no clips)
   - [ ] Fixture: song with clip arpeggiator having extra numeric attributes
   - [ ] Fixture: song with non-c1.2.1 firmware version
   - [ ] Fixture: init synth and init kit reference files (can use actual Init-Synth.XML and Init-Kit.XML)
+  - [ ] Fixture: two preset elements with hard marker differences (different osc types) for comparison engine testing
+  - [ ] Fixture: two preset elements with soft marker differences (3+ params changed >10%) for comparison engine testing
+  - [ ] Fixture: two nearly-identical preset elements (1-2 params changed) for dedup testing
+  - [ ] Fixture: preset elements with different patchCable structures (added/removed cables) for hybrid patchCable comparison testing
 - **Implementation Notes:**
   > {Space for the Implement agent to add notes during execution}
 
-#### Task 5.2: Unit tests for extraction logic
+#### Task 6.2: Unit tests for extraction logic
 
 - **Description:** Write pytest tests for the core extraction functions in `extraction.py`.
 - **Inputs:** Test fixtures, extraction module
@@ -504,11 +607,22 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [ ] Tests firmware version validation (skip non-c1.2.1)
   - [ ] Tests filename generation and collision handling
   - [ ] Tests version comparison logic (extended mode)
+  - [ ] Tests comparison engine — hard marker detection (osc type change = distinct)
+  - [ ] Tests comparison engine — soft marker threshold (3+ params at 10%+ = distinct, fewer = not distinct)
+  - [ ] Tests comparison engine — ignored params (volume/pan changes do not affect verdict)
+  - [ ] Tests comparison engine — patchCable hybrid comparison (structure vs amount)
+  - [ ] Tests comparison engine — kit per-sound comparison (one tweaked row makes entire kit distinct)
+  - [ ] Tests comparison engine — envelope attributes treated as soft markers
+  - [ ] Tests dedup — baseline + incremental acceptance algorithm
+  - [ ] Tests dedup — preset-name grouping (different names never compared)
+  - [ ] Tests dedup — single-result groups pass through
+  - [ ] Tests dedup — compare-against-all-accepted (not just baseline)
+  - [ ] Tests select_extended_clips with compare-against-all-accepted
   - [ ] All tests pass with `pytest`
 - **Implementation Notes:**
   > {Space for the Implement agent to add notes during execution}
 
-#### Task 5.3: Integration test with real songs
+#### Task 6.3: Integration test with real songs
 
 - **Description:** Run the script against the actual song library in dry-run mode. Verify output count and spot-check a few extractions against their standalone counterparts.
 - **Inputs:** Full song library in `DELUGE/SONGS/`
@@ -517,6 +631,9 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
   - [ ] Script runs to completion without errors on all 58 songs
   - [ ] All warnings are expected and understood
   - [ ] Extraction count is reasonable (each song should produce at least one instrument)
+  - [ ] Dedup removes a plausible number of results (expected 20-30% reduction per research Section 19.2)
+  - [ ] Kit "000" appears only once in output (or a small number of distinct versions)
+  - [ ] `--no-dedup` produces more results than default mode
   - [ ] Spot-check: compare at least one extracted synth (e.g. from K01Sink) against its standalone counterpart to verify structural correctness
   - [ ] Spot-check: compare at least one extracted kit (e.g. Deeper from Ell.XML) against its standalone counterpart
 - **Implementation Notes:**
@@ -529,8 +646,9 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 | Phase 1: Foundation | Complete | 4/4 | Tasks 1.1 (scaffolding) ✅, 1.2 (discover_songs) ✅, 1.3 (instrument/clip discovery) ✅, 1.4 (default version selection) ✅ |
 | Phase 2: Core Transformation | Complete | 3/3 | Tasks 2.1 (synth extraction) ✅, 2.2 (kit extraction) ✅, 2.3 (normalisation) ✅ |
 | Phase 3: Output and CLI | Complete | 5/5 | Tasks 3.1 (filename generation) ✅, 3.2 (XML serialisation) ✅, 3.3 (trash mechanism) ✅, 3.4 (manifest entry) ✅, 3.5 (exit codes, init validation) ✅ |
-| Phase 4: Extended Mode | Not Started | 0/2 | |
-| Phase 5: Testing and Verification | Not Started | 0/3 | |
+| Phase 4: Comparison Engine & Extended Mode | Not Started | 0/3 | Tasks 4.1 (ComparisonConfig/Result), 4.2 (compare_instruments), 4.3 (updated select_extended_clips) |
+| Phase 5: Cross-Song Deduplication | Not Started | 0/3 | Tasks 5.1 (deduplicate_results), 5.2 (CLI integration + --no-dedup), 5.3 (dedup reporting) |
+| Phase 6: Testing and Verification | Not Started | 0/3 | |
 
 ## Open Questions
 
@@ -546,16 +664,26 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
    - **Blocking:** No
    - **Resolution:** _{To be filled during implementation}_
 
-3. **How should extended mode handle automation data in parameter comparisons?**
+3. **How should extended mode handle automation data in parameter comparisons?** ✅ Resolved
    - **Impact:** Automation strings are variable-length hex (e.g. `0x7FFFFFFF7FFFFFFF000000607FFFFFFF00000120`). Comparing these verbatim would flag any automated parameter as "different" even if the base value hasn't changed.
    - **Recommendation:** For comparison purposes, extract the first 10 characters (one 32-bit hex value) from each attribute value as the "static" value. If the value is longer than 10 chars, it contains automation — use only the first value for comparison. Per D15, automation is ignored for comparison.
    - **Blocking:** No — only affects extended mode
-   - **Resolution:** _{To be filled during implementation}_
+   - **Resolution:** Resolved by research Section 16.2 (soft marker tier) and D15. Automation is stripped during extraction (`_strip_automation()`), so post-normalisation comparison sees only base values. For any residual automation strings, the comparison engine uses the first 10 chars.
+
+4. **Should dedup threshold tuning be exposed to the user via CLI flags?**
+   - **Impact:** Currently thresholds are developer-tunable constants in the `ComparisonConfig.default()` classmethod. A `--dedup-threshold` flag would let users control aggressiveness.
+   - **Recommendation:** Not for v1. Keep thresholds as code constants. If users need tuning, add CLI flags in a future iteration.
+   - **Blocking:** No
+
+5. **Should dedup reporting support a `--verbose` flag for per-result match details?**
+   - **Impact:** Research Section 17.6 suggests optionally showing which specific song × preset combinations were rejected and which accepted result they matched.
+   - **Recommendation:** Defer. The default summary (preset name → kept/removed list) is sufficient for v1. Verbose mode can be added later if needed.
+   - **Blocking:** No
 
 ## References
 
 ### Research Document
-- [extract-instruments-research.md](../research/extract-instruments-research.md) — Primary input. Transformation recipes (Section 13.5), structural comparisons (Sections 13.2–13.3), and edge cases (Section 12).
+- [extract-instruments-research.md](../research/extract-instruments-research.md) — Primary input. Transformation recipes (Section 13.5), structural comparisons (Sections 13.2–13.3), edge cases (Section 12), generalised comparison engine (Section 16), cross-song deduplication (Section 17), extended mode impact (Section 18), and duplication analysis (Section 19).
 
 ### User Decisions
 - [extraction-questions.md](../../temp/extraction-questions.md) — 40 questions with authoritative user answers. Takes precedence over research where conflicts exist.
@@ -580,6 +708,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 | 22 Apr 2026 | Task 1.4 implemented — Phase 1 complete | `select_default_clip()` implemented with `min()` on `clips_by_section` keys. 3 tests added in `TestSelectDefaultClip`. Phase 1 marked complete (4/4). |
 | 22 Apr 2026 | Plan revised to reflect true implementation state after code audit | Phase 1 progress corrected (2/4 — Task 1.2 confirmed complete). Phase 3 status clarified (1/5 — only Task 3.3 truly complete; Tasks 3.4/3.5 partially scaffolded but depend on unimplemented stubs). Codebase audit note added to Research Summary. `print_path()` noted in Integration Points. |
 | 22 Apr 2026 | Tasks 3.1, 3.2, 3.4, 3.5 implemented — Phase 3 complete | `generate_filename()` implemented with collision handling. `serialise_xml()` implemented with lxml pretty_print. `build_manifest_entry()` implemented mapping ExtractionResult to dict. CLI exit codes added (try/except + sys.exit(1)). Init preset validation added at startup (checks Init-Synth.XML and Init-Kit.XML). 7 new tests (5 filename + 2 serialisation), all passing. Phase 3 marked complete (5/5). |
+| 23 Apr 2026 | Plan re-review: generalised comparison engine and cross-song dedup | Added research Sections 16–19 findings to Research Summary. Added decisions D16–D24 (comparison engine, dedup, config design, patchCables hybrid, threshold independence, etc.). Rewrote Phase 4 (was 2 tasks, now 3: ComparisonConfig/Result, compare_instruments(), updated select_extended_clips()). Added new Phase 5: Cross-Song Deduplication (3 tasks: deduplicate_results(), CLI integration with --no-dedup, dedup reporting). Renumbered Testing to Phase 6 and added comparison engine + dedup test criteria. Updated architecture data flow, key data structures, CLI interface (--no-dedup flag), console output format, cross-cutting concerns, and risk mitigation. Resolved Open Question 3 (automation handling). Progress Tracker updated (now 6 phases, 21 total tasks). |
 | 23 Apr 2026 | Automation stripping post-processing added | `_strip_automation()` helper in `extraction.py` truncates extended hex automation strings to base values. Called from CLI script after extraction, before normalisation. 5 tests added. D10 reversed — standalone presets never contain automation. |
 | 22 Apr 2026 | Tasks 2.2 and 2.3 implemented — Phase 2 complete | `extract_kit()` with helpers `_reorder_kit_children()`, `_reorder_kit_sound_children()`, `_merge_noterow_params()` implemented. `normalise_params()` implemented. 17 new tests (11 kit + 6 normalisation), all passing. Phase 2 marked complete (3/3). |
 | 15 Apr 2026 | Updated plan to reflect scaffolding state | Task 1.1 complete, Tasks 3.3/3.4/3.5 substantially complete, trash path corrected, Task 1.4 API updated to use dataclasses |
