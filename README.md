@@ -138,6 +138,8 @@ uv run extract_instruments.py --include-sidechain    # include sidechain-only ki
 uv run extract_instruments.py --exclude-dir testing  # skip songs in a subdirectory
 uv run extract_instruments.py --sd-direct            # read/write directly to SD card
 uv run extract_instruments.py --verbose              # detailed dedup comparison logging
+uv run extract_instruments.py --naming preset          # Preset-SongName filenames (default)
+uv run extract_instruments.py --naming song            # SongName-Preset filenames
 ```
 
 #### `fix_references.py`
@@ -164,17 +166,17 @@ uv run sync_to_sd.py --dry-run  # preview only
 Sample library overview and reference checking tool. Cross-references XML presets with the filesystem to show what's in use, what's unused, and what's missing.
 
 ```
-uv run sample_overview.py                  # library summary (equivalent to "summary --top 5")
-uv run sample_overview.py summary --top N  # summary with custom top-N most-referenced
-uv run sample_overview.py unused                  # condensed per-folder summary of unreferenced samples
-uv run sample_overview.py unused --all             # full listing of all unreferenced samples grouped by folder
-uv run sample_overview.py unused --folder DRUMS    # full listing filtered to specific folder(s)
-uv run sample_overview.py unused --top N           # top N largest unreferenced samples
-uv run sample_overview.py missing          # samples referenced in XML but missing from disk
+uv run sample_overview.py                                   # library summary (equivalent to "summary --top 5")
+uv run sample_overview.py summary --top N                   # summary with custom top-N most-referenced
+uv run sample_overview.py unused                            # condensed per-folder summary of unreferenced samples
+uv run sample_overview.py unused --all                      # full listing of all unreferenced samples grouped by folder
+uv run sample_overview.py unused --folder DRUMS             # full listing filtered to specific folder(s)
+uv run sample_overview.py unused --top N                    # top N largest unreferenced samples
+uv run sample_overview.py missing                           # samples referenced in XML but missing from disk
 uv run sample_overview.py duplicates                        # find duplicate samples by content hash (hashes live)
 uv run sample_overview.py duplicates -s latest              # find duplicates using the latest snapshot
 uv run sample_overview.py duplicates -s path/to/snap.json   # find duplicates using a specific snapshot
-uv run sample_overview.py usage "Kick"     # usage detail for samples matching a search term
+uv run sample_overview.py usage "Kick"                      # usage detail for samples matching a search term
 ```
 
 ### Ideas

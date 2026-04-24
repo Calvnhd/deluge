@@ -1,10 +1,10 @@
 {
-  "generated": "2026-04-24T06:36:04.810733+00:00",
+  "generated": "2026-04-24T12:13:10.192156+00:00",
   "songs_processed": 81,
   "total_count": 187,
   "extractions": [
     {
-      "output_filename": "Beginagain-000.XML",
+      "output_filename": "000-Beginagain.XML",
       "source_song": "Beginagain",
       "preset_name": "000",
       "preset_folder": "SYNTHS",
@@ -15,7 +15,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-000.XML",
+      "output_filename": "000-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "000",
       "preset_folder": "SYNTHS",
@@ -26,7 +26,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bmtk-000.XML",
+      "output_filename": "000-Bmtk.XML",
       "source_song": "Bmtk",
       "preset_name": "000",
       "preset_folder": "SYNTHS",
@@ -37,7 +37,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Judder-000.XML",
+      "output_filename": "000-Judder.XML",
       "source_song": "Judder",
       "preset_name": "000",
       "preset_folder": "SYNTHS",
@@ -48,7 +48,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-001.XML",
+      "output_filename": "001-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "001",
       "preset_folder": "SYNTHS",
@@ -59,7 +59,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-002.XML",
+      "output_filename": "002-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "002",
       "preset_folder": "SYNTHS",
@@ -70,7 +70,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Japarps-002.XML",
+      "output_filename": "002-Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "002",
       "preset_folder": "SYNTHS",
@@ -81,7 +81,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-002.XML",
+      "output_filename": "002-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "002",
       "preset_folder": "SYNTHS",
@@ -92,7 +92,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-003.XML",
+      "output_filename": "003-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "003",
       "preset_folder": "SYNTHS",
@@ -103,7 +103,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Paddy-003A.XML",
+      "output_filename": "003A-Paddy.XML",
       "source_song": "Paddy",
       "preset_name": "003A",
       "preset_folder": "SYNTHS",
@@ -114,7 +114,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bingbong-003B.XML",
+      "output_filename": "003B-Bingbong.XML",
       "source_song": "Bingbong",
       "preset_name": "003B",
       "preset_folder": "SYNTHS",
@@ -125,7 +125,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-003B.XML",
+      "output_filename": "003B-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "003B",
       "preset_folder": "SYNTHS",
@@ -136,7 +136,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Judder-003B.XML",
+      "output_filename": "003B-Judder.XML",
       "source_song": "Judder",
       "preset_name": "003B",
       "preset_folder": "SYNTHS",
@@ -147,7 +147,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K08Offbeat-003C.XML",
+      "output_filename": "003C-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "003C",
       "preset_folder": "SYNTHS",
@@ -158,7 +158,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Spook-003D.XML",
+      "output_filename": "003D-Spook.XML",
       "source_song": "Spook",
       "preset_name": "003D",
       "preset_folder": "SYNTHS",
@@ -169,7 +169,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Colour-004.XML",
+      "output_filename": "004-Colour.XML",
       "source_song": "Colour",
       "preset_name": "004",
       "preset_folder": "SYNTHS",
@@ -180,7 +180,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arpo-005.XML",
+      "output_filename": "005-Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "005",
       "preset_folder": "SYNTHS",
@@ -191,7 +191,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bmtk-006.XML",
+      "output_filename": "006-Bmtk.XML",
       "source_song": "Bmtk",
       "preset_name": "006",
       "preset_folder": "SYNTHS",
@@ -202,7 +202,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Stoner-007.XML",
+      "output_filename": "007-Stoner.XML",
       "source_song": "Stoner",
       "preset_name": "007",
       "preset_folder": "SYNTHS",
@@ -213,7 +213,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bmtk-007A.XML",
+      "output_filename": "007A-Bmtk.XML",
       "source_song": "Bmtk",
       "preset_name": "007A",
       "preset_folder": "SYNTHS",
@@ -224,7 +224,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K08Offbeat-008.XML",
+      "output_filename": "008-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "008",
       "preset_folder": "SYNTHS",
@@ -235,7 +235,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Notbs-008.XML",
+      "output_filename": "008-Notbs.XML",
       "source_song": "Notbs",
       "preset_name": "008",
       "preset_folder": "SYNTHS",
@@ -246,7 +246,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-009.XML",
+      "output_filename": "009-Dject.XML",
       "source_song": "Dject",
       "preset_name": "009",
       "preset_folder": "SYNTHS",
@@ -257,7 +257,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-009.XML",
+      "output_filename": "009-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "009",
       "preset_folder": "SYNTHS",
@@ -268,7 +268,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-009.XML",
+      "output_filename": "009-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "009",
       "preset_folder": "SYNTHS",
@@ -279,7 +279,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Paddy-009.XML",
+      "output_filename": "009-Paddy.XML",
       "source_song": "Paddy",
       "preset_name": "009",
       "preset_folder": "SYNTHS",
@@ -290,7 +290,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SlpspkArpsOld-013.XML",
+      "output_filename": "013-SlpspkArpsOld.XML",
       "source_song": "SlpspkArpsOld",
       "preset_name": "013",
       "preset_folder": "SYNTHS",
@@ -301,7 +301,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bingbong-014.XML",
+      "output_filename": "014-Bingbong.XML",
       "source_song": "Bingbong",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -312,7 +312,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K04Leftovers-014.XML",
+      "output_filename": "014-K04Leftovers.XML",
       "source_song": "K04Leftovers",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -323,7 +323,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-014.XML",
+      "output_filename": "014-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -334,7 +334,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K06MWHW-014.XML",
+      "output_filename": "014-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -345,7 +345,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K11Bonk-014.XML",
+      "output_filename": "014-K11Bonk.XML",
       "source_song": "K11Bonk",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -356,7 +356,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Lemon-014.XML",
+      "output_filename": "014-Lemon.XML",
       "source_song": "Lemon",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -367,7 +367,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "PianoArp-014.XML",
+      "output_filename": "014-PianoArp.XML",
       "source_song": "PianoArp",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -378,7 +378,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Yeti-014.XML",
+      "output_filename": "014-Yeti.XML",
       "source_song": "Yeti",
       "preset_name": "014",
       "preset_folder": "SYNTHS",
@@ -389,7 +389,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-014A.XML",
+      "output_filename": "014A-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "014A",
       "preset_folder": "SYNTHS",
@@ -400,7 +400,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K10FiveAlive-014A.XML",
+      "output_filename": "014A-K10FiveAlive.XML",
       "source_song": "K10FiveAlive",
       "preset_name": "014A",
       "preset_folder": "SYNTHS",
@@ -411,7 +411,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-014B.XML",
+      "output_filename": "014B-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "014B",
       "preset_folder": "SYNTHS",
@@ -422,7 +422,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Lemon-014B.XML",
+      "output_filename": "014B-Lemon.XML",
       "source_song": "Lemon",
       "preset_name": "014B",
       "preset_folder": "SYNTHS",
@@ -433,7 +433,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Alr-016.XML",
+      "output_filename": "016-Alr.XML",
       "source_song": "Alr",
       "preset_name": "016",
       "preset_folder": "SYNTHS",
@@ -444,7 +444,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-016.XML",
+      "output_filename": "016-Dject.XML",
       "source_song": "Dject",
       "preset_name": "016",
       "preset_folder": "SYNTHS",
@@ -455,7 +455,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-018.XML",
+      "output_filename": "018-Dject.XML",
       "source_song": "Dject",
       "preset_name": "018",
       "preset_folder": "SYNTHS",
@@ -466,7 +466,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SlpspkRemix-018.XML",
+      "output_filename": "018-SlpspkRemix.XML",
       "source_song": "SlpspkRemix",
       "preset_name": "018",
       "preset_folder": "SYNTHS",
@@ -477,7 +477,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Rr-022.XML",
+      "output_filename": "022-Rr.XML",
       "source_song": "Rr",
       "preset_name": "022",
       "preset_folder": "SYNTHS",
@@ -488,7 +488,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bmtk-023.XML",
+      "output_filename": "023-Bmtk.XML",
       "source_song": "Bmtk",
       "preset_name": "023",
       "preset_folder": "SYNTHS",
@@ -499,7 +499,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-024.XML",
+      "output_filename": "024-Dject.XML",
       "source_song": "Dject",
       "preset_name": "024",
       "preset_folder": "SYNTHS",
@@ -510,7 +510,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K08Offbeat-024.XML",
+      "output_filename": "024-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "024",
       "preset_folder": "SYNTHS",
@@ -521,7 +521,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K11Bonk-025.XML",
+      "output_filename": "025-K11Bonk.XML",
       "source_song": "K11Bonk",
       "preset_name": "025",
       "preset_folder": "SYNTHS",
@@ -532,7 +532,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Alr-027.XML",
+      "output_filename": "027-Alr.XML",
       "source_song": "Alr",
       "preset_name": "027",
       "preset_folder": "SYNTHS",
@@ -543,7 +543,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-027A.XML",
+      "output_filename": "027A-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "027A",
       "preset_folder": "SYNTHS",
@@ -554,7 +554,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-028.XML",
+      "output_filename": "028-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "028",
       "preset_folder": "SYNTHS",
@@ -565,7 +565,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SlpspkArpsOld-030.XML",
+      "output_filename": "030-SlpspkArpsOld.XML",
       "source_song": "SlpspkArpsOld",
       "preset_name": "030",
       "preset_folder": "SYNTHS",
@@ -576,7 +576,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-034.XML",
+      "output_filename": "034-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "034",
       "preset_folder": "SYNTHS",
@@ -587,7 +587,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-old-034.XML",
+      "output_filename": "034-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "034",
       "preset_folder": "SYNTHS",
@@ -598,7 +598,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Repeatbeat-034.XML",
+      "output_filename": "034-Repeatbeat.XML",
       "source_song": "Repeatbeat",
       "preset_name": "034",
       "preset_folder": "SYNTHS",
@@ -609,7 +609,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-035.XML",
+      "output_filename": "035-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "035",
       "preset_folder": "SYNTHS",
@@ -620,7 +620,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-036.XML",
+      "output_filename": "036-Dject.XML",
       "source_song": "Dject",
       "preset_name": "036",
       "preset_folder": "SYNTHS",
@@ -631,7 +631,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arpo-037.XML",
+      "output_filename": "037-Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "037",
       "preset_folder": "SYNTHS",
@@ -642,7 +642,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bingbong-037.XML",
+      "output_filename": "037-Bingbong.XML",
       "source_song": "Bingbong",
       "preset_name": "037",
       "preset_folder": "SYNTHS",
@@ -653,7 +653,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K12Hj-037.XML",
+      "output_filename": "037-K12Hj.XML",
       "source_song": "K12Hj",
       "preset_name": "037",
       "preset_folder": "SYNTHS",
@@ -664,7 +664,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K12Hj-040.XML",
+      "output_filename": "040-K12Hj.XML",
       "source_song": "K12Hj",
       "preset_name": "040",
       "preset_folder": "SYNTHS",
@@ -675,7 +675,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Japarps-041.XML",
+      "output_filename": "041-Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "041",
       "preset_folder": "SYNTHS",
@@ -686,7 +686,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K08Offbeat-041.XML",
+      "output_filename": "041-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "041",
       "preset_folder": "SYNTHS",
@@ -697,7 +697,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Repeatbeat-043.XML",
+      "output_filename": "043-Repeatbeat.XML",
       "source_song": "Repeatbeat",
       "preset_name": "043",
       "preset_folder": "SYNTHS",
@@ -708,7 +708,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K04Leftovers-047A.XML",
+      "output_filename": "047A-K04Leftovers.XML",
       "source_song": "K04Leftovers",
       "preset_name": "047A",
       "preset_folder": "SYNTHS",
@@ -719,7 +719,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-050.XML",
+      "output_filename": "050-Dject.XML",
       "source_song": "Dject",
       "preset_name": "050",
       "preset_folder": "SYNTHS",
@@ -730,7 +730,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-050.XML",
+      "output_filename": "050-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "050",
       "preset_folder": "SYNTHS",
@@ -741,7 +741,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-old-050.XML",
+      "output_filename": "050-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "050",
       "preset_folder": "SYNTHS",
@@ -752,7 +752,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Judder-050A.XML",
+      "output_filename": "050A-Judder.XML",
       "source_song": "Judder",
       "preset_name": "050A",
       "preset_folder": "SYNTHS",
@@ -763,7 +763,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Paddy-050A.XML",
+      "output_filename": "050A-Paddy.XML",
       "source_song": "Paddy",
       "preset_name": "050A",
       "preset_folder": "SYNTHS",
@@ -774,7 +774,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-051.XML",
+      "output_filename": "051-Dject.XML",
       "source_song": "Dject",
       "preset_name": "051",
       "preset_folder": "SYNTHS",
@@ -785,7 +785,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K06MWHW-055B.XML",
+      "output_filename": "055B-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "055B",
       "preset_folder": "SYNTHS",
@@ -796,7 +796,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SlpspkArpsOld-059.XML",
+      "output_filename": "059-SlpspkArpsOld.XML",
       "source_song": "SlpspkArpsOld",
       "preset_name": "059",
       "preset_folder": "SYNTHS",
@@ -807,7 +807,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-060.XML",
+      "output_filename": "060-Dject.XML",
       "source_song": "Dject",
       "preset_name": "060",
       "preset_folder": "SYNTHS",
@@ -818,7 +818,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-063.XML",
+      "output_filename": "063-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "063",
       "preset_folder": "SYNTHS",
@@ -829,7 +829,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-067.XML",
+      "output_filename": "067-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "067",
       "preset_folder": "SYNTHS",
@@ -840,7 +840,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Dject-073.XML",
+      "output_filename": "073-Dject.XML",
       "source_song": "Dject",
       "preset_name": "073",
       "preset_folder": "SYNTHS",
@@ -851,7 +851,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ape-080.XML",
+      "output_filename": "080-Ape.XML",
       "source_song": "Ape",
       "preset_name": "080",
       "preset_folder": "SYNTHS",
@@ -862,7 +862,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K07NatRad-080A.XML",
+      "output_filename": "080A-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "080A",
       "preset_folder": "SYNTHS",
@@ -873,7 +873,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K10FiveAlive-080A.XML",
+      "output_filename": "080A-K10FiveAlive.XML",
       "source_song": "K10FiveAlive",
       "preset_name": "080A",
       "preset_folder": "SYNTHS",
@@ -884,7 +884,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K06MWHW-085A.XML",
+      "output_filename": "085A-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "085A",
       "preset_folder": "SYNTHS",
@@ -895,7 +895,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K08Offbeat-085A.XML",
+      "output_filename": "085A-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "085A",
       "preset_folder": "SYNTHS",
@@ -906,7 +906,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-085A.XML",
+      "output_filename": "085A-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "085A",
       "preset_folder": "SYNTHS",
@@ -917,7 +917,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-old-085A.XML",
+      "output_filename": "085A-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "085A",
       "preset_folder": "SYNTHS",
@@ -928,7 +928,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K08Offbeat-086A.XML",
+      "output_filename": "086A-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "086A",
       "preset_folder": "SYNTHS",
@@ -939,7 +939,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-097.XML",
+      "output_filename": "097-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "097",
       "preset_folder": "SYNTHS",
@@ -950,7 +950,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-098.XML",
+      "output_filename": "098-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "098",
       "preset_folder": "SYNTHS",
@@ -961,7 +961,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-100.XML",
+      "output_filename": "100-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "100",
       "preset_folder": "SYNTHS",
@@ -972,7 +972,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K06MWHW-119.XML",
+      "output_filename": "119-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "119",
       "preset_folder": "SYNTHS",
@@ -983,7 +983,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-128.XML",
+      "output_filename": "128-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "128",
       "preset_folder": "SYNTHS",
@@ -994,7 +994,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-130.XML",
+      "output_filename": "130-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "130",
       "preset_folder": "SYNTHS",
@@ -1005,7 +1005,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Alr-133.XML",
+      "output_filename": "133-Alr.XML",
       "source_song": "Alr",
       "preset_name": "133",
       "preset_folder": "SYNTHS",
@@ -1016,7 +1016,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-133.XML",
+      "output_filename": "133-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "133",
       "preset_folder": "SYNTHS",
@@ -1027,7 +1027,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Alr-136.XML",
+      "output_filename": "136-Alr.XML",
       "source_song": "Alr",
       "preset_name": "136",
       "preset_folder": "SYNTHS",
@@ -1038,7 +1038,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ape-137.XML",
+      "output_filename": "137-Ape.XML",
       "source_song": "Ape",
       "preset_name": "137",
       "preset_folder": "SYNTHS",
@@ -1049,7 +1049,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-142A.XML",
+      "output_filename": "142A-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "142A",
       "preset_folder": "SYNTHS",
@@ -1060,7 +1060,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Japarps-143.XML",
+      "output_filename": "143-Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "143",
       "preset_folder": "SYNTHS",
@@ -1071,7 +1071,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K06MWHW-143.XML",
+      "output_filename": "143-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "143",
       "preset_folder": "SYNTHS",
@@ -1082,7 +1082,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K04Leftovers-143A.XML",
+      "output_filename": "143A-K04Leftovers.XML",
       "source_song": "K04Leftovers",
       "preset_name": "143A",
       "preset_folder": "SYNTHS",
@@ -1093,7 +1093,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K08Offbeat-149.XML",
+      "output_filename": "149-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "149",
       "preset_folder": "SYNTHS",
@@ -1104,7 +1104,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K06MWHW-150.XML",
+      "output_filename": "150-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "150",
       "preset_folder": "SYNTHS",
@@ -1115,7 +1115,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Paddy-155.XML",
+      "output_filename": "155-Paddy.XML",
       "source_song": "Paddy",
       "preset_name": "155",
       "preset_folder": "SYNTHS",
@@ -1126,7 +1126,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Stoner-158.XML",
+      "output_filename": "158-Stoner.XML",
       "source_song": "Stoner",
       "preset_name": "158",
       "preset_folder": "SYNTHS",
@@ -1137,7 +1137,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Kg-159.XML",
+      "output_filename": "159-Kg.XML",
       "source_song": "Kg",
       "preset_name": "159",
       "preset_folder": "SYNTHS",
@@ -1148,7 +1148,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Japarps-161.XML",
+      "output_filename": "161-Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "161",
       "preset_folder": "SYNTHS",
@@ -1159,7 +1159,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SlpspkArpsOld-161.XML",
+      "output_filename": "161-SlpspkArpsOld.XML",
       "source_song": "SlpspkArpsOld",
       "preset_name": "161",
       "preset_folder": "SYNTHS",
@@ -1170,7 +1170,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Paddy-162.XML",
+      "output_filename": "162-Paddy.XML",
       "source_song": "Paddy",
       "preset_name": "162",
       "preset_folder": "SYNTHS",
@@ -1181,7 +1181,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ape-164.XML",
+      "output_filename": "164-Ape.XML",
       "source_song": "Ape",
       "preset_name": "164",
       "preset_folder": "SYNTHS",
@@ -1192,7 +1192,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arpo-164.XML",
+      "output_filename": "164-Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "164",
       "preset_folder": "SYNTHS",
@@ -1203,7 +1203,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Judder-164.XML",
+      "output_filename": "164-Judder.XML",
       "source_song": "Judder",
       "preset_name": "164",
       "preset_folder": "SYNTHS",
@@ -1214,7 +1214,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Colour-164A.XML",
+      "output_filename": "164A-Colour.XML",
       "source_song": "Colour",
       "preset_name": "164A",
       "preset_folder": "SYNTHS",
@@ -1225,7 +1225,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "No-More-Colour-164A.XML",
+      "output_filename": "164A-No-More-Colour.XML",
       "source_song": "No-More-Colour",
       "preset_name": "164A",
       "preset_folder": "SYNTHS",
@@ -1236,7 +1236,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SlpspkArpsOld-164A.XML",
+      "output_filename": "164A-SlpspkArpsOld.XML",
       "source_song": "SlpspkArpsOld",
       "preset_name": "164A",
       "preset_folder": "SYNTHS",
@@ -1247,7 +1247,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-165.XML",
+      "output_filename": "165-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "165",
       "preset_folder": "SYNTHS",
@@ -1258,7 +1258,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K11Bonk-165.XML",
+      "output_filename": "165-K11Bonk.XML",
       "source_song": "K11Bonk",
       "preset_name": "165",
       "preset_folder": "SYNTHS",
@@ -1269,7 +1269,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-166.XML",
+      "output_filename": "166-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "166",
       "preset_folder": "SYNTHS",
@@ -1280,7 +1280,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K11Bonk-168.XML",
+      "output_filename": "168-K11Bonk.XML",
       "source_song": "K11Bonk",
       "preset_name": "168",
       "preset_folder": "SYNTHS",
@@ -1291,7 +1291,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Kg-169.XML",
+      "output_filename": "169-Kg.XML",
       "source_song": "Kg",
       "preset_name": "169",
       "preset_folder": "SYNTHS",
@@ -1302,7 +1302,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "No-More-Colour-17-BRASS.XML",
+      "output_filename": "17-BRASS-No-More-Colour.XML",
       "source_song": "No-More-Colour",
       "preset_name": "17-BRASS",
       "preset_folder": "SYNTHS",
@@ -1313,7 +1313,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Japarps-170.XML",
+      "output_filename": "170-Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "170",
       "preset_folder": "SYNTHS",
@@ -1324,7 +1324,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-170.XML",
+      "output_filename": "170-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "170",
       "preset_folder": "SYNTHS",
@@ -1335,7 +1335,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K11Bonk-170.XML",
+      "output_filename": "170-K11Bonk.XML",
       "source_song": "K11Bonk",
       "preset_name": "170",
       "preset_folder": "SYNTHS",
@@ -1346,7 +1346,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arpo-171.XML",
+      "output_filename": "171-Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "171",
       "preset_folder": "SYNTHS",
@@ -1357,7 +1357,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bloop-171.XML",
+      "output_filename": "171-Bloop.XML",
       "source_song": "Bloop",
       "preset_name": "171",
       "preset_folder": "SYNTHS",
@@ -1368,7 +1368,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-171.XML",
+      "output_filename": "171-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "171",
       "preset_folder": "SYNTHS",
@@ -1379,7 +1379,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Alr-172.XML",
+      "output_filename": "172-Alr.XML",
       "source_song": "Alr",
       "preset_name": "172",
       "preset_folder": "SYNTHS",
@@ -1390,7 +1390,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Colour-172.XML",
+      "output_filename": "172-Colour.XML",
       "source_song": "Colour",
       "preset_name": "172",
       "preset_folder": "SYNTHS",
@@ -1401,7 +1401,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-172.XML",
+      "output_filename": "172-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "172",
       "preset_folder": "SYNTHS",
@@ -1412,7 +1412,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K05BeautifulStranger-172A.XML",
+      "output_filename": "172A-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "172A",
       "preset_folder": "SYNTHS",
@@ -1423,7 +1423,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Env-173.XML",
+      "output_filename": "173-Env.XML",
       "source_song": "Env",
       "preset_name": "173",
       "preset_folder": "SYNTHS",
@@ -1434,7 +1434,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Env-174.XML",
+      "output_filename": "174-Env.XML",
       "source_song": "Env",
       "preset_name": "174",
       "preset_folder": "SYNTHS",
@@ -1445,7 +1445,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Sot-175.XML",
+      "output_filename": "175-Sot.XML",
       "source_song": "Sot",
       "preset_name": "175",
       "preset_folder": "SYNTHS",
@@ -1456,7 +1456,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Spook-176.XML",
+      "output_filename": "176-Spook.XML",
       "source_song": "Spook",
       "preset_name": "176",
       "preset_folder": "SYNTHS",
@@ -1467,7 +1467,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Mountain-31-BASS1.XML",
+      "output_filename": "31-BASS1-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "31-BASS1",
       "preset_folder": "SYNTHS",
@@ -1478,7 +1478,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K06MWHW-41-VIOLINE.XML",
+      "output_filename": "41-VIOLINE-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "41-VIOLINE",
       "preset_folder": "SYNTHS",
@@ -1489,7 +1489,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K04Leftovers-41-VIOLINE 2.XML",
+      "output_filename": "41-VIOLINE 2-K04Leftovers.XML",
       "source_song": "K04Leftovers",
       "preset_name": "41-VIOLINE 2",
       "preset_folder": "SYNTHS",
@@ -1500,7 +1500,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Sink-41-VIOLINE 3.XML",
+      "output_filename": "41-VIOLINE 3-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "41-VIOLINE 3",
       "preset_folder": "SYNTHS",
@@ -1511,7 +1511,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K04Leftovers-41-VIOLINE 3.XML",
+      "output_filename": "41-VIOLINE 3-K04Leftovers.XML",
       "source_song": "K04Leftovers",
       "preset_name": "41-VIOLINE 3",
       "preset_folder": "SYNTHS",
@@ -1522,7 +1522,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-55-POPCORN.XML",
+      "output_filename": "55-POPCORN-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "55-POPCORN",
       "preset_folder": "SYNTHS",
@@ -1533,7 +1533,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Mountain-62-EFFECTSOUND1.XML",
+      "output_filename": "62-EFFECTSOUND1-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "62-EFFECTSOUND1",
       "preset_folder": "SYNTHS",
@@ -1544,7 +1544,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "No-More-Colour-Apex Stab.XML",
+      "output_filename": "Apex Stab-No-More-Colour.XML",
       "source_song": "No-More-Colour",
       "preset_name": "Apex Stab",
       "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
@@ -1555,7 +1555,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-Arp1.XML",
+      "output_filename": "Arp1-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "Arp1",
       "preset_folder": "SYNTHS/KERERU",
@@ -1566,7 +1566,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-Arp1.XML",
+      "output_filename": "Arp1-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "Arp1",
       "preset_folder": "SYNTHS/KERERU",
@@ -1577,7 +1577,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Wf-og-Arp1.XML",
+      "output_filename": "Arp1-Wf-og.XML",
       "source_song": "Wf-og",
       "preset_name": "Arp1",
       "preset_folder": "SYNTHS/KERERU",
@@ -1588,7 +1588,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-Arp2.XML",
+      "output_filename": "Arp2-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "Arp2",
       "preset_folder": "SYNTHS/KERERU",
@@ -1599,7 +1599,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bingbong-Arp2.XML",
+      "output_filename": "Arp2-Bingbong.XML",
       "source_song": "Bingbong",
       "preset_name": "Arp2",
       "preset_folder": "SYNTHS/KERERU",
@@ -1610,7 +1610,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-Arp2.XML",
+      "output_filename": "Arp2-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "Arp2",
       "preset_folder": "SYNTHS/KERERU",
@@ -1621,7 +1621,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Triggy 10-Backdraft Pad.XML",
+      "output_filename": "Backdraft Pad-Triggy 10.XML",
       "source_song": "Triggy 10",
       "preset_name": "Backdraft Pad",
       "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
@@ -1632,7 +1632,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Triggy 11-Bassdirtyswell.XML",
+      "output_filename": "Bassdirtyswell-Triggy 11.XML",
       "source_song": "Triggy 11",
       "preset_name": "Bassdirtyswell",
       "preset_folder": "SYNTHS/KERERU",
@@ -1643,7 +1643,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "No-More-Colour-Dystopia Keys.XML",
+      "output_filename": "Dystopia Keys-No-More-Colour.XML",
       "source_song": "No-More-Colour",
       "preset_name": "Dystopia Keys",
       "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
@@ -1654,7 +1654,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-Fuzz.XML",
+      "output_filename": "Fuzz-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "Fuzz",
       "preset_folder": "SYNTHS/KERERU",
@@ -1665,7 +1665,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Triggy-Init-Synth.XML",
+      "output_filename": "Init-Synth-Triggy.XML",
       "source_song": "Triggy",
       "preset_name": "Init-Synth",
       "preset_folder": "SYNTHS",
@@ -1676,7 +1676,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Triggy 15-Init-Synth.XML",
+      "output_filename": "Init-Synth-Triggy 15.XML",
       "source_song": "Triggy 15",
       "preset_name": "Init-Synth",
       "preset_folder": "SYNTHS",
@@ -1687,7 +1687,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Triggy 16-Init-Synth.XML",
+      "output_filename": "Init-Synth-Triggy 16.XML",
       "source_song": "Triggy 16",
       "preset_name": "Init-Synth",
       "preset_folder": "SYNTHS",
@@ -1698,7 +1698,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Triggy 18-Init-Synth.XML",
+      "output_filename": "Init-Synth-Triggy 18.XML",
       "source_song": "Triggy 18",
       "preset_name": "Init-Synth",
       "preset_folder": "SYNTHS",
@@ -1709,7 +1709,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K07NatRad-Islp.XML",
+      "output_filename": "Islp-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "Islp",
       "preset_folder": "SYNTHS",
@@ -1720,7 +1720,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-K01Arp.XML",
+      "output_filename": "K01Arp-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "K01Arp",
       "preset_folder": "SYNTHS/KERERU",
@@ -1731,7 +1731,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Sink-K01Arp.XML",
+      "output_filename": "K01Arp-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Arp",
       "preset_folder": "SYNTHS/KERERU",
@@ -1742,7 +1742,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Wf-full-K01Arp.XML",
+      "output_filename": "K01Arp-Wf-full.XML",
       "source_song": "Wf-full",
       "preset_name": "K01Arp",
       "preset_folder": "SYNTHS/KERERU",
@@ -1753,7 +1753,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-K01Bass.XML",
+      "output_filename": "K01Bass-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "K01Bass",
       "preset_folder": "SYNTHS/KERERU",
@@ -1764,7 +1764,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-K01Drone.XML",
+      "output_filename": "K01Drone-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
@@ -1775,7 +1775,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Sink-K01Drone.XML",
+      "output_filename": "K01Drone-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
@@ -1786,7 +1786,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K02Slpspk-K01Drone.XML",
+      "output_filename": "K01Drone-K02Slpspk.XML",
       "source_song": "K02Slpspk",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
@@ -1797,7 +1797,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-K01Drone.XML",
+      "output_filename": "K01Drone-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
@@ -1808,7 +1808,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-old-K01Drone.XML",
+      "output_filename": "K01Drone-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
@@ -1819,7 +1819,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Sink-K01Fillforarp.XML",
+      "output_filename": "K01Fillforarp-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Fillforarp",
       "preset_folder": "SYNTHS/KERERU",
@@ -1830,7 +1830,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Sink-K01Fuzzbass.XML",
+      "output_filename": "K01Fuzzbass-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Fuzzbass",
       "preset_folder": "SYNTHS/KERERU",
@@ -1841,7 +1841,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-K01Fuzzbass.XML",
+      "output_filename": "K01Fuzzbass-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "K01Fuzzbass",
       "preset_folder": "SYNTHS/KERERU",
@@ -1852,7 +1852,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Sink-K01Twinkle2.XML",
+      "output_filename": "K01Twinkle2-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Twinkle2",
       "preset_folder": "SYNTHS/KERERU",
@@ -1863,7 +1863,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Sink-K01Twinlke1.XML",
+      "output_filename": "K01Twinlke1-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Twinlke1",
       "preset_folder": "SYNTHS/KERERU",
@@ -1874,7 +1874,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Ambient-Fishes-K01Violin.XML",
+      "output_filename": "K01Violin-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "K01Violin",
       "preset_folder": "SYNTHS/KERERU",
@@ -1885,7 +1885,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Lemon-KRAF-POLY.XML",
+      "output_filename": "KRAF-POLY-Lemon.XML",
       "source_song": "Lemon",
       "preset_name": "KRAF-POLY",
       "preset_folder": "SYNTHS",
@@ -1896,7 +1896,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-KRumchybass.XML",
+      "output_filename": "KRumchybass-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "KRumchybass",
       "preset_folder": "SYNTHS",
@@ -1907,7 +1907,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-old-KRumchybass.XML",
+      "output_filename": "KRumchybass-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "KRumchybass",
       "preset_folder": "SYNTHS",
@@ -1918,7 +1918,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-Padfoot.XML",
+      "output_filename": "Padfoot-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "Padfoot",
       "preset_folder": "SYNTHS/KERERU",
@@ -1929,7 +1929,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-SYNT056.XML",
+      "output_filename": "SYNT056-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "SYNT056",
       "preset_folder": "SYNTHS",
@@ -1940,7 +1940,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Triggy 19-SYNT1.XML",
+      "output_filename": "SYNT1-Triggy 19.XML",
       "source_song": "Triggy 19",
       "preset_name": "SYNT1",
       "preset_folder": "SYNTHS",
@@ -1951,7 +1951,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K10FiveAlive-TB02.XML",
+      "output_filename": "TB02-K10FiveAlive.XML",
       "source_song": "K10FiveAlive",
       "preset_name": "TB02",
       "preset_folder": "SYNTHS",
@@ -1962,7 +1962,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "No-More-Colour-TB08.XML",
+      "output_filename": "TB08-No-More-Colour.XML",
       "source_song": "No-More-Colour",
       "preset_name": "TB08",
       "preset_folder": "SYNTHS",
@@ -1973,7 +1973,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-TB11.XML",
+      "output_filename": "TB11-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "TB11",
       "preset_folder": "SYNTHS",
@@ -1984,7 +1984,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K03Yends-TB13.XML",
+      "output_filename": "TB13-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "TB13",
       "preset_folder": "SYNTHS",
@@ -1995,7 +1995,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-VISA-PAD.XML",
+      "output_filename": "VISA-PAD-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "VISA-PAD",
       "preset_folder": "SYNTHS",
@@ -2006,7 +2006,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K09Arparty-old-VISA-PAD.XML",
+      "output_filename": "VISA-PAD-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "VISA-PAD",
       "preset_folder": "SYNTHS",
@@ -2017,7 +2017,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Oddish-Vibes WT.XML",
+      "output_filename": "Vibes WT-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "Vibes WT",
       "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
@@ -2028,7 +2028,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Oddish-Wall Of Static.XML",
+      "output_filename": "Wall Of Static-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "Wall Of Static",
       "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
@@ -2039,7 +2039,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bmtk-YAZO-LEAD2.XML",
+      "output_filename": "YAZO-LEAD2-Bmtk.XML",
       "source_song": "Bmtk",
       "preset_name": "YAZO-LEAD2",
       "preset_folder": "SYNTHS",
@@ -2050,7 +2050,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Lemon-YAZO-SEQ.XML",
+      "output_filename": "YAZO-SEQ-Lemon.XML",
       "source_song": "Lemon",
       "preset_name": "YAZO-SEQ",
       "preset_folder": "SYNTHS",

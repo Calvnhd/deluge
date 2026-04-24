@@ -1042,18 +1042,18 @@ class TestNormaliseParams:
 
 class TestGenerateFilename:
     def test_default_mode_format(self) -> None:
-        """Default mode: <SongName>-<PresetName>.XML."""
+        """Default mode: <PresetName>-<SongName>.XML."""
         used: set[str] = set()
         result = generate_filename("Bloop", "133", "synth", 0, False, used)
-        assert result == "Bloop-133.XML"
-        assert "Bloop-133.XML" in used
+        assert result == "133-Bloop.XML"
+        assert "133-Bloop.XML" in used
 
     def test_extended_mode_format(self) -> None:
-        """Extended mode: <SongName>-<PresetName>-<Abbr>.XML."""
+        """Extended mode: <PresetName>-<SongName>-<Abbr>.XML."""
         used: set[str] = set()
         result = generate_filename("Bloop", "133", "synth", 0, True, used)
-        assert result == "Bloop-133-Lbl.XML"
-        assert "Bloop-133-Lbl.XML" in used
+        assert result == "133-Bloop-Lbl.XML"
+        assert "133-Bloop-Lbl.XML" in used
 
     def test_colour_abbreviation_mapping(self) -> None:
         """Should use correct 3-letter abbreviation for each section ID."""
@@ -1062,24 +1062,50 @@ class TestGenerateFilename:
         for section_id, (_name, abbr) in SECTION_COLOURS.items():
             used: set[str] = set()
             result = generate_filename("Song", "Preset", "synth", section_id, True, used)
-            assert result == f"Song-Preset-{abbr}.XML"
+            assert result == f"Preset-Song-{abbr}.XML"
 
     def test_collision_appends_number(self) -> None:
         """Should append -2, -3 etc. on filename collision."""
-        used: set[str] = {"Bloop-133.XML"}
+        used: set[str] = {"133-Bloop.XML"}
         result = generate_filename("Bloop", "133", "synth", 0, False, used)
-        assert result == "Bloop-133-2.XML"
-        assert "Bloop-133-2.XML" in used
+        assert result == "133-Bloop-2.XML"
+        assert "133-Bloop-2.XML" in used
 
         # Third collision
         result2 = generate_filename("Bloop", "133", "synth", 0, False, used)
-        assert result2 == "Bloop-133-3.XML"
+        assert result2 == "133-Bloop-3.XML"
 
     def test_preserves_spaces_and_hyphens(self) -> None:
         """Should keep spaces and hyphens in names."""
         used: set[str] = set()
         result = generate_filename("My Song", "Rich Saw-Bass", "synth", 0, False, used)
-        assert result == "My Song-Rich Saw-Bass.XML"
+        assert result == "Rich Saw-Bass-My Song.XML"
+
+    def test_preset_naming_default_mode(self) -> None:
+        """Song naming: <SongName>-<PresetName>.XML."""
+        used: set[str] = set()
+        result = generate_filename("Bloop", "133", "synth", 0, False, used, naming="song")
+        assert result == "Bloop-133.XML"
+        assert "Bloop-133.XML" in used
+
+    def test_preset_naming_extended_mode(self) -> None:
+        """Song naming extended: <SongName>-<PresetName>-<Abbr>.XML."""
+        used: set[str] = set()
+        result = generate_filename("Bloop", "133", "synth", 0, True, used, naming="song")
+        assert result == "Bloop-133-Lbl.XML"
+        assert "Bloop-133-Lbl.XML" in used
+
+    def test_preset_naming_collision(self) -> None:
+        """Song naming collision should append -2."""
+        used: set[str] = {"Bloop-133.XML"}
+        result = generate_filename("Bloop", "133", "synth", 0, False, used, naming="song")
+        assert result == "Bloop-133-2.XML"
+
+    def test_preset_naming_is_default(self) -> None:
+        """Preset naming should be the default (no naming arg)."""
+        used: set[str] = set()
+        result = generate_filename("Bloop", "133", "synth", 0, False, used)
+        assert result == "133-Bloop.XML"
 
 
 # ---------------------------------------------------------------------------

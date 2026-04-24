@@ -1143,11 +1143,14 @@ def generate_filename(
     section_id: int,
     extended: bool,
     used_filenames: set[str],
+    naming: str = "preset",
 ) -> str:
     """Generate a unique output filename following the naming convention.
 
-    Default mode:   <SongName>-<PresetName>.XML
-    Extended mode:  <SongName>-<PresetName>-<Abbr>.XML
+    Default mode:   <SongName>-<PresetName>.XML  (naming="song")
+                    <PresetName>-<SongName>.XML  (naming="preset")
+    Extended mode:  <SongName>-<PresetName>-<Abbr>.XML  (naming="song")
+                    <PresetName>-<SongName>-<Abbr>.XML  (naming="preset")
 
     Args:
         song_name: Stem of the song XML filename (e.g. "Bloop").
@@ -1156,12 +1159,13 @@ def generate_filename(
         section_id: Section ID for colour abbreviation lookup (extended mode only).
         extended: Whether extended mode is active.
         used_filenames: Set of filenames already used — for collision detection.
+        naming: Filename ordering — "song" for SongName-Preset, "preset" for Preset-SongName.
 
     Returns:
         A unique filename string (e.g. "Bloop-133.XML").
 
     Steps:
-        1. Construct base name: "<song_name>-<preset_name>"
+        1. Construct base name based on naming mode
         2. If extended, append "-<Abbr>" using SECTION_COLOURS[section_id]
         3. Append ".XML" extension
         4. If filename is already in used_filenames, append "-2", "-3", etc.
@@ -1169,7 +1173,10 @@ def generate_filename(
         5. Add the final filename to used_filenames
         6. Return the filename
     """
-    base = f"{song_name}-{preset_name}"
+    if naming == "preset":
+        base = f"{preset_name}-{song_name}"
+    else:
+        base = f"{song_name}-{preset_name}"
     if extended:
         _colour_name, abbr = SECTION_COLOURS[section_id]
         base = f"{base}-{abbr}"
@@ -1488,6 +1495,8 @@ def _dedup_pass(
 
         if verbose:
             print(f"[{label}]   baseline: {baseline.song_name}")
+            max_name_len = max(len(r.song_name) for r in group)
+            max_pair_len = max_name_len * 2 + 4  # "name vs name"
 
         for candidate in group[1:]:
             is_distinct_from_all = True
@@ -1503,10 +1512,10 @@ def _dedup_pass(
                 )
                 if verbose:
                     verdict = "distinct" if comparison.is_distinct else "similar"
+                    pair = f"{candidate.song_name} vs {accepted_result.song_name}"
                     print(
-                        f"[{label}]   {candidate.song_name} vs"
-                        f" {accepted_result.song_name}"
-                        f" → {verdict} ({comparison.reason})"
+                        f"[{label}]   {pair:<{max_pair_len}}"
+                        f" → {verdict} {comparison.reason}"
                     )
                 if not comparison.is_distinct:
                     is_distinct_from_all = False

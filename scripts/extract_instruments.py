@@ -90,6 +90,12 @@ def main(argv: list[str] | None = None) -> None:
         default=None,
         help="Exclude songs in a subdirectory of SONGS/ (e.g. --exclude-dir testing). Can be specified multiple times.",
     )
+    parser.add_argument(
+        "--naming",
+        choices=["song", "preset"],
+        default="preset",
+        help="Filename ordering: 'preset' for Preset-SongName (default), 'song' for SongName-Preset",
+    )
     args = parser.parse_args(argv)
 
     # Dry-run is the default behaviour (matches existing script conventions).
@@ -235,6 +241,7 @@ def main(argv: list[str] | None = None) -> None:
                     section_id=section_id,
                     extended=args.extended,
                     used_filenames=used,
+                    naming=args.naming,
                 )
 
                 result = ExtractionResult(
