@@ -143,7 +143,24 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="Show what would change and exit without prompting.",
     )
+    parser.add_argument(
+        "--xml",
+        action="store_true",
+        help="Sync only XML files. Combine with --wav to sync both.",
+    )
+    parser.add_argument(
+        "--wav",
+        action="store_true",
+        help="Sync only WAV files. Combine with --xml to sync both.",
+    )
     args = parser.parse_args(argv)
+
+    if args.xml and not args.wav:
+        file_filter = "xml"
+    elif args.wav and not args.xml:
+        file_filter = "wav"
+    else:
+        file_filter = "both"
 
     deluge_root = get_deluge_root()
     sd_path = get_sd_card_path()
@@ -152,7 +169,7 @@ def main(argv: list[str] | None = None) -> None:
     print(f"Destination: {sd_path}")
     print()
 
-    plan, _src_scan = compute_sync(deluge_root, sd_path)
+    plan, _src_scan = compute_sync(deluge_root, sd_path, file_filter=file_filter)
 
     if not plan.files_to_copy and not plan.files_to_delete:
         print("Already up to date.")

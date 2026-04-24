@@ -342,14 +342,19 @@ def main(argv: list[str] | None = None) -> None:
             print("\n*** Aborted ***\n")
             return
         print()
-        # Delete old output dirs directly (no .trash on SD card).
-        print("Cleaning up previously extracted instruments...")
-        if synth_output_dir.is_dir():
-            print("Removing", synth_output_dir)
-            shutil.rmtree(synth_output_dir)
-        if kit_output_dir.is_dir():
-            print("Removing", kit_output_dir)
-            shutil.rmtree(kit_output_dir)
+        # Back up old SD output dirs to LOCAL .trash/ before deletion.
+        local_root = get_deluge_root()
+        if synth_output_dir.is_dir() or kit_output_dir.is_dir():
+            print("Cleaning up previously extracted instruments...")
+            trash_base = local_root / ".trash" / datetime.now().strftime("SD-extract-%Y%m%d_%H%M%S")
+            for source_dir in [synth_output_dir, kit_output_dir]:
+                if source_dir.is_dir():
+                    rel_path = source_dir.relative_to(deluge_root)
+                    trash_dest = trash_base / rel_path
+                    trash_dest.parent.mkdir(parents=True, exist_ok=True)
+                    print("Moving", source_dir, "to", trash_dest)
+                    shutil.copytree(str(source_dir), str(trash_dest))
+                    shutil.rmtree(source_dir)
     else:
         # Trash previous extraction directories (local backup).
         if synth_output_dir.is_dir() or kit_output_dir.is_dir():
