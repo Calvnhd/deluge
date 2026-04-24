@@ -38,6 +38,7 @@ from deluge_lib.extraction import (
     extract_kit,
     extract_synth,
     generate_filename,
+    is_sidechain_kit,
     load_init_defaults,
     load_kit_init_template,
     match_instruments_to_clips,
@@ -78,6 +79,17 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="Read from and write to the SD card directly instead of the local backup",
     )
+    parser.add_argument(
+        "--include-sidechain",
+        action="store_true",
+        help="Include sidechain-only kits (excluded by default)",
+    )
+    parser.add_argument(
+        "--exclude-dir",
+        action="append",
+        default=None,
+        help="Exclude songs in a subdirectory of SONGS/ (e.g. --exclude-dir testing). Can be specified multiple times.",
+    )
     args = parser.parse_args(argv)
 
     # Dry-run is the default behaviour (matches existing script conventions).
@@ -98,7 +110,7 @@ def main(argv: list[str] | None = None) -> None:
     kit_init_template = load_kit_init_template(deluge_root)
 
     print()
-    songs = discover_songs(deluge_root)
+    songs = discover_songs(deluge_root, exclude_dirs=args.exclude_dir)
 
     all_results: list[ExtractionResult] = []
     comp_config = ComparisonConfig.default()  # intra-song comparison (extended mode)
@@ -119,7 +131,7 @@ def main(argv: list[str] | None = None) -> None:
         # Discover instruments and clips in this song.
         instruments = discover_instruments(song_tree)
         clips = discover_clips(song_tree)
-        groups, match_warnings = match_instruments_to_clips(instruments, clips)
+        groups, match_warnings = match_instruments_to_clips(instruments, clips, song_tree)
 
         # Only print songs that have warnings or extractable instruments.
         if not match_warnings and not groups:
@@ -139,6 +151,20 @@ def main(argv: list[str] | None = None) -> None:
         song_results: list[ExtractionResult] = []
 
         for group in groups:
+            # Sidechain kit detection: skip sidechain-only kits unless opted in.
+            if (
+                group.instrument.instrument_type == "kit"
+                and not args.include_sidechain
+            ):
+                is_sc, sc_reason = is_sidechain_kit(group)
+                if is_sc:
+                    name = group.instrument.preset_name
+                    print(
+                        f"  NOTE:  Kit \"{name}\" detected as sidechain-only"
+                        f" — skipped (use --include-sidechain to extract)"
+                    )
+                    continue
+
             # Build the list of (ClipInfo, differing_params) for extraction.
             clips_with_diffs: list[tuple[ClipInfo, list[str]]] = []
             if args.extended:
@@ -185,7 +211,7 @@ def main(argv: list[str] | None = None) -> None:
                     )
                     for w in default_param_warnings:
                         print(
-                            f"  WARNING: ({inst.preset_name},"
+                            f"  NOTE:  ({inst.preset_name},"
                             f" section {section_id}/{colour_name})"
                             f" — {w}"
                         )

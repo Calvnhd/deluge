@@ -17,6 +17,9 @@ from deluge_lib.extraction import (
     InstrumentInfo,
     NormalisationConfig,
     RejectedResult,
+    SIDECHAIN_LOW_VOLUME_THRESHOLD,
+    SIDECHAIN_SEND_MAX,
+    SIDECHAIN_SEND_THRESHOLD,
     _strip_automation,
     build_manifest_entry,
     compare_instruments,
@@ -27,6 +30,7 @@ from deluge_lib.extraction import (
     extract_kit,
     extract_synth,
     generate_filename,
+    is_sidechain_kit,
     match_instruments_to_clips,
     normalise_params,
     select_default_clip,
@@ -230,6 +234,7 @@ class TestMatchInstrumentsToClips:
         assert len(warnings) == 1
         assert "Orphaned instrument" in warnings[0]
         assert "'Orphan'" in warnings[0]
+        assert "no clips in session or arrangement view" in warnings[0]
 
     def test_warns_on_duplicate_clips_in_same_section(self) -> None:
         """Should keep first clip and warn about duplicate in same section."""
@@ -252,6 +257,43 @@ class TestMatchInstrumentsToClips:
         assert len(groups) == 0
         assert len(warnings) == 1
         assert "Orphaned" in warnings[0]
+        assert "no clips in session or arrangement view" in warnings[0]
+
+    def test_orphan_with_arrangement_clip_shows_arrangement_only_message(self) -> None:
+        """When an instrument has no session clips but exists in arrangementOnlyClips."""
+        instruments = [self._make_instrument("Pad", "SYNTHS")]
+        clips: list[ClipInfo] = []
+        # Build a song_tree with arrangementOnlyClips referencing the instrument
+        song_tree = etree.fromstring(
+            b'<song>'
+            b'<sessionClips></sessionClips>'
+            b'<arrangementOnlyClips>'
+            b'<instrumentClip instrumentPresetName="Pad" instrumentPresetFolder="SYNTHS" section="0" />'
+            b'</arrangementOnlyClips>'
+            b'</song>'
+        )
+        groups, warnings = match_instruments_to_clips(instruments, clips, song_tree=song_tree)
+        assert len(groups) == 0
+        assert len(warnings) == 1
+        assert "arrangement-only clips" in warnings[0]
+        assert "'Pad'" in warnings[0]
+        assert "Orphaned" not in warnings[0]
+
+    def test_orphan_without_arrangement_clip_shows_orphaned_message(self) -> None:
+        """When an instrument has no clips in session or arrangement views."""
+        instruments = [self._make_instrument("Ghost", "SYNTHS")]
+        clips: list[ClipInfo] = []
+        song_tree = etree.fromstring(
+            b'<song>'
+            b'<sessionClips></sessionClips>'
+            b'<arrangementOnlyClips></arrangementOnlyClips>'
+            b'</song>'
+        )
+        groups, warnings = match_instruments_to_clips(instruments, clips, song_tree=song_tree)
+        assert len(groups) == 0
+        assert len(warnings) == 1
+        assert "Orphaned instrument" in warnings[0]
+        assert "no clips in session or arrangement view" in warnings[0]
 
     def test_multiple_instruments_matched_independently(self) -> None:
         """Each instrument should match its own clips independently."""
@@ -842,8 +884,8 @@ class TestKitDefaultParamsSafetyPass:
         )
         _, warnings = extract_kit(kit, clip)
         warning_text = "\n".join(warnings)
-        assert "Kit sound 'Snare' (index 1) has no clip parameters" in warning_text
-        assert "Kit sound 'HiHat' (index 2) has no clip parameters" in warning_text
+        assert "Kit sound 'Snare' not used in this clip" in warning_text
+        assert "Kit sound 'HiHat' not used in this clip" in warning_text
         # Sound 0 (Kick) should NOT have a warning
         assert "Kick" not in warning_text
 
@@ -879,10 +921,12 @@ class TestKitDefaultParamsSafetyPass:
         # noteRow with drumIndex but no <soundParams> child
         etree.SubElement(note_rows_el, "noteRow", drumIndex="0")
 
-        result, _ = extract_kit(kit, clip)
+        result, warnings = extract_kit(kit, clip)
         captured = capsys.readouterr()
-        # Should warn about missing soundParams
+        # Should warn about missing soundParams (printed to stdout)
         assert "no <soundParams>" in captured.out
+        # Warning should also be propagated in the returned warnings list
+        assert any("no <soundParams>" in w for w in warnings)
         # Sound should still get <defaultParams> from fallback
         sound_sources = result.find("soundSources")
         sounds = list(sound_sources)
@@ -1491,6 +1535,153 @@ class TestCompareInstruments:
 
 
 # ---------------------------------------------------------------------------
+# Task 3.3: Comparison engine extension tests (depthControlledBy + synth osc markers)
+# ---------------------------------------------------------------------------
+
+
+def _add_depth_controlled_by(
+    preset: etree._Element,
+    cable_src: str,
+    cable_dst: str,
+    depth_source: str,
+    depth_amount: str,
+) -> None:
+    """Add a <depthControlledBy> child to a matching patchCable in *preset*.
+
+    Finds the patchCable with the given (source, destination) under
+    <defaultParams><patchCables> and appends a nested depthControlledBy element.
+    """
+    dp = preset.find("defaultParams")
+    for cable in dp.find("patchCables"):
+        if cable.get("source") == cable_src and cable.get("destination") == cable_dst:
+            dcb = etree.SubElement(cable, "depthControlledBy")
+            etree.SubElement(dcb, "patchCable", source=depth_source, amount=depth_amount)
+            return
+    msg = f"No patchCable ({cable_src}->{cable_dst}) found"
+    raise ValueError(msg)
+
+
+class TestDepthControlledByComparison:
+    """Tests for depthControlledBy nested patchCable comparison."""
+
+    CONFIG = ComparisonConfig.default()
+
+    def test_depth_present_one_side_only_is_hard(self) -> None:
+        """depthControlledBy on one cable but not the other → hard distinct."""
+        a = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        b = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        _add_depth_controlled_by(b, "lfo1", "oscAPitch", "lfo2", "0x3FFFFFE8")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("depthControlledBy" in d for d in result.hard_diffs)
+
+    def test_depth_removed_is_hard(self) -> None:
+        """depthControlledBy present on A but not B → hard distinct (removed)."""
+        a = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        b = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        _add_depth_controlled_by(a, "lfo1", "oscAPitch", "lfo2", "0x3FFFFFE8")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("depthControlledBy: removed" in d for d in result.hard_diffs)
+
+    def test_depth_different_source_is_hard(self) -> None:
+        """Same depthControlledBy structure but different sub-source → hard distinct."""
+        a = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        b = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        _add_depth_controlled_by(a, "lfo1", "oscAPitch", "lfo2", "0x3FFFFFE8")
+        _add_depth_controlled_by(b, "lfo1", "oscAPitch", "velocity", "0x3FFFFFE8")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("depthControlledBy" in d and "source" in d for d in result.hard_diffs)
+
+    def test_depth_same_structure_different_amount_is_soft(self) -> None:
+        """Same depthControlledBy source but different amount → soft marker."""
+        a = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        b = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        _add_depth_controlled_by(a, "lfo1", "oscAPitch", "lfo2", "0x00000000")
+        _add_depth_controlled_by(b, "lfo1", "oscAPitch", "lfo2", "0x7FFFFFFF")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        # Hard diffs should be empty — this is a soft difference only
+        assert result.hard_diffs == []
+        assert any("depthControlledBy.amount" in d for d in result.soft_diffs)
+
+    def test_depth_same_structure_same_amount_no_diff(self) -> None:
+        """Identical depthControlledBy → no diffs at all."""
+        a = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        b = _make_synth_preset(patchCables=[("lfo1", "oscAPitch", "0x051EB850")])
+        _add_depth_controlled_by(a, "lfo1", "oscAPitch", "lfo2", "0x3FFFFFE8")
+        _add_depth_controlled_by(b, "lfo1", "oscAPitch", "lfo2", "0x3FFFFFE8")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.hard_diffs == []
+        assert not any("depthControlledBy" in d for d in result.soft_diffs)
+
+    def test_no_depth_controlled_by_unchanged_behaviour(self) -> None:
+        """PatchCables without depthControlledBy → existing comparison unchanged."""
+        a = _make_synth_preset(patchCables=[("velocity", "volume", "0x3FFFFFE8")])
+        b = _make_synth_preset(patchCables=[("velocity", "volume", "0x3FFFFFE8")])
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is False
+        assert result.hard_diffs == []
+        assert result.soft_diffs == []
+
+
+class TestSynthOscHardMarkers:
+    """Tests for synth osc1/osc2 loopMode and reversed hard markers."""
+
+    CONFIG = ComparisonConfig.default()
+
+    def test_osc1_loopmode_difference_is_hard(self) -> None:
+        """Different loopMode on osc1 → hard distinct."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        a.find("osc1").set("loopMode", "0")
+        b.find("osc1").set("loopMode", "1")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("osc1.loopMode" in d for d in result.hard_diffs)
+
+    def test_osc1_reversed_difference_is_hard(self) -> None:
+        """Different reversed on osc1 → hard distinct."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        a.find("osc1").set("reversed", "0")
+        b.find("osc1").set("reversed", "1")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("osc1.reversed" in d for d in result.hard_diffs)
+
+    def test_osc2_loopmode_difference_is_hard(self) -> None:
+        """Different loopMode on osc2 → hard distinct."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        a.find("osc2").set("loopMode", "0")
+        b.find("osc2").set("loopMode", "2")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("osc2.loopMode" in d for d in result.hard_diffs)
+
+    def test_osc_same_loopmode_not_hard(self) -> None:
+        """Same loopMode on both → no hard diff from loopMode."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        a.find("osc1").set("loopMode", "1")
+        b.find("osc1").set("loopMode", "1")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert not any("loopMode" in d for d in result.hard_diffs)
+
+    def test_osc_absent_vs_present_loopmode_is_hard(self) -> None:
+        """loopMode present on one side but absent on the other → hard distinct."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        # Only set on b, not a — absent attr defaults to ""
+        b.find("osc1").set("loopMode", "1")
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("osc1.loopMode" in d for d in result.hard_diffs)
+
+
+# ---------------------------------------------------------------------------
 # Task 4.3 / 6.2: Extended mode multi-version selection
 # ---------------------------------------------------------------------------
 
@@ -1895,3 +2086,274 @@ class TestDeduplicateResults:
         assert len(result.rejected) == 1
         assert len(result.name_pass_rejected) == 1
         assert result.global_pass_rejected == []
+
+
+# ---------------------------------------------------------------------------
+# Sidechain Kit Detection
+# ---------------------------------------------------------------------------
+
+
+class TestIsSidechainKit:
+    """Tests for is_sidechain_kit() — sidechain-only kit detection."""
+
+    @staticmethod
+    def _make_kit_group(
+        sounds: list[dict[str, str]],
+        note_rows: list[dict[str, str | None]],
+        kit_volume: str = "0x3504F334",
+    ) -> InstrumentClipGroup:
+        """Build a minimal InstrumentClipGroup for a kit.
+
+        sounds: list of dicts with keys: name, sideChainSend (optional).
+        note_rows: list of dicts with keys: drumIndex, noteDataWithLift (optional),
+                   volume (optional, for soundParams).
+        kit_volume: hex volume for the clip's <kitParams>.
+        """
+        # Build the instrument <kit> element with <soundSources>.
+        kit_el = etree.Element("kit")
+        ss = etree.SubElement(kit_el, "soundSources")
+        for s in sounds:
+            attrs = {"name": s["name"]}
+            if "sideChainSend" in s:
+                attrs["sideChainSend"] = s["sideChainSend"]
+            etree.SubElement(ss, "sound", **attrs)
+
+        # Build the clip element with <kitParams> and <noteRows>.
+        clip_el = etree.Element("instrumentClip")
+        etree.SubElement(clip_el, "kitParams", volume=kit_volume)
+        nr_el = etree.SubElement(clip_el, "noteRows")
+        for nr in note_rows:
+            attrs: dict[str, str] = {}
+            if nr.get("drumIndex") is not None:
+                attrs["drumIndex"] = nr["drumIndex"]
+            if nr.get("noteDataWithLift") is not None:
+                attrs["noteDataWithLift"] = nr["noteDataWithLift"]
+            row = etree.SubElement(nr_el, "noteRow", **attrs)
+            if nr.get("volume") is not None:
+                etree.SubElement(row, "soundParams", volume=nr["volume"])
+
+        inst_info = InstrumentInfo(
+            element=kit_el,
+            instrument_type="kit",
+            preset_name="TestKit",
+            preset_folder="KITS",
+        )
+        clip_info = ClipInfo(
+            element=clip_el,
+            section=0,
+            preset_name="TestKit",
+            preset_folder="KITS",
+        )
+        return InstrumentClipGroup(
+            instrument=inst_info,
+            clips_by_section={0: clip_info},
+        )
+
+    def test_single_sound_max_sidechain_send(self) -> None:
+        """Single-sound kit with max sideChainSend → detected (Path B)."""
+        group = self._make_kit_group(
+            sounds=[{"name": "KICK", "sideChainSend": str(SIDECHAIN_SEND_MAX)}],
+            note_rows=[{"drumIndex": "0", "noteDataWithLift": "0x00000001"}],
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is True
+        assert "single sound" in reason
+
+    def test_single_sound_max_sidechain_normal_volume(self) -> None:
+        """Single-sound kit with max sideChainSend and normal volume → still detected (Path B)."""
+        group = self._make_kit_group(
+            sounds=[{"name": "KICK", "sideChainSend": str(SIDECHAIN_SEND_MAX)}],
+            note_rows=[{"drumIndex": "0", "noteDataWithLift": "0x00000001"}],
+            kit_volume="0x3504F334",
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is True
+        assert "single sound" in reason
+
+    def test_multi_sound_one_sequenced_row_low_kit_volume(self) -> None:
+        """Multi-sound kit, 1 sequenced row, max sideChainSend, low kit volume → detected (Path A)."""
+        group = self._make_kit_group(
+            sounds=[
+                {"name": "KICK", "sideChainSend": str(SIDECHAIN_SEND_MAX)},
+                {"name": "SNARE"},
+            ],
+            note_rows=[
+                {"drumIndex": "0", "noteDataWithLift": "0x00000001"},
+                {"drumIndex": "1"},
+            ],
+            kit_volume="0x80000000",  # silent
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is True
+        assert "low kit volume" in reason
+
+    def test_multi_sound_one_sequenced_row_low_row_volume(self) -> None:
+        """Multi-sound kit, 1 sequenced row, max sideChainSend, low row volume → detected (Path A)."""
+        group = self._make_kit_group(
+            sounds=[
+                {"name": "KICK", "sideChainSend": str(SIDECHAIN_SEND_MAX)},
+                {"name": "SNARE"},
+            ],
+            note_rows=[
+                {"drumIndex": "0", "noteDataWithLift": "0x00000001", "volume": "0x80000000"},
+                {"drumIndex": "1"},
+            ],
+            kit_volume="0x3504F334",  # normal kit volume
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is True
+        assert "low row volume" in reason
+
+    def test_multi_sound_multiple_sequenced_rows(self) -> None:
+        """Multi-sound kit with multiple sequenced rows → NOT detected (normal kit)."""
+        group = self._make_kit_group(
+            sounds=[
+                {"name": "KICK", "sideChainSend": str(SIDECHAIN_SEND_MAX)},
+                {"name": "SNARE"},
+            ],
+            note_rows=[
+                {"drumIndex": "0", "noteDataWithLift": "0x00000001"},
+                {"drumIndex": "1", "noteDataWithLift": "0x00000002"},
+            ],
+            kit_volume="0x80000000",
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is False
+        assert reason == ""
+
+    def test_no_sidechain_send_attribute(self) -> None:
+        """Kit with no sideChainSend attribute → NOT detected."""
+        group = self._make_kit_group(
+            sounds=[{"name": "KICK"}],
+            note_rows=[{"drumIndex": "0", "noteDataWithLift": "0x00000001"}],
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is False
+
+    def test_sidechain_send_well_below_max(self) -> None:
+        """Kit with sideChainSend well below max → NOT detected."""
+        group = self._make_kit_group(
+            sounds=[{"name": "KICK", "sideChainSend": "1000000"}],
+            note_rows=[{"drumIndex": "0", "noteDataWithLift": "0x00000001"}],
+            kit_volume="0x80000000",
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is False
+
+    def test_near_max_sidechain_send_within_threshold(self) -> None:
+        """sideChainSend at 99% of max (just at threshold) → detected."""
+        group = self._make_kit_group(
+            sounds=[{"name": "KICK", "sideChainSend": str(SIDECHAIN_SEND_THRESHOLD)}],
+            note_rows=[{"drumIndex": "0", "noteDataWithLift": "0x00000001"}],
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is True
+
+    def test_multi_sound_normal_volume_not_detected(self) -> None:
+        """Multi-sound kit, 1 sequenced row, max sideChainSend but normal volume → NOT detected."""
+        group = self._make_kit_group(
+            sounds=[
+                {"name": "KICK", "sideChainSend": str(SIDECHAIN_SEND_MAX)},
+                {"name": "SNARE"},
+            ],
+            note_rows=[
+                {"drumIndex": "0", "noteDataWithLift": "0x00000001"},
+                {"drumIndex": "1"},
+            ],
+            kit_volume="0x3504F334",  # init kit volume (normal)
+        )
+        is_sc, reason = is_sidechain_kit(group)
+        assert is_sc is False
+
+
+# ---------------------------------------------------------------------------
+# Phase 4: Test Song Filtering — directory exclusion
+# ---------------------------------------------------------------------------
+
+
+class TestDiscoverSongsExcludeDir:
+    """Tests for the --exclude-dir directory exclusion in discover_songs()."""
+
+    @staticmethod
+    def _write_song(path: Path) -> None:
+        """Write a minimal valid song XML at the given path."""
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<song firmwareVersion="c1.2.1">\n'
+            "  <instruments/>\n"
+            "</song>\n"
+        )
+
+    def test_exclude_dirs_none_discovers_all(self, tmp_path: Path) -> None:
+        """exclude_dirs=None discovers all songs (existing behaviour)."""
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "testing" / "B.XML")
+
+        results = discover_songs(tmp_path, exclude_dirs=None)
+        names = {p.name for p, _ in results}
+        assert names == {"A.XML", "B.XML"}
+
+    def test_exclude_single_dir(self, tmp_path: Path) -> None:
+        """exclude_dirs=['testing'] excludes songs in testing/ subdirectory."""
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "testing" / "B.XML")
+        self._write_song(songs_dir / "testing" / "C.XML")
+
+        results = discover_songs(tmp_path, exclude_dirs=["testing"])
+        names = {p.name for p, _ in results}
+        assert names == {"A.XML"}
+
+    def test_exclude_multiple_dirs(self, tmp_path: Path) -> None:
+        """Multiple exclude_dirs values exclude multiple subdirectories."""
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "testing" / "B.XML")
+        self._write_song(songs_dir / "drafts" / "C.XML")
+
+        results = discover_songs(tmp_path, exclude_dirs=["testing", "drafts"])
+        names = {p.name for p, _ in results}
+        assert names == {"A.XML"}
+
+    def test_top_level_songs_never_excluded(self, tmp_path: Path) -> None:
+        """Songs at top level of SONGS/ are never excluded."""
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "B.XML")
+
+        results = discover_songs(tmp_path, exclude_dirs=["testing"])
+        names = {p.name for p, _ in results}
+        assert names == {"A.XML", "B.XML"}
+
+    def test_exclude_nested_subdir(self, tmp_path: Path) -> None:
+        """Songs in nested subdirectories of an excluded dir are also excluded."""
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "testing" / "sub" / "B.XML")
+
+        results = discover_songs(tmp_path, exclude_dirs=["testing"])
+        names = {p.name for p, _ in results}
+        assert names == {"A.XML"}
+
+    def test_exclude_prints_message(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+        """A message is printed when songs are excluded."""
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "testing" / "B.XML")
+        self._write_song(songs_dir / "testing" / "C.XML")
+
+        discover_songs(tmp_path, exclude_dirs=["testing"])
+        captured = capsys.readouterr().out
+        assert "Excluding 2 song(s) from testing/" in captured
+
+    def test_exclude_is_case_insensitive(self, tmp_path: Path) -> None:
+        """Exclusion matching is case-insensitive."""
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "Testing" / "B.XML")
+
+        results = discover_songs(tmp_path, exclude_dirs=["testing"])
+        names = {p.name for p, _ in results}
+        assert names == {"A.XML"}

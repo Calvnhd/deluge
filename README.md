@@ -50,7 +50,7 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 | Step | What you do | Script | Status |
 |------|-------------|--------|--------|
 | 1 | Clean up songs — delete old versions, rename | (manual) | — |
-| 2 | Extract kit and synth presets from songs | `extract_instruments.py` | 🚧 |
+| 2 | Extract kit and synth presets from songs | `extract_instruments.py` | ✅ |
 | 3 | Add, remove, or rearrange synths and kits presets as desired | (manual) | — |
 | 4 | Add, remove, or rearrange samples as desired | (manual) | — |
 
@@ -95,6 +95,8 @@ Syncs the mounted SD card into the local `DELUGE/` directory. The SD card is not
 ```
 uv run sync_from_sd.py            # preview changes, then prompt to apply
 uv run sync_from_sd.py --dry-run  # preview only
+uv run sync_from_sd.py --xml      # sync only XML files
+uv run sync_from_sd.py --wav      # sync only WAV files
 ```
 
 #### `sync_samples_to_cloud.py`
@@ -123,14 +125,19 @@ uv run create_backup.py            # create backup
 uv run create_backup.py --dry-run  # preview file count and size only
 ```
 
-#### `extract_instruments.py` 🚧
+#### `extract_instruments.py`
 
-Extracts standalone synth and kit presets from song XMLs into `SYNTHS/SONG-SYNTHS/` and `KITS/SONG-KITS/`.
+Extracts standalone synth and kit presets from song XMLs into `SYNTHS/SONG-SYNTHS/` and `KITS/SONG-KITS/`. Includes cross-song deduplication to remove near-identical presets, and sidechain-only kit detection.
 
 ```
-uv run extract_instruments.py              # preview, then prompt to apply
-uv run extract_instruments.py --dry-run    # preview only
-uv run extract_instruments.py --extended   # extract multiple versions when params differ (WIP)
+uv run extract_instruments.py                        # preview, then prompt to apply
+uv run extract_instruments.py --dry-run              # preview only
+uv run extract_instruments.py --extended             # extract multiple versions when params differ
+uv run extract_instruments.py --no-dedup             # disable cross-song deduplication
+uv run extract_instruments.py --include-sidechain    # include sidechain-only kits (excluded by default)
+uv run extract_instruments.py --exclude-dir testing  # skip songs in a subdirectory
+uv run extract_instruments.py --sd-direct            # read/write directly to SD card
+uv run extract_instruments.py --verbose              # detailed dedup comparison logging
 ```
 
 #### `fix_references.py`
@@ -172,7 +179,6 @@ uv run sample_overview.py usage "Kick"     # usage detail for samples matching a
 
 ### Ideas
 
-- sync script can specify whether or not to sync samples?
 - Consider a library for parsing and working with the SD card contents?
 - Generate a manifest of all SD card contents for quick reference
 - Bulk rename songs with trailing numbers (after manually deleting old versions)

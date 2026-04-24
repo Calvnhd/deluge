@@ -140,6 +140,17 @@ _HEX_VALUE_RE = re.compile(r"^0x[0-9A-Fa-f]+$")
 # would correspond to ~5 display units.  Adjust during testing if needed.
 _HEX_FULL_RANGE = 0x7FFFFFFF
 
+# Sidechain detection constants.
+# sideChainSend is a plain integer (not hex) on kit <sound> elements.
+# Max value = 2147483647 (0x7FFFFFFF).  Near-max threshold = 99% of max.
+SIDECHAIN_SEND_MAX = 2147483647
+SIDECHAIN_SEND_THRESHOLD = int(SIDECHAIN_SEND_MAX * 0.99)
+
+# Volume threshold for "low volume" in sidechain detection.
+# Deluge hex volumes: 0x80000000 = silent, 0x7FFFFFFF = max.
+# 0xC0000000 (signed: -1,073,741,824) ≈ display value 12/50 — generous cutoff.
+SIDECHAIN_LOW_VOLUME_THRESHOLD = 0xC0000000 - 0x100000000  # → signed: -1073741824
+
 
 # ---------------------------------------------------------------------------
 # Dataclasses
@@ -249,8 +260,8 @@ class ComparisonConfig:
                     "hpfMode",
                     "filterRoute",
                 },
-                "osc1": {"type", "fileName", "transpose"},
-                "osc2": {"type", "fileName", "transpose"},
+                "osc1": {"type", "fileName", "transpose", "loopMode", "reversed"},
+                "osc2": {"type", "fileName", "transpose", "loopMode", "reversed"},
                 "lfo1": {"type"},
                 "lfo2": {"type"},
                 "unison": {"num"},
@@ -300,8 +311,8 @@ class ComparisonConfig:
                 "currentFilterType",
             },
             synth_soft_elements={
-                "osc1": {"type", "fileName", "transpose"},
-                "osc2": {"type", "fileName", "transpose"},
+                "osc1": {"type", "fileName", "transpose", "loopMode", "reversed"},
+                "osc2": {"type", "fileName", "transpose", "loopMode", "reversed"},
                 "lfo1": {"type"},
                 "lfo2": {"type"},
                 "unison": {"num"},
@@ -475,7 +486,10 @@ def load_kit_init_template(deluge_root: Path) -> etree._Element | None:
 # ---------------------------------------------------------------------------
 
 
-def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
+def discover_songs(
+    deluge_root: Path,
+    exclude_dirs: list[str] | None = None,
+) -> list[tuple[Path, etree._Element]]:
     """Find and parse all valid song XMLs in DELUGE_ROOT/SONGS/.
 
     Recursively discovers all *.XML files in the SONGS/ directory and its
@@ -483,15 +497,22 @@ def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
     firmwareVersion attribute on the <song> root element. Songs with
     firmware != c1.2.1 are skipped with a warning.
 
+    Args:
+        deluge_root: Path to the DELUGE root directory.
+        exclude_dirs: Optional list of subdirectory names relative to SONGS/
+            to exclude. Songs whose path contains any of these as a parent
+            folder are skipped.
+
     Returns:
         List of (path, parsed_root_element) tuples for valid songs.
 
     Steps:
         1. Recursively scan DELUGE_ROOT/SONGS/ for XML files via scan_tree()
-        2. For each file, parse with parse_deluge_xml()
-        3. Read firmwareVersion attribute from <song> root element
-        4. If firmwareVersion != "c1.2.1", print warning and skip
-        5. Collect and return valid (path, root) tuples
+        2. Filter out songs in excluded directories (if any)
+        3. For each file, parse with parse_deluge_xml()
+        4. Read firmwareVersion attribute from <song> root element
+        5. If firmwareVersion != "c1.2.1", print warning and skip
+        6. Collect and return valid (path, root) tuples
     """
     songs_dir = deluge_root / "SONGS"
     if not songs_dir.is_dir():
@@ -499,6 +520,28 @@ def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
 
     scan = scan_tree(songs_dir, label="songs", file_filter="xml")
     xml_paths = sorted(songs_dir / entry.rel_path for entry in scan.files.values())
+
+    # Filter out songs in excluded directories.
+    if exclude_dirs:
+        exclude_set = {d.lower() for d in exclude_dirs}
+        filtered: list[Path] = []
+        excluded_counts: dict[str, int] = {}
+        for xml_path in xml_paths:
+            try:
+                rel = xml_path.parent.relative_to(songs_dir)
+            except ValueError:
+                filtered.append(xml_path)
+                continue
+            # Check if any parent directory component matches an excluded dir.
+            parts = [p.lower() for p in rel.parts]
+            matched = next((d for d in exclude_set if d in parts), None)
+            if matched:
+                excluded_counts[matched] = excluded_counts.get(matched, 0) + 1
+            else:
+                filtered.append(xml_path)
+        for dir_name, count in sorted(excluded_counts.items()):
+            print(f"Excluding {count} song(s) from {dir_name}/")
+        xml_paths = filtered
 
     results: list[tuple[Path, etree._Element]] = []
 
@@ -604,7 +647,7 @@ def discover_clips(song_tree: etree._Element) -> list[ClipInfo]:
         if section_str is None:
             print(
                 f"WARNING: <instrumentClip> for {preset_name!r} has no section attribute"
-                " — treating as section 0"
+                " — treating as section 0 (may indicate corrupt XML)"
             )
             section = 0
         else:
@@ -625,6 +668,7 @@ def discover_clips(song_tree: etree._Element) -> list[ClipInfo]:
 def match_instruments_to_clips(
     instruments: list[InstrumentInfo],
     clips: list[ClipInfo],
+    song_tree: etree._Element | None = None,
 ) -> tuple[list[InstrumentClipGroup], list[str]]:
     """Match clips to instruments and group by section, identifying orphans.
 
@@ -637,7 +681,8 @@ def match_instruments_to_clips(
         3. Group matching clips by section ID
         4. If two clips share the same section for one instrument, keep the first
            and record a warning (D14)
-        5. If an instrument has no matching clips, it is orphaned — record a warning (D7)
+        5. If an instrument has no matching clips, check <arrangementOnlyClips>
+           to distinguish arrangement-only from truly orphaned — record a warning (D7)
         6. Return (groups, warnings) where warnings is a flat list of all warning strings
     """
     # Build lookup: (preset_name, preset_folder) → list of ClipInfo
@@ -654,11 +699,30 @@ def match_instruments_to_clips(
         matching_clips = clips_by_key.get(key, [])
 
         if not matching_clips:
-            msg = (
-                f"Orphaned instrument {instrument.preset_name!r}"
-                f" (folder={instrument.preset_folder!r}, type={instrument.instrument_type})"
-                " — no matching session clips"
-            )
+            # Check <arrangementOnlyClips> for matching clips
+            has_arrangement_clip = False
+            if song_tree is not None:
+                arr_clips_el = song_tree.find("arrangementOnlyClips")
+                if arr_clips_el is not None:
+                    for arr_clip in arr_clips_el:
+                        if arr_clip.tag != "instrumentClip":
+                            continue
+                        arr_name = arr_clip.get("instrumentPresetName", "")
+                        arr_folder = arr_clip.get("instrumentPresetFolder", "")
+                        if (arr_name, arr_folder) == (instrument.preset_name, instrument.preset_folder):
+                            has_arrangement_clip = True
+                            break
+
+            if has_arrangement_clip:
+                msg = (
+                    f"Instrument {instrument.preset_name!r} has arrangement-only clips"
+                    " — session clips required for extraction (skipped)"
+                )
+            else:
+                msg = (
+                    f"Orphaned instrument {instrument.preset_name!r}"
+                    " — no clips in session or arrangement view"
+                )
             warnings.append(msg)
             continue
 
@@ -690,6 +754,110 @@ def match_instruments_to_clips(
         warnings.extend(group_warnings)
 
     return groups, warnings
+
+
+# ---------------------------------------------------------------------------
+# Sidechain Kit Detection
+# ---------------------------------------------------------------------------
+
+
+def is_sidechain_kit(group: InstrumentClipGroup) -> tuple[bool, str]:
+    """Detect whether a kit group is a sidechain-only trigger kit.
+
+    Uses heuristics from XML structure research Section 12:
+      Path A: Only 1 noteRow has noteDataWithLift, that row's sound has
+              sideChainSend at or near max, AND kit-level or row-level
+              volume is low.
+      Path B: The kit has only 1 sound in soundSources AND that sound has
+              sideChainSend at or near max.
+
+    Args:
+        group: An InstrumentClipGroup for a kit instrument.
+
+    Returns:
+        (is_sidechain, reason) — True with a descriptive reason string if
+        the kit matches the sidechain heuristic, False with empty string
+        otherwise.
+    """
+    instrument_el = group.instrument.element
+    sound_sources = instrument_el.find("soundSources")
+    if sound_sources is None:
+        return False, ""
+    sounds = [s for s in sound_sources if s.tag == "sound"]
+    if not sounds:
+        return False, ""
+
+    # Select the clip that would be used for extraction (lowest section).
+    lowest_section = min(group.clips_by_section)
+    clip_el = group.clips_by_section[lowest_section].element
+
+    # --- Path B: dedicated sidechain kit (1 sound with max sideChainSend) ---
+    if len(sounds) == 1:
+        sc_send_str = sounds[0].get("sideChainSend")
+        if sc_send_str is not None:
+            try:
+                sc_send = int(sc_send_str)
+            except ValueError:
+                sc_send = 0
+            if sc_send >= SIDECHAIN_SEND_THRESHOLD:
+                return True, "single sound with max sideChainSend"
+
+    # --- Path A: multi-sound kit with only 1 sequenced row ---
+    note_rows_el = clip_el.find("noteRows")
+    if note_rows_el is None:
+        return False, ""
+
+    sequenced_rows: list[etree._Element] = []
+    for nr in note_rows_el:
+        if nr.tag == "noteRow" and nr.get("noteDataWithLift") is not None:
+            sequenced_rows.append(nr)
+
+    if len(sequenced_rows) != 1:
+        return False, ""
+
+    # Check the single sequenced row's sound for sideChainSend.
+    row = sequenced_rows[0]
+    drum_index_str = row.get("drumIndex")
+    if drum_index_str is None:
+        return False, ""
+    try:
+        drum_index = int(drum_index_str)
+    except ValueError:
+        return False, ""
+    if drum_index < 0 or drum_index >= len(sounds):
+        return False, ""
+
+    sound = sounds[drum_index]
+    sc_send_str = sound.get("sideChainSend")
+    if sc_send_str is None:
+        return False, ""
+    try:
+        sc_send = int(sc_send_str)
+    except ValueError:
+        return False, ""
+    if sc_send < SIDECHAIN_SEND_THRESHOLD:
+        return False, ""
+
+    # sideChainSend is at/near max — now check volume levels.
+    # Check kit-level volume from the clip's <kitParams>.
+    kit_params = clip_el.find("kitParams")
+    if kit_params is not None:
+        kit_vol_str = kit_params.get("volume")
+        if kit_vol_str is not None and _HEX_VALUE_RE.match(kit_vol_str):
+            kit_vol = _parse_hex_value(kit_vol_str)
+            if kit_vol <= SIDECHAIN_LOW_VOLUME_THRESHOLD:
+                return True, "only 1 sequenced row with max sideChainSend and low kit volume"
+
+    # Check the row-level volume from the noteRow's <soundParams>.
+    sound_params = row.find("soundParams")
+    if sound_params is not None:
+        row_vol_str = sound_params.get("volume")
+        if row_vol_str is not None and _HEX_VALUE_RE.match(row_vol_str):
+            row_vol = _parse_hex_value(row_vol_str)
+            if row_vol <= SIDECHAIN_LOW_VOLUME_THRESHOLD:
+                return True, "only 1 sequenced row with max sideChainSend and low row volume"
+
+    return False, ""
 
 
 # ---------------------------------------------------------------------------
@@ -855,6 +1023,7 @@ def extract_kit(
     sound_sources = kit.find("soundSources")
     sounds = list(sound_sources) if sound_sources is not None else []
 
+    default_param_warnings: list[str] = []
     note_rows_el = clip.find("noteRows")
     if note_rows_el is not None:
         for noterow in note_rows_el:
@@ -870,14 +1039,14 @@ def extract_kit(
                     f" (soundSources has {len(sounds)} sounds) — skipping noteRow"
                 )
                 continue
-            _merge_noterow_params(sounds[drum_index], noterow)
+            merge_warnings = _merge_noterow_params(sounds[drum_index], noterow)
+            default_param_warnings.extend(merge_warnings)
 
     # 7. Safety pass: ensure every <sound> has a <defaultParams> child
-    default_param_warnings: list[str] = []
     if sound_sources is not None:
-        default_param_warnings = _ensure_all_sounds_have_default_params(
+        default_param_warnings.extend(_ensure_all_sounds_have_default_params(
             sounds, init_template=init_template,
-        )
+        ))
 
     # 8. Reorder kit top-level children
     _reorder_kit_children(kit)
@@ -1708,8 +1877,8 @@ def _ensure_all_sounds_have_default_params(
 
         name = sound.get("name", f"index {idx}")
         warnings.append(
-            f"Kit sound {name!r} (index {idx})"
-            " has no clip parameters — using defaults"
+            f"Kit sound {name!r} not used in this clip"
+            " — applying init defaults"
         )
 
         # Insert after <unison> to match expected element order
@@ -1840,25 +2009,81 @@ def _build_patchcable_dict(
     return result
 
 
+def _build_patchcable_element_dict(
+    default_params: etree._Element | None,
+) -> dict[tuple[str, str], etree._Element]:
+    """Build a ``(source, destination) -> element`` dict from ``<patchCables>``."""
+    result: dict[tuple[str, str], etree._Element] = {}
+    if default_params is None:
+        return result
+    patch_cables = default_params.find("patchCables")
+    if patch_cables is None:
+        return result
+    for cable in patch_cables:
+        if cable.tag != "patchCable":
+            continue
+        src = cable.get("source", "")
+        dst = cable.get("destination", "")
+        result[(src, dst)] = cable
+    return result
+
+
 def _check_patchcable_structure(
     dp_a: etree._Element | None,
     dp_b: etree._Element | None,
 ) -> list[str]:
-    """Return hard diffs if patchCable ``(source, destination)`` sets differ."""
+    """Return hard diffs if patchCable routing or depthControlledBy structure differs."""
     cables_a = _build_patchcable_dict(dp_a)
     cables_b = _build_patchcable_dict(dp_b)
     keys_a = set(cables_a)
     keys_b = set(cables_b)
-    if keys_a == keys_b:
-        return []
-    added = keys_b - keys_a
-    removed = keys_a - keys_b
-    parts: list[str] = []
-    if added:
-        parts.append(f"added {sorted(added)}")
-    if removed:
-        parts.append(f"removed {sorted(removed)}")
-    return [f"patchCables structure: {'; '.join(parts)}"]
+
+    diffs: list[str] = []
+
+    if keys_a != keys_b:
+        added = keys_b - keys_a
+        removed = keys_a - keys_b
+        parts: list[str] = []
+        if added:
+            parts.append(f"added {sorted(added)}")
+        if removed:
+            parts.append(f"removed {sorted(removed)}")
+        diffs.append(f"patchCables structure: {'; '.join(parts)}")
+
+    # Check depthControlledBy on matching cables
+    elems_a = _build_patchcable_element_dict(dp_a)
+    elems_b = _build_patchcable_element_dict(dp_b)
+    for key in sorted(keys_a & keys_b):
+        cable_a = elems_a[key]
+        cable_b = elems_b[key]
+        dcb_a = cable_a.find("depthControlledBy")
+        dcb_b = cable_b.find("depthControlledBy")
+
+        # Presence/absence difference → hard diff
+        if (dcb_a is not None) != (dcb_b is not None):
+            src, dst = key
+            side = "added" if dcb_b is not None else "removed"
+            diffs.append(
+                f"patchCable({src}->{dst}).depthControlledBy: {side}"
+            )
+            continue
+
+        if dcb_a is None:
+            continue  # Neither has depthControlledBy
+
+        # Both have depthControlledBy — compare sub-patchCable sources
+        sub_a = dcb_a.find("patchCable")
+        sub_b = dcb_b.find("patchCable")
+        src_sub_a = sub_a.get("source", "") if sub_a is not None else ""
+        src_sub_b = sub_b.get("source", "") if sub_b is not None else ""
+        if src_sub_a != src_sub_b:
+            src, dst = key
+            diffs.append(
+                f"patchCable({src}->{dst}).depthControlledBy"
+                f" source: {src_sub_a!r} vs {src_sub_b!r}"
+            )
+
+    return diffs
 
 
 def _collect_soft_diffs(
@@ -1936,6 +2161,37 @@ def _collect_soft_diffs(
         else:
             src, dst = key
             diffs.append(f"{pfx}patchCable({src}->{dst}).amount")
+
+    # 3b. depthControlledBy amounts on matching cables with matching structure
+    elems_a = _build_patchcable_element_dict(dp_a)
+    elems_b = _build_patchcable_element_dict(dp_b)
+    for key in sorted(set(elems_a) & set(elems_b)):
+        cable_a = elems_a[key]
+        cable_b = elems_b[key]
+        dcb_a = cable_a.find("depthControlledBy")
+        dcb_b = cable_b.find("depthControlledBy")
+        if dcb_a is None or dcb_b is None:
+            continue  # structural diff handled by hard markers
+        sub_a = dcb_a.find("patchCable")
+        sub_b = dcb_b.find("patchCable")
+        if sub_a is None or sub_b is None:
+            continue
+        if sub_a.get("source", "") != sub_b.get("source", ""):
+            continue  # source diff handled by hard markers
+        amt_a = sub_a.get("amount", "")
+        amt_b = sub_b.get("amount", "")
+        if amt_a == amt_b:
+            continue
+        src, dst = key
+        if _HEX_VALUE_RE.match(amt_a) and _HEX_VALUE_RE.match(amt_b):
+            if _hex_diff_exceeds(amt_a, amt_b, threshold):
+                diffs.append(
+                    f"{pfx}patchCable({src}->{dst}).depthControlledBy.amount"
+                )
+        else:
+            diffs.append(
+                f"{pfx}patchCable({src}->{dst}).depthControlledBy.amount"
+            )
 
     # 4. Instrument-level: delay, sidechain, audioCompressor (D24)
     for elem_tag in ("delay", "sidechain", "audioCompressor"):
