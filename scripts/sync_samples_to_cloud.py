@@ -64,7 +64,7 @@ def main(argv: list[str] | None = None) -> None:
     if not confirm_apply(
         f"This will sync WAV files from {source} to {dest}. Continue?"
     ):
-        print("Aborted.")
+        print("\n*** Aborted ***\n")
         return
 
     start_time = time.monotonic()

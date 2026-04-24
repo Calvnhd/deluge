@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <kit modFXCurrentParam="feedback" currentFilterType="lpf" modFXType="flanger" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" firmwareVersion="c1.2.1" earliestCompatibleFirmware="4.1.0-alpha">
-			<defaultParams reverbAmount="0x9658CCCE" volume="0x3504F334" pan="0x00000000" sidechainCompressorShape="0xDC28F5B2" modFXDepth="0x00000000" modFXRate="0xE0000000" stutterRate="0x00000000" sampleRateReduction="0x80000000" bitCrush="0x80000000" modFXOffset="0x00000000" modFXFeedback="0x80000000" compressorThreshold="0x00000000" lpfMorph="0x80000000" hpfMorph="0x80000000" tempo="0x00000000">
+			<defaultParams reverbAmount="0xE16EBB36" volume="0x3504F334" pan="0x00000000" sidechainCompressorShape="0xDC28F5B2" modFXDepth="0x00000000" modFXRate="0xE0000000" stutterRate="0x00000000" sampleRateReduction="0x80000000" bitCrush="0x80000000" modFXOffset="0x00000000" modFXFeedback="0x80000000" compressorThreshold="0x00000000" lpfMorph="0x80000000" hpfMorph="0x80000000" tempo="0x00000000">
 				<delay rate="0x00000000" feedback="0x80000000"/>
 				<lpf frequency="0x46000000" resonance="0x80000000"/>
 				<hpf frequency="0x80000000" resonance="0xC0000000"/>

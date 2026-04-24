@@ -21,7 +21,7 @@ import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
-from deluge_lib.cli_utils import confirm_apply, get_deluge_root
+from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
 from deluge_lib.extraction import (
     SECTION_COLOURS,
     ClipInfo,
@@ -71,6 +71,11 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="Print detailed comparison logging during deduplication",
     )
+    parser.add_argument(
+        "--sd-direct",
+        action="store_true",
+        help="Read from and write to the SD card directly instead of the local backup",
+    )
     args = parser.parse_args(argv)
 
     # Dry-run is the default behaviour (matches existing script conventions).
@@ -81,7 +86,10 @@ def main(argv: list[str] | None = None) -> None:
     # ----- Extraction -----
 
     # Discover and parse all valid song XMLs.
-    deluge_root = get_deluge_root()
+    if args.sd_direct:
+        deluge_root = get_sd_card_path()
+    else:
+        deluge_root = get_deluge_root()
 
     # Validate init preset files exist (sanity check).
     init_synth = deluge_root / "SYNTHS" / "Init-Synth.XML"
@@ -238,10 +246,14 @@ def main(argv: list[str] | None = None) -> None:
     print()
     print("-" * line_width)
     print()
+    total_synths = sum(1 for r in all_results if r.instrument_type == "synth")
+    total_kits = sum(1 for r in all_results if r.instrument_type == "kit")
     dedup_result: DedupResult | None = None
     if not args.no_dedup and all_results:
         dedup_result = deduplicate_results(all_results, dedup_config, verbose=args.verbose)
         all_results = dedup_result.accepted
+    synth_removed = sum(1 for r in dedup_result.rejected if r.result.instrument_type == "synth") if dedup_result else 0
+    kit_removed = sum(1 for r in dedup_result.rejected if r.result.instrument_type == "kit") if dedup_result else 0
     if dedup_result is not None:
         _print_dedup_report(dedup_result)
 
@@ -254,18 +266,32 @@ def main(argv: list[str] | None = None) -> None:
 
     synth_count = sum(1 for r in all_results if r.instrument_type == "synth")
     kit_count = sum(1 for r in all_results if r.instrument_type == "kit")
-    dedup_removed = len(dedup_result.rejected) if dedup_result else 0
     print(f"\n{'-' * line_width}")
     print()
-    print(f"Extracted {synth_count} synths and {kit_count} kits from {len(songs)} songs")
-    if dedup_removed:
-        print(f"({dedup_removed} duplicates removed)")
+    print(f"Analysed {len(songs)} songs")
+    synth_removed_str = f", removed {synth_removed} duplicates" if synth_removed else ""
+    kit_removed_str = f", removed {kit_removed} duplicates" if kit_removed else ""
+    print(f"Found {total_synths} synths{synth_removed_str}")
+    print(f"Found {total_kits} kits{kit_removed_str}")
+    print()
+    print(f"\u2192 {synth_count} synths and {kit_count} kits ready for extraction")
     print()
     print("Output:")
+    entries = []
     if synth_count > 0:
-        print(f"\t{print_path(synth_output_dir.relative_to(deluge_root))}/ \t({synth_count} files)")
+        entries.append((f"{print_path(synth_output_dir)}/", synth_count))
     if kit_count > 0:
-        print(f"\t{print_path(kit_output_dir.relative_to(deluge_root))}/ \t({kit_count} files)")
+        entries.append((f"{print_path(kit_output_dir)}/", kit_count))
+    if entries:
+        total_files = sum(c for _, c in entries)
+        max_path_len = max(len(p) for p, _ in entries)
+        max_num_len = len(str(max(total_files, *(c for _, c in entries))))
+
+        for path, count in entries:
+            print(f"  {path:<{max_path_len}}   {count:>{max_num_len}} files")
+        # Total line: right-align number to match the entry number column
+        print()
+        print(f"  {'Total:':>{max_path_len}}   {total_files:>{max_num_len}} files")
 
     # In dry-run mode, stop here.
     if explicit_dry_run:
@@ -275,26 +301,48 @@ def main(argv: list[str] | None = None) -> None:
 
     # Prompt for confirmation before writing.
     print()
-    if not confirm_apply("Apply these changes? \nExisting content will be overwritten"):
-        print("Aborted.")
+    if not confirm_apply("Existing content in output directories will be replaced\n\nApply these changes?"):
+        print("\n*** Aborted ***\n")
         return
+    print()
 
-    # Trash previous extraction directories.
-    if synth_output_dir.is_dir() or kit_output_dir.is_dir():
-        trash_base = deluge_root / ".trash" / datetime.now().strftime("extract-%Y%m%d_%H%M%S")
-        for source in [synth_output_dir, kit_output_dir]:
-            if source.is_dir():
-                rel_path = source.relative_to(deluge_root)
-                trash_dest = trash_base / rel_path
-                trash_dest.parent.mkdir(parents=True, exist_ok=True)
-                shutil.move(str(source), str(trash_dest))
+    # Double confirm for SD card safety
+    if args.sd_direct:
+        print("\u26a0  WARNING!! Writing directly to SD card at", deluge_root) 
+        sd_confirm = input("Are you sure? Type 'yes' to confirm: ").strip()
+        if sd_confirm != "yes":
+            print("\n*** Aborted ***\n")
+            return
+        print()
+        # Delete old output dirs directly (no .trash on SD card).
+        print("Cleaning up previously extracted instruments...")
+        if synth_output_dir.is_dir():
+            print("Removing", synth_output_dir)
+            shutil.rmtree(synth_output_dir)
+        if kit_output_dir.is_dir():
+            print("Removing", kit_output_dir)
+            shutil.rmtree(kit_output_dir)
+    else:
+        # Trash previous extraction directories (local backup).
+        if synth_output_dir.is_dir() or kit_output_dir.is_dir():
+            print("Cleaning up previously extracted instruments...")
+            trash_base = deluge_root / ".trash" / datetime.now().strftime("extract-%Y%m%d_%H%M%S")
+            for source in [synth_output_dir, kit_output_dir]:
+                if source.is_dir():
+                    rel_path = source.relative_to(deluge_root)
+                    trash_dest = trash_base / rel_path
+                    trash_dest.parent.mkdir(parents=True, exist_ok=True)
+                    print("Moving", source, "to", trash_dest)
+                    shutil.move(str(source), str(trash_dest))
 
     # Create fresh output directories.
     synth_output_dir.mkdir(parents=True, exist_ok=True)
     kit_output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Print file listing grouped by output directory.
-    print("\nWriting files...\n")
+    # Print file listing grouped by output directory
+    print()
+    print("Preparing new files...")
+    print()
     for label, dir_path, inst_type in [
         (synth_output_dir, synth_output_dir, "synth"),
         (kit_output_dir, kit_output_dir, "kit"),
@@ -307,16 +355,20 @@ def main(argv: list[str] | None = None) -> None:
             print()
 
     # Write extraction files.
-    for result in all_results:
+    total = len(all_results)
+    for i, result in enumerate(all_results, 1):
+        print(f"\rWriting... {i}/{total}", end="", flush=True)
         output_dir = synth_output_dir if result.instrument_type == "synth" else kit_output_dir
         output_path = output_dir / result.output_filename
         serialise_xml(result.element, output_path)
+    print(f"\rWriting... {total}/{total}")
+    print()
 
     # Write manifests.
     _write_manifest(synth_output_dir, all_results, "synth", len(songs))
     _write_manifest(kit_output_dir, all_results, "kit", len(songs))
 
-    print(f"\nInstrument extraction complete")
+    print(f"Instrument extraction complete")
     print()
 
 

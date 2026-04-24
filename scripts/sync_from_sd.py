@@ -119,6 +119,7 @@ def _build_post_sync_manifest(
     src_scan: ScanResult,
     dest: Path,
     old_files: dict[str, FileRecord],
+    file_filter: str = "both",
 ) -> tuple[str, dict[str, FileRecord]]:
     """Build updated manifest data after a successful sync.
 
@@ -129,7 +130,13 @@ def _build_post_sync_manifest(
     - Unchanged files: preserve existing manifest entries.
     - Copied files: read dest stat for fresh size/mtime.
     - Trashed files: omitted (not in source scan).
+
+    When *file_filter* is not ``"both"``, old manifest entries whose
+    extensions fall outside the scanned set are carried forward so that
+    a filtered sync does not wipe entries for the other file type.
     """
+    from deluge_lib.scanning import _FILTER_MAP
+
     # Sets of normalised keys for files that were actively changed.
     copied_keys: set[str] = set()
     for _src, dst in plan.files_to_copy:
@@ -148,6 +155,15 @@ def _build_post_sync_manifest(
             # Unchanged but no prior manifest entry (first run): use source stat.
             new_files[key] = {"size": src_entry.size, "mtime": src_entry.mtime}
 
+    # Preserve manifest entries for file types not included in this filtered sync.
+    if file_filter != "both":
+        scanned_exts = _FILTER_MAP[file_filter]
+        for key, old_entry in old_files.items():
+            if key not in new_files:
+                ext = Path(key).suffix.lower()
+                if ext not in scanned_exts:
+                    new_files[key] = old_entry
+
     timestamp = datetime.now(tz=UTC).replace(microsecond=0).isoformat()
     return (timestamp, new_files)
 
@@ -161,7 +177,24 @@ def main(argv: list[str] | None = None) -> None:
         action="store_true",
         help="Show what would change and exit without prompting.",
     )
+    parser.add_argument(
+        "--xml",
+        action="store_true",
+        help="Sync only XML files. Combine with --wav to sync both.",
+    )
+    parser.add_argument(
+        "--wav",
+        action="store_true",
+        help="Sync only WAV files. Combine with --xml to sync both.",
+    )
     args = parser.parse_args(argv)
+
+    if args.xml and not args.wav:
+        file_filter = "xml"
+    elif args.wav and not args.xml:
+        file_filter = "wav"
+    else:
+        file_filter = "both"
 
     sd_path = get_sd_card_path()
     deluge_root = get_deluge_root()
@@ -174,7 +207,7 @@ def main(argv: list[str] | None = None) -> None:
     print(f"Destination: {deluge_root}")
     print()
 
-    plan, src_scan = compute_sync(sd_path, deluge_root, manifest=manifest_files)
+    plan, src_scan = compute_sync(sd_path, deluge_root, manifest=manifest_files, file_filter=file_filter)
 
     if not plan.files_to_copy and not plan.files_to_delete:
         print("Already up to date.")
@@ -188,9 +221,9 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     if not confirm_apply(
-        f"This will overwrite {deluge_root} to match {sd_path}. Continue?"
+        f"This will overwrite {deluge_root} to match {sd_path} \nContinue?"
     ):
-        print("Aborted.")
+        print("\n*** Aborted ***\n")
         return
 
     start_time = time.monotonic()
@@ -217,14 +250,15 @@ def main(argv: list[str] | None = None) -> None:
     append_sync_log(result, elapsed_seconds=elapsed)
 
     # Build and write updated manifest after successful sync.
-    new_ts, new_files = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files)
+    new_ts, new_files = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, file_filter)
     _write_manifest(manifest_path, timestamp=new_ts, files=new_files)
 
     print()
     print(
         f"Sync complete: {result.copied} copied, "
-        f"{result.trashed} trashed."
+        f"{result.trashed} trashed"
     )
+    print()
 
 if __name__ == "__main__":
     main()

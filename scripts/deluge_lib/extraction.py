@@ -571,9 +571,15 @@ def match_instruments_to_clips(
 
         for clip in matching_clips:
             if clip.section in clips_by_section:
+                colour_entry = SECTION_COLOURS.get(clip.section)
+                section_label = (
+                    f"{clip.section}/{colour_entry[0]}"
+                    if colour_entry
+                    else str(clip.section)
+                )
                 msg = (
                     f"Duplicate clip for {instrument.preset_name!r}"
-                    f" in section {clip.section}, taking first"
+                    f" in section {section_label}, taking first"
                 )
                 group_warnings.append(msg)
                 continue

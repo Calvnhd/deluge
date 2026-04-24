@@ -145,7 +145,7 @@ Per `standards/project.md` §4 and §5:
 - **Outputs:** Full execution path in `sync_to_sd.py`
 - **Acceptance Criteria:**
   - [x] `confirm_apply()` prompt includes the SD card path
-  - [x] Abort path prints "Aborted." and exits cleanly
+  - [x] Abort path prints "Aborted" and exits cleanly
   - [x] Copy phase: for each file in `plan.files_to_copy`, creates parent directories and copies with `shutil.copy2`
   - [x] Trash phase: generates a single `SD-<timestamp>` folder name (format matching existing `.trash` convention)
   - [x] Trash phase: for each file in `plan.files_to_delete`, copies SD file to `DELUGE_ROOT/.trash/SD-<timestamp>/<rel_path>`, then calls `unlink()` on the SD file
@@ -223,7 +223,7 @@ Per `standards/project.md` §4 and §5:
   - [x] `TestFullSync`: unchanged files left alone
   - [x] `TestFullSync`: result summary printed with correct counts
   - [x] `TestFullSync`: log entry written to `to_sd_sync.log`
-  - [x] Confirmation decline test: prints "Aborted.", no changes made
+  - [x] Confirmation decline test: prints "Aborted", no changes made
 - **Implementation Notes:**
   > `TestFullSync` (7 tests) covers copies, overwrites, SD trash+delete, unchanged files, counts, logging, and empty dir cleanup. `TestAbort` (1 test) covers confirmation decline.
 

@@ -319,7 +319,7 @@ class TestAbort:
             main([])
 
         out = capsys.readouterr().out
-        assert "Aborted." in out
+        assert "Aborted" in out
         assert not (sd / "KITS" / "Kit.XML").exists()
 
 

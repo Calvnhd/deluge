@@ -138,6 +138,7 @@ def scan_tree(
             result.files[key] = entry
 
             file_count += 1
+            print(f"\rScanning {label}... {file_count} files", end="", flush=True)
 
     print(f"\rScanning {label}... {file_count} files found.")
 
