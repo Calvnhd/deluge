@@ -38,6 +38,8 @@ from deluge_lib.extraction import (
     extract_kit,
     extract_synth,
     generate_filename,
+    load_init_defaults,
+    load_kit_init_template,
     match_instruments_to_clips,
     normalise_params,
     select_default_clip,
@@ -91,23 +93,14 @@ def main(argv: list[str] | None = None) -> None:
     else:
         deluge_root = get_deluge_root()
 
-    # Validate init preset files exist (sanity check).
-    init_synth = deluge_root / "SYNTHS" / "Init-Synth.XML"
-    init_kit = deluge_root / "KITS" / "Init-Kit.XML"
-    missing: list[str] = []
-    if not init_synth.is_file():
-        missing.append(str(init_synth))
-    if not init_kit.is_file():
-        missing.append(str(init_kit))
-    if missing:
-        print(f"ERROR: Missing init preset files: {', '.join(missing)}", file=sys.stderr)
-        print("These files are expected on a valid Deluge SD card.", file=sys.stderr)
-        sys.exit(1)
+    # Load normalisation defaults from init files (or fall back to hardcoded values).
+    norm_config = load_init_defaults(deluge_root)
+    kit_init_template = load_kit_init_template(deluge_root)
 
+    print()
     songs = discover_songs(deluge_root)
 
     all_results: list[ExtractionResult] = []
-    norm_config = NormalisationConfig()
     comp_config = ComparisonConfig.default()  # intra-song comparison (extended mode)
     dedup_config = ComparisonConfig.default()  # inter-song dedup (D22 — threshold independence)
 
@@ -118,8 +111,8 @@ def main(argv: list[str] | None = None) -> None:
     synth_output_dir = deluge_root / "SYNTHS" / "SONG-SYNTHS"
     kit_output_dir = deluge_root / "KITS" / "SONG-KITS"
 
+    print()
     line_width = 60
-
     for song_path, song_tree in songs:
         song_name = song_path.stem
 
@@ -151,6 +144,7 @@ def main(argv: list[str] | None = None) -> None:
             if args.extended:
                 extended_results = select_extended_clips(
                     group, comp_config, norm_config,
+                    kit_init_template=kit_init_template,
                 )
                 for clip_info, comparisons in extended_results:
                     # Collect differing param descriptions from comparisons.
@@ -187,6 +181,7 @@ def main(argv: list[str] | None = None) -> None:
                 else:
                     element, default_param_warnings = extract_kit(
                         inst.element, clip_info.element,
+                        init_template=kit_init_template,
                     )
                     for w in default_param_warnings:
                         print(

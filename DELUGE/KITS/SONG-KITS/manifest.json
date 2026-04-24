@@ -1,7 +1,7 @@
 {
-  "generated": "2026-04-24T04:52:56.689454+00:00",
-  "songs_processed": 52,
-  "total_count": 77,
+  "generated": "2026-04-24T06:36:04.812030+00:00",
+  "songs_processed": 81,
+  "total_count": 84,
   "extractions": [
     {
       "output_filename": "Alr-000.XML",
@@ -554,6 +554,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "Duppy 10-Analog Machine Lofi.XML",
+      "source_song": "Duppy 10",
+      "preset_name": "Analog Machine Lofi",
+      "preset_folder": "KITS/COMMUNITY/1.2 Presets",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
       "output_filename": "Oddish-Chug.XML",
       "source_song": "Oddish",
       "preset_name": "Chug",
@@ -562,6 +573,28 @@
       "section_id": 1,
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Duppy 5-Deeper.XML",
+      "source_song": "Duppy 5",
+      "preset_name": "Deeper",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Duppy 8-Deeper.XML",
+      "source_song": "Duppy 8",
+      "preset_name": "Deeper",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
       "differing_params": []
     },
     {
@@ -609,17 +642,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "Noize-Deeper.XML",
-      "source_song": "Noize",
-      "preset_name": "Deeper",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "One-Eye-Tea-Deeper.XML",
       "source_song": "One-Eye-Tea",
       "preset_name": "Deeper",
@@ -653,6 +675,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "Duppy-Init-Kit.XML",
+      "source_song": "Duppy",
+      "preset_name": "Init-Kit",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "K01Sink-K01Perc.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Perc",
@@ -672,6 +705,17 @@
       "section_id": 7,
       "colour_name": "Orange",
       "colour_abbr": "Orn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Triggy 17-KIT003A.XML",
+      "source_song": "Triggy 17",
+      "preset_name": "KIT003A",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
       "differing_params": []
     },
     {
@@ -716,6 +760,39 @@
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Duppy 5-KIT1.XML",
+      "source_song": "Duppy 5",
+      "preset_name": "KIT1",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Duppy 5-KIT2.XML",
+      "source_song": "Duppy 5",
+      "preset_name": "KIT2",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Duppy 8-KIT2.XML",
+      "source_song": "Duppy 8",
+      "preset_name": "KIT2",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
       "differing_params": []
     },
     {

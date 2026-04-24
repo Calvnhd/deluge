@@ -23,6 +23,7 @@ from pathlib import Path
 from lxml import etree
 
 from deluge_lib.deluge_sdk import parse_deluge_xml
+from deluge_lib.scanning import scan_tree
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -378,6 +379,98 @@ class DedupResult:
 
 
 # ---------------------------------------------------------------------------
+# Init File Loading
+# ---------------------------------------------------------------------------
+
+
+def load_init_defaults(deluge_root: Path) -> NormalisationConfig:
+    """Load normalisation defaults from Init-Synth.XML and Init-Kit.XML.
+
+    If the files exist, reads the volume and pan values from their
+    <defaultParams> elements. If not, falls back to hardcoded constants.
+
+    Returns:
+        A NormalisationConfig with either file-read or hardcoded values.
+    """
+    synth_volume = SYNTH_INIT_VOLUME
+    synth_pan = CENTRE_PAN
+    kit_volume = KIT_INIT_VOLUME
+    kit_pan = CENTRE_PAN
+
+    init_synth_path = deluge_root / "SYNTHS" / "Init-Synth.XML"
+    if init_synth_path.is_file():
+        try:
+            _tree, root, _recovered = parse_deluge_xml(init_synth_path)
+            sound_el = root if root.tag == "sound" else root.find("sound")
+            if sound_el is not None:
+                dp = sound_el.find("defaultParams")
+                if dp is not None:
+                    synth_volume = dp.get("volume", synth_volume)
+                    synth_pan = dp.get("pan", synth_pan)
+        except Exception as exc:
+            print(f"Note: Could not parse Init-Synth.XML — {exc}")
+            print("  Using hardcoded defaults for synth normalisation")
+    else:
+        print("Note: Init-Synth.XML not found — using hardcoded defaults for synth normalisation")
+
+    init_kit_path = deluge_root / "KITS" / "Init-Kit.XML"
+    if init_kit_path.is_file():
+        try:
+            _tree, root, _recovered = parse_deluge_xml(init_kit_path)
+            kit_el = root if root.tag == "kit" else root.find("kit")
+            if kit_el is not None:
+                dp = kit_el.find("defaultParams")
+                if dp is not None:
+                    kit_volume = dp.get("volume", kit_volume)
+                    kit_pan = dp.get("pan", kit_pan)
+        except Exception as exc:
+            print(f"Note: Could not parse Init-Kit.XML — {exc}")
+            print("  Using hardcoded defaults for kit normalisation")
+    else:
+        print("Note: Init-Kit.XML not found — using hardcoded defaults for kit normalisation")
+
+    return NormalisationConfig(
+        synth_targets={"volume": synth_volume, "pan": synth_pan},
+        kit_targets={"volume": kit_volume, "pan": kit_pan},
+    )
+
+
+def load_kit_init_template(deluge_root: Path) -> etree._Element | None:
+    """Load a <defaultParams> template from Init-Kit.XML's first sound.
+
+    Parses Init-Kit.XML and extracts the <defaultParams> element from its
+    first <sound> in <soundSources>. This template is used as a fallback
+    when kit sounds lack <defaultParams> and no sibling sound has one to
+    clone from.
+
+    Returns:
+        A deep-copied <defaultParams> element, or None if Init-Kit.XML
+        is not found or cannot be parsed.
+    """
+    init_kit_path = deluge_root / "KITS" / "Init-Kit.XML"
+    if not init_kit_path.is_file():
+        return None
+
+    try:
+        _tree, root, _recovered = parse_deluge_xml(init_kit_path)
+        kit_el = root if root.tag == "kit" else root.find("kit")
+        if kit_el is None:
+            return None
+        sound_sources = kit_el.find("soundSources")
+        if sound_sources is None:
+            return None
+        first_sound = sound_sources.find("sound")
+        if first_sound is None:
+            return None
+        dp = first_sound.find("defaultParams")
+        if dp is None:
+            return None
+        return copy.deepcopy(dp)
+    except Exception:
+        return None
+
+
+# ---------------------------------------------------------------------------
 # Song Discovery (Task 1.2)
 # ---------------------------------------------------------------------------
 
@@ -385,15 +478,16 @@ class DedupResult:
 def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
     """Find and parse all valid song XMLs in DELUGE_ROOT/SONGS/.
 
-    Discovers all *.XML files directly in the SONGS/ directory (non-recursive).
-    Parses each file and validates the firmwareVersion attribute on the <song>
-    root element. Songs with firmware != c1.2.1 are skipped with a warning.
+    Recursively discovers all *.XML files in the SONGS/ directory and its
+    subdirectories using scan_tree(). Parses each file and validates the
+    firmwareVersion attribute on the <song> root element. Songs with
+    firmware != c1.2.1 are skipped with a warning.
 
     Returns:
         List of (path, parsed_root_element) tuples for valid songs.
 
     Steps:
-        1. Glob DELUGE_ROOT/SONGS/*.XML (case-insensitive on content, uppercase ext)
+        1. Recursively scan DELUGE_ROOT/SONGS/ for XML files via scan_tree()
         2. For each file, parse with parse_deluge_xml()
         3. Read firmwareVersion attribute from <song> root element
         4. If firmwareVersion != "c1.2.1", print warning and skip
@@ -403,12 +497,14 @@ def discover_songs(deluge_root: Path) -> list[tuple[Path, etree._Element]]:
     if not songs_dir.is_dir():
         return []
 
+    scan = scan_tree(songs_dir, label="songs", file_filter="xml")
+    xml_paths = sorted(songs_dir / entry.rel_path for entry in scan.files.values())
+
     results: list[tuple[Path, etree._Element]] = []
 
-    for xml_path in sorted(songs_dir.glob("*.XML")):
+    for xml_path in xml_paths:
         if not xml_path.is_file():
             continue
-
         try:
             _tree, root, _recovered = parse_deluge_xml(xml_path)
         except Exception as exc:
@@ -694,6 +790,7 @@ def extract_synth(
 def extract_kit(
     instrument: etree._Element,
     clip: etree._Element,
+    init_template: etree._Element | None = None,
 ) -> etree._Element:
     """Transform an embedded kit into a standalone preset XML element.
 
@@ -778,7 +875,9 @@ def extract_kit(
     # 7. Safety pass: ensure every <sound> has a <defaultParams> child
     default_param_warnings: list[str] = []
     if sound_sources is not None:
-        default_param_warnings = _ensure_all_sounds_have_default_params(sounds)
+        default_param_warnings = _ensure_all_sounds_have_default_params(
+            sounds, init_template=init_template,
+        )
 
     # 8. Reorder kit top-level children
     _reorder_kit_children(kit)
@@ -1079,6 +1178,7 @@ def select_extended_clips(
     group: InstrumentClipGroup,
     comparison_config: ComparisonConfig,
     normalisation_config: NormalisationConfig,
+    kit_init_template: etree._Element | None = None,
 ) -> list[tuple[ClipInfo, list[ComparisonResult]]]:
     """Select clips for extended mode extraction based on version comparison.
 
@@ -1114,7 +1214,9 @@ def select_extended_clips(
         if instrument_type == "synth":
             element = extract_synth(inst.element, clip.element)
         else:
-            element, _warnings = extract_kit(inst.element, clip.element)
+            element, _warnings = extract_kit(
+                inst.element, clip.element, init_template=kit_init_template,
+            )
         _strip_automation(element)
         normalise_params(element, instrument_type, normalisation_config)
         return element
@@ -1563,6 +1665,7 @@ def _merge_noterow_params(
 
 def _ensure_all_sounds_have_default_params(
     sounds: list[etree._Element],
+    init_template: etree._Element | None = None,
 ) -> list[str]:
     """Ensure every <sound> in a kit has a <defaultParams> child.
 
@@ -1573,9 +1676,9 @@ def _ensure_all_sounds_have_default_params(
 
     Strategy:
         1. Find the first sound that already has <defaultParams> → use as template
-        2. For any sound missing <defaultParams>, deep-clone the template and insert it
-        3. If NO sound has <defaultParams> (extremely unlikely), fall back to
-           a minimal hardcoded init structure
+        2. If no sibling has one, use init_template (from Init-Kit.XML) if provided
+        3. For any sound missing <defaultParams>, deep-clone the template and insert it
+        4. If NO template is available, fall back to a minimal hardcoded init structure
 
     Returns:
         A list of warning strings for each sound that received default params.
@@ -1587,6 +1690,10 @@ def _ensure_all_sounds_have_default_params(
         if dp is not None:
             template = dp
             break
+
+    # Fall back to init template from Init-Kit.XML if no sibling has one
+    if template is None and init_template is not None:
+        template = init_template
 
     warnings: list[str] = []
     for idx, sound in enumerate(sounds):
