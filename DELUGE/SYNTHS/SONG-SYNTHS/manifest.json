@@ -1,7 +1,7 @@
 {
-  "generated": "2026-04-27T14:10:48.883970+00:00",
+  "generated": "2026-04-27T14:12:17.318803+00:00",
   "songs_processed": 81,
-  "total_count": 331,
+  "total_count": 234,
   "extractions": [
     {
       "output_filename": "000-Beginagain-Lbl.XML",
@@ -66,20 +66,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "000-Colour-Dbl.XML",
-      "source_song": "Colour",
-      "preset_name": "000",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance"
-      ]
-    },
-    {
       "output_filename": "000-Judder-Lbl.XML",
       "source_song": "Judder",
       "preset_name": "000",
@@ -115,17 +101,6 @@
       "differing_params": [
         "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
       ]
-    },
-    {
-      "output_filename": "000-Polygon-Lbl.XML",
-      "source_song": "Polygon",
-      "preset_name": "000",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
     },
     {
       "output_filename": "001-Bloop-Pnk.XML",
@@ -241,11 +216,8 @@
         "defaultParams.delayRate",
         "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
-        "defaultParams.reverbAmount",
-        "envelope1.decay",
         "envelope1.release",
-        "envelope2.decay",
-        "patchCable(compressor->volumePostReverbSend).amount"
+        "envelope2.decay"
       ]
     },
     {
@@ -263,8 +235,6 @@
         "patchCable(compressor->volumePostReverbSend).amount",
         "defaultParams.delayRate",
         "defaultParams.lpfFrequency",
-        "defaultParams.reverbAmount",
-        "envelope1.decay",
         "envelope1.release",
         "envelope2.decay"
       ]
@@ -426,17 +396,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "009-Paddy-Pnk.XML",
-      "source_song": "Paddy",
-      "preset_name": "009",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "013-SlpspkArpsOld-Red.XML",
       "source_song": "SlpspkArpsOld",
       "preset_name": "013",
@@ -479,19 +438,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "014-K05BeautifulStranger-Dbl.XML",
-      "source_song": "K05BeautifulStranger",
-      "preset_name": "014",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": [
-        "defaultParams.oscBVolume"
-      ]
     },
     {
       "output_filename": "014-K06MWHW-Lbl.XML",
@@ -573,76 +519,6 @@
       ]
     },
     {
-      "output_filename": "014A-K09Arparty-old-Red.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "014A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": []
-    },
-    {
-      "output_filename": "014A-K10FiveAlive-Lbl.XML",
-      "source_song": "K10FiveAlive",
-      "preset_name": "014A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "014A-K10FiveAlive-Pnk.XML",
-      "source_song": "K10FiveAlive",
-      "preset_name": "014A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.oscBVolume",
-        "defaultParams.sampleRateReduction",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "014A-K10FiveAlive-Pur.XML",
-      "source_song": "K10FiveAlive",
-      "preset_name": "014A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": [
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "defaultParams.lpfFrequency",
-        "defaultParams.oscBVolume",
-        "defaultParams.sampleRateReduction"
-      ]
-    },
-    {
-      "output_filename": "014A-K10FiveAlive-Lme.XML",
-      "source_song": "K10FiveAlive",
-      "preset_name": "014A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 9,
-      "colour_name": "Lime",
-      "colour_abbr": "Lme",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.oscBVolume",
-        "defaultParams.sampleRateReduction",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
       "output_filename": "014B-K03Yends-Pnk.XML",
       "source_song": "K03Yends",
       "preset_name": "014B",
@@ -652,20 +528,6 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": []
-    },
-    {
-      "output_filename": "014B-K03Yends-Gld.XML",
-      "source_song": "K03Yends",
-      "preset_name": "014B",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
     },
     {
       "output_filename": "014B-Lemon-Lbl.XML",
@@ -723,17 +585,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "018A-K02Slpspk-Pur.XML",
-      "source_song": "K02Slpspk",
-      "preset_name": "018A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": []
-    },
-    {
       "output_filename": "022-Rr-Lbl.XML",
       "source_song": "Rr",
       "preset_name": "022",
@@ -767,17 +618,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "024-K08Offbeat-Pnk.XML",
-      "source_song": "K08Offbeat",
-      "preset_name": "024",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "024-K08Offbeat-Gld.XML",
       "source_song": "K08Offbeat",
       "preset_name": "024",
@@ -788,38 +628,6 @@
       "colour_abbr": "Gld",
       "differing_params": [
         "arpeggiator.mode: 'arp' vs 'off'"
-      ]
-    },
-    {
-      "output_filename": "024-K08Offbeat-Cyn.XML",
-      "source_song": "K08Offbeat",
-      "preset_name": "024",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.lfo1Rate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "arpeggiator.mode: 'off' vs 'arp'"
-      ]
-    },
-    {
-      "output_filename": "024-K08Offbeat-Dbl.XML",
-      "source_song": "K08Offbeat",
-      "preset_name": "024",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": [
-        "defaultParams.lfo1Rate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "arpeggiator.mode: 'off' vs 'arp'"
       ]
     },
     {
@@ -856,38 +664,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "027A-K03Yends-Gld.XML",
-      "source_song": "K03Yends",
-      "preset_name": "027A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.lpfFrequency",
-        "defaultParams.reverbAmount",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "027A-K03Yends-Red.XML",
-      "source_song": "K03Yends",
-      "preset_name": "027A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.lpfFrequency",
-        "defaultParams.reverbAmount",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
       "output_filename": "028-K09Arparty-Red.XML",
       "source_song": "K09Arparty",
       "preset_name": "028",
@@ -896,17 +672,6 @@
       "section_id": 4,
       "colour_name": "Red",
       "colour_abbr": "Red",
-      "differing_params": []
-    },
-    {
-      "output_filename": "028-K09Arparty-old-Grn.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "028",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 10,
-      "colour_name": "Green",
-      "colour_abbr": "Grn",
       "differing_params": []
     },
     {
@@ -919,19 +684,6 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": []
-    },
-    {
-      "output_filename": "030-SlpspkArpsOld-Gld.XML",
-      "source_song": "SlpspkArpsOld",
-      "preset_name": "030",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
     },
     {
       "output_filename": "034-K09Arparty-Grn.XML",
@@ -977,20 +729,6 @@
       "colour_abbr": "Gld",
       "differing_params": [
         "arpeggiator.octaveMode: 'alt' vs 'up'"
-      ]
-    },
-    {
-      "output_filename": "034-Repeatbeat-Cyn.XML",
-      "source_song": "Repeatbeat",
-      "preset_name": "034",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "arpeggiator.octaveMode: 'alt' vs 'up'",
-        "defaultParams.delayFeedback"
       ]
     },
     {
@@ -1095,19 +833,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "041-K08Offbeat-Cyn.XML",
-      "source_song": "K08Offbeat",
-      "preset_name": "041",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "envelope1.attack"
-      ]
-    },
-    {
       "output_filename": "043-Repeatbeat-Pnk.XML",
       "source_song": "Repeatbeat",
       "preset_name": "043",
@@ -1187,21 +912,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "050A-Judder-Pnk.XML",
-      "source_song": "Judder",
-      "preset_name": "050A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.modulator1Feedback",
-        "defaultParams.stutterRate",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
       "output_filename": "050A-Paddy-Lbl.XML",
       "source_song": "Paddy",
       "preset_name": "050A",
@@ -1279,19 +989,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "067-K05BeautifulStranger-Red.XML",
-      "source_song": "K05BeautifulStranger",
-      "preset_name": "067",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.modulator1Amount"
-      ]
-    },
-    {
       "output_filename": "073-Dject-Gld.XML",
       "source_song": "Dject",
       "preset_name": "073",
@@ -1313,12 +1010,10 @@
       "colour_abbr": "Cyn",
       "differing_params": [
         "defaultParams.delayFeedback",
-        "defaultParams.delayRate",
         "defaultParams.modulator1Amount",
         "defaultParams.modulator2Amount",
         "envelope1.attack",
         "envelope2.decay",
-        "envelope2.sustain",
         "patchCable(compressor->volumePostReverbSend).amount"
       ]
     },
@@ -1343,40 +1038,6 @@
       "colour_name": "Gold",
       "colour_abbr": "Gld",
       "differing_params": []
-    },
-    {
-      "output_filename": "080A-K07NatRad-Cyn.XML",
-      "source_song": "K07NatRad",
-      "preset_name": "080A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.delayRate",
-        "defaultParams.lpfFrequency",
-        "envelope1.attack",
-        "envelope1.release"
-      ]
-    },
-    {
-      "output_filename": "080A-K07NatRad-Red.XML",
-      "source_song": "K07NatRad",
-      "preset_name": "080A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.delayRate",
-        "envelope1.attack",
-        "envelope1.release",
-        "defaultParams.lpfFrequency"
-      ]
     },
     {
       "output_filename": "080A-K10FiveAlive-Pnk.XML",
@@ -1458,69 +1119,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "086A-K08Offbeat-Gld.XML",
-      "source_song": "K08Offbeat",
-      "preset_name": "086A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "086A-K12Hj-Lbl.XML",
-      "source_song": "K12Hj",
-      "preset_name": "086A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "086A-K12Hj-Gld.XML",
-      "source_song": "K12Hj",
-      "preset_name": "086A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "086A-K12Hj-Cyn.XML",
-      "source_song": "K12Hj",
-      "preset_name": "086A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "086A-Kg-Lbl.XML",
-      "source_song": "Kg",
-      "preset_name": "086A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "097-K03Yends-Pnk.XML",
       "source_song": "K03Yends",
       "preset_name": "097",
@@ -1585,19 +1183,6 @@
       "colour_name": "Red",
       "colour_abbr": "Red",
       "differing_params": []
-    },
-    {
-      "output_filename": "130-K05BeautifulStranger-Orn.XML",
-      "source_song": "K05BeautifulStranger",
-      "preset_name": "130",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "defaultParams.delayFeedback"
-      ]
     },
     {
       "output_filename": "133-Alr-Pnk.XML",
@@ -1682,21 +1267,6 @@
       ]
     },
     {
-      "output_filename": "142A-K03Yends-Dbl.XML",
-      "source_song": "K03Yends",
-      "preset_name": "142A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": [
-        "defaultParams.lfo1Rate",
-        "defaultParams.lpfResonance",
-        "patchCables structure: removed [('lfo1', 'pitch')]"
-      ]
-    },
-    {
       "output_filename": "143-Japarps-Lbl.XML",
       "source_song": "Japarps",
       "preset_name": "143",
@@ -1774,23 +1344,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "155-Paddy-Pnk.XML",
-      "source_song": "Paddy",
-      "preset_name": "155",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.lfo1Rate",
-        "defaultParams.modulator1Amount",
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "patchCable(lfo1->pitch).amount"
-      ]
     },
     {
       "output_filename": "158-Stoner-Lbl.XML",
@@ -1871,12 +1424,9 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": [
-        "defaultParams.delayFeedback",
         "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
-        "defaultParams.portamento",
-        "envelope1.attack",
-        "patchCable(lfo1->lpfFrequency).amount"
+        "envelope1.attack"
       ]
     },
     {
@@ -1913,19 +1463,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "164-Judder-Pnk.XML",
-      "source_song": "Judder",
-      "preset_name": "164",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "patchCables structure: removed [('lfo1', 'pitch')]"
-      ]
-    },
-    {
       "output_filename": "164A-Colour-Lbl.XML",
       "source_song": "Colour",
       "preset_name": "164A",
@@ -1935,19 +1472,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "164A-Colour-Pnk.XML",
-      "source_song": "Colour",
-      "preset_name": "164A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
     },
     {
       "output_filename": "164A-Colour-Cyn.XML",
@@ -1963,21 +1487,6 @@
       ]
     },
     {
-      "output_filename": "164A-Colour-Red.XML",
-      "source_song": "Colour",
-      "preset_name": "164A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
       "output_filename": "164A-No-More-Colour-Lbl.XML",
       "source_song": "No-More-Colour",
       "preset_name": "164A",
@@ -1987,19 +1496,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "164A-No-More-Colour-Pnk.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "164A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "patchCables structure: added [('lfo1', 'lpfFrequency')]"
-      ]
     },
     {
       "output_filename": "164A-No-More-Colour-Gld.XML",
@@ -2016,42 +1512,6 @@
       ]
     },
     {
-      "output_filename": "164A-No-More-Colour-Cyn.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "164A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "patchCables structure: added [('compressor', 'volumePostReverbSend'), ('lfo1', 'lpfFrequency')]",
-        "patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "patchCables structure: added [('compressor', 'volumePostReverbSend'), ('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "164A-No-More-Colour-Red.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "164A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "patchCables structure: added [('lfo1', 'lpfFrequency')]",
-        "defaultParams.delayFeedback",
-        "defaultParams.hpfFrequency",
-        "defaultParams.lpfFrequency",
-        "defaultParams.oscAPulseWidth",
-        "envelope1.attack",
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "patchCables structure: added [('lfo1', 'pitch')]",
-        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
       "output_filename": "164A-No-More-Colour-Ylw.XML",
       "source_song": "No-More-Colour",
       "preset_name": "164A",
@@ -2062,15 +1522,13 @@
       "colour_abbr": "Ylw",
       "differing_params": [
         "patchCables structure: added [('lfo1', 'lpfFrequency')]",
-        "defaultParams.delayFeedback",
         "defaultParams.hpfFrequency",
         "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
         "defaultParams.oscAPulseWidth",
         "patchCables structure: added [('lfo1', 'pitch')]",
         "patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
-        "envelope1.attack",
-        "patchCable(compressor->volumePostReverbSend).amount"
+        "envelope1.attack"
       ]
     },
     {
@@ -2084,8 +1542,6 @@
       "colour_abbr": "Dbl",
       "differing_params": [
         "patchCables structure: added [('lfo1', 'lpfFrequency')]",
-        "defaultParams.delayFeedback",
-        "defaultParams.hpfFrequency",
         "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
         "defaultParams.oscAPulseWidth",
@@ -2093,34 +1549,8 @@
         "patchCable(compressor->volumePostReverbSend).amount",
         "patchCables structure: added [('lfo1', 'pitch')]",
         "patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
-        "envelope1.attack"
-      ]
-    },
-    {
-      "output_filename": "164A-SlpspkArpsOld-Pnk.XML",
-      "source_song": "SlpspkArpsOld",
-      "preset_name": "164A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "164A-SlpspkArpsOld-Gld.XML",
-      "source_song": "SlpspkArpsOld",
-      "preset_name": "164A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayFeedback",
         "defaultParams.hpfFrequency",
-        "defaultParams.oscAPulseWidth",
-        "defaultParams.portamento"
+        "envelope1.attack"
       ]
     },
     {
@@ -2202,8 +1632,6 @@
         "defaultParams.bitCrush",
         "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
-        "defaultParams.reverbAmount",
-        "defaultParams.sampleRateReduction",
         "envelope1.attack",
         "envelope1.release"
       ]
@@ -2221,31 +1649,10 @@
         "defaultParams.bitCrush",
         "defaultParams.delayFeedback",
         "defaultParams.lpfResonance",
-        "defaultParams.reverbAmount",
         "defaultParams.sampleRateReduction",
         "envelope1.attack",
         "envelope1.release",
         "defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "17-BRASS-No-More-Colour-Orn.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "17-BRASS",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "envelope1.release",
-        "defaultParams.bitCrush",
-        "defaultParams.reverbAmount",
-        "defaultParams.sampleRateReduction",
-        "envelope1.attack",
-        "defaultParams.delayFeedback"
       ]
     },
     {
@@ -2328,17 +1735,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "171-Paddy-Lbl.XML",
-      "source_song": "Paddy",
-      "preset_name": "171",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "171-Paddy-Pnk.XML",
       "source_song": "Paddy",
       "preset_name": "171",
@@ -2387,32 +1783,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "172-Colour-Pnk.XML",
-      "source_song": "Colour",
-      "preset_name": "172",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "172-Colour-Ylw.XML",
-      "source_song": "Colour",
-      "preset_name": "172",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
-      "differing_params": [
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
       "output_filename": "172-K03Yends-Pnk.XML",
       "source_song": "K03Yends",
       "preset_name": "172",
@@ -2424,30 +1794,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "172-SlpspkArpsOld-Pnk.XML",
-      "source_song": "SlpspkArpsOld",
-      "preset_name": "172",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "172-SlpspkArpsOld-Gld.XML",
-      "source_song": "SlpspkArpsOld",
-      "preset_name": "172",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "envelope1.attack"
-      ]
-    },
-    {
       "output_filename": "172A-K05BeautifulStranger-Lbl.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "172A",
@@ -2456,28 +1802,6 @@
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "172A-K09Arparty-old-Red.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "172A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": []
-    },
-    {
-      "output_filename": "172A-Yeti-Pnk.XML",
-      "source_song": "Yeti",
-      "preset_name": "172A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
       "differing_params": []
     },
     {
@@ -2512,19 +1836,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "175-Sot-Pnk.XML",
-      "source_song": "Sot",
-      "preset_name": "175",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
     },
     {
       "output_filename": "176-Spook-Gld.XML",
@@ -2604,33 +1915,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "55-POPCORN-Ambient-Fishes-Cyn.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "55-POPCORN",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.hpfFrequency",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance"
-      ]
-    },
-    {
-      "output_filename": "55-POPCORN-Wf-og-Lbl.XML",
-      "source_song": "Wf-og",
-      "preset_name": "55-POPCORN",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "62-EFFECTSOUND1-Mountain-Lbl.XML",
       "source_song": "Mountain",
       "preset_name": "62-EFFECTSOUND1",
@@ -2651,19 +1935,6 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": []
-    },
-    {
-      "output_filename": "Apex Stab-No-More-Colour-Gld.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "Apex Stab",
-      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
     },
     {
       "output_filename": "Arp1-Ambient-Fishes-Lbl.XML",
@@ -2710,11 +1981,9 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": [
-        "defaultParams.delayFeedback",
         "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
-        "defaultParams.reverbAmount",
-        "envelope2.decay"
+        "defaultParams.reverbAmount"
       ]
     },
     {
@@ -2728,29 +1997,10 @@
       "colour_abbr": "Gld",
       "differing_params": [
         "defaultParams.delayFeedback",
-        "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
         "defaultParams.reverbAmount",
-        "envelope1.release",
-        "envelope2.decay"
-      ]
-    },
-    {
-      "output_filename": "Arp1-K03Yends-Red.XML",
-      "source_song": "K03Yends",
-      "preset_name": "Arp1",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "envelope1.release",
         "envelope2.decay",
-        "defaultParams.reverbAmount"
+        "defaultParams.lpfFrequency"
       ]
     },
     {
@@ -2776,7 +2026,6 @@
       "differing_params": [
         "defaultParams.delayFeedback",
         "defaultParams.hpfFrequency",
-        "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance"
       ]
     },
@@ -2790,30 +2039,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "Arp2-Bingbong-Pnk.XML",
-      "source_song": "Bingbong",
-      "preset_name": "Arp2",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Arp2-Bingbong-Cyn.XML",
-      "source_song": "Bingbong",
-      "preset_name": "Arp2",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
-      ]
     },
     {
       "output_filename": "Arp2-K03Yends-Pnk.XML",
@@ -2850,26 +2075,11 @@
       "colour_abbr": "Red",
       "differing_params": [
         "patchCables structure: added [('lfo1', 'lpfFrequency'), ('lfo2', 'lpfFrequency')]",
-        "defaultParams.delayFeedback",
-        "defaultParams.hpfFrequency",
         "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
-        "defaultParams.oscAPulseWidth",
         "defaultParams.reverbAmount",
-        "envelope1.attack",
         "envelope1.release"
       ]
-    },
-    {
-      "output_filename": "Arp2-Wf-og-Lbl.XML",
-      "source_song": "Wf-og",
-      "preset_name": "Arp2",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
     },
     {
       "output_filename": "Backdraft Pad-Triggy 10-Lbl.XML",
@@ -2944,59 +2154,6 @@
       ]
     },
     {
-      "output_filename": "Dystopia Keys-No-More-Colour-Red.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "Dystopia Keys",
-      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.bitCrush",
-        "defaultParams.delayFeedback",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "defaultParams.sampleRateReduction",
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "Dystopia Keys-No-More-Colour-Ylw.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "Dystopia Keys",
-      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
-      "differing_params": [
-        "patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "defaultParams.bitCrush",
-        "defaultParams.sampleRateReduction"
-      ]
-    },
-    {
-      "output_filename": "Dystopia Keys-No-More-Colour-Pur.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "Dystopia Keys",
-      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
-      "instrument_type": "synth",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": [
-        "defaultParams.sampleRateReduction",
-        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
-        "defaultParams.bitCrush",
-        "defaultParams.delayFeedback",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
       "output_filename": "Fuzz-Ambient-Fishes-Lbl.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "Fuzz",
@@ -3006,34 +2163,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "Fuzz-Ambient-Fishes-Dbl.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "Fuzz",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.reverbAmount",
-        "envelope1.attack"
-      ]
-    },
-    {
-      "output_filename": "Fuzz-K10FiveAlive-Pnk.XML",
-      "source_song": "K10FiveAlive",
-      "preset_name": "Fuzz",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
     },
     {
       "output_filename": "Init-Synth-Triggy-Lbl.XML",
@@ -3136,23 +2265,6 @@
       ]
     },
     {
-      "output_filename": "Init-Synth-Triggy 2-Gld.XML",
-      "source_song": "Triggy 2",
-      "preset_name": "Init-Synth",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.hpfFrequency",
-        "defaultParams.hpfResonance",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "defaultParams.reverbAmount"
-      ]
-    },
-    {
       "output_filename": "Islp-K07NatRad-Lbl.XML",
       "source_song": "K07NatRad",
       "preset_name": "Islp",
@@ -3186,35 +2298,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Arp-K01Sink-Gld.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Arp",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.modulator1Amount",
-        "defaultParams.modulator1Feedback",
-        "defaultParams.reverbAmount"
-      ]
-    },
-    {
-      "output_filename": "K01Arp-K01Sink-Red.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Arp",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "patchCables structure: removed [('lfo1', 'pitch')]"
-      ]
-    },
-    {
       "output_filename": "K01Arp-Wf-full-Pnk.XML",
       "source_song": "Wf-full",
       "preset_name": "K01Arp",
@@ -3237,21 +2320,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Bass-Ambient-Fishes-Ylw.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "K01Bass",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "equalizer.bass"
-      ]
-    },
-    {
       "output_filename": "K01Bass-Wf-og-Lbl.XML",
       "source_song": "Wf-og",
       "preset_name": "K01Bass",
@@ -3261,21 +2329,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "K01Bass-Wf-og-Ylw.XML",
-      "source_song": "Wf-og",
-      "preset_name": "K01Bass",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "equalizer.bass"
-      ]
     },
     {
       "output_filename": "K01Drone-Ambient-Fishes-Lbl.XML",
@@ -3289,20 +2342,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-Ambient-Fishes-Pnk.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.lpfResonance",
-        "equalizer.treble"
-      ]
-    },
-    {
       "output_filename": "K01Drone-Ambient-Fishes-Red.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "K01Drone",
@@ -3312,15 +2351,11 @@
       "colour_name": "Red",
       "colour_abbr": "Red",
       "differing_params": [
-        "defaultParams.delayFeedback",
         "defaultParams.lpfFrequency",
         "defaultParams.reverbAmount",
         "envelope1.decay",
         "envelope1.release",
-        "envelope2.decay",
-        "equalizer.treble",
-        "patchCable(lfo1->pitch).amount",
-        "defaultParams.lpfResonance"
+        "envelope2.decay"
       ]
     },
     {
@@ -3333,16 +2368,12 @@
       "colour_name": "Orange",
       "colour_abbr": "Orn",
       "differing_params": [
-        "defaultParams.delayFeedback",
         "defaultParams.lfo1Rate",
-        "defaultParams.lpfFrequency",
         "defaultParams.reverbAmount",
         "envelope1.decay",
         "envelope1.release",
         "envelope2.decay",
-        "equalizer.treble",
-        "defaultParams.lpfResonance",
-        "patchCable(lfo1->pitch).amount"
+        "defaultParams.lpfFrequency"
       ]
     },
     {
@@ -3357,141 +2388,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-K01Sink-Pnk.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.delayRate",
-        "defaultParams.lpfResonance",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K01Sink-Gld.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayRate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K01Sink-Cyn.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.delayRate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "defaultParams.reverbAmount",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K01Sink-Red.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.delayRate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "defaultParams.reverbAmount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K02Slpspk-Pnk.XML",
-      "source_song": "K02Slpspk",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "K01Drone-K02Slpspk-Red.XML",
-      "source_song": "K02Slpspk",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K02Slpspk-Ylw.XML",
-      "source_song": "K02Slpspk",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K02Slpspk-Orn.XML",
-      "source_song": "K02Slpspk",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K02Slpspk-Grn.XML",
-      "source_song": "K02Slpspk",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 10,
-      "colour_name": "Green",
-      "colour_abbr": "Grn",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
       "output_filename": "K01Drone-K09Arparty-Pnk.XML",
       "source_song": "K09Arparty",
       "preset_name": "K01Drone",
@@ -3501,70 +2397,6 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": []
-    },
-    {
-      "output_filename": "K01Drone-K09Arparty-Gld.XML",
-      "source_song": "K09Arparty",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.delayRate"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K09Arparty-Cyn.XML",
-      "source_song": "K09Arparty",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.delayRate",
-        "envelope1.attack",
-        "envelope1.release"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K09Arparty-Orn.XML",
-      "source_song": "K09Arparty",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "envelope1.attack",
-        "defaultParams.delayFeedback",
-        "defaultParams.delayRate",
-        "envelope1.release"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K09Arparty-Mag.XML",
-      "source_song": "K09Arparty",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 11,
-      "colour_name": "Magenta",
-      "colour_abbr": "Mag",
-      "differing_params": [
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "defaultParams.delayFeedback",
-        "defaultParams.delayRate",
-        "envelope1.attack",
-        "envelope1.release"
-      ]
     },
     {
       "output_filename": "K01Drone-K09Arparty-old-Pnk.XML",
@@ -3578,21 +2410,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-K09Arparty-old-Gld.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.delayRate",
-        "envelope1.attack"
-      ]
-    },
-    {
       "output_filename": "K01Drone-K09Arparty-old-Dbl.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "K01Drone",
@@ -3602,28 +2419,8 @@
       "colour_name": "DarkBlue",
       "colour_abbr": "Dbl",
       "differing_params": [
-        "defaultParams.delayFeedback",
         "defaultParams.lpfFrequency",
         "envelope1.attack",
-        "envelope1.release",
-        "defaultParams.delayRate"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-K09Arparty-old-Orn.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.reverbAmount",
-        "envelope1.attack",
-        "defaultParams.delayRate",
-        "defaultParams.lpfFrequency",
         "envelope1.release"
       ]
     },
@@ -3639,20 +2436,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-Wf-full-Pnk.XML",
-      "source_song": "Wf-full",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.lpfResonance",
-        "equalizer.treble"
-      ]
-    },
-    {
       "output_filename": "K01Drone-Wf-full-Red.XML",
       "source_song": "Wf-full",
       "preset_name": "K01Drone",
@@ -3662,49 +2445,12 @@
       "colour_name": "Red",
       "colour_abbr": "Red",
       "differing_params": [
-        "defaultParams.delayFeedback",
         "defaultParams.lpfFrequency",
         "defaultParams.reverbAmount",
         "envelope1.decay",
         "envelope1.release",
-        "envelope2.decay",
-        "equalizer.treble",
-        "patchCable(lfo1->pitch).amount",
-        "defaultParams.lpfResonance"
+        "envelope2.decay"
       ]
-    },
-    {
-      "output_filename": "K01Drone-Wf-full-Orn.XML",
-      "source_song": "Wf-full",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.lfo1Rate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.reverbAmount",
-        "envelope1.decay",
-        "envelope1.release",
-        "envelope2.decay",
-        "equalizer.treble",
-        "defaultParams.lpfResonance",
-        "patchCable(lfo1->pitch).amount"
-      ]
-    },
-    {
-      "output_filename": "K01Drone-Wf-og-Lbl.XML",
-      "source_song": "Wf-og",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
     },
     {
       "output_filename": "K01Fillforarp-K01Sink-Lbl.XML",
@@ -3716,19 +2462,6 @@
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
       "differing_params": []
-    },
-    {
-      "output_filename": "K01Fillforarp-K01Sink-Pnk.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Fillforarp",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
     },
     {
       "output_filename": "K01Fuzzbass-K01Sink-Gld.XML",
@@ -3756,17 +2489,6 @@
       "output_filename": "K01Twinkle2-K01Sink-Lbl.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Twinkle2",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "K01Twinlke1-K01Sink-Lbl.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Twinlke1",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
       "section_id": 0,
@@ -3813,23 +2535,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "KRAF-POLY-Lemon-Pnk.XML",
-      "source_song": "Lemon",
-      "preset_name": "KRAF-POLY",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "defaultParams.lfo1Rate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "defaultParams.reverbAmount"
-      ]
-    },
-    {
       "output_filename": "KRumchybass-K09Arparty-Pnk.XML",
       "source_song": "K09Arparty",
       "preset_name": "KRumchybass",
@@ -3841,20 +2546,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "KRumchybass-K09Arparty-Gld.XML",
-      "source_song": "K09Arparty",
-      "preset_name": "KRumchybass",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.delayFeedback",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
-    },
-    {
       "output_filename": "KRumchybass-K09Arparty-old-Pnk.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "KRumchybass",
@@ -3864,27 +2555,6 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": []
-    },
-    {
-      "output_filename": "KRumchybass-K09Arparty-old-Cyn.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "KRumchybass",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.bitCrush",
-        "defaultParams.delayFeedback",
-        "defaultParams.lfo1Rate",
-        "defaultParams.lpfFrequency",
-        "defaultParams.reverbAmount",
-        "defaultParams.sampleRateReduction",
-        "envelope1.attack",
-        "envelope1.release",
-        "patchCable(compressor->volumePostReverbSend).amount"
-      ]
     },
     {
       "output_filename": "Padfoot-K09Arparty-Pnk.XML",
@@ -3942,85 +2612,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "TB08-No-More-Colour-Gld.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "TB08",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "TB08-No-More-Colour-Cyn.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "TB08",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "TB08-No-More-Colour-Red.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "TB08",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "TB08-No-More-Colour-Ylw.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "TB08",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "TB08-No-More-Colour-Dbl.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "TB08",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": [
-        "defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "TB08-No-More-Colour-Orn.XML",
-      "source_song": "No-More-Colour",
-      "preset_name": "TB08",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "defaultParams.lpfResonance",
-        "defaultParams.lpfFrequency"
-      ]
-    },
-    {
       "output_filename": "TB11-K09Arparty-Pur.XML",
       "source_song": "K09Arparty",
       "preset_name": "TB11",
@@ -4071,8 +2662,7 @@
         "defaultParams.sampleRateReduction",
         "envelope1.attack",
         "envelope1.release",
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "patchCable(lfo2->pan).amount"
+        "patchCable(compressor->volumePostReverbSend).amount"
       ]
     },
     {
@@ -4089,8 +2679,6 @@
         "defaultParams.delayFeedback",
         "defaultParams.lfo1Rate",
         "defaultParams.lpfFrequency",
-        "defaultParams.lpfResonance",
-        "defaultParams.modFXDepth",
         "defaultParams.modFXFeedback",
         "defaultParams.modFXOffset",
         "defaultParams.modFXRate",
@@ -4099,9 +2687,7 @@
         "defaultParams.sampleRateReduction",
         "envelope1.attack",
         "envelope1.release",
-        "patchCable(compressor->volumePostReverbSend).amount",
-        "patchCable(lfo1->pitch).amount",
-        "patchCable(lfo2->pan).amount"
+        "patchCable(compressor->volumePostReverbSend).amount"
       ]
     },
     {
@@ -4117,17 +2703,14 @@
         "defaultParams.bitCrush",
         "defaultParams.delayFeedback",
         "defaultParams.lfo1Rate",
-        "defaultParams.lfo2Rate",
-        "defaultParams.lpfFrequency",
         "defaultParams.lpfResonance",
         "defaultParams.reverbAmount",
         "defaultParams.sampleRateReduction",
         "envelope1.attack",
-        "patchCable(lfo1->pitch).amount",
         "patchCable(lfo2->pan).amount",
+        "defaultParams.lpfFrequency",
         "envelope1.release",
         "patchCable(compressor->volumePostReverbSend).amount",
-        "defaultParams.modFXDepth",
         "defaultParams.modFXFeedback",
         "defaultParams.modFXOffset",
         "defaultParams.modFXRate",
@@ -4173,8 +2756,7 @@
         "defaultParams.lpfResonance",
         "defaultParams.reverbAmount",
         "envelope1.attack",
-        "envelope1.release",
-        "patchCable(compressor->volumePostReverbSend).amount"
+        "envelope1.release"
       ]
     },
     {
@@ -4187,19 +2769,6 @@
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
       "differing_params": []
-    },
-    {
-      "output_filename": "Vibes WT-Oddish-Cyn.XML",
-      "source_song": "Oddish",
-      "preset_name": "Vibes WT",
-      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "defaultParams.delayFeedback"
-      ]
     },
     {
       "output_filename": "Wall Of Static-Oddish-Pnk.XML",

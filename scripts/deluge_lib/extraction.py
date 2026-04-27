@@ -83,8 +83,8 @@ SECTION_COLOURS: dict[int, tuple[str, str]] = {
 #DIFF_PARAM_COUNT_THRESHOLD = 3
 #DIFF_PARAM_PERCENT_THRESHOLD = 0.10
 
-DIFF_PARAM_COUNT_THRESHOLD = 1
-DIFF_PARAM_PERCENT_THRESHOLD = 0.01
+DIFF_PARAM_COUNT_THRESHOLD = 3
+DIFF_PARAM_PERCENT_THRESHOLD = 0.1
 
 # The standalone synth child element order for c1.2.1 firmware.
 # Elements are reordered to match this sequence during extraction.
