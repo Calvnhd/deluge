@@ -20,7 +20,7 @@ from deluge_lib.extraction import (
     SIDECHAIN_LOW_VOLUME_THRESHOLD,
     SIDECHAIN_SEND_MAX,
     SIDECHAIN_SEND_THRESHOLD,
-    _strip_automation,
+    strip_automation,
     build_manifest_entry,
     compare_instruments,
     deduplicate_results,
@@ -47,21 +47,60 @@ FIXTURES_DIR = Path(__file__).parent / "fixtures"
 
 
 class TestDiscoverSongs:
+    @staticmethod
+    def _write_song(path: Path) -> None:
+        """Write a minimal valid song XML at the given path."""
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<song firmwareVersion="c1.2.1">\n'
+            "  <instruments/>\n"
+            "</song>\n"
+        )
+
     def test_finds_xml_files_in_songs_dir(self, tmp_path: Path) -> None:
         """Should discover all *.XML files directly in SONGS/."""
-        pytest.skip("Not implemented")
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "A.XML")
+        self._write_song(songs_dir / "B.XML")
+        results = discover_songs(tmp_path)
+        assert len(results) == 2
+        names = {p.name for p, _ in results}
+        assert names == {"A.XML", "B.XML"}
 
-    def test_skips_non_c121_firmware(self, tmp_path: Path) -> None:
+    def test_skips_non_c121_firmware(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
         """Should skip songs with firmwareVersion != c1.2.1 and print warning."""
-        pytest.skip("Not implemented")
+        songs_dir = tmp_path / "SONGS"
+        songs_dir.mkdir(parents=True)
+        (songs_dir / "Old.XML").write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<song firmwareVersion="4.1.0">\n'
+            "  <instruments/>\n"
+            "</song>\n"
+        )
+        self._write_song(songs_dir / "Good.XML")
+        results = discover_songs(tmp_path)
+        names = {p.name for p, _ in results}
+        assert names == {"Good.XML"}
+        captured = capsys.readouterr()
+        assert "WARNING" in captured.out
 
     def test_skips_unparseable_xml(self, tmp_path: Path) -> None:
         """Should skip songs that fail to parse and print warning."""
-        pytest.skip("Not implemented")
+        songs_dir = tmp_path / "SONGS"
+        songs_dir.mkdir(parents=True)
+        (songs_dir / "Bad.XML").write_text("this is not xml")
+        self._write_song(songs_dir / "Good.XML")
+        results = discover_songs(tmp_path)
+        names = {p.name for p, _ in results}
+        assert names == {"Good.XML"}
 
     def test_returns_empty_for_no_songs(self, tmp_path: Path) -> None:
         """Should return empty list if SONGS/ has no XML files."""
-        pytest.skip("Not implemented")
+        songs_dir = tmp_path / "SONGS"
+        songs_dir.mkdir(parents=True)
+        results = discover_songs(tmp_path)
+        assert results == []
 
 
 # ---------------------------------------------------------------------------
@@ -1963,13 +2002,33 @@ class TestSelectExtendedClips:
 
 
 class TestFirmwareValidation:
+    @staticmethod
+    def _write_song(path: Path, firmware: str = "c1.2.1") -> None:
+        """Write a minimal valid song XML at the given path."""
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            f'<song firmwareVersion="{firmware}">\n'
+            "  <instruments/>\n"
+            "</song>\n"
+        )
+
     def test_c121_accepted(self, tmp_path: Path) -> None:
         """Songs with firmwareVersion='c1.2.1' should be accepted."""
-        pytest.skip("Not implemented")
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "Song.XML", firmware="c1.2.1")
+        results = discover_songs(tmp_path)
+        assert len(results) == 1
+        assert results[0][0].name == "Song.XML"
 
-    def test_other_firmware_skipped(self, tmp_path: Path) -> None:
+    def test_other_firmware_skipped(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
         """Songs with other firmware versions should be skipped with warning."""
-        pytest.skip("Not implemented")
+        songs_dir = tmp_path / "SONGS"
+        self._write_song(songs_dir / "Song.XML", firmware="4.0.0")
+        results = discover_songs(tmp_path)
+        assert results == []
+        captured = capsys.readouterr()
+        assert "WARNING" in captured.out
 
 
 # ---------------------------------------------------------------------------
@@ -1980,15 +2039,57 @@ class TestFirmwareValidation:
 class TestArpeggiatorHandling:
     def test_synth_arpeggiator_extracted_from_clip(self) -> None:
         """Synth clips should have arpeggiator extracted from <instrumentClip>."""
-        pytest.skip("Not implemented")
+        instrument = TestExtractSynth._make_embedded_synth()
+        clip = TestExtractSynth._make_clip(
+            arp_attrs={"mode": "arp", "syncLevel": "7"},
+        )
+        result = extract_synth(instrument, clip)
+        arp = result.find("arpeggiator")
+        assert arp is not None
+        assert arp.get("mode") == "arp"
+        assert arp.get("syncLevel") == "7"
 
     def test_extra_arpeggiator_attrs_stripped(self) -> None:
         """Extra numeric attrs (gate, rate, etc.) should be stripped from arpeggiator."""
-        pytest.skip("Not implemented")
+        instrument = TestExtractSynth._make_embedded_synth()
+        clip = TestExtractSynth._make_clip(
+            arp_attrs={
+                "mode": "arp",
+                "syncLevel": "7",
+                "gate": "0x40000000",
+                "rate": "0x20000000",
+                "ratchetProbability": "0x00000000",
+                "ratchetAmount": "0x00000000",
+                "sequenceLength": "0x00000000",
+                "rhythm": "0x00000000",
+            },
+        )
+        result = extract_synth(instrument, clip)
+        arp = result.find("arpeggiator")
+        assert arp is not None
+        assert arp.get("mode") == "arp"
+        assert arp.get("syncLevel") == "7"
+        for attr in ("gate", "rate", "ratchetProbability", "ratchetAmount",
+                      "sequenceLength", "rhythm"):
+            assert attr not in arp.attrib, f"{attr} should be stripped from arpeggiator"
 
     def test_kit_arpeggiator_left_in_instrument(self) -> None:
         """Kit sound arpeggiators should remain in the instrument definition."""
-        pytest.skip("Not implemented")
+        instrument = TestExtractKit._make_embedded_kit()
+        clip = TestExtractKit._make_kit_clip(
+            kit_params_attrs={"volume": "0x50000000"},
+            noterows=[
+                (0, {"volume": "0xAAAAAAAA"}),
+            ],
+        )
+        result, _ = extract_kit(instrument, clip)
+        sound_sources = result.find("soundSources")
+        sound0 = list(sound_sources)[0]
+        arp = sound0.find("arpeggiator")
+        assert arp is not None
+        assert arp.get("mode") == "off"
+        # Kit clips should not have a clip-level arpeggiator extracted
+        assert result.find("arpeggiator") is None
 
 
 # ---------------------------------------------------------------------------
@@ -2000,21 +2101,21 @@ class TestStripAutomation:
     def test_truncates_extended_hex_to_base_value(self) -> None:
         """Extended hex automation string should be truncated to first 8 hex chars."""
         el = etree.Element("defaultParams", lpfFrequency="0x7FFFFFFF7FFFFFFF000000607FFFFFFF00000120")
-        warnings = _strip_automation(el)
+        warnings = strip_automation(el)
         assert el.get("lpfFrequency") == "0x7FFFFFFF"
         assert len(warnings) == 1
 
     def test_normal_hex_unchanged(self) -> None:
         """Normal 8-char hex values should not be modified."""
         el = etree.Element("defaultParams", lpfFrequency="0x7FFFFFFF")
-        warnings = _strip_automation(el)
+        warnings = strip_automation(el)
         assert el.get("lpfFrequency") == "0x7FFFFFFF"
         assert warnings == []
 
     def test_non_hex_attributes_unchanged(self) -> None:
         """Non-hex attributes like text or numeric values should not be modified."""
         el = etree.Element("osc1", type="square")
-        warnings = _strip_automation(el)
+        warnings = strip_automation(el)
         assert el.get("type") == "square"
         assert warnings == []
 
@@ -2023,7 +2124,7 @@ class TestStripAutomation:
         root = etree.Element("sound")
         child = etree.SubElement(root, "defaultParams", volume="0x4CCCCCA8AABBCCDD11223344")
         grandchild = etree.SubElement(child, "envelope1", attack="0x00000000FFFFFFFF99887766")
-        warnings = _strip_automation(root)
+        warnings = strip_automation(root)
         assert child.get("volume") == "0x4CCCCCA8"
         assert grandchild.get("attack") == "0x00000000"
         assert len(warnings) == 2
@@ -2031,7 +2132,7 @@ class TestStripAutomation:
     def test_returns_warning_strings(self) -> None:
         """Warning strings should identify the element tag and attribute name."""
         el = etree.Element("defaultParams", delayFeedback="0x7FFFFFFF7FFFFFFF000000607FFFFFFF")
-        warnings = _strip_automation(el)
+        warnings = strip_automation(el)
         assert warnings == ["Stripped automation from defaultParams.delayFeedback"]
 
 

@@ -1,6 +1,4 @@
-"""WORK IN PROGRESS
-
-Core extraction logic for extracting standalone presets from Deluge song XMLs.
+"""Core extraction logic for extracting standalone presets from Deluge song XMLs.
 
 This module contains all reusable functions for:
 - Song parsing and instrument/clip discovery
@@ -961,7 +959,7 @@ def extract_kit(
     instrument: etree._Element,
     clip: etree._Element,
     init_template: etree._Element | None = None,
-) -> etree._Element:
+) -> tuple[etree._Element, list[str]]:
     """Transform an embedded kit into a standalone preset XML element.
 
     Follows the kit extraction recipe from research Section 13.5.
@@ -1113,7 +1111,7 @@ def normalise_params(
 _AUTOMATION_RE = re.compile(r"^0x[0-9A-Fa-f]{9,}$")
 
 
-def _strip_automation(element: etree._Element) -> list[str]:
+def strip_automation(element: etree._Element) -> list[str]:
     """Truncate extended hex automation strings to base values on element and all descendants.
 
     Standalone Deluge presets never contain automation data — the Deluge strips
@@ -1399,7 +1397,7 @@ def select_extended_clips(
             element, _warnings = extract_kit(
                 inst.element, clip.element, init_template=kit_init_template,
             )
-        _strip_automation(element)
+        strip_automation(element)
         normalise_params(element, instrument_type, normalisation_config)
         return element
 

@@ -1,6 +1,4 @@
-"""WORK IN PROGRESS
-
-Extract standalone synth and kit presets from Deluge song XMLs.
+"""Extract standalone synth and kit presets from Deluge song XMLs.
 
 Scans all song XMLs in DELUGE/SONGS/, extracts embedded instruments as
 standalone preset XMLs, and writes them to DELUGE/SYNTHS/SONG-SYNTHS/ and
@@ -29,7 +27,7 @@ from deluge_lib.extraction import (
     DedupResult,
     ExtractionResult,
     NormalisationConfig,
-    _strip_automation,
+    strip_automation,
     build_manifest_entry,
     deduplicate_results,
     discover_clips,
@@ -223,7 +221,7 @@ def main(argv: list[str] | None = None) -> None:
                         )
 
                 # Strip automation data (extended hex strings → base values).
-                _strip_automation(element)
+                strip_automation(element)
 
                 # Normalise master volume and pan.
                 normalise_params(element, inst.instrument_type, norm_config)

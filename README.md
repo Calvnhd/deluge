@@ -58,11 +58,11 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 
 | Step | What you do | Script | Status |
 |------|-------------|--------|--------|
-| 2 | Verify sample references are intact | `sample_overview.py missing` | ✅ |
-| 3 | Fix any broken references | `fix_references.py` | ✅ |
-| 4 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
-| 5 | Sync repo back to SD card | `sync_to_sd.py` | 🚧 |
-| 6 | Take a fresh sample snapshot | `create_snapshot.py` | ✅ |
+| 1 | Verify sample references are intact | `sample_overview.py missing` | ✅ |
+| 2 | Fix any broken references | `fix_references.py` | ✅ |
+| 3 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
+| 4 | Sync repo back to SD card | `sync_to_sd.py` | 🚧 |
+| 5 | Take a fresh sample snapshot | `create_snapshot.py` | ✅ |
 
 ### Setup
 

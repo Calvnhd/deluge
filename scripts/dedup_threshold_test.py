@@ -15,7 +15,7 @@ from deluge_lib.extraction import (
     SECTION_COLOURS,
     ComparisonConfig,
     ExtractionResult,
-    _strip_automation,
+    strip_automation,
     deduplicate_results,
     discover_clips,
     discover_instruments,
@@ -70,7 +70,7 @@ def _extract_default_results(
                     init_template=kit_init_template,
                 )
 
-            _strip_automation(element)
+            strip_automation(element)
             normalise_params(element, inst.instrument_type, norm_config)
 
             used = (
@@ -146,7 +146,7 @@ def _extract_extended_results(
                         init_template=kit_init_template,
                     )
 
-                _strip_automation(element)
+                strip_automation(element)
                 normalise_params(element, inst.instrument_type, norm_config)
 
                 diffs: list[str] = []
