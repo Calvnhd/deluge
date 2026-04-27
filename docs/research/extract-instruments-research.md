@@ -1004,12 +1004,21 @@ Reasons:
 
 #### 15.2 Default vs Customized Knob Mappings
 
-The first 14 knobs are largely standard. Positions 3–4 and 15–16 get customized based on synth mode:
+The first 12 knobs (slots 0–11) form a stable framework that is rarely customised. The main exceptions:
+
+- **Slots 2–3** automatically switch from `lpfResonance`/`lpfFrequency` to `modulator2Volume`/`modulator1Volume` (or similar FM params) for FM synth mode
+- **Slot 12** is type-dependent: `portamento` for synths, `pitch` for kit sounds
+
+**Slots 13–15 are the primary customisation zone** — users remap these to sound-specific params.
+
+Examples of FM mode substitution at slots 2–4 and 14–16:
 
 | Knob Positions | Default (subtractive) | FM synth example |
 |---|---|---|
 | 3–4 | `lpfResonance`, `lpfFrequency` | `modulator1Volume`, `modulator1Feedback` |
 | 15–16 | `bitcrushAmount`, `sampleRateReduction` | `modulator2Volume`, `carrier1Feedback` |
+
+Custom slots can also use `patchAmountFromSource` to control modulation depths rather than direct parameter values. Observed `patchAmountFromSource` values across all songs: `compressor`, `lfo1`, `lfo2`, `envelope1`, `envelope2`, `velocity`. [Verified — Init-Kit.XML, song XMLs]
 
 #### 15.3 Proposed Version Comparison Strategy (for Extended Mode)
 
@@ -1052,6 +1061,26 @@ Examined K01Drone across sections 2, 3, and 4 in K01Sink.XML:
 - Some section clips contain **embedded automation data** (extended hex strings) while others have static values
 - This suggests cross-section variation is typically limited to a few parameters being tweaked for different song parts, not wholesale redesigns
 
+#### 15.7 modKnobs as Hard Marker in Comparison Engine
+
+The comparison engine treats `<modKnobs>` mapping as a structural hard marker: [Verified — Init-Kit.XML, song XMLs]
+
+- A positional comparison of all 16 `<modKnob>` entries is performed
+- Any difference in `controlsParam` or `patchAmountFromSource` at any position = hard distinct
+- For synths: checked on the top-level `<sound>` element
+- For kits: checked per-sound inside `<soundSources>` (no kit-level `<modKnobs>` exist)
+- This was implemented based on the insight that changing which parameter a knob controls reflects deliberate sound design intent, even if the parameter values haven't changed
+- The actual *values* of modKnob-controlled parameters follow standard soft-marker rules (threshold-based) — see Section 16.2
+
+#### 15.8 Kit-Level Knob Behaviour (Affect Entire)
+
+When "affect entire" is enabled on a kit clip, the gold knobs control kit-level parameters instead of per-sound parameters. However, this mapping is not persisted to XML: [Verified — Init-Kit.XML, song XMLs]
+
+- Kits have NO `<modKnobs>` at the `<kit>` level — only per-sound `<modKnobs>` inside `<soundSources>/<sound>`
+- The "affect entire" gold knob mapping is firmware-hardcoded, not persisted to XML
+- Kit-level `<defaultParams>` has a different parameter set from per-sound params. Unique kit-level params observed: `sidechainCompressorShape`, `modFXDepth`, `modFXRate`, `modFXOffset`, `modFXFeedback`, `compressorThreshold`, `lpfMorph`, `hpfMorph`, `tempo`
+- Only the resulting parameter values in kit-level `<defaultParams>` are saved, not the knob assignments used to set them
+
 ### 16. Generalised Comparison Engine Design
 
 **Source:** Analysis of existing `compare_versions()` stub in [extraction.py](scripts/deluge_lib/extraction.py), user requirements, and XML structure analysis across all examined presets and songs.
@@ -1089,6 +1118,8 @@ Parameters/elements that, if changed, immediately indicate a fundamentally diffe
 | Arpeggiator note mode | `<arpeggiator noteMode="...">` | `up` vs `down` vs `upDown` vs `random` etc. |
 | Arpeggiator octave mode | `<arpeggiator octaveMode="...">` | `up` vs `down` vs `upDown` vs `random` etc. |
 
+Additionally, `<modKnobs>` mapping is compared as a structural hard marker — any positional change in `controlsParam` or `patchAmountFromSource` = distinct instrument. See Section 15.7.
+
 **Kit hard markers (on the assembled standalone `<kit>`):**
 
 | Element/Attribute | Path | Rationale |
@@ -1100,6 +1131,8 @@ Parameters/elements that, if changed, immediately indicate a fundamentally diffe
 | Per-sound arpeggiator mode | `<sound>/<arpeggiator mode="...">` | Per-row arpeggiator changes |
 | Kit-level mod FX type | `<kit modFXType="...">` | Different master effect |
 | Kit-level filter modes | `<kit lpfMode="...">`, `<kit hpfMode="...">` | Different filter configuration |
+
+Additionally, per-sound `<modKnobs>` mapping is compared as a structural hard marker — any positional change in `controlsParam` or `patchAmountFromSource` on any kit row sound = distinct kit. See Section 15.7.
 
 **Note on `<patchCables>` comparison:** Compare the _set_ of `(source, destination)` tuples, not the `amount` values. Adding or removing a patch cable is structural (hard marker); changing the amount of an existing cable is numerical (soft marker).
 

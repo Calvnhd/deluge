@@ -142,6 +142,17 @@ uv run extract_instruments.py --naming preset          # Preset-SongName filenam
 uv run extract_instruments.py --naming song            # SongName-Preset filenames
 ```
 
+#### `dedup_threshold_test.py`
+
+Benchmarks dedup threshold configurations against the current song library. Produces a markdown table showing how many instruments survive dedup at each (percent, count) threshold combination.
+
+```
+uv run dedup_threshold_test.py                             # default: %=1-99/10, count=1-5/2
+uv run dedup_threshold_test.py --percent 1 99 10 --count 1 5 2   # explicit (same as default)
+uv run dedup_threshold_test.py --percent 10 50 10 --count 3 3 1  # narrow test range
+uv run dedup_threshold_test.py > results.md                # pipe table to file (progress on stderr)
+```
+
 #### `fix_references.py`
 
 Fixes broken sample references after samples have been moved or renamed. Compares a before-snapshot against the current filesystem and updates XML paths. Auto-finds the latest snapshot if `--snapshot` is omitted.
@@ -178,18 +189,6 @@ uv run sample_overview.py duplicates -s latest              # find duplicates us
 uv run sample_overview.py duplicates -s path/to/snap.json   # find duplicates using a specific snapshot
 uv run sample_overview.py usage "Kick"                      # usage detail for samples matching a search term
 ```
-
-### Ideas
-
-- Consider a library for parsing and working with the SD card contents?
-- Generate a manifest of all SD card contents for quick reference
-- Bulk rename songs with trailing numbers (after manually deleting old versions)
-
-## Other Todos
-
-- Re-arrange your samples into a structure that is actually usable
-- Same with synths
-- Same with kits
 
 ---
 

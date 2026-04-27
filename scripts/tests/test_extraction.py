@@ -1209,7 +1209,14 @@ def _make_synth_preset(**overrides: str | dict[str, str] | list[tuple[str, str, 
     etree.SubElement(dp, "equalizer", bass="0x00000000", treble="0x00000000")
 
     etree.SubElement(sound, "arpeggiator", mode="off", noteMode="up", octaveMode="up")
-    etree.SubElement(sound, "modKnobs")
+    mk_el = etree.SubElement(sound, "modKnobs")
+    mod_knobs = overrides.pop("modKnobs", None)
+    if mod_knobs is not None:
+        for knob_def in mod_knobs:
+            attrs = {"controlsParam": knob_def["controlsParam"]}
+            if "patchAmountFromSource" in knob_def:
+                attrs["patchAmountFromSource"] = knob_def["patchAmountFromSource"]
+            etree.SubElement(mk_el, "modKnob", **attrs)
     etree.SubElement(sound, "delay", pingPong="1", analog="0")
     etree.SubElement(sound, "sidechain", attack="0", release="0")
     etree.SubElement(sound, "audioCompressor", attack="0", release="0", thresh="0", ratio="0")
@@ -1265,7 +1272,14 @@ def _make_kit_preset(
             etree.SubElement(pc_el, "patchCable", source=src, destination=dst, amount=amt)
         etree.SubElement(s_dp, "equalizer", bass="0x00000000", treble="0x00000000")
         etree.SubElement(sound, "arpeggiator", mode="off")
-        etree.SubElement(sound, "modKnobs")
+        mk_el = etree.SubElement(sound, "modKnobs")
+        mod_knobs = ov.get("modKnobs")
+        if mod_knobs is not None:
+            for knob_def in mod_knobs:
+                attrs = {"controlsParam": knob_def["controlsParam"]}
+                if "patchAmountFromSource" in knob_def:
+                    attrs["patchAmountFromSource"] = knob_def["patchAmountFromSource"]
+                etree.SubElement(mk_el, "modKnob", **attrs)
         etree.SubElement(sound, "delay", pingPong="0")
         etree.SubElement(sound, "sidechain")
         etree.SubElement(sound, "audioCompressor")
@@ -1368,8 +1382,8 @@ class TestCompareInstruments:
         assert result.soft_diff_count < 3
 
     def test_soft_small_change_not_counted(self) -> None:
-        """Params that change by <10% of full range should not count as soft diffs."""
-        # 10% of 0x7FFFFFFF ≈ 0x0CCCCCCC. Keep changes well under that.
+        """Params that change by <8% of full range should not count as soft diffs."""
+        # 8% of 0xFFFFFFFF ≈ 0x147AE147. Keep changes well under that.
         a = _make_synth_preset(lpfFrequency="0x40000000")
         b = _make_synth_preset(lpfFrequency="0x41000000")  # ~0.5% change
         result = compare_instruments(a, b, "synth", self.CONFIG)
@@ -1558,6 +1572,84 @@ class TestCompareInstruments:
         dp_b.find("envelope1").set("attack", "0x7FFFFFFF")
         result = compare_instruments(a, b, "kit", self.CONFIG)
         assert result.is_distinct is False
+
+    # --- Hard marker: modKnobs structure (synth) ---
+
+    _BASELINE_MODKNOBS: list[dict[str, str]] = [
+        {"controlsParam": "pan"},
+        {"controlsParam": "volumePostFX"},
+        {"controlsParam": "volumePostReverbSend", "patchAmountFromSource": "compressor"},
+        {"controlsParam": "lpfFrequency"},
+    ]
+
+    def test_modknob_param_change_is_hard_distinct(self) -> None:
+        """Different controlsParam in one modKnob slot → hard distinct."""
+        knobs_b = [dict(k) for k in self._BASELINE_MODKNOBS]
+        knobs_b[3] = {"controlsParam": "modulator1Volume"}
+        a = _make_synth_preset(modKnobs=self._BASELINE_MODKNOBS)
+        b = _make_synth_preset(modKnobs=knobs_b)
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("modKnobs[3].controlsParam" in d for d in result.hard_diffs)
+
+    def test_modknob_patch_source_added_is_hard_distinct(self) -> None:
+        """Adding patchAmountFromSource to a modKnob slot → hard distinct."""
+        knobs_b = [dict(k) for k in self._BASELINE_MODKNOBS]
+        knobs_b[0] = {"controlsParam": "pan", "patchAmountFromSource": "lfo1"}
+        a = _make_synth_preset(modKnobs=self._BASELINE_MODKNOBS)
+        b = _make_synth_preset(modKnobs=knobs_b)
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("modKnobs[0].patchAmountFromSource" in d and "added" in d for d in result.hard_diffs)
+
+    def test_modknob_patch_source_removed_is_hard_distinct(self) -> None:
+        """Removing patchAmountFromSource from a modKnob slot → hard distinct."""
+        knobs_b = [dict(k) for k in self._BASELINE_MODKNOBS]
+        knobs_b[2] = {"controlsParam": "volumePostReverbSend"}
+        a = _make_synth_preset(modKnobs=self._BASELINE_MODKNOBS)
+        b = _make_synth_preset(modKnobs=knobs_b)
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("modKnobs[2].patchAmountFromSource" in d and "removed" in d for d in result.hard_diffs)
+
+    def test_modknob_patch_source_changed_is_hard_distinct(self) -> None:
+        """Changed patchAmountFromSource on a modKnob slot → hard distinct."""
+        knobs_b = [dict(k) for k in self._BASELINE_MODKNOBS]
+        knobs_b[2] = {"controlsParam": "volumePostReverbSend", "patchAmountFromSource": "lfo2"}
+        a = _make_synth_preset(modKnobs=self._BASELINE_MODKNOBS)
+        b = _make_synth_preset(modKnobs=knobs_b)
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert result.is_distinct is True
+        assert any(
+            "modKnobs[2].patchAmountFromSource" in d and "'compressor'" in d and "'lfo2'" in d
+            for d in result.hard_diffs
+        )
+
+    def test_identical_modknobs_not_distinct(self) -> None:
+        """Identical modKnobs mappings → not distinct (from modKnobs perspective)."""
+        a = _make_synth_preset(modKnobs=self._BASELINE_MODKNOBS)
+        b = _make_synth_preset(modKnobs=self._BASELINE_MODKNOBS)
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert not any("modKnobs" in d for d in result.hard_diffs)
+
+    def test_empty_modknobs_not_distinct(self) -> None:
+        """Both presets with empty modKnobs → not distinct (backward compat)."""
+        a = _make_synth_preset()
+        b = _make_synth_preset()
+        result = compare_instruments(a, b, "synth", self.CONFIG)
+        assert not any("modKnobs" in d for d in result.hard_diffs)
+
+    # --- Hard marker: modKnobs structure (kit per-sound) ---
+
+    def test_kit_per_sound_modknob_change_is_hard_distinct(self) -> None:
+        """Kit where one sound row has different modKnobs → hard distinct."""
+        knobs_a = [{"controlsParam": "pan"}, {"controlsParam": "volumePostFX"}]
+        knobs_b = [{"controlsParam": "pan"}, {"controlsParam": "lpfFrequency"}]
+        a = _make_kit_preset(num_sounds=2, sound_overrides={0: {"modKnobs": knobs_a}})
+        b = _make_kit_preset(num_sounds=2, sound_overrides={0: {"modKnobs": knobs_b}})
+        result = compare_instruments(a, b, "kit", self.CONFIG)
+        assert result.is_distinct is True
+        assert any("sound[Sound0].modKnobs[1].controlsParam" in d for d in result.hard_diffs)
 
 
 # ---------------------------------------------------------------------------

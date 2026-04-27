@@ -619,3 +619,72 @@ Tests synth behaviours, arranger clips, preset changes, parameter values, sidech
 | Triggy 17 | Muted notes in synth clips; added kit with sequencing | `muted="1"` on synth `<noteRow>` elements |
 | Triggy 18 | Muted kit rows; loaded TR-808 and configured as sidechain-only | `muted="1"` on kit rows, `sideChainSend` pattern |
 | Triggy 19 | Created dedicated sidechain kit (single KICK sound) | Minimal sidechain kit — 1 sound in `<soundSources>` |
+
+---
+
+### 15. Gold Knobs and `<modKnobs>`
+
+**Source:** Analysis of `<modKnobs>` elements across Init-Synth.XML, Init-Kit.XML, standalone presets, and song-embedded instruments. Cross-referenced with hardware behaviour.
+
+#### 15.1 Overview
+
+- The Deluge has 8 physical buttons, each with a pair of gold knobs (top and bottom), giving 16 knob slots
+- The `<modKnobs>` element stores the knob→parameter mapping as exactly 16 `<modKnob>` child elements in positional order
+- `<modKnobs>` lives at the `<sound>` level — both in standalone presets and inside kit `<soundSources>/<sound>`
+- Kits do NOT have a `<modKnobs>` at the `<kit>` level [Verified — Init-Kit.XML, all examined song kits]
+
+#### 15.2 `<modKnob>` Attributes
+
+- `controlsParam` (required) — the parameter name this knob controls (e.g. `"lpfFrequency"`, `"pan"`, `"env1Attack"`)
+- `patchAmountFromSource` (optional) — when present, the knob controls the patch cable amount from this source to the `controlsParam` destination, rather than the parameter's direct value. Default entries use this for sidechain (slot 9: `compressor → volumePostReverbSend`) and mod depth (slot 10: `lfo1 → pitch`)
+
+#### 15.3 Default Knob Layout
+
+The full Init-Synth default mapping: [Verified — Init-Synth.XML]
+
+| Slot | Button Pair | Position | `controlsParam` | `patchAmountFromSource` | Hardware Label |
+|------|-------------|----------|-----------------|------------------------|----------------|
+| 0 | 1 | Top | `pan` | — | Level/Pan |
+| 1 | 1 | Bottom | `volumePostFX` | — | Level/Pan |
+| 2 | 2 | Top | `lpfResonance` | — | Cutoff/Res |
+| 3 | 2 | Bottom | `lpfFrequency` | — | Cutoff/Res |
+| 4 | 3 | Top | `env1Release` | — | Env1 Atk/Rel |
+| 5 | 3 | Bottom | `env1Attack` | — | Env1 Atk/Rel |
+| 6 | 4 | Top | `delayFeedback` | — | Delay |
+| 7 | 4 | Bottom | `delayRate` | — | Delay |
+| 8 | 5 | Top | `reverbAmount` | — | Sidechain/Reverb |
+| 9 | 5 | Bottom | `volumePostReverbSend` | `compressor` | Sidechain/Reverb |
+| 10 | 6 | Top | `pitch` | `lfo1` | Mod Rate/Depth |
+| 11 | 6 | Bottom | `lfo1Rate` | — | Mod Rate/Depth |
+| 12 | 7 | Top | `portamento` | — | Stutter/Custom1 |
+| 13 | 7 | Bottom | `stutterRate` | — | Stutter/Custom1 |
+| 14 | 8 | Top | `bitcrushAmount` | — | Custom2/Custom3 |
+| 15 | 8 | Bottom | `sampleRateReduction` | — | Custom2/Custom3 |
+
+Note: Init-Kit sounds have `pitch` at slot 12 instead of `portamento` (kit row sounds don't have portamento). [Verified — Init-Kit.XML]
+
+#### 15.4 Customisation Patterns
+
+Observed patterns from real song data: [Verified — Init-Kit.XML, song XMLs]
+
+- **Slots 0–11 are highly stable** — almost never customised, except slots 2–3 which automatically switch to `modulator2Volume`/`modulator1Volume` for FM synths
+- **Slot 12 differs by instrument type**: `portamento` for synths, `pitch` for kit sounds
+- **Slots 13–15 are the customisation zone** — users remap these to sound-specific params. Common custom mappings observed: `noiseVolume`, `oscAPhaseWidth`, `oscBVolume`, `env2Decay`, `carrier2Feedback`, `modulator1Feedback`
+- Custom slots can also use `patchAmountFromSource` to control modulation depths (e.g. `envelope2 → lpfFrequency`, `lfo2 → oscAWavetablePosition`, `velocity → lpfFrequency`)
+- Observed `patchAmountFromSource` values across all songs: `compressor`, `lfo1`, `lfo2`, `envelope1`, `envelope2`, `velocity`
+
+#### 15.5 Kit "Affect Entire" and Knob Behaviour
+
+When "affect entire" is enabled on a kit clip, the gold knobs control kit-level parameters instead of per-sound parameters. However: [Verified — Init-Kit.XML, song XMLs]
+
+- There is NO `<modKnobs>` element at the `<kit>` level in the XML
+- The kit-level `<defaultParams>` has a different parameter set from per-sound params (e.g. `modFXDepth`, `modFXRate`, `lpfMorph`, `hpfMorph`, `tempo` — none of which appear in per-sound modKnobs)
+- The firmware uses a hardcoded internal mapping for kit-level knob behaviour — this mapping is not persisted to XML
+- Only the *resulting parameter values* in kit-level `<defaultParams>` are saved, not the knob assignments used to set them
+
+#### 15.6 Implications for Comparison/Dedup
+
+- `<modKnobs>` is a strong signal for instrument identity — different knob assignments mean the user had different intentions for using the instrument
+- modKnobs live at the instrument level (not the clip level), so they are shared across all section/colour versions and don't vary per-clip
+- The comparison engine treats modKnob mapping differences as **hard markers**: any positional change in `controlsParam` or `patchAmountFromSource` = structurally distinct instrument
+- The actual parameter *values* controlled by the knobs are stored in `<defaultParams>`/`<soundParams>` and follow the standard soft-marker comparison rules

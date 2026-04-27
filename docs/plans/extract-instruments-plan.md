@@ -4,11 +4,13 @@
 > **Date:** 14 April 2026
 > **Research:** [extract-instruments-research.md](../research/extract-instruments-research.md)
 > **Pipeline:** Research → **Plan** → Implement
-> **Status:** Draft
+> **Status:** Complete — in threshold tuning
 
 ## Executive Summary
 
 Build a script that scans all song XMLs in `DELUGE/SONGS/`, extracts embedded synth and kit instruments as standalone preset XMLs, and writes them to `DELUGE/SYNTHS/SONG-SYNTHS/` and `DELUGE/KITS/SONG-KITS/`. The script merges the split instrument structure (from `<instruments>`) with clip-level parameters (from `<sessionClips>`) and arpeggiator data, normalises master volume and pan, and outputs firmware `c1.2.1` standalone presets. Two modes are supported: default mode extracts one version per instrument (lowest section ID), and extended mode extracts multiple versions when parameters differ significantly. A generalised comparison engine (research Section 16) classifies parameters into hard markers, soft markers, and ignorable params — used by both intra-song extended selection and cross-song deduplication. Cross-song dedup (research Section 17) filters redundant extractions where the same preset appears in multiple songs, using a baseline + incremental acceptance algorithm grouped by preset name. Dedup is enabled by default (`--no-dedup` to disable). Research Section 13.5 provides the definitive transformation recipes.
+
+Post-plan enhancements include: sidechain-only kit detection and filtering (`--include-sidechain`), SD card direct mode (`--sd-direct`), configurable filename ordering (`--naming`), subdirectory exclusion (`--exclude-dir`), verbose dedup logging (`--verbose`), dynamic init file loading (reads normalisation values from Init-Synth/Init-Kit XMLs instead of hardcoded constants), init template for kit sounds without clip params, two-pass deduplication (name-pass + global cross-name pass), and `<modKnobs>` mapping as a hard marker in the comparison engine.
 
 ## Research Summary
 
@@ -57,6 +59,16 @@ Authoritative user decisions from [extraction-questions.md](../../temp/extractio
 | D22 | Threshold independence — both use cases get separate `ComparisonConfig` instances with identical defaults | Research Section 17.7. Allows independent tuning during testing (e.g., more aggressive dedup thresholds vs. more permissive extended selection). | Single shared config (rejected — limits tuning flexibility) |
 | D23 | Extended mode `select_extended_clips()` compares against ALL accepted clips, not just baseline | Research Section 18.2. Prevents accepting clips that are similar to each other but both differ from baseline. Same pattern as dedup algorithm. | Compare only against baseline (original plan — rejected for consistency and quality) |
 | D24 | Envelope and delay/sidechain/compressor attributes treated as soft markers | Research Sections 16.7 and 16.8. These are numerical/tweakable settings, not structural identity. Included in soft param count. | Treat as hard markers (rejected — too aggressive for numerical tweaks) |
+| D25 | Sidechain-only kits excluded by default, `--include-sidechain` to include | Sidechain trigger kits (e.g. single-sound kick with max sideChainSend) are not useful as standalone presets. Detection uses heuristics from research Section 12: Path A (1 sequenced row with high sideChainSend and low volume) and Path B (single sound with max sideChainSend). | Include all kits (rejected — clutters output with unusable presets) |
+| D26 | `--sd-direct` reads/writes to SD card with double confirmation | Users may want to extract directly to the SD card without syncing. SD card safety rules require explicit confirmation before any SD card writes. Old SD output dirs are backed up to the LOCAL `.trash/` (not the SD card) before deletion. | Always use local backup (rejected — limits workflow flexibility) |
+| D27 | `--naming` flag: `preset` (default) or `song` filename ordering | `preset` mode produces `<PresetName>-<SongName>.XML` for easier alphabetical browsing by preset. `song` mode produces `<SongName>-<PresetName>.XML` for grouping by source song. Default changed from song-first (original D5) to preset-first based on user preference. | Single fixed format (rejected — both orderings have valid use cases) |
+| D28 | `--exclude-dir` for subdirectory exclusion | Songs in `SONGS/testing/` are test fixtures, not real songs. `--exclude-dir testing` skips them. Multiple dirs can be excluded. Case-insensitive matching on directory name. | Process all songs always (rejected — testing songs produce noise in output) |
+| D29 | `--verbose` for detailed dedup logging | Shows per-result comparison details during dedup: which results were compared, which matched, and why. Useful for threshold tuning. | Always verbose (rejected — too noisy for normal use) |
+| D30 | Dynamic init file loading with hardcoded fallback | `load_init_defaults()` reads volume/pan from Init-Synth.XML and Init-Kit.XML at runtime. Falls back to hardcoded constants if files are missing or unparseable. More robust than hardcoded-only — adapts if user changes their init presets. | Hardcoded constants only (original approach — replaced for flexibility) |
+| D31 | Init kit template for sounds without clip params | `load_kit_init_template()` extracts `<defaultParams>` from Init-Kit.XML's first sound. Used as a fallback when `_ensure_all_sounds_have_default_params()` needs to create default params for kit sounds that have no corresponding noteRow in the selected clip. | Skip sounds without params (rejected — produces incomplete presets) |
+| D32 | Two-pass deduplication: name-pass then global cross-name pass | Pass 1 groups by `(preset_name, instrument_type)` — catches same-name duplicates across songs. Pass 2 groups accepted results by `(instrument_type,)` only — catches cross-name duplicates (e.g. "000" vs "000 TR-808" which are structurally identical). Both passes use baseline + incremental acceptance. | Single-pass by name only (original D21 — upgraded to catch renamed presets) |
+| D33 | `<modKnobs>` mapping as hard marker in comparison engine | Different knob assignments (positional comparison of `controlsParam` and `patchAmountFromSource` on all 16 slots) indicate different user intent for the instrument. Checked on synth `<sound>` top-level and per-sound in kit `<soundSources>`. Kits have no kit-level modKnobs. | Ignore modKnobs (rejected — loses meaningful structural information) |
+| D34 | Standalone threshold benchmark script, no CLI flags on extract_instruments | Threshold tuning is a developer/testing concern, not a user workflow. A separate `dedup_threshold_test.py` imports extraction internals directly and uses `dataclasses.replace()` on `ComparisonConfig` to test different thresholds without modifying module-level constants. No changes to `extraction.py` or `extract_instruments.py` required. | Add --percent/--count flags to extract_instruments.py (rejected — pollutes the user-facing CLI with developer-only options) |
 
 ## Technical Specification
 
@@ -142,6 +154,11 @@ DELUGE/
 | `--dry-run` | CLI flag | List extractions without writing files. Default behaviour when no flag is given — matches existing script conventions |
 | Song XMLs | `DELUGE_ROOT/SONGS/*.XML` | All song XMLs discovered recursively |
 | Init presets | `DELUGE_ROOT/SYNTHS/Init-Synth.XML`, `DELUGE_ROOT/KITS/Init-Kit.XML` | Reference volume/pan values for normalisation |
+| `--verbose` | CLI flag | Print detailed dedup comparison logging |
+| `--sd-direct` | CLI flag | Read from and write to SD card directly (with double confirmation) |
+| `--include-sidechain` | CLI flag | Include sidechain-only kits (excluded by default) |
+| `--exclude-dir` | CLI flag (repeatable) | Exclude songs in subdirectories of SONGS/ |
+| `--naming` | CLI flag (`preset`/`song`) | Filename ordering: preset-first (default) or song-first |
 
 **Outputs:**
 
@@ -220,6 +237,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 | **.env configuration** | Uses existing `DELUGE_ROOT`. No new environment variables. |
 | **Cross-platform** | Python + pathlib + lxml. No platform-specific tools. Spaces in filenames are kept (Deluge handles them; both platforms support them). |
 | **Comparison engine** | The generalised `compare_instruments()` function is used by both extended mode (`select_extended_clips()`) and cross-song dedup (`deduplicate_results()`). Changes to comparison logic or thresholds affect both features. Both use cases get independent `ComparisonConfig` instances to allow separate tuning. |
+| **SD card safety (`--sd-direct`)** | `--sd-direct` reads songs from and writes extractions to the SD card. SD card writes require double confirmation (standard prompt + explicit "yes" input). Old output dirs on SD card are backed up to the local repo's `.trash/` before deletion, not to the SD card itself. Compliant with project standard: scripts never write to SD card without explicit user confirmation. |
 
 ## Risk Mitigation
 
@@ -237,6 +255,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 | Extended mode comparison noise | Configurable thresholds (D4). Automation ignored for comparison (D15). Structural/non-numerical changes always trigger extraction. | May need threshold tuning — constants are easily editable |
 | Dedup removes legitimately different instruments | Hard marker comparison catches structural differences regardless of thresholds. Instruments with different osc types, sample files, or patchCable structure are always kept. Soft threshold defaults (3 params, 10%) are conservative. `--no-dedup` flag provides escape hatch. | Possible false negatives for instruments with identical structure but subtly different numerical settings below threshold — user can lower thresholds or disable dedup |
 | Dedup ordering affects which version is kept | Deterministic alphabetical ordering by song name ensures reproducible results. The "first alphabetically" convention is consistent with default mode's "lowest section ID" strategy. | User may prefer a specific song's version — not controllable without manual intervention |
+| SD card data loss via `--sd-direct` | Double confirmation: standard `confirm_apply()` then explicit "type yes" prompt. Old SD output dirs backed up to LOCAL `.trash/` before deletion. | Minimal — user must actively confirm twice |
 | Comparison engine performance on large preset sets | Grouping by preset name keeps comparison groups small (typically 2-10 instruments per group). Each comparison is in-memory XML traversal — no I/O. Extended mode has at most ~6 pairwise comparisons per instrument per song. | Negligible unless preset counts grow significantly |
 
 ## Implementation Roadmap
@@ -680,6 +699,7 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 | Phase 4: Comparison Engine & Extended Mode | Complete | 3/3 | Task 4.1 (ComparisonConfig/Result) ✅, Task 4.2 (compare_instruments) ✅, Task 4.3 (updated select_extended_clips) ✅ |
 | Phase 5: Cross-Song Deduplication | Complete | 3/3 | Task 5.1 (deduplicate_results) ✅, Task 5.2 (CLI integration + --no-dedup) ✅, Task 5.3 (dedup reporting) ✅ |
 | Phase 6: Testing and Verification | Complete | 3/3 | Task 6.1 (test fixtures) ✅, Task 6.2 (unit tests) ✅, Task 6.3 (integration test) ✅ |
+| Phase 7: Post-Plan Enhancements | Complete | 10/10 | Sidechain detection ✅, SD-direct mode ✅, --naming flag ✅, --exclude-dir flag ✅, --verbose flag ✅, dynamic init loading ✅, init template ✅, two-pass dedup ✅, modKnobs hard marker ✅, threshold benchmark script ✅ |
 
 ## Open Questions
 
@@ -689,11 +709,11 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
    - **Blocking:** No — can be resolved during Task 3.2
    - **Resolution:** Hardware-tested. lxml's `pretty_print=True` with `encoding="UTF-8"` produces output that the Deluge firmware (c1.2.1) loads without issue. The Deluge re-normalises formatting to its preferred tab-indented style when the user saves the preset. No custom serialiser needed — use lxml's default pretty-print output.
 
-2. **Should the manifest be one file per output directory or one combined file?**
+2. **Should the manifest be one file per output directory or one combined file?** ✅ Resolved
    - **Impact:** Minor organisational choice. Two manifests (one per output dir) is slightly cleaner; one combined file is simpler to parse.
    - **Recommendation:** One per output directory (as specified in Task 3.4). Each manifest covers only its directory's contents.
    - **Blocking:** No
-   - **Resolution:** _{To be filled during implementation}_
+   - **Resolution:** One manifest per output directory, as originally recommended. Implemented in `_write_manifest()` in `extract_instruments.py`.
 
 3. **How should extended mode handle automation data in parameter comparisons?** ✅ Resolved
    - **Impact:** Automation strings are variable-length hex (e.g. `0x7FFFFFFF7FFFFFFF000000607FFFFFFF00000120`). Comparing these verbatim would flag any automated parameter as "different" even if the base value hasn't changed.
@@ -706,10 +726,11 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
    - **Recommendation:** Not for v1. Keep thresholds as code constants. If users need tuning, add CLI flags in a future iteration.
    - **Blocking:** No
 
-5. **Should dedup reporting support a `--verbose` flag for per-result match details?**
+5. **Should dedup reporting support a `--verbose` flag for per-result match details?** ✅ Resolved
    - **Impact:** Research Section 17.6 suggests optionally showing which specific song × preset combinations were rejected and which accepted result they matched.
    - **Recommendation:** Defer. The default summary (preset name → kept/removed list) is sufficient for v1. Verbose mode can be added later if needed.
    - **Blocking:** No
+   - **Resolution:** Implemented. `--verbose` flag added to CLI, passed through to `deduplicate_results()`. Verbose mode prints per-result match details showing which results were compared, matched, and rejected with reasons.
 
 ## References
 
@@ -736,6 +757,13 @@ In dry-run mode, the final confirmation prompt is skipped and a `(dry run)` labe
 
 | Date | Change | Reason |
 |------|--------|--------|
+| 27 Apr 2026 | Hex range denominator fixed, threshold set to 10% / count 3 | `_HEX_FULL_RANGE` changed from `0x7FFFFFFF` (positive half) to `0xFFFFFFFF` (full unsigned span) for consistent % semantics across all parameter types. Default threshold set to `0.10` (10%) with count 3. 10% now means 10% of the parameter's total range regardless of display mapping (0–50, ±50, or ±25). |
+| 27 Apr 2026 | Default percent threshold changed from 10% to 15% | Based on threshold benchmarking with 81 songs. 15% sits at a natural step in the data — past this point, default mode flattens at 265 instruments through 25%. Translates to ~3.75 display units on a 0–50 knob scale. |
+| 27 Apr 2026 | Threshold benchmark script created | `dedup_threshold_test.py` — standalone script to benchmark dedup threshold configurations. Accepts `--percent` and `--count` ranges, runs extraction once then loops dedup with custom `ComparisonConfig` instances via `dataclasses.replace()`. Produces aligned markdown table to stdout, progress to stderr. Entry point: `deluge-threshold-test`. |
+| 27 Apr 2026 | Plan updated to reflect post-plan enhancements | Added Phase 7 (9 post-plan features), decisions D25–D33, resolved Open Questions 2 and 5, updated CLI interface documentation. Feature is complete pending threshold tuning. |
+| 27 Apr 2026 | modKnobs mapping added as hard marker (D33) | `_check_modknobs_structure()` added to comparison engine. Positional comparison of 16 `<modKnob>` entries by `controlsParam` and `patchAmountFromSource`. Checked for synths (top-level) and kits (per-sound). 7 new tests added. |
+| 25 Apr 2026 | Two-pass dedup implemented (D32) | `deduplicate_results()` refactored into `_dedup_pass()` helper called twice: name-pass groups by `(preset_name, instrument_type)`, global-pass groups by `(instrument_type,)` only. `DedupResult` expanded with `name_pass_rejected` and `global_pass_rejected` fields. Dedup reporting updated with per-stage sections. |
+| 24 Apr 2026 | Post-plan enhancements implemented | Sidechain detection (`is_sidechain_kit()`, `--include-sidechain`), SD-direct mode (`--sd-direct`, `get_sd_card_path()`), naming flag (`--naming preset/song`), exclude-dir (`--exclude-dir`), verbose dedup (`--verbose`), dynamic init loading (`load_init_defaults()`, `load_kit_init_template()`), init template for sounds without clip params (`_ensure_all_sounds_have_default_params()`). |
 | 22 Apr 2026 | Task 1.4 implemented — Phase 1 complete | `select_default_clip()` implemented with `min()` on `clips_by_section` keys. 3 tests added in `TestSelectDefaultClip`. Phase 1 marked complete (4/4). |
 | 22 Apr 2026 | Plan revised to reflect true implementation state after code audit | Phase 1 progress corrected (2/4 — Task 1.2 confirmed complete). Phase 3 status clarified (1/5 — only Task 3.3 truly complete; Tasks 3.4/3.5 partially scaffolded but depend on unimplemented stubs). Codebase audit note added to Research Summary. `print_path()` noted in Integration Points. |
 | 22 Apr 2026 | Tasks 3.1, 3.2, 3.4, 3.5 implemented — Phase 3 complete | `generate_filename()` implemented with collision handling. `serialise_xml()` implemented with lxml pretty_print. `build_manifest_entry()` implemented mapping ExtractionResult to dict. CLI exit codes added (try/except + sys.exit(1)). Init preset validation added at startup (checks Init-Synth.XML and Init-Kit.XML). 7 new tests (5 filename + 2 serialisation), all passing. Phase 3 marked complete (5/5). |

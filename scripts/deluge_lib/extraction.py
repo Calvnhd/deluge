@@ -134,11 +134,13 @@ _HEX_VALUE_RE = re.compile(r"^0x[0-9A-Fa-f]+$")
 
 # Full range for proportional soft-marker difference calculation.
 # Deluge hex params span 0x80000000 (-2,147,483,648) to 0x7FFFFFFF (+2,147,483,647).
-# User-facing values map to either 0–50 or -50 to +50, using the full signed range.
-# Using 0x7FFFFFFF (positive half) as the denominator means the 10% threshold
-# corresponds to ~2.5 display units on a 0–50 scale.  Using 0xFFFFFFFF (full span)
-# would correspond to ~5 display units.  Adjust during testing if needed.
-_HEX_FULL_RANGE = 0x7FFFFFFF
+# The full unsigned span is 0xFFFFFFFF (4,294,967,295).  Using this as the
+# denominator ensures the % threshold is consistent across all parameter types:
+#   0-50 params:  15% = 7.5 display units
+#   ±50 params:   15% = 15 display units
+#   ±25 params:   15% = 7.5 display units
+# All represent 15% of the parameter's total range.
+_HEX_FULL_RANGE = 0xFFFFFFFF
 
 # Sidechain detection constants.
 # sideChainSend is a plain integer (not hex) on kit <sound> elements.
@@ -1296,6 +1298,10 @@ def compare_instruments(
     dp_b = preset_b.find("defaultParams")
     hard_diffs.extend(_check_patchcable_structure(dp_a, dp_b))
 
+    # modKnobs structure (synth: top-level <modKnobs> on <sound>)
+    if instrument_type == "synth":
+        hard_diffs.extend(_check_modknobs_structure(preset_a, preset_b))
+
     # Kit-specific structural hard markers
     if instrument_type == "kit":
         hard_diffs.extend(
@@ -2037,6 +2043,56 @@ def _build_patchcable_element_dict(
     return result
 
 
+def _check_modknobs_structure(
+    parent_a: etree._Element,
+    parent_b: etree._Element,
+    prefix: str = "",
+) -> list[str]:
+    """Return hard diffs if modKnob mappings differ positionally.
+
+    Compares the ``<modKnobs>`` child of *parent_a* and *parent_b* slot by
+    slot, checking ``controlsParam`` and ``patchAmountFromSource`` attributes.
+    """
+    mk_a = parent_a.find("modKnobs")
+    mk_b = parent_b.find("modKnobs")
+    knobs_a = list(mk_a) if mk_a is not None else []
+    knobs_b = list(mk_b) if mk_b is not None else []
+
+    # Both empty → no diff
+    if not knobs_a and not knobs_b:
+        return []
+
+    diffs: list[str] = []
+    pfx = f"{prefix}." if prefix else ""
+    max_len = max(len(knobs_a), len(knobs_b))
+    for i in range(max_len):
+        ka = knobs_a[i] if i < len(knobs_a) else None
+        kb = knobs_b[i] if i < len(knobs_b) else None
+        cp_a = ka.get("controlsParam", "") if ka is not None else ""
+        cp_b = kb.get("controlsParam", "") if kb is not None else ""
+        ps_a = ka.get("patchAmountFromSource") if ka is not None else None
+        ps_b = kb.get("patchAmountFromSource") if kb is not None else None
+
+        if cp_a != cp_b:
+            diffs.append(
+                f"{pfx}modKnobs[{i}].controlsParam: {cp_a!r} vs {cp_b!r}"
+            )
+        if ps_a != ps_b:
+            if ps_a is None:
+                diffs.append(
+                    f"{pfx}modKnobs[{i}].patchAmountFromSource: added {ps_b!r}"
+                )
+            elif ps_b is None:
+                diffs.append(
+                    f"{pfx}modKnobs[{i}].patchAmountFromSource: removed {ps_a!r}"
+                )
+            else:
+                diffs.append(
+                    f"{pfx}modKnobs[{i}].patchAmountFromSource: {ps_a!r} vs {ps_b!r}"
+                )
+    return diffs
+
+
 def _check_patchcable_structure(
     dp_a: etree._Element | None,
     dp_b: etree._Element | None,
@@ -2321,6 +2377,12 @@ def _check_kit_structure_hard(
         if pc_diffs:
             name = sa.get("name", f"index {i}")
             diffs.extend(f"sound[{name}].{d}" for d in pc_diffs)
+
+    # Per-sound modKnobs structure
+    for i, (sa, sb) in enumerate(zip(sounds_a, sounds_b, strict=True)):
+        name = sa.get("name", f"index {i}")
+        mk_diffs = _check_modknobs_structure(sa, sb, prefix=f"sound[{name}]")
+        diffs.extend(mk_diffs)
 
     return diffs
 
