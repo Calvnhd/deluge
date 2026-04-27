@@ -1,10 +1,10 @@
 {
-  "generated": "2026-04-27T14:12:17.320617+00:00",
+  "generated": "2026-04-27T14:29:28.675375+00:00",
   "songs_processed": 81,
-  "total_count": 106,
+  "total_count": 80,
   "extractions": [
     {
-      "output_filename": "000-Alr-Lbl.XML",
+      "output_filename": "000-Alr.XML",
       "source_song": "Alr",
       "preset_name": "000",
       "preset_folder": "KITS",
@@ -15,7 +15,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "000-Ambient-Fishes-Lbl.XML",
+      "output_filename": "000-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "000",
       "preset_folder": "KITS",
@@ -26,38 +26,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "000-Ambient-Fishes-Pnk.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "sound[KICK].patchCables structure: removed [('lfo1', 'pitch')]",
-        "sound[U1].patchCables structure: removed [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "000-Ambient-Fishes-Cyn.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "sound[HATO].defaultParams.delayFeedback",
-        "sound[HATO].defaultParams.lpfFrequency",
-        "sound[HATO].defaultParams.reverbAmount",
-        "sound[KICK].patchCables structure: added [('lfo1', 'pitch')]",
-        "sound[U1].patchCables structure: added [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "000-SlpspkArpsOld-Lbl.XML",
+      "output_filename": "000-SlpspkArpsOld.XML",
       "source_song": "SlpspkArpsOld",
       "preset_name": "000",
       "preset_folder": "KITS",
@@ -68,7 +37,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "003-Bmtk-Pnk.XML",
+      "output_filename": "003-Bmtk.XML",
       "source_song": "Bmtk",
       "preset_name": "003",
       "preset_folder": "KITS",
@@ -79,7 +48,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "005-Kg-Lbl.XML",
+      "output_filename": "005-Kg.XML",
       "source_song": "Kg",
       "preset_name": "005",
       "preset_folder": "KITS",
@@ -90,7 +59,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "008-Arpo-Pnk.XML",
+      "output_filename": "008-Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "008",
       "preset_folder": "KITS",
@@ -101,7 +70,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010-Env-Lbl.XML",
+      "output_filename": "010-Env.XML",
       "source_song": "Env",
       "preset_name": "010",
       "preset_folder": "KITS",
@@ -112,7 +81,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010-K08Offbeat-Lbl.XML",
+      "output_filename": "010-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "010",
       "preset_folder": "KITS",
@@ -123,7 +92,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010-Yeti-Lbl.XML",
+      "output_filename": "010-Yeti.XML",
       "source_song": "Yeti",
       "preset_name": "010",
       "preset_folder": "KITS",
@@ -134,36 +103,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010-Yeti-Gld.XML",
-      "source_song": "Yeti",
-      "preset_name": "010",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "sound[RIDE].patchCables structure: added [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "010-Yeti-Red.XML",
-      "source_song": "Yeti",
-      "preset_name": "010",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "sound[RIDE].patchCables structure: added [('lfo1', 'pitch')]",
-        "sound[RIDE].defaultParams.delayFeedback",
-        "sound[RIDE].defaultParams.lpfFrequency",
-        "sound[RIDE].defaultParams.reverbAmount"
-      ]
-    },
-    {
-      "output_filename": "010A-Japarps-Cyn.XML",
+      "output_filename": "010A-Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "010A",
       "preset_folder": "KITS",
@@ -174,7 +114,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010A-K09Arparty-Pnk.XML",
+      "output_filename": "010A-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "010A",
       "preset_folder": "KITS",
@@ -185,20 +125,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010A-K09Arparty-Gld.XML",
-      "source_song": "K09Arparty",
-      "preset_name": "010A",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "sound[CRAS].patchCables structure: added [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "010A-K09Arparty-old-Pnk.XML",
+      "output_filename": "010A-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "010A",
       "preset_folder": "KITS",
@@ -209,39 +136,18 @@
       "differing_params": []
     },
     {
-      "output_filename": "010A-K09Arparty-old-Gld.XML",
-      "source_song": "K09Arparty-old",
+      "output_filename": "010A-Stoner.XML",
+      "source_song": "Stoner",
       "preset_name": "010A",
       "preset_folder": "KITS",
       "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "sound[HATC].defaultParams.sampleRateReduction",
-        "sound[RIDE].defaultParams.delayFeedback",
-        "sound[RIDE].defaultParams.delayRate",
-        "sound[RIDE].defaultParams.pitchAdjust"
-      ]
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
     },
     {
-      "output_filename": "010A-K09Arparty-old-Red.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "010A",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "sound[909 Kick].defaultParams.hpfFrequency",
-        "sound[Sequential Circuits Drumtraks Snare].defaultParams.delayRate",
-        "sound[Sequential Circuits Drumtraks Snare].defaultParams.hpfFrequency",
-        "sound[Sequential Circuits Drumtraks Snare].defaultParams.lpfFrequency"
-      ]
-    },
-    {
-      "output_filename": "012-Colour-Lbl.XML",
+      "output_filename": "012-Colour.XML",
       "source_song": "Colour",
       "preset_name": "012",
       "preset_folder": "KITS",
@@ -252,20 +158,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "012-Colour-Pnk.XML",
-      "source_song": "Colour",
-      "preset_name": "012",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "sound[HATC].patchCables structure: added [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "013-Paddy-Gld.XML",
+      "output_filename": "013-Paddy.XML",
       "source_song": "Paddy",
       "preset_name": "013",
       "preset_folder": "KITS",
@@ -276,7 +169,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "016-Alr-Pnk.XML",
+      "output_filename": "016-Alr.XML",
       "source_song": "Alr",
       "preset_name": "016",
       "preset_folder": "KITS",
@@ -287,7 +180,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "016-Mountain-Lbl.XML",
+      "output_filename": "016-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "016",
       "preset_folder": "KITS",
@@ -298,7 +191,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Alr-Pnk.XML",
+      "output_filename": "018-Alr.XML",
       "source_song": "Alr",
       "preset_name": "018",
       "preset_folder": "KITS",
@@ -309,7 +202,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Beginagain-Lbl.XML",
+      "output_filename": "018-Beginagain.XML",
       "source_song": "Beginagain",
       "preset_name": "018",
       "preset_folder": "KITS",
@@ -320,7 +213,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Dject-Pnk.XML",
+      "output_filename": "018-Dject.XML",
       "source_song": "Dject",
       "preset_name": "018",
       "preset_folder": "KITS",
@@ -331,7 +224,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-K03Yends-Pnk.XML",
+      "output_filename": "018-K03Yends.XML",
       "source_song": "K03Yends",
       "preset_name": "018",
       "preset_folder": "KITS",
@@ -342,25 +235,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-K03Yends-Pur.XML",
-      "source_song": "K03Yends",
-      "preset_name": "018",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": [
-        "sound[KICK].defaultParams.bitCrush",
-        "sound[KICK].defaultParams.lpfFrequency",
-        "sound[U1].defaultParams.bitCrush",
-        "sound[U1].defaultParams.lpfFrequency",
-        "sound[U1].defaultParams.pitchAdjust",
-        "sound[U1].defaultParams.sampleRateReduction"
-      ]
-    },
-    {
-      "output_filename": "018 Electronisounds 3-Oddish-Pnk.XML",
+      "output_filename": "018 Electronisounds 3-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "018 Electronisounds 3",
       "preset_folder": "KITS/FACTORY",
@@ -371,20 +246,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018 Electronisounds 3-Oddish-Gld.XML",
-      "source_song": "Oddish",
-      "preset_name": "018 Electronisounds 3",
-      "preset_folder": "KITS/FACTORY",
-      "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "sound[SNAR].patchCables structure: added [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "019-Ambient-Fishes-Lbl.XML",
+      "output_filename": "019-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "019",
       "preset_folder": "KITS",
@@ -395,7 +257,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "019-K06MWHW-Lbl.XML",
+      "output_filename": "019-K06MWHW.XML",
       "source_song": "K06MWHW",
       "preset_name": "019",
       "preset_folder": "KITS",
@@ -406,7 +268,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "021-K10FiveAlive-Lbl.XML",
+      "output_filename": "021-K10FiveAlive.XML",
       "source_song": "K10FiveAlive",
       "preset_name": "021",
       "preset_folder": "KITS",
@@ -417,7 +279,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "021-Rr-Lbl.XML",
+      "output_filename": "021-Rr.XML",
       "source_song": "Rr",
       "preset_name": "021",
       "preset_folder": "KITS",
@@ -428,7 +290,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "031-PianoArp-Lbl.XML",
+      "output_filename": "031-PianoArp.XML",
       "source_song": "PianoArp",
       "preset_name": "031",
       "preset_folder": "KITS",
@@ -439,7 +301,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "031-PianoFatBass-Lbl.XML",
+      "output_filename": "031-PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "031",
       "preset_folder": "KITS",
@@ -450,7 +312,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "039-K08Offbeat-Gld.XML",
+      "output_filename": "039-K08Offbeat.XML",
       "source_song": "K08Offbeat",
       "preset_name": "039",
       "preset_folder": "KITS",
@@ -461,7 +323,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "040-Env-Lbl.XML",
+      "output_filename": "040-Env.XML",
       "source_song": "Env",
       "preset_name": "040",
       "preset_folder": "KITS",
@@ -472,7 +334,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "042-Sot-Lbl.XML",
+      "output_filename": "042-Sot.XML",
       "source_song": "Sot",
       "preset_name": "042",
       "preset_folder": "KITS",
@@ -483,7 +345,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Arpo-Pnk.XML",
+      "output_filename": "043-Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "043",
       "preset_folder": "KITS",
@@ -494,7 +356,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Lemon-Lbl.XML",
+      "output_filename": "043-Lemon.XML",
       "source_song": "Lemon",
       "preset_name": "043",
       "preset_folder": "KITS",
@@ -505,7 +367,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Sot-Lbl.XML",
+      "output_filename": "043-Sot.XML",
       "source_song": "Sot",
       "preset_name": "043",
       "preset_folder": "KITS",
@@ -516,7 +378,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Spook-Pnk.XML",
+      "output_filename": "043-Spook.XML",
       "source_song": "Spook",
       "preset_name": "043",
       "preset_folder": "KITS",
@@ -527,7 +389,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "044-Sot-Lbl.XML",
+      "output_filename": "044-Sot.XML",
       "source_song": "Sot",
       "preset_name": "044",
       "preset_folder": "KITS",
@@ -538,7 +400,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "044-Spook-Pnk.XML",
+      "output_filename": "044-Spook.XML",
       "source_song": "Spook",
       "preset_name": "044",
       "preset_folder": "KITS",
@@ -549,7 +411,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-K02Slpspk-Red.XML",
+      "output_filename": "045-K02Slpspk.XML",
       "source_song": "K02Slpspk",
       "preset_name": "045",
       "preset_folder": "KITS",
@@ -560,7 +422,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-K10FiveAlive-Gld.XML",
+      "output_filename": "045-K10FiveAlive.XML",
       "source_song": "K10FiveAlive",
       "preset_name": "045",
       "preset_folder": "KITS",
@@ -571,34 +433,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-K10FiveAlive-Cyn.XML",
-      "source_song": "K10FiveAlive",
-      "preset_name": "045",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "sound[16].patchCables structure: added [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "045-K10FiveAlive-Lme.XML",
-      "source_song": "K10FiveAlive",
-      "preset_name": "045",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 9,
-      "colour_name": "Lime",
-      "colour_abbr": "Lme",
-      "differing_params": [
-        "sound[16].patchCables structure: removed [('lfo1', 'pitch')]",
-        "sound[16].patchCables structure: removed [('compressor', 'volumePostReverbSend'), ('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "045-Sot-Lbl.XML",
+      "output_filename": "045-Sot.XML",
       "source_song": "Sot",
       "preset_name": "045",
       "preset_folder": "KITS",
@@ -609,7 +444,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "046-K02Slpspk-Pur.XML",
+      "output_filename": "046-K02Slpspk.XML",
       "source_song": "K02Slpspk",
       "preset_name": "046",
       "preset_folder": "KITS",
@@ -620,7 +455,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "046-Yeti-Ylw.XML",
+      "output_filename": "046-Yeti.XML",
       "source_song": "Yeti",
       "preset_name": "046",
       "preset_folder": "KITS",
@@ -631,7 +466,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "051-Beepboop-Lbl.XML",
+      "output_filename": "051-Beepboop.XML",
       "source_song": "Beepboop",
       "preset_name": "051",
       "preset_folder": "KITS",
@@ -642,7 +477,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "051-K02Slpspk-Lbl.XML",
+      "output_filename": "051-K02Slpspk.XML",
       "source_song": "K02Slpspk",
       "preset_name": "051",
       "preset_folder": "KITS",
@@ -653,7 +488,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "051-Polygon-Lbl.XML",
+      "output_filename": "051-Polygon.XML",
       "source_song": "Polygon",
       "preset_name": "051",
       "preset_folder": "KITS",
@@ -664,7 +499,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "053-Beepboop-Lbl.XML",
+      "output_filename": "053-Beepboop.XML",
       "source_song": "Beepboop",
       "preset_name": "053",
       "preset_folder": "KITS",
@@ -675,7 +510,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "053-Polygon-Lbl.XML",
+      "output_filename": "053-Polygon.XML",
       "source_song": "Polygon",
       "preset_name": "053",
       "preset_folder": "KITS",
@@ -686,7 +521,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Analog Machine Lofi-Duppy 10-Red.XML",
+      "output_filename": "Analog Machine Lofi-Duppy 10.XML",
       "source_song": "Duppy 10",
       "preset_name": "Analog Machine Lofi",
       "preset_folder": "KITS/COMMUNITY/1.2 Presets",
@@ -697,7 +532,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Chug-Oddish-Pnk.XML",
+      "output_filename": "Chug-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "Chug",
       "preset_folder": "KITS/COMMUNITY/1.2 Presets",
@@ -708,7 +543,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-Duppy 5-Gld.XML",
+      "output_filename": "Deeper-Duppy 5.XML",
       "source_song": "Duppy 5",
       "preset_name": "Deeper",
       "preset_folder": "KITS/KERERU",
@@ -719,7 +554,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-Duppy 8-Gld.XML",
+      "output_filename": "Deeper-Duppy 8.XML",
       "source_song": "Duppy 8",
       "preset_name": "Deeper",
       "preset_folder": "KITS/KERERU",
@@ -730,25 +565,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-Duppy 8-Cyn.XML",
-      "source_song": "Duppy 8",
-      "preset_name": "Deeper",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "sound[Linndrum Crash].defaultParams.delayFeedback",
-        "sound[Linndrum Crash].defaultParams.delayRate",
-        "sound[Linndrum Crash].defaultParams.hpfFrequency",
-        "sound[Linndrum Crash].defaultParams.lpfFrequency",
-        "sound[Linndrum Crash].defaultParams.pitchAdjust",
-        "sound[Linndrum Crash].envelope1.attack"
-      ]
-    },
-    {
-      "output_filename": "Deeper-Ell-Lbl.XML",
+      "output_filename": "Deeper-Ell.XML",
       "source_song": "Ell",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -759,7 +576,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-K05BeautifulStranger-Lbl.XML",
+      "output_filename": "Deeper-K05BeautifulStranger.XML",
       "source_song": "K05BeautifulStranger",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -770,7 +587,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-K07NatRad-Gld.XML",
+      "output_filename": "Deeper-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -781,23 +598,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-K07NatRad-Cyn.XML",
-      "source_song": "K07NatRad",
-      "preset_name": "Deeper",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "sound[Linndrum Crash].defaultParams.pitchAdjust",
-        "sound[909 Clap].defaultParams.delayFeedback",
-        "sound[909 Clap].defaultParams.pitchAdjust",
-        "sound[909 Clap].defaultParams.reverbAmount"
-      ]
-    },
-    {
-      "output_filename": "Deeper-No-More-Colour-Lbl.XML",
+      "output_filename": "Deeper-No-More-Colour.XML",
       "source_song": "No-More-Colour",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -808,7 +609,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-One-Eye-Tea-Lbl.XML",
+      "output_filename": "Deeper-One-Eye-Tea.XML",
       "source_song": "One-Eye-Tea",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -819,7 +620,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzzgat-K09Arparty-old-Gld.XML",
+      "output_filename": "Fuzzgat-K09Arparty-old.XML",
       "source_song": "K09Arparty-old",
       "preset_name": "Fuzzgat",
       "preset_folder": "KITS/KERERU",
@@ -830,52 +631,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzzgat-K09Arparty-old-Cyn.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "Fuzzgat",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "sound[REC5].patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "sound[REC8].patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "Fuzzgat-K09Arparty-old-Red.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "Fuzzgat",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "sound[REC3].patchCables structure: removed [('compressor', 'volumePostReverbSend'), ('lfo1', 'delayRate')]",
-        "sound[REC5].patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "sound[REC8].patchCables structure: added [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "Fuzzgat-K09Arparty-old-Dbl.XML",
-      "source_song": "K09Arparty-old",
-      "preset_name": "Fuzzgat",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": [
-        "sound[REC4].patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
-        "sound[REC5].patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "sound[REC8].patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "sound[REC3].patchCables structure: added [('compressor', 'volumePostReverbSend'), ('lfo1', 'delayRate')]"
-      ]
-    },
-    {
-      "output_filename": "Fuzzogatto-K09Arparty-Gld.XML",
+      "output_filename": "Fuzzogatto-K09Arparty.XML",
       "source_song": "K09Arparty",
       "preset_name": "Fuzzogatto",
       "preset_folder": "KITS/KERERU",
@@ -886,24 +642,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzzogatto-K09Arparty-Red.XML",
-      "source_song": "K09Arparty",
-      "preset_name": "Fuzzogatto",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": [
-        "sound[REC1].patchCables structure: removed [('lfo1', 'delayRate')]",
-        "sound[REC2].patchCables structure: removed [('compressor', 'volumePostReverbSend'), ('lfo1', 'delayRate')]",
-        "sound[REC4].patchCables structure: removed [('compressor', 'volumePostReverbSend'), ('lfo1', 'delayRate')]",
-        "sound[REC5].patchCables structure: removed [('compressor', 'volumePostReverbSend'), ('lfo1', 'delayRate')]",
-        "sound[REC8].patchCables structure: removed [('compressor', 'volumePostReverbSend'), ('lfo1', 'delayRate')]"
-      ]
-    },
-    {
-      "output_filename": "Init-Kit-Duppy-Lbl.XML",
+      "output_filename": "Init-Kit-Duppy.XML",
       "source_song": "Duppy",
       "preset_name": "Init-Kit",
       "preset_folder": "KITS",
@@ -914,7 +653,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Perc-K01Sink-Lbl.XML",
+      "output_filename": "K01Perc-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Perc",
       "preset_folder": "KITS/KERERU",
@@ -925,49 +664,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Perc-K01Sink-Pnk.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Perc",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "sound[HATC].patchCables structure: added [('lfo1', 'lpfFrequency'), ('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "K01Perc-K01Sink-Gld.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Perc",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "sound[HATC].patchCables structure: added [('lfo1', 'lpfFrequency')]",
-        "sound[HATC].patchCables structure: removed [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "K01Perc-K01Sink-Cyn.XML",
-      "source_song": "K01Sink",
-      "preset_name": "K01Perc",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": [
-        "sound[HATC].patchCables structure: added [('lfo1', 'lpfFrequency'), ('lfo1', 'pitch')]",
-        "sound[RIM].patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
-        "sound[HATC].patchCables structure: added [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "K01Perc2-K01Sink-Orn.XML",
+      "output_filename": "K01Perc2-K01Sink.XML",
       "source_song": "K01Sink",
       "preset_name": "K01Perc2",
       "preset_folder": "KITS/KERERU",
@@ -978,7 +675,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT003A-Triggy 17-Pnk.XML",
+      "output_filename": "KIT003A-Triggy 17.XML",
       "source_song": "Triggy 17",
       "preset_name": "KIT003A",
       "preset_folder": "KITS/KERERU",
@@ -989,7 +686,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT051-Noize-Lbl.XML",
+      "output_filename": "KIT051-Noize.XML",
       "source_song": "Noize",
       "preset_name": "KIT051",
       "preset_folder": "KITS",
@@ -1000,7 +697,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT053-PianoFatBass-Lbl.XML",
+      "output_filename": "KIT053-PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "KIT053",
       "preset_folder": "KITS",
@@ -1011,7 +708,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT056-PianoFatBass-Lbl.XML",
+      "output_filename": "KIT056-PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "KIT056",
       "preset_folder": "KITS",
@@ -1022,7 +719,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT1-Duppy 5-Gld.XML",
+      "output_filename": "KIT1-Duppy 5.XML",
       "source_song": "Duppy 5",
       "preset_name": "KIT1",
       "preset_folder": "KITS",
@@ -1033,7 +730,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT2-Duppy 5-Gld.XML",
+      "output_filename": "KIT2-Duppy 5.XML",
       "source_song": "Duppy 5",
       "preset_name": "KIT2",
       "preset_folder": "KITS",
@@ -1044,7 +741,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT2-Duppy 8-Gld.XML",
+      "output_filename": "KIT2-Duppy 8.XML",
       "source_song": "Duppy 8",
       "preset_name": "KIT2",
       "preset_folder": "KITS",
@@ -1055,7 +752,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT2-Oddish-Pnk.XML",
+      "output_filename": "KIT2-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "KIT2",
       "preset_folder": "KITS",
@@ -1066,7 +763,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Drums-K07NatRad-Grn.XML",
+      "output_filename": "Nr Drums-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "Nr Drums",
       "preset_folder": "KITS",
@@ -1077,7 +774,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Hits-K07NatRad-Lbl.XML",
+      "output_filename": "Nr Hits-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "Nr Hits",
       "preset_folder": "KITS",
@@ -1088,72 +785,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Hits-K07NatRad-Pnk.XML",
-      "source_song": "K07NatRad",
-      "preset_name": "Nr Hits",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "sound[Wind-9Bars-108bpm].patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "Nr Hits-K07NatRad-Orn.XML",
-      "source_song": "K07NatRad",
-      "preset_name": "Nr Hits",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": [
-        "sound[Wind-9Bars-108bpm].patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
-        "sound[Wind-9Bars-108bpm2].patchCables structure: removed [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "Nr Hits-K07NatRad-Lme.XML",
-      "source_song": "K07NatRad",
-      "preset_name": "Nr Hits",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 9,
-      "colour_name": "Lime",
-      "colour_abbr": "Lme",
-      "differing_params": [
-        "defaultParams.modFXFeedback",
-        "defaultParams.modFXOffset",
-        "defaultParams.reverbAmount",
-        "defaultParams.sidechainCompressorVolume",
-        "sound[Wind-9Bars-108bpm].patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "sound[Wind-9Bars-108bpm2].patchCables structure: added [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "Nr Hits-K07NatRad-Grn.XML",
-      "source_song": "K07NatRad",
-      "preset_name": "Nr Hits",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 10,
-      "colour_name": "Green",
-      "colour_abbr": "Grn",
-      "differing_params": [
-        "defaultParams.modFXDepth",
-        "defaultParams.sidechainCompressorVolume",
-        "equalizer.treble",
-        "sound[Wind-9Bars-108bpm].patchCables structure: added [('compressor', 'volumePostReverbSend')]",
-        "sound[Wind-9Bars-108bpm2].patchCables structure: added [('lfo1', 'pitch')]",
-        "defaultParams.modFXFeedback",
-        "defaultParams.modFXOffset",
-        "defaultParams.reverbAmount"
-      ]
-    },
-    {
-      "output_filename": "Nr Hook-K07NatRad-Gld.XML",
+      "output_filename": "Nr Hook-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "Nr Hook",
       "preset_folder": "KITS",
@@ -1164,7 +796,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Isovox-K07NatRad-Lbl.XML",
+      "output_filename": "Nr Isovox-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "Nr Isovox",
       "preset_folder": "KITS",
@@ -1175,7 +807,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Piano-K07NatRad-Grn.XML",
+      "output_filename": "Nr Piano-K07NatRad.XML",
       "source_song": "K07NatRad",
       "preset_name": "Nr Piano",
       "preset_folder": "KITS",
@@ -1186,34 +818,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "PianoFatBass-031-Triggy 2-Pnk.XML",
-      "source_song": "Triggy 2",
-      "preset_name": "PianoFatBass-031",
-      "preset_folder": "KITS/SONG-KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": [
-        "sound[COWB].patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
-      ]
-    },
-    {
-      "output_filename": "PianoFatBass-031-Triggy 2-Gld.XML",
-      "source_song": "Triggy 2",
-      "preset_name": "PianoFatBass-031",
-      "preset_folder": "KITS/SONG-KITS",
-      "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": [
-        "sound[COWB].patchCables structure: removed [('lfo1', 'pitch')]",
-        "sound[COWB].patchCables structure: added [('compressor', 'volumePostReverbSend')]; removed [('lfo1', 'pitch')]"
-      ]
-    },
-    {
-      "output_filename": "SS-C-Bass-K02Slpspk-Pur.XML",
+      "output_filename": "SS-C-Bass-K02Slpspk.XML",
       "source_song": "K02Slpspk",
       "preset_name": "SS-C-Bass",
       "preset_folder": "KITS",
@@ -1224,7 +829,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Bass-SlpspkRemix-Pnk.XML",
+      "output_filename": "SS-C-Bass-SlpspkRemix.XML",
       "source_song": "SlpspkRemix",
       "preset_name": "SS-C-Bass",
       "preset_folder": "KITS",
@@ -1235,7 +840,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Inst-K02Slpspk-Pur.XML",
+      "output_filename": "SS-C-Inst-K02Slpspk.XML",
       "source_song": "K02Slpspk",
       "preset_name": "SS-C-Inst",
       "preset_folder": "KITS",
@@ -1246,7 +851,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-vox-SlpspkRemix-Pnk.XML",
+      "output_filename": "SS-C-vox-SlpspkRemix.XML",
       "source_song": "SlpspkRemix",
       "preset_name": "SS-C-vox",
       "preset_folder": "KITS",
@@ -1257,7 +862,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-Drums-SlpspkRemix-Lbl.XML",
+      "output_filename": "SS-Drums-SlpspkRemix.XML",
       "source_song": "SlpspkRemix",
       "preset_name": "SS-Drums",
       "preset_folder": "KITS",
@@ -1268,7 +873,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Tuikit-PianoFatBass-Lbl.XML",
+      "output_filename": "Tuikit-PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "Tuikit",
       "preset_folder": "KITS",

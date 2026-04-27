@@ -80,11 +80,8 @@ SECTION_COLOURS: dict[int, tuple[str, str]] = {
 # Extended mode thresholds for version comparison (D4).
 # A version is "distinct" if >= DIFF_PARAM_COUNT_THRESHOLD numerical params
 # differ by > DIFF_PARAM_PERCENT_THRESHOLD (as a fraction of the full range).
-#DIFF_PARAM_COUNT_THRESHOLD = 3
-#DIFF_PARAM_PERCENT_THRESHOLD = 0.10
-
 DIFF_PARAM_COUNT_THRESHOLD = 3
-DIFF_PARAM_PERCENT_THRESHOLD = 0.1
+DIFF_PARAM_PERCENT_THRESHOLD = 0.10
 
 # The standalone synth child element order for c1.2.1 firmware.
 # Elements are reordered to match this sequence during extraction.

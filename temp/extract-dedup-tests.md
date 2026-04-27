@@ -131,3 +131,149 @@ Let's go with 10% / 3 as defaults for now
 |------|-------|-----------------|-----------------|
 |   5% |     5 |   78, 183 (261) |   99, 217 (316) |
 |------|-------|-----------------|-----------------|
+
+---
+
+With these settings, the following are removed when comparing minimal to default tests:
+
+deleted:    DELUGE/KITS/SONG-KITS/000 TR-808-Oddish-Pnk.XML
+        deleted:    DELUGE/KITS/SONG-KITS/000-Ambient-Fishes-Gld.XML
+        deleted:    DELUGE/KITS/SONG-KITS/000-Ambient-Fishes-Ylw.XML
+        deleted:    DELUGE/KITS/SONG-KITS/000-K05BeautifulStranger-Lbl.XML
+        deleted:    DELUGE/KITS/SONG-KITS/000-Wf-full-Cyn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/000-Wf-full-Lbl.XML
+        deleted:    DELUGE/KITS/SONG-KITS/003-K10FiveAlive-Pnk.XML
+        deleted:    DELUGE/KITS/SONG-KITS/010-K08Offbeat-Gld.XML
+        deleted:    DELUGE/KITS/SONG-KITS/010-Yeti-Cyn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/010-Yeti-Dbl.XML
+        deleted:    DELUGE/KITS/SONG-KITS/010A-K09Arparty-Orn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/010A-K09Arparty-Red.XML
+        deleted:    DELUGE/KITS/SONG-KITS/010A-K09Arparty-old-Orn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/018-Judder-Lbl.XML
+        deleted:    DELUGE/KITS/SONG-KITS/018-K03Yends-Orn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/019-Ambient-Fishes-Pnk.XML
+        deleted:    DELUGE/KITS/SONG-KITS/019-Ambient-Fishes-Ylw.XML
+        deleted:    DELUGE/KITS/SONG-KITS/019-Wf-full-Ylw.XML
+        deleted:    DELUGE/KITS/SONG-KITS/019-Wf-og-Ylw.XML
+        deleted:    DELUGE/KITS/SONG-KITS/021-K10FiveAlive-Gld.XML
+        deleted:    DELUGE/KITS/SONG-KITS/021-K10FiveAlive-Pnk.XML
+        deleted:    DELUGE/KITS/SONG-KITS/031-PianoFatBass-Pnk.XML
+        deleted:    DELUGE/KITS/SONG-KITS/046-K02Slpspk-Lme.XML
+        deleted:    DELUGE/KITS/SONG-KITS/051-K02Slpspk-Ylw.XML
+        deleted:    DELUGE/KITS/SONG-KITS/051-Polygon-Pnk.XML
+        deleted:    DELUGE/KITS/SONG-KITS/Deeper-No-More-Colour-Pnk.XML
+        deleted:    DELUGE/KITS/SONG-KITS/K01Perc-K01Sink-Red.XML
+        deleted:    DELUGE/KITS/SONG-KITS/KIT1-Duppy 8-Cyn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/Nr Hits-K07NatRad-Pur.XML
+        deleted:    DELUGE/KITS/SONG-KITS/Nr Hook-K07NatRad-Cyn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/Nr Hook-K07NatRad-Dbl.XML
+        deleted:    DELUGE/KITS/SONG-KITS/Nr Hook-K07NatRad-Red.XML
+        deleted:    DELUGE/KITS/SONG-KITS/Nr Hook-K07NatRad-Ylw.XML
+        deleted:    DELUGE/KITS/SONG-KITS/PianoFatBass-031-Triggy 6-Cyn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/SS-C-Bass-SlpspkRemix-Cyn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/SS-C-Inst-SlpspkRemix-Cyn.XML
+        deleted:    DELUGE/KITS/SONG-KITS/SS-C-Inst-SlpspkRemix-Pnk.XML
+        modified:   DELUGE/KITS/SONG-KITS/manifest.json
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/000-Colour-Dbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/000-Polygon-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/009-Paddy-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/014-K05BeautifulStranger-Dbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/014A-K09Arparty-old-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/014A-K10FiveAlive-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/014A-K10FiveAlive-Lme.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/014A-K10FiveAlive-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/014A-K10FiveAlive-Pur.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/014B-K03Yends-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/018A-K02Slpspk-Pur.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/024-K08Offbeat-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/024-K08Offbeat-Dbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/024-K08Offbeat-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/027A-K03Yends-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/027A-K03Yends-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/028-K09Arparty-old-Grn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/030-SlpspkArpsOld-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/034-Repeatbeat-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/041-K08Offbeat-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/050A-Judder-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/067-K05BeautifulStranger-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/080A-K07NatRad-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/080A-K07NatRad-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/086A-K08Offbeat-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/086A-K12Hj-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/086A-K12Hj-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/086A-K12Hj-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/086A-Kg-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/130-K05BeautifulStranger-Orn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/142A-K03Yends-Dbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/155-Paddy-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164-Judder-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164A-Colour-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164A-Colour-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164A-No-More-Colour-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164A-No-More-Colour-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164A-No-More-Colour-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164A-SlpspkArpsOld-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/164A-SlpspkArpsOld-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/17-BRASS-No-More-Colour-Orn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/171-Paddy-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/172-Colour-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/172-Colour-Ylw.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/172-SlpspkArpsOld-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/172-SlpspkArpsOld-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/172A-K09Arparty-old-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/172A-Yeti-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/175-Sot-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/55-POPCORN-Ambient-Fishes-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/55-POPCORN-Wf-og-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Apex Stab-No-More-Colour-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Arp1-K03Yends-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Arp2-Bingbong-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Arp2-Bingbong-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Arp2-Wf-og-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Dystopia Keys-No-More-Colour-Pur.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Dystopia Keys-No-More-Colour-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Dystopia Keys-No-More-Colour-Ylw.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Fuzz-Ambient-Fishes-Dbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Fuzz-K10FiveAlive-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Init-Synth-Triggy 2-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Arp-K01Sink-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Arp-K01Sink-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Bass-Ambient-Fishes-Ylw.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Bass-Wf-og-Ylw.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-Ambient-Fishes-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K01Sink-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K01Sink-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K01Sink-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K01Sink-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K02Slpspk-Grn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K02Slpspk-Orn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K02Slpspk-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K02Slpspk-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K02Slpspk-Ylw.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K09Arparty-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K09Arparty-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K09Arparty-Mag.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K09Arparty-Orn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K09Arparty-old-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-K09Arparty-old-Orn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-Wf-full-Orn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-Wf-full-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Drone-Wf-og-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Fillforarp-K01Sink-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/K01Twinlke1-K01Sink-Lbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/KRAF-POLY-Lemon-Pnk.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/KRumchybass-K09Arparty-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/KRumchybass-K09Arparty-old-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/TB08-No-More-Colour-Cyn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/TB08-No-More-Colour-Dbl.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/TB08-No-More-Colour-Gld.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/TB08-No-More-Colour-Orn.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/TB08-No-More-Colour-Red.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/TB08-No-More-Colour-Ylw.XML
+        deleted:    DELUGE/SYNTHS/SONG-SYNTHS/Vibes WT-Oddish-Cyn.XML
+        modified:   DELUGE/SYNTHS/SONG-SYNTHS/manifest.json
+        modified:   scripts/deluge_lib/extraction.py
+
+default vs aggressive
+
+
