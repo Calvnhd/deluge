@@ -56,7 +56,7 @@ The hash is always 64 characters (for SHA256), regardless of whether the file is
 
 ## How the Scripts Use Hashing
 
-### Step 1: scan-samples.py --before
+### Step 1: fix_references.py snapshot (before)
 
 Before you reorganize, the script walks through every `.wav` file and computes its hash:
 
@@ -85,7 +85,7 @@ SAMPLES/DRUMS/kick.wav     →  SAMPLES/DRUMS/Kicks/808/BigKick.wav
 SAMPLES/DRUMS/snare.wav    →  SAMPLES/DRUMS/Snares/Acoustic/Snare1.wav
 ```
 
-### Step 3: scan-samples.py --after
+### Step 3: fix_references.py snapshot (after)
 
 The script scans again and computes hashes:
 
@@ -121,7 +121,7 @@ The script compares the two manifests:
 
 It matched files by their fingerprints, not their names or locations.
 
-### Step 5: update-refs.py
+### Step 5: fix_references.py fix
 
 Now updating XML is simple—find-and-replace each old path with its new path:
 
@@ -297,11 +297,11 @@ The main cost is speed—but for a one-time reorganization, waiting a few minute
 
 ```bash
 # Full workflow
-python scripts/verify-refs.py           # Check current state
-python scripts/scan-samples.py --before # Snapshot before
+python scripts/verify_references.py              # Check current state
+python scripts/fix_references.py snapshot         # Snapshot before
 # ... reorganize your samples ...
-python scripts/scan-samples.py --after  # Detect moves
-python scripts/update-refs.py --dry-run # Preview changes
-python scripts/update-refs.py           # Apply changes
-python scripts/verify-refs.py           # Verify result
+python scripts/fix_references.py snapshot         # Detect moves
+python scripts/fix_references.py fix --dry-run    # Preview changes
+python scripts/fix_references.py fix              # Apply changes
+python scripts/verify_references.py              # Verify result
 ```

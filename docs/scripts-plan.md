@@ -1,6 +1,6 @@
 # Scripts Overview
 
-**NOTE:**  This is old! None of these scripts exist. Keeping for future reference when redeveloping a bunch of scripts.
+**NOTE:** This document was written before implementation. Some scripts below now exist under different names — see inline notes. Scripts not yet implemented are marked as such.
 
 ## Configuration
 
@@ -27,7 +27,7 @@
 
 **Reasoning:** SAMPLES contains large audio files that shouldn't live in git. This script provides a simple way to back them up to cloud storage (e.g., OneDrive via WSL). Uses rsync's `--delete` for true mirroring with safety checks.
 
-### `sd-to-repo.py`
+### `sync_from_sd.py` _(originally `sd-to-repo.py`)_
 **Purpose:** Sync contents FROM a physical Deluge SD card INTO this repository.
 
 **Reasoning:** When you've been working on the Deluge, you need to pull changes back to the repo. This script safely copies new/modified files and moves deleted files to `.trash/` rather than permanently deleting. **Read-only to SD card.**
@@ -41,17 +41,17 @@
 
 ## Sample Management Scripts
 
-### `scan-samples.py`
+### `fix_references.py snapshot` _(originally `scan-samples.py`)_
 **Purpose:** Generate SHA256 hash manifests of all samples to detect moved/renamed files.
 
-**Reasoning:** When reorganizing the SAMPLES folder, file paths break XML references. By hashing files BEFORE and AFTER reorganization, this script creates a migration map that identifies where files moved to (regardless of rename). **Read-only.**
+**Reasoning:** When reorganizing the SAMPLES folder, file paths break XML references. By hashing files BEFORE and AFTER reorganization, this subcommand creates a migration map that identifies where files moved to (regardless of rename). **Read-only.**
 
-### `update-refs.py`
+### `fix_references.py fix` _(originally `update-refs.py`)_
 **Purpose:** Update sample path references in XML files based on a migration map.
 
-**Reasoning:** After samples are moved/renamed, all XML files referencing them break. This script reads the migration map from `scan-samples.py` and rewrites XML files with corrected paths. **Modifies XML files** - use with caution.
+**Reasoning:** After samples are moved/renamed, all XML files referencing them break. This subcommand reads the migration map from `fix_references.py snapshot` and rewrites XML files with corrected paths. **Modifies XML files** - use with caution.
 
-### `verify-refs.py`
+### `verify_references.py` _(originally `verify-refs.py`)_
 **Purpose:** Verify that all sample references in XML files point to files that actually exist.
 
 **Reasoning:** Pre-flight check before reorganizing samples, or post-migration validation. Finds broken references so you can fix them before they cause problems on the Deluge. **Read-only.**
@@ -82,11 +82,11 @@
 |--------|---------------|----------------|---------------|----------------|
 | `deluge_sdk.py` | ✓ | ✗ | - | - |
 | `sync-samples.sh` | ✓ | ✗ | - | - |
-| `sd-to-repo.py` | ✓ | ✓ | ✓ | ✗ |
+| `sync_from_sd.py` | ✓ | ✓ | ✓ | ✗ |
 | `sd-to-zip.sh` | ✗ | ✗ | ✓ | ✗ |
-| `scan-samples.py` | ✓ | ✗ | - | - |
-| `update-refs.py` | ✓ | **✓** | - | - |
-| `verify-refs.py` | ✓ | ✗ | - | - |
+| `fix_references.py snapshot` | ✓ | ✗ | - | - |
+| `fix_references.py fix` | ✓ | **✓** | - | - |
+| `verify_references.py` | ✓ | ✗ | - | - |
 | `create-manifest.py` | ✓ | ✗ | - | - |
 | `rename_songs.py` | ✓ | **✓** | - | - |
 
@@ -95,17 +95,17 @@
 ## Typical Workflows
 
 ### After a Deluge session
-1. `sd-to-repo.py` - Pull changes from SD card to repo
+1. `sync_from_sd.py` - Pull changes from SD card to repo
 2. `sync-samples.sh` - Back up any new samples
 3. Commit XML changes to git
 
 ### Before reorganizing samples
-1. `scan-samples.py --before` - Create baseline hash manifest
+1. `fix_references.py snapshot` - Create baseline hash manifest
 2. Reorganize files manually
-3. `scan-samples.py --after` - Create post-reorganization manifest
-4. `update-refs.py --dry-run` - Preview XML updates
-5. `update-refs.py` - Apply XML updates
-6. `verify-refs.py` - Confirm all references are valid
+3. `fix_references.py snapshot` - Create post-reorganization manifest
+4. `fix_references.py fix --dry-run` - Preview XML updates
+5. `fix_references.py fix` - Apply XML updates
+6. `verify_references.py` - Confirm all references are valid
 
 ### Creating documentation
 1. `create-manifest.py` - Generate all manifests in `docs/`

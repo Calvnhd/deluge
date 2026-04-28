@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture: edge cases for empty/missing sample references
+     Covers: Empty reference variations that extraction must skip:
+     - <fileName></fileName> (element-style, empty text)
+     - fileName="" (attribute-style, empty string)
+     - osc element with no fileName attribute at all (attribute-style, missing entirely)
+     Also includes one valid reference to verify empties are skipped while valid refs are found.
+-->
+<kit
+	firmwareVersion="4.0.1"
+	earliestCompatibleFirmware="4.0.0"
+	lpfMode="24dB">
+	<defaultParams
+		volume="0x3504F334">
+	</defaultParams>
+	<soundSources>
+		<!-- Sound with element-style empty fileName -->
+		<sound>
+			<name>EmptyElement</name>
+			<osc1>
+				<type>sample</type>
+				<loopMode>0</loopMode>
+				<fileName></fileName>
+			</osc1>
+			<osc2>
+				<type>sample</type>
+				<loopMode>0</loopMode>
+				<fileName></fileName>
+			</osc2>
+			<mode>subtractive</mode>
+		</sound>
+		<!-- Sound with attribute-style empty fileName -->
+		<sound
+			name="EmptyAttribute"
+			polyphonic="auto"
+			mode="subtractive">
+			<osc1
+				type="sample"
+				loopMode="0"
+				reversed="0"
+				fileName="">
+			</osc1>
+			<osc2
+				type="sample"
+				loopMode="0"
+				reversed="0"
+				fileName="">
+			</osc2>
+		</sound>
+		<!-- Sound with missing fileName attribute entirely -->
+		<sound
+			name="MissingAttribute"
+			polyphonic="auto"
+			mode="subtractive">
+			<osc1
+				type="sample"
+				loopMode="0"
+				reversed="0">
+			</osc1>
+			<osc2
+				type="sample"
+				loopMode="0"
+				reversed="0">
+			</osc2>
+		</sound>
+		<!-- Sound with one valid reference to ensure empties don't suppress extraction -->
+		<sound
+			name="ValidRef"
+			polyphonic="auto"
+			mode="subtractive">
+			<osc1
+				type="sample"
+				loopMode="1"
+				reversed="0"
+				timeStretchEnable="0"
+				timeStretchAmount="0"
+				fileName="SAMPLES/DRUMS/Kick/Validate.wav">
+				<zone
+					startSamplePos="0"
+					endSamplePos="10000" />
+			</osc1>
+			<osc2
+				type="sample"
+				loopMode="0"
+				reversed="0">
+			</osc2>
+		</sound>
+	</soundSources>
+</kit>

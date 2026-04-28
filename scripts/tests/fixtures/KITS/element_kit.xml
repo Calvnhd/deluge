@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture: element-style kit (pre-3.x firmware)
+     Covers: Pattern 1 — <fileName>text</fileName> element on <osc1> and <osc2>
+     - osc1 has a sample reference
+     - osc2 has an empty <fileName></fileName> (no sample assigned)
+-->
+<kit>
+	<defaultParams>
+		<volume>0x3504F334</volume>
+	</defaultParams>
+	<soundSources>
+		<sound>
+			<name>KICK</name>
+			<osc1>
+				<type>sample</type>
+				<loopMode>1</loopMode>
+				<reversed>0</reversed>
+				<timeStretchEnable>0</timeStretchEnable>
+				<timeStretchAmount>0</timeStretchAmount>
+				<fileName>SAMPLES/DRUMS/Kick/808 Kick.wav</fileName>
+				<zone>
+					<startMilliseconds>0</startMilliseconds>
+					<endMilliseconds>501</endMilliseconds>
+				</zone>
+			</osc1>
+			<osc2>
+				<type>sample</type>
+				<loopMode>1</loopMode>
+				<reversed>0</reversed>
+				<timeStretchEnable>0</timeStretchEnable>
+				<timeStretchAmount>0</timeStretchAmount>
+				<fileName></fileName>
+			</osc2>
+			<polyphonic>0</polyphonic>
+			<mode>subtractive</mode>
+		</sound>
+		<sound>
+			<name>SNARE</name>
+			<osc1>
+				<type>sample</type>
+				<loopMode>0</loopMode>
+				<reversed>0</reversed>
+				<timeStretchEnable>0</timeStretchEnable>
+				<timeStretchAmount>0</timeStretchAmount>
+				<fileName>SAMPLES/DRUMS/Snare/TR-909 Snare.wav</fileName>
+				<zone>
+					<startMilliseconds>0</startMilliseconds>
+					<endMilliseconds>300</endMilliseconds>
+				</zone>
+			</osc1>
+			<osc2>
+				<type>square</type>
+				<transpose>0</transpose>
+				<cents>0</cents>
+			</osc2>
+			<polyphonic>0</polyphonic>
+			<mode>subtractive</mode>
+		</sound>
+	</soundSources>
+</kit>

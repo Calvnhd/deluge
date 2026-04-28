@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Environment and output utilities for Deluge scripts."""
 
 from __future__ import annotations
@@ -11,6 +12,7 @@ _SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 
 
 def get_deluge_root() -> Path:
+    # TODO-v0.1-REVIEW
     """Load DELUGE_ROOT from scripts/.env.
 
     Raises SystemExit if DELUGE_ROOT is not set or the directory does not exist.
@@ -29,6 +31,7 @@ def get_deluge_root() -> Path:
 
 
 def get_sd_card_path() -> Path:
+    # TODO-v0.1-REVIEW
     """Load SD_CARD_PATH from scripts/.env.
 
     Raises SystemExit if SD_CARD_PATH is not set or the path does not exist
@@ -49,7 +52,65 @@ def get_sd_card_path() -> Path:
     return path
 
 
+def get_cloud_backup_path() -> Path:
+    # TODO-v0.1-REVIEW
+    """Load CLOUD_BACKUP_PATH from scripts/.env.
+
+    Raises SystemExit if CLOUD_BACKUP_PATH is not set or the directory does not exist.
+    """
+    load_dotenv(_SCRIPTS_DIR / ".env")
+
+    env_value = os.environ.get("CLOUD_BACKUP_PATH")
+    if not env_value:
+        raise SystemExit("CLOUD_BACKUP_PATH is not set. Set it in scripts/.env")
+
+    path = Path(env_value).resolve()
+    if not path.is_dir():
+        raise SystemExit(f"CLOUD_BACKUP_PATH directory does not exist: {path}")
+
+    return path
+
+
+def get_zip_source_path() -> Path:
+    # TODO-v0.1-REVIEW
+    """Load ZIP_SOURCE_PATH from scripts/.env.
+
+    Raises SystemExit if ZIP_SOURCE_PATH is not set or the directory does not exist.
+    """
+    load_dotenv(_SCRIPTS_DIR / ".env")
+
+    env_value = os.environ.get("ZIP_SOURCE_PATH")
+    if not env_value:
+        raise SystemExit("ZIP_SOURCE_PATH is not set. Set it in scripts/.env")
+
+    path = Path(env_value).resolve()
+    if not path.is_dir():
+        raise SystemExit(f"ZIP_SOURCE_PATH directory does not exist: {path}")
+
+    return path
+
+
+def get_zip_dest_path() -> Path:
+    # TODO-v0.1-REVIEW
+    """Load ZIP_DEST_PATH from scripts/.env.
+
+    Raises SystemExit if ZIP_DEST_PATH is not set or the directory does not exist.
+    """
+    load_dotenv(_SCRIPTS_DIR / ".env")
+
+    env_value = os.environ.get("ZIP_DEST_PATH")
+    if not env_value:
+        raise SystemExit("ZIP_DEST_PATH is not set. Set it in scripts/.env")
+
+    path = Path(env_value).resolve()
+    if not path.is_dir():
+        raise SystemExit(f"ZIP_DEST_PATH directory does not exist: {path}")
+
+    return path
+
+
 def confirm_apply(message: str) -> bool:
+    # TODO-v0.1-REVIEW
     """Print message and prompt user for confirmation.
 
     Returns True if user enters 'y' or 'Y', False otherwise.

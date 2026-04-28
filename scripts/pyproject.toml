@@ -8,8 +8,23 @@ dependencies = [
     "python-dotenv>=1.0.0",
 ]
 
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["deluge_lib"]
+
 [project.scripts]
 deluge-sync = "sync_from_sd:main"
+deluge-cloud-sync = "sync_samples_to_cloud:main"
+deluge-fix = "fix_references:main"
+deluge-overview = "sample_overview:main"
+deluge-snapshot = "create_snapshot:main"
+deluge-backup = "create_backup:main"
+deluge-to-sd = "sync_to_sd:main"
+deluge-extract = "extract_instruments:main"
+deluge-threshold-test = "dedup_threshold_test:main"
 
 [project.optional-dependencies]
 dev = [

@@ -101,6 +101,14 @@ Audit all existing scripts and code:
 - [ ] Identify reusable utilities, libraries, or patterns
 - [ ] Note coding conventions used in existing scripts
 
+> ⚠️ **Read implementations, not interfaces.** Script names, function names, and docstrings describe *intent* — they can be outdated, misleading, or incomplete. The only reliable source of truth is the code itself. For every function, module, or script relevant to the feature:
+> - Read the function body to understand what it actually does
+> - Check what data it takes in and what it actually returns (not what the docstring says)
+> - Note what information is computed but discarded (e.g. a function that scans files for sizes but only returns paths)
+> - Identify reusable data structures and their actual fields
+
+**Enumerate before analysing.** List every file discovered in `scripts/` and `scripts/deluge_lib/` before writing the capability matrix. If a file is not relevant, say so explicitly — do not silently skip it.
+
 **Record as a capability matrix:**
 
 | Capability | Status | Location | Notes |

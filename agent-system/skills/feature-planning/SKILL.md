@@ -35,7 +35,7 @@ This skill references the following shared project standards:
 
 ### Key System Context
 
-The planning agent operates within a multi-repository workspace:
+The planning agent operates within this repository:
 
 | Resource | Path | Purpose |
 |----------|------|---------|
