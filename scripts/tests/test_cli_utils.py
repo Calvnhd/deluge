@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Tests for lib/cli_utils.py."""
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ class TestGetDelugeRoot:
     """Tests for get_deluge_root()."""
 
     def test_loads_from_env(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        # TODO-v0.1-REVIEW
         """DELUGE_ROOT set in environment is used directly."""
         deluge_dir = tmp_path / "DELUGE"
         deluge_dir.mkdir()
@@ -23,6 +25,7 @@ class TestGetDelugeRoot:
         assert result == deluge_dir
 
     def test_system_exit_when_unset(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # TODO-v0.1-REVIEW
         """Raises SystemExit when DELUGE_ROOT is not set."""
         monkeypatch.delenv("DELUGE_ROOT", raising=False)
         with patch("deluge_lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="DELUGE_ROOT is not set"):
@@ -31,6 +34,7 @@ class TestGetDelugeRoot:
     def test_system_exit_on_missing_directory(
         self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Raises SystemExit when resolved directory doesn't exist."""
         monkeypatch.setenv("DELUGE_ROOT", str(tmp_path / "nonexistent"))
         with patch("deluge_lib.cli_utils.load_dotenv"), pytest.raises(SystemExit, match="does not exist"):
@@ -39,6 +43,7 @@ class TestGetDelugeRoot:
     def test_relative_path_resolved_to_absolute(
         self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Relative DELUGE_ROOT is resolved to absolute via CWD."""
         deluge_dir = tmp_path / "DELUGE"
         deluge_dir.mkdir()
@@ -53,11 +58,13 @@ class TestConfirmApply:
     """Tests for confirm_apply()."""
 
     def test_returns_true_on_y(self) -> None:
+        # TODO-v0.1-REVIEW
         """Returns True when user types 'y'."""
         with patch("builtins.input", return_value="y"):
             assert confirm_apply("Apply changes?") is True
 
     def test_returns_false_on_other_input(self) -> None:
+        # TODO-v0.1-REVIEW
         """Returns False on any non-y input."""
         with patch("builtins.input", return_value="n"):
             assert confirm_apply("Apply changes?") is False

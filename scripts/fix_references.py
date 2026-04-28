@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Fix sample references in Deluge XML files after reorganising samples."""
 
 from __future__ import annotations
@@ -23,6 +24,7 @@ from deluge_lib.deluge_sdk import (
 
 @dataclass
 class MigrationResult:
+    # TODO-v0.1-REVIEW
     """Result of comparing a before-snapshot with the current filesystem state.
 
     Attributes:
@@ -46,6 +48,7 @@ def compute_migration_map(
     before_snapshot: dict[str, Any],
     deluge_root: Path,
 ) -> MigrationResult:
+    # TODO-v0.1-REVIEW
     """Compare a before-snapshot with the current filesystem to build a migration map.
 
     Args:
@@ -97,6 +100,7 @@ def compute_migration_map(
 
 @dataclass
 class PlannedChange:
+    # TODO-v0.1-REVIEW
     """A sample reference that can be automatically fixed via the migration map."""
 
     ref: SampleRef
@@ -106,6 +110,7 @@ class PlannedChange:
 
 @dataclass
 class BrokenRefError:
+    # TODO-v0.1-REVIEW
     """A sample reference pointing to a deleted file — requires manual resolution."""
 
     ref: SampleRef
@@ -114,6 +119,7 @@ class BrokenRefError:
 
 @dataclass
 class AmbiguousRefWarning:
+    # TODO-v0.1-REVIEW
     """A sample reference that cannot be auto-resolved due to ambiguous hash mapping."""
 
     ref: SampleRef
@@ -122,6 +128,7 @@ class AmbiguousRefWarning:
 
 @dataclass
 class MissingRefError:
+    # TODO-v0.1-REVIEW
     """A sample reference that doesn't match any file on disk — wrong name or never existed."""
 
     ref: SampleRef
@@ -130,6 +137,7 @@ class MissingRefError:
 
 @dataclass
 class BrokenRefResult:
+    # TODO-v0.1-REVIEW
     """Result of scanning XML references against a migration map.
 
     Attributes:
@@ -148,6 +156,7 @@ def classify_ref_changes(
     migration: MigrationResult,
     deluge_root: Path,
 ) -> BrokenRefResult:
+    # TODO-v0.1-REVIEW
     """Scan all XML references and classify them against a migration map.
 
     For each sample reference found in KITS/, SYNTHS/, SONGS/ XMLs:
@@ -204,6 +213,7 @@ def classify_ref_changes(
 
 
 def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
+    # TODO-v0.1-REVIEW
     """Update sample references in *xml_path* according to *mapping*.
 
     For each reference whose current path appears as a key in *mapping*, the
@@ -236,6 +246,7 @@ def preview_and_apply(
     *,
     auto_apply: bool = False,
 ) -> bool:
+    # TODO-v0.1-REVIEW
     """Display planned changes, errors, and warnings, then optionally apply.
 
     Args:
@@ -339,6 +350,7 @@ def preview_and_apply(
 
 
 def main(argv: list[str] | None = None) -> None:
+    # TODO-v0.1-REVIEW
     """CLI entry point for the reference fixer."""
     import argparse
 

@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Create a dated SHA-256 snapshot of all samples on the Deluge SD card."""
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ from deluge_lib.deluge_sdk import (
 
 
 def snapshot(deluge_root: Path) -> Path:
+    # TODO-v0.1-REVIEW
     """Hash all samples and save a dated JSON snapshot.
 
     Args:
@@ -55,6 +57,7 @@ def snapshot(deluge_root: Path) -> Path:
 
 
 def main(argv: list[str] | None = None) -> None:
+    # TODO-v0.1-REVIEW
     """CLI entry point for creating sample snapshots."""
     import argparse
 

@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """WORK IN PROGRESS
 
 Sync the local DELUGE/ directory back to a mounted Deluge SD card.
@@ -5,10 +6,8 @@ Sync the local DELUGE/ directory back to a mounted Deluge SD card.
 By default, shows a preview of changes then prompts to apply.
 Pass --dry-run to preview only.
 
-Safety measures:
-- All copies (repo → SD) execute before any deletions
-- Files deleted from SD are first backed up to DELUGE/.trash/SD-<timestamp>/
-- Backup is verified before the SD original is removed
+All copies (repo → SD) execute before any deletions 
+Files deleted from SD are first backed up to DELUGE/.trash/SD-<timestamp>/
 """
 
 from __future__ import annotations
@@ -38,6 +37,7 @@ def _execute_to_sd(
     source: Path,
     dest: Path,
 ) -> SyncResult:
+    # TODO-v0.1-REVIEW
     """Execute the sync plan: copy repo files to SD, then trash-and-delete SD extras.
 
     The execution has two phases, always in this order:
@@ -135,6 +135,7 @@ def _execute_to_sd(
 
 
 def main(argv: list[str] | None = None) -> None:
+    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Sync the local DELUGE/ directory back to a mounted Deluge SD card."
     )

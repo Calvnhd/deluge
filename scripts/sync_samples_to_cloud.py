@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Sync WAV samples from DELUGE/SAMPLES/ to a local cloud-backup folder.
 
 Mirrors all .wav files to CLOUD_BACKUP_PATH, preserving directory structure.
@@ -25,6 +26,7 @@ _CLOUD_LOG_PATH = Path(__file__).resolve().parent / "data" / "cloud_sync.log"
 
 
 def main(argv: list[str] | None = None) -> None:
+    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Sync WAV samples from DELUGE/SAMPLES/ to a cloud-backup folder."
     )

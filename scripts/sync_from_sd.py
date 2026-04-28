@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Sync the contents of a mounted Deluge SD card into the local DELUGE/ directory.
 
 By default, shows a preview of changes then prompts to apply.
@@ -40,11 +41,13 @@ FilesDict = dict[str, FileRecord]
 
 
 def _default_manifest_path() -> Path:
+    # TODO-v0.1-REVIEW
     """Return the default manifest path (``scripts/data/manifest.json``)."""
     return Path(__file__).resolve().parent / "data" / "manifest.json"
 
 
 def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
+    # TODO-v0.1-REVIEW
     """Read a manifest JSON file, returning (timestamp, files).
 
     Returns ``("", {})`` when the file is missing or contains invalid JSON.
@@ -80,6 +83,7 @@ def _write_manifest(
     timestamp: str,
     files: dict[str, FileRecord],
 ) -> None:
+    # TODO-v0.1-REVIEW
     """Atomically write a manifest JSON file.
 
     Uses a temporary file in the same directory followed by a rename
@@ -121,6 +125,7 @@ def _build_post_sync_manifest(
     old_files: dict[str, FileRecord],
     file_filter: str = "both",
 ) -> tuple[str, dict[str, FileRecord]]:
+    # TODO-v0.1-REVIEW
     """Build updated manifest data after a successful sync.
 
     Returns ``(timestamp, files)`` where *timestamp* is the current UTC
@@ -169,6 +174,7 @@ def _build_post_sync_manifest(
 
 
 def main(argv: list[str] | None = None) -> None:
+    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Sync Deluge SD card contents into the local DELUGE/ directory."
     )

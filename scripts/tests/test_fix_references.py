@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Tests for fix_references.py."""
 
 from __future__ import annotations
@@ -24,6 +25,7 @@ from deluge_lib.deluge_sdk import SampleRef
 
 
 def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
+    # TODO-v0.1-REVIEW
     """Helper: create a DELUGE/SAMPLES/ tree with given WAV files.
 
     Args:
@@ -46,6 +48,7 @@ class TestMain:
     """Tests for the CLI entry point."""
 
     def test_missing_snapshot_file_exits(self) -> None:
+        # TODO-v0.1-REVIEW
         """Exits with error when snapshot file is missing."""
         from fix_references import main
 
@@ -58,6 +61,7 @@ class TestComputeMigrationMap:
 
     @staticmethod
     def _make_snapshot(hashes: dict[str, list[str]]) -> dict[str, object]:
+        # TODO-v0.1-REVIEW
         """Create a minimal snapshot dict for testing."""
         return {
             "date": "2026-04-01",
@@ -66,6 +70,7 @@ class TestComputeMigrationMap:
         }
 
     def test_simple_move(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """File moved from old to new path appears in moved dict."""
         content = b"kick drum audio"
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/NewKick.wav": content})
@@ -82,6 +87,7 @@ class TestComputeMigrationMap:
         assert not result.ambiguous
 
     def test_deleted_file(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Hash in before but not in after is categorised as deleted."""
         deluge_root = tmp_path / "DELUGE"
         (deluge_root / "SAMPLES").mkdir(parents=True)
@@ -95,6 +101,7 @@ class TestComputeMigrationMap:
         assert not result.moved
 
     def test_added_file(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Hash in after but not in before is categorised as added."""
         content = b"new sample"
         deluge_root = _make_deluge_tree(tmp_path, {"new.wav": content})
@@ -108,6 +115,7 @@ class TestComputeMigrationMap:
         assert not result.moved
 
     def test_ambiguous_multiple_before_paths(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Hash with multiple before paths is categorised as ambiguous."""
         content = b"shared content"
         deluge_root = _make_deluge_tree(tmp_path, {"current.wav": content})
@@ -123,6 +131,7 @@ class TestComputeMigrationMap:
         assert not result.moved
 
     def test_ambiguous_multiple_after_paths(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Hash with multiple after paths is categorised as ambiguous."""
         content = b"duplicated content"
         deluge_root = _make_deluge_tree(tmp_path, {
@@ -141,6 +150,7 @@ class TestComputeMigrationMap:
         assert not result.moved
 
     def test_unchanged_file_not_in_results(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Same hash and same path produces no entries in any category."""
         content = b"unchanged audio"
         deluge_root = _make_deluge_tree(tmp_path, {"same.wav": content})
@@ -155,6 +165,7 @@ class TestComputeMigrationMap:
         assert not result.ambiguous
 
     def test_empty_snapshot_empty_filesystem(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Empty before and after states produce an empty result."""
         deluge_root = tmp_path / "DELUGE"
         (deluge_root / "SAMPLES").mkdir(parents=True)
@@ -165,6 +176,7 @@ class TestComputeMigrationMap:
         assert result == MigrationResult()
 
     def test_empty_snapshot_with_current_files(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Empty before snapshot with files on disk reports all as added."""
         content = b"brand new"
         deluge_root = _make_deluge_tree(tmp_path, {"new.wav": content})
@@ -177,6 +189,7 @@ class TestComputeMigrationMap:
         assert len(result.added) == 1
 
     def test_multiple_independent_moves(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Multiple files each moved independently all appear in moved dict."""
         content_a = b"audio a"
         content_b = b"audio b"
@@ -202,6 +215,7 @@ class TestComputeMigrationMap:
         assert not result.ambiguous
 
     def test_mixed_categories(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """A single run can produce moved, deleted, added, and ambiguous entries."""
         moved_content = b"moved file"
         added_content = b"added file"
@@ -233,6 +247,7 @@ class TestComputeMigrationMap:
 
 
 def _write_minimal_kit_xml(path: Path, sample_paths: list[str]) -> None:
+    # TODO-v0.1-REVIEW
     """Write a minimal kit XML with fileName attributes for each sample path."""
     sounds = ""
     for sp in sample_paths:
@@ -252,6 +267,7 @@ class TestClassifyRefChanges:
     """Tests for classify_ref_changes."""
 
     def test_ref_in_migration_map_is_planned_change(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """A reference whose path is in moved dict appears as a planned change."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
@@ -271,6 +287,7 @@ class TestClassifyRefChanges:
         assert not result.warnings
 
     def test_ref_in_deleted_set_is_error(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """A reference whose path is in the deleted set appears as an error."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
@@ -289,6 +306,7 @@ class TestClassifyRefChanges:
         assert not result.warnings
 
     def test_ref_in_ambiguous_set_is_warning(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """A reference whose path is in the ambiguous before-paths appears as a warning."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
@@ -312,6 +330,7 @@ class TestClassifyRefChanges:
         assert result.warnings[0].ambiguous_path == "SAMPLES/DRUMS/Ambig.wav"
 
     def test_valid_ref_not_in_results(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """A reference not in any migration category does not appear in results."""
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/StillHere.wav": b"audio"})
         _write_minimal_kit_xml(
@@ -328,6 +347,7 @@ class TestClassifyRefChanges:
         assert not result.missing
 
     def test_multiple_refs_across_multiple_xmls(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """References from multiple XML files are all classified correctly."""
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/OK.wav": b"audio"})
         _write_minimal_kit_xml(
@@ -352,6 +372,7 @@ class TestClassifyRefChanges:
         assert not result.warnings
 
     def test_no_broken_refs(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """When all references are valid, result is empty."""
         deluge_root = _make_deluge_tree(tmp_path, {
             "DRUMS/Fine.wav": b"audio",
@@ -368,6 +389,7 @@ class TestClassifyRefChanges:
         assert result == BrokenRefResult()
 
     def test_ref_carries_sample_ref_metadata(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Planned change carries the full SampleRef with correct metadata."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
@@ -386,6 +408,7 @@ class TestClassifyRefChanges:
         assert change.ref.ref_type == "fileName-attribute"
 
     def test_deleted_multiple_paths_per_hash(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Multiple deleted paths under the same hash are all detected."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
@@ -403,6 +426,7 @@ class TestClassifyRefChanges:
         assert deleted_paths == {"SAMPLES/A.wav", "SAMPLES/B.wav"}
 
     def test_missing_ref_not_on_disk(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """A reference not in migration map and not on disk appears as missing."""
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/Other.wav": b"audio"})
         _write_minimal_kit_xml(
@@ -420,6 +444,7 @@ class TestClassifyRefChanges:
         assert result.missing[0].missing_path == "SAMPLES/DRUMS/CB1-BD~1.WAV"
 
     def test_case_insensitive_ref_not_missing(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """A reference differing only in case from a current path is not missing."""
         deluge_root = _make_deluge_tree(tmp_path, {"Artists/Chaz/CB1-bdrum1.wav": b"audio"})
         _write_minimal_kit_xml(
@@ -437,6 +462,7 @@ class TestClassifyRefChanges:
 
 
 def _make_ref(xml_file: str = "KITS/KIT001.XML", path: str = "SAMPLES/old.wav") -> SampleRef:
+    # TODO-v0.1-REVIEW
     """Helper: create a minimal SampleRef for testing."""
     return SampleRef(
         path=path,
@@ -454,6 +480,7 @@ class TestPreviewAndApply:
     def test_empty_result_nothing_to_do(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Empty BrokenRefResult prints 'Nothing to do' and returns."""
         preview_and_apply(BrokenRefResult(), tmp_path)
 
@@ -463,6 +490,7 @@ class TestPreviewAndApply:
     def test_changes_grouped_by_xml_file(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Preview output groups changes by XML file."""
         result = BrokenRefResult(
             changes=[
@@ -489,6 +517,7 @@ class TestPreviewAndApply:
     def test_duplicate_refs_show_count(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Multiple refs with the same old→new in one file show '× N refs'."""
         ref = _make_ref("KITS/KIT001.XML", "SAMPLES/a.wav")
         result = BrokenRefResult(
@@ -507,6 +536,7 @@ class TestPreviewAndApply:
     def test_error_section_displayed(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Errors are displayed under the 'ERRORS' section header."""
         result = BrokenRefResult(
             errors=[
@@ -527,6 +557,7 @@ class TestPreviewAndApply:
     def test_warning_section_displayed(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Warnings are displayed under the 'WARNINGS' section header."""
         result = BrokenRefResult(
             warnings=[
@@ -547,6 +578,7 @@ class TestPreviewAndApply:
     def test_summary_line_counts(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Summary line shows correct counts for changes, files, errors, warnings."""
         result = BrokenRefResult(
             changes=[
@@ -584,6 +616,7 @@ class TestPreviewAndApply:
     def test_error_warning_recommends_resolution(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """When errors exist, a warning recommending resolution is shown."""
         result = BrokenRefResult(
             changes=[
@@ -610,6 +643,7 @@ class TestPreviewAndApply:
     def test_apply_calls_update_sample_refs(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """On confirm, update_sample_refs is called with correct mapping per XML file."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -639,6 +673,7 @@ class TestPreviewAndApply:
     def test_no_apply_on_decline(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """On decline, no changes are applied and message is shown."""
         result = BrokenRefResult(
             changes=[
@@ -663,6 +698,7 @@ class TestPreviewAndApply:
     def test_auto_apply_skips_prompt(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """auto_apply=True skips the confirmation prompt."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -688,6 +724,7 @@ class TestPreviewAndApply:
     def test_post_apply_summary(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Post-apply summary shows files modified and references updated."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -717,6 +754,7 @@ class TestPreviewAndApply:
     def test_missing_section_displayed(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
+        # TODO-v0.1-REVIEW
         """Missing refs are displayed under the 'MISSING' section header."""
         result = BrokenRefResult(
             missing=[
@@ -735,6 +773,7 @@ class TestPreviewAndApply:
         assert "no matching file on disk" in captured.out
 
     def test_returns_true_when_missing(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Returns True when missing refs exist."""
         result = BrokenRefResult(
             missing=[
@@ -750,6 +789,7 @@ class TestPreviewAndApply:
         assert has_errors is True
 
     def test_only_errors_no_apply_prompt(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """When there are only errors (no changes), no apply prompt is shown."""
         result = BrokenRefResult(
             errors=[
@@ -767,10 +807,12 @@ class TestPreviewAndApply:
         assert has_errors is True
 
     def test_returns_false_when_nothing_to_do(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Returns False when no changes, errors, or warnings exist."""
         assert preview_and_apply(BrokenRefResult(), tmp_path) is False
 
     def test_returns_false_when_changes_only(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Returns False when there are fixable changes but no errors."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -791,6 +833,7 @@ class TestPreviewAndApply:
         assert has_errors is False
 
     def test_returns_true_when_errors_and_changes(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Returns True when errors exist even if fixable changes also exist."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -821,6 +864,7 @@ class TestMainExitCodes:
     """Tests for CLI exit codes via main()."""
 
     def test_fix_exits_0_no_errors(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Exits 0 when no broken references found."""
         from fix_references import main
 
@@ -840,6 +884,7 @@ class TestMainExitCodes:
             main(["--snapshot", str(snap_file)])  # Should not raise
 
     def test_fix_exits_1_when_errors(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Exits 1 when deleted references are detected."""
         from fix_references import main
 
@@ -865,6 +910,7 @@ class TestMainExitCodes:
             assert exc_info.value.code == 1
 
     def test_fix_apply_skips_prompt(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """--apply skips the confirmation prompt and applies changes."""
         from fix_references import main
 

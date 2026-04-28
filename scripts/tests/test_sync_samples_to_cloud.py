@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Tests for sync_samples_to_cloud.py."""
 
 from __future__ import annotations
@@ -16,6 +17,7 @@ def _setup_env(
     deluge_root: Path,
     cloud_path: Path,
 ) -> None:
+    # TODO-v0.1-REVIEW
     """Set environment variables and stub load_dotenv."""
     monkeypatch.setenv("DELUGE_ROOT", str(deluge_root))
     monkeypatch.setenv("CLOUD_BACKUP_PATH", str(cloud_path))
@@ -33,6 +35,7 @@ class TestDryRun:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         _touch(samples / "kick.wav", b"audio", mtime=1_700_000_000.0)
@@ -64,6 +67,7 @@ class TestFullSync:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         _touch(samples / "DRUMS" / "kick.wav", b"kick", mtime=1_700_000_000.0)
@@ -90,6 +94,7 @@ class TestFullSync:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         _touch(samples / "kick.wav", b"kick", mtime=1_700_000_000.0)
@@ -122,6 +127,7 @@ class TestNonWavHandling:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         _touch(samples / "kick.wav", b"kick", mtime=1_700_000_000.0)
@@ -146,6 +152,7 @@ class TestNonWavHandling:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         _touch(samples / "kick.wav", b"kick", mtime=1_700_000_000.0)
@@ -176,6 +183,7 @@ class TestEmptyDirCleanup:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         samples.mkdir(parents=True)
@@ -207,6 +215,7 @@ class TestAlreadyUpToDate:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         _touch(samples / "kick.wav", b"kick", mtime=1_700_000_000.0)
@@ -234,6 +243,7 @@ class TestErrorHandling:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         deluge = tmp_path / "DELUGE"
         deluge.mkdir()
         # SAMPLES/ does not exist

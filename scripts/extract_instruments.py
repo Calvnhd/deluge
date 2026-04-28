@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Extract standalone synth and kit presets from Deluge song XMLs.
 
 Scans all song XMLs in DELUGE/SONGS/, extracts embedded instruments as
@@ -49,6 +50,7 @@ from deluge_lib.scanning import print_path
 
 
 def main(argv: list[str] | None = None) -> None:
+    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Extract standalone presets from Deluge song XMLs.",
     )
@@ -409,6 +411,7 @@ def main(argv: list[str] | None = None) -> None:
 
 
 def _print_dedup_report(dedup_result: DedupResult) -> None:
+    # TODO-v0.1-REVIEW
     """Print a summary of duplicates removed during cross-song dedup."""
     if not dedup_result.rejected:
         return
@@ -437,6 +440,7 @@ def _print_dedup_stage(
     accepted: list[ExtractionResult],
     show_match_info: bool,
 ) -> None:
+    # TODO-v0.1-REVIEW
     """Print a single dedup stage report section."""
     if not rejected:
         return
@@ -498,6 +502,7 @@ def _write_manifest(
     instrument_type: str,
     songs_processed: int,
 ) -> None:
+    # TODO-v0.1-REVIEW
     """Write a manifest.json file in the output directory.
 
     Includes only results matching the given instrument_type.

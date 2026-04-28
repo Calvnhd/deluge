@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Sample library analysis — cross-reference XML refs against disk state.
 
 This module receives pre-collected data (sample references and scan results)
@@ -23,6 +24,7 @@ _SAMPLES_PREFIX = "samples/"
 
 @dataclass
 class SampleUsage:
+    # TODO-v0.1-REVIEW
     """Per-sample usage record."""
 
     # Display path relative to SAMPLES/ (e.g. "DRUMS/Kick/808.wav").
@@ -36,11 +38,13 @@ class SampleUsage:
 
     @property
     def ref_count(self) -> int:
+        # TODO-v0.1-REVIEW
         return len(self.refs)
 
 
 @dataclass(frozen=True)
 class FolderStats:
+    # TODO-v0.1-REVIEW
     """Per-folder breakdown (top-level folder under SAMPLES/)."""
 
     folder: str
@@ -50,6 +54,7 @@ class FolderStats:
 
 @dataclass(frozen=True)
 class LibrarySummary:
+    # TODO-v0.1-REVIEW
     """Library-wide aggregate statistics."""
 
     on_disk_count: int
@@ -63,6 +68,7 @@ class LibrarySummary:
 
 @dataclass
 class UsageIndex:
+    # TODO-v0.1-REVIEW
     """Complete cross-reference of samples on disk and in XML.
 
     Keys are normalised paths relative to SAMPLES/ (lowercase, forward-slash).
@@ -72,16 +78,19 @@ class UsageIndex:
 
     @property
     def referenced(self) -> dict[str, SampleUsage]:
+        # TODO-v0.1-REVIEW
         """Samples that exist on disk AND are referenced by at least one XML."""
         return {k: v for k, v in self.entries.items() if v.on_disk and v.ref_count > 0}
 
     @property
     def unreferenced(self) -> dict[str, SampleUsage]:
+        # TODO-v0.1-REVIEW
         """Samples that exist on disk but are NOT referenced by any XML."""
         return {k: v for k, v in self.entries.items() if v.on_disk and v.ref_count == 0}
 
     @property
     def missing(self) -> dict[str, SampleUsage]:
+        # TODO-v0.1-REVIEW
         """Samples referenced in XML but not found on disk."""
         return {k: v for k, v in self.entries.items() if not v.on_disk}
 
@@ -92,6 +101,7 @@ class UsageIndex:
 
 
 def _ref_key(ref_path: str) -> str:
+    # TODO-v0.1-REVIEW
     """Normalise a SampleRef path to match ScanResult keys.
 
     SampleRef.path is relative to DELUGE/ (e.g. "SAMPLES/DRUMS/Kick/808.wav").
@@ -104,6 +114,7 @@ def _ref_key(ref_path: str) -> str:
 
 
 def top_folder(path: str) -> str:
+    # TODO-v0.1-REVIEW
     """Extract the first path component (top-level folder under SAMPLES/).
 
     >>> top_folder("DRUMS/Kick/808.wav")
@@ -126,6 +137,7 @@ def build_usage_index(
     refs: list[SampleRef],
     sample_scan: ScanResult,
 ) -> UsageIndex:
+    # TODO-v0.1-REVIEW
     """Cross-reference XML sample refs against a SAMPLES/ disk scan.
 
     Parameters
@@ -178,6 +190,7 @@ def build_usage_index(
 
 
 def compute_summary(index: UsageIndex) -> LibrarySummary:
+    # TODO-v0.1-REVIEW
     """Compute library-wide aggregate statistics from a usage index."""
     on_disk_count = 0
     on_disk_size = 0
@@ -212,6 +225,7 @@ def compute_summary(index: UsageIndex) -> LibrarySummary:
 
 
 def compute_folder_breakdown(index: UsageIndex) -> list[FolderStats]:
+    # TODO-v0.1-REVIEW
     """Group on-disk samples by top-level folder under SAMPLES/.
 
     Returns a list of ``FolderStats`` sorted by folder name.
@@ -232,6 +246,7 @@ def compute_folder_breakdown(index: UsageIndex) -> list[FolderStats]:
 
 
 def top_by_refs(index: UsageIndex, n: int) -> list[SampleUsage]:
+    # TODO-v0.1-REVIEW
     """Return the *n* most-referenced samples currently on-disk, sorted by reference count descending."""
     return sorted(
         (u for u in index.entries.values() if u.ref_count > 0 and u.on_disk),
@@ -241,6 +256,7 @@ def top_by_refs(index: UsageIndex, n: int) -> list[SampleUsage]:
 
 
 def top_by_size(index: UsageIndex, n: int) -> list[SampleUsage]:
+    # TODO-v0.1-REVIEW
     """Return the *n* largest samples currently on-disk, sorted by size descending."""
     return sorted(
         (u for u in index.entries.values() if u.on_disk and u.size is not None),
@@ -250,6 +266,7 @@ def top_by_size(index: UsageIndex, n: int) -> list[SampleUsage]:
 
 
 def filter_by_pattern(index: UsageIndex, term: str) -> list[SampleUsage]:
+    # TODO-v0.1-REVIEW
     """Return samples whose path contains *term* (case-insensitive substring match)."""
     needle = term.lower()
     return [u for u in index.entries.values() if needle in u.path.lower()]

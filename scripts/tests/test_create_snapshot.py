@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Tests for create_snapshot.py."""
 
 from __future__ import annotations
@@ -14,6 +15,7 @@ from deluge_lib.deluge_sdk import hash_file
 
 
 def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
+    # TODO-v0.1-REVIEW
     """Helper: create a DELUGE/SAMPLES/ tree with given WAV files."""
     deluge_root = tmp_path / "DELUGE"
     samples = deluge_root / "SAMPLES"
@@ -28,6 +30,7 @@ class TestHashFile:
     """Tests for the hash_file function."""
 
     def test_correct_sha256(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """hash_file returns the correct SHA256 hex digest for known content."""
         f = tmp_path / "test.wav"
         content = b"known content for hashing"
@@ -38,6 +41,7 @@ class TestHashFile:
         assert hash_file(f) == expected
 
     def test_empty_file(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """hash_file handles an empty file (SHA256 of empty bytes)."""
         f = tmp_path / "empty.wav"
         f.write_bytes(b"")
@@ -51,6 +55,7 @@ class TestSnapshot:
     """Tests for the snapshot function."""
 
     def test_json_structure(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Snapshot JSON has the required top-level keys and format."""
         deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": b"kick"})
         output_dir = tmp_path / "manifests"
@@ -71,6 +76,7 @@ class TestSnapshot:
         assert data["hashes"][expected_hash] == ["SAMPLES/kick.wav"]
 
     def test_snapshot_filename(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Snapshot file is named snapshot-<date>.json."""
         deluge_root = _make_deluge_tree(tmp_path, {"a.wav": b"a"})
         output_dir = tmp_path / "manifests"
@@ -83,6 +89,7 @@ class TestSnapshot:
         assert result_path.name == "snapshot-2026-04-02.json"
 
     def test_paths_relative_to_deluge_root(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Paths in the snapshot are relative to DELUGE_ROOT."""
         deluge_root = _make_deluge_tree(
             tmp_path, {"DRUMS/Kicks/808.wav": b"808"}
@@ -97,6 +104,7 @@ class TestSnapshot:
         assert "SAMPLES/DRUMS/Kicks/808.wav" in all_paths
 
     def test_duplicate_hash_grouping(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Files with identical content are grouped under the same hash."""
         content = b"identical audio data"
         deluge_root = _make_deluge_tree(tmp_path, {
@@ -116,6 +124,7 @@ class TestSnapshot:
         assert "SAMPLES/kick2.wav" in paths
 
     def test_duplicate_hash_warning(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+        # TODO-v0.1-REVIEW
         """Duplicate content produces a console warning."""
         content = b"duplicate content"
         deluge_root = _make_deluge_tree(tmp_path, {
@@ -131,6 +140,7 @@ class TestSnapshot:
         assert "WARNING: duplicate content" in captured.out
 
     def test_console_summary(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+        # TODO-v0.1-REVIEW
         """Console output includes total files hashed and snapshot path."""
         deluge_root = _make_deluge_tree(tmp_path, {
             "a.wav": b"a",
@@ -146,6 +156,7 @@ class TestSnapshot:
         assert str(result_path) in captured.out
 
     def test_creates_output_directory(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Snapshot creates the output directory if it doesn't exist."""
         deluge_root = _make_deluge_tree(tmp_path, {"a.wav": b"a"})
         output_dir = tmp_path / "new" / "nested" / "manifests"
@@ -158,6 +169,7 @@ class TestSnapshot:
         assert output_dir.is_dir()
 
     def test_empty_samples_dir(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Snapshot handles empty SAMPLES directory (no WAV files)."""
         deluge_root = tmp_path / "DELUGE"
         (deluge_root / "SAMPLES").mkdir(parents=True)
@@ -170,6 +182,7 @@ class TestSnapshot:
         assert data["hashes"] == {}
 
     def test_no_samples_dir(self, tmp_path: Path) -> None:
+        # TODO-v0.1-REVIEW
         """Snapshot handles missing SAMPLES directory gracefully."""
         deluge_root = tmp_path / "DELUGE"
         deluge_root.mkdir()
@@ -186,6 +199,7 @@ class TestMain:
     """Tests for the CLI entry point."""
 
     def test_snapshot_runs(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+        # TODO-v0.1-REVIEW
         """The script creates a snapshot when run."""
         from create_snapshot import main
 

@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Tests for deluge_lib.analysis."""
 
 from __future__ import annotations
@@ -23,11 +24,13 @@ from deluge_lib.scanning import FileEntry, ScanResult
 
 
 def _file_entry(rel: str, size: int = 100) -> FileEntry:
+    # TODO-v0.1-REVIEW
     """Create a FileEntry with defaults for testing."""
     return FileEntry(rel_path=Path(rel), size=size, mtime=0.0)
 
 
 def _sample_ref(path: str, xml_file: str = "KITS/Kit.XML", preset: str = "Kit") -> SampleRef:
+    # TODO-v0.1-REVIEW
     """Create a SampleRef with defaults for testing."""
     return SampleRef(
         path=path,
@@ -40,6 +43,7 @@ def _sample_ref(path: str, xml_file: str = "KITS/Kit.XML", preset: str = "Kit") 
 
 
 def _scan_result(entries: dict[str, FileEntry]) -> ScanResult:
+    # TODO-v0.1-REVIEW
     """Wrap a dict of normalised-key → FileEntry into a ScanResult."""
     result = ScanResult()
     result.files = entries
@@ -53,6 +57,7 @@ def _scan_result(entries: dict[str, FileEntry]) -> ScanResult:
 
 class TestBuildUsageIndex:
     def test_sample_on_disk_and_referenced(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({"drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav", 5000)})
         refs = [_sample_ref("SAMPLES/DRUMS/Kick/808.wav")]
 
@@ -66,6 +71,7 @@ class TestBuildUsageIndex:
         assert usage.refs[0].path == "SAMPLES/DRUMS/Kick/808.wav"
 
     def test_sample_on_disk_unreferenced(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({"drums/snare/rim.wav": _file_entry("DRUMS/Snare/rim.wav", 2000)})
 
         index = build_usage_index([], scan)
@@ -76,6 +82,7 @@ class TestBuildUsageIndex:
         assert usage.size == 2000
 
     def test_sample_referenced_but_missing(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({})
         refs = [_sample_ref("SAMPLES/DRUMS/Kick/missing.wav")]
 
@@ -88,6 +95,7 @@ class TestBuildUsageIndex:
         assert usage.path == "DRUMS/Kick/missing.wav"
 
     def test_case_insensitive_matching(self) -> None:
+        # TODO-v0.1-REVIEW
         """SampleRef with different casing should match the on-disk entry."""
         scan = _scan_result({"drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav", 3000)})
         refs = [_sample_ref("SAMPLES/drums/KICK/808.WAV")]
@@ -101,6 +109,7 @@ class TestBuildUsageIndex:
         assert usage.ref_count == 1
 
     def test_multiple_refs_to_same_sample(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({"drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav")})
         refs = [
             _sample_ref("SAMPLES/DRUMS/Kick/808.wav", xml_file="KITS/Kit1.XML", preset="Kit1"),
@@ -113,6 +122,7 @@ class TestBuildUsageIndex:
         assert usage.ref_count == 2
 
     def test_convenience_properties(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav"),
             "drums/snare/rim.wav": _file_entry("DRUMS/Snare/rim.wav"),
@@ -134,6 +144,7 @@ class TestBuildUsageIndex:
         assert "synths/lead/missing.wav" in index.missing
 
     def test_missing_sample_strips_samples_prefix(self) -> None:
+        # TODO-v0.1-REVIEW
         """Display path for missing samples should not include SAMPLES/ prefix."""
         scan = _scan_result({})
         refs = [_sample_ref("SAMPLES/Artists/SomeArtist/loop.wav")]
@@ -151,6 +162,7 @@ class TestBuildUsageIndex:
 
 class TestComputeSummary:
     def test_summary_counts_and_sizes(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav", 5000),
             "drums/snare/rim.wav": _file_entry("DRUMS/Snare/rim.wav", 3000),
@@ -173,6 +185,7 @@ class TestComputeSummary:
         assert summary.missing_count == 1
 
     def test_empty_library(self) -> None:
+        # TODO-v0.1-REVIEW
         index = build_usage_index([], _scan_result({}))
         summary = compute_summary(index)
 
@@ -186,6 +199,7 @@ class TestComputeSummary:
 
 class TestComputeFolderBreakdown:
     def test_groups_by_top_level_folder(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav", 1000),
             "drums/snare/rim.wav": _file_entry("DRUMS/Snare/rim.wav", 2000),
@@ -202,6 +216,7 @@ class TestComputeFolderBreakdown:
         assert drums == FolderStats(folder="DRUMS", file_count=2, total_size=3000)
 
     def test_missing_samples_excluded(self) -> None:
+        # TODO-v0.1-REVIEW
         """Missing samples have no size and should not appear in folder breakdown."""
         scan = _scan_result({})
         refs = [_sample_ref("SAMPLES/DRUMS/Kick/missing.wav")]
@@ -212,6 +227,7 @@ class TestComputeFolderBreakdown:
         assert breakdown == []
 
     def test_sorted_by_folder_name(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "z_folder/a.wav": _file_entry("Z_Folder/a.wav", 100),
             "a_folder/b.wav": _file_entry("A_Folder/b.wav", 200),
@@ -224,6 +240,7 @@ class TestComputeFolderBreakdown:
         assert breakdown[1].folder == "Z_Folder"
 
     def test_root_level_files(self) -> None:
+        # TODO-v0.1-REVIEW
         """Files directly under SAMPLES/ (no subfolder) get empty-string folder."""
         scan = _scan_result({
             "loose.wav": _file_entry("loose.wav", 500),
@@ -244,6 +261,7 @@ class TestComputeFolderBreakdown:
 
 class TestTopByRefs:
     def test_returns_top_n(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "a.wav": _file_entry("a.wav"),
             "b.wav": _file_entry("b.wav"),
@@ -266,6 +284,7 @@ class TestTopByRefs:
         assert top[1].ref_count == 2  # b.wav
 
     def test_excludes_unreferenced(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({"a.wav": _file_entry("a.wav")})
         index = build_usage_index([], scan)
 
@@ -279,6 +298,7 @@ class TestTopByRefs:
 
 class TestTopBySize:
     def test_returns_top_n_largest(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "small.wav": _file_entry("small.wav", 100),
             "medium.wav": _file_entry("medium.wav", 5000),
@@ -293,6 +313,7 @@ class TestTopBySize:
         assert top[1].size == 5000
 
     def test_excludes_missing(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({})
         refs = [_sample_ref("SAMPLES/gone.wav")]
 
@@ -308,6 +329,7 @@ class TestTopBySize:
 
 class TestFilterByPattern:
     def test_case_insensitive_match(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav"),
             "drums/snare/rim.wav": _file_entry("DRUMS/Snare/rim.wav"),
@@ -319,6 +341,7 @@ class TestFilterByPattern:
         assert result[0].path == "DRUMS/Kick/808.wav"
 
     def test_matches_on_full_path(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({
             "drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav"),
         })
@@ -328,12 +351,14 @@ class TestFilterByPattern:
         assert len(result) == 1
 
     def test_no_matches(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({"drums/kick/808.wav": _file_entry("DRUMS/Kick/808.wav")})
         index = build_usage_index([], scan)
 
         assert filter_by_pattern(index, "nonexistent") == []
 
     def test_includes_missing_samples(self) -> None:
+        # TODO-v0.1-REVIEW
         scan = _scan_result({})
         refs = [_sample_ref("SAMPLES/DRUMS/Kick/missing.wav")]
 

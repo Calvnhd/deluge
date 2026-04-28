@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Generic filtered file scanner with stat capture.
 
 Accepts any root directory and returns a case-normalised path dict.
@@ -16,6 +17,7 @@ FileFilter = Literal["wav", "xml", "both"]
 
 
 def normalise_key(path: str | Path) -> str:
+    # TODO-v0.1-REVIEW
     """Convert *path* to a normalised lookup key: lowercase with forward slashes.
 
     Used for case-insensitive dict matching and cross-platform manifest
@@ -25,11 +27,13 @@ def normalise_key(path: str | Path) -> str:
 
 
 def print_path(path: str | Path) -> str:
+    # TODO-v0.1-REVIEW
     """Cosmetic consistency. Format *path* forward slashes, preserving case."""
     return str(PurePosixPath(path))
 
 
 def normalise_mtime(raw_mtime: float) -> float:
+    # TODO-v0.1-REVIEW
     """Truncate a timestamp to FAT32's 2-second resolution.
 
     FAT32 stores modification times with 2-second granularity (the seconds
@@ -52,6 +56,7 @@ _SKIP_DIRS: frozenset[str] = frozenset({".trash"})
 
 
 def format_size(size_bytes: int) -> str:
+    # TODO-v0.1-REVIEW
     """Format a byte count as a human-readable string."""
     if size_bytes < 1024 * 1024:
         return f"{size_bytes / 1024:.1f} KB"
@@ -62,6 +67,7 @@ def format_size(size_bytes: int) -> str:
 
 @dataclass(frozen=True)
 class FileEntry:
+    # TODO-v0.1-REVIEW
     """Stat data for a single scanned file."""
 
     rel_path: Path
@@ -71,6 +77,7 @@ class FileEntry:
 
 @dataclass
 class ScanResult:
+    # TODO-v0.1-REVIEW
     """Result of scanning a directory tree.
 
     Attributes:
@@ -87,6 +94,7 @@ def scan_tree(
     label: str = "source",
     file_filter: FileFilter = "both",
 ) -> ScanResult:
+    # TODO-v0.1-REVIEW
     """Walk *root* and collect filtered file entries.
 
     Parameters

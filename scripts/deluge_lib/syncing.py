@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Shared sync primitives used by sync scripts.
 
 Contains dataclasses, comparison logic, plan computation, plan display,
@@ -41,6 +42,7 @@ _TRASH_DIR_NAME = ".trash"
 
 @dataclass
 class SyncPlan:
+    # TODO-v0.1-REVIEW
     """Holds the list of planned sync actions."""
 
     files_to_copy: list[tuple[Path, Path]] = field(default_factory=list)
@@ -65,6 +67,7 @@ class SyncError(Exception):
         unchanged: int = 0,
         remaining: int = 0,
     ) -> None:
+        # TODO-v0.1-REVIEW
         super().__init__(message)
         self.file = file
         self.copied = copied
@@ -75,6 +78,7 @@ class SyncError(Exception):
 
 @dataclass
 class SyncResult:
+    # TODO-v0.1-REVIEW
     """Outcome of executing a sync plan — counts only."""
 
     copied: int = 0
@@ -88,6 +92,7 @@ class SyncResult:
 
 
 def _mtime_matches(mtime_a: float, mtime_b: float) -> bool:
+    # TODO-v0.1-REVIEW
     """Return True if two mtimes are equal within FAT32 tolerance.
 
     FAT32 has 2-second mtime resolution, so mtimes within ±2 seconds
@@ -108,6 +113,7 @@ def compute_sync(
     manifest: FilesDict | None = None,
     file_filter: FileFilter = "both",
 ) -> tuple[SyncPlan, ScanResult]:
+    # TODO-v0.1-REVIEW
     """Walk both trees and build a plan of copy/delete/rename actions.
 
     Parameters
@@ -183,6 +189,7 @@ def compute_sync(
 
 
 def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> None:
+    # TODO-v0.1-REVIEW
     """Print a human-readable summary of what the sync would do.
 
     Parameters
@@ -224,6 +231,7 @@ def execute_plan(
     dest: Path,
     delete_mode: str = "trash",
 ) -> SyncResult:
+    # TODO-v0.1-REVIEW
     """Execute the sync plan: copy files and remove extras.
 
     Parameters
@@ -332,6 +340,7 @@ def execute_plan(
 # ---------------------------------------------------------------------------
 
 def _default_log_path() -> Path:
+    # TODO-v0.1-REVIEW
     """Return the default path for the sync execution log."""
     return Path(__file__).resolve().parent.parent / "data" / "sync.log"
 
@@ -342,6 +351,7 @@ def append_sync_log(
     error: str | None = None,
     log_path: Path | None = None,
 ) -> None:
+    # TODO-v0.1-REVIEW
     """Append a structured entry to the sync execution log."""
     if log_path is None:
         log_path = _default_log_path()

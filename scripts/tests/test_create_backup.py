@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Tests for create_backup.py."""
 
 from __future__ import annotations
@@ -17,12 +18,14 @@ def _setup_env(
     source: Path,
     dest: Path,
 ) -> None:
+    # TODO-v0.1-REVIEW
     """Set environment variables and stub load_dotenv."""
     monkeypatch.setenv("ZIP_SOURCE_PATH", str(source))
     monkeypatch.setenv("ZIP_DEST_PATH", str(dest))
 
 
 def _find_zip(dest: Path) -> Path:
+    # TODO-v0.1-REVIEW
     """Return the single .zip file in dest."""
     zips = list(dest.glob("*.zip"))
     assert len(zips) == 1, f"Expected 1 zip, found {len(zips)}: {zips}"
@@ -41,6 +44,7 @@ class TestDryRun:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
+        # TODO-v0.1-REVIEW
         source = tmp_path / "DELUGE"
         _touch(source / "KITS" / "kit.xml", b"<kit/>", mtime=1_700_000_000.0)
         _touch(source / "SAMPLES" / "kick.wav", b"audio", mtime=1_700_000_000.0)
@@ -71,6 +75,7 @@ class TestFullBackup:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
+        # TODO-v0.1-REVIEW
         source = tmp_path / "DELUGE"
         _touch(source / "KITS" / "kit.xml", b"<kit/>", mtime=1_700_000_000.0)
         _touch(source / "SYNTHS" / "pad.xml", b"<synth/>", mtime=1_700_000_000.0)
@@ -102,6 +107,7 @@ class TestFullBackup:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         source = tmp_path / "DELUGE"
         _touch(source / "SAMPLES" / "DRUMS" / "kick.wav", b"kick", mtime=1_700_000_000.0)
         _touch(source / "SAMPLES" / "DRUMS" / "snare.wav", b"snare", mtime=1_700_000_000.0)
@@ -128,6 +134,7 @@ class TestFullBackup:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         source = tmp_path / "DELUGE"
         _touch(source / "SAMPLES" / "DRUMS" / "kick.wav", b"kick", mtime=1_700_000_000.0)
 
@@ -157,6 +164,7 @@ class TestTrashExclusion:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         source = tmp_path / "DELUGE"
         _touch(source / "KITS" / "kit.xml", b"<kit/>", mtime=1_700_000_000.0)
         _touch(source / ".trash" / "old.xml", b"<old/>", mtime=1_600_000_000.0)
@@ -189,6 +197,7 @@ class TestMissingEnvVars:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         dest = tmp_path / "backups"
         dest.mkdir()
         monkeypatch.setenv("ZIP_DEST_PATH", str(dest))
@@ -202,6 +211,7 @@ class TestMissingEnvVars:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
+        # TODO-v0.1-REVIEW
         source = tmp_path / "DELUGE"
         source.mkdir()
         monkeypatch.setenv("ZIP_SOURCE_PATH", str(source))

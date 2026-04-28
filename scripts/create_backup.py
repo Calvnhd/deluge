@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Create a timestamped .zip backup of the Deluge SD card or repo DELUGE/ directory.
 
 Archives all XML and WAV files into a compressed zip file.
@@ -17,6 +18,7 @@ from deluge_lib.scanning import format_size, scan_tree
 
 
 def main(argv: list[str] | None = None) -> None:
+    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Create a timestamped .zip backup of the Deluge SD card or repo DELUGE/ directory."
     )

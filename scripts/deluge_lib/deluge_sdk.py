@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Deluge SDK — Deluge filesystem discovery, reference extraction, and in-place updating."""
 
 from __future__ import annotations
@@ -27,6 +28,7 @@ _OSC_AND_RANGE_TAGS = ("osc1", "osc2", "sampleRange")
 
 @dataclass
 class SampleRef:
+    # TODO-v0.1-REVIEW
     """A single sample reference found in a Deluge XML file."""
 
     # Sample path as written in the XML, relative to DELUGE/ (e.g. "SAMPLES/DRUMS/Kick/808 Kick.wav")
@@ -47,6 +49,7 @@ class SampleRef:
 
 
 def hash_file(path: Path) -> str:
+    # TODO-v0.1-REVIEW
     """Compute a SHA256 hex digest for a file, reading in chunks.
 
     Args:
@@ -63,11 +66,13 @@ def hash_file(path: Path) -> str:
 
 
 def default_manifests_dir() -> Path:
+    # TODO-v0.1-REVIEW
     """Return the default manifests directory: <repo_root>/docs/manifests/."""
     return Path(__file__).resolve().parent.parent.parent / "docs" / "manifests"
 
 
 def find_all_wav_files(samples_dir: Path) -> list[Path]:
+    # TODO-v0.1-REVIEW
     """Recursively find all .wav/.WAV files under a directory.
 
     Returns sorted absolute paths for consistent ordering.
@@ -79,6 +84,7 @@ def find_all_wav_files(samples_dir: Path) -> list[Path]:
 
 
 def get_existing_samples(deluge_root: Path) -> set[str]:
+    # TODO-v0.1-REVIEW
     """Build a normalised set of all WAV sample paths under DELUGE/SAMPLES/.
 
     Returns a set of lowercase, forward-slash paths relative to *deluge_root*,
@@ -92,6 +98,7 @@ def get_existing_samples(deluge_root: Path) -> set[str]:
 
 
 def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
+    # TODO-v0.1-REVIEW
     """Hash all WAV files under ``deluge_root / "SAMPLES"`` and group by digest.
 
     Args:
@@ -118,6 +125,7 @@ def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
 
 
 def find_all_xml_files(deluge_root: Path) -> list[Path]:
+    # TODO-v0.1-REVIEW
     """Recursively find all XML files in KITS/, SYNTHS/, SONGS/ under *deluge_root*.
 
     Returns a sorted list of absolute paths.  Missing subdirectories are skipped.
@@ -136,6 +144,7 @@ def find_all_xml_files(deluge_root: Path) -> list[Path]:
 
 
 def detect_xml_type(xml_path: Path) -> str:
+    # TODO-v0.1-REVIEW
     """Determine the Deluge XML type from the file's path.
 
     Returns ``"kit"``, ``"synth"``, or ``"song"``.
@@ -154,6 +163,7 @@ def _get_preset_name(
     xml_type: str,
     xml_path: Path,
 ) -> str:
+    # TODO-v0.1-REVIEW
     """Walk up the element tree to determine the preset/instrument name.
 
     - **Standalone presets** (kit/synth outside a song): use ``xml_path.stem``.
@@ -183,6 +193,7 @@ def _get_preset_name(
 def parse_deluge_xml(
     xml_path: Path,
 ) -> tuple[etree._ElementTree | None, etree._Element, bool]:
+    # TODO-v0.1-REVIEW
     """Parse a Deluge XML file with a three-stage fallback strategy.
 
     1. **Strict parse** via ``etree.parse()``.
@@ -224,6 +235,7 @@ def parse_deluge_xml(
 
 
 def extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]:
+    # TODO-v0.1-REVIEW
     """Extract all sample references from a single Deluge XML file.
 
     Handles all 5 reference patterns:
@@ -311,6 +323,7 @@ _SAMPLE_PATH_RE = re.compile(r"SAMPLES/[^\"'<>\t\n\r]+\.wav", re.IGNORECASE)
 
 
 def find_unextracted_refs(xml_file: Path, extracted: list[SampleRef]) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Find sample paths in raw XML text not captured by the structured extractor.
 
     Reads the raw XML and finds all SAMPLES/...wav paths via regex, then

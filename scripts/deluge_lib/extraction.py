@@ -1,3 +1,4 @@
+# Deluge CLI v0.1
 """Core extraction logic for extracting standalone presets from Deluge song XMLs.
 
 This module contains all reusable functions for:
@@ -159,6 +160,7 @@ SIDECHAIN_LOW_VOLUME_THRESHOLD = 0xC0000000 - 0x100000000  # → signed: -107374
 
 @dataclass
 class InstrumentInfo:
+    # TODO-v0.1-REVIEW
     """An instrument definition found in a song's <instruments> section."""
 
     element: etree._Element
@@ -169,6 +171,7 @@ class InstrumentInfo:
 
 @dataclass
 class ClipInfo:
+    # TODO-v0.1-REVIEW
     """An <instrumentClip> found in a song's <sessionClips> section."""
 
     element: etree._Element
@@ -179,6 +182,7 @@ class ClipInfo:
 
 @dataclass
 class InstrumentClipGroup:
+    # TODO-v0.1-REVIEW
     """Groups an instrument with all its clips, keyed by section ID."""
 
     instrument: InstrumentInfo
@@ -188,6 +192,7 @@ class InstrumentClipGroup:
 
 @dataclass
 class NormalisationConfig:
+    # TODO-v0.1-REVIEW
     """Which attributes to normalise on <defaultParams> and their target values.
 
     Designed to be extendable — add new entries to the dict to normalise
@@ -210,6 +215,7 @@ class NormalisationConfig:
 
 @dataclass
 class ComparisonConfig:
+    # TODO-v0.1-REVIEW
     """Configurable ruleset for the generalised comparison engine.
 
     Maps element paths to sets of attribute names that constitute hard markers
@@ -242,6 +248,7 @@ class ComparisonConfig:
 
     @classmethod
     def default(cls) -> ComparisonConfig:
+        # TODO-v0.1-REVIEW
         """Return the standard comparison config.
 
         Hard markers sourced from research Section 16.2.  Thresholds and
@@ -343,6 +350,7 @@ class ComparisonConfig:
 
 @dataclass
 class ComparisonResult:
+    # TODO-v0.1-REVIEW
     """Result of comparing two assembled standalone presets."""
 
     is_distinct: bool
@@ -354,6 +362,7 @@ class ComparisonResult:
 
 @dataclass
 class ExtractionResult:
+    # TODO-v0.1-REVIEW
     """Carries all information about a single extracted instrument preset."""
 
     song_name: str
@@ -371,6 +380,7 @@ class ExtractionResult:
 
 @dataclass
 class RejectedResult:
+    # TODO-v0.1-REVIEW
     """An extraction result rejected during cross-song deduplication."""
 
     result: ExtractionResult
@@ -380,6 +390,7 @@ class RejectedResult:
 
 @dataclass
 class DedupResult:
+    # TODO-v0.1-REVIEW
     """Output of cross-song deduplication."""
 
     accepted: list[ExtractionResult]
@@ -395,6 +406,7 @@ class DedupResult:
 
 
 def load_init_defaults(deluge_root: Path) -> NormalisationConfig:
+    # TODO-v0.1-REVIEW
     """Load normalisation defaults from Init-Synth.XML and Init-Kit.XML.
 
     If the files exist, reads the volume and pan values from their
@@ -447,6 +459,7 @@ def load_init_defaults(deluge_root: Path) -> NormalisationConfig:
 
 
 def load_kit_init_template(deluge_root: Path) -> etree._Element | None:
+    # TODO-v0.1-REVIEW
     """Load a <defaultParams> template from Init-Kit.XML's first sound.
 
     Parses Init-Kit.XML and extracts the <defaultParams> element from its
@@ -490,6 +503,7 @@ def discover_songs(
     deluge_root: Path,
     exclude_dirs: list[str] | None = None,
 ) -> list[tuple[Path, etree._Element]]:
+    # TODO-v0.1-REVIEW
     """Find and parse all valid song XMLs in DELUGE_ROOT/SONGS/.
 
     Recursively discovers all *.XML files in the SONGS/ directory and its
@@ -579,6 +593,7 @@ def discover_songs(
 
 
 def discover_instruments(song_tree: etree._Element) -> list[InstrumentInfo]:
+    # TODO-v0.1-REVIEW
     """Extract all synth and kit instruments from a song's <instruments> section.
 
     Discovers all <sound> (synth) and <kit> children of <instruments>.
@@ -618,6 +633,7 @@ def discover_instruments(song_tree: etree._Element) -> list[InstrumentInfo]:
 
 
 def discover_clips(song_tree: etree._Element) -> list[ClipInfo]:
+    # TODO-v0.1-REVIEW
     """Extract all instrumentClips from a song's <sessionClips> section.
 
     Discovers all <instrumentClip> children of <sessionClips>.
@@ -670,6 +686,7 @@ def match_instruments_to_clips(
     clips: list[ClipInfo],
     song_tree: etree._Element | None = None,
 ) -> tuple[list[InstrumentClipGroup], list[str]]:
+    # TODO-v0.1-REVIEW
     """Match clips to instruments and group by section, identifying orphans.
 
     Matching key: (presetName, presetFolder) on instrument == (preset_name, preset_folder)
@@ -762,6 +779,7 @@ def match_instruments_to_clips(
 
 
 def is_sidechain_kit(group: InstrumentClipGroup) -> tuple[bool, str]:
+    # TODO-v0.1-REVIEW
     """Detect whether a kit group is a sidechain-only trigger kit.
 
     Uses heuristics from XML structure research Section 12:
@@ -866,6 +884,7 @@ def is_sidechain_kit(group: InstrumentClipGroup) -> tuple[bool, str]:
 
 
 def select_default_clip(group: InstrumentClipGroup) -> ClipInfo:
+    # TODO-v0.1-REVIEW
     """Select the clip with the lowest section ID as the extraction source.
 
     This is the default mode selection strategy (D3). Simple, deterministic,
@@ -889,6 +908,7 @@ def extract_synth(
     instrument: etree._Element,
     clip: etree._Element,
 ) -> etree._Element:
+    # TODO-v0.1-REVIEW
     """Transform an embedded synth into a standalone preset XML element.
 
     Follows the synth extraction recipe from research Section 13.5.
@@ -960,6 +980,7 @@ def extract_kit(
     clip: etree._Element,
     init_template: etree._Element | None = None,
 ) -> tuple[etree._Element, list[str]]:
+    # TODO-v0.1-REVIEW
     """Transform an embedded kit into a standalone preset XML element.
 
     Follows the kit extraction recipe from research Section 13.5.
@@ -1070,6 +1091,7 @@ def normalise_params(
     instrument_type: str,
     config: NormalisationConfig,
 ) -> None:
+    # TODO-v0.1-REVIEW
     """Normalise master volume and pan on the top-level <defaultParams>.
 
     Modifies the element in-place. Only touches the top-level <defaultParams>
@@ -1112,6 +1134,7 @@ _AUTOMATION_RE = re.compile(r"^0x[0-9A-Fa-f]{9,}$")
 
 
 def strip_automation(element: etree._Element) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Truncate extended hex automation strings to base values on element and all descendants.
 
     Standalone Deluge presets never contain automation data — the Deluge strips
@@ -1145,6 +1168,7 @@ def generate_filename(
     used_filenames: set[str],
     naming: str = "preset",
 ) -> str:
+    # TODO-v0.1-REVIEW
     """Generate a unique output filename following the naming convention.
 
     Default mode:   <SongName>-<PresetName>.XML  (naming="song")
@@ -1199,6 +1223,7 @@ def generate_filename(
 
 
 def serialise_xml(element: etree._Element, output_path: Path) -> None:
+    # TODO-v0.1-REVIEW
     """Serialise an assembled lxml element to a standalone XML file.
 
     Writes with XML declaration and UTF-8 encoding to match the formatting
@@ -1233,6 +1258,7 @@ def compare_instruments(
     instrument_type: str,
     config: ComparisonConfig,
 ) -> ComparisonResult:
+    # TODO-v0.1-REVIEW
     """Compare two assembled standalone presets for equivalence.
 
     Three-tier comparison operating on post-extraction, post-normalisation
@@ -1360,6 +1386,7 @@ def select_extended_clips(
     normalisation_config: NormalisationConfig,
     kit_init_template: etree._Element | None = None,
 ) -> list[tuple[ClipInfo, list[ComparisonResult]]]:
+    # TODO-v0.1-REVIEW
     """Select clips for extended mode extraction based on version comparison.
 
     The baseline clip (lowest section ID) is always included.  Each subsequent
@@ -1390,6 +1417,7 @@ def select_extended_clips(
         return []
 
     def _assemble(clip: ClipInfo) -> etree._Element:
+        # TODO-v0.1-REVIEW
         """Extract, strip automation, and normalise a clip for comparison."""
         if instrument_type == "synth":
             element = extract_synth(inst.element, clip.element)
@@ -1450,6 +1478,7 @@ def _dedup_pass(
     verbose: bool = False,
     label: str = "dedup",
 ) -> DedupResult:
+    # TODO-v0.1-REVIEW
     """Run a single deduplication pass with configurable grouping and sorting.
 
     Groups extraction results by *group_key*, sorts within each group by
@@ -1566,6 +1595,7 @@ def deduplicate_results(
     *,
     verbose: bool = False,
 ) -> DedupResult:
+    # TODO-v0.1-REVIEW
     """Filter redundant instruments across songs using two dedup passes.
 
     **Pass 1 (by name):** Groups by ``(preset_name, instrument_type)`` and
@@ -1623,6 +1653,7 @@ def deduplicate_results(
 
 
 def build_manifest_entry(result: ExtractionResult) -> dict[str, str | int | list[str]]:
+    # TODO-v0.1-REVIEW
     """Build a single manifest entry dict from an ExtractionResult.
 
     Steps:
@@ -1650,6 +1681,7 @@ def build_manifest_entry(result: ExtractionResult) -> dict[str, str | int | list
 
 
 def _strip_song_attrs(element: etree._Element) -> None:
+    # TODO-v0.1-REVIEW
     """Remove song-specific attributes from an instrument element.
 
     Strips: presetName, presetFolder, defaultVelocity, isArmedForRecording,
@@ -1663,6 +1695,7 @@ def _strip_song_attrs(element: etree._Element) -> None:
 
 
 def _extract_arpeggiator_from_clip(clip: etree._Element) -> etree._Element | None:
+    # TODO-v0.1-REVIEW
     """Extract and clean the <arpeggiator> element from an <instrumentClip>.
 
     For synth clips, the <arpeggiator> is a direct child of <instrumentClip>,
@@ -1689,6 +1722,7 @@ def _extract_arpeggiator_from_clip(clip: etree._Element) -> etree._Element | Non
 
 
 def _reorder_synth_children(sound: etree._Element) -> None:
+    # TODO-v0.1-REVIEW
     """Reorder child elements of a <sound> to match standalone c1.2.1 format.
 
     Target order: osc1, osc2, lfo1, lfo2, [modulator1, modulator2], unison,
@@ -1730,6 +1764,7 @@ def _reorder_synth_children(sound: etree._Element) -> None:
 
 
 def _reorder_kit_children(kit: etree._Element) -> None:
+    # TODO-v0.1-REVIEW
     """Reorder top-level child elements of a <kit> to match standalone format.
 
     Target order: defaultParams, delay, sidechain, audioCompressor,
@@ -1768,6 +1803,7 @@ def _reorder_kit_children(kit: etree._Element) -> None:
 
 
 def _reorder_kit_sound_children(sound: etree._Element) -> None:
+    # TODO-v0.1-REVIEW
     """Reorder child elements of a kit row <sound> to match standalone format.
 
     Target order: osc1, osc2, lfo1, lfo2, unison, defaultParams, arpeggiator,
@@ -1809,6 +1845,7 @@ def _merge_noterow_params(
     sound: etree._Element,
     noterow: etree._Element,
 ) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Merge a noteRow's <soundParams> into a kit row <sound> as <defaultParams>.
 
     Steps:
@@ -1849,6 +1886,7 @@ def _ensure_all_sounds_have_default_params(
     sounds: list[etree._Element],
     init_template: etree._Element | None = None,
 ) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Ensure every <sound> in a kit has a <defaultParams> child.
 
     After the noteRow merge pass, some sounds may still lack <defaultParams>
@@ -1906,6 +1944,7 @@ def _ensure_all_sounds_have_default_params(
 
 
 def _create_init_default_params() -> etree._Element:
+    # TODO-v0.1-REVIEW
     """Create a minimal <defaultParams> element with init kit sound values.
 
     Hardcoded from Init-Kit.XML's per-sound <defaultParams>. Used only as a
@@ -1982,6 +2021,7 @@ def _create_init_default_params() -> etree._Element:
 
 
 def _parse_hex_value(hex_str: str) -> int:
+    # TODO-v0.1-REVIEW
     """Parse a Deluge hex string (e.g. '0x4CCCCCA8') as a 32-bit signed integer.
 
     For extended hex strings containing automation data (longer than 10 chars),
@@ -1996,6 +2036,7 @@ def _parse_hex_value(hex_str: str) -> int:
 
 
 def _hex_diff_exceeds(val_a: str, val_b: str, threshold: float) -> bool:
+    # TODO-v0.1-REVIEW
     """Return True if two hex param values differ by more than *threshold* proportion."""
     a = _parse_hex_value(val_a)
     b = _parse_hex_value(val_b)
@@ -2005,6 +2046,7 @@ def _hex_diff_exceeds(val_a: str, val_b: str, threshold: float) -> bool:
 def _build_patchcable_dict(
     default_params: etree._Element | None,
 ) -> dict[tuple[str, str], str]:
+    # TODO-v0.1-REVIEW
     """Build a ``(source, destination) -> amount`` dict from ``<patchCables>``."""
     result: dict[tuple[str, str], str] = {}
     if default_params is None:
@@ -2025,6 +2067,7 @@ def _build_patchcable_dict(
 def _build_patchcable_element_dict(
     default_params: etree._Element | None,
 ) -> dict[tuple[str, str], etree._Element]:
+    # TODO-v0.1-REVIEW
     """Build a ``(source, destination) -> element`` dict from ``<patchCables>``."""
     result: dict[tuple[str, str], etree._Element] = {}
     if default_params is None:
@@ -2046,6 +2089,7 @@ def _check_modknobs_structure(
     parent_b: etree._Element,
     prefix: str = "",
 ) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Return hard diffs if modKnob mappings differ positionally.
 
     Compares the ``<modKnobs>`` child of *parent_a* and *parent_b* slot by
@@ -2095,6 +2139,7 @@ def _check_patchcable_structure(
     dp_a: etree._Element | None,
     dp_b: etree._Element | None,
 ) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Return hard diffs if patchCable routing or depthControlledBy structure differs."""
     cables_a = _build_patchcable_dict(dp_a)
     cables_b = _build_patchcable_dict(dp_b)
@@ -2158,6 +2203,7 @@ def _collect_soft_diffs(
     prefix: str = "",
     soft_elements: dict[str, set[str]] | None = None,
 ) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Collect soft-marker differences for one comparison scope.
 
     Walks ``<defaultParams>`` attributes and children (``envelope1``,
@@ -2310,6 +2356,7 @@ def _check_kit_structure_hard(
     hard_attrs: dict[str, set[str]],
     config: ComparisonConfig,
 ) -> list[str]:
+    # TODO-v0.1-REVIEW
     """Check kit structural hard markers: soundSources count/names, per-sound attrs."""
     diffs: list[str] = []
 
@@ -2390,6 +2437,7 @@ def _compare_kit_soft(
     preset_b: etree._Element,
     config: ComparisonConfig,
 ) -> ComparisonResult:
+    # TODO-v0.1-REVIEW
     """Evaluate soft markers for kits with per-sound threshold checking."""
     all_soft_diffs: list[str] = []
 
