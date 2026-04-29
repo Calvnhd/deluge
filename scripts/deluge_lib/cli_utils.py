@@ -12,7 +12,6 @@ _SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 
 
 def get_deluge_root() -> Path:
-    # TODO-v0.1-REVIEW
     """Load DELUGE_ROOT from scripts/.env.
 
     Raises SystemExit if DELUGE_ROOT is not set or the directory does not exist.
@@ -31,7 +30,6 @@ def get_deluge_root() -> Path:
 
 
 def get_sd_card_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load SD_CARD_PATH from scripts/.env.
 
     Raises SystemExit if SD_CARD_PATH is not set or the path does not exist

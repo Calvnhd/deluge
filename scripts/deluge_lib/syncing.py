@@ -113,7 +113,6 @@ def compute_sync(
     manifest: FilesDict | None = None,
     file_filter: FileFilter = "both",
 ) -> tuple[SyncPlan, ScanResult]:
-    # TODO-v0.1-REVIEW
     """Walk both trees and build a plan of copy/delete/rename actions.
 
     Parameters
@@ -224,14 +223,13 @@ def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> No
 # Plan execution
 # ---------------------------------------------------------------------------
 
-
+# TODO: Do we actually need a delete mode?
 def execute_plan(
     plan: SyncPlan,
     *,
     dest: Path,
     delete_mode: str = "trash",
 ) -> SyncResult:
-    # TODO-v0.1-REVIEW
     """Execute the sync plan: copy files and remove extras.
 
     Parameters
@@ -351,7 +349,6 @@ def append_sync_log(
     error: str | None = None,
     log_path: Path | None = None,
 ) -> None:
-    # TODO-v0.1-REVIEW
     """Append a structured entry to the sync execution log."""
     if log_path is None:
         log_path = _default_log_path()

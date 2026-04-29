@@ -67,7 +67,6 @@ def format_size(size_bytes: int) -> str:
 
 @dataclass(frozen=True)
 class FileEntry:
-    # TODO-v0.1-REVIEW
     """Stat data for a single scanned file."""
 
     rel_path: Path
@@ -77,7 +76,6 @@ class FileEntry:
 
 @dataclass
 class ScanResult:
-    # TODO-v0.1-REVIEW
     """Result of scanning a directory tree.
 
     Attributes:
@@ -94,7 +92,6 @@ def scan_tree(
     label: str = "source",
     file_filter: FileFilter = "both",
 ) -> ScanResult:
-    # TODO-v0.1-REVIEW
     """Walk *root* and collect filtered file entries.
 
     Parameters
