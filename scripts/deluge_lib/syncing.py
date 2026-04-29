@@ -42,7 +42,6 @@ _TRASH_DIR_NAME = ".trash"
 
 @dataclass
 class SyncPlan:
-    # TODO-v0.1-REVIEW
     """Holds the list of planned sync actions."""
 
     files_to_copy: list[tuple[Path, Path]] = field(default_factory=list)
