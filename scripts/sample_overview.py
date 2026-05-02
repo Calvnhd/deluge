@@ -18,7 +18,8 @@ from deluge_lib.analysis import (
     top_by_refs,
 )
 from deluge_lib.cli_utils import get_deluge_root
-from deluge_lib.deluge_sdk import SampleRef, default_manifests_dir, extract_sample_refs, find_all_xml_files, find_unextracted_refs, hash_all_samples
+from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files, find_unextracted_refs, hash_all_samples
+from deluge_lib.paths import SNAPSHOTS_DIR
 from deluge_lib.scanning import format_size, print_path, scan_tree
 
 # ---------------------------------------------------------------------------
@@ -590,7 +591,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "duplicates":
         if args.snapshot is not None:
             if args.snapshot == "latest":
-                manifests_dir = default_manifests_dir()
+                manifests_dir = SNAPSHOTS_DIR
                 snapshots = sorted(manifests_dir.glob("snapshot-*.json"))
                 if not snapshots:
                     raise SystemExit(f"No snapshots found in {manifests_dir}")

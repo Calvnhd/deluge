@@ -8,16 +8,15 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-_SCRIPTS_DIR = Path(__file__).resolve().parent.parent
+from deluge_lib.paths import SCRIPTS_DIR
 
 
 def get_deluge_root() -> Path:
-    # TODO-v0.1-REVIEW
     """Load DELUGE_ROOT from scripts/.env.
 
     Raises SystemExit if DELUGE_ROOT is not set or the directory does not exist.
     """
-    load_dotenv(_SCRIPTS_DIR / ".env")
+    load_dotenv(SCRIPTS_DIR / ".env")
 
     env_value = os.environ.get("DELUGE_ROOT")
     if not env_value:
@@ -31,12 +30,11 @@ def get_deluge_root() -> Path:
 
 
 def get_sd_card_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load SD_CARD_PATH from scripts/.env.
 
     Raises SystemExit if SD_CARD_PATH is not set or the path does not exist
     """
-    load_dotenv(_SCRIPTS_DIR / ".env")
+    load_dotenv(SCRIPTS_DIR / ".env")
 
     env_value = os.environ.get("SD_CARD_PATH")
     if not env_value:
@@ -53,12 +51,11 @@ def get_sd_card_path() -> Path:
 
 
 def get_cloud_backup_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load CLOUD_BACKUP_PATH from scripts/.env.
 
     Raises SystemExit if CLOUD_BACKUP_PATH is not set or the directory does not exist.
     """
-    load_dotenv(_SCRIPTS_DIR / ".env")
+    load_dotenv(SCRIPTS_DIR / ".env")
 
     env_value = os.environ.get("CLOUD_BACKUP_PATH")
     if not env_value:
@@ -72,12 +69,11 @@ def get_cloud_backup_path() -> Path:
 
 
 def get_zip_source_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load ZIP_SOURCE_PATH from scripts/.env.
 
     Raises SystemExit if ZIP_SOURCE_PATH is not set or the directory does not exist.
     """
-    load_dotenv(_SCRIPTS_DIR / ".env")
+    load_dotenv(SCRIPTS_DIR / ".env")
 
     env_value = os.environ.get("ZIP_SOURCE_PATH")
     if not env_value:
@@ -91,12 +87,11 @@ def get_zip_source_path() -> Path:
 
 
 def get_zip_dest_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load ZIP_DEST_PATH from scripts/.env.
 
     Raises SystemExit if ZIP_DEST_PATH is not set or the directory does not exist.
     """
-    load_dotenv(_SCRIPTS_DIR / ".env")
+    load_dotenv(SCRIPTS_DIR / ".env")
 
     env_value = os.environ.get("ZIP_DEST_PATH")
     if not env_value:
@@ -110,11 +105,9 @@ def get_zip_dest_path() -> Path:
 
 
 def confirm_apply(message: str) -> bool:
-    # TODO-v0.1-REVIEW
     """Print message and prompt user for confirmation.
 
     Returns True if user enters 'y' or 'Y', False otherwise.
-    Default is No (empty input returns False).
     """
     print(message)
     response = input("[y/N] ").strip().lower()

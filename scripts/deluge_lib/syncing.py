@@ -21,8 +21,10 @@ if TYPE_CHECKING:
     from typing import TypedDict
 
     class _FileRecord(TypedDict):
-        size: int
-        mtime: float
+        sd_size: int
+        sd_mtime: float
+        local_size: int
+        local_mtime: float
 
     FilesDict = dict[str, _FileRecord]
 
@@ -42,7 +44,6 @@ _TRASH_DIR_NAME = ".trash"
 
 @dataclass
 class SyncPlan:
-    # TODO-v0.1-REVIEW
     """Holds the list of planned sync actions."""
 
     files_to_copy: list[tuple[Path, Path]] = field(default_factory=list)
@@ -92,7 +93,6 @@ class SyncResult:
 
 
 def _mtime_matches(mtime_a: float, mtime_b: float) -> bool:
-    # TODO-v0.1-REVIEW
     """Return True if two mtimes are equal within FAT32 tolerance.
 
     FAT32 has 2-second mtime resolution, so mtimes within ±2 seconds
@@ -113,7 +113,6 @@ def compute_sync(
     manifest: FilesDict | None = None,
     file_filter: FileFilter = "both",
 ) -> tuple[SyncPlan, ScanResult]:
-    # TODO-v0.1-REVIEW
     """Walk both trees and build a plan of copy/delete/rename actions.
 
     Parameters
@@ -123,10 +122,11 @@ def compute_sync(
     dest:
         Root of the local ``DELUGE/`` directory.
     manifest:
-        Optional manifest dict mapping normalised keys to
-        ``{"size": int, "mtime": float, ...}`` entries.  When an entry
-        exists, the SD card stat is compared against the manifest instead
-        of the destination file stat.
+        Optional manifest dict mapping normalised keys to dual-stat
+        entries with ``sd_size``, ``sd_mtime``, ``local_size``, and
+        ``local_mtime``.  When present, detects both SD-side changes
+        (SD stats vs manifest) and local-side changes (local stats vs
+        manifest).
     file_filter:
         Which file types to include: ``"wav"``, ``"xml"``, or ``"both"``
         (the default).  Forwarded to ``scan_tree()``.
@@ -157,23 +157,30 @@ def compute_sync(
 
         dst_entry = dst_scan.files[key]
 
-        # Choose comparison target: manifest entry if it exists, otherwise use destination stat
+        # Deluge firware does not record file creation time, and FAT32 vs NTFS have a bunch of conflicts
+        # Dual-stat manifest check deals with this
         if manifest is not None and key in manifest:
-            cmp_size: int = manifest[key]["size"]
-            cmp_mtime: float = manifest[key]["mtime"]
+            manifest_entry = manifest[key]
+            sd_changed = (
+                src_entry.size != manifest_entry["sd_size"]
+                or not _mtime_matches(src_entry.mtime, manifest_entry["sd_mtime"])
+            )
+            local_changed = (
+                dst_entry.size != manifest_entry["local_size"]
+                or normalise_mtime(dst_entry.mtime) != manifest_entry["local_mtime"]
+            )
+            if sd_changed or local_changed:
+                plan.files_to_copy.append((src_path, dst_path))
+            else:
+                plan.files_unchanged += 1
         else:
-            cmp_size = dst_entry.size
-            cmp_mtime = dst_entry.mtime
-
-        if src_entry.size != cmp_size:
-            # Size differs → copy (overwrite)
-            plan.files_to_copy.append((src_path, dst_path))
-        elif not _mtime_matches(src_entry.mtime, cmp_mtime):
-            # Same size, mtime differs → copy (overwrite)
-            plan.files_to_copy.append((src_path, dst_path))
-        else:
-            # Identical (or case-only difference) → skip
-            plan.files_unchanged += 1
+            # No manifest entry — fall back to direct SD vs local comparison.
+            if src_entry.size != dst_entry.size:
+                plan.files_to_copy.append((src_path, dst_path))
+            elif not _mtime_matches(src_entry.mtime, normalise_mtime(dst_entry.mtime)):
+                plan.files_to_copy.append((src_path, dst_path))
+            else:
+                plan.files_unchanged += 1
 
     # --- files in dest not on source → trash ---
     for key, dst_entry in dst_scan.files.items():
@@ -189,7 +196,6 @@ def compute_sync(
 
 
 def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> None:
-    # TODO-v0.1-REVIEW
     """Print a human-readable summary of what the sync would do.
 
     Parameters
@@ -224,14 +230,12 @@ def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> No
 # Plan execution
 # ---------------------------------------------------------------------------
 
-
 def execute_plan(
     plan: SyncPlan,
     *,
     dest: Path,
     delete_mode: str = "trash",
 ) -> SyncResult:
-    # TODO-v0.1-REVIEW
     """Execute the sync plan: copy files and remove extras.
 
     Parameters
@@ -288,6 +292,7 @@ def execute_plan(
     trashed = 0
     trash_count = len(plan.files_to_delete)
     if trash_count and delete_mode == "trash":
+        print(f"Trashing {trash_count} files...")
         trash_base = dest / _TRASH_DIR_NAME / datetime.now().strftime("%Y%m%d_%H%M%S")
         try:
             for path in plan.files_to_delete:
@@ -306,6 +311,7 @@ def execute_plan(
                 remaining=trash_count - trashed - 1,
             ) from exc
     elif trash_count and delete_mode == "delete":
+        print(f"Deleting {trash_count} files...")
         try:
             for path in plan.files_to_delete:
                 path.unlink()
@@ -339,11 +345,6 @@ def execute_plan(
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _default_log_path() -> Path:
-    # TODO-v0.1-REVIEW
-    """Return the default path for the sync execution log."""
-    return Path(__file__).resolve().parent.parent / "data" / "sync.log"
-
 def append_sync_log(
     result: SyncResult,
     *,
@@ -351,10 +352,10 @@ def append_sync_log(
     error: str | None = None,
     log_path: Path | None = None,
 ) -> None:
-    # TODO-v0.1-REVIEW
     """Append a structured entry to the sync execution log."""
     if log_path is None:
-        log_path = _default_log_path()
+        from deluge_lib.paths import FROM_SD_SYNC_LOG_PATH
+        log_path = FROM_SD_SYNC_LOG_PATH
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
     status = "FAILED" if error else "SUCCESS"

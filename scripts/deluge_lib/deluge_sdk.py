@@ -65,12 +65,6 @@ def hash_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def default_manifests_dir() -> Path:
-    # TODO-v0.1-REVIEW
-    """Return the default manifests directory: <repo_root>/docs/manifests/."""
-    return Path(__file__).resolve().parent.parent.parent / "docs" / "manifests"
-
-
 def find_all_wav_files(samples_dir: Path) -> list[Path]:
     # TODO-v0.1-REVIEW
     """Recursively find all .wav/.WAV files under a directory.

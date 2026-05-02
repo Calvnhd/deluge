@@ -15,12 +15,12 @@ from deluge_lib.cli_utils import confirm_apply, get_deluge_root
 from deluge_lib.scanning import normalise_key, print_path
 from deluge_lib.deluge_sdk import (
     SampleRef,
-    default_manifests_dir,
     extract_sample_refs,
     find_all_xml_files,
     get_existing_samples,
     hash_all_samples,
 )
+from deluge_lib.paths import SNAPSHOTS_DIR
 
 @dataclass
 class MigrationResult:
@@ -374,7 +374,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.snapshot_path:
         snapshot_path = Path(args.snapshot_path)
     else:
-        manifests_dir = default_manifests_dir()
+        manifests_dir = SNAPSHOTS_DIR
         snapshots = sorted(manifests_dir.glob("snapshot-*.json"))
         if not snapshots:
             raise SystemExit(f"No snapshots found in {manifests_dir}")

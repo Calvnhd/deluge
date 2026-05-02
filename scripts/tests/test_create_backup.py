@@ -59,7 +59,7 @@ class TestDryRun:
 
         out = capsys.readouterr().out
         assert "Files:" in out
-        assert "Dry run complete." in out
+        assert "Dry run complete" in out
         assert list(dest.glob("*.zip")) == []
 
 

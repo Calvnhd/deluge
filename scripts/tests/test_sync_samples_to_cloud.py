@@ -229,7 +229,7 @@ class TestAlreadyUpToDate:
             main(["--dry-run"])
 
         out = capsys.readouterr().out
-        assert "Already up to date." in out
+        assert "Already up to date" in out
 
 
 # ============================================================================

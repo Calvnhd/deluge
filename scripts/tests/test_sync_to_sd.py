@@ -103,7 +103,7 @@ class TestUpToDate:
             main(["--dry-run"])
 
         out = capsys.readouterr().out
-        assert "Already up to date." in out
+        assert "Already up to date" in out
 
 
 # ============================================================================
@@ -269,7 +269,7 @@ class TestFullSync:
         with (
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
-            patch("sync_to_sd._TO_SD_LOG_PATH", log_path),
+            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", log_path),
         ):
             main([])
 
@@ -396,7 +396,7 @@ class TestErrorHandling:
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
             patch("sync_to_sd.shutil.copy2", side_effect=failing_copy2),
-            patch("sync_to_sd._TO_SD_LOG_PATH", log_path),
+            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", log_path),
         ):
             with pytest.raises(SystemExit):
                 main([])

@@ -3,12 +3,12 @@
 	firmwareVersion="c1.2.1"
 	earliestCompatibleFirmware="4.1.0-alpha"
 	previewNumPads="144"
-	preview="1200ED06023206023206023206023206023206023206023206023206023206023206023206023206023206023206023200FF06FA00051200ED00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF06FA00051200ED00000000000000000000000000000000000000000000000000000000000000000000FF0000000000000000000000FF06FA000509F60000000000000000000025DA000000000000000000005AA500000000000000000000000000000000000000000000FF000000C7381200ED060232060232060232060232060232060232060232060232060232060232060232060232060232060232060232FF000000C7381200ED0000000000000000000000000000000000000000000000000000000000000000001200ED000000000000000000FF000000C7381200ED00000000000000000000000000000000000000000000000000000000000000000000FF00000000000000000000FF000000C73809F60000000000000000000025DA000000000000000000005AA500000000000000000000070707070707070707070707FF0000B04F00"
+	preview="00DA25000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF0000FA0005FC0300000000000000000000070707070707070707070707070707070707070707070707070707070707070707070707FF0000FA000500DA2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF0600C738FC030000000000000000000007070707070707070707070707070707070707070707070707070707070707070707070700FF0600C73800DA25000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF0000B04F00FC0300000000000000000000070707070707070707070707070707070707070707070707070707070707070707070707FF0000B04F0000DA25000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF0000B0004FFC0300000000000000000000070707070707070707070707070707070707070707070707070707070707070707070707FF0000B0004F"
 	arrangementAutoScrollOn="0"
 	xScroll="0"
 	xZoom="6"
-	yScrollSongView="1"
-	yScrollArrangementView="-2"
+	yScrollSongView="16"
+	yScrollArrangementView="-1"
 	xScrollArrangementView="0"
 	xZoomArrangementView="192"
 	timePerTimerTick="306"
@@ -17,8 +17,8 @@
 	inputTickMagnitude="2"
 	swingAmount="0"
 	swingInterval="7"
-	affectEntire="0"
-	activeModFunction="1"
+	affectEntire="1"
+	activeModFunction="4"
 	modFXCurrentParam="feedback"
 	currentFilterType="lpf"
 	modFXType="none"
@@ -38,7 +38,7 @@
 		<modeNote>10</modeNote>
 	</modeNotes>
 	<reverb
-		roomSize="1288490112"
+		roomSize="1288489984"
 		dampening="1546188288"
 		width="2147483647"
 		hpf="0"
@@ -64,7 +64,7 @@
 	<audioCompressor
 		attack="83886080"
 		release="83886080"
-		thresh="0"
+		thresh="1308622848"
 		ratio="1073741824"
 		compHPF="0"
 		compBlend="2147483647" />
@@ -101,11 +101,76 @@
 	</songParams>
 	<instruments>
 		<sound
+			presetName="014-K06MWHW"
+			presetFolder="SYNTHS/SONG-SYNTHS"
+			defaultVelocity="64"
+			isArmedForRecording="0"
+			activeModFunction="4"
+			colour="0"
+			polyphonic="mono"
+			voicePriority="1"
+			mode="subtractive"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L"
+			clippingAmount="7"
+			maxVoices="8">
+			<osc1
+				type="sine"
+				transpose="-24"
+				cents="0"
+				retrigPhase="-1" />
+			<osc2
+				type="analogSquare"
+				transpose="-36"
+				cents="0"
+				retrigPhase="-1" />
+			<lfo1 type="sine" syncLevel="0" syncType="0" />
+			<lfo2 type="sine" syncLevel="0" syncType="0" />
+			<unison num="1" detune="8" spread="0" />
+			<modKnobs>
+				<modKnob controlsParam="pan" />
+				<modKnob controlsParam="volumePostFX" />
+				<modKnob controlsParam="lpfResonance" />
+				<modKnob controlsParam="lpfFrequency" />
+				<modKnob controlsParam="env1Release" />
+				<modKnob controlsParam="env1Attack" />
+				<modKnob controlsParam="delayFeedback" />
+				<modKnob controlsParam="delayRate" />
+				<modKnob controlsParam="reverbAmount" />
+				<modKnob controlsParam="volumePostReverbSend" patchAmountFromSource="compressor" />
+				<modKnob controlsParam="pitch" patchAmountFromSource="lfo1" />
+				<modKnob controlsParam="lfo1Rate" />
+				<modKnob controlsParam="portamento" />
+				<modKnob controlsParam="stutterRate" />
+				<modKnob controlsParam="oscBVolume" />
+				<modKnob controlsParam="sampleRateReduction" />
+			</modKnobs>
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</sound>
+		<sound
 			presetName="Vibes WT"
 			presetFolder="SYNTHS/COMMUNITY/1.2 Presets"
 			defaultVelocity="64"
 			isArmedForRecording="0"
-			activeModFunction="3"
+			activeModFunction="1"
 			colour="0"
 			polyphonic="legato"
 			voicePriority="1"
@@ -4529,13 +4594,12 @@
 			yScrollKeyboard="50"
 			instrumentPresetName="Vibes WT"
 			instrumentPresetFolder="SYNTHS/COMMUNITY/1.2 Presets"
-			isPlaying="1"
+			isPlaying="0"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="96"
 			colourOffset="63"
 			section="4"
-			selected="1"
 			keyboardLayout="0"
 			keyboardRowInterval="5"
 			drumsScrollOffset="0"
@@ -4715,7 +4779,7 @@
 			yScrollKeyboard="50"
 			instrumentPresetName="Wall Of Static"
 			instrumentPresetFolder="SYNTHS/COMMUNITY/1.2 Presets"
-			isPlaying="1"
+			isPlaying="0"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="1536"
@@ -4882,7 +4946,7 @@
 			affectEntire="0"
 			instrumentPresetName="Chug"
 			instrumentPresetFolder="KITS/COMMUNITY/1.2 Presets"
-			isPlaying="1"
+			isPlaying="0"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="1536"
@@ -6192,7 +6256,7 @@
 			affectEntire="0"
 			instrumentPresetName="018 Electronisounds 3"
 			instrumentPresetFolder="KITS/FACTORY"
-			isPlaying="1"
+			isPlaying="0"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="1536"
@@ -7502,7 +7566,7 @@
 			yScrollKeyboard="50"
 			instrumentPresetName="Vibes WT"
 			instrumentPresetFolder="SYNTHS/COMMUNITY/1.2 Presets"
-			isPlaying="0"
+			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="576"
@@ -7685,7 +7749,7 @@
 			yScrollKeyboard="50"
 			instrumentPresetName="Wall Of Static"
 			instrumentPresetFolder="SYNTHS/COMMUNITY/1.2 Presets"
-			isPlaying="0"
+			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="1152"
@@ -7851,7 +7915,7 @@
 			affectEntire="0"
 			instrumentPresetName="Chug"
 			instrumentPresetFolder="KITS/COMMUNITY/1.2 Presets"
-			isPlaying="0"
+			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="1152"
@@ -9161,7 +9225,7 @@
 			affectEntire="0"
 			instrumentPresetName="018 Electronisounds 3"
 			instrumentPresetFolder="KITS/FACTORY"
-			isPlaying="0"
+			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="1152"
@@ -10466,16 +10530,17 @@
 		<instrumentClip
 			clipName=""
 			inKeyMode="1"
-			yScroll="54"
+			yScroll="55"
 			yScrollKeyboard="50"
-			instrumentPresetName="Vibes WT"
-			instrumentPresetFolder="SYNTHS/COMMUNITY/1.2 Presets"
+			instrumentPresetName="014-K06MWHW"
+			instrumentPresetFolder="SYNTHS/SONG-SYNTHS"
 			isPlaying="0"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="72"
 			colourOffset="63"
 			section="2"
+			selected="1"
 			keyboardLayout="0"
 			keyboardRowInterval="5"
 			drumsScrollOffset="0"
@@ -10484,7 +10549,7 @@
 			inKeyRowInterval="3">
 			<arpeggiator
 				mode="off"
-				syncLevel="6"
+				syncLevel="5"
 				numOctaves="2"
 				syncType="0"
 				arpMode="off"
@@ -10495,21 +10560,21 @@
 				arpeggiatorGate="0x00000000"
 				portamento="0x80000000"
 				compressorShape="0xDC28F5B2"
-				oscAVolume="0x33333313"
+				oscAVolume="0x7FFFFFD2"
 				oscAPulseWidth="0x00000000"
-				oscAWavetablePosition="0x98000000"
-				oscBVolume="0x4CCCCCA8"
-				oscBPulseWidth="0x7FFFFFFF"
+				oscAWavetablePosition="0x00000000"
+				oscBVolume="0xBD70A3CC"
+				oscBPulseWidth="0x00000000"
 				oscBWavetablePosition="0x00000000"
 				noiseVolume="0x80000000"
-				volume="0xE6666654"
+				volume="0x5A000000"
 				pan="0x00000000"
-				lpfFrequency="0x48000000"
-				lpfResonance="0xB333332A"
+				lpfFrequency="0x23D70A20"
+				lpfResonance="0x80000000"
 				hpfFrequency="0x80000000"
 				hpfResonance="0x80000000"
-				lfo1Rate="0x3A000000"
-				lfo2Rate="0xE147AE03"
+				lfo1Rate="0x1999997E"
+				lfo2Rate="0x00000000"
 				modulator1Amount="0x80000000"
 				modulator1Feedback="0x80000000"
 				modulator2Amount="0x80000000"
@@ -10517,18 +10582,18 @@
 				carrier1Feedback="0x80000000"
 				carrier2Feedback="0x80000000"
 				modFXRate="0x00000000"
-				modFXDepth="0xF2000000"
+				modFXDepth="0x00000000"
 				delayRate="0x00000000"
-				delayFeedback="0xD6000000"
-				reverbAmount="0xE6666654"
+				delayFeedback="0x80000000"
+				reverbAmount="0x80000000"
 				arpeggiatorRate="0x00000000"
 				stutterRate="0x00000000"
 				sampleRateReduction="0x80000000"
 				bitCrush="0x80000000"
-				modFXOffset="0x34000000"
-				modFXFeedback="0xE4000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x00000000"
 				compressorThreshold="0x00000000"
-				lpfMorph="0xB333332A"
+				lpfMorph="0x80000000"
 				hpfMorph="0x80000000"
 				waveFold="0x80000000"
 				ratchetProbability="0x80000000"
@@ -10536,84 +10601,38 @@
 				sequenceLength="0x80000000"
 				rhythm="0x80000000">
 				<envelope1
-					attack="0x84000000"
-					decay="0xFFFFFFE9"
-					sustain="0x80000000"
-					release="0x30000000" />
-				<envelope2
 					attack="0x80000000"
-					decay="0xCCCCCCBF"
-					sustain="0x80000000"
-					release="0x80000000" />
+					decay="0xE6666654"
+					sustain="0x7FFFFFFF"
+					release="0x10000000" />
+				<envelope2
+					attack="0xE6666654"
+					decay="0xE6666654"
+					sustain="0xFFFFFFE9"
+					release="0xE6666654" />
 				<patchCables>
-					<patchCable
-						source="random"
-						destination="lfo2Rate"
-						amount="0x0147AE14" />
-					<patchCable
-						source="note"
-						destination="lfo2Rate"
-						amount="0x19999999" />
-					<patchCable
-						source="lfo2"
-						destination="oscAPitch"
-						amount="0x001A36E2" />
-					<patchCable
-						source="velocity"
-						destination="lpfFrequency"
-						amount="0x19999999" />
-					<patchCable
-						source="y"
-						destination="lpfFrequency"
-						amount="0xF3333333" />
-					<patchCable
-						source="note"
-						destination="oscAWavetablePosition"
-						amount="0xF9999999">
-						<depthControlledBy>
-							<patchCable
-								source="y"
-								amount="0x3FFFFFFF" />
-						</depthControlledBy>
-					</patchCable>
-					<patchCable
-						source="y"
-						destination="env1Decay"
-						amount="0xCCCCCCCC" />
-					<patchCable
-						source="aftertouch"
-						destination="env1Decay"
-						amount="0x26666666" />
-					<patchCable
-						source="note"
-						destination="oscAVolume"
-						amount="0xF3333333" />
-					<patchCable
-						source="envelope1"
-						destination="oscAVolume"
-						amount="0x3FFFFFFF" />
-					<patchCable
-						source="velocity"
-						destination="oscAVolume"
-						amount="0x0CCCCCCC" />
 					<patchCable
 						source="velocity"
 						destination="volume"
-						amount="0x33333333" />
+						amount="0x3FFFFFE8" />
 					<patchCable
-						source="envelope2"
-						destination="oscBVolume"
-						amount="0x3FFFFFFF" />
+						source="aftertouch"
+						destination="volume"
+						amount="0x2A3D7094" />
 					<patchCable
-						source="lfo1"
-						destination="pitch"
-						amount="0xFF800000" />
+						source="y"
+						destination="lpfFrequency"
+						amount="0x19999990" />
+					<patchCable
+						source="compressor"
+						destination="volumePostReverbSend"
+						amount="0x39000000" />
 				</patchCables>
 				<equalizer
-					bass="0x33333313"
-					treble="0x1999997E"
-					bassFrequency="0xFFFFFFE9"
-					trebleFrequency="0xFFFFFFE9" />
+					bass="0x00000000"
+					treble="0x00000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
 			</soundParams>
 			<columnControls>
 				<leftCol
@@ -10634,17 +10653,19 @@
 				<noteRow
 					y="61" />
 				<noteRow
-					y="63"
-					noteDataWithLift="0x0000001800000018404014" />
+					y="63" />
+				<noteRow
+					y="65" />
 				<noteRow
 					y="67"
-					noteDataWithLift="0x0000003000000018404014" />
+					noteDataWithLift="0x0000001800000018404014" />
 				<noteRow
 					y="68" />
 				<noteRow
 					y="70" />
 				<noteRow
-					y="72" />
+					y="72"
+					noteDataWithLift="0x0000003000000018404014" />
 			</noteRows>
 		</instrumentClip>
 		<instrumentClip
@@ -16427,7 +16448,7 @@
 			affectEntire="1"
 			instrumentPresetName="KIT2"
 			instrumentPresetFolder="KITS"
-			isPlaying="1"
+			isPlaying="0"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="768"
@@ -16803,7 +16824,7 @@
 			affectEntire="1"
 			instrumentPresetName="000 TR-808"
 			instrumentPresetFolder="KITS/FACTORY"
-			isPlaying="1"
+			isPlaying="0"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="24"
@@ -18112,7 +18133,7 @@
 			affectEntire="1"
 			instrumentPresetName="KIT2"
 			instrumentPresetFolder="KITS"
-			isPlaying="0"
+			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="576"
@@ -18488,7 +18509,7 @@
 			affectEntire="1"
 			instrumentPresetName="000 TR-808"
 			instrumentPresetFolder="KITS/FACTORY"
-			isPlaying="0"
+			isPlaying="1"
 			isSoloing="0"
 			isArmedForRecording="1"
 			length="24"

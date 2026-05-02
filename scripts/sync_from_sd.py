@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import TypedDict
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
+from deluge_lib.paths import MANIFEST_PATH
 from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
     SyncError,
@@ -31,28 +32,21 @@ from deluge_lib.syncing import (
 
 
 class FileRecord(TypedDict):
-    """Per-file manifest entry with size and modification time."""
+    """Per-file dual-stat manifest entry — SD-side and local-side stats."""
 
-    size: int
-    mtime: float
+    sd_size: int
+    sd_mtime: float
+    local_size: int
+    local_mtime: float
 
 
 FilesDict = dict[str, FileRecord]
 
 
-def _default_manifest_path() -> Path:
-    # TODO-v0.1-REVIEW
-    """Return the default manifest path (``scripts/data/manifest.json``)."""
-    return Path(__file__).resolve().parent / "data" / "manifest.json"
-
-
 def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
-    # TODO-v0.1-REVIEW
     """Read a manifest JSON file, returning (timestamp, files).
 
     Returns ``("", {})`` when the file is missing or contains invalid JSON.
-    Tolerates old manifest formats that include extra metadata fields
-    (version, direction, file_count) — they are simply ignored.
     """
     if not path.is_file():
         return ("", {})
@@ -63,16 +57,17 @@ def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
         print(f"Warning: corrupt manifest at {path} ({exc}) \u2014 treating as empty")
         return ("", {})
 
-    # Support old format (metadata.last_sync_timestamp) and new (top-level).
-    if "metadata" in data:
-        timestamp = str(data["metadata"].get("last_sync_timestamp", ""))
-    else:
-        timestamp = str(data.get("last_sync_timestamp", ""))
+    timestamp = str(data.get("last_sync_timestamp", ""))
 
     files: dict[str, FileRecord] = {}
     for key, val in data.get("files", {}).items():
-        if isinstance(val, dict) and "size" in val and "mtime" in val:
-            files[key] = {"size": int(val["size"]), "mtime": normalise_mtime(float(val["mtime"]))}
+        if isinstance(val, dict) and "sd_size" in val and "sd_mtime" in val and "local_size" in val and "local_mtime" in val:
+            files[key] = {
+                "sd_size": int(val["sd_size"]),
+                "sd_mtime": float(val["sd_mtime"]),
+                "local_size": int(val["local_size"]),
+                "local_mtime": float(val["local_mtime"]),
+            }
 
     return (timestamp, files)
 
@@ -83,7 +78,6 @@ def _write_manifest(
     timestamp: str,
     files: dict[str, FileRecord],
 ) -> None:
-    # TODO-v0.1-REVIEW
     """Atomically write a manifest JSON file.
 
     Uses a temporary file in the same directory followed by a rename
@@ -125,7 +119,6 @@ def _build_post_sync_manifest(
     old_files: dict[str, FileRecord],
     file_filter: str = "both",
 ) -> tuple[str, dict[str, FileRecord]]:
-    # TODO-v0.1-REVIEW
     """Build updated manifest data after a successful sync.
 
     Returns ``(timestamp, files)`` where *timestamp* is the current UTC
@@ -149,16 +142,19 @@ def _build_post_sync_manifest(
 
     new_files: dict[str, FileRecord] = {}
     for key, src_entry in src_scan.files.items():
-        if key in copied_keys:
-            # Copied: use the normalised source mtime (already on FAT32 grid).
-            new_files[key] = {"size": src_entry.size, "mtime": src_entry.mtime}
-        elif key in old_files:
-            # Unchanged with existing manifest entry: preserve.
-            old = old_files[key]
-            new_files[key] = {"size": old["size"], "mtime": old["mtime"]}
+        if key in old_files and key not in copied_keys:
+            # Unchanged with existing manifest entry: preserve as-is.
+            new_files[key] = old_files[key]
         else:
-            # Unchanged but no prior manifest entry (first run): use source stat.
-            new_files[key] = {"size": src_entry.size, "mtime": src_entry.mtime}
+            # Copied or no prior entry: SD stats from scan, local stats from dest file.
+            dst_path = dest / src_entry.rel_path
+            dst_stat = dst_path.stat()
+            new_files[key] = {
+                "sd_size": src_entry.size,
+                "sd_mtime": src_entry.mtime, # SD time is normalized upstream via scan_tree()
+                "local_size": dst_stat.st_size,
+                "local_mtime": normalise_mtime(dst_stat.st_mtime),
+            }
 
     # Preserve manifest entries for file types not included in this filtered sync.
     if file_filter != "both":
@@ -174,7 +170,6 @@ def _build_post_sync_manifest(
 
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Sync Deluge SD card contents into the local DELUGE/ directory."
     )
@@ -206,7 +201,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
 
     # Load manifest (empty state on first run or if corrupt).
-    manifest_path = _default_manifest_path()
+    manifest_path = MANIFEST_PATH
     manifest_ts, manifest_files = _read_manifest(manifest_path)
 
     print(f"Source:      {sd_path}")
@@ -216,7 +211,7 @@ def main(argv: list[str] | None = None) -> None:
     plan, src_scan = compute_sync(sd_path, deluge_root, manifest=manifest_files, file_filter=file_filter)
 
     if not plan.files_to_copy and not plan.files_to_delete:
-        print("Already up to date.")
+        print("Already up to date")
         return
 
     print_plan(plan, dest=deluge_root)
