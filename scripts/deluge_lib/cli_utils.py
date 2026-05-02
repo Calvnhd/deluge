@@ -51,7 +51,6 @@ def get_sd_card_path() -> Path:
 
 
 def get_cloud_backup_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load CLOUD_BACKUP_PATH from scripts/.env.
 
     Raises SystemExit if CLOUD_BACKUP_PATH is not set or the directory does not exist.
@@ -70,7 +69,6 @@ def get_cloud_backup_path() -> Path:
 
 
 def get_zip_source_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load ZIP_SOURCE_PATH from scripts/.env.
 
     Raises SystemExit if ZIP_SOURCE_PATH is not set or the directory does not exist.
@@ -89,7 +87,6 @@ def get_zip_source_path() -> Path:
 
 
 def get_zip_dest_path() -> Path:
-    # TODO-v0.1-REVIEW
     """Load ZIP_DEST_PATH from scripts/.env.
 
     Raises SystemExit if ZIP_DEST_PATH is not set or the directory does not exist.
@@ -108,11 +105,9 @@ def get_zip_dest_path() -> Path:
 
 
 def confirm_apply(message: str) -> bool:
-    # TODO-v0.1-REVIEW
     """Print message and prompt user for confirmation.
 
     Returns True if user enters 'y' or 'Y', False otherwise.
-    Default is No (empty input returns False).
     """
     print(message)
     response = input("[y/N] ").strip().lower()

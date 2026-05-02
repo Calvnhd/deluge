@@ -15,6 +15,6 @@ LOGS_DIR = DATA_DIR / "logs"
 
 # Individual file paths.
 MANIFEST_PATH = DATA_DIR / "manifest.json"
-SYNC_LOG_PATH = LOGS_DIR / "sync.log"
+FROM_SD_SYNC_LOG_PATH = LOGS_DIR / "from_sd_sync.log"
 CLOUD_SYNC_LOG_PATH = LOGS_DIR / "cloud_sync.log"
 TO_SD_SYNC_LOG_PATH = LOGS_DIR / "to_sd_sync.log"

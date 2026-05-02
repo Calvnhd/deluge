@@ -17,7 +17,7 @@ from typing import TypedDict
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
 from deluge_lib.paths import MANIFEST_PATH
-from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
+from deluge_lib.scanning import ScanResult, normalise_key
 from deluge_lib.syncing import (
     SyncError,
     SyncPlan,
@@ -45,8 +45,6 @@ def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
     """Read a manifest JSON file, returning (timestamp, files).
 
     Returns ``("", {})`` when the file is missing or contains invalid JSON.
-    Tolerates old manifest formats that include extra metadata fields
-    (version, direction, file_count) — they are simply ignored.
     """
     if not path.is_file():
         return ("", {})
@@ -57,16 +55,12 @@ def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
         print(f"Warning: corrupt manifest at {path} ({exc}) \u2014 treating as empty")
         return ("", {})
 
-    # Support old format (metadata.last_sync_timestamp) and new (top-level).
-    if "metadata" in data:
-        timestamp = str(data["metadata"].get("last_sync_timestamp", ""))
-    else:
-        timestamp = str(data.get("last_sync_timestamp", ""))
+    timestamp = str(data.get("last_sync_timestamp", ""))
 
     files: dict[str, FileRecord] = {}
     for key, val in data.get("files", {}).items():
         if isinstance(val, dict) and "size" in val and "mtime" in val:
-            files[key] = {"size": int(val["size"]), "mtime": normalise_mtime(float(val["mtime"]))}
+            files[key] = {"size": int(val["size"]), "mtime": float(val["mtime"])}
 
     return (timestamp, files)
 

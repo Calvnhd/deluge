@@ -156,12 +156,12 @@ def compute_sync(
         dst_entry = dst_scan.files[key]
 
         # Choose comparison target: manifest entry if it exists, otherwise use destination stat
-        if manifest is not None and key in manifest:
-            cmp_size: int = manifest[key]["size"]
-            cmp_mtime: float = manifest[key]["mtime"]
-        else:
-            cmp_size = dst_entry.size
-            cmp_mtime = dst_entry.mtime
+        # if manifest is not None and key in manifest:
+        #     cmp_size: int = manifest[key]["size"]
+        #     cmp_mtime: float = manifest[key]["mtime"]
+        # else:
+        cmp_size = dst_entry.size
+        cmp_mtime = normalise_mtime(dst_entry.mtime)
 
         if src_entry.size != cmp_size:
             # Size differs → copy (overwrite)
@@ -187,7 +187,6 @@ def compute_sync(
 
 
 def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> None:
-    # TODO-v0.1-REVIEW
     """Print a human-readable summary of what the sync would do.
 
     Parameters
@@ -222,7 +221,6 @@ def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> No
 # Plan execution
 # ---------------------------------------------------------------------------
 
-# TODO: Do we actually need a delete mode?
 def execute_plan(
     plan: SyncPlan,
     *,
@@ -285,6 +283,7 @@ def execute_plan(
     trashed = 0
     trash_count = len(plan.files_to_delete)
     if trash_count and delete_mode == "trash":
+        print(f"Trashing {trash_count} files...")
         trash_base = dest / _TRASH_DIR_NAME / datetime.now().strftime("%Y%m%d_%H%M%S")
         try:
             for path in plan.files_to_delete:
@@ -303,6 +302,7 @@ def execute_plan(
                 remaining=trash_count - trashed - 1,
             ) from exc
     elif trash_count and delete_mode == "delete":
+        print(f"Deleting {trash_count} files...")
         try:
             for path in plan.files_to_delete:
                 path.unlink()
@@ -345,8 +345,8 @@ def append_sync_log(
 ) -> None:
     """Append a structured entry to the sync execution log."""
     if log_path is None:
-        from deluge_lib.paths import SYNC_LOG_PATH
-        log_path = SYNC_LOG_PATH
+        from deluge_lib.paths import FROM_SD_SYNC_LOG_PATH
+        log_path = FROM_SD_SYNC_LOG_PATH
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
     status = "FAILED" if error else "SUCCESS"
