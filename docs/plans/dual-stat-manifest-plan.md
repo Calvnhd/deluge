@@ -4,7 +4,7 @@
 > **Date:** 02 May 2026
 > **Research:** [manifest-sync-comparison-research.md](../research/manifest-sync-comparison-research.md)
 > **Pipeline:** Research → **Plan** → Implement
-> **Status:** Draft
+> **Status:** Complete
 
 ## Executive Summary
 
@@ -98,11 +98,11 @@ Data flow after changes:
 - **Inputs:** Current TypedDict definitions
 - **Outputs:** Updated TypedDicts
 - **Acceptance Criteria:**
-  - [ ] `FileRecord` in `sync_from_sd.py` has fields `sd_size: int`, `sd_mtime: float`, `local_size: int`, `local_mtime: float`
-  - [ ] `_FileRecord` in `syncing.py` has the same four fields
-  - [ ] No type errors reported by the editor
+  - [x] `FileRecord` in `sync_from_sd.py` has fields `sd_size: int`, `sd_mtime: float`, `local_size: int`, `local_mtime: float`
+  - [x] `_FileRecord` in `syncing.py` has the same four fields
+  - [x] No type errors reported by the editor
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > TypedDict definitions updated. No other code changed — field access updates come in later tasks.
 
 #### Task 1.2: Update `_read_manifest()`
 
@@ -110,11 +110,11 @@ Data flow after changes:
 - **Inputs:** Current `_read_manifest()` in `sync_from_sd.py`
 - **Outputs:** Reader that loads dual-stat entries and gracefully drops old-format ones
 - **Acceptance Criteria:**
-  - [ ] New-format entries (`sd_size`, `sd_mtime`, `local_size`, `local_mtime`) are loaded correctly
-  - [ ] Old-format entries (only `size` and `mtime`) are silently dropped (not loaded into the dict)
-  - [ ] Missing file / corrupt JSON still returns `("", {})`
+  - [x] New-format entries (`sd_size`, `sd_mtime`, `local_size`, `local_mtime`) are loaded correctly
+  - [x] Old-format entries (only `size` and `mtime`) are silently dropped (not loaded into the dict)
+  - [x] Missing file / corrupt JSON still returns `("", {})`
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > Validation updated to check for all four new field names. Old-format entries with only `size`/`mtime` silently fail the check and are skipped. No changes to `_write_manifest()` or error handling paths.
 
 ### Phase 2: Manifest Builder
 
@@ -127,13 +127,13 @@ Data flow after changes:
 - **Inputs:** Current `_build_post_sync_manifest()` in `sync_from_sd.py`
 - **Outputs:** Builder that produces `{sd_size, sd_mtime, local_size, local_mtime}` entries
 - **Acceptance Criteria:**
-  - [ ] Copied files: entry has `sd_size`/`sd_mtime` from `src_scan` and `local_size`/`local_mtime` from `stat()` of dest file
-  - [ ] Unchanged files with prior dual-stat entry: entry preserved as-is
-  - [ ] Unchanged files with no prior entry: `sd_*` from `src_scan`, `local_*` from `stat()` of dest file
-  - [ ] Trashed files: not in output (existing behaviour, unchanged)
-  - [ ] Filtered sync carry-forward: entries for unscanned file types preserved (existing behaviour)
+  - [x] Copied files: entry has `sd_size`/`sd_mtime` from `src_scan` and `local_size`/`local_mtime` from `stat()` of dest file
+  - [x] Unchanged files with prior dual-stat entry: entry preserved as-is
+  - [x] Unchanged files with no prior entry: `sd_*` from `src_scan`, `local_*` from `stat()` of dest file
+  - [x] Trashed files: not in output (existing behaviour, unchanged)
+  - [x] Filtered sync carry-forward: entries for unscanned file types preserved (existing behaviour)
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > Three branches updated to produce `{sd_size, sd_mtime, local_size, local_mtime}` entries. Copied files and no-prior-entry files stat the dest file via `(dest / src_entry.rel_path).stat()`. Unchanged files with existing entries preserved as-is. Filtered-sync carry-forward unchanged (already passes through `old_entry`). Raw `local_mtime` stored per D3.
 
 ### Phase 3: Comparison Logic
 
@@ -146,15 +146,15 @@ Data flow after changes:
 - **Inputs:** Current commented-out block in `compute_sync()`, lines ~148–163 of `syncing.py`
 - **Outputs:** Working dual-stat comparison
 - **Acceptance Criteria:**
-  - [ ] Manifest block is uncommented and reworked with dual-stat logic
-  - [ ] SD-side check: `src_entry.size != m["sd_size"] or not _mtime_matches(src_entry.mtime, m["sd_mtime"])`
-  - [ ] Local-side check: `dst_entry.size != m["local_size"] or dst_entry.mtime != m["local_mtime"]`
-  - [ ] Either check failing → file added to `files_to_copy`
-  - [ ] Both checks passing → `files_unchanged` incremented
-  - [ ] `manifest is None` code path completely untouched
-  - [ ] No-manifest-entry fallback (key not in manifest) falls through to existing direct comparison
+  - [x] Manifest block is uncommented and reworked with dual-stat logic
+  - [x] SD-side check: `src_entry.size != m["sd_size"] or not _mtime_matches(src_entry.mtime, m["sd_mtime"])`
+  - [x] Local-side check: `dst_entry.size != m["local_size"] or dst_entry.mtime != m["local_mtime"]`
+  - [x] Either check failing → file added to `files_to_copy`
+  - [x] Both checks passing → `files_unchanged` incremented
+  - [x] `manifest is None` code path completely untouched
+  - [x] No-manifest-entry fallback (key not in manifest) falls through to existing direct comparison
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > Replaced the commented-out single-stat manifest block with dual-stat logic. Two boolean checks (`sd_changed`, `local_drifted`) computed independently — SD-side uses `_mtime_matches()` (FAT32 tolerance, D5), local-side uses exact `!=` (NTFS-to-NTFS, D4). `else` branch falls back to direct SD vs local comparison with `normalise_mtime()` for the fallback mtime check. Docstring updated to describe dual-stat manifest fields.
 
 ### Phase 4: Tests
 
@@ -167,11 +167,11 @@ Data flow after changes:
 - **Inputs:** Current tests in `test_syncing.py`
 - **Outputs:** Updated tests passing with new manifest format
 - **Acceptance Criteria:**
-  - [ ] `test_manifest_entry_used_when_available` passes with dual-stat manifest entry
-  - [ ] `test_fallback_to_dest_stat_when_no_manifest_entry` passes (manifest has entries for other files in new format)
-  - [ ] All pre-existing non-manifest tests still pass unchanged
+  - [x] `test_manifest_entry_used_when_available` passes with dual-stat manifest entry
+  - [x] `test_fallback_to_dest_stat_when_no_manifest_entry` passes (manifest has entries for other files in new format)
+  - [x] All pre-existing non-manifest tests still pass unchanged
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > Updated both manifest test dicts from `{"size", "mtime"}` to `{"sd_size", "sd_mtime", "local_size", "local_mtime"}`. For `test_manifest_entry_used_when_available`, `local_mtime` set to the dest file's mtime (`1_600_000_000.0`) so both SD and local checks pass → file skipped. For `test_fallback_to_dest_stat_when_no_manifest_entry`, the unrelated manifest entry updated to four-field format. All 28 tests pass.
 
 #### Task 4.2: Add new dual-stat comparison tests in `test_syncing.py`
 
@@ -179,14 +179,14 @@ Data flow after changes:
 - **Inputs:** Scenario walkthroughs from research
 - **Outputs:** New test cases in `TestComputeSyncManifest`
 - **Acceptance Criteria:**
-  - [ ] **Local size drift detected:** SD unchanged, local file has different size → copy
-  - [ ] **Local mtime drift detected:** SD unchanged, local file has different mtime (same size) → copy
-  - [ ] **SD change detected:** SD stats differ from manifest `sd_*` → copy (even if local matches `local_*`)
-  - [ ] **Both sides changed:** SD changed AND local drifted → copy
-  - [ ] **Null-timestamp idempotent:** SD mtime is `-11644473600.0`, manifest `sd_mtime` matches, local mtime matches `local_mtime` → skip (no false positive)
-  - [ ] **Old-format entry treated as missing:** Manifest entry with only `size`/`mtime` not loaded → falls through to direct comparison
+  - [x] **Local size drift detected:** SD unchanged, local file has different size → copy
+  - [x] **Local mtime drift detected:** SD unchanged, local file has different mtime (same size) → copy
+  - [x] **SD change detected:** SD stats differ from manifest `sd_*` → copy (even if local matches `local_*`)
+  - [x] **Both sides changed:** SD changed AND local drifted → copy
+  - [x] **Null-timestamp idempotent:** SD mtime is `-11644473600.0`, manifest `sd_mtime` matches, local mtime matches `local_mtime` → skip (no false positive)
+  - [x] **Old-format entry treated as missing:** Manifest entry with only `size`/`mtime` not loaded → falls through to direct comparison
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > Added 5 tests to `TestComputeSyncManifest` in `test_syncing.py` and 1 test to `TestReadManifest` in `test_sync_from_sd.py`. Null-timestamp test uses `monkeypatch` to mock `scan_tree` since Windows NTFS cannot set negative mtimes. Old-format test placed in `TestReadManifest` (its natural home) — writes raw JSON with mixed old/new entries and verifies `_read_manifest()` drops old-format ones. All 33 `test_syncing.py` tests pass (28 original + 5 new).
 
 #### Task 4.3: Update manifest builder tests in `test_sync_from_sd.py`
 
@@ -194,12 +194,12 @@ Data flow after changes:
 - **Inputs:** Current tests in `test_sync_from_sd.py`
 - **Outputs:** Updated tests passing with new manifest format
 - **Acceptance Criteria:**
-  - [ ] `test_creates_correct_entries_after_sync` verifies entry has all four fields (`sd_size`, `sd_mtime`, `local_size`, `local_mtime`)
-  - [ ] `test_trashed_files_excluded` uses new format for `old_files`
-  - [ ] `test_valid_manifest_round_trip` uses new four-field format and verifies round-trip
-  - [ ] A new test verifies that unchanged files with no prior entry get local stats from `stat()` of dest file
+  - [x] `test_creates_correct_entries_after_sync` verifies entry has all four fields (`sd_size`, `sd_mtime`, `local_size`, `local_mtime`)
+  - [x] `test_trashed_files_excluded` uses new format for `old_files`
+  - [x] `test_valid_manifest_round_trip` uses new four-field format and verifies round-trip
+  - [x] A new test verifies that unchanged files with no prior entry get local stats from `stat()` of dest file
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > Updated three existing tests from old `size`/`mtime` fields to four-field format (`sd_size`, `sd_mtime`, `local_size`, `local_mtime`). `test_creates_correct_entries_after_sync` now asserts all four fields with SD stats from src_scan and local stats from dest file stat(). `test_trashed_files_excluded` old_files dict updated to four-field format. `test_valid_manifest_round_trip` uses four-field entries and verifies round-trip for both `sd_*` and `local_*` fields. Added `test_unchanged_no_prior_entry_stats_dest` covering the no-prior-entry branch. All 377 tests pass.
 
 ### Phase 5: Verification
 
@@ -210,10 +210,10 @@ Data flow after changes:
 
 - **Description:** Run `pytest` from the `scripts/` directory. All tests must pass.
 - **Acceptance Criteria:**
-  - [ ] `pytest` exits with 0 failures
-  - [ ] No warnings related to manifest format or type mismatches
+  - [x] `pytest` exits with 0 failures
+  - [x] No warnings related to manifest format or type mismatches
 - **Implementation Notes:**
-  > _(space for implementer)_
+  > 377/377 tests passed in 1.47s. No warnings. Exit code 0.
 
 #### Task 5.2: Manual smoke test (optional)
 
@@ -228,11 +228,11 @@ Data flow after changes:
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
-| Phase 1: Manifest Format and I/O | Not Started | 0/2 | |
-| Phase 2: Manifest Builder | Not Started | 0/1 | |
-| Phase 3: Comparison Logic | Not Started | 0/1 | |
-| Phase 4: Tests | Not Started | 0/3 | |
-| Phase 5: Verification | Not Started | 0/2 | |
+| Phase 1: Manifest Format and I/O | Complete | 2/2 | Tasks 1.1, 1.2 complete |
+| Phase 2: Manifest Builder | Complete | 1/1 | Task 2.1 complete |
+| Phase 3: Comparison Logic | Complete | 1/1 | Task 3.1 complete |
+| Phase 4: Tests | Complete | 3/3 | Tasks 4.1, 4.2, 4.3 complete |
+| Phase 5: Verification | Complete | 1/2 | Task 5.1 complete. Task 5.2 skipped (SD card not mounted). |
 
 ## Open Questions
 

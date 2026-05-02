@@ -133,7 +133,7 @@ Per `standards/project.md` §4 and §5:
   - [x] Calls `compute_sync(deluge_root, sd_path)` (repo as source, SD as dest)
   - [x] Calls `print_plan()` with `delete_label="delete"`
   - [x] `--dry-run` prints plan and exits without prompting
-  - [x] "Already up to date." message when no changes detected
+  - [x] "Already up to date" message when no changes detected
   - [x] Follows `def main(argv=None)` + `if __name__` guard pattern
 - **Implementation Notes:**
   > Created `scripts/sync_to_sd.py` following `sync_samples_to_cloud.py` pattern. CLI and preview implemented in `main()`. All criteria verified by `TestDryRun` and `TestUpToDate` test classes.
@@ -205,7 +205,7 @@ Per `standards/project.md` §4 and §5:
 - **Outputs:** `scripts/tests/test_sync_to_sd.py` with initial test classes
 - **Acceptance Criteria:**
   - [x] `TestDryRun` class: verifies plan is printed, no files modified on "SD" (tmp_path), no prompt shown
-  - [x] `TestUpToDate` class: verifies "Already up to date." output when source and dest match
+  - [x] `TestUpToDate` class: verifies "Already up to date" output when source and dest match
   - [x] Uses `tmp_path`, `monkeypatch.setenv()`, `patch("deluge_lib.cli_utils.load_dotenv")`, `_touch()` helper
   - [x] Uses `capsys` for output assertions
 - **Implementation Notes:**

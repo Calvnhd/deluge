@@ -51,7 +51,7 @@ def main(argv: list[str] | None = None) -> None:
     )
 
     if not plan.files_to_copy and not plan.files_to_delete:
-        print("Already up to date.")
+        print("Already up to date")
         return
 
     print_plan(plan, dest=dest, delete_label="delete")

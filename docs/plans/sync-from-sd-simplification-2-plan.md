@@ -186,7 +186,7 @@ No architectural changes. The module structure remains the same. All changes are
 
 #### Task 2.2: Simplify post-compute_sync flow in main
 
-- **Description:** Restructure the post-`compute_sync()` section of `main()` to eliminate the three separate empty-plan checks and the two plan-printing paths (DRY RUN vs DRY RUN PREVIEW). The new flow: (1) if plan is empty, print "Already up to date." and return; (2) print the plan (always); (3) if `--dry-run`, print "Dry run complete." and return; (4) call `confirm_apply()`, proceed or abort. Also remove the `--confirm` flag and its mutually exclusive group from argparse. Update the module docstring.
+- **Description:** Restructure the post-`compute_sync()` section of `main()` to eliminate the three separate empty-plan checks and the two plan-printing paths (DRY RUN vs DRY RUN PREVIEW). The new flow: (1) if plan is empty, print "Already up to date" and return; (2) print the plan (always); (3) if `--dry-run`, print "Dry run complete." and return; (4) call `confirm_apply()`, proceed or abort. Also remove the `--confirm` flag and its mutually exclusive group from argparse. Update the module docstring.
 - **Files:** `scripts/sync_from_sd.py`
 - **Acceptance Criteria:**
   - [x] Only one `_plan_is_empty()` check remains

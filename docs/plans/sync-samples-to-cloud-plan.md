@@ -259,7 +259,7 @@ scripts/
   5. Scan source with `scan_tree(source, label="source", extensions={".wav"})`
   6. Scan destination with `scan_tree(dest, label="destination", extensions={".wav"})`
   7. Compute sync plan with `compute_sync()` — pass `manifest=None` (no manifest)
-  8. If plan is empty, print "Already up to date." and exit
+  8. If plan is empty, print "Already up to date" and exit
   9. Print plan with `print_plan(plan, dest=dest, delete_label="delete")`
   10. If `--dry-run`, print "Dry run complete." and exit
   11. Prompt with `confirm_apply()`

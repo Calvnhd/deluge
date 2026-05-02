@@ -17,7 +17,7 @@ from typing import TypedDict
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
 from deluge_lib.paths import MANIFEST_PATH
-from deluge_lib.scanning import ScanResult, normalise_key
+from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
     SyncError,
     SyncPlan,
@@ -32,10 +32,12 @@ from deluge_lib.syncing import (
 
 
 class FileRecord(TypedDict):
-    """Per-file manifest entry with size and modification time."""
+    """Per-file dual-stat manifest entry — SD-side and local-side stats."""
 
-    size: int
-    mtime: float
+    sd_size: int
+    sd_mtime: float
+    local_size: int
+    local_mtime: float
 
 
 FilesDict = dict[str, FileRecord]
@@ -59,8 +61,13 @@ def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
 
     files: dict[str, FileRecord] = {}
     for key, val in data.get("files", {}).items():
-        if isinstance(val, dict) and "size" in val and "mtime" in val:
-            files[key] = {"size": int(val["size"]), "mtime": float(val["mtime"])}
+        if isinstance(val, dict) and "sd_size" in val and "sd_mtime" in val and "local_size" in val and "local_mtime" in val:
+            files[key] = {
+                "sd_size": int(val["sd_size"]),
+                "sd_mtime": float(val["sd_mtime"]),
+                "local_size": int(val["local_size"]),
+                "local_mtime": float(val["local_mtime"]),
+            }
 
     return (timestamp, files)
 
@@ -135,16 +142,19 @@ def _build_post_sync_manifest(
 
     new_files: dict[str, FileRecord] = {}
     for key, src_entry in src_scan.files.items():
-        if key in copied_keys:
-            # Copied: use the normalised source mtime (already on FAT32 grid).
-            new_files[key] = {"size": src_entry.size, "mtime": src_entry.mtime}
-        elif key in old_files:
-            # Unchanged with existing manifest entry: preserve.
-            old = old_files[key]
-            new_files[key] = {"size": old["size"], "mtime": old["mtime"]}
+        if key in old_files and key not in copied_keys:
+            # Unchanged with existing manifest entry: preserve as-is.
+            new_files[key] = old_files[key]
         else:
-            # Unchanged but no prior manifest entry (first run): use source stat.
-            new_files[key] = {"size": src_entry.size, "mtime": src_entry.mtime}
+            # Copied or no prior entry: SD stats from scan, local stats from dest file.
+            dst_path = dest / src_entry.rel_path
+            dst_stat = dst_path.stat()
+            new_files[key] = {
+                "sd_size": src_entry.size,
+                "sd_mtime": src_entry.mtime, # SD time is normalized upstream via scan_tree()
+                "local_size": dst_stat.st_size,
+                "local_mtime": normalise_mtime(dst_stat.st_mtime),
+            }
 
     # Preserve manifest entries for file types not included in this filtered sync.
     if file_filter != "both":
@@ -201,7 +211,7 @@ def main(argv: list[str] | None = None) -> None:
     plan, src_scan = compute_sync(sd_path, deluge_root, manifest=manifest_files, file_filter=file_filter)
 
     if not plan.files_to_copy and not plan.files_to_delete:
-        print("Already up to date.")
+        print("Already up to date")
         return
 
     print_plan(plan, dest=deluge_root)

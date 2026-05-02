@@ -172,7 +172,7 @@ def main(argv: list[str] | None = None) -> None:
     plan, _src_scan = compute_sync(deluge_root, sd_path, file_filter=file_filter)
 
     if not plan.files_to_copy and not plan.files_to_delete:
-        print("Already up to date.")
+        print("Already up to date")
         return
 
     print_plan(plan, dest=sd_path, delete_label="delete")

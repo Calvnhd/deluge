@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 
 from tests.conftest import _touch
-from deluge_lib.scanning import FileEntry, ScanResult
+from deluge_lib.scanning import FileEntry, ScanResult, normalise_mtime
 from deluge_lib.syncing import (
     SyncError,
     SyncPlan,
@@ -172,14 +172,18 @@ class TestComputeSyncManifest:
         src_mtime = 1_700_000_000.0
         _touch(src / "KITS" / "Kit.XML", content, mtime=src_mtime)
         # Dest has wrong mtime (simulates git clone destroying mtime)
-        _touch(dst / "KITS" / "Kit.XML", content, mtime=1_600_000_000.0)
+        dst_mtime = 1_600_000_000.0
+        _touch(dst / "KITS" / "Kit.XML", content, mtime=dst_mtime)
 
-        # Manifest records the correct mtime from last sync
-        manifest = {"kits/kit.xml": {"size": len(content), "mtime": src_mtime}}
+        # Manifest records both SD and local stats from last sync
+        manifest = {"kits/kit.xml": {
+            "sd_size": len(content), "sd_mtime": src_mtime,
+            "local_size": len(content), "local_mtime": dst_mtime,
+        }}
 
         plan, _ = compute_sync(src, dst, manifest=manifest)
 
-        # Manifest mtime matches source → unchanged (not a copy)
+        # SD stats match manifest sd_* AND local stats match manifest local_* → unchanged
         assert plan.files_to_copy == []
         assert plan.files_unchanged == 1
 
@@ -193,7 +197,128 @@ class TestComputeSyncManifest:
         _touch(dst / "KITS" / "Kit.XML", content, mtime=mtime)
 
         # Manifest exists but has no entry for this file
-        manifest = {"other/file.xml": {"size": 10, "mtime": 1.0}}
+        manifest = {"other/file.xml": {
+            "sd_size": 10, "sd_mtime": 1.0,
+            "local_size": 10, "local_mtime": 1.0,
+        }}
+
+        plan, _ = compute_sync(src, dst, manifest=manifest)
+
+        assert plan.files_to_copy == []
+        assert plan.files_unchanged == 1
+
+    def test_local_size_change_detected(self, tmp_path: Path) -> None:
+        """SD unchanged but local file has different size → copy."""
+        src = tmp_path / "src"
+        dst = tmp_path / "dst"
+        content = b"x" * 100
+        sd_mtime = normalise_mtime(1_700_000_000.0)
+        local_mtime = normalise_mtime(1_690_000_000.0)
+        _touch(src / "KITS" / "Kit.XML", content, mtime=sd_mtime)
+        # Dest file has 120 bytes — differs from manifest local_size of 100
+        _touch(dst / "KITS" / "Kit.XML", b"x" * 120, mtime=local_mtime)
+
+        manifest = {"kits/kit.xml": {
+            "sd_size": len(content), "sd_mtime": sd_mtime,
+            "local_size": len(content), "local_mtime": local_mtime,
+        }}
+
+        plan, _ = compute_sync(src, dst, manifest=manifest)
+
+        assert len(plan.files_to_copy) == 1
+
+    def test_local_mtime_change_detected(self, tmp_path: Path) -> None:
+        """SD unchanged but local file has different mtime (same size) → copy."""
+        src = tmp_path / "src"
+        dst = tmp_path / "dst"
+        content = b"x" * 100
+        sd_mtime = normalise_mtime(1_700_000_000.0)
+        local_mtime = normalise_mtime(1_690_000_000.0)
+        changed_mtime = normalise_mtime(1_680_000_000.0)
+        _touch(src / "KITS" / "Kit.XML", content, mtime=sd_mtime)
+        # Dest file has same size but different mtime from manifest local_mtime
+        _touch(dst / "KITS" / "Kit.XML", content, mtime=changed_mtime)
+
+        manifest = {"kits/kit.xml": {
+            "sd_size": len(content), "sd_mtime": sd_mtime,
+            "local_size": len(content), "local_mtime": local_mtime,
+        }}
+
+        plan, _ = compute_sync(src, dst, manifest=manifest)
+
+        assert len(plan.files_to_copy) == 1
+
+    def test_sd_change_detected_even_if_local_matches(self, tmp_path: Path) -> None:
+        """SD stats differ from manifest sd_* → copy, even if local matches local_*."""
+        src = tmp_path / "src"
+        dst = tmp_path / "dst"
+        old_content = b"x" * 100
+        new_content = b"x" * 150  # SD file has changed size
+        sd_mtime = normalise_mtime(1_700_000_000.0)
+        local_mtime = normalise_mtime(1_690_000_000.0)
+        _touch(src / "KITS" / "Kit.XML", new_content, mtime=sd_mtime)
+        # Dest matches manifest local_* exactly
+        _touch(dst / "KITS" / "Kit.XML", old_content, mtime=local_mtime)
+
+        manifest = {"kits/kit.xml": {
+            "sd_size": len(old_content), "sd_mtime": sd_mtime,
+            "local_size": len(old_content), "local_mtime": local_mtime,
+        }}
+
+        plan, _ = compute_sync(src, dst, manifest=manifest)
+
+        assert len(plan.files_to_copy) == 1
+
+    def test_both_changed_triggers_copy(self, tmp_path: Path) -> None:
+        """SD changed AND local changed → copy."""
+        src = tmp_path / "src"
+        dst = tmp_path / "dst"
+        sd_mtime = normalise_mtime(1_700_000_000.0)
+        local_mtime = normalise_mtime(1_690_000_000.0)
+        changed_mtime = normalise_mtime(1_680_000_000.0)
+        # SD file differs from manifest sd_size
+        _touch(src / "KITS" / "Kit.XML", b"x" * 200, mtime=sd_mtime)
+        # Dest file differs from manifest local_mtime
+        _touch(dst / "KITS" / "Kit.XML", b"x" * 100, mtime=changed_mtime)
+
+        manifest = {"kits/kit.xml": {
+            "sd_size": 100, "sd_mtime": sd_mtime,
+            "local_size": 100, "local_mtime": local_mtime,
+        }}
+
+        plan, _ = compute_sync(src, dst, manifest=manifest)
+
+        assert len(plan.files_to_copy) == 1
+
+    def test_null_timestamp_idempotent(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        """Null FAT32 timestamp (-11644473600.0) does not cause false positive."""
+        src = tmp_path / "src"
+        dst = tmp_path / "dst"
+        content = b"<preset/>"
+        null_mtime = normalise_mtime(-11644473600.0)  # null FAT32 timestamp
+        ntfs_copy_mtime = normalise_mtime(1_777_722_966.0)  # NTFS copy time
+
+        # Create placeholder files (actual mtimes don't matter — we mock
+        # scan_tree because negative mtimes can't be set on Windows NTFS).
+        _touch(src / "SYNTHS" / "Preset.XML", content)
+        _touch(dst / "SYNTHS" / "Preset.XML", content)
+
+        src_scan = ScanResult(files={"synths/preset.xml": FileEntry(
+            rel_path=Path("SYNTHS/Preset.XML"), size=len(content), mtime=null_mtime,
+        )})
+        dst_scan = ScanResult(files={"synths/preset.xml": FileEntry(
+            rel_path=Path("SYNTHS/Preset.XML"), size=len(content), mtime=ntfs_copy_mtime,
+        )})
+        calls = iter([src_scan, dst_scan])
+        monkeypatch.setattr(
+            "deluge_lib.syncing.scan_tree", lambda *a, **kw: next(calls),
+        )
+
+        # Manifest records the null SD mtime and the NTFS copy mtime
+        manifest = {"synths/preset.xml": {
+            "sd_size": len(content), "sd_mtime": null_mtime,
+            "local_size": len(content), "local_mtime": ntfs_copy_mtime,
+        }}
 
         plan, _ = compute_sync(src, dst, manifest=manifest)
 
