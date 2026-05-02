@@ -336,11 +336,6 @@ def execute_plan(
 # Helpers
 # ---------------------------------------------------------------------------
 
-def _default_log_path() -> Path:
-    # TODO-v0.1-REVIEW
-    """Return the default path for the sync execution log."""
-    return Path(__file__).resolve().parent.parent / "data" / "sync.log"
-
 def append_sync_log(
     result: SyncResult,
     *,
@@ -350,7 +345,8 @@ def append_sync_log(
 ) -> None:
     """Append a structured entry to the sync execution log."""
     if log_path is None:
-        log_path = _default_log_path()
+        from deluge_lib.paths import SYNC_LOG_PATH
+        log_path = SYNC_LOG_PATH
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
     status = "FAILED" if error else "SUCCESS"

@@ -9,9 +9,9 @@ from pathlib import Path
 
 from deluge_lib.cli_utils import get_deluge_root
 from deluge_lib.deluge_sdk import (
-    default_manifests_dir,
     hash_all_samples,
 )
+from deluge_lib.paths import SNAPSHOTS_DIR
 
 
 def snapshot(deluge_root: Path) -> Path:
@@ -35,7 +35,7 @@ def snapshot(deluge_root: Path) -> Path:
     }
 
     # Ensure output directory exists
-    manifests_dir = default_manifests_dir()
+    manifests_dir = SNAPSHOTS_DIR
     manifests_dir.mkdir(parents=True, exist_ok=True)
 
     snapshot_path = manifests_dir / f"snapshot-{snapshot_date}.json"

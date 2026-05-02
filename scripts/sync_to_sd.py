@@ -19,6 +19,7 @@ from datetime import datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
+from deluge_lib.paths import TO_SD_SYNC_LOG_PATH
 from deluge_lib.syncing import (
     SyncError,
     SyncPlan,
@@ -27,8 +28,6 @@ from deluge_lib.syncing import (
     compute_sync,
     print_plan,
 )
-
-_TO_SD_LOG_PATH = Path(__file__).resolve().parent / "data" / "to_sd_sync.log"
 
 
 def _execute_to_sd(
@@ -203,7 +202,7 @@ def main(argv: list[str] | None = None) -> None:
             error_result,
             elapsed_seconds=elapsed,
             error=str(exc),
-            log_path=_TO_SD_LOG_PATH,
+            log_path=TO_SD_SYNC_LOG_PATH,
         )
         print()
         print(f"ERROR: Operation failed on: {exc.file}")
@@ -212,7 +211,7 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(1) from None
     elapsed = time.monotonic() - start_time
 
-    append_sync_log(result, elapsed_seconds=elapsed, log_path=_TO_SD_LOG_PATH)
+    append_sync_log(result, elapsed_seconds=elapsed, log_path=TO_SD_SYNC_LOG_PATH)
 
     print()
     print(

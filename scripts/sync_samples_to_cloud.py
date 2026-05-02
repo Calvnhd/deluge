@@ -10,9 +10,9 @@ from __future__ import annotations
 
 import argparse
 import time
-from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_cloud_backup_path, get_deluge_root
+from deluge_lib.paths import CLOUD_SYNC_LOG_PATH
 from deluge_lib.syncing import (
     SyncError,
     SyncResult,
@@ -21,8 +21,6 @@ from deluge_lib.syncing import (
     execute_plan,
     print_plan,
 )
-
-_CLOUD_LOG_PATH = Path(__file__).resolve().parent / "data" / "cloud_sync.log"
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -83,7 +81,7 @@ def main(argv: list[str] | None = None) -> None:
             error_result,
             elapsed_seconds=elapsed,
             error=str(exc),
-            log_path=_CLOUD_LOG_PATH,
+            log_path=CLOUD_SYNC_LOG_PATH,
         )
         print()
         print(f"ERROR: Operation failed on: {exc.file}")
@@ -92,7 +90,7 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(1) from None
     elapsed = time.monotonic() - start_time
 
-    append_sync_log(result, elapsed_seconds=elapsed, log_path=_CLOUD_LOG_PATH)
+    append_sync_log(result, elapsed_seconds=elapsed, log_path=CLOUD_SYNC_LOG_PATH)
 
     print()
     print(

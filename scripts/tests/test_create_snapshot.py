@@ -60,7 +60,7 @@ class TestSnapshot:
         deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": b"kick"})
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir), \
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir), \
              patch("create_snapshot.date") as mock_date:
             mock_date.today.return_value.isoformat.return_value = "2026-04-02"
             result_path = snapshot(deluge_root)
@@ -81,7 +81,7 @@ class TestSnapshot:
         deluge_root = _make_deluge_tree(tmp_path, {"a.wav": b"a"})
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir), \
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir), \
              patch("create_snapshot.date") as mock_date:
             mock_date.today.return_value.isoformat.return_value = "2026-04-02"
             result_path = snapshot(deluge_root)
@@ -96,7 +96,7 @@ class TestSnapshot:
         )
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir):
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir):
             result_path = snapshot(deluge_root)
         data = json.loads(result_path.read_text())
 
@@ -113,7 +113,7 @@ class TestSnapshot:
         })
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir):
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir):
             result_path = snapshot(deluge_root)
         data = json.loads(result_path.read_text())
 
@@ -133,7 +133,7 @@ class TestSnapshot:
         })
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir):
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir):
             snapshot(deluge_root)
 
         captured = capsys.readouterr()
@@ -148,7 +148,7 @@ class TestSnapshot:
         })
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir):
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir):
             result_path = snapshot(deluge_root)
 
         captured = capsys.readouterr()
@@ -163,7 +163,7 @@ class TestSnapshot:
 
         assert not output_dir.exists()
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir):
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir):
             snapshot(deluge_root)
 
         assert output_dir.is_dir()
@@ -175,7 +175,7 @@ class TestSnapshot:
         (deluge_root / "SAMPLES").mkdir(parents=True)
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir):
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir):
             result_path = snapshot(deluge_root)
         data = json.loads(result_path.read_text())
 
@@ -188,7 +188,7 @@ class TestSnapshot:
         deluge_root.mkdir()
         output_dir = tmp_path / "manifests"
 
-        with patch("create_snapshot.default_manifests_dir", return_value=output_dir):
+        with patch("create_snapshot.SNAPSHOTS_DIR", output_dir):
             result_path = snapshot(deluge_root)
         data = json.loads(result_path.read_text())
 
@@ -207,7 +207,7 @@ class TestMain:
         output_dir = tmp_path / "manifests"
 
         with patch("create_snapshot.get_deluge_root", return_value=deluge_root), patch(
-            "create_snapshot.default_manifests_dir", return_value=output_dir
+            "create_snapshot.SNAPSHOTS_DIR", output_dir
         ):
             main([])
 

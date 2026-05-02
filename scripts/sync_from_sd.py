@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import TypedDict
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
+from deluge_lib.paths import MANIFEST_PATH
 from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
     SyncError,
@@ -38,11 +39,6 @@ class FileRecord(TypedDict):
 
 
 FilesDict = dict[str, FileRecord]
-
-
-def _default_manifest_path() -> Path:
-    """Return the default manifest path (``scripts/data/manifest.json``)."""
-    return Path(__file__).resolve().parent / "data" / "manifest.json"
 
 
 def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
@@ -201,7 +197,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
 
     # Load manifest (empty state on first run or if corrupt).
-    manifest_path = _default_manifest_path()
+    manifest_path = MANIFEST_PATH
     manifest_ts, manifest_files = _read_manifest(manifest_path)
 
     print(f"Source:      {sd_path}")
