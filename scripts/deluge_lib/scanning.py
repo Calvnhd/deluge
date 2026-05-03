@@ -13,51 +13,39 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 from typing import Literal
 
-FileFilter = Literal["wav", "xml", "both"]
-
-
 def normalise_key(path: str | Path) -> str:
-    # TODO-v0.1-REVIEW
     """Convert *path* to a normalised lookup key: lowercase with forward slashes.
 
-    Used for case-insensitive dict matching and cross-platform manifest
-    portability.  Works on both ``str`` and ``Path`` inputs.
+    Used for case-insensitive dict matching and cross-platform portability. 
     """
     return str(PurePosixPath(path)).lower()
 
 
 def print_path(path: str | Path) -> str:
-    # TODO-v0.1-REVIEW
-    """Cosmetic consistency. Format *path* forward slashes, preserving case."""
+    """Cosmetic consistency. Use forward slashes and preserve case."""
     return str(PurePosixPath(path))
 
 
 def normalise_mtime(raw_mtime: float) -> float:
-    # TODO-v0.1-REVIEW
-    """Truncate a timestamp to FAT32's 2-second resolution.
-
-    FAT32 stores modification times with 2-second granularity (the seconds
-    field is divided by 2 and truncated).  This function maps any timestamp
-    onto that same grid so that values from FAT32 sources, NTFS sources,
-    and manifest files are directly comparable.
-    """
+    """Truncate a timestamp to FAT32's 2-second resolution."""
     return 2.0 * (raw_mtime // 2.0)
 
+# File extensions to find while scanning
+FileFilter = Literal["wav", "xml", "both"]
 
-# Mapping from FileFilter literals to extension frozensets.
+# Mapping extensions from FileFilter literals to frozensets
 _FILTER_MAP: dict[str, frozenset[str]] = {
     "wav": frozenset({".wav"}),
     "xml": frozenset({".xml"}),
     "both": frozenset({".xml", ".wav"}),
 }
 
-# Directory names to skip entirely (case-insensitive).
+# Directory names to skip (case-insensitive)
 _SKIP_DIRS: frozenset[str] = frozenset({".trash"})
 
 
 def format_size(size_bytes: int) -> str:
-    # TODO-v0.1-REVIEW
-    """Format a byte count as a human-readable string."""
+    """Format a byte count as a human-readable string"""
     if size_bytes < 1024 * 1024:
         return f"{size_bytes / 1024:.1f} KB"
     if size_bytes < 1024 * 1024 * 1024:
@@ -67,7 +55,7 @@ def format_size(size_bytes: int) -> str:
 
 @dataclass(frozen=True)
 class FileEntry:
-    """Stat data for a single scanned file."""
+    """Status data for a single scanned file"""
 
     rel_path: Path
     size: int
@@ -76,12 +64,7 @@ class FileEntry:
 
 @dataclass
 class ScanResult:
-    """Result of scanning a directory tree.
-
-    Attributes:
-        files: Mapping of normalised key (lowercase, forward-slash) to
-            ``FileEntry`` containing the actual relative path, size, and mtime.
-    """
+    """Result of scanning a directory tree"""
 
     files: dict[str, FileEntry] = field(default_factory=dict)
 
@@ -92,24 +75,15 @@ def scan_tree(
     label: str = "source",
     file_filter: FileFilter = "both",
 ) -> ScanResult:
-    """Walk *root* and collect filtered file entries.
+    """Walk *root* and collect filtered file entries
 
-    Parameters
-    ----------
-    root:
-        Any directory to scan.  Does not need to be an SD card.
-    label:
-        Human-readable name shown in progress messages (e.g. ``"source"``,
-        ``"destination"``).
-    file_filter:
-        Which file types to include: ``"wav"``, ``"xml"``, or ``"both"``
-        (the default).
+    Args:
+        root: Directory to scan
+        label: Human-readable name shown in progress messages
+        file_filter: File types to include: `"wav"`, `"xml"`, or `"both"` (default)
 
-    Returns
-    -------
-    ScanResult
-        A dataclass containing:
-        - ``files``: dict mapping normalised keys to ``FileEntry`` objects.
+    Returns:
+        The computed ScanResult
     """
     allowed = _FILTER_MAP[file_filter]
     result = ScanResult()

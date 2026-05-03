@@ -3,7 +3,7 @@
 
 Mirrors all .wav files to CLOUD_BACKUP_PATH, preserving directory structure.
 Files removed from source are hard-deleted from the destination.
-Pass --dry-run to preview only (no prompt).
+Pass --dry-run to preview only.
 """
 
 from __future__ import annotations
@@ -24,14 +24,13 @@ from deluge_lib.syncing import (
 
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Sync WAV samples from DELUGE/SAMPLES/ to a cloud-backup folder."
     )
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Show what would change and exit without prompting.",
+        help="Print planned changes and exit",
     )
     args = parser.parse_args(argv)
 
@@ -39,7 +38,6 @@ def main(argv: list[str] | None = None) -> None:
     source = deluge_root / "SAMPLES"
     if not source.is_dir():
         raise SystemExit(f"Source directory does not exist: {source}")
-
     dest = get_cloud_backup_path()
 
     print(f"Source:      {source}")
@@ -89,7 +87,6 @@ def main(argv: list[str] | None = None) -> None:
         print(f"  {exc.copied} copied, {exc.remaining} remaining")
         raise SystemExit(1) from None
     elapsed = time.monotonic() - start_time
-
     append_sync_log(result, elapsed_seconds=elapsed, log_path=CLOUD_SYNC_LOG_PATH)
 
     print()

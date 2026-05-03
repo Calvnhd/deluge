@@ -9,13 +9,12 @@ so that multiple sync scripts can share them.
 from __future__ import annotations
 
 import shutil
-import time
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from deluge_lib.scanning import FileFilter, ScanResult, print_path, normalise_key, normalise_mtime, scan_tree
+from deluge_lib.scanning import FileFilter, ScanResult, print_path, normalise_mtime, scan_tree
 
 if TYPE_CHECKING:
     from typing import TypedDict
@@ -29,17 +28,8 @@ if TYPE_CHECKING:
     FilesDict = dict[str, _FileRecord]
 
 
-# ---------------------------------------------------------------------------
-# Constants
-# ---------------------------------------------------------------------------
-
 _MTIME_TOLERANCE_S = 2.0
 _TRASH_DIR_NAME = ".trash"
-
-
-# ---------------------------------------------------------------------------
-# Dataclasses
-# ---------------------------------------------------------------------------
 
 
 @dataclass
@@ -68,7 +58,6 @@ class SyncError(Exception):
         unchanged: int = 0,
         remaining: int = 0,
     ) -> None:
-        # TODO-v0.1-REVIEW
         super().__init__(message)
         self.file = file
         self.copied = copied
@@ -79,17 +68,11 @@ class SyncError(Exception):
 
 @dataclass
 class SyncResult:
-    # TODO-v0.1-REVIEW
-    """Outcome of executing a sync plan — counts only."""
+    """Number of files copied, trashed, and unchanged after sync"""
 
     copied: int = 0
     trashed: int = 0
     unchanged: int = 0
-
-
-# ---------------------------------------------------------------------------
-# Comparison helpers
-# ---------------------------------------------------------------------------
 
 
 def _mtime_matches(mtime_a: float, mtime_b: float) -> bool:
@@ -101,11 +84,6 @@ def _mtime_matches(mtime_a: float, mtime_b: float) -> bool:
     return abs(mtime_a - mtime_b) <= _MTIME_TOLERANCE_S
 
 
-# ---------------------------------------------------------------------------
-# Plan computation
-# ---------------------------------------------------------------------------
-
-
 def compute_sync(
     source: Path,
     dest: Path,
@@ -113,52 +91,40 @@ def compute_sync(
     manifest: FilesDict | None = None,
     file_filter: FileFilter = "both",
 ) -> tuple[SyncPlan, ScanResult]:
-    """Walk both trees and build a plan of copy/delete/rename actions.
+    """Walk both trees to build a plan of copy/delete actions for altering
+    the destination directory such that it becomes identical to source.
 
-    Parameters
-    ----------
-    source:
-        Root of the SD card (or any source directory).
-    dest:
-        Root of the local ``DELUGE/`` directory.
-    manifest:
-        Optional manifest dict mapping normalised keys to dual-stat
-        entries with ``sd_size``, ``sd_mtime``, ``local_size``, and
-        ``local_mtime``.  When present, detects both SD-side changes
-        (SD stats vs manifest) and local-side changes (local stats vs
-        manifest).
-    file_filter:
-        Which file types to include: ``"wav"``, ``"xml"``, or ``"both"``
-        (the default).  Forwarded to ``scan_tree()``.
+    Args:
+        source: Source directory to sync with
+        dest: Destination to sync
+        manifest: Optional manifest dict used during SD syncs. Maps normalised 
+            keys to status data for both SD and local sides
+        file_filter: File types to include: "wav", "xml", or
+            "both" (default).  Forwarded to scan_tree().
 
-    Returns
-    -------
-    tuple[SyncPlan, ScanResult]
-        The sync plan and the source scan result (needed for manifest
-        updates after execution).
+    Returns:
+        The sync plan and the source scan result.
     """
     plan = SyncPlan()
 
-    # --- scan source (SD card) ---
+    # --- scan source and dest
     src_scan = scan_tree(source, label="source", file_filter=file_filter)
-
-    # --- scan destination (DELUGE/) ---
     dst_scan = scan_tree(dest, label="destination", file_filter=file_filter)
 
-    # --- compare source → dest (file-level) ---
+    # --- compare source → dest, file by file ---
     for key, src_entry in src_scan.files.items():
         src_path = source / src_entry.rel_path
         dst_path = dest / src_entry.rel_path
 
+        # File is in source but not dest: copy
         if key not in dst_scan.files:
-            # On SD, not in repo → copy
             plan.files_to_copy.append((src_path, dst_path))
             continue
 
         dst_entry = dst_scan.files[key]
 
-        # Deluge firware does not record file creation time, and FAT32 vs NTFS have a bunch of conflicts
-        # Dual-stat manifest check deals with this
+        # Deluge firmware does not record file creation time, and FAT32/NTFS record mtime differently
+        # The manifest lets us check changes on both source and destination for an accurate sync
         if manifest is not None and key in manifest:
             manifest_entry = manifest[key]
             sd_changed = (
@@ -174,7 +140,7 @@ def compute_sync(
             else:
                 plan.files_unchanged += 1
         else:
-            # No manifest entry — fall back to direct SD vs local comparison.
+            # No manifest entry — fall back to direct source vs dest comparison.
             if src_entry.size != dst_entry.size:
                 plan.files_to_copy.append((src_path, dst_path))
             elif not _mtime_matches(src_entry.mtime, normalise_mtime(dst_entry.mtime)):
@@ -182,7 +148,7 @@ def compute_sync(
             else:
                 plan.files_unchanged += 1
 
-    # --- files in dest not on source → trash ---
+    # File in dest but not source: delete
     for key, dst_entry in dst_scan.files.items():
         if key not in src_scan.files:
             plan.files_to_delete.append(dest / dst_entry.rel_path)
@@ -190,23 +156,14 @@ def compute_sync(
     return plan, src_scan
 
 
-# ---------------------------------------------------------------------------
-# Plan display
-# ---------------------------------------------------------------------------
-
-
 def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> None:
     """Print a human-readable summary of what the sync would do.
 
-    Parameters
-    ----------
-    plan:
-        The computed sync plan.
-    dest:
-        Destination root, used to display relative paths.
-    delete_label:
-        Verb printed for files to be removed (e.g. ``"trash"`` or
-        ``"delete"``).
+    Args:
+        plan: The computed sync plan.
+        dest: Destination root, used to display relative paths.
+        delete_label: Verb printed for files to be removed (e.g. "trash" or
+            "delete").
     """
     for _src, dst in plan.files_to_copy:
         rel = dst.relative_to(dest)
@@ -226,43 +183,30 @@ def print_plan(plan: SyncPlan, *, dest: Path, delete_label: str = "trash") -> No
     )
 
 
-# ---------------------------------------------------------------------------
-# Plan execution
-# ---------------------------------------------------------------------------
-
 def execute_plan(
     plan: SyncPlan,
     *,
     dest: Path,
     delete_mode: str = "trash",
 ) -> SyncResult:
-    """Execute the sync plan: copy files and remove extras.
+    """Execute the sync plan: copy and remove files.
 
-    Parameters
-    ----------
-    plan:
-        The computed sync plan.
-    dest:
-        Destination root directory.
-    delete_mode:
-        How to handle files marked for deletion:
+    Args:
+        plan: The computed sync plan.
+        dest: Destination root directory.
+        delete_mode: How to handle files marked for deletion:
 
-        - ``"trash"`` (default): move to a timestamped ``.trash/``
-          subdirectory inside *dest*.
-        - ``"delete"``: hard-delete via ``Path.unlink()`` and clean up
-          empty ancestor directories up to *dest*.
+            - "trash" (default): move to a timestamped .trash/
+              subdirectory inside `dest`.
+            - "delete": hard-delete and clean up empty ancestor directories
+              up to `dest`.
 
-    Returns
-    -------
-    SyncResult
-        Counts of copied, trashed (i.e. removed regardless of mode),
-        and unchanged files.
+    Returns:
+        Counts of copied, trashed/deleted, and unchanged files.
 
-    Raises
-    ------
-    SyncError
-        On any copy or delete failure, with context about completed and
-        remaining operations.
+    Raises:
+        SyncError: On any copy or delete failure, with context about completed
+            and remaining operations.
     """
     copied = 0
     total_copy = len(plan.files_to_copy)
@@ -341,10 +285,6 @@ def execute_plan(
     )
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
 def append_sync_log(
     result: SyncResult,
     *,
@@ -353,11 +293,13 @@ def append_sync_log(
     log_path: Path | None = None,
 ) -> None:
     """Append a structured entry to the sync execution log."""
+
+    # default to "From SD" log if none is specified
     if log_path is None:
         from deluge_lib.paths import FROM_SD_SYNC_LOG_PATH
         log_path = FROM_SD_SYNC_LOG_PATH
-    log_path.parent.mkdir(parents=True, exist_ok=True)
 
+    log_path.parent.mkdir(parents=True, exist_ok=True)
     status = "FAILED" if error else "SUCCESS"
     elapsed_m = int(elapsed_seconds) // 60
     elapsed_s = int(elapsed_seconds) % 60

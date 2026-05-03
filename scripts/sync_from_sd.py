@@ -28,9 +28,6 @@ from deluge_lib.syncing import (
     print_plan,
 )
 
-# -- Manifest types and helpers -----------------------------------------------
-
-
 class FileRecord(TypedDict):
     """Per-file dual-stat manifest entry — SD-side and local-side stats."""
 
@@ -44,11 +41,10 @@ FilesDict = dict[str, FileRecord]
 
 
 def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
-    """Read a manifest JSON file, returning (timestamp, files).
+    """Read a JSON manifest file"""
 
-    Returns ``("", {})`` when the file is missing or contains invalid JSON.
-    """
     if not path.is_file():
+        print(f"Warning: No manifest at {path}")
         return ("", {})
 
     try:
@@ -78,11 +74,7 @@ def _write_manifest(
     timestamp: str,
     files: dict[str, FileRecord],
 ) -> None:
-    """Atomically write a manifest JSON file.
-
-    Uses a temporary file in the same directory followed by a rename
-    to prevent corruption from interrupted writes.
-    """
+    """Atomically write a manifest JSON file"""
     path.parent.mkdir(parents=True, exist_ok=True)
 
     payload = {
@@ -119,37 +111,24 @@ def _build_post_sync_manifest(
     old_files: dict[str, FileRecord],
     file_filter: str = "both",
 ) -> tuple[str, dict[str, FileRecord]]:
-    """Build updated manifest data after a successful sync.
+    """Build updated manifest after a successful sync"""
 
-    Returns ``(timestamp, files)`` where *timestamp* is the current UTC
-    time as an ISO 8601 string and *files* maps normalised keys to
-    ``FileRecord`` dicts.
-
-    - Unchanged files: preserve existing manifest entries.
-    - Copied files: read dest stat for fresh size/mtime.
-    - Trashed files: omitted (not in source scan).
-
-    When *file_filter* is not ``"both"``, old manifest entries whose
-    extensions fall outside the scanned set are carried forward so that
-    a filtered sync does not wipe entries for the other file type.
-    """
     from deluge_lib.scanning import _FILTER_MAP
 
-    # Sets of normalised keys for files that were actively changed.
     copied_keys: set[str] = set()
     for _src, dst in plan.files_to_copy:
         copied_keys.add(normalise_key(dst.relative_to(dest)))
 
-    new_files: dict[str, FileRecord] = {}
+    updated_manifest: dict[str, FileRecord] = {}
     for key, src_entry in src_scan.files.items():
         if key in old_files and key not in copied_keys:
             # Unchanged with existing manifest entry: preserve as-is.
-            new_files[key] = old_files[key]
+            updated_manifest[key] = old_files[key]
         else:
             # Copied or no prior entry: SD stats from scan, local stats from dest file.
             dst_path = dest / src_entry.rel_path
             dst_stat = dst_path.stat()
-            new_files[key] = {
+            updated_manifest[key] = {
                 "sd_size": src_entry.size,
                 "sd_mtime": src_entry.mtime, # SD time is normalized upstream via scan_tree()
                 "local_size": dst_stat.st_size,
@@ -160,13 +139,13 @@ def _build_post_sync_manifest(
     if file_filter != "both":
         scanned_exts = _FILTER_MAP[file_filter]
         for key, old_entry in old_files.items():
-            if key not in new_files:
+            if key not in updated_manifest:
                 ext = Path(key).suffix.lower()
                 if ext not in scanned_exts:
-                    new_files[key] = old_entry
+                    updated_manifest[key] = old_entry
 
     timestamp = datetime.now(tz=UTC).replace(microsecond=0).isoformat()
-    return (timestamp, new_files)
+    return (timestamp, updated_manifest)
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -202,7 +181,7 @@ def main(argv: list[str] | None = None) -> None:
 
     # Load manifest (empty state on first run or if corrupt).
     manifest_path = MANIFEST_PATH
-    manifest_ts, manifest_files = _read_manifest(manifest_path)
+    _, manifest_files = _read_manifest(manifest_path)
 
     print(f"Source:      {sd_path}")
     print(f"Destination: {deluge_root}")
@@ -251,8 +230,11 @@ def main(argv: list[str] | None = None) -> None:
     append_sync_log(result, elapsed_seconds=elapsed)
 
     # Build and write updated manifest after successful sync.
-    new_ts, new_files = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, file_filter)
-    _write_manifest(manifest_path, timestamp=new_ts, files=new_files)
+    try:
+        new_ts, updated_manifest = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, file_filter)
+        _write_manifest(manifest_path, timestamp=new_ts, files=updated_manifest)
+    except OSError as exc:
+        print(f"\nWARNING: Sync succeeded but manifest update failed: {exc}")
 
     print()
     print(
