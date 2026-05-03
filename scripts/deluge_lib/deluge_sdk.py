@@ -49,7 +49,6 @@ class SampleRef:
 
 
 def hash_file(path: Path) -> str:
-    # TODO-v0.1-REVIEW
     """Compute a SHA256 hex digest for a file, reading in chunks.
 
     Args:
@@ -66,12 +65,12 @@ def hash_file(path: Path) -> str:
 
 
 def find_all_wav_files(samples_dir: Path) -> list[Path]:
-    # TODO-v0.1-REVIEW
     """Recursively find all .wav/.WAV files under a directory.
 
-    Returns sorted absolute paths for consistent ordering.
+    Returns sorted absolute paths
     """
     if not samples_dir.is_dir():
+        print(f"WARNING: samples directory does not exist: {samples_dir}")
         return []
     scan = scan_tree(samples_dir, label="samples", file_filter="wav")
     return sorted(samples_dir / entry.rel_path for entry in scan.files.values())
@@ -92,7 +91,6 @@ def get_existing_samples(deluge_root: Path) -> set[str]:
 
 
 def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
-    # TODO-v0.1-REVIEW
     """Hash all WAV files under ``deluge_root / "SAMPLES"`` and group by digest.
 
     Args:
@@ -100,7 +98,6 @@ def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
 
     Returns:
         Mapping of SHA-256 hex digests to lists of relative paths
-        (POSIX-style, relative to *deluge_root*).
     """
     samples_dir = deluge_root / "SAMPLES"
     wav_files = find_all_wav_files(samples_dir)
