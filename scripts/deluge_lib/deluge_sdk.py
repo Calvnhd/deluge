@@ -214,14 +214,14 @@ def parse_deluge_xml(
         try:
             # wrap entire xml in new root element
             root = etree.fromstring(b"<root>" + raw + b"</root>")  # noqa: S320
-            print(f"Warning: {xml_path} has multiple root elements")
+            print(f"\nWarning: {xml_path} has multiple root elements")
             return None, root, False
         except etree.XMLSyntaxError as exc:
             # Lenient parse for files with duplicate attributes, unclosed tags, etc.
             parser = etree.XMLParser(recover=True)
             root = etree.fromstring(b"<root>" + raw + b"</root>", parser=parser)  # noqa: S320
             if not _KNOWN_DUPE_ATTR_RE.search(str(exc)):
-                print(f"Warning: {xml_path} has malformed XML and was parsed with recover=true. {exc}")
+                print(f"\nWarning: {xml_path} has malformed XML and was parsed with recover=true. {exc}")
             return None, root, True
 
 

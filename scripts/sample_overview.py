@@ -510,14 +510,13 @@ def cmd_usage(index, args):
 
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         prog="sample_overview",
         description="Sample library overview \u2014 cross-referenced reports for the Deluge sample library.",
     )
     subparsers = parser.add_subparsers(dest="command")
 
-    # summary
+    # uv run sample_overview summary --top 5
     sp_summary = subparsers.add_parser(
         "summary", help="Library overview with totals and folder breakdown"
     )
@@ -528,7 +527,7 @@ def main(argv: list[str] | None = None) -> None:
         help="Number of top-referenced samples to show (default: 5)",
     )
 
-    # unused
+    # uv run sample_overview unused
     sp_unused = subparsers.add_parser("unused", help="List unreferenced samples")
     unused_mode = sp_unused.add_mutually_exclusive_group()
     unused_mode.add_argument(
@@ -549,13 +548,11 @@ def main(argv: list[str] | None = None) -> None:
         help="Show only the N largest unreferenced samples",
     )
 
-    # missing
     subparsers.add_parser(
         "missing",
         help="List samples referenced in XML but missing from disk",
     )
 
-    # usage
     sp_usage = subparsers.add_parser(
         "usage", help="Show usage detail for samples matching a search term"
     )
@@ -613,10 +610,13 @@ def main(argv: list[str] | None = None) -> None:
     xml_files = find_all_xml_files(deluge_root)
     refs: list[SampleRef] = []
     refs_by_file: dict[Path, list[SampleRef]] = {}
-    for xml_file in xml_files:
+    total = len(xml_files)
+    for i, xml_file in enumerate(xml_files, 1):
+        print(f"\rParsing XML references... {i}/{total}", end="", flush=True)
         file_refs = extract_sample_refs(xml_file, deluge_root)
         refs.extend(file_refs)
         refs_by_file[xml_file] = file_refs
+    print(f"\rParsing XML references... {total}/{total} done")
     index = build_usage_index(refs, sample_scan)
 
     # Branch to subcommand
