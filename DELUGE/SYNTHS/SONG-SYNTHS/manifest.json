@@ -1,0 +1,2758 @@
+{
+  "generated": "2026-05-13T15:42:08.063758+00:00",
+  "songs_processed": 75,
+  "total_count": 231,
+  "extractions": [
+    {
+      "output_filename": "000-Beginagain-Lbl.XML",
+      "source_song": "Beginagain",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000-Bloop-Gld.XML",
+      "source_song": "Bloop",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "patchCables structure: added [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "000-Bloop-Cyn.XML",
+      "source_song": "Bloop",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": [
+        "patchCables structure: added [('compressor', 'volumePostReverbSend')]",
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "defaultParams.portamento"
+      ]
+    },
+    {
+      "output_filename": "000-Bmtk-Gld.XML",
+      "source_song": "Bmtk",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000-Judder-Lbl.XML",
+      "source_song": "Judder",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000-Judder-Pnk.XML",
+      "source_song": "Judder",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "patchCables structure: removed [('lfo1', 'pitch')]"
+      ]
+    },
+    {
+      "output_filename": "000-Lcd-Pnk.XML",
+      "source_song": "Lcd",
+      "preset_name": "000",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "001-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "001",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "002-BeautifulStranger-Pnk.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "002",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "002-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "002",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "002-Japarps-Pnk.XML",
+      "source_song": "Japarps",
+      "preset_name": "002",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "003",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003A-Paddy-Lbl.XML",
+      "source_song": "Paddy",
+      "preset_name": "003A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003A-Paddy-Pnk.XML",
+      "source_song": "Paddy",
+      "preset_name": "003A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "003B-Bingbong-Pnk.XML",
+      "source_song": "Bingbong",
+      "preset_name": "003B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003B-Bloop-Lbl.XML",
+      "source_song": "Bloop",
+      "preset_name": "003B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003B-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "003B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "defaultParams.delayRate",
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "envelope1.release",
+        "envelope2.decay"
+      ]
+    },
+    {
+      "output_filename": "003B-Bloop-Gld.XML",
+      "source_song": "Bloop",
+      "preset_name": "003B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "defaultParams.delayFeedback",
+        "defaultParams.lpfResonance",
+        "patchCable(compressor->volumePostReverbSend).amount",
+        "defaultParams.delayRate",
+        "defaultParams.lpfFrequency",
+        "envelope1.release",
+        "envelope2.decay"
+      ]
+    },
+    {
+      "output_filename": "003B-Judder-Lbl.XML",
+      "source_song": "Judder",
+      "preset_name": "003B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003C-Offbeat-Lbl.XML",
+      "source_song": "Offbeat",
+      "preset_name": "003C",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003D-Spook-Lbl.XML",
+      "source_song": "Spook",
+      "preset_name": "003D",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "004-Colour-Lbl.XML",
+      "source_song": "Colour",
+      "preset_name": "004",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "005-Arpo-Pnk.XML",
+      "source_song": "Arpo",
+      "preset_name": "005",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "006-Bmtk-Cyn.XML",
+      "source_song": "Bmtk",
+      "preset_name": "006",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "007-Stoner-Lbl.XML",
+      "source_song": "Stoner",
+      "preset_name": "007",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "007A-Bmtk-Lbl.XML",
+      "source_song": "Bmtk",
+      "preset_name": "007A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "008-Notbs-Lbl.XML",
+      "source_song": "Notbs",
+      "preset_name": "008",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "008-Offbeat-Gld.XML",
+      "source_song": "Offbeat",
+      "preset_name": "008",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "009-Arparty-Pur.XML",
+      "source_song": "Arparty",
+      "preset_name": "009",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 8,
+      "colour_name": "Purple",
+      "colour_abbr": "Pur",
+      "differing_params": []
+    },
+    {
+      "output_filename": "009-Arparty-old-Pur.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "009",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 8,
+      "colour_name": "Purple",
+      "colour_abbr": "Pur",
+      "differing_params": []
+    },
+    {
+      "output_filename": "009-BeautifulStranger-Pnk.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "009",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "009-Dject-Ylw.XML",
+      "source_song": "Dject",
+      "preset_name": "009",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": [
+        "patchCables structure: removed [('lfo1', 'lpfFrequency')]"
+      ]
+    },
+    {
+      "output_filename": "013-SlpspkArpsOld-Red.XML",
+      "source_song": "SlpspkArpsOld",
+      "preset_name": "013",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-BeautifulStranger-Lbl.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-Bingbong-Lbl.XML",
+      "source_song": "Bingbong",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-Bonk-Lbl.XML",
+      "source_song": "Bonk",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-Leftovers-Ylw.XML",
+      "source_song": "Leftovers",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-Lemon-Pnk.XML",
+      "source_song": "Lemon",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-MWHW-Lbl.XML",
+      "source_song": "MWHW",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-PianoArp-Lbl.XML",
+      "source_song": "PianoArp",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014-Yeti-Lbl.XML",
+      "source_song": "Yeti",
+      "preset_name": "014",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014A-Arparty-Red.XML",
+      "source_song": "Arparty",
+      "preset_name": "014A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014A-Arparty-Ylw.XML",
+      "source_song": "Arparty",
+      "preset_name": "014A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'oscBVolume')]; removed [('lfo1', 'pitch')]"
+      ]
+    },
+    {
+      "output_filename": "014B-Lemon-Lbl.XML",
+      "source_song": "Lemon",
+      "preset_name": "014B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "014B-Yends-Pnk.XML",
+      "source_song": "Yends",
+      "preset_name": "014B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "016-Alr-Pnk.XML",
+      "source_song": "Alr",
+      "preset_name": "016",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "016-Dject-Pnk.XML",
+      "source_song": "Dject",
+      "preset_name": "016",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "018-Dject-Pnk.XML",
+      "source_song": "Dject",
+      "preset_name": "018",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "018-SlpspkRemix-Pnk.XML",
+      "source_song": "SlpspkRemix",
+      "preset_name": "018",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "022-Rr-Lbl.XML",
+      "source_song": "Rr",
+      "preset_name": "022",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "023-Bmtk-Pnk.XML",
+      "source_song": "Bmtk",
+      "preset_name": "023",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "024-Dject-Pnk.XML",
+      "source_song": "Dject",
+      "preset_name": "024",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "024-Offbeat-Gld.XML",
+      "source_song": "Offbeat",
+      "preset_name": "024",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "arpeggiator.mode: 'arp' vs 'off'"
+      ]
+    },
+    {
+      "output_filename": "025-Bonk-Lbl.XML",
+      "source_song": "Bonk",
+      "preset_name": "025",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "027-Alr-Pnk.XML",
+      "source_song": "Alr",
+      "preset_name": "027",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "027A-Yends-Lbl.XML",
+      "source_song": "Yends",
+      "preset_name": "027A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "028-Arparty-Red.XML",
+      "source_song": "Arparty",
+      "preset_name": "028",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "030-SlpspkArpsOld-Pnk.XML",
+      "source_song": "SlpspkArpsOld",
+      "preset_name": "030",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "034-Arparty-Grn.XML",
+      "source_song": "Arparty",
+      "preset_name": "034",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 10,
+      "colour_name": "Green",
+      "colour_abbr": "Grn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "034-Arparty-old-Grn.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "034",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 10,
+      "colour_name": "Green",
+      "colour_abbr": "Grn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "034-Repeatbeat-Pnk.XML",
+      "source_song": "Repeatbeat",
+      "preset_name": "034",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "034-Repeatbeat-Gld.XML",
+      "source_song": "Repeatbeat",
+      "preset_name": "034",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "arpeggiator.octaveMode: 'alt' vs 'up'"
+      ]
+    },
+    {
+      "output_filename": "035-Yends-Gld.XML",
+      "source_song": "Yends",
+      "preset_name": "035",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "036-Dject-Gld.XML",
+      "source_song": "Dject",
+      "preset_name": "036",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "036-Dject-Cyn.XML",
+      "source_song": "Dject",
+      "preset_name": "036",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'lpfFrequency')]"
+      ]
+    },
+    {
+      "output_filename": "037-Arpo-Pnk.XML",
+      "source_song": "Arpo",
+      "preset_name": "037",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "037-Bingbong-Lbl.XML",
+      "source_song": "Bingbong",
+      "preset_name": "037",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "037-Hj-Lbl.XML",
+      "source_song": "Hj",
+      "preset_name": "037",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "040-Hj-Lbl.XML",
+      "source_song": "Hj",
+      "preset_name": "040",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "041-Japarps-Pnk.XML",
+      "source_song": "Japarps",
+      "preset_name": "041",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "041-Offbeat-Gld.XML",
+      "source_song": "Offbeat",
+      "preset_name": "041",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "043-Repeatbeat-Pnk.XML",
+      "source_song": "Repeatbeat",
+      "preset_name": "043",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "043-Repeatbeat-Gld.XML",
+      "source_song": "Repeatbeat",
+      "preset_name": "043",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "patchCables structure: removed [('lfo1', 'lpfFrequency')]"
+      ]
+    },
+    {
+      "output_filename": "047A-Leftovers-Ylw.XML",
+      "source_song": "Leftovers",
+      "preset_name": "047A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "050-Arparty-Cyn.XML",
+      "source_song": "Arparty",
+      "preset_name": "050",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "050-Arparty-old-Cyn.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "050",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "050-Dject-Cyn.XML",
+      "source_song": "Dject",
+      "preset_name": "050",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "050A-Judder-Lbl.XML",
+      "source_song": "Judder",
+      "preset_name": "050A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "050A-Paddy-Lbl.XML",
+      "source_song": "Paddy",
+      "preset_name": "050A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "051-Dject-Cyn.XML",
+      "source_song": "Dject",
+      "preset_name": "051",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "055B-MWHW-Pnk.XML",
+      "source_song": "MWHW",
+      "preset_name": "055B",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "059-SlpspkArpsOld-Red.XML",
+      "source_song": "SlpspkArpsOld",
+      "preset_name": "059",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "060-Dject-Pnk.XML",
+      "source_song": "Dject",
+      "preset_name": "060",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "063-BeautifulStranger-Lbl.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "063",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "067-BeautifulStranger-Lbl.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "067",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "073-Dject-Gld.XML",
+      "source_song": "Dject",
+      "preset_name": "073",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "073-Dject-Cyn.XML",
+      "source_song": "Dject",
+      "preset_name": "073",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": [
+        "defaultParams.delayFeedback",
+        "defaultParams.modulator1Amount",
+        "defaultParams.modulator2Amount",
+        "envelope1.attack",
+        "envelope2.decay",
+        "patchCable(compressor->volumePostReverbSend).amount"
+      ]
+    },
+    {
+      "output_filename": "080-Ape-Pnk.XML",
+      "source_song": "Ape",
+      "preset_name": "080",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "080A-FiveAlive-Pnk.XML",
+      "source_song": "FiveAlive",
+      "preset_name": "080A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "080A-FiveAlive-Mag.XML",
+      "source_song": "FiveAlive",
+      "preset_name": "080A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 11,
+      "colour_name": "Magenta",
+      "colour_abbr": "Mag",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'pitch')]"
+      ]
+    },
+    {
+      "output_filename": "080A-NatRad-Gld.XML",
+      "source_song": "NatRad",
+      "preset_name": "080A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "085A-Arparty-Lbl.XML",
+      "source_song": "Arparty",
+      "preset_name": "085A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "085A-Arparty-old-Red.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "085A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "085A-MWHW-Lbl.XML",
+      "source_song": "MWHW",
+      "preset_name": "085A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "085A-Offbeat-Pnk.XML",
+      "source_song": "Offbeat",
+      "preset_name": "085A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "086A-Hj-Lbl.XML",
+      "source_song": "Hj",
+      "preset_name": "086A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "097-Yends-Pnk.XML",
+      "source_song": "Yends",
+      "preset_name": "097",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "098-BeautifulStranger-Dbl.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "098",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "098-K05BeautifulStranger-One-Eye-Tea 2-Lbl.XML",
+      "source_song": "One-Eye-Tea 2",
+      "preset_name": "098-K05BeautifulStranger",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "100-BeautifulStranger-Pnk.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "100",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "119-MWHW-Gld.XML",
+      "source_song": "MWHW",
+      "preset_name": "119",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "128-Yends-Pnk.XML",
+      "source_song": "Yends",
+      "preset_name": "128",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "130-BeautifulStranger-Red.XML",
+      "source_song": "BeautifulStranger",
+      "preset_name": "130",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "133-Alr-Pnk.XML",
+      "source_song": "Alr",
+      "preset_name": "133",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "133-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "133",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "136-Alr-Pnk.XML",
+      "source_song": "Alr",
+      "preset_name": "136",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "137-Ape-Pnk.XML",
+      "source_song": "Ape",
+      "preset_name": "137",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "137-Ape-Gld.XML",
+      "source_song": "Ape",
+      "preset_name": "137",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "arpeggiator.mode: 'off' vs 'arp'",
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "142A-Yends-Cyn.XML",
+      "source_song": "Yends",
+      "preset_name": "142A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "142A-Yends-Ylw.XML",
+      "source_song": "Yends",
+      "preset_name": "142A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'pitch')]"
+      ]
+    },
+    {
+      "output_filename": "143-Japarps-Lbl.XML",
+      "source_song": "Japarps",
+      "preset_name": "143",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "143-Japarps-Pnk.XML",
+      "source_song": "Japarps",
+      "preset_name": "143",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "143-MWHW-Pnk.XML",
+      "source_song": "MWHW",
+      "preset_name": "143",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "143A-Leftovers-Ylw.XML",
+      "source_song": "Leftovers",
+      "preset_name": "143A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "149-Offbeat-Lbl.XML",
+      "source_song": "Offbeat",
+      "preset_name": "149",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "150-MWHW-Gld.XML",
+      "source_song": "MWHW",
+      "preset_name": "150",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "155-Paddy-Lbl.XML",
+      "source_song": "Paddy",
+      "preset_name": "155",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "158-Stoner-Lbl.XML",
+      "source_song": "Stoner",
+      "preset_name": "158",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "159-Kg-Lbl.XML",
+      "source_song": "Kg",
+      "preset_name": "159",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "161-Japarps-Lbl.XML",
+      "source_song": "Japarps",
+      "preset_name": "161",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "161-Japarps-Pnk.XML",
+      "source_song": "Japarps",
+      "preset_name": "161",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "arpeggiator.noteMode: 'up' vs 'down'",
+        "arpeggiator.octaveMode: 'up' vs 'down'"
+      ]
+    },
+    {
+      "output_filename": "161-SlpspkArpsOld-Pnk.XML",
+      "source_song": "SlpspkArpsOld",
+      "preset_name": "161",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "162-Paddy-Lbl.XML",
+      "source_song": "Paddy",
+      "preset_name": "162",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "162-Paddy-Pnk.XML",
+      "source_song": "Paddy",
+      "preset_name": "162",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "envelope1.attack"
+      ]
+    },
+    {
+      "output_filename": "164-Ape-Lbl.XML",
+      "source_song": "Ape",
+      "preset_name": "164",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "164-Arpo-Pnk.XML",
+      "source_song": "Arpo",
+      "preset_name": "164",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "164-Judder-Lbl.XML",
+      "source_song": "Judder",
+      "preset_name": "164",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "164A-Colour-Lbl.XML",
+      "source_song": "Colour",
+      "preset_name": "164A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "164A-Colour-Cyn.XML",
+      "source_song": "Colour",
+      "preset_name": "164A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": [
+        "patchCables structure: added [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "164A-No-More-Colour-Lbl.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "164A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "164A-No-More-Colour-Gld.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "164A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'lpfFrequency')]; removed [('lfo1', 'pitch')]",
+        "patchCables structure: removed [('lfo1', 'pitch')]"
+      ]
+    },
+    {
+      "output_filename": "164A-No-More-Colour-Ylw.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "164A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'lpfFrequency')]",
+        "defaultParams.hpfFrequency",
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "defaultParams.oscAPulseWidth",
+        "patchCables structure: added [('lfo1', 'pitch')]",
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
+        "envelope1.attack"
+      ]
+    },
+    {
+      "output_filename": "164A-No-More-Colour-Dbl.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "164A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'lpfFrequency')]",
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "defaultParams.oscAPulseWidth",
+        "defaultParams.reverbAmount",
+        "patchCable(compressor->volumePostReverbSend).amount",
+        "patchCables structure: added [('lfo1', 'pitch')]",
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
+        "defaultParams.hpfFrequency",
+        "envelope1.attack"
+      ]
+    },
+    {
+      "output_filename": "165-Arparty-Pur.XML",
+      "source_song": "Arparty",
+      "preset_name": "165",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 8,
+      "colour_name": "Purple",
+      "colour_abbr": "Pur",
+      "differing_params": []
+    },
+    {
+      "output_filename": "165-Bonk-Lbl.XML",
+      "source_song": "Bonk",
+      "preset_name": "165",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "166-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "166",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "168-Bonk-Lbl.XML",
+      "source_song": "Bonk",
+      "preset_name": "168",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "169-Kg-Lbl.XML",
+      "source_song": "Kg",
+      "preset_name": "169",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "17-BRASS-No-More-Colour-Pnk.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "17-BRASS",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "17-BRASS-No-More-Colour-Ylw.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "17-BRASS",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": [
+        "defaultParams.bitCrush",
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "envelope1.attack",
+        "envelope1.release"
+      ]
+    },
+    {
+      "output_filename": "17-BRASS-No-More-Colour-Dbl.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "17-BRASS",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": [
+        "defaultParams.bitCrush",
+        "defaultParams.delayFeedback",
+        "defaultParams.lpfResonance",
+        "defaultParams.sampleRateReduction",
+        "envelope1.attack",
+        "envelope1.release",
+        "defaultParams.lpfFrequency"
+      ]
+    },
+    {
+      "output_filename": "170-Bonk-Lbl.XML",
+      "source_song": "Bonk",
+      "preset_name": "170",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "170-Japarps-Gld.XML",
+      "source_song": "Japarps",
+      "preset_name": "170",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "170-Japarps-Red.XML",
+      "source_song": "Japarps",
+      "preset_name": "170",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": [
+        "patchCables structure: added [('compressor', 'volumePostReverbSend')]; removed [('lfo1', 'pitch')]"
+      ]
+    },
+    {
+      "output_filename": "170-Yends-Ylw.XML",
+      "source_song": "Yends",
+      "preset_name": "170",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "171-Arpo-Pnk.XML",
+      "source_song": "Arpo",
+      "preset_name": "171",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "171-Bloop-Pnk.XML",
+      "source_song": "Bloop",
+      "preset_name": "171",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "171-Paddy-Lbl.XML",
+      "source_song": "Paddy",
+      "preset_name": "171",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "171-Paddy-Pnk.XML",
+      "source_song": "Paddy",
+      "preset_name": "171",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "172-Alr-Pnk.XML",
+      "source_song": "Alr",
+      "preset_name": "172",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "172-Alr-Gld.XML",
+      "source_song": "Alr",
+      "preset_name": "172",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "172-Colour-Lbl.XML",
+      "source_song": "Colour",
+      "preset_name": "172",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "172-Yends-Pnk.XML",
+      "source_song": "Yends",
+      "preset_name": "172",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "172-K03Yends-One-Eye-Tea 3-Lbl.XML",
+      "source_song": "One-Eye-Tea 3",
+      "preset_name": "172-K03Yends",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "172-K03Yends-One-Eye-Tea 4-Lbl.XML",
+      "source_song": "One-Eye-Tea 4",
+      "preset_name": "172-K03Yends",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "172A-Arparty-old-Red.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "172A",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "173-Env-Lbl.XML",
+      "source_song": "Env",
+      "preset_name": "173",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "174-Env-Lbl.XML",
+      "source_song": "Env",
+      "preset_name": "174",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "175-Sot-Lbl.XML",
+      "source_song": "Sot",
+      "preset_name": "175",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "175-Sot-Dim-Lbl.XML",
+      "source_song": "Dim",
+      "preset_name": "175-Sot",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "175-Sot-Dim 2-Lbl.XML",
+      "source_song": "Dim 2",
+      "preset_name": "175-Sot",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "176-Spook-Gld.XML",
+      "source_song": "Spook",
+      "preset_name": "176",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "31-BASS1-Mountain-Lbl.XML",
+      "source_song": "Mountain",
+      "preset_name": "31-BASS1",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "41-VIOLINE-MWHW-Pnk.XML",
+      "source_song": "MWHW",
+      "preset_name": "41-VIOLINE",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "41-VIOLINE 2-Leftovers-Ylw.XML",
+      "source_song": "Leftovers",
+      "preset_name": "41-VIOLINE 2",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "41-VIOLINE 3-Leftovers-Ylw.XML",
+      "source_song": "Leftovers",
+      "preset_name": "41-VIOLINE 3",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "41-VIOLINE 3-Sink-Cyn.XML",
+      "source_song": "Sink",
+      "preset_name": "41-VIOLINE 3",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "55-POPCORN-Ambient-Fishes-Lbl.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "55-POPCORN",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "62-EFFECTSOUND1-Mountain-Lbl.XML",
+      "source_song": "Mountain",
+      "preset_name": "62-EFFECTSOUND1",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Apex Stab-No-More-Colour-Pnk.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "Apex Stab",
+      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp1-Ambient-Fishes-Lbl.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp1-Ambient-Fishes-Gld.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend'), ('lfo1', 'delayFeedback')]"
+      ]
+    },
+    {
+      "output_filename": "Arp1-Wf-og-Lbl.XML",
+      "source_song": "Wf-og",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp1-Wf-og-Gld.XML",
+      "source_song": "Wf-og",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "defaultParams.delayFeedback",
+        "defaultParams.hpfFrequency",
+        "defaultParams.lpfResonance"
+      ]
+    },
+    {
+      "output_filename": "Arp1-Yends-Lbl.XML",
+      "source_song": "Yends",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp1-Yends-Pnk.XML",
+      "source_song": "Yends",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "defaultParams.reverbAmount"
+      ]
+    },
+    {
+      "output_filename": "Arp1-Yends-Gld.XML",
+      "source_song": "Yends",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "defaultParams.delayFeedback",
+        "defaultParams.lpfResonance",
+        "defaultParams.reverbAmount",
+        "envelope2.decay",
+        "defaultParams.lpfFrequency"
+      ]
+    },
+    {
+      "output_filename": "Arp1-Wf-og-Loopy 2-Pnk.XML",
+      "source_song": "Loopy 2",
+      "preset_name": "Arp1-Wf-og",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp2-Ambient-Fishes-Lbl.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "Arp2",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp2-Yends-Pnk.XML",
+      "source_song": "Yends",
+      "preset_name": "Arp2",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp2-Yends-Gld.XML",
+      "source_song": "Yends",
+      "preset_name": "Arp2",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'lpfFrequency'), ('lfo2', 'lpfFrequency')]"
+      ]
+    },
+    {
+      "output_filename": "Arp2-Yends-Red.XML",
+      "source_song": "Yends",
+      "preset_name": "Arp2",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": [
+        "patchCables structure: added [('lfo1', 'lpfFrequency'), ('lfo2', 'lpfFrequency')]",
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "defaultParams.reverbAmount",
+        "envelope1.release"
+      ]
+    },
+    {
+      "output_filename": "Dystopia Keys-No-More-Colour-Lbl.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "Dystopia Keys",
+      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Dystopia Keys-No-More-Colour-Pnk.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "Dystopia Keys",
+      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": [
+        "patchCables structure: added [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "Fuzz-Ambient-Fishes-Lbl.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "Fuzz",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Init-Synth-Dim 3-Gld.XML",
+      "source_song": "Dim 3",
+      "preset_name": "Init-Synth",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Islp-NatRad-Lbl.XML",
+      "source_song": "NatRad",
+      "preset_name": "Islp",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Arp-Ambient-Fishes-Pnk.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "K01Arp",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Arp-Sink-Pnk.XML",
+      "source_song": "Sink",
+      "preset_name": "K01Arp",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Arp-Wf-full-Pnk.XML",
+      "source_song": "Wf-full",
+      "preset_name": "K01Arp",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Bass-Ambient-Fishes-Lbl.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "K01Bass",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Bass-Wf-og-Lbl.XML",
+      "source_song": "Wf-og",
+      "preset_name": "K01Bass",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Drone-Ambient-Fishes-Lbl.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Drone-Ambient-Fishes-Red.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": [
+        "defaultParams.lpfFrequency",
+        "defaultParams.reverbAmount",
+        "envelope1.decay",
+        "envelope1.release",
+        "envelope2.decay"
+      ]
+    },
+    {
+      "output_filename": "K01Drone-Ambient-Fishes-Orn.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 7,
+      "colour_name": "Orange",
+      "colour_abbr": "Orn",
+      "differing_params": [
+        "defaultParams.lfo1Rate",
+        "defaultParams.reverbAmount",
+        "envelope1.decay",
+        "envelope1.release",
+        "envelope2.decay",
+        "defaultParams.lpfFrequency"
+      ]
+    },
+    {
+      "output_filename": "K01Drone-Arparty-Pnk.XML",
+      "source_song": "Arparty",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Drone-Arparty-old-Pnk.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Drone-Arparty-old-Dbl.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": [
+        "defaultParams.lpfFrequency",
+        "envelope1.attack",
+        "envelope1.release"
+      ]
+    },
+    {
+      "output_filename": "K01Drone-Sink-Lbl.XML",
+      "source_song": "Sink",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Drone-Wf-full-Lbl.XML",
+      "source_song": "Wf-full",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Drone-Wf-full-Red.XML",
+      "source_song": "Wf-full",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": [
+        "defaultParams.lpfFrequency",
+        "defaultParams.reverbAmount",
+        "envelope1.decay",
+        "envelope1.release",
+        "envelope2.decay"
+      ]
+    },
+    {
+      "output_filename": "K01Fillforarp-Sink-Lbl.XML",
+      "source_song": "Sink",
+      "preset_name": "K01Fillforarp",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Fuzzbass-Arparty-Cyn.XML",
+      "source_song": "Arparty",
+      "preset_name": "K01Fuzzbass",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Fuzzbass-Sink-Gld.XML",
+      "source_song": "Sink",
+      "preset_name": "K01Fuzzbass",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Twinkle2-Sink-Lbl.XML",
+      "source_song": "Sink",
+      "preset_name": "K01Twinkle2",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Violin-Ambient-Fishes-Gld.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "K01Violin",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Violin-Ambient-Fishes-Ylw.XML",
+      "source_song": "Ambient-Fishes",
+      "preset_name": "K01Violin",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": [
+        "defaultParams.delayFeedback",
+        "defaultParams.hpfFrequency",
+        "defaultParams.lpfFrequency",
+        "envelope1.release"
+      ]
+    },
+    {
+      "output_filename": "KRAF-POLY-Lemon-Lbl.XML",
+      "source_song": "Lemon",
+      "preset_name": "KRAF-POLY",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KRumchybass-Arparty-Pnk.XML",
+      "source_song": "Arparty",
+      "preset_name": "KRumchybass",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KRumchybass-Arparty-old-Pnk.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "KRumchybass",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Padfoot-Arparty-Pnk.XML",
+      "source_song": "Arparty",
+      "preset_name": "Padfoot",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "SYNT056-Arparty-Ylw.XML",
+      "source_song": "Arparty",
+      "preset_name": "SYNT056",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "SYNT1-Dim 2-Gld.XML",
+      "source_song": "Dim 2",
+      "preset_name": "SYNT1",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "SYNT1-Dim 3-Gld.XML",
+      "source_song": "Dim 3",
+      "preset_name": "SYNT1",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "TB02-FiveAlive-Lbl.XML",
+      "source_song": "FiveAlive",
+      "preset_name": "TB02",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "TB08-No-More-Colour-Pnk.XML",
+      "source_song": "No-More-Colour",
+      "preset_name": "TB08",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "TB11-Arparty-Pur.XML",
+      "source_song": "Arparty",
+      "preset_name": "TB11",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 8,
+      "colour_name": "Purple",
+      "colour_abbr": "Pur",
+      "differing_params": []
+    },
+    {
+      "output_filename": "TB13-Yends-Pnk.XML",
+      "source_song": "Yends",
+      "preset_name": "TB13",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "VISA-PAD-Arparty-Pnk.XML",
+      "source_song": "Arparty",
+      "preset_name": "VISA-PAD",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "VISA-PAD-Arparty-Ylw.XML",
+      "source_song": "Arparty",
+      "preset_name": "VISA-PAD",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": [
+        "defaultParams.bitCrush",
+        "defaultParams.lfo1Rate",
+        "defaultParams.lpfFrequency",
+        "defaultParams.lpfResonance",
+        "defaultParams.reverbAmount",
+        "defaultParams.sampleRateReduction",
+        "envelope1.attack",
+        "envelope1.release",
+        "patchCable(compressor->volumePostReverbSend).amount"
+      ]
+    },
+    {
+      "output_filename": "VISA-PAD-Arparty-Dbl.XML",
+      "source_song": "Arparty",
+      "preset_name": "VISA-PAD",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": [
+        "defaultParams.bitCrush",
+        "defaultParams.delayFeedback",
+        "defaultParams.lfo1Rate",
+        "defaultParams.lpfFrequency",
+        "defaultParams.modFXFeedback",
+        "defaultParams.modFXOffset",
+        "defaultParams.modFXRate",
+        "defaultParams.portamento",
+        "defaultParams.reverbAmount",
+        "defaultParams.sampleRateReduction",
+        "envelope1.attack",
+        "envelope1.release",
+        "patchCable(compressor->volumePostReverbSend).amount"
+      ]
+    },
+    {
+      "output_filename": "VISA-PAD-Arparty-Lme.XML",
+      "source_song": "Arparty",
+      "preset_name": "VISA-PAD",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 9,
+      "colour_name": "Lime",
+      "colour_abbr": "Lme",
+      "differing_params": [
+        "defaultParams.bitCrush",
+        "defaultParams.delayFeedback",
+        "defaultParams.lfo1Rate",
+        "defaultParams.lpfResonance",
+        "defaultParams.reverbAmount",
+        "defaultParams.sampleRateReduction",
+        "envelope1.attack",
+        "patchCable(lfo2->pan).amount",
+        "defaultParams.lpfFrequency",
+        "envelope1.release",
+        "patchCable(compressor->volumePostReverbSend).amount",
+        "defaultParams.modFXFeedback",
+        "defaultParams.modFXOffset",
+        "defaultParams.modFXRate",
+        "defaultParams.portamento"
+      ]
+    },
+    {
+      "output_filename": "VISA-PAD-Arparty-old-Pnk.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "VISA-PAD",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "VISA-PAD-Arparty-old-Red.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "VISA-PAD",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]"
+      ]
+    },
+    {
+      "output_filename": "VISA-PAD-Arparty-old-Dbl.XML",
+      "source_song": "Arparty-old",
+      "preset_name": "VISA-PAD",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": [
+        "patchCables structure: removed [('compressor', 'volumePostReverbSend')]",
+        "defaultParams.delayFeedback",
+        "defaultParams.lpfResonance",
+        "defaultParams.reverbAmount",
+        "envelope1.attack",
+        "envelope1.release"
+      ]
+    },
+    {
+      "output_filename": "Vibes WT-Oddish-Pnk.XML",
+      "source_song": "Oddish",
+      "preset_name": "Vibes WT",
+      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Wall Of Static-Oddish-Pnk.XML",
+      "source_song": "Oddish",
+      "preset_name": "Wall Of Static",
+      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Warm DX7 Pad-Dim 3-Gld.XML",
+      "source_song": "Dim 3",
+      "preset_name": "Warm DX7 Pad",
+      "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "YAZO-LEAD2-Bmtk-Cyn.XML",
+      "source_song": "Bmtk",
+      "preset_name": "YAZO-LEAD2",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "YAZO-SEQ-Lemon-Pnk.XML",
+      "source_song": "Lemon",
+      "preset_name": "YAZO-SEQ",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    }
+  ]
+}
