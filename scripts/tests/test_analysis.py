@@ -13,7 +13,6 @@ from deluge_lib.analysis import (
     compute_summary,
     filter_by_pattern,
     top_by_refs,
-    top_by_size,
 )
 from deluge_lib.deluge_sdk import SampleRef
 from deluge_lib.scanning import FileEntry, ScanResult
@@ -289,37 +288,6 @@ class TestTopByRefs:
         index = build_usage_index([], scan)
 
         assert top_by_refs(index, 5) == []
-
-
-# ---------------------------------------------------------------------------
-# top_by_size
-# ---------------------------------------------------------------------------
-
-
-class TestTopBySize:
-    def test_returns_top_n_largest(self) -> None:
-        # TODO-v0.1-REVIEW
-        scan = _scan_result({
-            "small.wav": _file_entry("small.wav", 100),
-            "medium.wav": _file_entry("medium.wav", 5000),
-            "large.wav": _file_entry("large.wav", 50000),
-        })
-
-        index = build_usage_index([], scan)
-        top = top_by_size(index, 2)
-
-        assert len(top) == 2
-        assert top[0].size == 50000
-        assert top[1].size == 5000
-
-    def test_excludes_missing(self) -> None:
-        # TODO-v0.1-REVIEW
-        scan = _scan_result({})
-        refs = [_sample_ref("SAMPLES/gone.wav")]
-
-        index = build_usage_index(refs, scan)
-
-        assert top_by_size(index, 5) == []
 
 
 # ---------------------------------------------------------------------------

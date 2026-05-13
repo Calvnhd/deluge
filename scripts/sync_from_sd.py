@@ -37,9 +37,6 @@ class FileRecord(TypedDict):
     local_mtime: float
 
 
-FilesDict = dict[str, FileRecord]
-
-
 def _read_manifest(path: Path) -> tuple[str, dict[str, FileRecord]]:
     """Read a JSON manifest file"""
 

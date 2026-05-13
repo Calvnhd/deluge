@@ -130,16 +130,16 @@ uv run create_backup.py --dry-run  # preview file count and size only
 Extracts standalone synth and kit presets from song XMLs into `SYNTHS/SONG-SYNTHS/` and `KITS/SONG-KITS/`. Includes cross-song deduplication to remove near-identical presets, and sidechain-only kit detection.
 
 ```
-uv run extract_instruments.py                        # preview, then prompt to apply
-uv run extract_instruments.py --dry-run              # preview only
-uv run extract_instruments.py --extended             # extract multiple versions when params differ
-uv run extract_instruments.py --no-dedup             # disable cross-song deduplication
-uv run extract_instruments.py --include-sidechain    # include sidechain-only kits (excluded by default)
-uv run extract_instruments.py --exclude-dir testing  # skip songs in a subdirectory
-uv run extract_instruments.py --sd-direct            # read/write directly to SD card
-uv run extract_instruments.py --verbose              # detailed dedup comparison logging
-uv run extract_instruments.py --naming preset          # Preset-SongName filenames (default)
-uv run extract_instruments.py --naming song            # SongName-Preset filenames
+uv run extract_instruments.py                           # preview, then prompt to apply
+uv run extract_instruments.py --dry-run                 # preview only
+uv run extract_instruments.py --extended                # extract multiple versions when params differ
+uv run extract_instruments.py --no-dedup                # disable cross-song deduplication
+uv run extract_instruments.py --include-sidechain       # include sidechain-only kits (excluded by default)
+uv run extract_instruments.py --exclude-dir testing     # skip songs in a subdirectory
+uv run extract_instruments.py --sd-direct               # read/write directly to SD card
+uv run extract_instruments.py --verbose                 # detailed dedup comparison logging
+uv run extract_instruments.py --naming preset           # Preset-SongName filenames (default)
+uv run extract_instruments.py --naming song             # SongName-Preset filenames
 ```
 
 #### `dedup_threshold_test.py`
@@ -147,10 +147,10 @@ uv run extract_instruments.py --naming song            # SongName-Preset filenam
 Benchmarks dedup threshold configurations against the current song library. Produces a markdown table showing how many instruments survive dedup at each (percent, count) threshold combination.
 
 ```
-uv run dedup_threshold_test.py                             # default: %=1-99/10, count=1-5/2
-uv run dedup_threshold_test.py --percent 1 99 10 --count 1 5 2   # explicit (same as default)
-uv run dedup_threshold_test.py --percent 10 50 10 --count 3 3 1  # narrow test range
-uv run dedup_threshold_test.py > results.md                # pipe table to file (progress on stderr)
+uv run dedup_threshold_test.py                                      # default: %=1-99/10, count=1-5/2
+uv run dedup_threshold_test.py --percent 1 99 10 --count 1 5 2      # explicit (same as default)
+uv run dedup_threshold_test.py --percent 10 50 10 --count 3 3 1     # narrow test range
+uv run dedup_threshold_test.py > results.md                         # pipe table to file (progress on stderr)
 ```
 
 #### `fix_references.py`
@@ -192,9 +192,14 @@ uv run sample_overview.py usage "Kick"                      # usage detail for s
 
 ---
 
-## AI-Assisted Development
+### v0.1 Review
 
-This repository uses a structured agent system. See [AGENTS.md](AGENTS.md) for full details.
-
-Key workflow: **Research → Plan → Implement** feature pipeline using specialist agents. Use the `orchestrator` agent mode as the default entry point.
-
+- `sync_from_sd.py`: DONE
+- `sync_samples_to_cloud.py`: DONE
+- `create_snapshot.py`: DONE
+- `create_backup.py`: DONE
+- `extract_instruments.py`
+- `dedup_threshold_test.py`: Utility - no further review required yet
+- `fix_references.py`
+- `sync_to_sd.py`
+- `sample_overview.py`: DONE

@@ -423,7 +423,7 @@ def load_init_defaults(deluge_root: Path) -> NormalisationConfig:
     init_synth_path = deluge_root / "SYNTHS" / "Init-Synth.XML"
     if init_synth_path.is_file():
         try:
-            _tree, root, _recovered = parse_deluge_xml(init_synth_path)
+            root = parse_deluge_xml(init_synth_path)
             sound_el = root if root.tag == "sound" else root.find("sound")
             if sound_el is not None:
                 dp = sound_el.find("defaultParams")
@@ -439,7 +439,7 @@ def load_init_defaults(deluge_root: Path) -> NormalisationConfig:
     init_kit_path = deluge_root / "KITS" / "Init-Kit.XML"
     if init_kit_path.is_file():
         try:
-            _tree, root, _recovered = parse_deluge_xml(init_kit_path)
+            root = parse_deluge_xml(init_kit_path)
             kit_el = root if root.tag == "kit" else root.find("kit")
             if kit_el is not None:
                 dp = kit_el.find("defaultParams")
@@ -476,7 +476,7 @@ def load_kit_init_template(deluge_root: Path) -> etree._Element | None:
         return None
 
     try:
-        _tree, root, _recovered = parse_deluge_xml(init_kit_path)
+        root = parse_deluge_xml(init_kit_path)
         kit_el = root if root.tag == "kit" else root.find("kit")
         if kit_el is None:
             return None
@@ -563,7 +563,7 @@ def discover_songs(
         if not xml_path.is_file():
             continue
         try:
-            _tree, root, _recovered = parse_deluge_xml(xml_path)
+            root = parse_deluge_xml(xml_path)
         except Exception as exc:
             print(f"WARNING: Skipping {xml_path.name} — failed to parse XML: {exc}")
             continue
