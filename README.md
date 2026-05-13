@@ -61,7 +61,7 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 | 1 | Verify sample references are intact | `sample_overview.py missing` | ✅ |
 | 2 | Fix any broken references | `fix_references.py` | ✅ |
 | 3 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
-| 4 | Sync repo back to SD card | `sync_to_sd.py` | 🚧 |
+| 4 | Sync repo back to SD card | `sync_to_sd.py` | ✅ |
 | 5 | Take a fresh sample snapshot | `create_snapshot.py` | ✅ |
 
 ### Setup
@@ -163,13 +163,15 @@ uv run fix_references.py --snapshot docs/manifests/<snapshot>.json   # use speci
 uv run fix_references.py --apply                                     # skip confirmation prompt
 ```
 
-#### `sync_to_sd.py` 🚧
+#### `sync_to_sd.py`
 
-Syncs the local `DELUGE/` directory back to the mounted SD card. Files to be deleted from the SD card are first backed up to `DELUGE/.trash/` in the repo before removal.
+Syncs the local `DELUGE/` directory back to the mounted SD card. Files on the SD card that don't exist in the local directory are deleted.
 
 ```
 uv run sync_to_sd.py            # preview changes, then prompt to apply
 uv run sync_to_sd.py --dry-run  # preview only
+uv run sync_to_sd.py --xml      # sync only XML files
+uv run sync_to_sd.py --wav      # sync only WAV files
 ```
 
 #### `sample_overview.py`
@@ -200,6 +202,6 @@ uv run sample_overview.py usage "Kick"                      # usage detail for s
 - `create_backup.py`: DONE
 - `extract_instruments.py`
 - `dedup_threshold_test.py`: Utility - no further review required yet
-- `fix_references.py`
+- `fix_references.py` DONE - yet to test
 - `sync_to_sd.py`
 - `sample_overview.py`: DONE

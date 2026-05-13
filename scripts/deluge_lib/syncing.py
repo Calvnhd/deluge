@@ -8,24 +8,91 @@ so that multiple sync scripts can share them.
 
 from __future__ import annotations
 
+import json
 import shutil
+import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TypedDict
 
 from deluge_lib.scanning import FileFilter, ScanResult, print_path, normalise_mtime, scan_tree
 
-if TYPE_CHECKING:
-    from typing import TypedDict
 
-    class _FileRecord(TypedDict):
-        sd_size: int
-        sd_mtime: float
-        local_size: int
-        local_mtime: float
+class FileRecord(TypedDict):
+    """Per-file dual-stat manifest entry — SD-side and local-side stats."""
 
-    FilesDict = dict[str, _FileRecord]
+    sd_size: int
+    sd_mtime: float
+    local_size: int
+    local_mtime: float
+
+
+FilesDict = dict[str, FileRecord]
+
+
+def read_manifest(path: Path) -> tuple[str, FilesDict]:
+    """Read a JSON manifest file"""
+
+    if not path.is_file():
+        print(f"Warning: No manifest at {path}")
+        return ("", {})
+
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        print(f"Warning: corrupt manifest at {path} ({exc}) \u2014 treating as empty")
+        return ("", {})
+
+    timestamp = str(data.get("last_sync_timestamp", ""))
+
+    files: dict[str, FileRecord] = {}
+    for key, val in data.get("files", {}).items():
+        if isinstance(val, dict) and "sd_size" in val and "sd_mtime" in val and "local_size" in val and "local_mtime" in val:
+            files[key] = {
+                "sd_size": int(val["sd_size"]),
+                "sd_mtime": float(val["sd_mtime"]),
+                "local_size": int(val["local_size"]),
+                "local_mtime": float(val["local_mtime"]),
+            }
+
+    return (timestamp, files)
+
+
+def write_manifest(
+    path: Path,
+    *,
+    timestamp: str,
+    files: FilesDict,
+) -> None:
+    """Atomically write a manifest JSON file"""
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    payload = {
+        "last_sync_timestamp": timestamp,
+        "files": files,
+    }
+    blob = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
+
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        encoding="utf-8",
+        dir=str(path.parent),
+        suffix=".tmp",
+        delete=False,
+    ) as fd:
+        tmp_path = Path(fd.name)
+        try:
+            fd.write(blob)
+            fd.flush()
+        except BaseException:
+            tmp_path.unlink(missing_ok=True)
+            raise
+    try:
+        tmp_path.replace(path)
+    except BaseException:
+        tmp_path.unlink(missing_ok=True)
+        raise
 
 
 _MTIME_TOLERANCE_S = 2.0
@@ -89,6 +156,7 @@ def compute_sync(
     dest: Path,
     *,
     manifest: FilesDict | None = None,
+    source_is_sd: bool = True,
     file_filter: FileFilter = "both",
 ) -> tuple[SyncPlan, ScanResult]:
     """Walk both trees to build a plan of copy/delete actions for altering
@@ -99,6 +167,9 @@ def compute_sync(
         dest: Destination to sync
         manifest: Optional manifest dict used during SD syncs. Maps normalised 
             keys to status data for both SD and local sides
+        source_is_sd: When True (default), source is the SD card and dest is the
+            local directory.  When False, source is local and dest is SD.
+            Controls which manifest fields are compared against source vs dest.
         file_filter: File types to include: "wav", "xml", or
             "both" (default).  Forwarded to scan_tree().
 
@@ -127,13 +198,21 @@ def compute_sync(
         # The manifest lets us check changes on both source and destination for an accurate sync
         if manifest is not None and key in manifest:
             manifest_entry = manifest[key]
+            # Compare each side against its own manifest baseline.
+            # SD side always uses tolerance (FAT32 quirks, Deluge firmware
+            # doesn't reliably write timestamps).
+            # Local side uses exact equality (NTFS/APFS timestamps are reliable).
+            if source_is_sd:
+                sd_entry, local_entry = src_entry, dst_entry
+            else:
+                sd_entry, local_entry = dst_entry, src_entry
             sd_changed = (
-                src_entry.size != manifest_entry["sd_size"]
-                or not _mtime_matches(src_entry.mtime, manifest_entry["sd_mtime"])
+                sd_entry.size != manifest_entry["sd_size"]
+                or not _mtime_matches(sd_entry.mtime, manifest_entry["sd_mtime"])
             )
             local_changed = (
-                dst_entry.size != manifest_entry["local_size"]
-                or normalise_mtime(dst_entry.mtime) != manifest_entry["local_mtime"]
+                local_entry.size != manifest_entry["local_size"]
+                or local_entry.mtime != manifest_entry["local_mtime"]
             )
             if sd_changed or local_changed:
                 plan.files_to_copy.append((src_path, dst_path))

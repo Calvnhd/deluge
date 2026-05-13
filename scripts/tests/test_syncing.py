@@ -325,6 +325,29 @@ class TestComputeSyncManifest:
         assert plan.files_to_copy == []
         assert plan.files_unchanged == 1
 
+    def test_source_is_sd_false_swaps_manifest_keys(self, tmp_path: Path) -> None:
+        """When source_is_sd=False, source is compared against local_* fields."""
+        src = tmp_path / "src"  # local side
+        dst = tmp_path / "dst"  # SD side
+        content = b"<kit/>"
+        local_mtime = 1_700_000_000.0
+        sd_mtime = 1_600_000_000.0
+        _touch(src / "KITS" / "Kit.XML", content, mtime=local_mtime)
+        _touch(dst / "KITS" / "Kit.XML", content, mtime=sd_mtime)
+
+        # Manifest records the correct stats from last sync
+        manifest = {"kits/kit.xml": {
+            "sd_size": len(content), "sd_mtime": sd_mtime,
+            "local_size": len(content), "local_mtime": local_mtime,
+        }}
+
+        # source_is_sd=False: source is local, dest is SD
+        plan, _ = compute_sync(src, dst, manifest=manifest, source_is_sd=False)
+
+        # local stats match manifest local_* AND SD stats match manifest sd_* → unchanged
+        assert plan.files_to_copy == []
+        assert plan.files_unchanged == 1
+
 
 # =============================================================================
 # execute_plan
