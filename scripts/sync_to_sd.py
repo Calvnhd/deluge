@@ -119,7 +119,8 @@ def _execute_to_sd(
     delete_count = len(plan.files_to_delete)
     if delete_count:
         try:
-            for path in plan.files_to_delete:
+            for i, path in enumerate(plan.files_to_delete, 1):
+                print(f"\rDeleting... {i}/{delete_count}", end="", flush=True)
                 path.unlink()
                 deleted += 1
                 # Clean up empty ancestor directories on SD up to dest root
@@ -139,6 +140,8 @@ def _execute_to_sd(
                 unchanged=plan.files_unchanged,
                 remaining=delete_count - deleted - 1,
             ) from exc
+    if delete_count:
+        print()
 
     return SyncResult(
         copied=copied,
