@@ -1613,7 +1613,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/LoZ OOT Navi Hey.wav">
+						fileName="SAMPLES/FOUND/Games/LoZ OOT Navi Hey.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="14606" />
@@ -1690,7 +1690,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/LoZ OOT Navi Listen.wav">
+						fileName="SAMPLES/FOUND/Games/LoZ OOT Navi Listen.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="21066" />
@@ -1767,7 +1767,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/LoZ OOT Navi Look.wav">
+						fileName="SAMPLES/FOUND/Games/LoZ OOT Navi Look.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="17440" />
@@ -1844,7 +1844,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/LoZ OOT Navi WatchOut.wav">
+						fileName="SAMPLES/FOUND/Games/LoZ OOT Navi WatchOut.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="20462" />

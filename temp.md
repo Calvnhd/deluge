@@ -77,3 +77,13 @@ Re-run in both directions -- already up to date.  Looking good!
 ---
 
 Going nuclear... deleting everything!! Let's gooo
+
+---
+
+Need to think about snapshots  
+What happens when we move samples in between snapshot taking without fixing refs?
+Are we overwriting same day snapshots? Is that okay?
+Can we do any search to suggest where the new file might be?
+The ambiguous mapping thing should be able to be resolved easy with the information we have
+
+---

@@ -1332,7 +1332,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/CS-SCI-FI Sustain Breath 2.wav">
+						fileName="SAMPLES/LANDR/Sci-Fi Ambiences/CS-SCI-FI Sustain Breath 2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4233600" />
@@ -1794,7 +1794,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/FS_COM_Computer_Glitch_SFX 26.wav">
+						fileName="SAMPLES/LANDR/Computer SFX/FS_COM_Computer_Glitch_SFX 26.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="101300" />

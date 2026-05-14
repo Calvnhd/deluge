@@ -1551,7 +1551,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="40042" />
@@ -1628,7 +1628,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="40042"
 							endSamplePos="80085" />
@@ -1705,7 +1705,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="80085"
 							endSamplePos="120128" />
@@ -1782,7 +1782,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="120128"
 							endSamplePos="160171" />
@@ -1859,7 +1859,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="160171"
 							endSamplePos="200213" />
@@ -1936,7 +1936,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="200213"
 							endSamplePos="240256" />
@@ -2013,7 +2013,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="240256"
 							endSamplePos="280299" />
@@ -2090,7 +2090,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-Drums.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-Drums.wav">
 						<zone
 							startSamplePos="280299"
 							endSamplePos="320342" />
@@ -2200,7 +2200,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="40042" />
@@ -2277,7 +2277,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="40042"
 							endSamplePos="80085" />
@@ -2354,7 +2354,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="80085"
 							endSamplePos="120128" />
@@ -2431,7 +2431,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="120128"
 							endSamplePos="160171" />
@@ -2508,7 +2508,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="160171"
 							endSamplePos="200213" />
@@ -2585,7 +2585,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="200213"
 							endSamplePos="240256" />
@@ -2662,7 +2662,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="240256"
 							endSamplePos="280299" />
@@ -2739,7 +2739,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/KG-PG-DrumsBass.wav">
+						fileName="SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav">
 						<zone
 							startSamplePos="280299"
 							endSamplePos="320342" />

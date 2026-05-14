@@ -260,7 +260,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiChirpPop.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiChirpPop.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -337,7 +337,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiHonk.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiHonk.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -414,7 +414,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiSkrch.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiSkrch.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -491,7 +491,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiSkrch2.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiSkrch2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -568,7 +568,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiSqwk.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiSqwk.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -645,7 +645,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiSqwk2.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiSqwk2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -722,7 +722,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiTweet.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiTweet.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -799,7 +799,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiTwitter.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiTwitter.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
@@ -876,7 +876,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/FOUND/TuiWeo.wav">
+						fileName="SAMPLES/FOUND/Tui/TuiWeo.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="27759" />
