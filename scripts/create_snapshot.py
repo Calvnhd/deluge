@@ -15,7 +15,6 @@ from deluge_lib.paths import SNAPSHOTS_DIR
 
 
 def snapshot(deluge_root: Path) -> Path:
-    # TODO-v0.1-REVIEW
     """Hash all samples and save a dated JSON snapshot.
 
     Args:
@@ -31,14 +30,13 @@ def snapshot(deluge_root: Path) -> Path:
     data = {
         "date": snapshot_date,
         "deluge_root": str(deluge_root),
-        "hashes": dict(hashes),
+        "hashes": hashes,
     }
 
     # Ensure output directory exists
-    manifests_dir = SNAPSHOTS_DIR
-    manifests_dir.mkdir(parents=True, exist_ok=True)
+    SNAPSHOTS_DIR.mkdir(parents=True, exist_ok=True)
 
-    snapshot_path = manifests_dir / f"snapshot-{snapshot_date}.json"
+    snapshot_path = SNAPSHOTS_DIR / f"snapshot-{snapshot_date}.json"
     snapshot_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
     # Console output
@@ -57,7 +55,6 @@ def snapshot(deluge_root: Path) -> Path:
 
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
     """CLI entry point for creating sample snapshots."""
     import argparse
 

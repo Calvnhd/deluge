@@ -18,7 +18,6 @@ from deluge_lib.scanning import format_size, scan_tree
 
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Create a timestamped .zip backup of the Deluge SD card or repo DELUGE/ directory."
     )
@@ -80,7 +79,7 @@ def main(argv: list[str] | None = None) -> None:
         print()
     except OSError as exc:
         print()
-        print(f"ERROR: Failed to create archive: {exc}")
+        print(f"ERROR: Failed to create archive at {archived} files: {exc}")
         raise SystemExit(1) from None
 
     # Verify archive integrity

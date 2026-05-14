@@ -1,13 +1,9 @@
 # Deluge CLI v0.1
-"""WORK IN PROGRESS
-
+"""
 Sync the local DELUGE/ directory back to a mounted Deluge SD card.
 
 By default, shows a preview of changes then prompts to apply.
 Pass --dry-run to preview only.
-
-All copies (repo → SD) execute before any deletions 
-Files deleted from SD are first backed up to DELUGE/.trash/SD-<timestamp>/
 """
 
 from __future__ import annotations
@@ -15,56 +11,84 @@ from __future__ import annotations
 import argparse
 import shutil
 import time
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
-from deluge_lib.paths import TO_SD_SYNC_LOG_PATH
+from deluge_lib.paths import TO_SD_MANIFEST_PATH, TO_SD_SYNC_LOG_PATH
+from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
+    FileRecord,
     SyncError,
     SyncPlan,
     SyncResult,
     append_sync_log,
     compute_sync,
     print_plan,
+    read_manifest,
+    write_manifest,
 )
+
+
+def _build_post_sync_manifest(
+    plan: SyncPlan,
+    src_scan: ScanResult,
+    dest: Path,
+    old_files: dict[str, FileRecord],
+    file_filter: str = "both",
+) -> tuple[str, dict[str, FileRecord]]:
+    """Build updated manifest after a successful sync"""
+
+    from deluge_lib.scanning import _FILTER_MAP
+
+    copied_keys: set[str] = set()
+    for _src, dst in plan.files_to_copy:
+        copied_keys.add(normalise_key(dst.relative_to(dest)))
+
+    updated_manifest: dict[str, FileRecord] = {}
+    for key, src_entry in src_scan.files.items():
+        if key in old_files and key not in copied_keys:
+            updated_manifest[key] = old_files[key]
+        else:
+            dst_path = dest / src_entry.rel_path
+            dst_stat = dst_path.stat()
+            updated_manifest[key] = {
+                "local_size": src_entry.size,
+                "local_mtime": src_entry.mtime,
+                "sd_size": dst_stat.st_size,
+                "sd_mtime": normalise_mtime(dst_stat.st_mtime),
+            }
+
+    if file_filter != "both":
+        scanned_exts = _FILTER_MAP[file_filter]
+        for key, old_entry in old_files.items():
+            if key not in updated_manifest:
+                ext = Path(key).suffix.lower()
+                if ext not in scanned_exts:
+                    updated_manifest[key] = old_entry
+
+    timestamp = datetime.now(tz=UTC).replace(microsecond=0).isoformat()
+    return (timestamp, updated_manifest)
 
 
 def _execute_to_sd(
     plan: SyncPlan,
     *,
-    source: Path,
     dest: Path,
 ) -> SyncResult:
-    # TODO-v0.1-REVIEW
-    """Execute the sync plan: copy repo files to SD, then trash-and-delete SD extras.
+    """Execute the sync plan by copying repo files to SD
 
-    The execution has two phases, always in this order:
-    1. **Copy phase** — copy new/modified files from repo to SD card
-    2. **Trash-and-delete phase** — for each file on SD not in repo:
-       a. Copy the SD file to ``source/.trash/SD-<timestamp>/<rel_path>``
-       b. Verify the trash copy exists
-       c. Delete the SD original
-       d. Clean up empty parent directories on SD
+    The execution has two sequential phases: copy and delete
 
-    Parameters
-    ----------
-    plan:
-        The computed sync plan.
-    source:
-        Repo ``DELUGE/`` root (used for the ``.trash/`` backup location).
-    dest:
-        SD card mount point.
+    Args:
+        plan: The computed sync plan.
+        dest: SD card mount point.
 
-    Returns
-    -------
-    SyncResult
-        Counts of copied, trashed, and unchanged files.
+    Returns:
+        SyncResult: Counts of copied, deleted, and unchanged files.
 
-    Raises
-    ------
-    SyncError
-        On any file operation failure, with context about progress.
+    Raises:
+        SyncError: On any file operation failure, with context about progress.
     """
     copied = 0
     total_copy = len(plan.files_to_copy)
@@ -90,24 +114,14 @@ def _execute_to_sd(
     if total_copy:
         print()
 
-    # --- Phase 2: trash-and-delete (SD → repo .trash/, then delete from SD) ---
-    trashed = 0
-    trash_count = len(plan.files_to_delete)
-    if trash_count:
-        trash_base = source / ".trash" / datetime.now().strftime("SD-%Y%m%d_%H%M%S")
+    # --- Phase 2: delete from SD ---
+    deleted = 0
+    delete_count = len(plan.files_to_delete)
+    if delete_count:
         try:
             for path in plan.files_to_delete:
-                rel = path.relative_to(dest)
-                # Back up SD file to repo .trash/
-                trash_dest = trash_base / rel
-                trash_dest.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(str(path), str(trash_dest))
-                # Verify backup exists before deleting original
-                if not trash_dest.is_file():
-                    raise OSError(f"Trash backup verification failed: {trash_dest}")
-                # Delete from SD
                 path.unlink()
-                trashed += 1
+                deleted += 1
                 # Clean up empty ancestor directories on SD up to dest root
                 parent = path.parent
                 while parent != dest:
@@ -121,20 +135,19 @@ def _execute_to_sd(
                 str(exc),
                 file=str(path),
                 copied=copied,
-                trashed=trashed,
+                trashed=deleted,
                 unchanged=plan.files_unchanged,
-                remaining=trash_count - trashed - 1,
+                remaining=delete_count - deleted - 1,
             ) from exc
 
     return SyncResult(
         copied=copied,
-        trashed=trashed,
+        trashed=deleted,
         unchanged=plan.files_unchanged,
     )
 
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         description="Sync the local DELUGE/ directory back to a mounted Deluge SD card."
     )
@@ -165,11 +178,13 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
     sd_path = get_sd_card_path()
 
+    _, manifest_files = read_manifest(TO_SD_MANIFEST_PATH)
+
     print(f"Source:      {deluge_root}")
     print(f"Destination: {sd_path}")
     print()
 
-    plan, _src_scan = compute_sync(deluge_root, sd_path, file_filter=file_filter)
+    plan, src_scan = compute_sync(deluge_root, sd_path, manifest=manifest_files, source_is_sd=False, file_filter=file_filter)
 
     if not plan.files_to_copy and not plan.files_to_delete:
         print("Already up to date")
@@ -190,7 +205,7 @@ def main(argv: list[str] | None = None) -> None:
 
     start_time = time.monotonic()
     try:
-        result = _execute_to_sd(plan, source=deluge_root, dest=sd_path)
+        result = _execute_to_sd(plan, dest=sd_path)
     except SyncError as exc:
         elapsed = time.monotonic() - start_time
         error_result = SyncResult(
@@ -208,16 +223,23 @@ def main(argv: list[str] | None = None) -> None:
         print(f"ERROR: Operation failed on: {exc.file}")
         print(f"  {exc}")
         print(f"  {exc.copied} copied, {exc.remaining} remaining")
+        print()
+        print("Sync FAILED. Manifest was NOT updated.")
         raise SystemExit(1) from None
     elapsed = time.monotonic() - start_time
 
     append_sync_log(result, elapsed_seconds=elapsed, log_path=TO_SD_SYNC_LOG_PATH)
 
+    try:
+        new_ts, updated_manifest = _build_post_sync_manifest(plan, src_scan, sd_path, manifest_files, file_filter)
+        write_manifest(TO_SD_MANIFEST_PATH, timestamp=new_ts, files=updated_manifest)
+    except OSError as exc:
+        print(f"\nWARNING: Sync succeeded but manifest update failed: {exc}")
+
     print()
     print(
         f"Sync complete: {result.copied} copied, "
-        f"{result.trashed} deleted from SD "
-        f"(backed up to .trash/)."
+        f"{result.trashed} deleted from SD."
     )
 
 

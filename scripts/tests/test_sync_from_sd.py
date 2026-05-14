@@ -8,15 +8,12 @@ from pathlib import Path
 
 import pytest
 from sync_from_sd import (
-    FileRecord,
     _build_post_sync_manifest,
-    _read_manifest,
-    _write_manifest,
 )
 
 from tests.conftest import _touch
 from deluge_lib.scanning import FileEntry, ScanResult, normalise_mtime
-from deluge_lib.syncing import SyncError, SyncPlan, SyncResult, execute_plan
+from deluge_lib.syncing import FileRecord, SyncError, SyncPlan, SyncResult, execute_plan, read_manifest, write_manifest
 
 
 # =============================================================================
@@ -137,14 +134,14 @@ class TestBuildPostSyncManifest:
 
 
 # =============================================================================
-# _read_manifest / _write_manifest (inlined manifest functions)
+# read_manifest / write_manifest
 # =============================================================================
 
 
 class TestReadManifest:
     def test_missing_file_returns_empty(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
-        ts, files = _read_manifest(tmp_path / "nonexistent.json")
+        ts, files = read_manifest(tmp_path / "nonexistent.json")
         assert ts == ""
         assert files == {}
 
@@ -153,7 +150,7 @@ class TestReadManifest:
         bad = tmp_path / "manifest.json"
         bad.write_text("{invalid json!!!", encoding="utf-8")
 
-        ts, files = _read_manifest(bad)
+        ts, files = read_manifest(bad)
 
         assert ts == ""
         assert files == {}
@@ -163,7 +160,7 @@ class TestReadManifest:
         bad = tmp_path / "manifest.json"
         bad.write_text("{broken", encoding="utf-8")
 
-        _read_manifest(bad)
+        read_manifest(bad)
 
         import _pytest.capture
 
@@ -187,8 +184,8 @@ class TestReadManifest:
         }
         ts = "2026-04-09T12:00:00+00:00"
 
-        _write_manifest(mf, timestamp=ts, files=files)
-        read_ts, read_files = _read_manifest(mf)
+        write_manifest(mf, timestamp=ts, files=files)
+        read_ts, read_files = read_manifest(mf)
 
         assert read_ts == ts
         assert len(read_files) == 2
@@ -212,7 +209,7 @@ class TestReadManifest:
         }
         mf.write_text(json.dumps(payload), encoding="utf-8")
 
-        _, files = _read_manifest(mf)
+        _, files = read_manifest(mf)
 
         # Old-format entry dropped, new-format entry loaded
         assert "kits/old.xml" not in files
@@ -224,7 +221,7 @@ class TestWriteManifest:
     def test_creates_file(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
         mf_path = tmp_path / "manifest.json"
-        _write_manifest(mf_path, timestamp="2026-04-09T00:00:00+00:00", files={})
+        write_manifest(mf_path, timestamp="2026-04-09T00:00:00+00:00", files={})
 
         assert mf_path.exists()
         raw = json.loads(mf_path.read_text(encoding="utf-8"))
@@ -234,7 +231,7 @@ class TestWriteManifest:
     def test_atomic_write_no_temp_file_lingers(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
         mf_path = tmp_path / "manifest.json"
-        _write_manifest(mf_path, timestamp="", files={})
+        write_manifest(mf_path, timestamp="", files={})
 
         tmp_files = list(tmp_path.glob("*.tmp"))
         assert tmp_files == []
@@ -242,6 +239,6 @@ class TestWriteManifest:
     def test_creates_parent_directory(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
         mf_path = tmp_path / "scripts" / "data" / "manifest.json"
-        _write_manifest(mf_path, timestamp="", files={})
+        write_manifest(mf_path, timestamp="", files={})
 
         assert mf_path.parent.is_dir()

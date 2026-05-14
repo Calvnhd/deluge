@@ -28,13 +28,11 @@ from deluge_lib.scanning import format_size, print_path, scan_tree
 
 
 def _folder_label(folder: str) -> str:
-    # TODO-v0.1-REVIEW
-    """Format a folder name for display: 'DRUMS/' or '(root)' for empty."""
+    """Format a folder name for display or '(root)' for empty."""
     return f"{folder}/" if folder else "(root)"
 
 
 def _print_header(text: str) -> None:
-    # TODO-v0.1-REVIEW
     """Print a section header with === above and below the text"""
     print()
     print("=" * len(text))
@@ -45,7 +43,6 @@ def _print_header(text: str) -> None:
 def _group_by_folder(
     samples: list[SampleUsage],
 ) -> dict[str, list[SampleUsage]]:
-    # TODO-v0.1-REVIEW
     """Group samples by top-level folder, sorted alphabetically by folder."""
 
     groups: dict[str, list[SampleUsage]] = defaultdict(list)
@@ -55,7 +52,6 @@ def _group_by_folder(
 
 
 def _strip_folder(path: str, folder: str) -> str:
-    # TODO-v0.1-REVIEW
     """Remove the top-level folder prefix from a sample path for grouped display."""
     if folder:
         return path[len(folder) + 1:]
@@ -68,7 +64,6 @@ def _strip_folder(path: str, folder: str) -> str:
 
 
 def cmd_summary(index, args):
-    # TODO-v0.1-REVIEW
     """Print the library overview with totals, folder breakdown, and top refs."""
 
     summary = compute_summary(index)
@@ -140,7 +135,6 @@ def cmd_summary(index, args):
 
 
 def _print_unused_full(unreferenced: list[SampleUsage]) -> None:
-    # TODO-v0.1-REVIEW
     """Print the full listing of unreferenced samples grouped by folder."""
     groups = _group_by_folder(unreferenced)
 
@@ -196,7 +190,6 @@ def _print_unused_full(unreferenced: list[SampleUsage]) -> None:
 
 
 def _print_unused_condensed(unreferenced: list[SampleUsage]) -> None:
-    # TODO-v0.1-REVIEW
     """Print a per-folder summary table of unreferenced samples."""
     groups = _group_by_folder(unreferenced)
 
@@ -227,7 +220,6 @@ def _print_unused_condensed(unreferenced: list[SampleUsage]) -> None:
 
 
 def cmd_unused(index, args):
-    # TODO-v0.1-REVIEW
     """Print unreferenced samples with multiple output modes."""
 
     unreferenced = list(index.unreferenced.values())
@@ -237,7 +229,7 @@ def cmd_unused(index, args):
         print()
         return
 
-    # --top: flat list of N largest (existing behavior, unchanged)
+    # --top: flat list of N largest
     if args.top is not None:
         top = sorted(unreferenced, key=lambda u: u.size or 0, reverse=True)[: args.top]
         if not top:
@@ -301,7 +293,6 @@ def cmd_unused(index, args):
     _print_unused_condensed(unreferenced)
 
 def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], deluge_root: Path):
-    # TODO-v0.1-REVIEW
     """Print samples referenced in XML but missing from disk, grouped by XML file."""
 
     unextracted: list[tuple[Path, str]] = []
@@ -362,7 +353,6 @@ def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], delu
     print()
 
 def cmd_duplicates(deluge_root: Path, hashes: dict[str, list[str]]) -> None:
-    # TODO-v0.1-REVIEW
     """Find and report duplicate sample files by content hash."""
 
     # Filter to only groups with duplicates
@@ -407,7 +397,6 @@ def cmd_duplicates(deluge_root: Path, hashes: dict[str, list[str]]) -> None:
 
 
 def cmd_usage(index, args):
-    # TODO-v0.1-REVIEW
     """Print usage detail for samples matching a pattern."""
 
     matches = filter_by_pattern(index, args.term)
@@ -504,20 +493,15 @@ def cmd_usage(index, args):
                         print(f"    {xml_name}")
     print()
 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
-
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
     parser = argparse.ArgumentParser(
         prog="sample_overview",
         description="Sample library overview \u2014 cross-referenced reports for the Deluge sample library.",
     )
     subparsers = parser.add_subparsers(dest="command")
 
-    # summary
+    # uv run sample_overview summary --top 5
     sp_summary = subparsers.add_parser(
         "summary", help="Library overview with totals and folder breakdown"
     )
@@ -528,7 +512,7 @@ def main(argv: list[str] | None = None) -> None:
         help="Number of top-referenced samples to show (default: 5)",
     )
 
-    # unused
+    # uv run sample_overview unused
     sp_unused = subparsers.add_parser("unused", help="List unreferenced samples")
     unused_mode = sp_unused.add_mutually_exclusive_group()
     unused_mode.add_argument(
@@ -549,13 +533,11 @@ def main(argv: list[str] | None = None) -> None:
         help="Show only the N largest unreferenced samples",
     )
 
-    # missing
     subparsers.add_parser(
         "missing",
         help="List samples referenced in XML but missing from disk",
     )
 
-    # usage
     sp_usage = subparsers.add_parser(
         "usage", help="Show usage detail for samples matching a search term"
     )
@@ -613,10 +595,13 @@ def main(argv: list[str] | None = None) -> None:
     xml_files = find_all_xml_files(deluge_root)
     refs: list[SampleRef] = []
     refs_by_file: dict[Path, list[SampleRef]] = {}
-    for xml_file in xml_files:
+    total = len(xml_files)
+    for i, xml_file in enumerate(xml_files, 1):
+        print(f"\rParsing XML references... {i}/{total}", end="", flush=True)
         file_refs = extract_sample_refs(xml_file, deluge_root)
         refs.extend(file_refs)
         refs_by_file[xml_file] = file_refs
+    print(f"\rParsing XML references... {total}/{total} done")
     index = build_usage_index(refs, sample_scan)
 
     # Branch to subcommand

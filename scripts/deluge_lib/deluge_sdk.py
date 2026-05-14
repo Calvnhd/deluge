@@ -17,7 +17,7 @@ from deluge_lib.scanning import normalise_key, scan_tree
 _HASH_CHUNK_SIZE = 1024 * 64
 
 # The three standard Deluge SD card subdirectories containing XML presets.
-_DELUGE_SUBDIRS = ("KITS", "SYNTHS", "SONGS")
+_DELUGE_XML_SUBDIRS = ("KITS", "SYNTHS", "SONGS")
 
 # Tag-to-type mapping for path-based XML type detection.
 _PATH_TYPE_MAP = {"KITS": "kit", "SYNTHS": "synth", "SONGS": "song"}
@@ -28,12 +28,11 @@ _OSC_AND_RANGE_TAGS = ("osc1", "osc2", "sampleRange")
 
 @dataclass
 class SampleRef:
-    # TODO-v0.1-REVIEW
     """A single sample reference found in a Deluge XML file."""
 
-    # Sample path as written in the XML, relative to DELUGE/ (e.g. "SAMPLES/DRUMS/Kick/808 Kick.wav")
+    # Sample path as written in the XML relative to DELUGE/
     path: str
-    # Path to the XML file containing this reference, relative to DELUGE_ROOT (e.g. "KITS/KIT001.XML")
+    # Path to the XML file containing this reference relative to DELUGE_ROOT
     xml_file: Path
     # Type of the XML file: "kit", "synth", or "song"
     xml_type: str
@@ -49,7 +48,6 @@ class SampleRef:
 
 
 def hash_file(path: Path) -> str:
-    # TODO-v0.1-REVIEW
     """Compute a SHA256 hex digest for a file, reading in chunks.
 
     Args:
@@ -66,23 +64,22 @@ def hash_file(path: Path) -> str:
 
 
 def find_all_wav_files(samples_dir: Path) -> list[Path]:
-    # TODO-v0.1-REVIEW
     """Recursively find all .wav/.WAV files under a directory.
 
-    Returns sorted absolute paths for consistent ordering.
+    Returns sorted absolute paths
     """
     if not samples_dir.is_dir():
+        print(f"WARNING: samples directory does not exist: {samples_dir}")
         return []
     scan = scan_tree(samples_dir, label="samples", file_filter="wav")
     return sorted(samples_dir / entry.rel_path for entry in scan.files.values())
 
 
 def get_existing_samples(deluge_root: Path) -> set[str]:
-    # TODO-v0.1-REVIEW
     """Build a normalised set of all WAV sample paths under DELUGE/SAMPLES/.
 
     Returns a set of lowercase, forward-slash paths relative to *deluge_root*,
-    suitable for case-insensitive existence checks via ``normalise_key()``.
+    suitable for case-insensitive existence checks via `normalise_key()`.
     """
     samples_dir = deluge_root / "SAMPLES"
     if not samples_dir.is_dir():
@@ -92,15 +89,13 @@ def get_existing_samples(deluge_root: Path) -> set[str]:
 
 
 def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
-    # TODO-v0.1-REVIEW
-    """Hash all WAV files under ``deluge_root / "SAMPLES"`` and group by digest.
+    """Hash all WAV files under `deluge_root / "SAMPLES"` and group by digest.
 
     Args:
         deluge_root: Absolute path to the DELUGE directory.
 
     Returns:
         Mapping of SHA-256 hex digests to lists of relative paths
-        (POSIX-style, relative to *deluge_root*).
     """
     samples_dir = deluge_root / "SAMPLES"
     wav_files = find_all_wav_files(samples_dir)
@@ -119,18 +114,16 @@ def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
 
 
 def find_all_xml_files(deluge_root: Path) -> list[Path]:
-    # TODO-v0.1-REVIEW
     """Recursively find all XML files in KITS/, SYNTHS/, SONGS/ under *deluge_root*.
 
     Returns a sorted list of absolute paths.  Missing subdirectories are skipped.
     """
     results: list[Path] = []
-    for subdir in _DELUGE_SUBDIRS:
+    for subdir in _DELUGE_XML_SUBDIRS:
         d = deluge_root / subdir
         if not d.is_dir():
             continue
-        # Not optimal to use scan_tree because we throw away so much of the result
-        # Consider writing something bespoke
+        # Use scan_tree for reliability even though we throw away so much of the result
         scan = scan_tree(d, label=subdir, file_filter="xml")
         for entry in scan.files.values():
             results.append(d / entry.rel_path)
@@ -138,10 +131,9 @@ def find_all_xml_files(deluge_root: Path) -> list[Path]:
 
 
 def detect_xml_type(xml_path: Path) -> str:
-    # TODO-v0.1-REVIEW
     """Determine the Deluge XML type from the file's path.
 
-    Returns ``"kit"``, ``"synth"``, or ``"song"``.
+    Returns `"kit"`, `"synth"`, or `"song"`.
     Raises :class:`ValueError` if the path does not contain a recognised directory.
     """
     parts = xml_path.parts
@@ -157,13 +149,12 @@ def _get_preset_name(
     xml_type: str,
     xml_path: Path,
 ) -> str:
-    # TODO-v0.1-REVIEW
     """Walk up the element tree to determine the preset/instrument name.
 
-    - **Standalone presets** (kit/synth outside a song): use ``xml_path.stem``.
+    - **Standalone presets** (kit/synth outside a song): use `xml_path.stem`.
     - **Song-embedded instruments**: walk up until we find the element whose
-      parent is ``<instruments>``, then read its ``presetName`` attribute.
-    - **audioClip**: use the ``trackName`` attribute on the element itself.
+      parent is `<instruments>`, then read its `presetName` attribute.
+    - **audioClip**: use the `trackName` attribute on the element itself.
     """
     if element.tag == "audioClip":
         return element.get("trackName", "unknown")
@@ -186,22 +177,18 @@ def _get_preset_name(
 
 def parse_deluge_xml(
     xml_path: Path,
-) -> tuple[etree._ElementTree | None, etree._Element, bool]:
-    # TODO-v0.1-REVIEW
+) -> etree._Element:
     """Parse a Deluge XML file with a three-stage fallback strategy.
 
-    1. **Strict parse** via ``etree.parse()``.
-    2. **Synthetic root wrapper** — wraps raw content in ``<root>...</root>``
+    1. **Strict parse** via `etree.parse()`.
+    2. **Synthetic root wrapper** — wraps raw content in `<root>...</root>`
        to handle old firmware (2.0.0–2.1.0) files with multiple root elements.
-    3. **Recovering parser** — uses ``etree.XMLParser(recover=True)`` to
+    3. **Recovering parser** — uses `etree.XMLParser(recover=True)` to
        handle files with duplicate attributes, unclosed tags, etc.  These
        files are readable by the Deluge hardware but not by a strict XML
-       parser.  Recovered trees may have silently dropped data and MUST NOT
-       be written back to disk.
+       parser.  Recovered trees may have silently dropped data
 
-    Returns ``(tree, root, recovered)`` where *tree* is ``None`` when a
-    wrapper fallback was used, and *recovered* is ``True`` when the lenient
-    parser was needed.
+    Returns the root element of the parsed XML.
     """
     # Known firmware bug: audioClip elements have duplicate attributes
     # (isPlaying, isSoloing, etc.) — harmless, suppress the warning.
@@ -209,7 +196,7 @@ def parse_deluge_xml(
 
     try:
         tree = etree.parse(xml_path)  # noqa: S320
-        return tree, tree.getroot(), False
+        return tree.getroot()
     except etree.XMLSyntaxError:
         raw = xml_path.read_bytes()
         # remove xml declaration
@@ -217,33 +204,32 @@ def parse_deluge_xml(
         try:
             # wrap entire xml in new root element
             root = etree.fromstring(b"<root>" + raw + b"</root>")  # noqa: S320
-            print(f"Warning: {xml_path} has multiple root elements")
-            return None, root, False
+            print(f"\nWarning: {xml_path} has multiple root elements")
+            return root
         except etree.XMLSyntaxError as exc:
             # Lenient parse for files with duplicate attributes, unclosed tags, etc.
             parser = etree.XMLParser(recover=True)
             root = etree.fromstring(b"<root>" + raw + b"</root>", parser=parser)  # noqa: S320
             if not _KNOWN_DUPE_ATTR_RE.search(str(exc)):
-                print(f"Warning: {xml_path} has malformed XML and was parsed with recover=true. {exc}")
-            return None, root, True
+                print(f"\nWarning: {xml_path} has malformed XML and was parsed with recover=true. {exc}")
+            return root
 
 
 def extract_sample_refs(xml_path: Path, deluge_root: Path) -> list[SampleRef]:
-    # TODO-v0.1-REVIEW
     """Extract all sample references from a single Deluge XML file.
 
     Handles all 5 reference patterns:
 
-    1. ``<fileName>text</fileName>`` element on ``<osc1>``/``<osc2>`` (element-style)
-    2. ``<fileName>text</fileName>`` element within ``<sampleRange>`` (element-style)
-    3. ``fileName="..."`` attribute on ``<osc1>``/``<osc2>`` (attribute-style)
-    4. ``fileName="..."`` attribute on ``<sampleRange>`` (attribute-style)
-    5. ``filePath="..."`` attribute on ``<audioClip>`` (songs only)
+    1. `<fileName>text</fileName>` element on `<osc1>`/`<osc2>` (element-style)
+    2. `<fileName>text</fileName>` element within `<sampleRange>` (element-style)
+    3. `fileName="..."` attribute on `<osc1>`/`<osc2>` (attribute-style)
+    4. `fileName="..."` attribute on `<sampleRange>` (attribute-style)
+    5. `filePath="..."` attribute on `<audioClip>` (songs only)
 
-    The ``xml_file`` field on each :class:`SampleRef` is stored as a path
+    The `xml_file` field on each :class:`SampleRef` is stored as a path
     relative to *deluge_root*.  Empty references are skipped.
     """
-    _tree, root, _recovered = parse_deluge_xml(xml_path)
+    root = parse_deluge_xml(xml_path)
     xml_type = detect_xml_type(xml_path)
     xml_rel = xml_path.relative_to(deluge_root)
     refs: list[SampleRef] = []
@@ -317,7 +303,6 @@ _SAMPLE_PATH_RE = re.compile(r"SAMPLES/[^\"'<>\t\n\r]+\.wav", re.IGNORECASE)
 
 
 def find_unextracted_refs(xml_file: Path, extracted: list[SampleRef]) -> list[str]:
-    # TODO-v0.1-REVIEW
     """Find sample paths in raw XML text not captured by the structured extractor.
 
     Reads the raw XML and finds all SAMPLES/...wav paths via regex, then

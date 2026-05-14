@@ -13,23 +13,14 @@ from dataclasses import dataclass, field
 from deluge_lib.deluge_sdk import SampleRef
 from deluge_lib.scanning import ScanResult, normalise_key, print_path
 
-# Normalised prefix used by SampleRef.path values (relative to DELUGE/).
-_SAMPLES_PREFIX = "samples/"
-
-
-# ---------------------------------------------------------------------------
-# Data structures
-# ---------------------------------------------------------------------------
-
 
 @dataclass
 class SampleUsage:
-    # TODO-v0.1-REVIEW
     """Per-sample usage record."""
 
-    # Display path relative to SAMPLES/ (e.g. "DRUMS/Kick/808.wav").
+    # Path (for output display) relative to SAMPLES/
     path: str
-    # File size in bytes; None when the sample is missing from disk.
+    # File size in bytes; None when the sample is missing
     size: int | None
     # Every SampleRef that points to this sample.
     refs: list[SampleRef] = field(default_factory=list)
@@ -38,13 +29,11 @@ class SampleUsage:
 
     @property
     def ref_count(self) -> int:
-        # TODO-v0.1-REVIEW
         return len(self.refs)
 
 
 @dataclass(frozen=True)
 class FolderStats:
-    # TODO-v0.1-REVIEW
     """Per-folder breakdown (top-level folder under SAMPLES/)."""
 
     folder: str
@@ -54,7 +43,6 @@ class FolderStats:
 
 @dataclass(frozen=True)
 class LibrarySummary:
-    # TODO-v0.1-REVIEW
     """Library-wide aggregate statistics."""
 
     on_disk_count: int
@@ -68,53 +56,42 @@ class LibrarySummary:
 
 @dataclass
 class UsageIndex:
-    # TODO-v0.1-REVIEW
     """Complete cross-reference of samples on disk and in XML.
 
-    Keys are normalised paths relative to SAMPLES/ (lowercase, forward-slash).
+    Keys are normalised paths (lowercase, forward-slash) relative to SAMPLES/
     """
 
     entries: dict[str, SampleUsage] = field(default_factory=dict)
 
     @property
     def referenced(self) -> dict[str, SampleUsage]:
-        # TODO-v0.1-REVIEW
         """Samples that exist on disk AND are referenced by at least one XML."""
         return {k: v for k, v in self.entries.items() if v.on_disk and v.ref_count > 0}
 
     @property
     def unreferenced(self) -> dict[str, SampleUsage]:
-        # TODO-v0.1-REVIEW
         """Samples that exist on disk but are NOT referenced by any XML."""
         return {k: v for k, v in self.entries.items() if v.on_disk and v.ref_count == 0}
 
     @property
     def missing(self) -> dict[str, SampleUsage]:
-        # TODO-v0.1-REVIEW
         """Samples referenced in XML but not found on disk."""
         return {k: v for k, v in self.entries.items() if not v.on_disk}
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
-
 def _ref_key(ref_path: str) -> str:
-    # TODO-v0.1-REVIEW
     """Normalise a SampleRef path to match ScanResult keys.
 
     SampleRef.path is relative to DELUGE/ (e.g. "SAMPLES/DRUMS/Kick/808.wav").
     ScanResult keys are normalised relative to SAMPLES/ (e.g. "drums/kick/808.wav").
     """
     key = normalise_key(ref_path)
-    if key.startswith(_SAMPLES_PREFIX):
-        key = key[len(_SAMPLES_PREFIX) :]
+    if key.startswith("samples/"):
+        key = key[len("samples/") :]
     return key
 
 
 def top_folder(path: str) -> str:
-    # TODO-v0.1-REVIEW
     """Extract the first path component (top-level folder under SAMPLES/).
 
     >>> top_folder("DRUMS/Kick/808.wav")
@@ -128,28 +105,18 @@ def top_folder(path: str) -> str:
     return path[:slash]
 
 
-# ---------------------------------------------------------------------------
-# Usage index builder
-# ---------------------------------------------------------------------------
-
-
 def build_usage_index(
     refs: list[SampleRef],
     sample_scan: ScanResult,
 ) -> UsageIndex:
-    # TODO-v0.1-REVIEW
     """Cross-reference XML sample refs against a SAMPLES/ disk scan.
 
-    Parameters
-    ----------
-    refs:
-        All sample references extracted from Deluge XMLs.
-    sample_scan:
-        Result of ``scan_tree()`` run on the SAMPLES/ directory.
+    Args:
+        refs: All sample references extracted from Deluge XMLs.
+        sample_scan: Result of ``scan_tree()`` run on the SAMPLES/ directory.
 
-    Returns
-    -------
-    UsageIndex covering every known sample — on disk, in XML, or both.
+    Returns:
+        UsageIndex covering every known sample — on disk, in XML, or both.
     """
     entries: dict[str, SampleUsage] = {}
 
@@ -184,13 +151,7 @@ def build_usage_index(
     return UsageIndex(entries=entries)
 
 
-# ---------------------------------------------------------------------------
-# Aggregation functions
-# ---------------------------------------------------------------------------
-
-
 def compute_summary(index: UsageIndex) -> LibrarySummary:
-    # TODO-v0.1-REVIEW
     """Compute library-wide aggregate statistics from a usage index."""
     on_disk_count = 0
     on_disk_size = 0
@@ -225,7 +186,6 @@ def compute_summary(index: UsageIndex) -> LibrarySummary:
 
 
 def compute_folder_breakdown(index: UsageIndex) -> list[FolderStats]:
-    # TODO-v0.1-REVIEW
     """Group on-disk samples by top-level folder under SAMPLES/.
 
     Returns a list of ``FolderStats`` sorted by folder name.
@@ -246,7 +206,6 @@ def compute_folder_breakdown(index: UsageIndex) -> list[FolderStats]:
 
 
 def top_by_refs(index: UsageIndex, n: int) -> list[SampleUsage]:
-    # TODO-v0.1-REVIEW
     """Return the *n* most-referenced samples currently on-disk, sorted by reference count descending."""
     return sorted(
         (u for u in index.entries.values() if u.ref_count > 0 and u.on_disk),
@@ -255,18 +214,7 @@ def top_by_refs(index: UsageIndex, n: int) -> list[SampleUsage]:
     )[:n]
 
 
-def top_by_size(index: UsageIndex, n: int) -> list[SampleUsage]:
-    # TODO-v0.1-REVIEW
-    """Return the *n* largest samples currently on-disk, sorted by size descending."""
-    return sorted(
-        (u for u in index.entries.values() if u.on_disk and u.size is not None),
-        key=lambda u: u.size,  # type: ignore[arg-type, return-value]
-        reverse=True,
-    )[:n]
-
-
 def filter_by_pattern(index: UsageIndex, term: str) -> list[SampleUsage]:
-    # TODO-v0.1-REVIEW
     """Return samples whose path contains *term* (case-insensitive substring match)."""
     needle = term.lower()
     return [u for u in index.entries.values() if needle in u.path.lower()]

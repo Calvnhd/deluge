@@ -7,9 +7,14 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
-from sync_to_sd import main
+from sync_to_sd import (
+    _build_post_sync_manifest,
+    main,
+)
 
 from tests.conftest import _touch
+from deluge_lib.scanning import FileEntry, ScanResult, normalise_mtime
+from deluge_lib.syncing import FileRecord, SyncPlan, read_manifest, write_manifest
 
 
 def _setup_env(
@@ -161,7 +166,7 @@ class TestFullSync:
 
         assert (sd / "KITS" / "Kit.XML").read_bytes() == b"<updated/>"
 
-    def test_sd_only_files_trashed_and_deleted(
+    def test_sd_only_files_deleted(
         self,
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
@@ -186,14 +191,8 @@ class TestFullSync:
         assert not (sd / "KITS" / "OldKit.XML").exists()
         # Kept file untouched
         assert (sd / "KITS" / "Kept.XML").exists()
-        # Old file backed up to repo .trash/
-        trash_dir = deluge / ".trash"
-        assert trash_dir.is_dir()
-        # Find the SD-timestamp folder
-        sd_trash_dirs = [d for d in trash_dir.iterdir() if d.name.startswith("SD-")]
-        assert len(sd_trash_dirs) == 1
-        trash_copy = sd_trash_dirs[0] / "KITS" / "OldKit.XML"
-        assert trash_copy.read_bytes() == b"<old/>"
+        # No .trash/ directory created
+        assert not (deluge / ".trash").exists()
 
     def test_unchanged_files_left_alone(
         self,
@@ -302,6 +301,171 @@ class TestFullSync:
         # File, SUB dir, and KITS dir should all be gone (empty)
         assert not (sd / "KITS" / "SUB").exists()
         assert not (sd / "KITS").exists()
+
+
+# ============================================================================
+# _build_post_sync_manifest
+# ============================================================================
+
+
+class TestBuildPostSyncManifest:
+    def test_creates_correct_entries_after_sync(self, tmp_path: Path) -> None:
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "Kit.XML"
+        _touch(kit_file, b"<kit/>", mtime=1_700_000_000.0)
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=6,
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "DELUGE" / "KITS" / "Kit.XML", kit_file)],
+        )
+        old_files: dict[str, FileRecord] = {}
+
+        ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert "kits/kit.xml" in files
+        entry = files["kits/kit.xml"]
+        assert entry["local_size"] == 6
+        assert entry["local_mtime"] == 1_700_000_000.0
+        assert entry["sd_size"] == kit_file.stat().st_size
+        assert entry["sd_mtime"] == normalise_mtime(kit_file.stat().st_mtime)
+        assert ts != ""
+
+    def test_deleted_files_excluded(self, tmp_path: Path) -> None:
+        dest = tmp_path / "SD"
+
+        src_scan = ScanResult(
+            files={
+                "kits/kept.xml": FileEntry(
+                    rel_path=Path("KITS/Kept.XML"),
+                    size=6,
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_delete=[dest / "KITS" / "Deleted.XML"],
+        )
+        old_files: dict[str, FileRecord] = {
+            "kits/kept.xml": {
+                "local_size": 6, "local_mtime": 1_700_000_000.0,
+                "sd_size": 6, "sd_mtime": 1_700_000_100.0,
+            },
+            "kits/deleted.xml": {
+                "local_size": 10, "local_mtime": 1_600_000_000.0,
+                "sd_size": 10, "sd_mtime": 1_600_000_100.0,
+            },
+        }
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert "kits/kept.xml" in files
+        assert "kits/deleted.xml" not in files
+
+    def test_unchanged_preserves_old_entry(self, tmp_path: Path) -> None:
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "Kit.XML"
+        _touch(kit_file, b"<kit/>", mtime=1_700_000_000.0)
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=6,
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan()
+        old_entry: FileRecord = {
+            "local_size": 6, "local_mtime": 1_700_000_000.0,
+            "sd_size": 6, "sd_mtime": 1_700_000_050.0,
+        }
+        old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/kit.xml"] is old_entry
+
+
+# ============================================================================
+# read_manifest / write_manifest
+# ============================================================================
+
+
+class TestReadWriteManifest:
+    def test_missing_file_returns_empty(self, tmp_path: Path) -> None:
+        ts, files = read_manifest(tmp_path / "nonexistent.json")
+        assert ts == ""
+        assert files == {}
+
+    def test_round_trip(self, tmp_path: Path) -> None:
+        mf = tmp_path / "manifest.json"
+        files: dict[str, FileRecord] = {
+            "kits/mykit.xml": {
+                "local_size": 1234, "local_mtime": 1712600000.0,
+                "sd_size": 1234, "sd_mtime": 1712600050.0,
+            },
+        }
+        ts = "2026-05-14T12:00:00+00:00"
+
+        write_manifest(mf, timestamp=ts, files=files)
+        read_ts, read_files = read_manifest(mf)
+
+        assert read_ts == ts
+        assert len(read_files) == 1
+        assert read_files["kits/mykit.xml"]["local_size"] == 1234
+        assert read_files["kits/mykit.xml"]["sd_mtime"] == 1712600050.0
+
+
+# ============================================================================
+# Manifest integration
+# ============================================================================
+
+
+class TestManifestIntegration:
+    def test_manifest_prevents_unnecessary_recopies(
+        self,
+        tmp_path: Path,
+        monkeypatch: pytest.MonkeyPatch,
+        capsys: pytest.CaptureFixture[str],
+    ) -> None:
+        deluge = tmp_path / "DELUGE"
+        _touch(deluge / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
+
+        sd = tmp_path / "SD"
+        sd.mkdir()
+
+        manifest_path = tmp_path / "to_sd_manifest.json"
+        _setup_env(monkeypatch, deluge, sd)
+
+        with (
+            patch("deluge_lib.cli_utils.load_dotenv"),
+            patch("sync_to_sd.confirm_apply", return_value=True),
+            patch("sync_to_sd.TO_SD_MANIFEST_PATH", manifest_path),
+            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
+        ):
+            main([])
+
+        out1 = capsys.readouterr().out
+        assert "Sync complete" in out1
+
+        with (
+            patch("deluge_lib.cli_utils.load_dotenv"),
+            patch("sync_to_sd.TO_SD_MANIFEST_PATH", manifest_path),
+            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
+        ):
+            main(["--dry-run"])
+
+        out2 = capsys.readouterr().out
+        assert "Already up to date" in out2
 
 
 # ============================================================================
@@ -436,7 +600,7 @@ class TestErrorHandling:
             with pytest.raises(SystemExit):
                 main([])
 
-    def test_trash_delete_failure_exits_with_error(
+    def test_delete_failure_exits_with_error(
         self,
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
@@ -451,7 +615,7 @@ class TestErrorHandling:
 
         _setup_env(monkeypatch, deluge, sd)
 
-        # Patch unlink to fail after trash copy succeeds
+        # Patch unlink to fail during delete phase
         original_unlink = Path.unlink
 
         def failing_unlink(self: Path, *args: object, **kwargs: object) -> None:
