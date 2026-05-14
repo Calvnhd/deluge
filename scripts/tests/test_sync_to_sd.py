@@ -443,13 +443,13 @@ class TestManifestIntegration:
         sd = tmp_path / "SD"
         sd.mkdir()
 
-        manifest_path = tmp_path / "to_sd_manifest.json"
+        manifest_path = tmp_path / "sync_manifest.json"
         _setup_env(monkeypatch, deluge, sd)
 
         with (
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
-            patch("sync_to_sd.TO_SD_MANIFEST_PATH", manifest_path),
+            patch("sync_to_sd.SYNC_MANIFEST_PATH", manifest_path),
             patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
         ):
             main([])
@@ -459,7 +459,7 @@ class TestManifestIntegration:
 
         with (
             patch("deluge_lib.cli_utils.load_dotenv"),
-            patch("sync_to_sd.TO_SD_MANIFEST_PATH", manifest_path),
+            patch("sync_to_sd.SYNC_MANIFEST_PATH", manifest_path),
             patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
         ):
             main(["--dry-run"])

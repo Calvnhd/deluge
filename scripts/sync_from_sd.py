@@ -13,7 +13,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
-from deluge_lib.paths import FROM_SD_MANIFEST_PATH
+from deluge_lib.paths import SYNC_MANIFEST_PATH
 from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
     FileRecord,
@@ -105,7 +105,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
 
     # Load manifest (empty state on first run or if corrupt).
-    manifest_path = FROM_SD_MANIFEST_PATH
+    manifest_path = SYNC_MANIFEST_PATH
     _, manifest_files = read_manifest(manifest_path)
 
     print(f"Source:      {sd_path}")

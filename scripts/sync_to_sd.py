@@ -15,7 +15,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
-from deluge_lib.paths import TO_SD_MANIFEST_PATH, TO_SD_SYNC_LOG_PATH
+from deluge_lib.paths import SYNC_MANIFEST_PATH, TO_SD_SYNC_LOG_PATH
 from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
     FileRecord,
@@ -181,7 +181,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
     sd_path = get_sd_card_path()
 
-    _, manifest_files = read_manifest(TO_SD_MANIFEST_PATH)
+    _, manifest_files = read_manifest(SYNC_MANIFEST_PATH)
 
     print(f"Source:      {deluge_root}")
     print(f"Destination: {sd_path}")
@@ -235,7 +235,7 @@ def main(argv: list[str] | None = None) -> None:
 
     try:
         new_ts, updated_manifest = _build_post_sync_manifest(plan, src_scan, sd_path, manifest_files, file_filter)
-        write_manifest(TO_SD_MANIFEST_PATH, timestamp=new_ts, files=updated_manifest)
+        write_manifest(SYNC_MANIFEST_PATH, timestamp=new_ts, files=updated_manifest)
     except OSError as exc:
         print(f"\nWARNING: Sync succeeded but manifest update failed: {exc}")
 
