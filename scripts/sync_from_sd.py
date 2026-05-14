@@ -25,6 +25,7 @@ from deluge_lib.syncing import (
     execute_plan,
     print_plan,
     read_manifest,
+    report_empty_dirs,
     write_manifest,
 )
 
@@ -167,6 +168,7 @@ def main(argv: list[str] | None = None) -> None:
         f"{result.trashed} trashed"
     )
     print()
+    report_empty_dirs(deluge_root)
 
 if __name__ == "__main__":
     main()
