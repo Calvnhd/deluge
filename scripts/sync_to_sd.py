@@ -15,7 +15,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
-from deluge_lib.paths import TO_SD_MANIFEST_PATH, TO_SD_SYNC_LOG_PATH
+from deluge_lib.paths import SYNC_MANIFEST_PATH, TO_SD_SYNC_LOG_PATH
 from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
     FileRecord,
@@ -26,6 +26,7 @@ from deluge_lib.syncing import (
     compute_sync,
     print_plan,
     read_manifest,
+    report_empty_dirs,
     write_manifest,
 )
 
@@ -119,7 +120,8 @@ def _execute_to_sd(
     delete_count = len(plan.files_to_delete)
     if delete_count:
         try:
-            for path in plan.files_to_delete:
+            for i, path in enumerate(plan.files_to_delete, 1):
+                print(f"\rDeleting... {i}/{delete_count}", end="", flush=True)
                 path.unlink()
                 deleted += 1
                 # Clean up empty ancestor directories on SD up to dest root
@@ -139,6 +141,8 @@ def _execute_to_sd(
                 unchanged=plan.files_unchanged,
                 remaining=delete_count - deleted - 1,
             ) from exc
+    if delete_count:
+        print()
 
     return SyncResult(
         copied=copied,
@@ -178,7 +182,7 @@ def main(argv: list[str] | None = None) -> None:
     deluge_root = get_deluge_root()
     sd_path = get_sd_card_path()
 
-    _, manifest_files = read_manifest(TO_SD_MANIFEST_PATH)
+    _, manifest_files = read_manifest(SYNC_MANIFEST_PATH)
 
     print(f"Source:      {deluge_root}")
     print(f"Destination: {sd_path}")
@@ -232,7 +236,7 @@ def main(argv: list[str] | None = None) -> None:
 
     try:
         new_ts, updated_manifest = _build_post_sync_manifest(plan, src_scan, sd_path, manifest_files, file_filter)
-        write_manifest(TO_SD_MANIFEST_PATH, timestamp=new_ts, files=updated_manifest)
+        write_manifest(SYNC_MANIFEST_PATH, timestamp=new_ts, files=updated_manifest)
     except OSError as exc:
         print(f"\nWARNING: Sync succeeded but manifest update failed: {exc}")
 
@@ -241,6 +245,7 @@ def main(argv: list[str] | None = None) -> None:
         f"Sync complete: {result.copied} copied, "
         f"{result.trashed} deleted from SD."
     )
+    report_empty_dirs(sd_path)
 
 
 if __name__ == "__main__":

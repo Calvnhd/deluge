@@ -259,7 +259,7 @@ def preview_and_apply(
 
     # --- Preview changes ---
     if changes_by_file:
-        print("CHANGES")
+        print("\nCHANGES")
         print("-------")
         for xml_file in sorted(changes_by_file):
             # Deduplicate same old→new pairs and count occurrences

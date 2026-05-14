@@ -9,6 +9,7 @@ so that multiple sync scripts can share them.
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import tempfile
 from dataclasses import dataclass, field
@@ -396,3 +397,26 @@ def append_sync_log(
 
     with log_path.open("a") as f:
         f.write(line + "\n")
+
+
+def report_empty_dirs(dest: Path) -> None:
+    """Print any empty subdirectories of *dest*.
+
+    Bottom-up walk, skips .trash/.
+    """
+    from deluge_lib.scanning import _SKIP_DIRS, print_path
+
+    empties: list[Path] = []
+    for dirpath, dirnames, filenames in os.walk(dest, topdown=False):
+        dirnames[:] = [d for d in dirnames if d.lower() not in _SKIP_DIRS]
+        current = Path(dirpath)
+        if current == dest:
+            continue
+        # Empty if no files and all subdirs were already flagged as empty.
+        if not filenames and all((current / d) in empties for d in dirnames):
+            empties.append(current)
+
+    if empties:
+        print(f"\nFound {len(empties)} empty director{'y' if len(empties) == 1 else 'ies'} in {dest}:")
+        for p in empties:
+            print(f"  {print_path(p.relative_to(dest))}")
