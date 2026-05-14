@@ -396,6 +396,98 @@ class TestBuildPostSyncManifest:
 
 
 # ============================================================================
+# _build_post_sync_manifest — hash population
+# ============================================================================
+
+
+class TestBuildPostSyncManifestHashing:
+    """Hash population in _build_post_sync_manifest for sync_to_sd."""
+
+    def test_copied_files_get_hash(self, tmp_path: Path) -> None:
+        """Copied files have hash computed from destination file on SD."""
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "Kit.XML"
+        content = b"<kit>hashed</kit>"
+        _touch(kit_file, content, mtime=1_700_000_000.0)
+
+        import hashlib
+        expected_hash = hashlib.sha256(content).hexdigest()
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=len(content),
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "DELUGE" / "KITS" / "Kit.XML", kit_file)],
+        )
+        old_files: dict[str, FileRecord] = {}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/kit.xml"]["hash"] == expected_hash
+
+    def test_unchanged_files_preserve_hash(self, tmp_path: Path) -> None:
+        """Unchanged files preserve their existing hash from old manifest."""
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "Kit.XML"
+        _touch(kit_file, b"<kit/>", mtime=1_700_000_000.0)
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=6,
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan()
+        old_entry: FileRecord = {
+            "local_size": 6, "local_mtime": 1_700_000_000.0,
+            "sd_size": 6, "sd_mtime": 1_700_000_050.0,
+            "hash": "preserved_hash_value",
+        }
+        old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/kit.xml"]["hash"] == "preserved_hash_value"
+
+    def test_new_file_gets_hash(self, tmp_path: Path) -> None:
+        """New file (no prior manifest entry) gets hash computed."""
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "New.XML"
+        content = b"<new/>"
+        _touch(kit_file, content, mtime=1_700_000_000.0)
+
+        import hashlib
+        expected_hash = hashlib.sha256(content).hexdigest()
+
+        src_scan = ScanResult(
+            files={
+                "kits/new.xml": FileEntry(
+                    rel_path=Path("KITS/New.XML"),
+                    size=len(content),
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "DELUGE" / "KITS" / "New.XML", kit_file)],
+        )
+        old_files: dict[str, FileRecord] = {}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/new.xml"]["hash"] == expected_hash
+
+
+# ============================================================================
 # read_manifest / write_manifest
 # ============================================================================
 

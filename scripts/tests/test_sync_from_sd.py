@@ -242,3 +242,344 @@ class TestWriteManifest:
         write_manifest(mf_path, timestamp="", files={})
 
         assert mf_path.parent.is_dir()
+
+
+# =============================================================================
+# Manifest v2 schema and v1 migration
+# =============================================================================
+
+
+class TestManifestV2Format:
+    """write_manifest always writes v2 format with version marker and hash."""
+
+    def test_write_includes_version_2(self, tmp_path: Path) -> None:
+        mf = tmp_path / "manifest.json"
+        write_manifest(mf, timestamp="ts", files={})
+
+        raw = json.loads(mf.read_text(encoding="utf-8"))
+        assert raw["version"] == 2
+
+    def test_write_includes_hash_field_null(self, tmp_path: Path) -> None:
+        mf = tmp_path / "manifest.json"
+        files: dict[str, FileRecord] = {
+            "kits/kit.xml": {
+                "sd_size": 100, "sd_mtime": 1.0,
+                "local_size": 100, "local_mtime": 2.0,
+            },
+        }
+        write_manifest(mf, timestamp="ts", files=files)
+
+        raw = json.loads(mf.read_text(encoding="utf-8"))
+        assert raw["files"]["kits/kit.xml"]["hash"] is None
+
+    def test_write_includes_hash_field_with_value(self, tmp_path: Path) -> None:
+        mf = tmp_path / "manifest.json"
+        files: dict[str, FileRecord] = {
+            "kits/kit.xml": {
+                "sd_size": 100, "sd_mtime": 1.0,
+                "local_size": 100, "local_mtime": 2.0,
+                "hash": "abcdef1234567890",
+            },
+        }
+        write_manifest(mf, timestamp="ts", files=files)
+
+        raw = json.loads(mf.read_text(encoding="utf-8"))
+        assert raw["files"]["kits/kit.xml"]["hash"] == "abcdef1234567890"
+
+
+class TestManifestV2RoundTrip:
+    """v2 manifests round-trip correctly including hash values."""
+
+    def test_round_trip_with_hashes(self, tmp_path: Path) -> None:
+        mf = tmp_path / "manifest.json"
+        files: dict[str, FileRecord] = {
+            "kits/kit.xml": {
+                "sd_size": 100, "sd_mtime": 1.0,
+                "local_size": 100, "local_mtime": 2.0,
+                "hash": "abc123",
+            },
+            "samples/kick.wav": {
+                "sd_size": 5000, "sd_mtime": 3.0,
+                "local_size": 5000, "local_mtime": 4.0,
+                "hash": None,
+            },
+        }
+
+        write_manifest(mf, timestamp="2026-05-15T00:00:00+00:00", files=files)
+        read_ts, read_files = read_manifest(mf)
+
+        assert read_ts == "2026-05-15T00:00:00+00:00"
+        assert len(read_files) == 2
+        assert read_files["kits/kit.xml"]["hash"] == "abc123"
+        assert read_files["kits/kit.xml"]["sd_size"] == 100
+        assert read_files["samples/kick.wav"]["hash"] is None
+        assert read_files["samples/kick.wav"]["sd_size"] == 5000
+
+    def test_round_trip_without_hash_field(self, tmp_path: Path) -> None:
+        """FileRecord without explicit hash round-trips with hash=None."""
+        mf = tmp_path / "manifest.json"
+        files: dict[str, FileRecord] = {
+            "kits/kit.xml": {
+                "sd_size": 100, "sd_mtime": 1.0,
+                "local_size": 100, "local_mtime": 2.0,
+            },
+        }
+
+        write_manifest(mf, timestamp="ts", files=files)
+        _, read_files = read_manifest(mf)
+
+        assert read_files["kits/kit.xml"]["hash"] is None
+
+
+class TestManifestV1Migration:
+    """v1 manifests (no version field) are migrated transparently."""
+
+    def test_v1_manifest_reads_with_hash_none(self, tmp_path: Path) -> None:
+        mf = tmp_path / "manifest.json"
+        payload = {
+            "last_sync_timestamp": "2026-01-01T00:00:00+00:00",
+            "files": {
+                "kits/kit.xml": {
+                    "sd_size": 100, "sd_mtime": 1.0,
+                    "local_size": 100, "local_mtime": 2.0,
+                },
+            },
+        }
+        mf.write_text(json.dumps(payload), encoding="utf-8")
+
+        ts, files = read_manifest(mf)
+
+        assert ts == "2026-01-01T00:00:00+00:00"
+        assert files["kits/kit.xml"]["sd_size"] == 100
+        assert files["kits/kit.xml"]["hash"] is None
+
+    def test_v1_manifest_mixed_entry_quality(self, tmp_path: Path) -> None:
+        """v1 manifest with mix of old-format and dual-stat entries."""
+        mf = tmp_path / "manifest.json"
+        payload = {
+            "last_sync_timestamp": "ts",
+            "files": {
+                "kits/old.xml": {"size": 100, "mtime": 1.0},
+                "kits/good.xml": {
+                    "sd_size": 200, "sd_mtime": 2.0,
+                    "local_size": 200, "local_mtime": 3.0,
+                },
+                "kits/also-old.xml": {"size": 50, "mtime": 0.5},
+            },
+        }
+        mf.write_text(json.dumps(payload), encoding="utf-8")
+
+        _, files = read_manifest(mf)
+
+        # Old-format entries dropped, good entry migrated with hash=None
+        assert "kits/old.xml" not in files
+        assert "kits/also-old.xml" not in files
+        assert "kits/good.xml" in files
+        assert files["kits/good.xml"]["hash"] is None
+        assert files["kits/good.xml"]["sd_size"] == 200
+
+    def test_v2_manifest_preserves_hashes(self, tmp_path: Path) -> None:
+        """v2 manifest hash values are preserved on read."""
+        mf = tmp_path / "manifest.json"
+        payload = {
+            "version": 2,
+            "last_sync_timestamp": "ts",
+            "files": {
+                "kits/hashed.xml": {
+                    "sd_size": 100, "sd_mtime": 1.0,
+                    "local_size": 100, "local_mtime": 2.0,
+                    "hash": "deadbeef",
+                },
+                "kits/unhashed.xml": {
+                    "sd_size": 200, "sd_mtime": 3.0,
+                    "local_size": 200, "local_mtime": 4.0,
+                    "hash": None,
+                },
+            },
+        }
+        mf.write_text(json.dumps(payload), encoding="utf-8")
+
+        _, files = read_manifest(mf)
+
+        assert files["kits/hashed.xml"]["hash"] == "deadbeef"
+        assert files["kits/unhashed.xml"]["hash"] is None
+
+    def test_v1_manifest_ignores_hash_field_if_present(self, tmp_path: Path) -> None:
+        """v1 manifest (no version field) with a stray hash field → hash set to None."""
+        mf = tmp_path / "manifest.json"
+        payload = {
+            "last_sync_timestamp": "ts",
+            "files": {
+                "kits/kit.xml": {
+                    "sd_size": 100, "sd_mtime": 1.0,
+                    "local_size": 100, "local_mtime": 2.0,
+                    "hash": "should-be-ignored",
+                },
+            },
+        }
+        mf.write_text(json.dumps(payload), encoding="utf-8")
+
+        _, files = read_manifest(mf)
+
+        # v1 manifests always get hash=None regardless of stray data
+        assert files["kits/kit.xml"]["hash"] is None
+
+
+# =============================================================================
+# _build_post_sync_manifest — hash population
+# =============================================================================
+
+
+class TestBuildPostSyncManifestHashing:
+    """Hash population in _build_post_sync_manifest."""
+
+    def test_copied_files_get_hash(self, tmp_path: Path) -> None:
+        """Copied files have hash computed from destination file."""
+        dest = tmp_path / "dst"
+        kit_file = dest / "KITS" / "Kit.XML"
+        content = b"<kit>hashed</kit>"
+        _touch(kit_file, content, mtime=1_700_000_000.0)
+
+        import hashlib
+        expected_hash = hashlib.sha256(content).hexdigest()
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=len(content),
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "src" / "KITS" / "Kit.XML", kit_file)],
+        )
+        old_files: dict[str, FileRecord] = {}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/kit.xml"]["hash"] == expected_hash
+
+    def test_unchanged_files_preserve_hash(self, tmp_path: Path) -> None:
+        """Unchanged files preserve their existing hash from old manifest."""
+        dest = tmp_path / "dst"
+        kit_file = dest / "KITS" / "Kit.XML"
+        _touch(kit_file, b"<kit/>", mtime=1_700_000_000.0)
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=6,
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan()  # Not in files_to_copy
+        old_entry: FileRecord = {
+            "sd_size": 6, "sd_mtime": 1_700_000_000.0,
+            "local_size": 6, "local_mtime": 1_700_000_100.0,
+            "hash": "preserved_hash_value",
+        }
+        old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/kit.xml"]["hash"] == "preserved_hash_value"
+
+    def test_unchanged_v1_entry_preserves_null_hash(self, tmp_path: Path) -> None:
+        """Unchanged v1 entry (hash=None) still has hash=None — not re-hashed."""
+        dest = tmp_path / "dst"
+        kit_file = dest / "KITS" / "Kit.XML"
+        _touch(kit_file, b"<kit/>", mtime=1_700_000_000.0)
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=6,
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan()
+        old_entry: FileRecord = {
+            "sd_size": 6, "sd_mtime": 1_700_000_000.0,
+            "local_size": 6, "local_mtime": 1_700_000_100.0,
+            "hash": None,
+        }
+        old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/kit.xml"]["hash"] is None
+
+    def test_new_file_gets_hash(self, tmp_path: Path) -> None:
+        """New file (no prior manifest entry) gets hash computed."""
+        dest = tmp_path / "dst"
+        kit_file = dest / "KITS" / "New.XML"
+        content = b"<new/>"
+        _touch(kit_file, content, mtime=1_700_000_000.0)
+
+        import hashlib
+        expected_hash = hashlib.sha256(content).hexdigest()
+
+        src_scan = ScanResult(
+            files={
+                "kits/new.xml": FileEntry(
+                    rel_path=Path("KITS/New.XML"),
+                    size=len(content),
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        # Not in old_files and IS in files_to_copy
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "src" / "KITS" / "New.XML", kit_file)],
+        )
+        old_files: dict[str, FileRecord] = {}
+
+        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+
+        assert files["kits/new.xml"]["hash"] == expected_hash
+
+    def test_filtered_sync_preserves_hashes_for_unscanned_types(self, tmp_path: Path) -> None:
+        """Filtered sync (e.g. --xml) preserves entries and hashes for unscanned file types."""
+        dest = tmp_path / "dst"
+        kit_file = dest / "KITS" / "Kit.XML"
+        content = b"<kit/>"
+        _touch(kit_file, content, mtime=1_700_000_000.0)
+
+        import hashlib
+        xml_hash = hashlib.sha256(content).hexdigest()
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=len(content),
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "src" / "KITS" / "Kit.XML", kit_file)],
+        )
+        # Old manifest has a WAV entry with a hash
+        old_files: dict[str, FileRecord] = {
+            "samples/kick.wav": {
+                "sd_size": 5000, "sd_mtime": 1_600_000_000.0,
+                "local_size": 5000, "local_mtime": 1_600_000_100.0,
+                "hash": "wav_hash_preserved",
+            },
+        }
+
+        _ts, files = _build_post_sync_manifest(
+            plan, src_scan, dest, old_files, file_filter="xml",
+        )
+
+        # XML file was copied → gets hash
+        assert files["kits/kit.xml"]["hash"] == xml_hash
+        # WAV file preserved with its hash intact
+        assert files["samples/kick.wav"]["hash"] == "wav_hash_preserved"

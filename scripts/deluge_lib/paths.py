@@ -10,7 +10,6 @@ SCRIPTS_DIR = Path(__file__).resolve().parent.parent
 
 # Data directory and subdirectories.
 DATA_DIR = SCRIPTS_DIR / "data"
-SNAPSHOTS_DIR = DATA_DIR / "snapshots"
 LOGS_DIR = DATA_DIR / "logs"
 
 # Individual file paths.

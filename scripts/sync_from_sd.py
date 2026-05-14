@@ -39,6 +39,7 @@ def _build_post_sync_manifest(
 ) -> tuple[str, dict[str, FileRecord]]:
     """Build updated manifest after a successful sync"""
 
+    from deluge_lib.deluge_sdk import hash_file
     from deluge_lib.scanning import _FILTER_MAP
 
     copied_keys: set[str] = set()
@@ -46,9 +47,14 @@ def _build_post_sync_manifest(
         copied_keys.add(normalise_key(dst.relative_to(dest)))
 
     updated_manifest: dict[str, FileRecord] = {}
+
+    # Collect keys that need hashing (copied/new files)
+    keys_to_hash: list[tuple[str, Path]] = []
+
     for key, src_entry in src_scan.files.items():
         if key in old_files and key not in copied_keys:
-            # Unchanged with existing manifest entry: preserve as-is.
+            # Unchanged with existing manifest entry: preserve as-is
+            # (including any cached hash).
             updated_manifest[key] = old_files[key]
         else:
             # Copied or no prior entry: SD stats from scan, local stats from dest file.
@@ -56,10 +62,20 @@ def _build_post_sync_manifest(
             dst_stat = dst_path.stat()
             updated_manifest[key] = {
                 "sd_size": src_entry.size,
-                "sd_mtime": src_entry.mtime, # SD time is normalized upstream via scan_tree()
+                "sd_mtime": src_entry.mtime,
                 "local_size": dst_stat.st_size,
                 "local_mtime": normalise_mtime(dst_stat.st_mtime),
             }
+            keys_to_hash.append((key, dst_path))
+
+    # Hash copied/new files and populate the hash field.
+    if keys_to_hash:
+        total = len(keys_to_hash)
+        print(f"Hashing {total} synced file{'s' if total != 1 else ''}...")
+        for i, (key, path) in enumerate(keys_to_hash, 1):
+            print(f"\rHashing... {i}/{total}", end="", flush=True)
+            updated_manifest[key]["hash"] = hash_file(path)
+        print()
 
     # Preserve manifest entries for file types not included in this filtered sync.
     if file_filter != "both":

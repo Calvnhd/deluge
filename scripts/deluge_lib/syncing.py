@@ -17,11 +17,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
 
-from deluge_lib.scanning import FileFilter, ScanResult, print_path, normalise_mtime, scan_tree
+from deluge_lib.scanning import FileEntry, FileFilter, ScanResult, print_path, normalise_mtime, scan_tree
 
 
-class FileRecord(TypedDict):
-    """Per-file dual-stat manifest entry — SD-side and local-side stats."""
+class _FileRecordRequired(TypedDict):
+    """Required fields for a manifest entry."""
 
     sd_size: int
     sd_mtime: float
@@ -29,11 +29,27 @@ class FileRecord(TypedDict):
     local_mtime: float
 
 
+class FileRecord(_FileRecordRequired, total=False):
+    """Per-file dual-stat manifest entry with optional content hash.
+
+    The ``hash`` field holds a SHA-256 hex digest or is absent/None when
+    the hash has not yet been computed (v1 manifests, newly added entries).
+    """
+
+    hash: str | None
+
+
 FilesDict = dict[str, FileRecord]
 
 
 def read_manifest(path: Path) -> tuple[str, FilesDict]:
-    """Read a JSON manifest file"""
+    """Read a JSON manifest file (v1 or v2).
+
+    v2 manifests have a top-level ``"version": 2`` field and per-entry
+    ``"hash"`` values.  v1 manifests (no version field) are migrated
+    transparently: stat fields are preserved and ``hash`` is set to
+    ``None``.
+    """
 
     if not path.is_file():
         print(f"Warning: No manifest at {path}")
@@ -46,16 +62,19 @@ def read_manifest(path: Path) -> tuple[str, FilesDict]:
         return ("", {})
 
     timestamp = str(data.get("last_sync_timestamp", ""))
+    version = data.get("version", 1)
 
     files: dict[str, FileRecord] = {}
     for key, val in data.get("files", {}).items():
         if isinstance(val, dict) and "sd_size" in val and "sd_mtime" in val and "local_size" in val and "local_mtime" in val:
-            files[key] = {
+            entry: FileRecord = {
                 "sd_size": int(val["sd_size"]),
                 "sd_mtime": float(val["sd_mtime"]),
                 "local_size": int(val["local_size"]),
                 "local_mtime": float(val["local_mtime"]),
+                "hash": val.get("hash") if version >= 2 else None,
             }
+            files[key] = entry
 
     return (timestamp, files)
 
@@ -66,12 +85,28 @@ def write_manifest(
     timestamp: str,
     files: FilesDict,
 ) -> None:
-    """Atomically write a manifest JSON file"""
+    """Atomically write a v2 manifest JSON file.
+
+    The output includes ``"version": 2`` at the top level and each file
+    entry includes a ``"hash"`` key (value is a hex string or ``null``).
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Ensure every entry has an explicit "hash" key for v2 format
+    v2_files: dict[str, dict] = {}
+    for key, rec in files.items():
+        v2_files[key] = {
+            "sd_size": rec["sd_size"],
+            "sd_mtime": rec["sd_mtime"],
+            "local_size": rec["local_size"],
+            "local_mtime": rec["local_mtime"],
+            "hash": rec.get("hash"),
+        }
+
     payload = {
+        "version": 2,
         "last_sync_timestamp": timestamp,
-        "files": files,
+        "files": v2_files,
     }
     blob = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
 
@@ -98,6 +133,26 @@ def write_manifest(
 
 _MTIME_TOLERANCE_S = 2.0
 _TRASH_DIR_NAME = ".trash"
+
+
+def _stat_cache_valid(
+    entry: FileEntry,
+    manifest_size: int,
+    manifest_mtime: float,
+) -> bool:
+    """Return True when a file's current stat matches the manifest entry.
+
+    When this returns True the cached hash in the manifest can be trusted
+    without re-reading the file (the stat-cache fast path).
+
+    Returns False (forcing a re-hash) when:
+    - size differs
+    - mtime differs
+    - mtime is 0 or negative (unreliable FAT32 null timestamps)
+    """
+    if entry.mtime <= 0:
+        return False
+    return entry.size == manifest_size and entry.mtime == manifest_mtime
 
 
 @dataclass
@@ -163,6 +218,15 @@ def compute_sync(
     """Walk both trees to build a plan of copy/delete actions for altering
     the destination directory such that it becomes identical to source.
 
+    When a manifest is provided and entries contain a non-null ``hash``,
+    the comparison uses a stat-cache fast path: if size+mtime match the
+    manifest on both sides the cached hash is trusted (no file I/O).
+    On a stat-cache miss the file is hashed and compared to the manifest
+    hash.  Entries with a null hash fall back to mtime-based comparison.
+
+    The manifest dict may be mutated in place when stat-cache misses are
+    resolved (updated stats + newly computed hashes).
+
     Args:
         source: Source directory to sync with
         dest: Destination to sync
@@ -177,6 +241,8 @@ def compute_sync(
     Returns:
         The sync plan and the source scan result.
     """
+    from deluge_lib.deluge_sdk import hash_file
+
     plan = SyncPlan()
 
     # --- scan source and dest
@@ -205,20 +271,54 @@ def compute_sync(
             # Local side uses exact equality (NTFS/APFS timestamps are reliable).
             if source_is_sd:
                 sd_entry, local_entry = src_entry, dst_entry
+                local_path = dst_path
             else:
                 sd_entry, local_entry = dst_entry, src_entry
+                local_path = src_path
+
             sd_changed = (
                 sd_entry.size != manifest_entry["sd_size"]
                 or not _mtime_matches(sd_entry.mtime, manifest_entry["sd_mtime"])
             )
-            local_changed = (
-                local_entry.size != manifest_entry["local_size"]
-                or local_entry.mtime != manifest_entry["local_mtime"]
-            )
-            if sd_changed or local_changed:
+
+            if sd_changed:
+                # SD changed — always copy (SD is source of truth)
                 plan.files_to_copy.append((src_path, dst_path))
-            else:
+                continue
+
+            # SD unchanged — check local side
+            local_stat_matches = _stat_cache_valid(
+                local_entry,
+                manifest_entry["local_size"],
+                manifest_entry["local_mtime"],
+            )
+
+            if local_stat_matches:
+                # Stat-cache hit: both sides match manifest → unchanged
                 plan.files_unchanged += 1
+            else:
+                # Stat-cache miss on local side — use hash if available
+                cached_hash = manifest_entry.get("hash")
+                if cached_hash is not None:
+                    local_hash = hash_file(local_path)
+                    if local_hash == cached_hash:
+                        # Content unchanged — mtime drift only. Update
+                        # manifest local stats so next run hits the fast path.
+                        manifest_entry["local_size"] = local_entry.size
+                        manifest_entry["local_mtime"] = local_entry.mtime
+                        plan.files_unchanged += 1
+                    else:
+                        # Content genuinely changed — copy from source
+                        plan.files_to_copy.append((src_path, dst_path))
+                else:
+                    # No hash in manifest (v1 migration) — hash the local
+                    # file and store for future runs, then fall back to
+                    # mtime-based decision (copy, since local stat changed).
+                    local_hash = hash_file(local_path)
+                    manifest_entry["hash"] = local_hash
+                    manifest_entry["local_size"] = local_entry.size
+                    manifest_entry["local_mtime"] = local_entry.mtime
+                    plan.files_to_copy.append((src_path, dst_path))
         else:
             # No manifest entry — fall back to direct source vs dest comparison.
             if src_entry.size != dst_entry.size:
