@@ -87,3 +87,7 @@ Can we do any search to suggest where the new file might be?
 The ambiguous mapping thing should be able to be resolved easy with the information we have
 
 ---
+
+should probably have it remove empty directories?
+
+---
