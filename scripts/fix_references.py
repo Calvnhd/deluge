@@ -13,7 +13,6 @@ from deluge_lib.deluge_sdk import (
     SampleRef,
     extract_sample_refs,
     find_all_xml_files,
-    get_existing_samples,
     hash_file,
 )
 from deluge_lib.syncing import FilesDict, read_manifest, write_manifest
@@ -38,6 +37,7 @@ class MigrationResult:
     deleted: dict[str, list[str]] = field(default_factory=dict)
     added: dict[str, list[str]] = field(default_factory=dict)
     ambiguous: dict[str, tuple[list[str], list[str]]] = field(default_factory=dict)
+    after_hashes: dict[str, list[str]] = field(default_factory=dict)
 
 
 def compute_migration_map(
@@ -150,6 +150,7 @@ def compute_migration_map(
         deleted=deleted,
         added=added,
         ambiguous=ambiguous,
+        after_hashes=dict(after_hashes),
     )
 
 
@@ -230,7 +231,7 @@ def classify_ref_changes(
     for before_paths, _after_paths in migration.ambiguous.values():
         ambiguous_paths.update(before_paths)
 
-    existing = get_existing_samples(deluge_root)
+    existing = {normalise_key(p) for paths in migration.after_hashes.values() for p in paths}
     result = BrokenRefResult()
 
     xml_files = find_all_xml_files(deluge_root)

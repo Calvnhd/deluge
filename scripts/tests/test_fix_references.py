@@ -316,6 +316,34 @@ class TestComputeMigrationMap:
         assert len(result.added) == 1
         assert ambig_hash in result.ambiguous
 
+    def test_after_hashes_populated(self, tmp_path: Path) -> None:
+        """after_hashes maps hashes to original-case filesystem paths."""
+        content_a = b"audio a"
+        content_b = b"audio b"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "DRUMS/Kick.wav": content_a,
+            "SYNTH/Pad.wav": content_b,
+        })
+        hash_a = hashlib.sha256(content_a).hexdigest()
+        hash_b = hashlib.sha256(content_b).hexdigest()
+        manifest: FilesDict = {}
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert hash_a in result.after_hashes
+        assert result.after_hashes[hash_a] == ["SAMPLES/DRUMS/Kick.wav"]
+        assert hash_b in result.after_hashes
+        assert result.after_hashes[hash_b] == ["SAMPLES/SYNTH/Pad.wav"]
+
+    def test_after_hashes_empty_when_no_samples(self, tmp_path: Path) -> None:
+        """after_hashes is empty when SAMPLES dir has no files."""
+        deluge_root = tmp_path / "DELUGE"
+        (deluge_root / "SAMPLES").mkdir(parents=True)
+
+        result = compute_migration_map({}, deluge_root)
+
+        assert result.after_hashes == {}
+
 
 # ---------------------------------------------------------------------------
 # Graceful degradation
@@ -609,7 +637,9 @@ class TestClassifyRefChanges:
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/StillHere.wav"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={"dummyhash": ["SAMPLES/DRUMS/StillHere.wav"]},
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 
@@ -632,6 +662,7 @@ class TestClassifyRefChanges:
         migration = MigrationResult(
             moved={"samples/drums/moved.wav": "SAMPLES/DRUMS/NewMoved.wav"},
             deleted={"delhash": ["samples/drums/deleted.wav"]},
+            after_hashes={"okhash": ["SAMPLES/DRUMS/OK.wav"]},
         )
 
         result = classify_ref_changes(migration, deluge_root)
@@ -652,7 +683,12 @@ class TestClassifyRefChanges:
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/Fine.wav", "SAMPLES/DRUMS/AlsoFine.wav"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={
+                "hash1": ["SAMPLES/DRUMS/Fine.wav"],
+                "hash2": ["SAMPLES/DRUMS/AlsoFine.wav"],
+            },
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 
@@ -700,7 +736,9 @@ class TestClassifyRefChanges:
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/CB1-BD~1.WAV"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={"otherhash": ["SAMPLES/DRUMS/Other.wav"]},
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 
@@ -717,7 +755,9 @@ class TestClassifyRefChanges:
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/ARTISTS/CHAZ/CB1-BDRUM1.WAV"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={"dummyhash": ["SAMPLES/Artists/Chaz/CB1-bdrum1.wav"]},
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 

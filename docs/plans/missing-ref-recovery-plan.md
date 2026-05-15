@@ -113,8 +113,8 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** Current `MigrationResult` definition
 - **Outputs:** Updated dataclass with the new field (default empty dict for backward compatibility)
 - **Acceptance Criteria:**
-  - [ ] `MigrationResult` has an `after_hashes` field with a default empty dict
-  - [ ] Existing tests pass without modification
+  - [x] `MigrationResult` has an `after_hashes` field with a default empty dict
+  - [x] Existing tests pass without modification
 
 #### Task 1.2: Return `after_hashes` from `compute_migration_map`
 
@@ -122,9 +122,9 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** Current `compute_migration_map` implementation
 - **Outputs:** `after_hashes` included in the returned `MigrationResult`
 - **Acceptance Criteria:**
-  - [ ] `compute_migration_map` returns `after_hashes` on its result
-  - [ ] Existing migration map tests pass unchanged
-  - [ ] A new test verifies `after_hashes` is populated correctly (hash maps to original-case paths)
+  - [x] `compute_migration_map` returns `after_hashes` on its result
+  - [x] Existing migration map tests pass unchanged
+  - [x] A new test verifies `after_hashes` is populated correctly (hash maps to original-case paths)
 
 #### Task 1.3: Replace `get_existing_samples` call with `after_hashes` derivation
 
@@ -132,9 +132,9 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** `migration.after_hashes` (from Task 1.2)
 - **Outputs:** Same `existing` set, without a second filesystem scan
 - **Acceptance Criteria:**
-  - [ ] `get_existing_samples` is no longer called from `classify_ref_changes`
-  - [ ] `classify_ref_changes` signature loses its `deluge_root` parameter (it now only needs `migration`)
-  - [ ] All existing `classify_ref_changes` tests pass unchanged (behaviour is identical)
+  - [x] `get_existing_samples` is no longer called from `classify_ref_changes`
+  - [x] `classify_ref_changes` retains `deluge_root` parameter (needed for XML file discovery)
+  - [x] All existing `classify_ref_changes` tests pass (behaviour is identical; tests updated to supply `after_hashes`)
 - **Implementation Notes:**
   > The `classify_ref_changes` function currently takes `deluge_root` for two purposes: (1) scanning for existing files, and (2) finding XML files. After this change it still needs `deluge_root` for XML file discovery, so the parameter stays. The `existing` set derivation replaces only the `get_existing_samples` call.
 
@@ -292,7 +292,7 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
-| Phase 1: Data Plumbing | Not Started | 0/3 | |
+| Phase 1: Data Plumbing | Complete | 3/3 | Tests updated to supply `after_hashes`; `get_existing_samples` import removed |
 | Phase 2: Recovery Logic | Not Started | 0/3 | |
 | Phase 3: Preview and Apply Integration | Not Started | 0/2 | |
 | Phase 4: Tests | Not Started | 0/10 | |
