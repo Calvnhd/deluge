@@ -8,13 +8,12 @@ from unittest.mock import patch
 
 import pytest
 from sync_to_sd import (
-    _build_post_sync_manifest,
     main,
 )
 
 from tests.conftest import _touch
 from deluge_lib.scanning import FileEntry, ScanResult, normalise_mtime
-from deluge_lib.syncing import FileRecord, SyncPlan, read_manifest, write_manifest
+from deluge_lib.syncing import build_post_sync_manifest, FileRecord, SyncPlan, read_manifest, write_manifest
 
 
 def _setup_env(
@@ -304,7 +303,7 @@ class TestFullSync:
 
 
 # ============================================================================
-# _build_post_sync_manifest
+# build_post_sync_manifest
 # ============================================================================
 
 
@@ -328,7 +327,7 @@ class TestBuildPostSyncManifest:
         )
         old_files: dict[str, FileRecord] = {}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert "kits/kit.xml" in files
         entry = files["kits/kit.xml"]
@@ -363,7 +362,7 @@ class TestBuildPostSyncManifest:
             },
         }
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert "kits/kept.xml" in files
         assert "kits/deleted.xml" not in files
@@ -389,18 +388,18 @@ class TestBuildPostSyncManifest:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert files["kits/kit.xml"] is old_entry
 
 
 # ============================================================================
-# _build_post_sync_manifest — hash population
+# build_post_sync_manifest — hash population
 # ============================================================================
 
 
 class TestBuildPostSyncManifestHashing:
-    """Hash population in _build_post_sync_manifest for sync_to_sd."""
+    """Hash population in build_post_sync_manifest for sync_to_sd."""
 
     def test_copied_files_get_hash(self, tmp_path: Path) -> None:
         """Copied files have hash computed from destination file on SD."""
@@ -426,7 +425,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert files["kits/kit.xml"]["hash"] == expected_hash
 
@@ -453,7 +452,7 @@ class TestBuildPostSyncManifestHashing:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert files["kits/kit.xml"]["hash"] == "preserved_hash_value"
 
@@ -481,7 +480,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert files["kits/new.xml"]["hash"] == expected_hash
 

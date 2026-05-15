@@ -7,8 +7,8 @@ import json
 from pathlib import Path
 
 import pytest
-from sync_from_sd import (
-    _build_post_sync_manifest,
+from deluge_lib.syncing import (
+    build_post_sync_manifest,
 )
 
 from tests.conftest import _touch
@@ -17,7 +17,7 @@ from deluge_lib.syncing import FileRecord, SyncError, SyncPlan, SyncResult, exec
 
 
 # =============================================================================
-# _build_post_sync_manifest
+# build_post_sync_manifest
 # =============================================================================
 
 
@@ -42,7 +42,7 @@ class TestBuildPostSyncManifest:
         )
         old_files: dict[str, FileRecord] = {}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=True)
 
         assert "kits/kit.xml" in files
         entry = files["kits/kit.xml"]
@@ -81,7 +81,7 @@ class TestBuildPostSyncManifest:
             },
         }
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=True)
 
         assert "kits/kept.xml" in files
         assert "kits/trashed.xml" not in files
@@ -105,7 +105,7 @@ class TestBuildPostSyncManifest:
         plan = SyncPlan()
         old_files: dict[str, FileRecord] = {}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=True)
 
         assert "kits/kit.xml" in files
         entry = files["kits/kit.xml"]
@@ -419,12 +419,12 @@ class TestManifestV1Migration:
 
 
 # =============================================================================
-# _build_post_sync_manifest — hash population
+# build_post_sync_manifest — hash population
 # =============================================================================
 
 
 class TestBuildPostSyncManifestHashing:
-    """Hash population in _build_post_sync_manifest."""
+    """Hash population in build_post_sync_manifest."""
 
     def test_copied_files_get_hash(self, tmp_path: Path) -> None:
         """Copied files have hash computed from destination file."""
@@ -450,7 +450,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=True)
 
         assert files["kits/kit.xml"]["hash"] == expected_hash
 
@@ -477,7 +477,7 @@ class TestBuildPostSyncManifestHashing:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=True)
 
         assert files["kits/kit.xml"]["hash"] == "preserved_hash_value"
 
@@ -504,7 +504,7 @@ class TestBuildPostSyncManifestHashing:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=True)
 
         assert files["kits/kit.xml"]["hash"] is None
 
@@ -533,7 +533,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=True)
 
         assert files["kits/new.xml"]["hash"] == expected_hash
 
@@ -568,8 +568,8 @@ class TestBuildPostSyncManifestHashing:
             },
         }
 
-        files = _build_post_sync_manifest(
-            plan, src_scan, dest, old_files, file_filter="xml",
+        files = build_post_sync_manifest(
+            plan, src_scan, dest, old_files, source_is_sd=True, file_filter="xml",
         )
 
         # XML file was copied → gets hash

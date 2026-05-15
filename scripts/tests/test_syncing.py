@@ -15,7 +15,6 @@ from deluge_lib.syncing import (
     SyncPlan,
     SyncResult,
     _mtime_matches,
-    _stat_cache_valid,
     append_sync_log,
     compute_sync,
     execute_plan,
@@ -611,33 +610,6 @@ class TestPrintPlanDeleteLabel:
 
         output = capsys.readouterr().out
         assert "1 to remove" in output
-
-
-# =============================================================================
-# _stat_cache_valid
-# =============================================================================
-
-
-class TestStatCacheValid:
-    def test_matching_size_and_mtime(self) -> None:
-        entry = FileEntry(rel_path=Path("f.wav"), size=100, mtime=1_700_000_000.0)
-        assert _stat_cache_valid(entry, 100, 1_700_000_000.0) is True
-
-    def test_size_differs(self) -> None:
-        entry = FileEntry(rel_path=Path("f.wav"), size=120, mtime=1_700_000_000.0)
-        assert _stat_cache_valid(entry, 100, 1_700_000_000.0) is False
-
-    def test_mtime_differs(self) -> None:
-        entry = FileEntry(rel_path=Path("f.wav"), size=100, mtime=1_700_001_000.0)
-        assert _stat_cache_valid(entry, 100, 1_700_000_000.0) is False
-
-    def test_zero_mtime_always_invalid(self) -> None:
-        entry = FileEntry(rel_path=Path("f.wav"), size=100, mtime=0.0)
-        assert _stat_cache_valid(entry, 100, 0.0) is False
-
-    def test_negative_mtime_always_invalid(self) -> None:
-        entry = FileEntry(rel_path=Path("f.wav"), size=100, mtime=-11644473600.0)
-        assert _stat_cache_valid(entry, 100, -11644473600.0) is False
 
 
 # =============================================================================

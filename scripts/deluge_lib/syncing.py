@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import TypedDict
 
 from deluge_lib.paths import SYNC_LOG_PATH
-from deluge_lib.scanning import FileFilter, ScanResult, print_path, normalise_mtime, scan_tree
+from deluge_lib.scanning import FileFilter, ScanResult, normalise_key, print_path, normalise_mtime, scan_tree
 
 
 class _FileRecordRequired(TypedDict):
@@ -121,6 +121,70 @@ def write_manifest(
     except BaseException:
         tmp_path.unlink(missing_ok=True)
         raise
+
+
+def build_post_sync_manifest(
+    plan: SyncPlan,
+    src_scan: ScanResult,
+    dest: Path,
+    old_files: dict[str, FileRecord],
+    source_is_sd: bool,
+    file_filter: str = "both",
+) -> dict[str, FileRecord]:
+    """Build updated manifest after a successful sync"""
+
+    from deluge_lib.deluge_sdk import hash_file
+    from deluge_lib.scanning import _FILTER_MAP
+
+    copied_keys: set[str] = set()
+    for _src, dst in plan.files_to_copy:
+        copied_keys.add(normalise_key(dst.relative_to(dest)))
+
+    updated_manifest: dict[str, FileRecord] = {}
+
+    # Collect keys that need hashing (copied/new files)
+    keys_to_hash: list[tuple[str, Path]] = []
+
+    for key, src_entry in src_scan.files.items():
+        if key in old_files and key not in copied_keys:
+            updated_manifest[key] = old_files[key]
+        else:
+            dst_path = dest / src_entry.rel_path
+            dst_stat = dst_path.stat()
+            if source_is_sd:
+                updated_manifest[key] = {
+                    "sd_size": src_entry.size,
+                    "sd_mtime": src_entry.mtime,
+                    "local_size": dst_stat.st_size,
+                    "local_mtime": normalise_mtime(dst_stat.st_mtime),
+                }
+            else:
+                updated_manifest[key] = {
+                    "local_size": src_entry.size,
+                    "local_mtime": src_entry.mtime,
+                    "sd_size": dst_stat.st_size,
+                    "sd_mtime": normalise_mtime(dst_stat.st_mtime),
+                }
+            keys_to_hash.append((key, dst_path))
+
+    # Hash copied/new files and populate the hash field.
+    if keys_to_hash:
+        total = len(keys_to_hash)
+        for i, (key, path) in enumerate(keys_to_hash, 1):
+            print(f"\rHashing... {i}/{total}", end="", flush=True)
+            updated_manifest[key]["hash"] = hash_file(path)
+        print()
+
+    # Preserve manifest entries for file types not included in this filtered sync.
+    if file_filter != "both":
+        scanned_exts = _FILTER_MAP[file_filter]
+        for key, old_entry in old_files.items():
+            if key not in updated_manifest:
+                ext = Path(key).suffix.lower()
+                if ext not in scanned_exts:
+                    updated_manifest[key] = old_entry
+
+    return updated_manifest
 
 
 _MTIME_TOLERANCE_S = 2.0
@@ -253,7 +317,7 @@ def compute_sync(
                     # No content change
                     # Update stale manifest data and fall through to local check
                     manifest_entry["sd_size"] = sd_entry.size
-                    manifest_entry["sd_mtime"] = sd_entry.mtime
+                    manifest_entry["sd_mtime"] = normalise_mtime(sd_entry.mtime)
                 else:
                     # No hash available
                     # To be safe, treat as if it's changed
@@ -264,7 +328,7 @@ def compute_sync(
             is_local_time_valid = local_entry.mtime > 0
             has_local_changed = (
                 local_entry.size != manifest_entry["local_size"]
-                or local_entry.mtime != manifest_entry["local_mtime"]
+                or normalise_mtime(local_entry.mtime) != normalise_mtime(manifest_entry["local_mtime"])
             )
             if is_local_time_valid and not has_local_changed:
                 # Both sides match manifest
@@ -277,7 +341,7 @@ def compute_sync(
                     if local_hash == cached_hash:
                         # No content change. Update stale manifest data
                         manifest_entry["local_size"] = local_entry.size
-                        manifest_entry["local_mtime"] = local_entry.mtime
+                        manifest_entry["local_mtime"] = normalise_mtime(local_entry.mtime)
                         plan.files_unchanged += 1
                     else:
                         plan.files_to_copy.append((src_path, dst_path))
@@ -286,7 +350,7 @@ def compute_sync(
                     local_hash = hash_file(local_path)
                     manifest_entry["hash"] = local_hash
                     manifest_entry["local_size"] = local_entry.size
-                    manifest_entry["local_mtime"] = local_entry.mtime
+                    manifest_entry["local_mtime"] = normalise_mtime(local_entry.mtime)
                     # To be safe, treat as if it's changed
                     plan.files_to_copy.append((src_path, dst_path))
         else:
