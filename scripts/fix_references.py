@@ -83,8 +83,7 @@ def compute_migration_map(
     # --- "after" state: scan current filesystem ---
     samples_dir = deluge_root / "SAMPLES"
     if not samples_dir.is_dir():
-        print(f"Warning: SAMPLES directory not found at {samples_dir}")
-        raise SystemExit(1)
+        return MigrationResult()
 
     scan = scan_tree(samples_dir, label="SAMPLES", file_filter="wav")
 

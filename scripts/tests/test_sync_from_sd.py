@@ -397,8 +397,8 @@ class TestManifestV1Migration:
         assert files["kits/hashed.xml"]["hash"] == "deadbeef"
         assert files["kits/unhashed.xml"]["hash"] is None
 
-    def test_v1_manifest_ignores_hash_field_if_present(self, tmp_path: Path) -> None:
-        """v1 manifest (no version field) with a stray hash field → hash set to None."""
+    def test_v1_manifest_preserves_hash_field_if_present(self, tmp_path: Path) -> None:
+        """v1 manifest (no version field) with a hash field → hash preserved by read_manifest."""
         mf = tmp_path / "manifest.json"
         payload = {
             "last_sync_timestamp": "ts",
@@ -414,8 +414,8 @@ class TestManifestV1Migration:
 
         files = read_manifest(mf)
 
-        # v1 manifests always get hash=None regardless of stray data
-        assert files["kits/kit.xml"]["hash"] is None
+        # read_manifest preserves the hash field regardless of manifest version
+        assert files["kits/kit.xml"]["hash"] == "should-be-ignored"
 
 
 # =============================================================================

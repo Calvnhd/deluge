@@ -9,15 +9,11 @@ from __future__ import annotations
 
 import argparse
 import time
-from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
 from deluge_lib.paths import SYNC_MANIFEST_PATH
-from deluge_lib.scanning import ScanResult, normalise_mtime
 from deluge_lib.syncing import (
-    FileRecord,
     SyncError,
-    SyncPlan,
     SyncResult,
     append_sync_log,
     build_post_sync_manifest,
