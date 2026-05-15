@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import argparse
 import time
-from datetime import UTC, datetime
 from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
@@ -36,7 +35,7 @@ def _build_post_sync_manifest(
     dest: Path,
     old_files: dict[str, FileRecord],
     file_filter: str = "both",
-) -> tuple[str, dict[str, FileRecord]]:
+) -> dict[str, FileRecord]:
     """Build updated manifest after a successful sync"""
 
     from deluge_lib.deluge_sdk import hash_file
@@ -71,7 +70,6 @@ def _build_post_sync_manifest(
     # Hash copied/new files and populate the hash field.
     if keys_to_hash:
         total = len(keys_to_hash)
-        print(f"Hashing {total} synced file{'s' if total != 1 else ''}...")
         for i, (key, path) in enumerate(keys_to_hash, 1):
             print(f"\rHashing... {i}/{total}", end="", flush=True)
             updated_manifest[key]["hash"] = hash_file(path)
@@ -86,8 +84,7 @@ def _build_post_sync_manifest(
                 if ext not in scanned_exts:
                     updated_manifest[key] = old_entry
 
-    timestamp = datetime.now(tz=UTC).replace(microsecond=0).isoformat()
-    return (timestamp, updated_manifest)
+    return updated_manifest
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -121,9 +118,7 @@ def main(argv: list[str] | None = None) -> None:
     sd_path = get_sd_card_path()
     deluge_root = get_deluge_root()
 
-    # Load manifest (empty state on first run or if corrupt).
-    manifest_path = SYNC_MANIFEST_PATH
-    _, manifest_files = read_manifest(manifest_path)
+    manifest_files = read_manifest(SYNC_MANIFEST_PATH)
 
     print(f"Source:      {sd_path}")
     print(f"Destination: {deluge_root}")
@@ -158,7 +153,7 @@ def main(argv: list[str] | None = None) -> None:
             trashed=exc.trashed,
             unchanged=exc.unchanged,
         )
-        append_sync_log(error_result, elapsed_seconds=elapsed, error=str(exc))
+        append_sync_log(error_result, direction="from-sd", elapsed_seconds=elapsed, error=str(exc))
         print()
         print(f"ERROR: Operation failed on: {exc.file}")
         print(f"  {exc}")
@@ -169,12 +164,12 @@ def main(argv: list[str] | None = None) -> None:
     elapsed = time.monotonic() - start_time
 
     # Always log on success.
-    append_sync_log(result, elapsed_seconds=elapsed)
+    append_sync_log(result, direction="from-sd", elapsed_seconds=elapsed)
 
     # Build and write updated manifest after successful sync.
     try:
-        new_ts, updated_manifest = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, file_filter)
-        write_manifest(manifest_path, timestamp=new_ts, files=updated_manifest)
+        updated_manifest = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, file_filter)
+        write_manifest(SYNC_MANIFEST_PATH, files=updated_manifest)
     except OSError as exc:
         print(f"\nWARNING: Sync succeeded but manifest update failed: {exc}")
 

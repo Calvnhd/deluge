@@ -113,7 +113,6 @@ def compute_migration_map(
 
     if files_to_hash:
         total = len(files_to_hash)
-        print(f"Hashing {total} file{'s' if total != 1 else ''}...")
         for i, (orig_path, abs_path) in enumerate(files_to_hash, 1):
             if total > 10:
                 print(f"\rHashing {i}/{total}...", end="", flush=True)
@@ -406,7 +405,6 @@ def update_manifest_keys(
     manifest: FilesDict,
     moved: dict[str, str],
     manifest_path: Path,
-    timestamp: str,
 ) -> None:
     """Rename manifest keys for moved files and write the updated manifest.
 
@@ -428,7 +426,7 @@ def update_manifest_keys(
         return
 
     try:
-        write_manifest(manifest_path, timestamp=timestamp, files=manifest)
+        write_manifest(manifest_path, files=manifest)
         print(f"Updated {updated} manifest key{'s' if updated != 1 else ''} for moved files.")
     except Exception as exc:
         print(f"Warning: Failed to update manifest: {exc}")
@@ -458,13 +456,13 @@ def main(argv: list[str] | None = None) -> None:
     manifest_path = Path(args.manifest_path) if args.manifest_path else SYNC_MANIFEST_PATH
     deluge_root = get_deluge_root()
 
-    timestamp, manifest = read_manifest(manifest_path)
+    manifest = read_manifest(manifest_path)
     migration = compute_migration_map(manifest, deluge_root)
     broken = classify_ref_changes(migration, deluge_root)
     has_issues, applied = preview_and_apply(broken, deluge_root, auto_apply=args.apply)
 
     if applied and migration.moved:
-        update_manifest_keys(manifest, migration.moved, manifest_path, timestamp)
+        update_manifest_keys(manifest, migration.moved, manifest_path)
 
     if has_issues:
         raise SystemExit(1)
