@@ -718,8 +718,8 @@ class TestComputeSyncHashAware:
 
         assert len(plan.files_to_copy) == 1
 
-    def test_sd_stat_change_copies_regardless_of_hash(self, tmp_path: Path) -> None:
-        """SD stats differ from manifest → always copy, hash is irrelevant."""
+    def test_sd_stat_and_content_change_copies(self, tmp_path: Path) -> None:
+        """SD stat+content genuinely changed (hash mismatch) → copy."""
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         new_sd_content = b"<kit>updated</kit>"
@@ -842,8 +842,58 @@ class TestComputeSyncHashAware:
         assert plan.files_to_copy == []
         assert plan.files_unchanged == 1
 
-    def test_source_is_sd_false_hash_comparison(self, tmp_path: Path) -> None:
-        """source_is_sd=False: local is source, SD is dest. Hash comparison on SD side."""
+    def test_sd_stat_drift_hash_match_skips(self, tmp_path: Path) -> None:
+        """SD mtime drifted but content hash matches manifest → skip."""
+        src = tmp_path / "src"
+        dst = tmp_path / "dst"
+        content = b"<kit/>"
+        sd_mtime_original = 1_700_000_000.0
+        sd_mtime_drifted = 1_700_000_004.0  # beyond FAT32 tolerance
+        local_mtime = 1_690_000_000.0
+
+        import hashlib
+        real_hash = hashlib.sha256(content).hexdigest()
+
+        _touch(src / "KITS" / "Kit.XML", content, mtime=sd_mtime_drifted)
+        _touch(dst / "KITS" / "Kit.XML", content, mtime=local_mtime)
+
+        manifest = {"kits/kit.xml": {
+            "sd_size": len(content), "sd_mtime": sd_mtime_original,
+            "local_size": len(content), "local_mtime": local_mtime,
+            "hash": real_hash,
+        }}
+
+        plan, _ = compute_sync(src, dst, manifest=manifest)
+
+        assert plan.files_to_copy == []
+        assert plan.files_unchanged == 1
+        # Manifest sd stats updated to current values
+        assert manifest["kits/kit.xml"]["sd_mtime"] == sd_mtime_drifted
+
+    def test_sd_stat_change_null_hash_copies(self, tmp_path: Path) -> None:
+        """SD stat changed with null hash → conservative copy (can't verify)."""
+        src = tmp_path / "src"
+        dst = tmp_path / "dst"
+        content = b"<kit/>"
+        sd_mtime_original = 1_700_000_000.0
+        sd_mtime_changed = 1_700_000_004.0
+        local_mtime = 1_690_000_000.0
+
+        _touch(src / "KITS" / "Kit.XML", content, mtime=sd_mtime_changed)
+        _touch(dst / "KITS" / "Kit.XML", content, mtime=local_mtime)
+
+        manifest = {"kits/kit.xml": {
+            "sd_size": len(content), "sd_mtime": sd_mtime_original,
+            "local_size": len(content), "local_mtime": local_mtime,
+            "hash": None,
+        }}
+
+        plan, _ = compute_sync(src, dst, manifest=manifest)
+
+        assert len(plan.files_to_copy) == 1
+
+    def test_source_is_sd_false_sd_stat_drift_skips(self, tmp_path: Path) -> None:
+        """source_is_sd=False: SD mtime drifted but hash matches → skip."""
         src = tmp_path / "src"  # local
         dst = tmp_path / "dst"  # SD
         content = b"<kit/>"
@@ -859,14 +909,16 @@ class TestComputeSyncHashAware:
 
         # source_is_sd=False: source=local, dest=SD
         # sd_entry = dst_entry, local_entry = src_entry
-        # local_entry matches manifest → stat cache hit → unchanged
         manifest = {"kits/kit.xml": {
             "sd_size": len(content), "sd_mtime": sd_mtime,
             "local_size": len(content), "local_mtime": local_mtime,
             "hash": real_hash,
         }}
 
-        # SD mtime changed (sd_entry.mtime != manifest sd_mtime) → sd_changed → copy
+        # SD mtime changed but hash matches → stat drift only → skip
         plan, _ = compute_sync(src, dst, manifest=manifest, source_is_sd=False)
 
-        assert len(plan.files_to_copy) == 1
+        assert plan.files_to_copy == []
+        assert plan.files_unchanged == 1
+        # Manifest sd stats updated to current values
+        assert manifest["kits/kit.xml"]["sd_mtime"] == changed_sd_mtime

@@ -265,16 +265,16 @@ def compute_sync(
         # The manifest lets us check changes on both source and destination for an accurate sync
         if manifest is not None and key in manifest:
             manifest_entry = manifest[key]
-            # Compare each side against its own manifest baseline.
-            # SD side always uses tolerance (FAT32 quirks, Deluge firmware
-            # doesn't reliably write timestamps).
-            # Local side uses exact equality (NTFS/APFS timestamps are reliable).
+            # Map scan entries to their manifest counterparts.
+            # sd_entry/local_entry are named for the manifest fields
+            # they compare against (sd_size/sd_mtime vs local_size/
+            # local_mtime), not the sync direction.
             if source_is_sd:
                 sd_entry, local_entry = src_entry, dst_entry
-                local_path = dst_path
+                sd_path, local_path = src_path, dst_path
             else:
                 sd_entry, local_entry = dst_entry, src_entry
-                local_path = src_path
+                sd_path, local_path = dst_path, src_path
 
             sd_changed = (
                 sd_entry.size != manifest_entry["sd_size"]
@@ -282,11 +282,23 @@ def compute_sync(
             )
 
             if sd_changed:
-                # SD changed — always copy (SD is source of truth)
-                plan.files_to_copy.append((src_path, dst_path))
-                continue
+                # SD stat diverged from manifest. Verify via hash to
+                # distinguish genuine content changes from stat-only drift.
+                cached_hash = manifest_entry.get("hash")
+                if cached_hash is not None:
+                    if hash_file(sd_path) != cached_hash:
+                        plan.files_to_copy.append((src_path, dst_path))
+                        continue
+                    # Stat drift only — update manifest and fall through
+                    # to local-side check below.
+                    manifest_entry["sd_size"] = sd_entry.size
+                    manifest_entry["sd_mtime"] = sd_entry.mtime
+                else:
+                    # No hash available — conservative: assume changed
+                    plan.files_to_copy.append((src_path, dst_path))
+                    continue
 
-            # SD unchanged — check local side
+            # SD side matches manifest (or stat-drift resolved) — check local side
             local_stat_matches = _stat_cache_valid(
                 local_entry,
                 manifest_entry["local_size"],
@@ -311,9 +323,8 @@ def compute_sync(
                         # Content genuinely changed — copy from source
                         plan.files_to_copy.append((src_path, dst_path))
                 else:
-                    # No hash in manifest (v1 migration) — hash the local
-                    # file and store for future runs, then fall back to
-                    # mtime-based decision (copy, since local stat changed).
+                    # No hash in manifest — hash the local file and store 
+                    # for future runs and fallback to copy since local stat changed
                     local_hash = hash_file(local_path)
                     manifest_entry["hash"] = local_hash
                     manifest_entry["local_size"] = local_entry.size
