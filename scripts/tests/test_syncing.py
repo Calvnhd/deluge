@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -428,13 +429,15 @@ class TestAppendSyncLog:
             unchanged=10,
         )
 
-        append_sync_log(result, elapsed_seconds=65.0, log_path=log_path)
+        with patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path):
+            append_sync_log(result, direction="from-sd", elapsed_seconds=65.0)
 
         content = log_path.read_text(encoding="utf-8")
         lines = content.strip().splitlines()
         assert len(lines) == 1
         line = lines[0]
         assert "SUCCESS" in line
+        assert "direction=from-sd" in line
         assert "copied=5" in line
         assert "trashed=3" in line
         assert "unchanged=10" in line
@@ -448,12 +451,13 @@ class TestAppendSyncLog:
             copied=2,
         )
 
-        append_sync_log(
-            result,
-            elapsed_seconds=12.0,
-            error="Permission denied: /mnt/sd/file.wav",
-            log_path=log_path,
-        )
+        with patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path):
+            append_sync_log(
+                result,
+                direction="from-sd",
+                elapsed_seconds=12.0,
+                error="Permission denied: /mnt/sd/file.wav",
+            )
 
         content = log_path.read_text(encoding="utf-8")
         lines = content.strip().splitlines()
@@ -468,7 +472,8 @@ class TestAppendSyncLog:
         log_path = tmp_path / "data" / "sync.log"
         result = SyncResult()
 
-        append_sync_log(result, elapsed_seconds=1.0, log_path=log_path)
+        with patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path):
+            append_sync_log(result, direction="from-sd", elapsed_seconds=1.0)
 
         assert log_path.exists()
         assert log_path.parent.name == "data"
@@ -479,8 +484,9 @@ class TestAppendSyncLog:
         r1 = SyncResult(copied=1)
         r2 = SyncResult(copied=2)
 
-        append_sync_log(r1, elapsed_seconds=1.0, log_path=log_path)
-        append_sync_log(r2, elapsed_seconds=2.0, log_path=log_path)
+        with patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path):
+            append_sync_log(r1, direction="from-sd", elapsed_seconds=1.0)
+            append_sync_log(r2, direction="to-sd", elapsed_seconds=2.0)
 
         lines = log_path.read_text(encoding="utf-8").strip().splitlines()
         assert len(lines) == 2

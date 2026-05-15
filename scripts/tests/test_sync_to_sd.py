@@ -268,7 +268,7 @@ class TestFullSync:
         with (
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", log_path),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path),
         ):
             main([])
 
@@ -328,7 +328,7 @@ class TestBuildPostSyncManifest:
         )
         old_files: dict[str, FileRecord] = {}
 
-        ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert "kits/kit.xml" in files
         entry = files["kits/kit.xml"]
@@ -336,7 +336,6 @@ class TestBuildPostSyncManifest:
         assert entry["local_mtime"] == 1_700_000_000.0
         assert entry["sd_size"] == kit_file.stat().st_size
         assert entry["sd_mtime"] == normalise_mtime(kit_file.stat().st_mtime)
-        assert ts != ""
 
     def test_deleted_files_excluded(self, tmp_path: Path) -> None:
         dest = tmp_path / "SD"
@@ -364,7 +363,7 @@ class TestBuildPostSyncManifest:
             },
         }
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert "kits/kept.xml" in files
         assert "kits/deleted.xml" not in files
@@ -390,7 +389,7 @@ class TestBuildPostSyncManifest:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/kit.xml"] is old_entry
 
@@ -427,7 +426,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/kit.xml"]["hash"] == expected_hash
 
@@ -454,7 +453,7 @@ class TestBuildPostSyncManifestHashing:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/kit.xml"]["hash"] == "preserved_hash_value"
 
@@ -482,7 +481,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/new.xml"]["hash"] == expected_hash
 
@@ -494,8 +493,7 @@ class TestBuildPostSyncManifestHashing:
 
 class TestReadWriteManifest:
     def test_missing_file_returns_empty(self, tmp_path: Path) -> None:
-        ts, files = read_manifest(tmp_path / "nonexistent.json")
-        assert ts == ""
+        files = read_manifest(tmp_path / "nonexistent.json")
         assert files == {}
 
     def test_round_trip(self, tmp_path: Path) -> None:
@@ -508,10 +506,9 @@ class TestReadWriteManifest:
         }
         ts = "2026-05-14T12:00:00+00:00"
 
-        write_manifest(mf, timestamp=ts, files=files)
-        read_ts, read_files = read_manifest(mf)
+        write_manifest(mf, files=files)
+        read_files = read_manifest(mf)
 
-        assert read_ts == ts
         assert len(read_files) == 1
         assert read_files["kits/mykit.xml"]["local_size"] == 1234
         assert read_files["kits/mykit.xml"]["sd_mtime"] == 1712600050.0
@@ -542,7 +539,7 @@ class TestManifestIntegration:
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
             patch("sync_to_sd.SYNC_MANIFEST_PATH", manifest_path),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", tmp_path / "log.log"),
         ):
             main([])
 
@@ -552,7 +549,7 @@ class TestManifestIntegration:
         with (
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.SYNC_MANIFEST_PATH", manifest_path),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", tmp_path / "log.log"),
         ):
             main(["--dry-run"])
 
@@ -652,7 +649,7 @@ class TestErrorHandling:
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
             patch("sync_to_sd.shutil.copy2", side_effect=failing_copy2),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", log_path),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path),
         ):
             with pytest.raises(SystemExit):
                 main([])

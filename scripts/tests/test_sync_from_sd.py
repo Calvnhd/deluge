@@ -42,7 +42,7 @@ class TestBuildPostSyncManifest:
         )
         old_files: dict[str, FileRecord] = {}
 
-        ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert "kits/kit.xml" in files
         entry = files["kits/kit.xml"]
@@ -50,7 +50,6 @@ class TestBuildPostSyncManifest:
         assert entry["sd_mtime"] == 1_700_000_000.0
         assert entry["local_size"] == kit_file.stat().st_size
         assert entry["local_mtime"] == normalise_mtime(kit_file.stat().st_mtime)
-        assert ts != ""
 
     def test_trashed_files_excluded(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
@@ -82,7 +81,7 @@ class TestBuildPostSyncManifest:
             },
         }
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert "kits/kept.xml" in files
         assert "kits/trashed.xml" not in files
@@ -106,7 +105,7 @@ class TestBuildPostSyncManifest:
         plan = SyncPlan()
         old_files: dict[str, FileRecord] = {}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert "kits/kit.xml" in files
         entry = files["kits/kit.xml"]
@@ -141,8 +140,7 @@ class TestBuildPostSyncManifest:
 class TestReadManifest:
     def test_missing_file_returns_empty(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
-        ts, files = read_manifest(tmp_path / "nonexistent.json")
-        assert ts == ""
+        files = read_manifest(tmp_path / "nonexistent.json")
         assert files == {}
 
     def test_corrupt_json_returns_empty(self, tmp_path: Path) -> None:
@@ -150,9 +148,8 @@ class TestReadManifest:
         bad = tmp_path / "manifest.json"
         bad.write_text("{invalid json!!!", encoding="utf-8")
 
-        ts, files = read_manifest(bad)
+        files = read_manifest(bad)
 
-        assert ts == ""
         assert files == {}
 
     def test_corrupt_json_prints_warning(self, tmp_path: Path, capsys: object) -> None:
@@ -184,10 +181,9 @@ class TestReadManifest:
         }
         ts = "2026-04-09T12:00:00+00:00"
 
-        write_manifest(mf, timestamp=ts, files=files)
-        read_ts, read_files = read_manifest(mf)
+        write_manifest(mf, files=files)
+        read_files = read_manifest(mf)
 
-        assert read_ts == ts
         assert len(read_files) == 2
         assert read_files["kits/mykit.xml"]["sd_size"] == 1234
         assert read_files["kits/mykit.xml"]["local_mtime"] == 1712600050.0
@@ -209,7 +205,7 @@ class TestReadManifest:
         }
         mf.write_text(json.dumps(payload), encoding="utf-8")
 
-        _, files = read_manifest(mf)
+        files = read_manifest(mf)
 
         # Old-format entry dropped, new-format entry loaded
         assert "kits/old.xml" not in files
@@ -221,17 +217,16 @@ class TestWriteManifest:
     def test_creates_file(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
         mf_path = tmp_path / "manifest.json"
-        write_manifest(mf_path, timestamp="2026-04-09T00:00:00+00:00", files={})
+        write_manifest(mf_path, files={})
 
         assert mf_path.exists()
         raw = json.loads(mf_path.read_text(encoding="utf-8"))
-        assert "last_sync_timestamp" in raw
         assert "files" in raw
 
     def test_atomic_write_no_temp_file_lingers(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
         mf_path = tmp_path / "manifest.json"
-        write_manifest(mf_path, timestamp="", files={})
+        write_manifest(mf_path, files={})
 
         tmp_files = list(tmp_path.glob("*.tmp"))
         assert tmp_files == []
@@ -239,7 +234,7 @@ class TestWriteManifest:
     def test_creates_parent_directory(self, tmp_path: Path) -> None:
         # TODO-v0.1-REVIEW
         mf_path = tmp_path / "scripts" / "data" / "manifest.json"
-        write_manifest(mf_path, timestamp="", files={})
+        write_manifest(mf_path, files={})
 
         assert mf_path.parent.is_dir()
 
@@ -254,7 +249,7 @@ class TestManifestV2Format:
 
     def test_write_includes_version_2(self, tmp_path: Path) -> None:
         mf = tmp_path / "manifest.json"
-        write_manifest(mf, timestamp="ts", files={})
+        write_manifest(mf, files={})
 
         raw = json.loads(mf.read_text(encoding="utf-8"))
         assert raw["version"] == 2
@@ -267,7 +262,7 @@ class TestManifestV2Format:
                 "local_size": 100, "local_mtime": 2.0,
             },
         }
-        write_manifest(mf, timestamp="ts", files=files)
+        write_manifest(mf, files=files)
 
         raw = json.loads(mf.read_text(encoding="utf-8"))
         assert raw["files"]["kits/kit.xml"]["hash"] is None
@@ -281,7 +276,7 @@ class TestManifestV2Format:
                 "hash": "abcdef1234567890",
             },
         }
-        write_manifest(mf, timestamp="ts", files=files)
+        write_manifest(mf, files=files)
 
         raw = json.loads(mf.read_text(encoding="utf-8"))
         assert raw["files"]["kits/kit.xml"]["hash"] == "abcdef1234567890"
@@ -305,10 +300,9 @@ class TestManifestV2RoundTrip:
             },
         }
 
-        write_manifest(mf, timestamp="2026-05-15T00:00:00+00:00", files=files)
-        read_ts, read_files = read_manifest(mf)
+        write_manifest(mf, files=files)
+        read_files = read_manifest(mf)
 
-        assert read_ts == "2026-05-15T00:00:00+00:00"
         assert len(read_files) == 2
         assert read_files["kits/kit.xml"]["hash"] == "abc123"
         assert read_files["kits/kit.xml"]["sd_size"] == 100
@@ -325,8 +319,8 @@ class TestManifestV2RoundTrip:
             },
         }
 
-        write_manifest(mf, timestamp="ts", files=files)
-        _, read_files = read_manifest(mf)
+        write_manifest(mf, files=files)
+        read_files = read_manifest(mf)
 
         assert read_files["kits/kit.xml"]["hash"] is None
 
@@ -347,9 +341,8 @@ class TestManifestV1Migration:
         }
         mf.write_text(json.dumps(payload), encoding="utf-8")
 
-        ts, files = read_manifest(mf)
+        files = read_manifest(mf)
 
-        assert ts == "2026-01-01T00:00:00+00:00"
         assert files["kits/kit.xml"]["sd_size"] == 100
         assert files["kits/kit.xml"]["hash"] is None
 
@@ -369,7 +362,7 @@ class TestManifestV1Migration:
         }
         mf.write_text(json.dumps(payload), encoding="utf-8")
 
-        _, files = read_manifest(mf)
+        files = read_manifest(mf)
 
         # Old-format entries dropped, good entry migrated with hash=None
         assert "kits/old.xml" not in files
@@ -399,7 +392,7 @@ class TestManifestV1Migration:
         }
         mf.write_text(json.dumps(payload), encoding="utf-8")
 
-        _, files = read_manifest(mf)
+        files = read_manifest(mf)
 
         assert files["kits/hashed.xml"]["hash"] == "deadbeef"
         assert files["kits/unhashed.xml"]["hash"] is None
@@ -419,7 +412,7 @@ class TestManifestV1Migration:
         }
         mf.write_text(json.dumps(payload), encoding="utf-8")
 
-        _, files = read_manifest(mf)
+        files = read_manifest(mf)
 
         # v1 manifests always get hash=None regardless of stray data
         assert files["kits/kit.xml"]["hash"] is None
@@ -457,7 +450,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/kit.xml"]["hash"] == expected_hash
 
@@ -484,7 +477,7 @@ class TestBuildPostSyncManifestHashing:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/kit.xml"]["hash"] == "preserved_hash_value"
 
@@ -511,7 +504,7 @@ class TestBuildPostSyncManifestHashing:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/kit.xml"]["hash"] is None
 
@@ -540,7 +533,7 @@ class TestBuildPostSyncManifestHashing:
         )
         old_files: dict[str, FileRecord] = {}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
 
         assert files["kits/new.xml"]["hash"] == expected_hash
 
@@ -575,7 +568,7 @@ class TestBuildPostSyncManifestHashing:
             },
         }
 
-        _ts, files = _build_post_sync_manifest(
+        files = _build_post_sync_manifest(
             plan, src_scan, dest, old_files, file_filter="xml",
         )
 

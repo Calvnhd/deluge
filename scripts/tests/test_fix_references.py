@@ -460,7 +460,7 @@ class TestManifestKeyUpdate:
         moved = {"samples/old.wav": "SAMPLES/NEW/Renamed.wav"}
         manifest_path = tmp_path / "manifest.json"
 
-        update_manifest_keys(manifest, moved, manifest_path, "2026-01-01T00:00:00")
+        update_manifest_keys(manifest, moved, manifest_path)
 
         assert "samples/old.wav" not in manifest
         assert "samples/new/renamed.wav" in manifest
@@ -478,7 +478,7 @@ class TestManifestKeyUpdate:
         }
         manifest_path = tmp_path / "manifest.json"
 
-        update_manifest_keys(manifest, {}, manifest_path, "ts")
+        update_manifest_keys(manifest, {}, manifest_path)
 
         assert not manifest_path.exists()
 
@@ -496,7 +496,7 @@ class TestManifestKeyUpdate:
         manifest_path = tmp_path / "manifest.json"
 
         with patch("fix_references.write_manifest", side_effect=OSError("disk full")):
-            update_manifest_keys(manifest, moved, manifest_path, "ts")
+            update_manifest_keys(manifest, moved, manifest_path)
 
         captured = capsys.readouterr()
         assert "Warning" in captured.out
@@ -512,7 +512,7 @@ class TestManifestKeyUpdate:
         moved = {"samples/old.wav": "SAMPLES/New.wav"}
         manifest_path = tmp_path / "manifest.json"
 
-        update_manifest_keys(manifest, moved, manifest_path, "ts")
+        update_manifest_keys(manifest, moved, manifest_path)
 
         entry = manifest["samples/new.wav"]
         assert entry["sd_size"] == 42
