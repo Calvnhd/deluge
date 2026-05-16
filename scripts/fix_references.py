@@ -51,7 +51,7 @@ def compute_migration_map(
     re-hashing files that haven't moved.  Degrades gracefully when the
     manifest is empty or has no hashes.
 
-    Keys in ``moved``, ``deleted``, and ``ambiguous`` before-paths are
+    Keys in `moved`, `deleted`, and `ambiguous` before-paths are
     normalised (lowercase, forward-slash) to match manifest key format.
     After-paths use original case from the current filesystem.
 
@@ -113,8 +113,7 @@ def compute_migration_map(
             current_hashes[hash_file(abs_path)].append(current_path)
         print()
 
-    # Compare
-
+    # Compare manifest data with actual state
     moved: dict[str, str] = {}
     deleted: dict[str, list[str]] = {}
     added: dict[str, list[str]] = {}
@@ -124,6 +123,7 @@ def compute_migration_map(
         manifest_paths = manifest_hashes.get(h, [])
         current_paths = current_hashes.get(h, [])
 
+        # deleted, added, or moved?
         if manifest_paths and not current_paths:
             deleted[h] = list(manifest_paths)
         elif current_paths and not manifest_paths:
@@ -131,9 +131,9 @@ def compute_migration_map(
         elif len(manifest_paths) == 1 and len(current_paths) == 1:
             if manifest_paths[0] != normalise_key(current_paths[0]):
                 moved[manifest_paths[0]] = current_paths[0]
-            # else: unchanged — same hash, same normalised path
-        elif len(current_paths) > 0:
-            # duplicated file. TODO - add removal system
+
+        # duplicates?
+        if len(current_paths) > 0:
             duplicate[h] = list(current_paths)
 
     return MigrationResult(
@@ -189,7 +189,7 @@ class RecoveredRefChange:
 
 # TODO - idk about the ambiguity here
 @dataclass
-class BrokenRefResult:
+class ReferenceStatus:
     """Result of scanning XML references against a migration map.
 
     Attributes:
@@ -205,43 +205,16 @@ class BrokenRefResult:
     recovered: list[RecoveredRefChange] = field(default_factory=list)
 
 
-MAX_RECOVERY_CANDIDATES = 3
-
-
-def path_similarity(ref_path: str, candidate_path: str) -> int:
-    """Count matching path components from the end, case-insensitive.
-
-    Used as a tiebreaker when multiple same-hash candidates exist for a
-    missing reference.  The basename counts as the first component.
-
-    Args:
-        ref_path: The XML reference path (e.g. "SAMPLES/DRUMS/Kick.wav").
-        candidate_path: A candidate filesystem path.
-
-    Returns:
-        Number of matching trailing path components (0 if none match).
-    """
-    ref_parts = PurePosixPath(ref_path).parts
-    cand_parts = PurePosixPath(candidate_path).parts
-    score = 0
-    for r, c in zip(reversed(ref_parts), reversed(cand_parts)):
-        if r.lower() == c.lower():
-            score += 1
-        else:
-            break
-    return score
-
-
 def classify_ref_changes(
     migration: MigrationResult,
     deluge_root: Path,
-) -> BrokenRefResult:
+) -> ReferenceStatus:
     """Scan all XML references and classify them against a migration map.
 
     For each sample reference found in KITS/, SYNTHS/, SONGS/ XMLs:
-    - If the path is a key in ``migration.moved`` → planned change
-    - If the path appears in any ``migration.deleted`` path list → error
-    - If the path appears in any ``migration.duplicate`` before-path list → warning
+    - Planned change: Path is a key in `migration.moved` 
+    - Error: Path appears in `migration.deleted`
+    - TODO: If the path appears in `migration.duplicate` 
     - Otherwise (valid, unchanged) → not included in results
 
     Args:
@@ -249,9 +222,11 @@ def classify_ref_changes(
         deluge_root: Absolute path to the DELUGE directory.
 
     Returns:
-        A :class:`BrokenRefResult` separating fixable changes, errors, and warnings.
+        A :class:`ReferenceStatus` separating fixable changes, errors, and warnings.
     """
-    # Build flat lookup sets for deleted and duplicate paths
+
+    # Build flat lookup sets
+
     deleted_paths: set[str] = set()
     for paths in migration.deleted.values():
         deleted_paths.update(paths)
@@ -260,22 +235,34 @@ def classify_ref_changes(
     for paths in migration.duplicate.values():
         duplicate_paths.update(normalise_key(p) for p in paths)
 
-    existing = {normalise_key(p) for paths in migration.current_hashes.values() for p in paths}
+    current_paths: set[str] = set()
+    for paths in migration.current_hashes.values():
+        for p in paths:
+                current_paths.add(normalise_key(p))
 
-    # Build basename index: lowercase basename → list of (original_path, hash)
+    # Build index that matches lowercase basename to list of (current_path, hash)
     basename_index: dict[str, list[tuple[str, str]]] = defaultdict(list)
     for file_hash, paths in migration.current_hashes.items():
         for p in paths:
             basename = PurePosixPath(p).name.lower()
             basename_index[basename].append((p, file_hash))
 
-    result = BrokenRefResult()
+    result = ReferenceStatus()
 
+    # Go through each xml and check each SAMPLE reference
     xml_files = find_all_xml_files(deluge_root)
     for xml_path in xml_files:
         refs = extract_sample_refs(xml_path, deluge_root)
         for ref in refs:
             norm_ref = normalise_key(ref.path)
+
+            # TODO: change this from a warning to something else that will help us resolve the dupe
+            if norm_ref in duplicate_paths:
+                result.warnings.append(
+                    AmbiguousRefWarning(ref=ref, ambiguous_path=ref.path)
+                )
+
+            # Moved? Planned change, we need to update path from old to new
             if norm_ref in migration.moved:
                 result.changes.append(
                     PlannedChange(
@@ -284,20 +271,21 @@ def classify_ref_changes(
                         new_path=migration.moved[norm_ref],
                     )
                 )
+            # Deleted? We have a broken reference
             elif norm_ref in deleted_paths:
                 result.errors.append(
                     BrokenRefError(ref=ref, deleted_path=ref.path)
                 )
-            elif norm_ref in duplicate_paths:
-                result.warnings.append(
-                    AmbiguousRefWarning(ref=ref, ambiguous_path=ref.path)
-                )
-            elif norm_ref not in existing:
+            # TODO - is this robust enough? can we fall back in any better way?
+            elif norm_ref not in current_paths:
+                
                 # Attempt recovery via basename matching
                 ref_basename = PurePosixPath(ref.path).name.lower()
                 candidates = basename_index.get(ref_basename, [])
 
-                if len(candidates) == 0 or len(candidates) > MAX_RECOVERY_CANDIDATES:
+                # No matches
+                # File is either genuinely missing or has been renamed on move
+                if len(candidates) == 0:
                     result.missing.append(
                         MissingRefError(ref=ref, missing_path=ref.path)
                     )
@@ -314,13 +302,12 @@ def classify_ref_changes(
                     # Multiple candidates — check if all share the same hash
                     hashes = {h for _, h in candidates}
                     if len(hashes) == 1:
-                        # Same hash: pick best path similarity
-                        best = max(candidates, key=lambda c: path_similarity(ref.path, c[0]))
+                        # Same hash, take first
                         result.recovered.append(
                             RecoveredRefChange(
                                 ref=ref,
                                 old_path=ref.path,
-                                new_path=best[0],
+                                new_path=candidates[0][0],
                                 candidates=candidates,
                             )
                         )
@@ -361,7 +348,7 @@ def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
 
 
 def preview_and_apply(
-    result: BrokenRefResult,
+    result: ReferenceStatus,
     deluge_root: Path,
     *,
     auto_apply: bool = False,
@@ -374,7 +361,7 @@ def preview_and_apply(
         auto_apply: If True, skip the confirmation prompt and apply immediately.
 
     Returns:
-        Tuple of ``(has_issues, applied)``.  *has_issues* is True when errors
+        Tuple of `(has_issues, applied)`.  *has_issues* is True when errors
         or missing refs were found.  *applied* is True when XML changes were
         actually written to disk.
     """

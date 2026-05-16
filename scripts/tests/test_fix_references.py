@@ -12,7 +12,7 @@ import pytest
 from fix_references import (
     AmbiguousRefWarning,
     BrokenRefError,
-    BrokenRefResult,
+    ReferenceStatus,
     MAX_RECOVERY_CANDIDATES,
     MigrationResult,
     MissingRefError,
@@ -944,7 +944,7 @@ class TestClassifyRefChanges:
 
         result = classify_ref_changes(migration, deluge_root)
 
-        assert result == BrokenRefResult()
+        assert result == ReferenceStatus()
 
     def test_ref_carries_sample_ref_metadata(self, tmp_path: Path) -> None:
         """Planned change carries the full SampleRef with correct metadata."""
@@ -1030,8 +1030,8 @@ class TestPreviewAndApply:
     def test_empty_result_nothing_to_do(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        """Empty BrokenRefResult prints 'Nothing to do' and returns."""
-        preview_and_apply(BrokenRefResult(), tmp_path)
+        """Empty ReferenceStatus prints 'Nothing to do' and returns."""
+        preview_and_apply(ReferenceStatus(), tmp_path)
 
         captured = capsys.readouterr()
         assert "Nothing to do" in captured.out
@@ -1040,7 +1040,7 @@ class TestPreviewAndApply:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """Preview output groups changes by XML file."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1067,7 +1067,7 @@ class TestPreviewAndApply:
     ) -> None:
         """Multiple refs with the same old\u2192new in one file show '\xd7 N refs'."""
         ref = _make_ref("KITS/KIT001.XML", "SAMPLES/a.wav")
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(ref=ref, old_path="SAMPLES/a.wav", new_path="SAMPLES/b.wav"),
                 PlannedChange(ref=ref, old_path="SAMPLES/a.wav", new_path="SAMPLES/b.wav"),
@@ -1084,7 +1084,7 @@ class TestPreviewAndApply:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """Errors are displayed under the 'ERRORS' section header."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             errors=[
                 BrokenRefError(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/gone.wav"),
@@ -1104,7 +1104,7 @@ class TestPreviewAndApply:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """Warnings are displayed under the 'WARNINGS' section header."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             warnings=[
                 AmbiguousRefWarning(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/ambig.wav"),
@@ -1124,7 +1124,7 @@ class TestPreviewAndApply:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """Summary line shows correct counts for changes, files, errors, warnings."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1161,7 +1161,7 @@ class TestPreviewAndApply:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """When errors exist, a warning recommending resolution is shown."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1188,7 +1188,7 @@ class TestPreviewAndApply:
     ) -> None:
         """On confirm, update_sample_refs is called with correct mapping per XML file."""
         deluge_root = tmp_path / "DELUGE"
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1216,7 +1216,7 @@ class TestPreviewAndApply:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """On decline, no changes are applied and message is shown."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1241,7 +1241,7 @@ class TestPreviewAndApply:
     ) -> None:
         """auto_apply=True skips the confirmation prompt."""
         deluge_root = tmp_path / "DELUGE"
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1266,7 +1266,7 @@ class TestPreviewAndApply:
     ) -> None:
         """Post-apply summary shows files modified and references updated."""
         deluge_root = tmp_path / "DELUGE"
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1294,7 +1294,7 @@ class TestPreviewAndApply:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """Missing refs are displayed under the 'MISSING' section header."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             missing=[
                 MissingRefError(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/DRUMS/CB1-BD~1.WAV"),
@@ -1312,11 +1312,11 @@ class TestPreviewAndApply:
 
     def test_returns_no_issues_no_apply_when_nothing(self, tmp_path: Path) -> None:
         """Returns (False, False) when no changes, errors, or warnings exist."""
-        assert preview_and_apply(BrokenRefResult(), tmp_path) == (False, False)
+        assert preview_and_apply(ReferenceStatus(), tmp_path) == (False, False)
 
     def test_returns_issues_true_when_missing(self, tmp_path: Path) -> None:
         """Returns (True, False) when missing refs exist."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             missing=[
                 MissingRefError(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/DRUMS/CB1-BD~1.WAV"),
@@ -1332,7 +1332,7 @@ class TestPreviewAndApply:
 
     def test_only_errors_no_apply_prompt(self, tmp_path: Path) -> None:
         """When there are only errors (no changes), no apply prompt is shown."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             errors=[
                 BrokenRefError(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/gone.wav"),
@@ -1351,7 +1351,7 @@ class TestPreviewAndApply:
     def test_returns_no_issues_applied_when_changes_only(self, tmp_path: Path) -> None:
         """Returns (False, True) when there are fixable changes but no errors."""
         deluge_root = tmp_path / "DELUGE"
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1372,7 +1372,7 @@ class TestPreviewAndApply:
     def test_returns_issues_and_applied_when_errors_and_changes(self, tmp_path: Path) -> None:
         """Returns (True, True) when errors exist but fixable changes were applied."""
         deluge_root = tmp_path / "DELUGE"
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             changes=[
                 PlannedChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/a.wav"),
@@ -1798,7 +1798,7 @@ class TestRecoveredPreviewOutput:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """RECOVERED section header appears when recovered refs exist."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             recovered=[
                 RecoveredRefChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
@@ -1819,7 +1819,7 @@ class TestRecoveredPreviewOutput:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """Recovered refs show old → new path."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             recovered=[
                 RecoveredRefChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
@@ -1840,7 +1840,7 @@ class TestRecoveredPreviewOutput:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """Summary line includes recovered count."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             recovered=[
                 RecoveredRefChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
@@ -1861,7 +1861,7 @@ class TestRecoveredPreviewOutput:
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
         """No RECOVERED section when recovered list is empty."""
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             errors=[
                 BrokenRefError(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/gone.wav"),
@@ -1887,7 +1887,7 @@ class TestApplyIncludesRecovered:
         xml_path = deluge_root / "KITS" / "KIT001.XML"
         _write_minimal_kit_xml(xml_path, ["SAMPLES/Old/Kick.wav"])
 
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             recovered=[
                 RecoveredRefChange(
                     ref=SampleRef(
@@ -1918,7 +1918,7 @@ class TestApplyIncludesRecovered:
     ) -> None:
         """Apply summary counts include recovered ref updates."""
         deluge_root = tmp_path / "DELUGE"
-        result = BrokenRefResult(
+        result = ReferenceStatus(
             recovered=[
                 RecoveredRefChange(
                     ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
