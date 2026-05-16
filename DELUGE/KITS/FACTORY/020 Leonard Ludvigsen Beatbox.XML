@@ -74,7 +74,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Kick/Bbox short 12bit HPF2.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Kick/Bbox short 12bit HPF2.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="27675" />
@@ -229,7 +229,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Kick/Big buf 8bit.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Kick/Big buf 8bit.wav">
 				<zone
 					startSamplePos="352"
 					endSamplePos="81414" />
@@ -384,7 +384,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/SNARE smack.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/SNARE smack.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="15190" />
@@ -539,7 +539,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Beatbox snare + Drive filter mono.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Beatbox snare + Drive filter mono.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="26848" />
@@ -694,7 +694,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/SNARE smack.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/SNARE smack.wav">
 				<zone
 					startSamplePos="13"
 					endSamplePos="15190" />
@@ -705,7 +705,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Snare Lip short SATURATED Beatbox.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Snare Lip short SATURATED Beatbox.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="10347" />
@@ -853,7 +853,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Beatbox snare + Drive filter mono.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Beatbox snare + Drive filter mono.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="26848" />
@@ -1008,7 +1008,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Snare crisp.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Snare crisp.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="57417" />
@@ -1163,7 +1163,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Hihat Beatbox.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Hihat Beatbox.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="10773" />
@@ -1318,7 +1318,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/HihatO3! Beatbox.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/HihatO3! Beatbox.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="86758" />
@@ -1473,7 +1473,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Rimshot Beatbox.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Rimshot Beatbox.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5765" />
@@ -1628,7 +1628,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Click Beatbox.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Click Beatbox.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="4702" />
@@ -1783,7 +1783,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/CLAP2.WAV">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/CLAP2.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="9506" />
@@ -1939,7 +1939,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="-35"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/Kick/Phat bbox kick HPF boost.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/Kick/Phat bbox kick HPF boost.wav">
 				<zone
 					startSamplePos="2098"
 					endSamplePos="20545" />
@@ -2090,7 +2090,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Phat Beatbox/1BurpStretch Pitch-envelope2.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Phat Beatbox/1BurpStretch Pitch-envelope2.wav">
 				<zone
 					startSamplePos="3584"
 					endSamplePos="278690" />

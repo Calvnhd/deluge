@@ -56,7 +56,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Kick/Rhythmace Kick.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="29015" />
@@ -182,7 +182,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Ride/XV5080 Ride edge.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Ride/XV5080 Ride edge.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="112640" />
@@ -307,7 +307,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Snare/Rhythmace Snare.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5100" />
@@ -432,7 +432,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/HatO/909 Open hihat.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/HatO/909 Open hihat.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="20251" />

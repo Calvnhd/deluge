@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/808 Bass C Deep-O.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/808 Bass C Deep-O.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>4715</endMilliseconds>
@@ -211,7 +211,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/Kick 003 Sensible.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/Kick 003 Sensible.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>322</endMilliseconds>
@@ -377,7 +377,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/Snare Drum 018 Dilla.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/Snare Drum 018 Dilla.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>313</endMilliseconds>
@@ -542,7 +542,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/HiHat Closed 001 Widened.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/HiHat Closed 001 Widened.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>229</endMilliseconds>
@@ -707,7 +707,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/Percussion Bell 003 Agogo High.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/Percussion Bell 003 Agogo High.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>498</endMilliseconds>
@@ -872,7 +872,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/cp02.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/cp02.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>450</endMilliseconds>
@@ -1037,7 +1037,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/Percussion Cowbell 004 808.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/Percussion Cowbell 004 808.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>69</endMilliseconds>
@@ -1202,7 +1202,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/Percussion Rimshot 003.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/Percussion Rimshot 003.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>2347</endMilliseconds>
@@ -1367,7 +1367,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/Percussion bubble 001.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/Percussion Bubble 001.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>69</endMilliseconds>
@@ -1532,7 +1532,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/SYNTH-FancyPoly800longCool.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/SYNTH-FancyPoly800longCool.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>3357</endMilliseconds>
@@ -1697,7 +1697,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/PAD-LosAngeles92.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/PAD-LosAngeles92.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>21270</endMilliseconds>
@@ -1862,7 +1862,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Totems/SYNTH-Bellishform1.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Totems/SYNTH-Bellishform1.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>3357</endMilliseconds>

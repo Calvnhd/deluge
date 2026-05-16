@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB4-Cassette808_BD02.wav">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB4-Cassette808_BD02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="24705" />
@@ -225,7 +225,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB5-Cassette808_BD03.wav">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB5-Cassette808_BD03.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="190428" />
@@ -375,7 +375,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB1-bdrum1.WAV">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB1-bdrum1.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="6080" />
@@ -525,7 +525,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB2-bdrum2.WAV">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB2-bdrum2.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="6102" />
@@ -674,7 +674,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB7-Cassette808_Rim_01.wav">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB7-Cassette808_Rim_01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="2982" />
@@ -823,7 +823,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB6-Cassette808_CP_01.wav">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB6-Cassette808_CP_01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="69725" />
@@ -972,7 +972,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB3-BELL.WAV">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB3-bell.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="45374" />
@@ -1121,7 +1121,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/CHAZ/CB8-yo.wav">
+				fileName="SAMPLES/FACTORY/Artists/Chaz/CB8-yo.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="25140" />

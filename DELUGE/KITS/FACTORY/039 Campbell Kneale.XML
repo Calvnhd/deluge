@@ -74,7 +74,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/goat throats.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/goat throats.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="3230013" />
@@ -223,7 +223,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/blurting bagpipe.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/blurting bagpipe.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="2262255" />
@@ -372,7 +372,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/bowed roof.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/bowed roof.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="1849541" />
@@ -521,7 +521,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/dogskinning guitar.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/dogskinning guitar.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="2240289" />
@@ -670,7 +670,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/bells of grenoble.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/bells of grenoble.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="970122" />
@@ -819,7 +819,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/arctic trem guitar.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/arctic trem guitar.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="4384641" />
@@ -974,7 +974,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/antihuman guitar.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/antihuman guitar.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="2969684" />
@@ -1129,7 +1129,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/Campbell Kneale/karma shovel.wav">
+				fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/karma shovel.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="4134293" />

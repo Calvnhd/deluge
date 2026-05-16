@@ -356,7 +356,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/Rhythmace Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="88244" />
@@ -437,7 +437,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/Rhythmace Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="5100" />
@@ -518,7 +518,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/Rhythmace Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/Rhythmace Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2178" />
@@ -599,7 +599,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/Rhythmace Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/Rhythmace Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="13915" />
@@ -680,7 +680,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConL/Rhythmace Conga low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConL/Rhythmace Conga low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7717" />
@@ -761,7 +761,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConH/Rhythmace Conga high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConH/Rhythmace Conga high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3219" />
@@ -842,7 +842,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Claves/Rhythmace Claves.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Claves/Rhythmace Claves.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4116" />
@@ -923,7 +923,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Claves/Rhythmace Percussion.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Claves/Rhythmace Percussion.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11520" />

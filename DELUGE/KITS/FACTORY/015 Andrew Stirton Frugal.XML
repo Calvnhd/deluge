@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/kick1D.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/kick1D.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="21897" />
@@ -227,7 +227,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/kick2D.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/kick2D.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="22199" />
@@ -379,7 +379,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/kick3D.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/kick3D.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="21952" />
@@ -531,7 +531,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/kick4D.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/kick4D.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="21744" />
@@ -682,7 +682,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/snare1A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/snare1A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5486" />
@@ -833,7 +833,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/snare2A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/snare2A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="3893" />
@@ -984,7 +984,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/c-hat1A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/c-hat1A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5604" />
@@ -1135,7 +1135,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/o-hat1A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/o-hat1A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="44078" />
@@ -1286,7 +1286,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/c-hat2A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/c-hat2A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5512" />
@@ -1437,7 +1437,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/c-hat3A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/c-hat3A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="7152" />
@@ -1588,7 +1588,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/c-hat4A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/c-hat4A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5604" />
@@ -1739,7 +1739,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/clap1.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/clap1.wav">
 				<zone
 					startSamplePos="384"
 					endSamplePos="12259" />
@@ -1890,7 +1890,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/sprongle.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/sprongle.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="130899" />
@@ -2041,7 +2041,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/wurgle.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/wurgle.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="88200" />
@@ -2192,7 +2192,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/frugalriser.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/frugalriser.wav">
 				<zone
 					startSamplePos="113403"
 					endSamplePos="604801"
@@ -2344,7 +2344,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Andrew Stirton/Frugal/befall.wav">
+				fileName="SAMPLES/FACTORY/Artists/Andrew Stirton/Frugal/befall.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="129379" />

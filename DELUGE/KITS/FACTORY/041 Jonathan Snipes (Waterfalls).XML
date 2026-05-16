@@ -74,7 +74,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/JS-IcelandicWaterfalls/Detifoss1.wav">
+				fileName="SAMPLES/FACTORY/Artists/JS-IcelandicWaterfalls/Detifoss1.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="220500" />
@@ -223,7 +223,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/JS-IcelandicWaterfalls/Detifoss2.wav">
+				fileName="SAMPLES/FACTORY/Artists/JS-IcelandicWaterfalls/Detifoss2.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="220500" />
@@ -372,7 +372,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/JS-IcelandicWaterfalls/Detifoss3.wav">
+				fileName="SAMPLES/FACTORY/Artists/JS-IcelandicWaterfalls/Detifoss3.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="220500" />
@@ -521,7 +521,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/JS-IcelandicWaterfalls/Dynjandi.wav">
+				fileName="SAMPLES/FACTORY/Artists/JS-IcelandicWaterfalls/Dynjandi.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="220500" />
@@ -670,7 +670,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/JS-IcelandicWaterfalls/Godifoss1.wav">
+				fileName="SAMPLES/FACTORY/Artists/JS-IcelandicWaterfalls/Godifoss1.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="220500" />
@@ -819,7 +819,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/JS-IcelandicWaterfalls/Godifoss2.wav">
+				fileName="SAMPLES/FACTORY/Artists/JS-IcelandicWaterfalls/Godifoss2.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="220500" />
@@ -968,7 +968,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/ARTISTS/JS-IcelandicWaterfalls/LoClose.wav">
+				fileName="SAMPLES/FACTORY/Artists/JS-IcelandicWaterfalls/LoClose.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="220500" />

@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Kick/Linndrum Kick.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Kick/Linndrum Kick.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>203</endMilliseconds>
@@ -218,7 +218,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Snare/Linndrum Snare.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Snare/Linndrum Snare.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>140</endMilliseconds>
@@ -390,7 +390,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatC/Linndrum Closed hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatC/Linndrum Closed hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>115</endMilliseconds>
@@ -562,7 +562,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatO/Linndrum Open hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatO/Linndrum Open hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>475</endMilliseconds>
@@ -734,7 +734,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Ride/Linndrum Ride.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Ride/Linndrum Ride.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1266</endMilliseconds>
@@ -906,7 +906,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Shaker/Linndrum Cabasa.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Shaker/Linndrum Cabasa.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>79</endMilliseconds>
@@ -1078,7 +1078,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Rim/Linndrum Rim.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Rim/Linndrum Rim.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>108</endMilliseconds>
@@ -1250,7 +1250,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Tambourine/Linndrum Tambourine.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Tambourine/Linndrum Tambourine.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>159</endMilliseconds>
@@ -1422,7 +1422,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Crash/Linndrum Crash.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Crash/Linndrum Crash.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1234</endMilliseconds>
@@ -1594,7 +1594,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Clap/Linndrum Clap.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Clap/Linndrum Clap.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>192</endMilliseconds>
@@ -1766,7 +1766,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomL/Linndrum Tom extra low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomL/Linndrum Tom extra low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>907</endMilliseconds>
@@ -1938,7 +1938,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomL/Linndrum Tom low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomL/Linndrum Tom low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>620</endMilliseconds>
@@ -2110,7 +2110,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomM/Linndrum Tom medium.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomM/Linndrum Tom medium.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>408</endMilliseconds>
@@ -2282,7 +2282,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomH/Linndrum Tom high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomH/Linndrum Tom high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>294</endMilliseconds>
@@ -2454,7 +2454,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomH/Linndrum Tom extra high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomH/Linndrum Tom extra high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>235</endMilliseconds>
@@ -2626,7 +2626,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConL/Linndrum Conga low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConL/Linndrum Conga low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>457</endMilliseconds>
@@ -2798,7 +2798,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConM/Linndrum Conga medium.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConM/Linndrum Conga medium.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>275</endMilliseconds>
@@ -2970,7 +2970,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConH/Linndrum Conga high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConH/Linndrum Conga high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>176</endMilliseconds>
@@ -3142,7 +3142,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConH/Linndrum Conga extra high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConH/Linndrum Conga extra high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>110</endMilliseconds>

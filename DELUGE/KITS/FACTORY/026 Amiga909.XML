@@ -74,7 +74,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Kick Woofer.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Kick Woofer.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="29274" />
@@ -376,7 +376,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Snare HiMetal.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Snare HiMetal.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="28470" />
@@ -678,7 +678,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Click.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Click.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="678" />
@@ -829,7 +829,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Hihat MetalSwish.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Hihat MetalSwish.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="14660" />
@@ -980,7 +980,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Hihat Open Long MetalSwish.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Hihat Open Long MetalSwish.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="157889" />
@@ -1131,7 +1131,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Snare Metallic Punch.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Snare Metallic Punch.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="15348" />
@@ -1433,7 +1433,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Zap.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Zap.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="2864" />
@@ -1584,7 +1584,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Dying Seagull.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Dying Seagull.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="58862" />
@@ -1735,7 +1735,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Mystery Bowl.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Mystery Bowl.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="107329" />
@@ -1886,7 +1886,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Old Bell.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Old Bell.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="59577" />
@@ -2037,7 +2037,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Old Bell 2.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Old Bell 2.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="17235" />
@@ -2188,7 +2188,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Screener.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Screener.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="61991" />
@@ -2339,7 +2339,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Perc Long Metal Hiss.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Long Metal Hiss.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="74229" />

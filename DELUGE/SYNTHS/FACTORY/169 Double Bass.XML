@@ -20,7 +20,7 @@
 		<sampleRanges>
 			<sampleRange
 				rangeTopNote="37"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/36 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/36 b.WAV"
 				transpose="24">
 				<zone
 					startSamplePos="0"
@@ -28,7 +28,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="41"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/39 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/39 b.WAV"
 				transpose="21">
 				<zone
 					startSamplePos="0"
@@ -36,7 +36,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="44"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/43 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/43 b.WAV"
 				transpose="17">
 				<zone
 					startSamplePos="0"
@@ -44,7 +44,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="48"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/46 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/46 b.WAV"
 				transpose="14">
 				<zone
 					startSamplePos="0"
@@ -52,7 +52,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="51"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/50 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/50 b.WAV"
 				transpose="10">
 				<zone
 					startSamplePos="0"
@@ -60,7 +60,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="55"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/53 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/53 b.WAV"
 				transpose="7">
 				<zone
 					startSamplePos="0"
@@ -68,7 +68,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="58"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/57 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/57 b.WAV"
 				transpose="3">
 				<zone
 					startSamplePos="0"
@@ -76,21 +76,21 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="63"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/60 b.WAV">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/60 b.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="188727" />
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="68"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/67 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/67 b.WAV"
 				transpose="-7">
 				<zone
 					startSamplePos="0"
 					endSamplePos="100799" />
 			</sampleRange>
 			<sampleRange
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/69 b.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Lo/69 b.WAV"
 				transpose="-9">
 				<zone
 					startSamplePos="0"
@@ -107,7 +107,7 @@
 		<sampleRanges>
 			<sampleRange
 				rangeTopNote="37"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/36 a.wav"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/36 a.wav"
 				transpose="24">
 				<zone
 					startSamplePos="0"
@@ -115,7 +115,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="41"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/39 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/39 a.WAV"
 				transpose="21">
 				<zone
 					startSamplePos="0"
@@ -123,7 +123,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="44"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/43 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/43 a.WAV"
 				transpose="17">
 				<zone
 					startSamplePos="0"
@@ -131,7 +131,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="48"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/46 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/46 a.WAV"
 				transpose="14">
 				<zone
 					startSamplePos="0"
@@ -139,7 +139,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="51"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/50 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/50 a.WAV"
 				transpose="10">
 				<zone
 					startSamplePos="0"
@@ -147,7 +147,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="55"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/53 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/53 a.WAV"
 				transpose="7">
 				<zone
 					startSamplePos="0"
@@ -155,7 +155,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="58"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/57 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/57 a.WAV"
 				transpose="3">
 				<zone
 					startSamplePos="0"
@@ -163,14 +163,14 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="62"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/60 a.WAV">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/60 a.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="187215" />
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="65"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/64 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/64 a.WAV"
 				transpose="-4">
 				<zone
 					startSamplePos="0"
@@ -178,14 +178,14 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="68"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/67 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/67 a.WAV"
 				transpose="-7">
 				<zone
 					startSamplePos="0"
 					endSamplePos="141047" />
 			</sampleRange>
 			<sampleRange
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Hi/69 a.WAV"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Double bass/Hi/69 a.WAV"
 				transpose="-9">
 				<zone
 					startSamplePos="0"

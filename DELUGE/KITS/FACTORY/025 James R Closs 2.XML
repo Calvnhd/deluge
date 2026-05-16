@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/00 KICK 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/00 KICK 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="64195" />
@@ -227,7 +227,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/01 KICK 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/01 KICK 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="59381" />
@@ -378,7 +378,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/02 SNARE 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/02 SNARE 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="37194" />
@@ -389,7 +389,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/14 NOISE M.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/14 NOISE M.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="705600" />
@@ -533,7 +533,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/06 CH 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/06 CH 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="16721" />
@@ -684,7 +684,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/05 OH 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/05 OH 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="132027" />
@@ -835,7 +835,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/07 OH 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/07 OH 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="131567" />
@@ -986,7 +986,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/08 CH 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/08 CH 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="24332" />
@@ -1137,7 +1137,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/04 SNARE 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/04 SNARE 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="28369" />
@@ -1148,7 +1148,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/10 CRASH 01.wav"
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/10 CRASH 01.wav"
 				transpose="-4">
 				<zone
 					startSamplePos="0"
@@ -1297,7 +1297,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/09 SPLASH 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/09 SPLASH 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="48354" />
@@ -1448,7 +1448,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/10 CRASH 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/10 CRASH 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="52880" />
@@ -1599,7 +1599,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/11 TOM L.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/11 TOM L.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="82169" />
@@ -1750,7 +1750,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/12 TOM H.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/12 TOM H.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="48846" />
@@ -1901,7 +1901,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/13 NOISE L.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/13 NOISE L.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="705600" />
@@ -2060,7 +2060,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/14 NOISE M.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/14 NOISE M.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="705600" />
@@ -2215,7 +2215,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/15 NOISE H.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/15 NOISE H.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="441000" />
@@ -2374,7 +2374,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit1/16 DRONE.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit1/16 DRONE.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="1234800" />

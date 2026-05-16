@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="GOAT" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/goat throats.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/goat throats.wav">
 						<zone startSamplePos="0" endSamplePos="3230013"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -54,7 +54,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BLUR" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/blurting bagpipe.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/blurting bagpipe.wav">
 						<zone startSamplePos="0" endSamplePos="2262255"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -95,7 +95,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BOWE" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/bowed roof.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/bowed roof.wav">
 						<zone startSamplePos="0" endSamplePos="1849541"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -136,7 +136,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="DOGS" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/dogskinning guitar.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/dogskinning guitar.wav">
 						<zone startSamplePos="0" endSamplePos="2240289"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -177,7 +177,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BELL" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/bells of grenoble.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/bells of grenoble.wav">
 						<zone startSamplePos="0" endSamplePos="970122"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -218,7 +218,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="arct" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/arctic trem guitar.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/arctic trem guitar.wav">
 						<zone startSamplePos="0" endSamplePos="4384641"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -261,7 +261,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="anti" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/antihuman guitar.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/antihuman guitar.wav">
 						<zone startSamplePos="0" endSamplePos="2969684"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -304,7 +304,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="karm" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/karma shovel.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/karma shovel.wav">
 						<zone startSamplePos="0" endSamplePos="4134293"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">

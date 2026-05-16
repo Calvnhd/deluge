@@ -220,7 +220,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/XV5080 Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/XV5080 Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9256" />
@@ -297,7 +297,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/909 Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/909 Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="15397" />
@@ -485,7 +485,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/VOCAL/21 Sound Effects A#m Scream.wav">
+						fileName="SAMPLES/LANDR/FX/21 Sound Effects A#m Scream.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="364829" />
@@ -947,7 +947,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/BEAT SESSION BELL FX.wav">
+						fileName="SAMPLES/LANDR/PERC/Assorted/BEAT SESSION BELL FX.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="325661" />
@@ -1024,7 +1024,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/BEAT SESSION IMPACT 2.wav">
+						fileName="SAMPLES/LANDR/PERC/Assorted/BEAT SESSION IMPACT 2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="244245" />
@@ -1255,7 +1255,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav">
+						fileName="SAMPLES/LANDR/PERC/Assorted/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="343980" />

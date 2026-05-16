@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Kick_Stomp.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Kick_Stomp.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>330</endMilliseconds>
@@ -211,7 +211,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Bass_Distort.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Bass_Distort.wav</fileName>
 				<zone>
 					<startMilliseconds>10</startMilliseconds>
 					<endMilliseconds>858</endMilliseconds>
@@ -377,7 +377,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Bent_Kick.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Bent_Kick.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>239</endMilliseconds>
@@ -542,7 +542,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Bent_Snap.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Bent_Snap.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>230</endMilliseconds>
@@ -707,7 +707,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Guitar_Pluck1.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Guitar_Pluck1.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1727</endMilliseconds>
@@ -872,7 +872,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Guitar_Pluck2.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Guitar_Pluck2.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1727</endMilliseconds>
@@ -1037,7 +1037,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Guitar_Pluck3.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Guitar_Pluck3.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1727</endMilliseconds>
@@ -1202,7 +1202,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/MusicBox_Chime.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/MusicBox_Chime.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1970</endMilliseconds>
@@ -1367,7 +1367,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Rushers_Loop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Rushers_Loop.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>10106</endMilliseconds>
@@ -1532,7 +1532,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Electro_Loop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Electro_Loop.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>6858</endMilliseconds>
@@ -1697,7 +1697,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/High_Loop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/High_Loop.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1600</endMilliseconds>
@@ -1862,7 +1862,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Break_4Chop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Break_4Chop.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>3000</endMilliseconds>
@@ -2027,7 +2027,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Daedelus/Samba_Loop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Daedelus/Samba_Loop.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1667</endMilliseconds>

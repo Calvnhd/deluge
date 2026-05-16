@@ -283,7 +283,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/Hammond Rhythm II Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/Hammond Rhythm II Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7824" />
@@ -364,7 +364,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/Hammond Rhythm II Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/Hammond Rhythm II Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6192" />
@@ -445,7 +445,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/Hammond Rhythm II Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/Hammond Rhythm II Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6152" />
@@ -526,7 +526,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/Hammond Rhythm II Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/Hammond Rhythm II Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="15126" />
@@ -607,7 +607,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/Hammond Rhythm II Crash.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/Hammond Rhythm II Crash.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="17754" />

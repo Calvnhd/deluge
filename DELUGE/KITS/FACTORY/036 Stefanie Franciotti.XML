@@ -373,7 +373,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/00.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/00.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>

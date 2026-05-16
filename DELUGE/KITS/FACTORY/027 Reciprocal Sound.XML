@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Bass, Sub, Doppler Distortion, Recorder Manipulation.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Bass, Sub, Doppler Distortion, Recorder Manipulation.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="77403" />
@@ -226,7 +226,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Braams, Guitar Bowed, Dark, Foreboding, Key of C.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Braams, Guitar Bowed, Dark, Foreboding, Key of C.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="1068512" />
@@ -377,7 +377,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Drone, Evolving, Slow Modulation, Electromagnetic.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Drone, Evolving, Slow Modulation, Electromagnetic.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="9162752" />
@@ -528,7 +528,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Rhythmic, Fast, Mechanical, 70bpm.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Rhythmic, Fast, Mechanical, 70bpm.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="329143" />
@@ -679,7 +679,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Rhythmic, Jacobs Ladder, Fast Modulation.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Rhythmic, Jacobs Ladder, Fast Modulation.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="631233" />
@@ -830,7 +830,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Rhythmic, Mechanical Movement, 80bpm, Key of D.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Rhythmic, Mechanical Movement, 80bpm, Key of D.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="576000" />
@@ -981,7 +981,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Stinger, Guitar Bowed, Visceral, Key of A.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Stinger, Guitar Bowed, Visceral, Key of A.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="872278" />
@@ -1132,7 +1132,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Eric Mooney/Kit1/Transition, Modulation, Movement, Key of D.wav">
+				fileName="SAMPLES/FACTORY/Artists/Eric Mooney/Kit1/Transition, Modulation, Movement, Key of D.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="342899" />

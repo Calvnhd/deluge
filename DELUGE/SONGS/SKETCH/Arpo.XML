@@ -491,7 +491,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/Sequential Circuits Drumtraks Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/Sequential Circuits Drumtraks Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4762" />
@@ -572,7 +572,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/Sequential Circuits Drumtraks Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/Sequential Circuits Drumtraks Snare.wav">
 						<zone
 							startSamplePos="352"
 							endSamplePos="9082" />
@@ -653,7 +653,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/Sequential Circuits Drumtraks Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/Sequential Circuits Drumtraks Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6558" />
@@ -734,7 +734,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/Sequential Circuits Drumtraks Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/Sequential Circuits Drumtraks Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10213" />
@@ -815,7 +815,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Shaker/Sequential Circuits Drumtraks Cabasa.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Shaker/Sequential Circuits Drumtraks Cabasa.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4604" />
@@ -896,7 +896,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Tambourine/Sequential Circuits Drumtraks Tambourine.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Tambourine/Sequential Circuits Drumtraks Tambourine.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="13642" />
@@ -977,7 +977,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Ride/Sequential Circuits Drumtraks Ride.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Ride/Sequential Circuits Drumtraks Ride.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="57598" />
@@ -1058,7 +1058,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/Sequential Circuits Drumtraks Crash.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/Sequential Circuits Drumtraks Crash.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="52983" />
@@ -1139,7 +1139,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Clap/Sequential Circuits Drumtraks Clap.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Clap/Sequential Circuits Drumtraks Clap.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="13379" />
@@ -1220,7 +1220,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Cowbell/Sequential Circuits Drumtraks Cowbell.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Cowbell/Sequential Circuits Drumtraks Cowbell.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6937" />
@@ -1301,7 +1301,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Rim/Sequential Circuits Drumtraks Rim.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Rim/Sequential Circuits Drumtraks Rim.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6665" />
@@ -1382,7 +1382,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomL/Sequential Circuits Drumtraks Tom low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomL/Sequential Circuits Drumtraks Tom low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="35689" />
@@ -1463,7 +1463,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomM/Sequential Circuits Drumtraks Tom medium.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomM/Sequential Circuits Drumtraks Tom medium.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="26672" />

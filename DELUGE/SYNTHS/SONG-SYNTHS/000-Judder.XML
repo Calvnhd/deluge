@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <sound polyphonic="poly" voicePriority="1" mode="subtractive" transpose="-12" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" maxVoices="8" firmwareVersion="c1.2.1" earliestCompatibleFirmware="4.1.0-alpha">
-			<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Campbell Kneale/antihuman guitar.wav" transpose="5" cents="-49">
+			<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/antihuman guitar.wav" transpose="5" cents="-49">
 				<zone startSamplePos="0" endSamplePos="2969684"/>
 			</osc1>
 			<osc2 type="square" transpose="-12" cents="0" retrigPhase="-1"/>
