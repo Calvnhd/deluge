@@ -29,14 +29,14 @@ class MigrationResult:
             manifest but absent from the current filesystem.
         added: hash → list of new paths for samples present in the current
             filesystem but absent from the manifest.
-        ambiguous: hash → (before_paths, after_paths) for hashes that map
-            to multiple paths in either state.
+        duplicate: hash → list of current paths for samples that exist at
+            multiple filesystem locations.
     """
 
     moved: dict[str, str] = field(default_factory=dict)
     deleted: dict[str, list[str]] = field(default_factory=dict)
     added: dict[str, list[str]] = field(default_factory=dict)
-    ambiguous: dict[str, tuple[list[str], list[str]]] = field(default_factory=dict)
+    duplicate: dict[str, list[str]] = field(default_factory=dict)
     current_hashes: dict[str, list[str]] = field(default_factory=dict)
 
 
@@ -61,7 +61,7 @@ def compute_migration_map(
 
     Returns:
         A :class:`MigrationResult` categorising every hash as moved, deleted,
-        added, ambiguous, or unchanged (omitted).
+        added, duplicate, or unchanged (omitted).
     """
 
     # Load manifest for most recent known state
@@ -118,7 +118,7 @@ def compute_migration_map(
     moved: dict[str, str] = {}
     deleted: dict[str, list[str]] = {}
     added: dict[str, list[str]] = {}
-    ambiguous: dict[str, tuple[list[str], list[str]]] = {}
+    duplicate: dict[str, list[str]] = {}
 
     for h in set(manifest_hashes) | set(current_hashes):
         manifest_paths = manifest_hashes.get(h, [])
@@ -132,12 +132,15 @@ def compute_migration_map(
             if manifest_paths[0] != normalise_key(current_paths[0]):
                 moved[manifest_paths[0]] = current_paths[0]
             # else: unchanged — same hash, same normalised path
+        elif len(current_paths) > 0:
+            # duplicated file. TODO - add removal system
+            duplicate[h] = list(current_paths)
 
     return MigrationResult(
         moved=moved,
         deleted=deleted,
         added=added,
-        ambiguous=ambiguous,
+        duplicate=duplicate,
         current_hashes=dict(current_hashes),
     )
 
@@ -158,7 +161,7 @@ class BrokenRefError:
     ref: SampleRef
     deleted_path: str
 
-
+# TODO - this needs updating
 @dataclass
 class AmbiguousRefWarning:
     """A sample reference that cannot be auto-resolved due to ambiguous hash mapping."""
@@ -184,7 +187,7 @@ class RecoveredRefChange:
     new_path: str
     candidates: list[tuple[str, str]]
 
-
+# TODO - idk about the ambiguity here
 @dataclass
 class BrokenRefResult:
     """Result of scanning XML references against a migration map.
@@ -238,7 +241,7 @@ def classify_ref_changes(
     For each sample reference found in KITS/, SYNTHS/, SONGS/ XMLs:
     - If the path is a key in ``migration.moved`` → planned change
     - If the path appears in any ``migration.deleted`` path list → error
-    - If the path appears in any ``migration.ambiguous`` before-path list → warning
+    - If the path appears in any ``migration.duplicate`` before-path list → warning
     - Otherwise (valid, unchanged) → not included in results
 
     Args:
@@ -248,14 +251,14 @@ def classify_ref_changes(
     Returns:
         A :class:`BrokenRefResult` separating fixable changes, errors, and warnings.
     """
-    # Build flat lookup sets for deleted and ambiguous paths
+    # Build flat lookup sets for deleted and duplicate paths
     deleted_paths: set[str] = set()
     for paths in migration.deleted.values():
         deleted_paths.update(paths)
 
-    ambiguous_paths: set[str] = set()
-    for before_paths, _after_paths in migration.ambiguous.values():
-        ambiguous_paths.update(before_paths)
+    duplicate_paths: set[str] = set()
+    for paths in migration.duplicate.values():
+        duplicate_paths.update(normalise_key(p) for p in paths)
 
     existing = {normalise_key(p) for paths in migration.current_hashes.values() for p in paths}
 
@@ -285,7 +288,7 @@ def classify_ref_changes(
                 result.errors.append(
                     BrokenRefError(ref=ref, deleted_path=ref.path)
                 )
-            elif norm_ref in ambiguous_paths:
+            elif norm_ref in duplicate_paths:
                 result.warnings.append(
                     AmbiguousRefWarning(ref=ref, ambiguous_path=ref.path)
                 )
@@ -433,7 +436,7 @@ def preview_and_apply(
     # --- Warnings ---
     if result.warnings:
         print()
-        print("WARNINGS \u2014 Ambiguous Mappings")
+        print("WARNINGS \u2014 duplicate Mappings")
         print("-----------------------------")
         for warning in result.warnings:
             print(
