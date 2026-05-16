@@ -149,9 +149,9 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** Existing dataclass patterns in `fix_references.py`
 - **Outputs:** New dataclass and updated `BrokenRefResult`
 - **Acceptance Criteria:**
-  - [ ] New dataclass has fields for: the sample ref, old path, new path, and candidates list
-  - [ ] `BrokenRefResult` has a `recovered` field (default empty list)
-  - [ ] Existing tests pass without modification (the new field defaults to empty)
+  - [x] New dataclass has fields for: the sample ref, old path, new path, and candidates list
+  - [x] `BrokenRefResult` has a `recovered` field (default empty list)
+  - [x] Existing tests pass without modification (the new field defaults to empty)
 
 #### Task 2.2: Build basename index and recovery classification
 
@@ -159,13 +159,13 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** `migration.after_hashes`, basename index, path similarity function
 - **Outputs:** Refs classified into `recovered` or `missing` lists
 - **Acceptance Criteria:**
-  - [ ] Basename index is built from `after_hashes` with case-insensitive basename keys
-  - [ ] Single-candidate recovery works: ref with one basename match is added to `recovered`
-  - [ ] Multi-candidate same-hash recovery works: best path similarity match is picked
-  - [ ] Multi-candidate different-hash refs remain as `missing`
-  - [ ] Refs with more than 5 candidates remain as `missing`
-  - [ ] Zero-candidate refs remain as `missing` (unchanged behaviour)
-  - [ ] Max candidates threshold is a named constant (value: 5)
+  - [x] Basename index is built from `after_hashes` with case-insensitive basename keys
+  - [x] Single-candidate recovery works: ref with one basename match is added to `recovered`
+  - [x] Multi-candidate same-hash recovery works: best path similarity match is picked
+  - [x] Multi-candidate different-hash refs remain as `missing`
+  - [x] Refs with more than 5 candidates remain as `missing`
+  - [x] Zero-candidate refs remain as `missing` (unchanged behaviour)
+  - [x] Max candidates threshold is a named constant (value: 5)
 
 #### Task 2.3: Implement path similarity function
 
@@ -173,10 +173,10 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** Two path strings (XML reference path and candidate filesystem path)
 - **Outputs:** Integer score (number of matching trailing path components)
 - **Acceptance Criteria:**
-  - [ ] Compares path components from the end, case-insensitively
-  - [ ] Basename match counts as the first matching component
-  - [ ] Returns 0 for paths with no matching components
-  - [ ] Handles paths of different depths correctly
+  - [x] Compares path components from the end, case-insensitively
+  - [x] Basename match counts as the first matching component
+  - [x] Returns 0 for paths with no matching components
+  - [x] Handles paths of different depths correctly
 
 ### Phase 3: Preview and Apply Integration
 
@@ -189,10 +189,10 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** `BrokenRefResult.recovered` list
 - **Outputs:** Preview output with RECOVERED section
 - **Acceptance Criteria:**
-  - [ ] RECOVERED section appears between CHANGES and ERRORS when recovered refs exist
-  - [ ] Output format matches the CHANGES section style (grouped by XML file, old → new path)
-  - [ ] Summary line includes recovered count
-  - [ ] No RECOVERED section when there are no recovered refs
+  - [x] RECOVERED section appears between CHANGES and ERRORS when recovered refs exist
+  - [x] Output format matches the CHANGES section style (grouped by XML file, old → new path)
+  - [x] Summary line includes recovered count
+  - [x] No RECOVERED section when there are no recovered refs
 
 #### Task 3.2: Include recovered refs in the apply step
 
@@ -200,11 +200,11 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 - **Inputs:** `BrokenRefResult.recovered` list, apply confirmation
 - **Outputs:** Recovered refs applied to XML files
 - **Acceptance Criteria:**
-  - [ ] Recovered refs are applied in the same confirmation step as migration map changes
-  - [ ] The "nothing to do" check considers recovered refs (if only recovered refs exist, there is work to do)
-  - [ ] `has_issues` is True only when there are errors or remaining missing refs (recovered refs reduce `has_issues`)
-  - [ ] The apply summary counts include recovered refs
-  - [ ] `--apply` flag auto-applies recovered refs alongside changes
+  - [x] Recovered refs are applied in the same confirmation step as migration map changes
+  - [x] The "nothing to do" check considers recovered refs (if only recovered refs exist, there is work to do)
+  - [x] `has_issues` is True only when there are errors or remaining missing refs (recovered refs reduce `has_issues`)
+  - [x] The apply summary counts include recovered refs
+  - [x] `--apply` flag auto-applies recovered refs alongside changes
 
 ### Phase 4: Tests
 
@@ -215,87 +215,87 @@ The recovery classification logic within `classify_ref_changes` follows this pri
 
 - **Description:** Verify that `compute_migration_map` returns `after_hashes` on its result with correct contents.
 - **Acceptance Criteria:**
-  - [ ] Test that `after_hashes` maps hashes to original-case filesystem paths
-  - [ ] Test that `after_hashes` is empty when SAMPLES dir is empty
-  - [ ] Test that stat-cache hits produce correct `after_hashes` entries
+  - [x] Test that `after_hashes` maps hashes to original-case filesystem paths
+  - [x] Test that `after_hashes` is empty when SAMPLES dir is empty
+  - [x] Test that stat-cache hits produce correct `after_hashes` entries
 
 #### Task 4.2: Test single-candidate recovery
 
 - **Description:** A missing ref whose basename matches exactly one file on disk is recovered.
 - **Acceptance Criteria:**
-  - [ ] Ref appears in `result.recovered` with correct old and new paths
-  - [ ] Ref does not appear in `result.missing`
-  - [ ] Candidate list has exactly one entry
+  - [x] Ref appears in `result.recovered` with correct old and new paths
+  - [x] Ref does not appear in `result.missing`
+  - [x] Candidate list has exactly one entry
 
 #### Task 4.3: Test multi-candidate same-hash recovery (duplicates)
 
 - **Description:** A missing ref whose basename matches multiple files that all share the same hash is recovered using path similarity.
 - **Acceptance Criteria:**
-  - [ ] Best path-similarity candidate is selected as the new path
-  - [ ] Ref appears in `result.recovered`
-  - [ ] Candidates list contains all matches
+  - [x] Best path-similarity candidate is selected as the new path
+  - [x] Ref appears in `result.recovered`
+  - [x] Candidates list contains all matches
 
 #### Task 4.4: Test multi-candidate different-hash (ambiguous)
 
 - **Description:** A missing ref whose basename matches multiple files with different hashes is not auto-recovered.
 - **Acceptance Criteria:**
-  - [ ] Ref remains in `result.missing`
-  - [ ] Ref does not appear in `result.recovered`
+  - [x] Ref remains in `result.missing`
+  - [x] Ref does not appear in `result.recovered`
 
 #### Task 4.5: Test zero-candidate (truly missing)
 
 - **Description:** A missing ref whose basename matches no file on disk remains as missing.
 - **Acceptance Criteria:**
-  - [ ] Ref remains in `result.missing` (unchanged behaviour)
-  - [ ] Ref does not appear in `result.recovered`
+  - [x] Ref remains in `result.missing` (unchanged behaviour)
+  - [x] Ref does not appear in `result.recovered`
 
 #### Task 4.6: Test candidate threshold exceeded
 
 - **Description:** A missing ref whose basename matches more than 5 files is not recovered.
 - **Acceptance Criteria:**
-  - [ ] Ref remains in `result.missing` when candidates exceed the threshold
-  - [ ] Behaviour changes if the threshold constant is adjusted
+  - [x] Ref remains in `result.missing` when candidates exceed the threshold
+  - [x] Behaviour changes if the threshold constant is adjusted
 
 #### Task 4.7: Test path similarity function
 
 - **Description:** Unit tests for the path similarity scoring function.
 - **Acceptance Criteria:**
-  - [ ] Identical paths score highest
-  - [ ] Paths sharing parent directories score higher than those that don't
-  - [ ] Case-insensitive comparison works correctly
-  - [ ] Different-depth paths handled correctly
+  - [x] Identical paths score highest
+  - [x] Paths sharing parent directories score higher than those that don't
+  - [x] Case-insensitive comparison works correctly
+  - [x] Different-depth paths handled correctly
 
 #### Task 4.8: Test RECOVERED section in preview output
 
 - **Description:** Verify the preview output includes the RECOVERED section with correct formatting.
 - **Acceptance Criteria:**
-  - [ ] RECOVERED section header appears in output
-  - [ ] Recovered refs show old → new path
-  - [ ] Summary line includes recovered count
-  - [ ] No RECOVERED section when `recovered` list is empty
+  - [x] RECOVERED section header appears in output
+  - [x] Recovered refs show old → new path
+  - [x] Summary line includes recovered count
+  - [x] No RECOVERED section when `recovered` list is empty
 
 #### Task 4.9: Test apply includes recovered refs
 
 - **Description:** Verify that applying changes also applies recovered refs to XML files.
 - **Acceptance Criteria:**
-  - [ ] XML file contents are updated with recovered paths after apply
-  - [ ] Apply summary counts include recovered ref updates
+  - [x] XML file contents are updated with recovered paths after apply
+  - [x] Apply summary counts include recovered ref updates
 
 #### Task 4.10: Test existing `get_existing_samples` call removed
 
 - **Description:** Verify that `classify_ref_changes` no longer calls `get_existing_samples`.
 - **Acceptance Criteria:**
-  - [ ] No call to `get_existing_samples` in `classify_ref_changes`
-  - [ ] Refs to existing files are still correctly identified as valid (not missing, not recovered)
+  - [x] No call to `get_existing_samples` in `classify_ref_changes`
+  - [x] Refs to existing files are still correctly identified as valid (not missing, not recovered)
 
 ## Progress Tracker
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
 | Phase 1: Data Plumbing | Complete | 3/3 | Tests updated to supply `after_hashes`; `get_existing_samples` import removed |
-| Phase 2: Recovery Logic | Not Started | 0/3 | |
-| Phase 3: Preview and Apply Integration | Not Started | 0/2 | |
-| Phase 4: Tests | Not Started | 0/10 | |
+| Phase 2: Recovery Logic | Complete | 3/3 | `RecoveredRefChange` dataclass, basename index, `path_similarity()`, recovery classification in `classify_ref_changes` |
+| Phase 3: Preview and Apply Integration | Complete | 2/2 | RECOVERED section added to preview; recovered refs included in apply step; summary format updated; existing test updated for new format |
+| Phase 4: Tests | Complete | 10/10 | 27 new tests (82 total), all passing. Covers after_hashes exposure, all recovery paths, path similarity, preview output, apply integration, and get_existing_samples removal |
 
 ## Open Questions
 

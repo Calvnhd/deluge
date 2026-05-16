@@ -188,6 +188,16 @@ class MissingRefError:
 
 
 @dataclass
+class RecoveredRefChange:
+    """A missing sample reference recovered via basename matching against current files."""
+
+    ref: SampleRef
+    old_path: str
+    new_path: str
+    candidates: list[tuple[str, str]]
+
+
+@dataclass
 class BrokenRefResult:
     """Result of scanning XML references against a migration map.
 
@@ -201,6 +211,34 @@ class BrokenRefResult:
     errors: list[BrokenRefError] = field(default_factory=list)
     warnings: list[AmbiguousRefWarning] = field(default_factory=list)
     missing: list[MissingRefError] = field(default_factory=list)
+    recovered: list[RecoveredRefChange] = field(default_factory=list)
+
+
+MAX_RECOVERY_CANDIDATES = 5
+
+
+def path_similarity(ref_path: str, candidate_path: str) -> int:
+    """Count matching path components from the end, case-insensitive.
+
+    Used as a tiebreaker when multiple same-hash candidates exist for a
+    missing reference.  The basename counts as the first component.
+
+    Args:
+        ref_path: The XML reference path (e.g. "SAMPLES/DRUMS/Kick.wav").
+        candidate_path: A candidate filesystem path.
+
+    Returns:
+        Number of matching trailing path components (0 if none match).
+    """
+    ref_parts = PurePosixPath(ref_path).parts
+    cand_parts = PurePosixPath(candidate_path).parts
+    score = 0
+    for r, c in zip(reversed(ref_parts), reversed(cand_parts)):
+        if r.lower() == c.lower():
+            score += 1
+        else:
+            break
+    return score
 
 
 def classify_ref_changes(
@@ -232,6 +270,14 @@ def classify_ref_changes(
         ambiguous_paths.update(before_paths)
 
     existing = {normalise_key(p) for paths in migration.after_hashes.values() for p in paths}
+
+    # Build basename index: lowercase basename → list of (original_path, hash)
+    basename_index: dict[str, list[tuple[str, str]]] = defaultdict(list)
+    for file_hash, paths in migration.after_hashes.items():
+        for p in paths:
+            basename = PurePosixPath(p).name.lower()
+            basename_index[basename].append((p, file_hash))
+
     result = BrokenRefResult()
 
     xml_files = find_all_xml_files(deluge_root)
@@ -256,9 +302,42 @@ def classify_ref_changes(
                     AmbiguousRefWarning(ref=ref, ambiguous_path=ref.path)
                 )
             elif norm_ref not in existing:
-                result.missing.append(
-                    MissingRefError(ref=ref, missing_path=ref.path)
-                )
+                # Attempt recovery via basename matching
+                ref_basename = PurePosixPath(ref.path).name.lower()
+                candidates = basename_index.get(ref_basename, [])
+
+                if len(candidates) == 0 or len(candidates) > MAX_RECOVERY_CANDIDATES:
+                    result.missing.append(
+                        MissingRefError(ref=ref, missing_path=ref.path)
+                    )
+                elif len(candidates) == 1:
+                    result.recovered.append(
+                        RecoveredRefChange(
+                            ref=ref,
+                            old_path=ref.path,
+                            new_path=candidates[0][0],
+                            candidates=candidates,
+                        )
+                    )
+                else:
+                    # Multiple candidates — check if all share the same hash
+                    hashes = {h for _, h in candidates}
+                    if len(hashes) == 1:
+                        # Same hash: pick best path similarity
+                        best = max(candidates, key=lambda c: path_similarity(ref.path, c[0]))
+                        result.recovered.append(
+                            RecoveredRefChange(
+                                ref=ref,
+                                old_path=ref.path,
+                                new_path=best[0],
+                                candidates=candidates,
+                            )
+                        )
+                    else:
+                        # Different hashes: ambiguous, don't auto-recover
+                        result.missing.append(
+                            MissingRefError(ref=ref, missing_path=ref.path)
+                        )
 
     return result
 
@@ -309,7 +388,13 @@ def preview_and_apply(
         actually written to disk.
     """
     # Nothing to do
-    if not result.changes and not result.errors and not result.warnings and not result.missing:
+    if (
+        not result.changes
+        and not result.recovered
+        and not result.errors
+        and not result.warnings
+        and not result.missing
+    ):
         print("No broken references found. Nothing to do.")
         return (False, False)
 
@@ -317,6 +402,11 @@ def preview_and_apply(
     changes_by_file: dict[Path, list[PlannedChange]] = defaultdict(list)
     for change in result.changes:
         changes_by_file[change.ref.xml_file].append(change)
+
+    # Group recovered refs by XML file
+    recovered_by_file: dict[Path, list[RecoveredRefChange]] = defaultdict(list)
+    for rec in result.recovered:
+        recovered_by_file[rec.ref.xml_file].append(rec)
 
     # --- Preview changes ---
     if changes_by_file:
@@ -328,6 +418,19 @@ def preview_and_apply(
             for change in changes_by_file[xml_file]:
                 pair_counts[(change.old_path, change.new_path)] += 1
             for (old, new), count in pair_counts.items():
+                suffix = f" (× {count} refs)" if count > 1 else ""
+                print(f'  {print_path(xml_file)}: "{old}" → "{new}"{suffix}')
+
+    # --- Recovered ---
+    if recovered_by_file:
+        print()
+        print("RECOVERED \u2014 Basename Match")
+        print("--------------------------")
+        for xml_file in sorted(recovered_by_file):
+            pair_counts_rec: dict[tuple[str, str], int] = defaultdict(int)
+            for rec in recovered_by_file[xml_file]:
+                pair_counts_rec[(rec.old_path, rec.new_path)] += 1
+            for (old, new), count in pair_counts_rec.items():
                 suffix = f" (× {count} refs)" if count > 1 else ""
                 print(f'  {print_path(xml_file)}: "{old}" → "{new}"{suffix}')
 
@@ -363,12 +466,16 @@ def preview_and_apply(
 
     # --- Summary ---
     n_changes = len(result.changes)
-    n_files = len(changes_by_file)
+    n_recovered = len(result.recovered)
+    n_files = len(set(changes_by_file) | set(recovered_by_file))
     n_errors = len(result.errors)
     n_warnings = len(result.warnings)
     n_missing = len(result.missing)
     print()
-    print(f"{n_changes} changes across {n_files} files. {n_errors} errors, {n_warnings} warnings, {n_missing} missing.")
+    print(
+        f"{n_changes} changes, {n_recovered} recovered, "
+        f"{n_errors} errors, {n_warnings} warnings, {n_missing} missing."
+    )
 
     if result.errors:
         print("WARNING: Resolve errors before applying to avoid broken references.")
@@ -376,22 +483,27 @@ def preview_and_apply(
     has_issues = bool(result.errors) or bool(result.missing)
 
     # Nothing to apply
-    if not result.changes:
+    if not result.changes and not result.recovered:
         return (has_issues, False)
 
     # --- Confirm ---
-    if not auto_apply and not confirm_apply(f"Apply {n_changes} changes to {n_files} files?"):
+    n_total_apply = n_changes + n_recovered
+    n_apply_files = len(set(changes_by_file) | set(recovered_by_file))
+    if not auto_apply and not confirm_apply(f"Apply {n_total_apply} changes to {n_apply_files} files?"):
         print("No changes applied.")
         return (has_issues, False)
 
     # --- Apply ---
-    # Build per-file mappings and apply
+    # Build per-file mappings from both changes and recovered refs, then apply
+    all_files = set(changes_by_file) | set(recovered_by_file)
     total_updated = 0
     files_modified = 0
-    for xml_file in sorted(changes_by_file):
+    for xml_file in sorted(all_files):
         mapping: dict[str, str] = {}
-        for change in changes_by_file[xml_file]:
+        for change in changes_by_file.get(xml_file, []):
             mapping[change.old_path] = change.new_path
+        for rec in recovered_by_file.get(xml_file, []):
+            mapping[rec.old_path] = rec.new_path
         updated = update_sample_refs(deluge_root / xml_file, mapping)
         if updated > 0:
             files_modified += 1

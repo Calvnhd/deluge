@@ -13,11 +13,14 @@ from fix_references import (
     AmbiguousRefWarning,
     BrokenRefError,
     BrokenRefResult,
+    MAX_RECOVERY_CANDIDATES,
     MigrationResult,
     MissingRefError,
     PlannedChange,
+    RecoveredRefChange,
     compute_migration_map,
     classify_ref_changes,
+    path_similarity,
     preview_and_apply,
     update_manifest_keys,
 )
@@ -903,7 +906,7 @@ class TestPreviewAndApply:
             preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert "2 changes across 2 files. 1 errors, 1 warnings, 0 missing." in captured.out
+        assert "2 changes, 0 recovered, 1 errors, 1 warnings, 0 missing." in captured.out
 
     def test_error_warning_recommends_resolution(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
@@ -1215,4 +1218,504 @@ class TestMainExitCodes:
             main(["--manifest", str(manifest_file), "--apply"])
 
         mock_confirm.assert_not_called()
+
+
+# ---------------------------------------------------------------------------
+# Phase 4: Recovery tests
+# ---------------------------------------------------------------------------
+
+
+class TestAfterHashesExposure:
+    """Task 4.1: Verify compute_migration_map returns after_hashes correctly."""
+
+    def test_after_hashes_maps_hashes_to_original_case_paths(self, tmp_path: Path) -> None:
+        """after_hashes maps SHA-256 hashes to original-case filesystem paths."""
+        content = b"kick audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/Kick.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+
+        result = compute_migration_map({}, deluge_root)
+
+        assert digest in result.after_hashes
+        assert result.after_hashes[digest] == ["SAMPLES/DRUMS/Kick.wav"]
+
+    def test_after_hashes_empty_for_empty_samples(self, tmp_path: Path) -> None:
+        """after_hashes is empty when SAMPLES dir contains no WAV files."""
+        deluge_root = tmp_path / "DELUGE"
+        (deluge_root / "SAMPLES").mkdir(parents=True)
+
+        result = compute_migration_map({}, deluge_root)
+
+        assert result.after_hashes == {}
+
+    def test_after_hashes_via_stat_cache_hit(self, tmp_path: Path) -> None:
+        """Stat-cache hits produce correct after_hashes entries."""
+        content = b"cached audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"Pad.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+        file_path = deluge_root / "SAMPLES" / "Pad.wav"
+        st = file_path.stat()
+
+        manifest: FilesDict = {
+            "samples/pad.wav": {
+                "sd_size": 100,
+                "sd_mtime": 1000.0,
+                "local_size": st.st_size,
+                "local_mtime": normalise_mtime(st.st_mtime),
+                "hash": digest,
+            },
+        }
+
+        with patch("fix_references.hash_file") as mock_hash:
+            result = compute_migration_map(manifest, deluge_root)
+
+        mock_hash.assert_not_called()
+        assert digest in result.after_hashes
+        assert result.after_hashes[digest] == ["SAMPLES/Pad.wav"]
+
+
+class TestSingleCandidateRecovery:
+    """Task 4.2: Missing ref with one basename match is recovered."""
+
+    def test_single_candidate_recovered(self, tmp_path: Path) -> None:
+        """Ref whose basename matches exactly one file on disk is recovered."""
+        deluge_root = _make_deluge_tree(tmp_path, {"NewDir/Kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/NewDir/Kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert result.recovered[0].old_path == "SAMPLES/OldDir/Kick.wav"
+        assert result.recovered[0].new_path == "SAMPLES/NewDir/Kick.wav"
+        assert not result.missing
+
+    def test_single_candidate_has_one_entry(self, tmp_path: Path) -> None:
+        """Recovered ref's candidate list has exactly one entry."""
+        deluge_root = _make_deluge_tree(tmp_path, {"NewDir/Kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/NewDir/Kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered[0].candidates) == 1
+        assert result.recovered[0].candidates[0] == ("SAMPLES/NewDir/Kick.wav", "hash1")
+
+    def test_single_candidate_case_insensitive_basename(self, tmp_path: Path) -> None:
+        """Basename matching is case-insensitive."""
+        deluge_root = _make_deluge_tree(tmp_path, {"NewDir/kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/KICK.WAV"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/NewDir/kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert result.recovered[0].new_path == "SAMPLES/NewDir/kick.wav"
+        assert not result.missing
+
+
+class TestMultiCandidateSameHashRecovery:
+    """Task 4.3: Multiple candidates with same hash — path similarity picks best."""
+
+    def test_same_hash_picks_best_path_similarity(self, tmp_path: Path) -> None:
+        """When all candidates share the same hash, the best path similarity wins."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "DRUMS/Kicks/Kick.wav": b"audio",
+            "OTHER/Kick.wav": b"audio",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/DRUMS/Kicks/OldKick/Kick.wav"],
+        )
+        same_hash = "aabb" * 16
+        migration = MigrationResult(
+            after_hashes={
+                same_hash: [
+                    "SAMPLES/DRUMS/Kicks/Kick.wav",
+                    "SAMPLES/OTHER/Kick.wav",
+                ],
+            },
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        # DRUMS/Kicks/Kick.wav shares more trailing components with the ref
+        assert result.recovered[0].new_path == "SAMPLES/DRUMS/Kicks/Kick.wav"
+        assert not result.missing
+
+    def test_same_hash_candidates_all_listed(self, tmp_path: Path) -> None:
+        """Candidates list contains all matches."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "A/Snare.wav": b"audio",
+            "B/Snare.wav": b"audio",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Snare.wav"],
+        )
+        same_hash = "ccdd" * 16
+        migration = MigrationResult(
+            after_hashes={same_hash: ["SAMPLES/A/Snare.wav", "SAMPLES/B/Snare.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert len(result.recovered[0].candidates) == 2
+        candidate_paths = {c[0] for c in result.recovered[0].candidates}
+        assert candidate_paths == {"SAMPLES/A/Snare.wav", "SAMPLES/B/Snare.wav"}
+
+    def test_same_hash_ref_in_recovered_not_missing(self, tmp_path: Path) -> None:
+        """Same-hash multi-candidate ref is in recovered, not missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "A/Hat.wav": b"audio",
+            "B/Hat.wav": b"audio",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/Old/Hat.wav"],
+        )
+        same_hash = "eeff" * 16
+        migration = MigrationResult(
+            after_hashes={same_hash: ["SAMPLES/A/Hat.wav", "SAMPLES/B/Hat.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert not result.missing
+
+
+class TestMultiCandidateDifferentHash:
+    """Task 4.4: Multiple candidates with different hashes — stays missing."""
+
+    def test_different_hashes_not_recovered(self, tmp_path: Path) -> None:
+        """Ref with multiple basename matches having different hashes stays missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "A/Kick.wav": b"audio_a",
+            "B/Kick.wav": b"audio_b",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={
+                "hash_a": ["SAMPLES/A/Kick.wav"],
+                "hash_b": ["SAMPLES/B/Kick.wav"],
+            },
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.recovered
+        assert len(result.missing) == 1
+        assert result.missing[0].missing_path == "SAMPLES/OldDir/Kick.wav"
+
+
+class TestZeroCandidateRecovery:
+    """Task 4.5: Missing ref with no basename match remains missing."""
+
+    def test_no_basename_match_stays_missing(self, tmp_path: Path) -> None:
+        """Ref whose basename matches no file on disk remains missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {"Other.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/DRUMS/NonExistent.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"somehash": ["SAMPLES/Other.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.recovered
+        assert len(result.missing) == 1
+        assert result.missing[0].missing_path == "SAMPLES/DRUMS/NonExistent.wav"
+
+
+class TestCandidateThresholdExceeded:
+    """Task 4.6: More than MAX_RECOVERY_CANDIDATES matches → stays missing."""
+
+    def test_exceeding_threshold_stays_missing(self, tmp_path: Path) -> None:
+        """Ref exceeding the candidate threshold is not recovered."""
+        # Create MAX_RECOVERY_CANDIDATES + 1 files with the same basename
+        wav_files = {
+            f"Dir{i}/Common.wav": b"audio" for i in range(MAX_RECOVERY_CANDIDATES + 1)
+        }
+        deluge_root = _make_deluge_tree(tmp_path, wav_files)
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/Missing/Common.wav"],
+        )
+        after_hashes: dict[str, list[str]] = {}
+        for i in range(MAX_RECOVERY_CANDIDATES + 1):
+            h = f"hash{i:02d}" + "00" * 30
+            after_hashes[h] = [f"SAMPLES/Dir{i}/Common.wav"]
+
+        migration = MigrationResult(after_hashes=after_hashes)
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.recovered
+        assert len(result.missing) == 1
+
+    def test_at_threshold_is_recovered(self, tmp_path: Path) -> None:
+        """Ref with exactly MAX_RECOVERY_CANDIDATES candidates is still recovered."""
+        wav_files = {
+            f"Dir{i}/Common.wav": b"audio" for i in range(MAX_RECOVERY_CANDIDATES)
+        }
+        deluge_root = _make_deluge_tree(tmp_path, wav_files)
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/Missing/Common.wav"],
+        )
+        # All same hash so recovery via path similarity
+        same_hash = "abcd" * 16
+        after_hashes: dict[str, list[str]] = {
+            same_hash: [f"SAMPLES/Dir{i}/Common.wav" for i in range(MAX_RECOVERY_CANDIDATES)],
+        }
+
+        migration = MigrationResult(after_hashes=after_hashes)
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert not result.missing
+
+
+class TestPathSimilarity:
+    """Task 4.7: Unit tests for path_similarity function."""
+
+    def test_identical_paths(self) -> None:
+        """Identical paths score the full component count."""
+        score = path_similarity("SAMPLES/DRUMS/Kick.wav", "SAMPLES/DRUMS/Kick.wav")
+        assert score == 3  # Kick.wav, DRUMS, SAMPLES
+
+    def test_shared_parent_scores_higher(self) -> None:
+        """Paths sharing parent directories score higher than those that don't."""
+        score_shared = path_similarity(
+            "SAMPLES/DRUMS/Kicks/Kick.wav", "SAMPLES/DRUMS/Kicks/Kick.wav"
+        )
+        score_not_shared = path_similarity(
+            "SAMPLES/DRUMS/Kicks/Kick.wav", "SAMPLES/OTHER/Kick.wav"
+        )
+        assert score_shared > score_not_shared
+
+    def test_case_insensitive(self) -> None:
+        """Comparison is case-insensitive."""
+        score = path_similarity("SAMPLES/DRUMS/Kick.wav", "samples/drums/kick.wav")
+        assert score == 3
+
+    def test_different_depth_paths(self) -> None:
+        """Paths of different depths are handled correctly."""
+        score = path_similarity(
+            "SAMPLES/DRUMS/Sub/Kick.wav", "SAMPLES/DRUMS/Kick.wav"
+        )
+        # Kick.wav matches, then Sub != DRUMS → stops
+        assert score == 1
+
+    def test_no_matching_components(self) -> None:
+        """Completely different paths score 0."""
+        score = path_similarity("A/B/C.wav", "X/Y/Z.wav")
+        assert score == 0
+
+    def test_only_basename_matches(self) -> None:
+        """When only the basename matches, score is 1."""
+        score = path_similarity("A/B/Kick.wav", "X/Y/Kick.wav")
+        assert score == 1
+
+
+class TestRecoveredPreviewOutput:
+    """Task 4.8: RECOVERED section in preview output."""
+
+    def test_recovered_section_header(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """RECOVERED section header appears when recovered refs exist."""
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=False):
+            preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert "RECOVERED" in captured.out
+
+    def test_recovered_shows_old_to_new(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Recovered refs show old → new path."""
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=False):
+            preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert '"SAMPLES/Old/Kick.wav" \u2192 "SAMPLES/New/Kick.wav"' in captured.out
+
+    def test_summary_includes_recovered_count(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Summary line includes recovered count."""
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=False):
+            preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert "0 changes, 1 recovered, 0 errors, 0 warnings, 0 missing." in captured.out
+
+    def test_no_recovered_section_when_empty(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """No RECOVERED section when recovered list is empty."""
+        result = BrokenRefResult(
+            errors=[
+                BrokenRefError(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/gone.wav"),
+                    deleted_path="SAMPLES/gone.wav",
+                ),
+            ],
+        )
+
+        preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert "RECOVERED" not in captured.out
+
+
+class TestApplyIncludesRecovered:
+    """Task 4.9: Apply includes recovered refs (XML updated)."""
+
+    def test_recovered_refs_applied_to_xml(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Recovered refs update XML file contents after apply."""
+        deluge_root = tmp_path / "DELUGE"
+        xml_path = deluge_root / "KITS" / "KIT001.XML"
+        _write_minimal_kit_xml(xml_path, ["SAMPLES/Old/Kick.wav"])
+
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=SampleRef(
+                        path="SAMPLES/Old/Kick.wav",
+                        xml_file=Path("KITS/KIT001.XML"),
+                        xml_type="kit",
+                        preset_name="KIT001",
+                        ref_type="fileName-attribute",
+                        element_tag="osc1",
+                    ),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=True):
+            has_issues, applied = preview_and_apply(result, deluge_root)
+
+        xml_content = xml_path.read_text(encoding="utf-8")
+        assert "SAMPLES/New/Kick.wav" in xml_content
+        assert "SAMPLES/Old/Kick.wav" not in xml_content
+        assert applied is True
+
+    def test_apply_summary_includes_recovered(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Apply summary counts include recovered ref updates."""
+        deluge_root = tmp_path / "DELUGE"
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=True), patch(
+            "fix_references.update_sample_refs", return_value=1
+        ):
+            preview_and_apply(result, deluge_root)
+
+        captured = capsys.readouterr()
+        assert "1 files modified" in captured.out
+        assert "1 references updated" in captured.out
+
+
+class TestGetExistingSamplesRemoved:
+    """Task 4.10: classify_ref_changes no longer calls get_existing_samples."""
+
+    def test_no_get_existing_samples_in_source(self) -> None:
+        """classify_ref_changes source code does not reference get_existing_samples."""
+        import inspect
+
+        source = inspect.getsource(classify_ref_changes)
+        assert "get_existing_samples" not in source
+
+    def test_existing_files_still_valid(self, tmp_path: Path) -> None:
+        """Refs to existing files are correctly identified as valid (not missing)."""
+        deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/Kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/DRUMS/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/DRUMS/Kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.changes
+        assert not result.errors
+        assert not result.warnings
+        assert not result.missing
+        assert not result.recovered
 

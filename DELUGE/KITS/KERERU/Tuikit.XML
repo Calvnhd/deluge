@@ -1282,7 +1282,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FOUND/Tui/TuiWeo.wav">
+				fileName="SAMPLES/FOUND/TuiWeo.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="27759" />
