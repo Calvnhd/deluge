@@ -1,6 +1,7 @@
 # Deluge CLI v0.1
 """Tests for deluge_sdk.py — XML discovery, reference extraction, and unextracted ref detection."""
 
+import hashlib
 import shutil
 from pathlib import Path
 
@@ -10,6 +11,7 @@ from deluge_lib.deluge_sdk import (
     extract_sample_refs,
     find_all_xml_files,
     find_unextracted_refs,
+    hash_file,
 )
 from fix_references import update_sample_refs
 
@@ -649,3 +651,29 @@ class TestFindUnextractedRefs:
         # which is not a known reference pattern
         assert len(result) == 1
         assert result[0] == "SAMPLES/HIDDEN/SecretSample.wav"
+
+
+# --- hash_file tests ---
+
+
+class TestHashFile:
+    """Tests for the hash_file function."""
+
+    def test_correct_sha256(self, tmp_path: Path) -> None:
+        """hash_file returns the correct SHA256 hex digest for known content."""
+        f = tmp_path / "test.wav"
+        content = b"known content for hashing"
+        f.write_bytes(content)
+
+        expected = hashlib.sha256(content).hexdigest()
+
+        assert hash_file(f) == expected
+
+    def test_empty_file(self, tmp_path: Path) -> None:
+        """hash_file handles an empty file (SHA256 of empty bytes)."""
+        f = tmp_path / "empty.wav"
+        f.write_bytes(b"")
+
+        expected = hashlib.sha256(b"").hexdigest()
+
+        assert hash_file(f) == expected

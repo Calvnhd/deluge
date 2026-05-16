@@ -34,14 +34,14 @@ def normalise_mtime(raw_mtime: float) -> float:
 FileFilter = Literal["wav", "xml", "both"]
 
 # Mapping extensions from FileFilter literals to frozensets
-_FILTER_MAP: dict[str, frozenset[str]] = {
+FILTER_MAP: dict[str, frozenset[str]] = {
     "wav": frozenset({".wav"}),
     "xml": frozenset({".xml"}),
     "both": frozenset({".xml", ".wav"}),
 }
 
 # Directory names to skip (case-insensitive)
-_SKIP_DIRS: frozenset[str] = frozenset({".trash"})
+SKIP_DIRS: frozenset[str] = frozenset({".trash"})
 
 
 def format_size(size_bytes: int) -> str:
@@ -85,7 +85,7 @@ def scan_tree(
     Returns:
         The computed ScanResult
     """
-    allowed = _FILTER_MAP[file_filter]
+    allowed = FILTER_MAP[file_filter]
     result = ScanResult()
     file_count = 0
 
@@ -95,7 +95,7 @@ def scan_tree(
         current_dir = Path(dirpath)
 
         # Prune skipped directories in-place so os.walk does not descend.
-        dirnames[:] = [d for d in dirnames if d.lower() not in _SKIP_DIRS]
+        dirnames[:] = [d for d in dirnames if d.lower() not in SKIP_DIRS]
 
         for fname in filenames:
             file_path = current_dir / fname

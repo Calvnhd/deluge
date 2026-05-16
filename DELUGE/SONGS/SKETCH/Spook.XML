@@ -408,7 +408,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/04_160BPM_Cmin_Siren.wav">
+						fileName="SAMPLES/LANDR/FX/04_160BPM_Cmin_Siren.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="529544" />
@@ -485,7 +485,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/21 Sound Effects A#m Scream.wav">
+						fileName="SAMPLES/LANDR/VOCAL/21 Sound Effects A#m Scream.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="364829" />
@@ -562,7 +562,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/55 Sound Effects Bm Digital Riser.wav">
+						fileName="SAMPLES/LANDR/FX/55 Sound Effects Bm Digital Riser.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="338688" />
@@ -639,7 +639,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/AACY_Mid_Tempo_Fx_Impact_Deep.wav">
+						fileName="SAMPLES/LANDR/FX/AACY_Mid_Tempo_Fx_Impact_Deep.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="334232" />
@@ -716,7 +716,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/AFFH_HipHop_FX_Ghost Pesto Sweep.wav">
+						fileName="SAMPLES/LANDR/FX/AFFH_HipHop_FX_Ghost Pesto Sweep.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="51883" />
@@ -793,7 +793,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/Ambience_Bats_in_the_City_Binaural.wav">
+						fileName="SAMPLES/LANDR/FX/Ambience_Bats_in_the_City_Binaural.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3149326" />
@@ -870,7 +870,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/AmtrakViewliner_Cf3Ye_01.wav">
+						fileName="SAMPLES/LANDR/FX/AmtrakViewliner_Cf3Ye_01.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2688512" />
@@ -947,7 +947,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/BEAT SESSION BELL FX.wav">
+						fileName="SAMPLES/LANDR/PERC/BEAT SESSION BELL FX.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="325661" />
@@ -1024,7 +1024,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/BEAT SESSION IMPACT 2.wav">
+						fileName="SAMPLES/LANDR/PERC/BEAT SESSION IMPACT 2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="244245" />
@@ -1101,7 +1101,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/CCP_Kit_4_Moist_Fx_Shots_Oneshot.wav">
+						fileName="SAMPLES/LANDR/FX/CCP_Kit_4_Moist_Fx_Shots_Oneshot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="211680" />
@@ -1178,7 +1178,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/CS_TM_Kit_05_Fx_02_Emin_128bpm.wav">
+						fileName="SAMPLES/LANDR/FX/CS_TM_Kit_05_Fx_02_Emin_128bpm.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="330753" />
@@ -1255,7 +1255,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav">
+						fileName="SAMPLES/LANDR/PERC/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="343980" />
@@ -1332,7 +1332,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Sci-Fi Ambiences/CS-SCI-FI Sustain Breath 2.wav">
+						fileName="SAMPLES/LANDR/FX/Sci-Fi Ambience/CS-SCI-FI Sustain Breath 2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4233600" />
@@ -1409,7 +1409,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/Drill_Sweep_FX_05.wav">
+						fileName="SAMPLES/LANDR/FX/Drill_Sweep_FX_05.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="264600" />
@@ -1486,7 +1486,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/ESM_Hi-Tech_Computer_Power_Up_2_Technology_Sci_fi_Interface_Click_Beep_Chirp_Futuristic.wav">
+						fileName="SAMPLES/LANDR/FX/ESM_Hi-Tech_Computer_Power_Up_2_Technology_Sci_fi_Interface_Click_Beep_Chirp_Futuristic.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="226013" />
@@ -1563,7 +1563,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/ESM_Iconic_SFX_King_George_11_Magic_FX_Airy_Shimmer.wav">
+						fileName="SAMPLES/LANDR/FX/ESM_Iconic_SFX_King_George_11_Magic_FX_Airy_Shimmer.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="198450" />
@@ -1640,7 +1640,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/EvilDroidChatterConstant_ovBUP_02.wav">
+						fileName="SAMPLES/LANDR/FX/EvilDroidChatterConstant_ovBUP_02.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="1728512" />
@@ -1717,7 +1717,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/ExplosionSoftCrack_CyK5f_05.wav">
+						fileName="SAMPLES/LANDR/FX/ExplosionSoftCrack_CyK5f_05.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="311296" />
@@ -1794,7 +1794,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Computer SFX/FS_COM_Computer_Glitch_SFX 26.wav">
+						fileName="SAMPLES/LANDR/FX/Computer/FS_COM_Computer_Glitch_SFX 26.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="101300" />
@@ -1871,7 +1871,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/FX_13_C_Maj_140Bpm.wav">
+						fileName="SAMPLES/LANDR/FX/FX_13_C_Maj_140Bpm.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="604801" />
@@ -1948,7 +1948,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/INDUSTRIAL STRENGTH_MRI_CHROME HITS.wav">
+						fileName="SAMPLES/LANDR/FX/INDUSTRIAL STRENGTH_MRI_CHROME HITS.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="371610" />
@@ -2025,7 +2025,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/Sfx 049.wav">
+						fileName="SAMPLES/LANDR/FX/Sfx 049.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="1642630" />
@@ -2102,7 +2102,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Premium SFX/One_Shot/UNPLND_Riser 2.wav">
+						fileName="SAMPLES/LANDR/FX/UNPLND_Riser 2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="178383" />

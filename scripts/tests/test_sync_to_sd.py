@@ -8,13 +8,12 @@ from unittest.mock import patch
 
 import pytest
 from sync_to_sd import (
-    _build_post_sync_manifest,
     main,
 )
 
 from tests.conftest import _touch
 from deluge_lib.scanning import FileEntry, ScanResult, normalise_mtime
-from deluge_lib.syncing import FileRecord, SyncPlan, read_manifest, write_manifest
+from deluge_lib.syncing import build_post_sync_manifest, FileRecord, SyncPlan, read_manifest, write_manifest
 
 
 def _setup_env(
@@ -268,7 +267,7 @@ class TestFullSync:
         with (
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", log_path),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path),
         ):
             main([])
 
@@ -304,7 +303,7 @@ class TestFullSync:
 
 
 # ============================================================================
-# _build_post_sync_manifest
+# build_post_sync_manifest
 # ============================================================================
 
 
@@ -328,7 +327,7 @@ class TestBuildPostSyncManifest:
         )
         old_files: dict[str, FileRecord] = {}
 
-        ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert "kits/kit.xml" in files
         entry = files["kits/kit.xml"]
@@ -336,7 +335,6 @@ class TestBuildPostSyncManifest:
         assert entry["local_mtime"] == 1_700_000_000.0
         assert entry["sd_size"] == kit_file.stat().st_size
         assert entry["sd_mtime"] == normalise_mtime(kit_file.stat().st_mtime)
-        assert ts != ""
 
     def test_deleted_files_excluded(self, tmp_path: Path) -> None:
         dest = tmp_path / "SD"
@@ -364,7 +362,7 @@ class TestBuildPostSyncManifest:
             },
         }
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert "kits/kept.xml" in files
         assert "kits/deleted.xml" not in files
@@ -390,9 +388,101 @@ class TestBuildPostSyncManifest:
         }
         old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
 
-        _ts, files = _build_post_sync_manifest(plan, src_scan, dest, old_files)
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
 
         assert files["kits/kit.xml"] is old_entry
+
+
+# ============================================================================
+# build_post_sync_manifest — hash population
+# ============================================================================
+
+
+class TestBuildPostSyncManifestHashing:
+    """Hash population in build_post_sync_manifest for sync_to_sd."""
+
+    def test_copied_files_get_hash(self, tmp_path: Path) -> None:
+        """Copied files have hash computed from destination file on SD."""
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "Kit.XML"
+        content = b"<kit>hashed</kit>"
+        _touch(kit_file, content, mtime=1_700_000_000.0)
+
+        import hashlib
+        expected_hash = hashlib.sha256(content).hexdigest()
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=len(content),
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "DELUGE" / "KITS" / "Kit.XML", kit_file)],
+        )
+        old_files: dict[str, FileRecord] = {}
+
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
+
+        assert files["kits/kit.xml"]["hash"] == expected_hash
+
+    def test_unchanged_files_preserve_hash(self, tmp_path: Path) -> None:
+        """Unchanged files preserve their existing hash from old manifest."""
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "Kit.XML"
+        _touch(kit_file, b"<kit/>", mtime=1_700_000_000.0)
+
+        src_scan = ScanResult(
+            files={
+                "kits/kit.xml": FileEntry(
+                    rel_path=Path("KITS/Kit.XML"),
+                    size=6,
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan()
+        old_entry: FileRecord = {
+            "local_size": 6, "local_mtime": 1_700_000_000.0,
+            "sd_size": 6, "sd_mtime": 1_700_000_050.0,
+            "hash": "preserved_hash_value",
+        }
+        old_files: dict[str, FileRecord] = {"kits/kit.xml": old_entry}
+
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
+
+        assert files["kits/kit.xml"]["hash"] == "preserved_hash_value"
+
+    def test_new_file_gets_hash(self, tmp_path: Path) -> None:
+        """New file (no prior manifest entry) gets hash computed."""
+        dest = tmp_path / "SD"
+        kit_file = dest / "KITS" / "New.XML"
+        content = b"<new/>"
+        _touch(kit_file, content, mtime=1_700_000_000.0)
+
+        import hashlib
+        expected_hash = hashlib.sha256(content).hexdigest()
+
+        src_scan = ScanResult(
+            files={
+                "kits/new.xml": FileEntry(
+                    rel_path=Path("KITS/New.XML"),
+                    size=len(content),
+                    mtime=1_700_000_000.0,
+                ),
+            },
+        )
+        plan = SyncPlan(
+            files_to_copy=[(tmp_path / "DELUGE" / "KITS" / "New.XML", kit_file)],
+        )
+        old_files: dict[str, FileRecord] = {}
+
+        files = build_post_sync_manifest(plan, src_scan, dest, old_files, source_is_sd=False)
+
+        assert files["kits/new.xml"]["hash"] == expected_hash
 
 
 # ============================================================================
@@ -402,8 +492,7 @@ class TestBuildPostSyncManifest:
 
 class TestReadWriteManifest:
     def test_missing_file_returns_empty(self, tmp_path: Path) -> None:
-        ts, files = read_manifest(tmp_path / "nonexistent.json")
-        assert ts == ""
+        files = read_manifest(tmp_path / "nonexistent.json")
         assert files == {}
 
     def test_round_trip(self, tmp_path: Path) -> None:
@@ -416,10 +505,9 @@ class TestReadWriteManifest:
         }
         ts = "2026-05-14T12:00:00+00:00"
 
-        write_manifest(mf, timestamp=ts, files=files)
-        read_ts, read_files = read_manifest(mf)
+        write_manifest(mf, files=files)
+        read_files = read_manifest(mf)
 
-        assert read_ts == ts
         assert len(read_files) == 1
         assert read_files["kits/mykit.xml"]["local_size"] == 1234
         assert read_files["kits/mykit.xml"]["sd_mtime"] == 1712600050.0
@@ -450,7 +538,7 @@ class TestManifestIntegration:
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
             patch("sync_to_sd.SYNC_MANIFEST_PATH", manifest_path),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", tmp_path / "log.log"),
         ):
             main([])
 
@@ -460,7 +548,7 @@ class TestManifestIntegration:
         with (
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.SYNC_MANIFEST_PATH", manifest_path),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", tmp_path / "log.log"),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", tmp_path / "log.log"),
         ):
             main(["--dry-run"])
 
@@ -560,7 +648,7 @@ class TestErrorHandling:
             patch("deluge_lib.cli_utils.load_dotenv"),
             patch("sync_to_sd.confirm_apply", return_value=True),
             patch("sync_to_sd.shutil.copy2", side_effect=failing_copy2),
-            patch("sync_to_sd.TO_SD_SYNC_LOG_PATH", log_path),
+            patch("deluge_lib.syncing.SYNC_LOG_PATH", log_path),
         ):
             with pytest.raises(SystemExit):
                 main([])

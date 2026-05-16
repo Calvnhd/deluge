@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -19,7 +18,6 @@ from deluge_lib.analysis import (
 )
 from deluge_lib.cli_utils import get_deluge_root
 from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files, find_unextracted_refs, hash_all_samples
-from deluge_lib.paths import SNAPSHOTS_DIR
 from deluge_lib.scanning import format_size, print_path, scan_tree
 
 # ---------------------------------------------------------------------------
@@ -552,14 +550,6 @@ def main(argv: list[str] | None = None) -> None:
         "duplicates",
         help="Find duplicate sample files by content hash",
     )
-    sp_duplicates.add_argument(
-        "-s",
-        "--snapshot",
-        metavar="PATH_OR_LATEST",
-        default=None,
-        help="Use a snapshot JSON instead of hashing live. Pass a file path or 'latest'.",
-    )
-
     args = parser.parse_args(argv)
 
     # Default to summary when no subcommand is given
@@ -571,22 +561,7 @@ def main(argv: list[str] | None = None) -> None:
 
     # Duplicates only needs hashing — skip XML scanning
     if args.command == "duplicates":
-        if args.snapshot is not None:
-            if args.snapshot == "latest":
-                manifests_dir = SNAPSHOTS_DIR
-                snapshots = sorted(manifests_dir.glob("snapshot-*.json"))
-                if not snapshots:
-                    raise SystemExit(f"No snapshots found in {manifests_dir}")
-                snapshot_path = snapshots[-1]
-            else:
-                snapshot_path = Path(args.snapshot)
-                if not snapshot_path.exists():
-                    raise SystemExit(f"Snapshot not found: {snapshot_path}")
-            print(f"Using snapshot: {snapshot_path.name}")
-            with open(snapshot_path, encoding="utf-8") as f:
-                hashes = json.load(f)["hashes"]
-        else:
-            hashes = hash_all_samples(deluge_root)
+        hashes = hash_all_samples(deluge_root)
         cmd_duplicates(deluge_root, hashes)
         return
 

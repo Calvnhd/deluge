@@ -51,5 +51,4 @@ Terms used in this project's scripts, documentation, and the Deluge itself.
 |------|-----------|
 | **Sample reference** | Any XML element or attribute that points to a sample file. Represented by the `SampleRef` dataclass. Five patterns exist (see research §1.5). |
 | **Manifest** | A JSON/CSV inventory of all samples in `SAMPLES/` with metadata and usage information. |
-| **Snapshot** | A JSON file mapping SHA256 hashes to sample paths, capturing the state of `SAMPLES/` at a point in time. Used by the reference fixer to detect moved/renamed files. |
-| **Migration map** | A mapping of old sample paths to new sample paths, derived by comparing a before-snapshot against the current filesystem state. |
+| **Migration map** | A mapping of old sample paths to new sample paths, derived by comparing the sync manifest against the current filesystem state. |

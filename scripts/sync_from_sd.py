@@ -9,18 +9,14 @@ from __future__ import annotations
 
 import argparse
 import time
-from datetime import UTC, datetime
-from pathlib import Path
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_path
 from deluge_lib.paths import SYNC_MANIFEST_PATH
-from deluge_lib.scanning import ScanResult, normalise_key, normalise_mtime
 from deluge_lib.syncing import (
-    FileRecord,
     SyncError,
-    SyncPlan,
     SyncResult,
     append_sync_log,
+    build_post_sync_manifest,
     compute_sync,
     execute_plan,
     print_plan,
@@ -28,50 +24,6 @@ from deluge_lib.syncing import (
     report_empty_dirs,
     write_manifest,
 )
-
-
-def _build_post_sync_manifest(
-    plan: SyncPlan,
-    src_scan: ScanResult,
-    dest: Path,
-    old_files: dict[str, FileRecord],
-    file_filter: str = "both",
-) -> tuple[str, dict[str, FileRecord]]:
-    """Build updated manifest after a successful sync"""
-
-    from deluge_lib.scanning import _FILTER_MAP
-
-    copied_keys: set[str] = set()
-    for _src, dst in plan.files_to_copy:
-        copied_keys.add(normalise_key(dst.relative_to(dest)))
-
-    updated_manifest: dict[str, FileRecord] = {}
-    for key, src_entry in src_scan.files.items():
-        if key in old_files and key not in copied_keys:
-            # Unchanged with existing manifest entry: preserve as-is.
-            updated_manifest[key] = old_files[key]
-        else:
-            # Copied or no prior entry: SD stats from scan, local stats from dest file.
-            dst_path = dest / src_entry.rel_path
-            dst_stat = dst_path.stat()
-            updated_manifest[key] = {
-                "sd_size": src_entry.size,
-                "sd_mtime": src_entry.mtime, # SD time is normalized upstream via scan_tree()
-                "local_size": dst_stat.st_size,
-                "local_mtime": normalise_mtime(dst_stat.st_mtime),
-            }
-
-    # Preserve manifest entries for file types not included in this filtered sync.
-    if file_filter != "both":
-        scanned_exts = _FILTER_MAP[file_filter]
-        for key, old_entry in old_files.items():
-            if key not in updated_manifest:
-                ext = Path(key).suffix.lower()
-                if ext not in scanned_exts:
-                    updated_manifest[key] = old_entry
-
-    timestamp = datetime.now(tz=UTC).replace(microsecond=0).isoformat()
-    return (timestamp, updated_manifest)
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -105,9 +57,7 @@ def main(argv: list[str] | None = None) -> None:
     sd_path = get_sd_card_path()
     deluge_root = get_deluge_root()
 
-    # Load manifest (empty state on first run or if corrupt).
-    manifest_path = SYNC_MANIFEST_PATH
-    _, manifest_files = read_manifest(manifest_path)
+    manifest_files = read_manifest(SYNC_MANIFEST_PATH)
 
     print(f"Source:      {sd_path}")
     print(f"Destination: {deluge_root}")
@@ -142,23 +92,23 @@ def main(argv: list[str] | None = None) -> None:
             trashed=exc.trashed,
             unchanged=exc.unchanged,
         )
-        append_sync_log(error_result, elapsed_seconds=elapsed, error=str(exc))
+        append_sync_log(error_result, direction="from-sd", elapsed_seconds=elapsed, error=str(exc))
         print()
         print(f"ERROR: Operation failed on: {exc.file}")
         print(f"  {exc}")
-        print(f"  {exc.copied} copied, {exc.remaining} remaining")
+        print(f"  {exc.copied} copied, {exc.trashed} trashed, {exc.remaining} remaining")
         print()
         print("Sync FAILED. Manifest was NOT updated.")
         raise SystemExit(1) from None
     elapsed = time.monotonic() - start_time
 
     # Always log on success.
-    append_sync_log(result, elapsed_seconds=elapsed)
+    append_sync_log(result, direction="from-sd", elapsed_seconds=elapsed)
 
     # Build and write updated manifest after successful sync.
     try:
-        new_ts, updated_manifest = _build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, file_filter)
-        write_manifest(manifest_path, timestamp=new_ts, files=updated_manifest)
+        updated_manifest = build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, source_is_sd=True, file_filter=file_filter)
+        write_manifest(SYNC_MANIFEST_PATH, files=updated_manifest)
     except OSError as exc:
         print(f"\nWARNING: Sync succeeded but manifest update failed: {exc}")
 

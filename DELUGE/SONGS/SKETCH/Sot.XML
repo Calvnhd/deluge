@@ -152,7 +152,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Dholak Session Vol 2/Dholak 72 - 8 Ptn.wav">
+						fileName="SAMPLES/LANDR/_SELECTED/PERC/Indian-Dholak/Dholak 72 - 8 Ptn.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="588000" />
@@ -264,7 +264,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Birds/BritishHarborBirdsChirping_Y3Mls_07.wav">
+						fileName="SAMPLES/LANDR/FX/Birds/BritishHarborBirdsChirping_Y3Mls_07.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="1728512" />
@@ -341,7 +341,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/Birds/MorningBirds_OTtBf_05.wav">
+						fileName="SAMPLES/LANDR/FX/Birds/MorningBirds_OTtBf_05.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2208768" />

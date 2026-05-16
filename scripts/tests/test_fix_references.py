@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+﻿# Deluge CLI v0.1
 """Tests for fix_references.py."""
 
 from __future__ import annotations
@@ -13,19 +13,24 @@ from fix_references import (
     AmbiguousRefWarning,
     BrokenRefError,
     BrokenRefResult,
+    MAX_RECOVERY_CANDIDATES,
     MigrationResult,
     MissingRefError,
     PlannedChange,
+    RecoveredRefChange,
     compute_migration_map,
     classify_ref_changes,
+    path_similarity,
     preview_and_apply,
+    update_manifest_keys,
 )
 
 from deluge_lib.deluge_sdk import SampleRef
+from deluge_lib.scanning import normalise_key, normalise_mtime
+from deluge_lib.syncing import FilesDict
 
 
 def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
-    # TODO-v0.1-REVIEW
     """Helper: create a DELUGE/SAMPLES/ tree with given WAV files.
 
     Args:
@@ -44,70 +49,145 @@ def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
     return deluge_root
 
 
+def _make_manifest(entries: dict[str, str | None]) -> FilesDict:
+    """Create a manifest dict for testing.
+
+    Args:
+        entries: Mapping of normalised path keys to hash values (or None).
+                 Stats are set to dummy values that won't match disk files.
+    """
+    result: FilesDict = {}
+    for key, hash_val in entries.items():
+        result[key] = {
+            "sd_size": 100,
+            "sd_mtime": 1000.0,
+            "local_size": 100,
+            "local_mtime": 1000.0,
+            "hash": hash_val,
+        }
+    return result
+
+
+def _write_minimal_kit_xml(path: Path, sample_paths: list[str]) -> None:
+    """Write a minimal kit XML with fileName attributes for each sample path."""
+    sounds = ""
+    for sp in sample_paths:
+        sounds += f"""
+\t\t<sound name="S">
+\t\t\t<osc1 type="sample" fileName="{sp}">
+\t\t\t</osc1>
+\t\t</sound>"""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        f'<?xml version="1.0" encoding="UTF-8"?>\n<kit>\n\t<soundSources>{sounds}\n\t</soundSources>\n</kit>\n',
+        encoding="utf-8",
+    )
+
+
+def _write_manifest_file(path: Path, manifest: FilesDict) -> None:
+    """Write a v2 manifest JSON file for testing."""
+    payload = {
+        "version": 2,
+        "last_sync_timestamp": "2026-01-01T00:00:00",
+        "files": {
+            k: {
+                "sd_size": v["sd_size"],
+                "sd_mtime": v["sd_mtime"],
+                "local_size": v["local_size"],
+                "local_mtime": v["local_mtime"],
+                "hash": v.get("hash"),
+            }
+            for k, v in manifest.items()
+        },
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload), encoding="utf-8")
+
+
 class TestMain:
     """Tests for the CLI entry point."""
 
-    def test_missing_snapshot_file_exits(self) -> None:
-        # TODO-v0.1-REVIEW
-        """Exits with error when snapshot file is missing."""
+    def test_missing_manifest_degrades_gracefully(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """With a missing manifest, the tool runs with degraded move detection."""
         from fix_references import main
 
-        with pytest.raises(SystemExit, match="Snapshot file not found"):
-            main(["--snapshot", "nonexistent-file.json"])
+        deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/kick.wav"],
+        )
+
+        with patch("fix_references.get_deluge_root", return_value=deluge_root):
+            main(["--manifest", str(tmp_path / "nonexistent.json")])
+
+        captured = capsys.readouterr()
+        assert "empty or missing" in captured.out
+
+    def test_custom_manifest_path(self, tmp_path: Path) -> None:
+        """--manifest flag uses the specified path."""
+        from fix_references import main
+
+        content = b"kick_audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/kick.wav"],
+        )
+        manifest = _make_manifest({"samples/kick.wav": digest})
+        manifest_file = tmp_path / "custom_manifest.json"
+        _write_manifest_file(manifest_file, manifest)
+
+        with patch("fix_references.get_deluge_root", return_value=deluge_root):
+            main(["--manifest", str(manifest_file)])  # Should not raise
+
+
+# ---------------------------------------------------------------------------
+# compute_migration_map
+# ---------------------------------------------------------------------------
 
 
 class TestComputeMigrationMap:
-    """Tests for compute_migration_map."""
-
-    @staticmethod
-    def _make_snapshot(hashes: dict[str, list[str]]) -> dict[str, object]:
-        # TODO-v0.1-REVIEW
-        """Create a minimal snapshot dict for testing."""
-        return {
-            "date": "2026-04-01",
-            "deluge_root": "/fake",
-            "hashes": hashes,
-        }
+    """Tests for compute_migration_map (manifest-based)."""
 
     def test_simple_move(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """File moved from old to new path appears in moved dict."""
         content = b"kick drum audio"
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/NewKick.wav": content})
         digest = hashlib.sha256(content).hexdigest()
-        before = self._make_snapshot({digest: ["SAMPLES/DRUMS/OldKick.wav"]})
+        manifest = _make_manifest({"samples/drums/oldkick.wav": digest})
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
         assert result.moved == {
-            "SAMPLES/DRUMS/OldKick.wav": "SAMPLES/DRUMS/NewKick.wav",
+            "samples/drums/oldkick.wav": "SAMPLES/DRUMS/NewKick.wav",
         }
         assert not result.deleted
         assert not result.added
         assert not result.ambiguous
 
     def test_deleted_file(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Hash in before but not in after is categorised as deleted."""
+        """Hash in manifest but not on disk is categorised as deleted."""
         deluge_root = tmp_path / "DELUGE"
         (deluge_root / "SAMPLES").mkdir(parents=True)
-        digest = "ab" * 32  # fake 64-char hex digest
-        before = self._make_snapshot({digest: ["SAMPLES/deleted.wav"]})
+        digest = "ab" * 32
+        manifest = _make_manifest({"samples/deleted.wav": digest})
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
         assert digest in result.deleted
-        assert result.deleted[digest] == ["SAMPLES/deleted.wav"]
+        assert result.deleted[digest] == ["samples/deleted.wav"]
         assert not result.moved
 
     def test_added_file(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Hash in after but not in before is categorised as added."""
+        """Hash on disk but not in manifest is categorised as added."""
         content = b"new sample"
         deluge_root = _make_deluge_tree(tmp_path, {"new.wav": content})
-        before = self._make_snapshot({})
+        manifest: FilesDict = {}
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
         digest = hashlib.sha256(content).hexdigest()
         assert digest in result.added
@@ -115,82 +195,77 @@ class TestComputeMigrationMap:
         assert not result.moved
 
     def test_ambiguous_multiple_before_paths(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Hash with multiple before paths is categorised as ambiguous."""
+        """Hash with multiple manifest paths is categorised as ambiguous."""
         content = b"shared content"
         deluge_root = _make_deluge_tree(tmp_path, {"current.wav": content})
         digest = hashlib.sha256(content).hexdigest()
-        before = self._make_snapshot({digest: ["SAMPLES/a.wav", "SAMPLES/b.wav"]})
+        manifest = _make_manifest({
+            "samples/a.wav": digest,
+            "samples/b.wav": digest,
+        })
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
         assert digest in result.ambiguous
         before_paths, after_paths = result.ambiguous[digest]
-        assert set(before_paths) == {"SAMPLES/a.wav", "SAMPLES/b.wav"}
+        assert set(before_paths) == {"samples/a.wav", "samples/b.wav"}
         assert after_paths == ["SAMPLES/current.wav"]
         assert not result.moved
 
     def test_ambiguous_multiple_after_paths(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Hash with multiple after paths is categorised as ambiguous."""
+        """Hash with multiple disk paths is categorised as ambiguous."""
         content = b"duplicated content"
         deluge_root = _make_deluge_tree(tmp_path, {
             "copy1.wav": content,
             "copy2.wav": content,
         })
         digest = hashlib.sha256(content).hexdigest()
-        before = self._make_snapshot({digest: ["SAMPLES/original.wav"]})
+        manifest = _make_manifest({"samples/original.wav": digest})
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
         assert digest in result.ambiguous
         before_paths, after_paths = result.ambiguous[digest]
-        assert before_paths == ["SAMPLES/original.wav"]
+        assert before_paths == ["samples/original.wav"]
         assert set(after_paths) == {"SAMPLES/copy1.wav", "SAMPLES/copy2.wav"}
         assert not result.moved
 
     def test_unchanged_file_not_in_results(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Same hash and same path produces no entries in any category."""
+        """Same hash and same normalised path produces no entries."""
         content = b"unchanged audio"
         deluge_root = _make_deluge_tree(tmp_path, {"same.wav": content})
         digest = hashlib.sha256(content).hexdigest()
-        before = self._make_snapshot({digest: ["SAMPLES/same.wav"]})
+        manifest = _make_manifest({"samples/same.wav": digest})
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
         assert not result.moved
         assert not result.deleted
         assert not result.added
         assert not result.ambiguous
 
-    def test_empty_snapshot_empty_filesystem(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Empty before and after states produce an empty result."""
+    def test_empty_manifest_empty_filesystem(self, tmp_path: Path) -> None:
+        """Empty manifest and empty SAMPLES dir produce an empty result."""
         deluge_root = tmp_path / "DELUGE"
         (deluge_root / "SAMPLES").mkdir(parents=True)
-        before = self._make_snapshot({})
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map({}, deluge_root)
 
         assert result == MigrationResult()
 
-    def test_empty_snapshot_with_current_files(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Empty before snapshot with files on disk reports all as added."""
+    def test_empty_manifest_with_current_files(self, tmp_path: Path) -> None:
+        """Empty manifest with files on disk reports all as added."""
         content = b"brand new"
         deluge_root = _make_deluge_tree(tmp_path, {"new.wav": content})
-        before = self._make_snapshot({})
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map({}, deluge_root)
 
         assert not result.moved
         assert not result.deleted
         assert len(result.added) == 1
 
     def test_multiple_independent_moves(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Multiple files each moved independently all appear in moved dict."""
+        """Multiple files each moved independently appear in moved dict."""
         content_a = b"audio a"
         content_b = b"audio b"
         deluge_root = _make_deluge_tree(tmp_path, {
@@ -199,23 +274,22 @@ class TestComputeMigrationMap:
         })
         hash_a = hashlib.sha256(content_a).hexdigest()
         hash_b = hashlib.sha256(content_b).hexdigest()
-        before = self._make_snapshot({
-            hash_a: ["SAMPLES/old_a.wav"],
-            hash_b: ["SAMPLES/old_b.wav"],
+        manifest = _make_manifest({
+            "samples/old_a.wav": hash_a,
+            "samples/old_b.wav": hash_b,
         })
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
         assert result.moved == {
-            "SAMPLES/old_a.wav": "SAMPLES/new_a.wav",
-            "SAMPLES/old_b.wav": "SAMPLES/new_b.wav",
+            "samples/old_a.wav": "SAMPLES/new_a.wav",
+            "samples/old_b.wav": "SAMPLES/new_b.wav",
         }
         assert not result.deleted
         assert not result.added
         assert not result.ambiguous
 
     def test_mixed_categories(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """A single run can produce moved, deleted, added, and ambiguous entries."""
         moved_content = b"moved file"
         added_content = b"added file"
@@ -232,34 +306,267 @@ class TestComputeMigrationMap:
         deleted_hash = "cc" * 32
         ambig_hash = hashlib.sha256(ambig_content).hexdigest()
 
-        before = self._make_snapshot({
-            moved_hash: ["SAMPLES/old_location.wav"],
-            deleted_hash: ["SAMPLES/gone.wav"],
-            ambig_hash: ["SAMPLES/original.wav"],
+        manifest = _make_manifest({
+            "samples/old_location.wav": moved_hash,
+            "samples/gone.wav": deleted_hash,
+            "samples/original.wav": ambig_hash,
         })
 
-        result = compute_migration_map(before, deluge_root)
+        result = compute_migration_map(manifest, deluge_root)
 
-        assert "SAMPLES/old_location.wav" in result.moved
+        assert "samples/old_location.wav" in result.moved
         assert deleted_hash in result.deleted
-        assert len(result.added) == 1  # added_content hash
+        assert len(result.added) == 1
         assert ambig_hash in result.ambiguous
 
+    def test_after_hashes_populated(self, tmp_path: Path) -> None:
+        """after_hashes maps hashes to original-case filesystem paths."""
+        content_a = b"audio a"
+        content_b = b"audio b"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "DRUMS/Kick.wav": content_a,
+            "SYNTH/Pad.wav": content_b,
+        })
+        hash_a = hashlib.sha256(content_a).hexdigest()
+        hash_b = hashlib.sha256(content_b).hexdigest()
+        manifest: FilesDict = {}
 
-def _write_minimal_kit_xml(path: Path, sample_paths: list[str]) -> None:
-    # TODO-v0.1-REVIEW
-    """Write a minimal kit XML with fileName attributes for each sample path."""
-    sounds = ""
-    for sp in sample_paths:
-        sounds += f"""
-		<sound name="S">
-			<osc1 type="sample" fileName="{sp}">
-			</osc1>
-		</sound>"""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        f'<?xml version="1.0" encoding="UTF-8"?>\n<kit>\n\t<soundSources>{sounds}\n\t</soundSources>\n</kit>\n',
-        encoding="utf-8",
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert hash_a in result.after_hashes
+        assert result.after_hashes[hash_a] == ["SAMPLES/DRUMS/Kick.wav"]
+        assert hash_b in result.after_hashes
+        assert result.after_hashes[hash_b] == ["SAMPLES/SYNTH/Pad.wav"]
+
+    def test_after_hashes_empty_when_no_samples(self, tmp_path: Path) -> None:
+        """after_hashes is empty when SAMPLES dir has no files."""
+        deluge_root = tmp_path / "DELUGE"
+        (deluge_root / "SAMPLES").mkdir(parents=True)
+
+        result = compute_migration_map({}, deluge_root)
+
+        assert result.after_hashes == {}
+
+
+# ---------------------------------------------------------------------------
+# Graceful degradation
+# ---------------------------------------------------------------------------
+
+
+class TestGracefulDegradation:
+    """Tests for manifest graceful degradation in compute_migration_map."""
+
+    def test_manifest_with_null_hashes(self, tmp_path: Path) -> None:
+        """Manifest entries with null hashes can't participate in move detection."""
+        content = b"some audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"new.wav": content})
+        manifest = _make_manifest({"samples/old.wav": None})
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert not result.moved
+        assert not result.deleted
+        assert len(result.added) == 1
+
+    def test_missing_samples_dir(self, tmp_path: Path) -> None:
+        """Missing SAMPLES directory returns empty result."""
+        deluge_root = tmp_path / "DELUGE"
+        deluge_root.mkdir(parents=True)
+        manifest = _make_manifest({"samples/kick.wav": "ab" * 32})
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert result == MigrationResult()
+
+    def test_manifest_status_output_empty(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Empty manifest prints degradation warning."""
+        deluge_root = tmp_path / "DELUGE"
+        (deluge_root / "SAMPLES").mkdir(parents=True)
+
+        compute_migration_map({}, deluge_root)
+
+        captured = capsys.readouterr()
+        assert "empty or missing" in captured.out
+
+    def test_manifest_status_output_no_hashes(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Manifest with entries but no hashes prints warning."""
+        deluge_root = tmp_path / "DELUGE"
+        (deluge_root / "SAMPLES").mkdir(parents=True)
+        manifest = _make_manifest({"samples/kick.wav": None})
+
+        compute_migration_map(manifest, deluge_root)
+
+        captured = capsys.readouterr()
+        assert "No hashes in manifest" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# Stat-cache optimisation
+# ---------------------------------------------------------------------------
+
+
+class TestStatCacheOptimization:
+    """Tests for stat-cache fast-path in compute_migration_map."""
+
+    def test_stat_cache_hit_avoids_rehash(self, tmp_path: Path) -> None:
+        """Files whose stat matches manifest use cached hash without hashing."""
+        content = b"cached content"
+        deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+
+        file_path = deluge_root / "SAMPLES" / "kick.wav"
+        st = file_path.stat()
+
+        manifest: FilesDict = {
+            "samples/kick.wav": {
+                "sd_size": 100,
+                "sd_mtime": 1000.0,
+                "local_size": st.st_size,
+                "local_mtime": normalise_mtime(st.st_mtime),
+                "hash": digest,
+            },
+        }
+
+        with patch("fix_references.hash_file") as mock_hash:
+            result = compute_migration_map(manifest, deluge_root)
+
+        mock_hash.assert_not_called()
+        assert not result.moved
+        assert not result.deleted
+        assert not result.added
+        assert not result.ambiguous
+
+    def test_stat_cache_miss_triggers_hash(self, tmp_path: Path) -> None:
+        """Files whose stat doesn't match manifest are hashed."""
+        content = b"changed content"
+        deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+
+        # Stats won't match because _make_manifest uses dummy values
+        manifest = _make_manifest({"samples/kick.wav": digest})
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        # File hashed and found at same normalised path â†’ unchanged
+        assert not result.moved
+
+    def test_new_path_triggers_hash(self, tmp_path: Path) -> None:
+        """Files at paths not in manifest are always hashed."""
+        content = b"moved file"
+        deluge_root = _make_deluge_tree(tmp_path, {"NewDir/kick.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+
+        manifest = _make_manifest({"samples/olddir/kick.wav": digest})
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert "samples/olddir/kick.wav" in result.moved
+        assert result.moved["samples/olddir/kick.wav"] == "SAMPLES/NewDir/kick.wav"
+
+
+# ---------------------------------------------------------------------------
+# Manifest key update
+# ---------------------------------------------------------------------------
+
+
+class TestManifestKeyUpdate:
+    """Tests for update_manifest_keys."""
+
+    def test_moved_keys_renamed(self, tmp_path: Path) -> None:
+        """Moved files have their manifest keys renamed."""
+        manifest: FilesDict = {
+            "samples/old.wav": {
+                "sd_size": 100, "sd_mtime": 1000.0,
+                "local_size": 100, "local_mtime": 1000.0, "hash": "abc123",
+            },
+            "samples/other.wav": {
+                "sd_size": 200, "sd_mtime": 2000.0,
+                "local_size": 200, "local_mtime": 2000.0, "hash": "def456",
+            },
+        }
+        moved = {"samples/old.wav": "SAMPLES/NEW/Renamed.wav"}
+        manifest_path = tmp_path / "manifest.json"
+
+        update_manifest_keys(manifest, moved, manifest_path)
+
+        assert "samples/old.wav" not in manifest
+        assert "samples/new/renamed.wav" in manifest
+        assert manifest["samples/new/renamed.wav"]["hash"] == "abc123"
+        assert "samples/other.wav" in manifest
+        assert manifest_path.is_file()
+
+    def test_no_moves_no_write(self, tmp_path: Path) -> None:
+        """No moves produces no manifest write."""
+        manifest: FilesDict = {
+            "samples/a.wav": {
+                "sd_size": 100, "sd_mtime": 1000.0,
+                "local_size": 100, "local_mtime": 1000.0, "hash": "abc",
+            },
+        }
+        manifest_path = tmp_path / "manifest.json"
+
+        update_manifest_keys(manifest, {}, manifest_path)
+
+        assert not manifest_path.exists()
+
+    def test_write_failure_prints_warning(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Write failure produces a warning, not an error."""
+        manifest: FilesDict = {
+            "samples/old.wav": {
+                "sd_size": 100, "sd_mtime": 1000.0,
+                "local_size": 100, "local_mtime": 1000.0, "hash": "abc",
+            },
+        }
+        moved = {"samples/old.wav": "SAMPLES/New.wav"}
+        manifest_path = tmp_path / "manifest.json"
+
+        with patch("fix_references.write_manifest", side_effect=OSError("disk full")):
+            update_manifest_keys(manifest, moved, manifest_path)
+
+        captured = capsys.readouterr()
+        assert "Warning" in captured.out
+
+    def test_preserves_hash_and_stats(self, tmp_path: Path) -> None:
+        """Renamed key preserves all original data."""
+        manifest: FilesDict = {
+            "samples/old.wav": {
+                "sd_size": 42, "sd_mtime": 999.0,
+                "local_size": 42, "local_mtime": 888.0, "hash": "deadbeef",
+            },
+        }
+        moved = {"samples/old.wav": "SAMPLES/New.wav"}
+        manifest_path = tmp_path / "manifest.json"
+
+        update_manifest_keys(manifest, moved, manifest_path)
+
+        entry = manifest["samples/new.wav"]
+        assert entry["sd_size"] == 42
+        assert entry["sd_mtime"] == 999.0
+        assert entry["local_size"] == 42
+        assert entry["local_mtime"] == 888.0
+        assert entry["hash"] == "deadbeef"
+
+
+# ---------------------------------------------------------------------------
+# classify_ref_changes
+# ---------------------------------------------------------------------------
+
+
+def _make_ref(xml_file: str = "KITS/KIT001.XML", path: str = "SAMPLES/old.wav") -> SampleRef:
+    """Helper: create a minimal SampleRef for testing."""
+    return SampleRef(
+        path=path,
+        xml_file=Path(xml_file),
+        xml_type="kit",
+        preset_name="KIT001",
+        ref_type="fileName-attribute",
+        element_tag="osc1",
     )
 
 
@@ -267,15 +574,14 @@ class TestClassifyRefChanges:
     """Tests for classify_ref_changes."""
 
     def test_ref_in_migration_map_is_planned_change(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """A reference whose path is in moved dict appears as a planned change."""
+        """A reference whose normalised path is in moved dict appears as a planned change."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/OldKick.wav"],
         )
         migration = MigrationResult(
-            moved={"SAMPLES/DRUMS/OldKick.wav": "SAMPLES/DRUMS/NewKick.wav"},
+            moved={"samples/drums/oldkick.wav": "SAMPLES/DRUMS/NewKick.wav"},
         )
 
         result = classify_ref_changes(migration, deluge_root)
@@ -287,15 +593,14 @@ class TestClassifyRefChanges:
         assert not result.warnings
 
     def test_ref_in_deleted_set_is_error(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """A reference whose path is in the deleted set appears as an error."""
+        """A reference whose normalised path is in the deleted set appears as an error."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/Gone.wav"],
         )
         migration = MigrationResult(
-            deleted={"somehash": ["SAMPLES/DRUMS/Gone.wav"]},
+            deleted={"somehash": ["samples/drums/gone.wav"]},
         )
 
         result = classify_ref_changes(migration, deluge_root)
@@ -306,8 +611,7 @@ class TestClassifyRefChanges:
         assert not result.warnings
 
     def test_ref_in_ambiguous_set_is_warning(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """A reference whose path is in the ambiguous before-paths appears as a warning."""
+        """A reference whose normalised path is in the ambiguous before-paths appears as a warning."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
@@ -316,7 +620,7 @@ class TestClassifyRefChanges:
         migration = MigrationResult(
             ambiguous={
                 "somehash": (
-                    ["SAMPLES/DRUMS/Ambig.wav", "SAMPLES/DRUMS/Other.wav"],
+                    ["samples/drums/ambig.wav", "samples/drums/other.wav"],
                     ["SAMPLES/DRUMS/New1.wav", "SAMPLES/DRUMS/New2.wav"],
                 ),
             },
@@ -330,14 +634,15 @@ class TestClassifyRefChanges:
         assert result.warnings[0].ambiguous_path == "SAMPLES/DRUMS/Ambig.wav"
 
     def test_valid_ref_not_in_results(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """A reference not in any migration category does not appear in results."""
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/StillHere.wav": b"audio"})
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/StillHere.wav"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={"dummyhash": ["SAMPLES/DRUMS/StillHere.wav"]},
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 
@@ -347,7 +652,6 @@ class TestClassifyRefChanges:
         assert not result.missing
 
     def test_multiple_refs_across_multiple_xmls(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """References from multiple XML files are all classified correctly."""
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/OK.wav": b"audio"})
         _write_minimal_kit_xml(
@@ -359,8 +663,9 @@ class TestClassifyRefChanges:
             ["SAMPLES/DRUMS/Deleted.wav", "SAMPLES/DRUMS/OK.wav"],
         )
         migration = MigrationResult(
-            moved={"SAMPLES/DRUMS/Moved.wav": "SAMPLES/DRUMS/NewMoved.wav"},
-            deleted={"delhash": ["SAMPLES/DRUMS/Deleted.wav"]},
+            moved={"samples/drums/moved.wav": "SAMPLES/DRUMS/NewMoved.wav"},
+            deleted={"delhash": ["samples/drums/deleted.wav"]},
+            after_hashes={"okhash": ["SAMPLES/DRUMS/OK.wav"]},
         )
 
         result = classify_ref_changes(migration, deluge_root)
@@ -372,7 +677,6 @@ class TestClassifyRefChanges:
         assert not result.warnings
 
     def test_no_broken_refs(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """When all references are valid, result is empty."""
         deluge_root = _make_deluge_tree(tmp_path, {
             "DRUMS/Fine.wav": b"audio",
@@ -382,14 +686,18 @@ class TestClassifyRefChanges:
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/Fine.wav", "SAMPLES/DRUMS/AlsoFine.wav"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={
+                "hash1": ["SAMPLES/DRUMS/Fine.wav"],
+                "hash2": ["SAMPLES/DRUMS/AlsoFine.wav"],
+            },
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 
         assert result == BrokenRefResult()
 
     def test_ref_carries_sample_ref_metadata(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """Planned change carries the full SampleRef with correct metadata."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
@@ -397,7 +705,7 @@ class TestClassifyRefChanges:
             ["SAMPLES/OldPath.wav"],
         )
         migration = MigrationResult(
-            moved={"SAMPLES/OldPath.wav": "SAMPLES/NewPath.wav"},
+            moved={"samples/oldpath.wav": "SAMPLES/NewPath.wav"},
         )
 
         result = classify_ref_changes(migration, deluge_root)
@@ -408,7 +716,6 @@ class TestClassifyRefChanges:
         assert change.ref.ref_type == "fileName-attribute"
 
     def test_deleted_multiple_paths_per_hash(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """Multiple deleted paths under the same hash are all detected."""
         deluge_root = tmp_path / "DELUGE"
         _write_minimal_kit_xml(
@@ -416,7 +723,7 @@ class TestClassifyRefChanges:
             ["SAMPLES/A.wav", "SAMPLES/B.wav"],
         )
         migration = MigrationResult(
-            deleted={"hash1": ["SAMPLES/A.wav", "SAMPLES/B.wav"]},
+            deleted={"hash1": ["samples/a.wav", "samples/b.wav"]},
         )
 
         result = classify_ref_changes(migration, deluge_root)
@@ -426,14 +733,15 @@ class TestClassifyRefChanges:
         assert deleted_paths == {"SAMPLES/A.wav", "SAMPLES/B.wav"}
 
     def test_missing_ref_not_on_disk(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """A reference not in migration map and not on disk appears as missing."""
         deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/Other.wav": b"audio"})
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/DRUMS/CB1-BD~1.WAV"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={"otherhash": ["SAMPLES/DRUMS/Other.wav"]},
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 
@@ -444,14 +752,15 @@ class TestClassifyRefChanges:
         assert result.missing[0].missing_path == "SAMPLES/DRUMS/CB1-BD~1.WAV"
 
     def test_case_insensitive_ref_not_missing(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """A reference differing only in case from a current path is not missing."""
         deluge_root = _make_deluge_tree(tmp_path, {"Artists/Chaz/CB1-bdrum1.wav": b"audio"})
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/ARTISTS/CHAZ/CB1-BDRUM1.WAV"],
         )
-        migration = MigrationResult()
+        migration = MigrationResult(
+            after_hashes={"dummyhash": ["SAMPLES/Artists/Chaz/CB1-bdrum1.wav"]},
+        )
 
         result = classify_ref_changes(migration, deluge_root)
 
@@ -461,17 +770,9 @@ class TestClassifyRefChanges:
         assert not result.missing
 
 
-def _make_ref(xml_file: str = "KITS/KIT001.XML", path: str = "SAMPLES/old.wav") -> SampleRef:
-    # TODO-v0.1-REVIEW
-    """Helper: create a minimal SampleRef for testing."""
-    return SampleRef(
-        path=path,
-        xml_file=Path(xml_file),
-        xml_type="kit",
-        preset_name="KIT001",
-        ref_type="fileName-attribute",
-        element_tag="osc1",
-    )
+# ---------------------------------------------------------------------------
+# preview_and_apply
+# ---------------------------------------------------------------------------
 
 
 class TestPreviewAndApply:
@@ -480,7 +781,6 @@ class TestPreviewAndApply:
     def test_empty_result_nothing_to_do(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """Empty BrokenRefResult prints 'Nothing to do' and returns."""
         preview_and_apply(BrokenRefResult(), tmp_path)
 
@@ -490,7 +790,6 @@ class TestPreviewAndApply:
     def test_changes_grouped_by_xml_file(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """Preview output groups changes by XML file."""
         result = BrokenRefResult(
             changes=[
@@ -511,14 +810,13 @@ class TestPreviewAndApply:
             preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert 'KIT001.XML: "SAMPLES/a.wav" → "SAMPLES/b.wav"' in captured.out
-        assert 'KIT002.XML: "SAMPLES/c.wav" → "SAMPLES/d.wav"' in captured.out
+        assert 'KIT001.XML: "SAMPLES/a.wav" \u2192 "SAMPLES/b.wav"' in captured.out
+        assert 'KIT002.XML: "SAMPLES/c.wav" \u2192 "SAMPLES/d.wav"' in captured.out
 
     def test_duplicate_refs_show_count(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
-        """Multiple refs with the same old→new in one file show '× N refs'."""
+        """Multiple refs with the same old\u2192new in one file show '\xd7 N refs'."""
         ref = _make_ref("KITS/KIT001.XML", "SAMPLES/a.wav")
         result = BrokenRefResult(
             changes=[
@@ -531,12 +829,11 @@ class TestPreviewAndApply:
             preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert "× 2 refs" in captured.out
+        assert "\xd7 2 refs" in captured.out
 
     def test_error_section_displayed(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """Errors are displayed under the 'ERRORS' section header."""
         result = BrokenRefResult(
             errors=[
@@ -550,14 +847,13 @@ class TestPreviewAndApply:
         preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert "ERRORS — Requires Manual Resolution" in captured.out
+        assert "ERRORS \u2014 Requires Manual Resolution" in captured.out
         assert "SAMPLES/gone.wav" in captured.out
         assert "sample deleted" in captured.out
 
     def test_warning_section_displayed(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """Warnings are displayed under the 'WARNINGS' section header."""
         result = BrokenRefResult(
             warnings=[
@@ -571,14 +867,13 @@ class TestPreviewAndApply:
         preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert "WARNINGS — Ambiguous Mappings" in captured.out
+        assert "WARNINGS \u2014 Ambiguous Mappings" in captured.out
         assert "SAMPLES/ambig.wav" in captured.out
         assert "multiple files share this hash" in captured.out
 
     def test_summary_line_counts(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """Summary line shows correct counts for changes, files, errors, warnings."""
         result = BrokenRefResult(
             changes=[
@@ -611,12 +906,11 @@ class TestPreviewAndApply:
             preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert "2 changes across 2 files. 1 errors, 1 warnings, 0 missing." in captured.out
+        assert "2 changes, 0 recovered, 1 errors, 1 warnings, 0 missing." in captured.out
 
     def test_error_warning_recommends_resolution(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """When errors exist, a warning recommending resolution is shown."""
         result = BrokenRefResult(
             changes=[
@@ -643,7 +937,6 @@ class TestPreviewAndApply:
     def test_apply_calls_update_sample_refs(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """On confirm, update_sample_refs is called with correct mapping per XML file."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -673,7 +966,6 @@ class TestPreviewAndApply:
     def test_no_apply_on_decline(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """On decline, no changes are applied and message is shown."""
         result = BrokenRefResult(
             changes=[
@@ -698,7 +990,6 @@ class TestPreviewAndApply:
     def test_auto_apply_skips_prompt(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """auto_apply=True skips the confirmation prompt."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -724,7 +1015,6 @@ class TestPreviewAndApply:
     def test_post_apply_summary(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """Post-apply summary shows files modified and references updated."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
@@ -754,7 +1044,6 @@ class TestPreviewAndApply:
     def test_missing_section_displayed(
         self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
     ) -> None:
-        # TODO-v0.1-REVIEW
         """Missing refs are displayed under the 'MISSING' section header."""
         result = BrokenRefResult(
             missing=[
@@ -768,13 +1057,16 @@ class TestPreviewAndApply:
         preview_and_apply(result, tmp_path)
 
         captured = capsys.readouterr()
-        assert "MISSING — Sample Path Not Found" in captured.out
+        assert "MISSING \u2014 Sample Path Not Found" in captured.out
         assert "SAMPLES/DRUMS/CB1-BD~1.WAV" in captured.out
         assert "no matching file on disk" in captured.out
 
-    def test_returns_true_when_missing(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Returns True when missing refs exist."""
+    def test_returns_no_issues_no_apply_when_nothing(self, tmp_path: Path) -> None:
+        """Returns (False, False) when no changes, errors, or warnings exist."""
+        assert preview_and_apply(BrokenRefResult(), tmp_path) == (False, False)
+
+    def test_returns_issues_true_when_missing(self, tmp_path: Path) -> None:
+        """Returns (True, False) when missing refs exist."""
         result = BrokenRefResult(
             missing=[
                 MissingRefError(
@@ -784,12 +1076,12 @@ class TestPreviewAndApply:
             ],
         )
 
-        has_errors = preview_and_apply(result, tmp_path)
+        has_issues, applied = preview_and_apply(result, tmp_path)
 
-        assert has_errors is True
+        assert has_issues is True
+        assert applied is False
 
     def test_only_errors_no_apply_prompt(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """When there are only errors (no changes), no apply prompt is shown."""
         result = BrokenRefResult(
             errors=[
@@ -801,19 +1093,14 @@ class TestPreviewAndApply:
         )
 
         with patch("fix_references.confirm_apply") as mock_confirm:
-            has_errors = preview_and_apply(result, tmp_path)
+            has_issues, applied = preview_and_apply(result, tmp_path)
 
         mock_confirm.assert_not_called()
-        assert has_errors is True
+        assert has_issues is True
+        assert applied is False
 
-    def test_returns_false_when_nothing_to_do(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Returns False when no changes, errors, or warnings exist."""
-        assert preview_and_apply(BrokenRefResult(), tmp_path) is False
-
-    def test_returns_false_when_changes_only(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Returns False when there are fixable changes but no errors."""
+    def test_returns_no_issues_applied_when_changes_only(self, tmp_path: Path) -> None:
+        """Returns (False, True) when there are fixable changes but no errors."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
             changes=[
@@ -828,13 +1115,13 @@ class TestPreviewAndApply:
         with patch("fix_references.confirm_apply", return_value=True), patch(
             "fix_references.update_sample_refs", return_value=1
         ):
-            has_errors = preview_and_apply(result, deluge_root)
+            has_issues, applied = preview_and_apply(result, deluge_root)
 
-        assert has_errors is False
+        assert has_issues is False
+        assert applied is True
 
-    def test_returns_true_when_errors_and_changes(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
-        """Returns True when errors exist even if fixable changes also exist."""
+    def test_returns_issues_and_applied_when_errors_and_changes(self, tmp_path: Path) -> None:
+        """Returns (True, True) when errors exist but fixable changes were applied."""
         deluge_root = tmp_path / "DELUGE"
         result = BrokenRefResult(
             changes=[
@@ -855,84 +1142,580 @@ class TestPreviewAndApply:
         with patch("fix_references.confirm_apply", return_value=True), patch(
             "fix_references.update_sample_refs", return_value=1
         ):
-            has_errors = preview_and_apply(result, deluge_root)
+            has_issues, applied = preview_and_apply(result, deluge_root)
 
-        assert has_errors is True
+        assert has_issues is True
+        assert applied is True
+
+
+# ---------------------------------------------------------------------------
+# CLI integration (main)
+# ---------------------------------------------------------------------------
 
 
 class TestMainExitCodes:
     """Tests for CLI exit codes via main()."""
 
     def test_fix_exits_0_no_errors(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """Exits 0 when no broken references found."""
         from fix_references import main
 
-        # Create a DELUGE root with one sample, snapshot matches current state
         content = b"kick_audio"
         deluge_root = _make_deluge_tree(tmp_path, {"kick.wav": content})
         digest = hashlib.sha256(content).hexdigest()
-        snap_data = {
-            "date": "2026-04-01",
-            "deluge_root": str(deluge_root),
-            "hashes": {digest: ["SAMPLES/kick.wav"]},
-        }
-        snap_file = tmp_path / "snap.json"
-        snap_file.write_text(json.dumps(snap_data), encoding="utf-8")
+
+        manifest = _make_manifest({"samples/kick.wav": digest})
+        manifest_file = tmp_path / "test_manifest.json"
+        _write_manifest_file(manifest_file, manifest)
+
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/kick.wav"],
+        )
 
         with patch("fix_references.get_deluge_root", return_value=deluge_root):
-            main(["--snapshot", str(snap_file)])  # Should not raise
+            main(["--manifest", str(manifest_file)])  # Should not raise
 
     def test_fix_exits_1_when_errors(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """Exits 1 when deleted references are detected."""
         from fix_references import main
 
         deluge_root = tmp_path / "DELUGE"
         (deluge_root / "SAMPLES").mkdir(parents=True)
-        # Kit referencing a sample that no longer exists
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/gone.wav"],
         )
-        # Snapshot says file existed with a fake hash
-        snap_data = {
-            "date": "2026-04-01",
-            "deluge_root": str(deluge_root),
-            "hashes": {"ab" * 32: ["SAMPLES/gone.wav"]},
-        }
-        snap_file = tmp_path / "snap.json"
-        snap_file.write_text(json.dumps(snap_data), encoding="utf-8")
+
+        manifest = _make_manifest({"samples/gone.wav": "ab" * 32})
+        manifest_file = tmp_path / "test_manifest.json"
+        _write_manifest_file(manifest_file, manifest)
 
         with patch("fix_references.get_deluge_root", return_value=deluge_root):
             with pytest.raises(SystemExit) as exc_info:
-                main(["--snapshot", str(snap_file)])
+                main(["--manifest", str(manifest_file)])
             assert exc_info.value.code == 1
 
     def test_fix_apply_skips_prompt(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
         """--apply skips the confirmation prompt and applies changes."""
         from fix_references import main
 
         content = b"kick_audio"
         deluge_root = _make_deluge_tree(tmp_path, {"NewKick.wav": content})
         digest = hashlib.sha256(content).hexdigest()
-        # Kit references old path
         _write_minimal_kit_xml(
             deluge_root / "KITS" / "KIT001.XML",
             ["SAMPLES/OldKick.wav"],
         )
-        snap_data = {
-            "date": "2026-04-01",
-            "deluge_root": str(deluge_root),
-            "hashes": {digest: ["SAMPLES/OldKick.wav"]},
-        }
-        snap_file = tmp_path / "snap.json"
-        snap_file.write_text(json.dumps(snap_data), encoding="utf-8")
+
+        manifest = _make_manifest({"samples/oldkick.wav": digest})
+        manifest_file = tmp_path / "test_manifest.json"
+        _write_manifest_file(manifest_file, manifest)
 
         with patch("fix_references.get_deluge_root", return_value=deluge_root), patch(
             "fix_references.confirm_apply"
         ) as mock_confirm:
-            main(["--snapshot", str(snap_file), "--apply"])
+            main(["--manifest", str(manifest_file), "--apply"])
 
         mock_confirm.assert_not_called()
+
+
+# ---------------------------------------------------------------------------
+# Phase 4: Recovery tests
+# ---------------------------------------------------------------------------
+
+
+class TestAfterHashesExposure:
+    """Task 4.1: Verify compute_migration_map returns after_hashes correctly."""
+
+    def test_after_hashes_maps_hashes_to_original_case_paths(self, tmp_path: Path) -> None:
+        """after_hashes maps SHA-256 hashes to original-case filesystem paths."""
+        content = b"kick audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/Kick.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+
+        result = compute_migration_map({}, deluge_root)
+
+        assert digest in result.after_hashes
+        assert result.after_hashes[digest] == ["SAMPLES/DRUMS/Kick.wav"]
+
+    def test_after_hashes_empty_for_empty_samples(self, tmp_path: Path) -> None:
+        """after_hashes is empty when SAMPLES dir contains no WAV files."""
+        deluge_root = tmp_path / "DELUGE"
+        (deluge_root / "SAMPLES").mkdir(parents=True)
+
+        result = compute_migration_map({}, deluge_root)
+
+        assert result.after_hashes == {}
+
+    def test_after_hashes_via_stat_cache_hit(self, tmp_path: Path) -> None:
+        """Stat-cache hits produce correct after_hashes entries."""
+        content = b"cached audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"Pad.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+        file_path = deluge_root / "SAMPLES" / "Pad.wav"
+        st = file_path.stat()
+
+        manifest: FilesDict = {
+            "samples/pad.wav": {
+                "sd_size": 100,
+                "sd_mtime": 1000.0,
+                "local_size": st.st_size,
+                "local_mtime": normalise_mtime(st.st_mtime),
+                "hash": digest,
+            },
+        }
+
+        with patch("fix_references.hash_file") as mock_hash:
+            result = compute_migration_map(manifest, deluge_root)
+
+        mock_hash.assert_not_called()
+        assert digest in result.after_hashes
+        assert result.after_hashes[digest] == ["SAMPLES/Pad.wav"]
+
+
+class TestSingleCandidateRecovery:
+    """Task 4.2: Missing ref with one basename match is recovered."""
+
+    def test_single_candidate_recovered(self, tmp_path: Path) -> None:
+        """Ref whose basename matches exactly one file on disk is recovered."""
+        deluge_root = _make_deluge_tree(tmp_path, {"NewDir/Kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/NewDir/Kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert result.recovered[0].old_path == "SAMPLES/OldDir/Kick.wav"
+        assert result.recovered[0].new_path == "SAMPLES/NewDir/Kick.wav"
+        assert not result.missing
+
+    def test_single_candidate_has_one_entry(self, tmp_path: Path) -> None:
+        """Recovered ref's candidate list has exactly one entry."""
+        deluge_root = _make_deluge_tree(tmp_path, {"NewDir/Kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/NewDir/Kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered[0].candidates) == 1
+        assert result.recovered[0].candidates[0] == ("SAMPLES/NewDir/Kick.wav", "hash1")
+
+    def test_single_candidate_case_insensitive_basename(self, tmp_path: Path) -> None:
+        """Basename matching is case-insensitive."""
+        deluge_root = _make_deluge_tree(tmp_path, {"NewDir/kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/KICK.WAV"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/NewDir/kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert result.recovered[0].new_path == "SAMPLES/NewDir/kick.wav"
+        assert not result.missing
+
+
+class TestMultiCandidateSameHashRecovery:
+    """Task 4.3: Multiple candidates with same hash — path similarity picks best."""
+
+    def test_same_hash_picks_best_path_similarity(self, tmp_path: Path) -> None:
+        """When all candidates share the same hash, the best path similarity wins."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "DRUMS/Kicks/Kick.wav": b"audio",
+            "OTHER/Kick.wav": b"audio",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/DRUMS/Kicks/OldKick/Kick.wav"],
+        )
+        same_hash = "aabb" * 16
+        migration = MigrationResult(
+            after_hashes={
+                same_hash: [
+                    "SAMPLES/DRUMS/Kicks/Kick.wav",
+                    "SAMPLES/OTHER/Kick.wav",
+                ],
+            },
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        # DRUMS/Kicks/Kick.wav shares more trailing components with the ref
+        assert result.recovered[0].new_path == "SAMPLES/DRUMS/Kicks/Kick.wav"
+        assert not result.missing
+
+    def test_same_hash_candidates_all_listed(self, tmp_path: Path) -> None:
+        """Candidates list contains all matches."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "A/Snare.wav": b"audio",
+            "B/Snare.wav": b"audio",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Snare.wav"],
+        )
+        same_hash = "ccdd" * 16
+        migration = MigrationResult(
+            after_hashes={same_hash: ["SAMPLES/A/Snare.wav", "SAMPLES/B/Snare.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert len(result.recovered[0].candidates) == 2
+        candidate_paths = {c[0] for c in result.recovered[0].candidates}
+        assert candidate_paths == {"SAMPLES/A/Snare.wav", "SAMPLES/B/Snare.wav"}
+
+    def test_same_hash_ref_in_recovered_not_missing(self, tmp_path: Path) -> None:
+        """Same-hash multi-candidate ref is in recovered, not missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "A/Hat.wav": b"audio",
+            "B/Hat.wav": b"audio",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/Old/Hat.wav"],
+        )
+        same_hash = "eeff" * 16
+        migration = MigrationResult(
+            after_hashes={same_hash: ["SAMPLES/A/Hat.wav", "SAMPLES/B/Hat.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert not result.missing
+
+
+class TestMultiCandidateDifferentHash:
+    """Task 4.4: Multiple candidates with different hashes — stays missing."""
+
+    def test_different_hashes_not_recovered(self, tmp_path: Path) -> None:
+        """Ref with multiple basename matches having different hashes stays missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "A/Kick.wav": b"audio_a",
+            "B/Kick.wav": b"audio_b",
+        })
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/OldDir/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={
+                "hash_a": ["SAMPLES/A/Kick.wav"],
+                "hash_b": ["SAMPLES/B/Kick.wav"],
+            },
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.recovered
+        assert len(result.missing) == 1
+        assert result.missing[0].missing_path == "SAMPLES/OldDir/Kick.wav"
+
+
+class TestZeroCandidateRecovery:
+    """Task 4.5: Missing ref with no basename match remains missing."""
+
+    def test_no_basename_match_stays_missing(self, tmp_path: Path) -> None:
+        """Ref whose basename matches no file on disk remains missing."""
+        deluge_root = _make_deluge_tree(tmp_path, {"Other.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/DRUMS/NonExistent.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"somehash": ["SAMPLES/Other.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.recovered
+        assert len(result.missing) == 1
+        assert result.missing[0].missing_path == "SAMPLES/DRUMS/NonExistent.wav"
+
+
+class TestCandidateThresholdExceeded:
+    """Task 4.6: More than MAX_RECOVERY_CANDIDATES matches → stays missing."""
+
+    def test_exceeding_threshold_stays_missing(self, tmp_path: Path) -> None:
+        """Ref exceeding the candidate threshold is not recovered."""
+        # Create MAX_RECOVERY_CANDIDATES + 1 files with the same basename
+        wav_files = {
+            f"Dir{i}/Common.wav": b"audio" for i in range(MAX_RECOVERY_CANDIDATES + 1)
+        }
+        deluge_root = _make_deluge_tree(tmp_path, wav_files)
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/Missing/Common.wav"],
+        )
+        after_hashes: dict[str, list[str]] = {}
+        for i in range(MAX_RECOVERY_CANDIDATES + 1):
+            h = f"hash{i:02d}" + "00" * 30
+            after_hashes[h] = [f"SAMPLES/Dir{i}/Common.wav"]
+
+        migration = MigrationResult(after_hashes=after_hashes)
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.recovered
+        assert len(result.missing) == 1
+
+    def test_at_threshold_is_recovered(self, tmp_path: Path) -> None:
+        """Ref with exactly MAX_RECOVERY_CANDIDATES candidates is still recovered."""
+        wav_files = {
+            f"Dir{i}/Common.wav": b"audio" for i in range(MAX_RECOVERY_CANDIDATES)
+        }
+        deluge_root = _make_deluge_tree(tmp_path, wav_files)
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/Missing/Common.wav"],
+        )
+        # All same hash so recovery via path similarity
+        same_hash = "abcd" * 16
+        after_hashes: dict[str, list[str]] = {
+            same_hash: [f"SAMPLES/Dir{i}/Common.wav" for i in range(MAX_RECOVERY_CANDIDATES)],
+        }
+
+        migration = MigrationResult(after_hashes=after_hashes)
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert len(result.recovered) == 1
+        assert not result.missing
+
+
+class TestPathSimilarity:
+    """Task 4.7: Unit tests for path_similarity function."""
+
+    def test_identical_paths(self) -> None:
+        """Identical paths score the full component count."""
+        score = path_similarity("SAMPLES/DRUMS/Kick.wav", "SAMPLES/DRUMS/Kick.wav")
+        assert score == 3  # Kick.wav, DRUMS, SAMPLES
+
+    def test_shared_parent_scores_higher(self) -> None:
+        """Paths sharing parent directories score higher than those that don't."""
+        score_shared = path_similarity(
+            "SAMPLES/DRUMS/Kicks/Kick.wav", "SAMPLES/DRUMS/Kicks/Kick.wav"
+        )
+        score_not_shared = path_similarity(
+            "SAMPLES/DRUMS/Kicks/Kick.wav", "SAMPLES/OTHER/Kick.wav"
+        )
+        assert score_shared > score_not_shared
+
+    def test_case_insensitive(self) -> None:
+        """Comparison is case-insensitive."""
+        score = path_similarity("SAMPLES/DRUMS/Kick.wav", "samples/drums/kick.wav")
+        assert score == 3
+
+    def test_different_depth_paths(self) -> None:
+        """Paths of different depths are handled correctly."""
+        score = path_similarity(
+            "SAMPLES/DRUMS/Sub/Kick.wav", "SAMPLES/DRUMS/Kick.wav"
+        )
+        # Kick.wav matches, then Sub != DRUMS → stops
+        assert score == 1
+
+    def test_no_matching_components(self) -> None:
+        """Completely different paths score 0."""
+        score = path_similarity("A/B/C.wav", "X/Y/Z.wav")
+        assert score == 0
+
+    def test_only_basename_matches(self) -> None:
+        """When only the basename matches, score is 1."""
+        score = path_similarity("A/B/Kick.wav", "X/Y/Kick.wav")
+        assert score == 1
+
+
+class TestRecoveredPreviewOutput:
+    """Task 4.8: RECOVERED section in preview output."""
+
+    def test_recovered_section_header(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """RECOVERED section header appears when recovered refs exist."""
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=False):
+            preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert "RECOVERED" in captured.out
+
+    def test_recovered_shows_old_to_new(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Recovered refs show old → new path."""
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=False):
+            preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert '"SAMPLES/Old/Kick.wav" \u2192 "SAMPLES/New/Kick.wav"' in captured.out
+
+    def test_summary_includes_recovered_count(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Summary line includes recovered count."""
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=False):
+            preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert "0 changes, 1 recovered, 0 errors, 0 warnings, 0 missing." in captured.out
+
+    def test_no_recovered_section_when_empty(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """No RECOVERED section when recovered list is empty."""
+        result = BrokenRefResult(
+            errors=[
+                BrokenRefError(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/gone.wav"),
+                    deleted_path="SAMPLES/gone.wav",
+                ),
+            ],
+        )
+
+        preview_and_apply(result, tmp_path)
+
+        captured = capsys.readouterr()
+        assert "RECOVERED" not in captured.out
+
+
+class TestApplyIncludesRecovered:
+    """Task 4.9: Apply includes recovered refs (XML updated)."""
+
+    def test_recovered_refs_applied_to_xml(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Recovered refs update XML file contents after apply."""
+        deluge_root = tmp_path / "DELUGE"
+        xml_path = deluge_root / "KITS" / "KIT001.XML"
+        _write_minimal_kit_xml(xml_path, ["SAMPLES/Old/Kick.wav"])
+
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=SampleRef(
+                        path="SAMPLES/Old/Kick.wav",
+                        xml_file=Path("KITS/KIT001.XML"),
+                        xml_type="kit",
+                        preset_name="KIT001",
+                        ref_type="fileName-attribute",
+                        element_tag="osc1",
+                    ),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=True):
+            has_issues, applied = preview_and_apply(result, deluge_root)
+
+        xml_content = xml_path.read_text(encoding="utf-8")
+        assert "SAMPLES/New/Kick.wav" in xml_content
+        assert "SAMPLES/Old/Kick.wav" not in xml_content
+        assert applied is True
+
+    def test_apply_summary_includes_recovered(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        """Apply summary counts include recovered ref updates."""
+        deluge_root = tmp_path / "DELUGE"
+        result = BrokenRefResult(
+            recovered=[
+                RecoveredRefChange(
+                    ref=_make_ref("KITS/KIT001.XML", "SAMPLES/Old/Kick.wav"),
+                    old_path="SAMPLES/Old/Kick.wav",
+                    new_path="SAMPLES/New/Kick.wav",
+                    candidates=[("SAMPLES/New/Kick.wav", "hash1")],
+                ),
+            ],
+        )
+
+        with patch("fix_references.confirm_apply", return_value=True), patch(
+            "fix_references.update_sample_refs", return_value=1
+        ):
+            preview_and_apply(result, deluge_root)
+
+        captured = capsys.readouterr()
+        assert "1 files modified" in captured.out
+        assert "1 references updated" in captured.out
+
+
+class TestGetExistingSamplesRemoved:
+    """Task 4.10: classify_ref_changes no longer calls get_existing_samples."""
+
+    def test_no_get_existing_samples_in_source(self) -> None:
+        """classify_ref_changes source code does not reference get_existing_samples."""
+        import inspect
+
+        source = inspect.getsource(classify_ref_changes)
+        assert "get_existing_samples" not in source
+
+    def test_existing_files_still_valid(self, tmp_path: Path) -> None:
+        """Refs to existing files are correctly identified as valid (not missing)."""
+        deluge_root = _make_deluge_tree(tmp_path, {"DRUMS/Kick.wav": b"audio"})
+        _write_minimal_kit_xml(
+            deluge_root / "KITS" / "KIT001.XML",
+            ["SAMPLES/DRUMS/Kick.wav"],
+        )
+        migration = MigrationResult(
+            after_hashes={"hash1": ["SAMPLES/DRUMS/Kick.wav"]},
+        )
+
+        result = classify_ref_changes(migration, deluge_root)
+
+        assert not result.changes
+        assert not result.errors
+        assert not result.warnings
+        assert not result.missing
+        assert not result.recovered
+

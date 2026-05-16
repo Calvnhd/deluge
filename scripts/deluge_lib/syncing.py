@@ -17,11 +17,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
 
-from deluge_lib.scanning import FileFilter, ScanResult, print_path, normalise_mtime, scan_tree
+from deluge_lib.paths import SYNC_LOG_PATH
+from deluge_lib.scanning import FileFilter, ScanResult, normalise_key, print_path, normalise_mtime, scan_tree
 
 
-class FileRecord(TypedDict):
-    """Per-file dual-stat manifest entry — SD-side and local-side stats."""
+class _FileRecordRequired(TypedDict):
+    """Required fields for a manifest entry."""
 
     sd_size: int
     sd_mtime: float
@@ -29,49 +30,75 @@ class FileRecord(TypedDict):
     local_mtime: float
 
 
+class FileRecord(_FileRecordRequired, total=False):
+    """Per-file dual-stat manifest entry with optional content hash.
+
+    The ``hash`` field holds a SHA-256 hex digest or is absent/None when
+    the hash has not yet been computed (v1 manifests, newly added entries).
+    """
+
+    hash: str | None
+
+
 FilesDict = dict[str, FileRecord]
 
 
-def read_manifest(path: Path) -> tuple[str, FilesDict]:
-    """Read a JSON manifest file"""
+def read_manifest(path: Path) -> FilesDict:
+    """Read a JSON manifest file."""
 
     if not path.is_file():
         print(f"Warning: No manifest at {path}")
-        return ("", {})
+        return {}
 
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         print(f"Warning: corrupt manifest at {path} ({exc}) \u2014 treating as empty")
-        return ("", {})
-
-    timestamp = str(data.get("last_sync_timestamp", ""))
+        return {}
 
     files: dict[str, FileRecord] = {}
     for key, val in data.get("files", {}).items():
         if isinstance(val, dict) and "sd_size" in val and "sd_mtime" in val and "local_size" in val and "local_mtime" in val:
-            files[key] = {
+            entry: FileRecord = {
                 "sd_size": int(val["sd_size"]),
                 "sd_mtime": float(val["sd_mtime"]),
                 "local_size": int(val["local_size"]),
                 "local_mtime": float(val["local_mtime"]),
+                "hash": val.get("hash")
             }
+            files[key] = entry
 
-    return (timestamp, files)
+    return files
 
 
 def write_manifest(
     path: Path,
     *,
-    timestamp: str,
     files: FilesDict,
 ) -> None:
-    """Atomically write a manifest JSON file"""
+    """Atomically write a v2 manifest JSON file.
+
+    The output includes ``"version": 2`` at the top level and each file
+    entry includes a ``"hash"`` key (value is a hex string or ``null``).
+    A ``last_sync_timestamp`` is generated automatically.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
 
+    # Ensure every entry has an explicit "hash" key for v2 format
+    v2_files: dict[str, dict] = {}
+    for key, rec in files.items():
+        v2_files[key] = {
+            "sd_size": rec["sd_size"],
+            "sd_mtime": rec["sd_mtime"],
+            "local_size": rec["local_size"],
+            "local_mtime": rec["local_mtime"],
+            "hash": rec.get("hash"),
+        }
+
     payload = {
-        "last_sync_timestamp": timestamp,
-        "files": files,
+        "version": 2,
+        "last_sync_timestamp": datetime.now().astimezone().replace(microsecond=0).isoformat(),
+        "files": v2_files,
     }
     blob = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
 
@@ -96,9 +123,72 @@ def write_manifest(
         raise
 
 
+def build_post_sync_manifest(
+    plan: SyncPlan,
+    src_scan: ScanResult,
+    dest: Path,
+    old_files: dict[str, FileRecord],
+    source_is_sd: bool,
+    file_filter: str = "both",
+) -> dict[str, FileRecord]:
+    """Build updated manifest after a successful sync"""
+
+    from deluge_lib.deluge_sdk import hash_file
+    from deluge_lib.scanning import FILTER_MAP
+
+    copied_keys: set[str] = set()
+    for _src, dst in plan.files_to_copy:
+        copied_keys.add(normalise_key(dst.relative_to(dest)))
+
+    updated_manifest: dict[str, FileRecord] = {}
+
+    # Collect keys that need hashing (copied/new files)
+    keys_to_hash: list[tuple[str, Path]] = []
+
+    for key, src_entry in src_scan.files.items():
+        if key in old_files and key not in copied_keys:
+            updated_manifest[key] = old_files[key]
+        else:
+            dst_path = dest / src_entry.rel_path
+            dst_stat = dst_path.stat()
+            if source_is_sd:
+                updated_manifest[key] = {
+                    "sd_size": src_entry.size,
+                    "sd_mtime": src_entry.mtime,
+                    "local_size": dst_stat.st_size,
+                    "local_mtime": normalise_mtime(dst_stat.st_mtime),
+                }
+            else:
+                updated_manifest[key] = {
+                    "local_size": src_entry.size,
+                    "local_mtime": src_entry.mtime,
+                    "sd_size": dst_stat.st_size,
+                    "sd_mtime": normalise_mtime(dst_stat.st_mtime),
+                }
+            keys_to_hash.append((key, dst_path))
+
+    # Hash copied/new files and populate the hash field.
+    if keys_to_hash:
+        total = len(keys_to_hash)
+        for i, (key, path) in enumerate(keys_to_hash, 1):
+            print(f"\rHashing... {i}/{total}", end="", flush=True)
+            updated_manifest[key]["hash"] = hash_file(path)
+        print()
+
+    # Preserve manifest entries for file types not included in this filtered sync.
+    if file_filter != "both":
+        scanned_exts = FILTER_MAP[file_filter]
+        for key, old_entry in old_files.items():
+            if key not in updated_manifest:
+                ext = Path(key).suffix.lower()
+                if ext not in scanned_exts:
+                    updated_manifest[key] = old_entry
+
+    return updated_manifest
+
+
 _MTIME_TOLERANCE_S = 2.0
 _TRASH_DIR_NAME = ".trash"
-
 
 @dataclass
 class SyncPlan:
@@ -148,6 +238,10 @@ def _mtime_matches(mtime_a: float, mtime_b: float) -> bool:
 
     FAT32 has 2-second mtime resolution, so mtimes within ±2 seconds
     are treated as equal.
+
+    The ±2s tolerance on top of already-truncated timestamps is intentional:
+    FAT32 write/read cycles can shift a value by exactly one tick (2s),
+    so a single-tick difference must be treated as equivalent.
     """
     return abs(mtime_a - mtime_b) <= _MTIME_TOLERANCE_S
 
@@ -177,6 +271,8 @@ def compute_sync(
     Returns:
         The sync plan and the source scan result.
     """
+    from deluge_lib.deluge_sdk import hash_file
+
     plan = SyncPlan()
 
     # --- scan source and dest
@@ -195,35 +291,77 @@ def compute_sync(
 
         dst_entry = dst_scan.files[key]
 
-        # Deluge firmware does not record file creation time, and FAT32/NTFS record mtime differently
-        # The manifest lets us check changes on both source and destination for an accurate sync
+        # Deluge firmware does not record file creation/modified time
+        # FAT32/NTFS record mtime differently
+        # manifest helps track changes by storing hashes and mtime information
+
         if manifest is not None and key in manifest:
             manifest_entry = manifest[key]
-            # Compare each side against its own manifest baseline.
-            # SD side always uses tolerance (FAT32 quirks, Deluge firmware
-            # doesn't reliably write timestamps).
-            # Local side uses exact equality (NTFS/APFS timestamps are reliable).
+
             if source_is_sd:
                 sd_entry, local_entry = src_entry, dst_entry
+                sd_path, local_path = src_path, dst_path
             else:
                 sd_entry, local_entry = dst_entry, src_entry
-            sd_changed = (
+                sd_path, local_path = dst_path, src_path
+
+            # Check if SD file status differs from last sync recorded by manifest
+            # TODO: test if you can break this by changing a very minor value
+            has_sd_changed = (
                 sd_entry.size != manifest_entry["sd_size"]
                 or not _mtime_matches(sd_entry.mtime, manifest_entry["sd_mtime"])
             )
-            local_changed = (
+            if has_sd_changed:
+                # Verify genuine content change via hash
+                cached_hash = manifest_entry.get("hash")
+                if cached_hash is not None:
+                    if hash_file(sd_path) != cached_hash:
+                        plan.files_to_copy.append((src_path, dst_path))
+                        continue
+                    # No content change
+                    # Update stale manifest data and fall through to local check
+                    manifest_entry["sd_size"] = sd_entry.size
+                    manifest_entry["sd_mtime"] = sd_entry.mtime
+                else:
+                    # No hash available
+                    # To be safe, treat as if it's changed
+                    plan.files_to_copy.append((src_path, dst_path))
+                    continue
+
+            # Check if local file status differs from last sync recorded by manifest
+            is_local_time_valid = local_entry.mtime > 0
+            has_local_changed = (
                 local_entry.size != manifest_entry["local_size"]
                 or local_entry.mtime != manifest_entry["local_mtime"]
             )
-            if sd_changed or local_changed:
-                plan.files_to_copy.append((src_path, dst_path))
-            else:
+            if is_local_time_valid and not has_local_changed:
+                # Both sides match manifest
                 plan.files_unchanged += 1
+            else:
+                # Cache miss. Use hash if available
+                cached_hash = manifest_entry.get("hash")
+                if cached_hash is not None:
+                    local_hash = hash_file(local_path)
+                    if local_hash == cached_hash:
+                        # No content change. Update stale manifest data
+                        manifest_entry["local_size"] = local_entry.size
+                        manifest_entry["local_mtime"] = local_entry.mtime
+                        plan.files_unchanged += 1
+                    else:
+                        plan.files_to_copy.append((src_path, dst_path))
+                else:
+                    # No hash in manifest. Add one.
+                    local_hash = hash_file(local_path)
+                    manifest_entry["hash"] = local_hash
+                    manifest_entry["local_size"] = local_entry.size
+                    manifest_entry["local_mtime"] = local_entry.mtime
+                    # To be safe, treat as if it's changed
+                    plan.files_to_copy.append((src_path, dst_path))
         else:
-            # No manifest entry — fall back to direct source vs dest comparison.
+            # No manifest entry. Fall back to direct source vs dest comparison.
             if src_entry.size != dst_entry.size:
                 plan.files_to_copy.append((src_path, dst_path))
-            elif not _mtime_matches(src_entry.mtime, normalise_mtime(dst_entry.mtime)):
+            elif not _mtime_matches(src_entry.mtime, dst_entry.mtime):
                 plan.files_to_copy.append((src_path, dst_path))
             else:
                 plan.files_unchanged += 1
@@ -335,9 +473,9 @@ def execute_plan(
                 remaining=trash_count - trashed - 1,
             ) from exc
     elif trash_count and delete_mode == "delete":
-        print(f"Deleting {trash_count} files...")
         try:
-            for path in plan.files_to_delete:
+            for i, path in enumerate(plan.files_to_delete, 1):
+                print(f"\rDeleting... {i}/{trash_count}", end="", flush=True)
                 path.unlink()
                 trashed += 1
                 # Clean up empty ancestor directories up to dest
@@ -357,6 +495,8 @@ def execute_plan(
                 unchanged=plan.files_unchanged,
                 remaining=trash_count - trashed - 1,
             ) from exc
+        if trash_count:
+            print()
 
     return SyncResult(
         copied=copied,
@@ -368,18 +508,13 @@ def execute_plan(
 def append_sync_log(
     result: SyncResult,
     *,
+    direction: str,
     elapsed_seconds: float,
     error: str | None = None,
-    log_path: Path | None = None,
 ) -> None:
     """Append a structured entry to the sync execution log."""
 
-    # default to "From SD" log if none is specified
-    if log_path is None:
-        from deluge_lib.paths import FROM_SD_SYNC_LOG_PATH
-        log_path = FROM_SD_SYNC_LOG_PATH
-
-    log_path.parent.mkdir(parents=True, exist_ok=True)
+    SYNC_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     status = "FAILED" if error else "SUCCESS"
     elapsed_m = int(elapsed_seconds) // 60
     elapsed_s = int(elapsed_seconds) % 60
@@ -387,6 +522,7 @@ def append_sync_log(
 
     line = (
         f"{timestamp} {status}"
+        f" direction={direction}"
         f" copied={result.copied}"
         f" trashed={result.trashed}"
         f" unchanged={result.unchanged}"
@@ -395,7 +531,7 @@ def append_sync_log(
     if error:
         line += f' error="{error}"'
 
-    with log_path.open("a") as f:
+    with SYNC_LOG_PATH.open("a") as f:
         f.write(line + "\n")
 
 
@@ -404,11 +540,11 @@ def report_empty_dirs(dest: Path) -> None:
 
     Bottom-up walk, skips .trash/.
     """
-    from deluge_lib.scanning import _SKIP_DIRS, print_path
+    from deluge_lib.scanning import SKIP_DIRS, print_path
 
     empties: list[Path] = []
     for dirpath, dirnames, filenames in os.walk(dest, topdown=False):
-        dirnames[:] = [d for d in dirnames if d.lower() not in _SKIP_DIRS]
+        dirnames[:] = [d for d in dirnames if d.lower() not in SKIP_DIRS]
         current = Path(dirpath)
         if current == dest:
             continue
