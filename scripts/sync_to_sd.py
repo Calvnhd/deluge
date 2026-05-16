@@ -9,7 +9,6 @@ Pass --dry-run to preview only.
 from __future__ import annotations
 
 import argparse
-import shutil
 import time
 from pathlib import Path
 
@@ -17,95 +16,16 @@ from deluge_lib.cli_utils import confirm_apply, get_deluge_root, get_sd_card_pat
 from deluge_lib.paths import SYNC_MANIFEST_PATH
 from deluge_lib.syncing import (
     SyncError,
-    SyncPlan,
     SyncResult,
     append_sync_log,
     build_post_sync_manifest,
     compute_sync,
+    execute_plan,
     print_plan,
     read_manifest,
     report_empty_dirs,
     write_manifest,
 )
-
-
-def _execute_to_sd(
-    plan: SyncPlan,
-    *,
-    dest: Path,
-) -> SyncResult:
-    """Execute the sync plan by copying repo files to SD
-
-    The execution has two sequential phases: copy and delete
-
-    Args:
-        plan: The computed sync plan.
-        dest: SD card mount point.
-
-    Returns:
-        SyncResult: Counts of copied, deleted, and unchanged files.
-
-    Raises:
-        SyncError: On any file operation failure, with context about progress.
-    """
-    copied = 0
-    total_copy = len(plan.files_to_copy)
-
-    # --- Phase 1: copies (repo → SD) ---
-    try:
-        for i, (src, dst) in enumerate(plan.files_to_copy, 1):
-            print(f"\rCopying... {i}/{total_copy}", end="", flush=True)
-            dst.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(src, dst)
-            copied += 1
-    except OSError as exc:
-        if total_copy:
-            print()
-        remaining = total_copy - copied - 1
-        raise SyncError(
-            str(exc),
-            file=str(src),
-            copied=copied,
-            unchanged=plan.files_unchanged,
-            remaining=remaining,
-        ) from exc
-    if total_copy:
-        print()
-
-    # --- Phase 2: delete from SD ---
-    deleted = 0
-    delete_count = len(plan.files_to_delete)
-    if delete_count:
-        try:
-            for i, path in enumerate(plan.files_to_delete, 1):
-                print(f"\rDeleting... {i}/{delete_count}", end="", flush=True)
-                path.unlink()
-                deleted += 1
-                # Clean up empty ancestor directories on SD up to dest root
-                parent = path.parent
-                while parent != dest:
-                    try:
-                        parent.rmdir()  # only succeeds if empty
-                    except OSError:
-                        break
-                    parent = parent.parent
-        except OSError as exc:
-            raise SyncError(
-                str(exc),
-                file=str(path),
-                copied=copied,
-                trashed=deleted,
-                unchanged=plan.files_unchanged,
-                remaining=delete_count - deleted - 1,
-            ) from exc
-    if delete_count:
-        print()
-
-    return SyncResult(
-        copied=copied,
-        trashed=deleted,
-        unchanged=plan.files_unchanged,
-    )
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -166,7 +86,7 @@ def main(argv: list[str] | None = None) -> None:
 
     start_time = time.monotonic()
     try:
-        result = _execute_to_sd(plan, dest=sd_path)
+        result = execute_plan(plan, dest=sd_path, delete_mode="delete")
     except SyncError as exc:
         elapsed = time.monotonic() - start_time
         error_result = SyncResult(

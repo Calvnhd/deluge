@@ -1,0 +1,3490 @@
+[
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Acid Synth Bass_keyA#Maj_124bpm.wav",
+    "sha256": "8316ad42b01b5699a671aa3eec6ed95b9e466f673d48de31be3195f3e6229368"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Chord Dub_ Filter_keyC#Maj_130bpm.wav",
+    "sha256": "eb461439562765625d52e7fe1f26962c02ba45d41d191fa8fa67522be60a1d83"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Chord Dub_Lofi_keyA#min_130bpm.wav",
+    "sha256": "b6a79b9cc31adfe1ec3c9e768e60627c3c1d1cd8befdb3085354c66cc38da32e"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Clap Delay_130bpm.wav",
+    "sha256": "fc47d734c9e38bd688e0f782ca28c58c49cdc66ba0a7dfb0036b44a2f1de5ac4"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Clap Reverb_01_124bpm.wav",
+    "sha256": "9c65d3608e360c986c0a0ca0f73e5eaaab03091a02b9eaa2b2aca5de3dee26a4"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Clap Reverb_02_124bpm.wav",
+    "sha256": "82ae78acbaf86daab67e58717d8d918baf6f280b3cac973e96de3916f2d35fab"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Closed HiHat_124bpm.wav",
+    "sha256": "0b09898d7830f28d07f3574567a059862c5c53c1251d6e695e5a1b09227d1843"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Dry Perc_130bpm.wav",
+    "sha256": "d62dfab7094ea099b49abe339888b526e93e3d8d35eff3db97f851691ab0d30c"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_HiHat Delay_02_124bpm.wav",
+    "sha256": "2b7cf3060cc095ace34952c268ebd91bde1e2370a2b47babb40e9f65f94e701a"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_HiHat Delay_03_124bpm.wav",
+    "sha256": "0ed4289e911760323cba7b55f3db7d533ad47659be04f070d18f0231251a8c1a"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_HiHat Delay_04_125bpm.wav",
+    "sha256": "7d3ae4003b7dbd820fbd548571d1db6442b03cd8ec26fb1abfc9b449b98c3ccc"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_HiHat Phaser_130bpm.wav",
+    "sha256": "e348026c66b5665fa0a3195d24a4fd6ba8fcb71c0c5c6aee493bf6cfa7e2eed3"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_HiHat_115bpm.wav",
+    "sha256": "4f687e478d324a430c2ecdb3c1062eb01d99d5b399ef4ecbcb46bd074b5ba5d2"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Kick_01_124bpm.wav",
+    "sha256": "38e7bb1e58be4f310a3edaa88968601969f64e014dfc096397f44b0672d79bb8"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Kick_02_130bpm.wav",
+    "sha256": "8d2efe7e82304aa12f5bc39b53bbf1db325ba9a2f9d217bd50f151eb84bb683b"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Kick_Short_115bpm.wav",
+    "sha256": "c1221236779f11273a4ddf2c419627552ea6ddcc9526a332606ba87414e5a61e"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Lead Melody_01_keyGMaj_130bpm.wav",
+    "sha256": "169655d663369bf8d810cdb5de0fb2c9a688c8ba2778ef7503652d3386c4b9d9"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Lead Melody_02_keyGMaj_130bpm.wav",
+    "sha256": "1c2da831d0d6fd91d936da690c96e66fa49cc1de27722393436ccd5ee2aa05a3"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Metallic Perc_01_124bpm.wav",
+    "sha256": "1ed6e9752f909b3ea87d10d641fe0da35cfb3f35da256d74ab8b5b12913ebf48"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Metallic Perc_02_124bpm.wav",
+    "sha256": "d4f8c5d410f86e805813c5f0da0dabefed78073c93bcb825e09a555b832f1961"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Metallic Synth Perc_keyC#min_130bpm.wav",
+    "sha256": "a474b4ea47410995b91c6b142dcbbaf3a054e6ab23e9104b5abf29d4bc8d424e"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Modular Synth Arp_01_keyC#Maj_125bpm.wav",
+    "sha256": "379607e8ff7b8c0da966023d7a05b3a9eeae939d7b58e18baf9653dad2d73676"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Modular Synth Arp_02_keyF#Min_124bpm.wav",
+    "sha256": "2cbc90bc1a41b837eb562699978940e626f436fcb729fd70f31ce403e77013cc"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Modular Synth Pluck_keyAMaj_124bpm.wav",
+    "sha256": "e314cbf513274b9a9babbc1d54ef2b74b8fb10f6105f2ee09fd9c363460dc23e"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Noise Drone_125.wav",
+    "sha256": "44331ac87b86fbe35d2496e8a336eca9c73f54b5d9fb2c50b294958f1b20dadd"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Noise Sweep_125bpm.wav",
+    "sha256": "ba48e603803f14a23fb1555d5930203148959bd8cc1475b8e2de8b5a209f2455"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Open HiHat_02_124bpm.wav",
+    "sha256": "2c9c4ee50f21c2842f7c8d9456aa8b9eaa5f98273b063a561359c0334d3a72d9"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Reverse Piano_keyD#Maj_115bpm.wav",
+    "sha256": "bd04c06323d7cd6a1725868a9fa85307abead51cefbea4bf163659803cb211a7"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Ride Delay_130bpm.wav",
+    "sha256": "92a280029a021653b06a496c719cafd9e07114f43aa7bf79a6ccdbffd0e09352"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Shimmering Pad_keyFmin_115bpm.wav",
+    "sha256": "385208a31245b9eaae642997baab8612cbe8a9e80fd3cdcd71af84984c9d0bb3"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Sub Bass_01_keyCmin_124bpm.wav",
+    "sha256": "9e93de670767acd8dc12e691f6fc60d1ab427aeba7f72ba6dfe14d5d80a6e88b"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Sub Bass_03_keyEmin_124bpm.wav",
+    "sha256": "12bcd87779b3cd98c8d959dbc6fbba2b90f845960b5bea11f5d6c6e3d286b320"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Sub Kick_124bpm.wav",
+    "sha256": "2343b15776a022d4b44235403a3ca5412400011258e0dcf1272bd7ec4738ccc7"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Sub Perc_130bpm.wav",
+    "sha256": "f04c6305bd79f4d94e964f77a589be1afd10127de4bf921fc9fd402b02a894fe"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Arp Random_03_keyBmin_130bpm.wav",
+    "sha256": "c4a04751a56b951af1c962b4946db677ea5c4d6552781b669f3096452e6de751"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Arp_01_keyAMaj_124bpm.wav",
+    "sha256": "902ab839c8e4884ffc7433764798b451e930e5d3a1fdc74e91ed8c3ced9d40ac"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Arp_02_keyF#min_124bpm.wav",
+    "sha256": "95347bdd944df64f03fab63fdbdd23291bdec7f991844d19ed826f4a1830cd68"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Arp_03_keyC#Maj_125bpm.wav",
+    "sha256": "7ada9d2a48770b2886b1e9f3d5855078a9ba45a83cccd6ea7ed1dfbfa0013c27"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_01_keyFmin_115bpm.wav",
+    "sha256": "ff7d77f7e0762355c888ec1a6f9a4643a639642db04cdf2046340012b44691d3"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_02_keyFMaj_115bpm.wav",
+    "sha256": "893119ec8a9dfe20d9e5ad1ee5267d824404383d70823cd1b53e47369b4aef2a"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_03_keyFmin_115bpm.wav",
+    "sha256": "9797d8abe2e92f6ae0ad3800b1cd6260ec8dc51e54202c41dd185e740a7ad323"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_05_keyA#Maj_124bpm.wav",
+    "sha256": "a5f86dd3becd1f4eb930ac7b096453a7331cadaadf4869d68c11e6e7cd9538c1"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_06_keyF#min_124bpm.wav",
+    "sha256": "bd1e1e4e512479418d7f3b34fa8773463eee46dc3992ea9b04620f996727852d"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_07_keyBMaj_124bpm.wav",
+    "sha256": "9fd9be6127aee48f02756a14cb4d53709fffabd12079cf14cef9a9883348a201"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_08_keyG#min_128bpm.wav",
+    "sha256": "f5c578e2f280eee92d25693a5d82985534f0f5b80bc786b60a53beb56cbf7cd1"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_09_keyF#min_130bpm.wav",
+    "sha256": "87ae9bb87e42331e0d2aafaf2ecd3bfc8a8c264f40d163f822acf6b49a597aad"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Bass_10_keyGMaj_130bpm.wav",
+    "sha256": "fa5aa3b52b063233f500c9c90c3c26d85e0499d593b8457517598b8cf16de1a3"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Choir_keyBmin_30bpm.wav",
+    "sha256": "11bccf1452166422bef696e9f2f2dae63d0711add53a70d23faf851e6ed1dd4b"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Chord Dub_01_keyEmin_130bpm.wav",
+    "sha256": "f2ee9d7707083e8b052215c2ac7d9da65128bcce2e69fba7897a9add41fc6455"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Chord Dub_02_keyEmin_130bpm.wav",
+    "sha256": "6a879a444fb4c0063edcefd7170317b8b66262047899fa46968f77aba91b8d83"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Drone_keyEbmin_115bpm.wav",
+    "sha256": "f48cd113399a9fb7435c08f840014d20092dc5ae51b11c16629231d5b86c68ac"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Flute_Melody_keyGMaj_130bpm.wav",
+    "sha256": "9226d6644083b3a88b117d9a7f03c3e5df9e2af1aeb0026c56482c27a0b932cf"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Keys_01_keyEMaj_125bpm.wav",
+    "sha256": "ecd35e3453487390fe2289c6328476b6238694dc183e4f004a582fa89c23f294"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Keys_02_keyEmin_123bpm.wav",
+    "sha256": "88b6ecd253152e02e2110292ad0f0b3007d24a1b72e954256cef29b180710050"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Melody_01_keyGMaj_130bpm.wav",
+    "sha256": "c3d54f040e26f4db0dcc89cefb1b2d63597e86b8d25eee065b12cf381629e09b"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Melody_02_keyGMaj_130bpm.wav",
+    "sha256": "19490d93e58977402c47eba4765b14313350b7f1ff7734993dbf8c7ac64a0cfb"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Pad_keyGMaj_130bpm.wav",
+    "sha256": "ae5dc4fae3d656e41d7c76ffcee86e7a5a8e712cda3ae62643929e7967f1347d"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Perc_keyF#min_130bpm.wav",
+    "sha256": "74c96c5cafd4273ca63676ce9bc734f30af0f4f53da9f10804195896692cfcee"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Strings_Chords_keyAmin_123bpm.wav",
+    "sha256": "98d6481133b6ae2269c6aa2700cb329a4bd8f72ca438b8ca4775857666b11bb5"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Strings_keyDMaj_124bpm.wav",
+    "sha256": "6c588c11ec85f08dba4b2f60b7df68b64d0ba747920d64fb4b6253cbc1db2cfd"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth Tom_125bpm.wav",
+    "sha256": "cb85a638771d673afe4a772b8878193093227cd7b388d539fab66cb6c3787fa9"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth_01_keyAMaj_124bpm.wav",
+    "sha256": "3ebd908d84cdfda89783761c5883b2e38a20acfca16a6d008eca51ae58e46931"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Synth_02_keyDMaj124bpm.wav",
+    "sha256": "9547b1e4d2b119aac425913258d9b6b77a0bbffd6babc41f4e8927177b063edc"
+  },
+  {
+    "relative_path": "Melodic Tech House/Loop/MTH_Tom Delay_115bpm.wav",
+    "sha256": "3c637c448b1f17f559119078e14ef5e79ab8cde94c0e512361fb78949ed86288"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Clap Reverb_One Shot.wav",
+    "sha256": "e6d5fd9213eb5ca7179ad460d6aae9190212280fa64f2434183d14ab0b11f6eb"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Clap_01_One Shot.wav",
+    "sha256": "9a10954e2be092e4f75e0bb5bff41df43552eb934769bbb5f6cf79259d18fba2"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Clap_02_One Shot.wav",
+    "sha256": "e7682504e89bd270459358f201f33f18536f0c9d8792a42ac43131da500aa9d2"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Clap_03_One Shot.wav",
+    "sha256": "1216cdbefbca5b4beb40bd0447a1f42fa891de969df9c69aa6cc541161d2ce1d"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Closed HiHat_One Shot.wav",
+    "sha256": "dedcd20bcc78f1731ff7b032e00631d916cacbfcae3a723c2f15605fd5a506f1"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Crash Reverb_One Shot.wav",
+    "sha256": "8de5a62919be31d44a45a996069f2cf51be331c64146f6285d859972f3042227"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Distorted Kick_One Shot.wav",
+    "sha256": "98b3552ccf3eccabf895098fe702f6730748c80cc7df26a30a64e1d8ead9ac71"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Dub Kick_One Shot.wav",
+    "sha256": "2f4c585cefb899d875c3e21fcb9dde0254820b0e79a1382116aa7331a59ff049"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_HiHat Reverb_One Shot.wav",
+    "sha256": "c52c98b9ae75e7a55807c562b9a7bf2013afd129eeeb5dfe5b6c939acf3a11c0"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Kick_01_One Shot.wav",
+    "sha256": "cd974d16ef69548cbef9ea70abc5564f1048fc5bb0bfbd58baf78450bcaad815"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Kick_02_One Shot.wav",
+    "sha256": "91069674e56d7aeb35ce063ce12f25c3e3ffd2d151b53b9bb1422112d8cf6ee6"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Open HH_One Shot.wav",
+    "sha256": "a1162ed54495a53d79a3fee6c9059274a4a51f5e19f9ca85c8ac8caaeca41c0c"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Perc Reverb_One Shot.wav",
+    "sha256": "c8828e0f45e69e3f426c6b836bd9a8516f4388a3cf250865388ab9aa23e28c68"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Perc_One Shot.wav",
+    "sha256": "1a1bbbc054affc7ba8bcd141b66b40af3991e5bf4582a94c6a0e6814909cb8e1"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Rim 909_One Shot.wav",
+    "sha256": "1920fa013d3a772544dc803875e5a722068c982032daa003c0968fe425790921"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Rim Reverb_One Shot.wav",
+    "sha256": "05bf320b8406de07174cb721ab73a9756671d9d8096b7dfc7f847fe596a69648"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_SFX_01_One Shot.wav",
+    "sha256": "184cd5a5a34c899af86c2fbccfc50ec922a459997bed473d695bbc8e3d981c78"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Snare_One Shot.wav",
+    "sha256": "57e8828b2bfbd405a7c6c993326d9e9dd94dec41d7a7c4a64db149f8727abe62"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Sub Kick_01_One Shot.wav",
+    "sha256": "515c77205960a9e1cc9391ecda722dffcb2c8ed24286fa0ae828e060b6a0d8a1"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Sub Kick_02_One Shot.wav",
+    "sha256": "0a1cbfc36f79971cb7a52617c51c087f81c3559d5fa39c8ca4c905fba0ad8847"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Sub Kick_03_One Shot.wav",
+    "sha256": "d83e5dca5c44fcaf16ece4414683d688d116245243132179fda9ef9bfb5677c4"
+  },
+  {
+    "relative_path": "Melodic Tech House/One_Shot/MTH_Synth Bass_One Shot_B.wav",
+    "sha256": "4e0e6db6cc9e6527a689525bc8b76fa7c76910ef3f900d375fd849b6a1388909"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_01_keyG#min_120bpm.wav",
+    "sha256": "1967178d429b8ee0d937a5620dd6f8ee4b5b497d02ac551456ff62c735da72ae"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_02_keyD#Maj_120bpm.wav",
+    "sha256": "e196364ec79cc82c2ee519542027c403107428e24fe942649695510830c4c4c6"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_03_keyD#min_120bpm.wav",
+    "sha256": "d854e6c32bd58d92b332496903955d6dce4959111767935e0e859ffa7d77c38f"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_04_keyD#Maj_120bpm.wav",
+    "sha256": "0d00614ddea61e9647d75f79fac289ea5acfce53a05cca305f927ce7da71d271"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_05_keyG#Maj_120bpm.wav",
+    "sha256": "89eb778e816d5e9c4efa941fb4abedf842daf91cf076c43207e89bdace01934b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_06_keyG#Maj_100bpm.wav",
+    "sha256": "d243e2986db997f5d517cfa0f44a115a4510a8eeab5d4faa75e27a019beba6a8"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_07_keyC#Maj_100bpm.wav",
+    "sha256": "0bb8f3faea9097978a4cb0f8627271185512a5f5ab4879054448be19998cacda"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_08_keyG#Maj_100bpm.wav",
+    "sha256": "32ecf497604dbc52739f434d171a71302d8780b2b1c98caab62d351313d38843"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_09_keyG#min_110bpm.wav",
+    "sha256": "c27bb992f5d4a173f4c0111add6b44b9355274de7ea2256b1f050de0fe3e7689"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_100_keyG#Maj_116bpm.wav",
+    "sha256": "83d6314ad6c82112f7be0571fa4d48a927ecf6fb2fc4acda5d77827b366eb640"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_10_keyF#min_110bpm.wav",
+    "sha256": "9a0f6c16728c9cb42673e1e19fad8e61008f80454bd24abaf5765049d2b8bb66"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_11_keyF#Maj_110bpm.wav",
+    "sha256": "64e3a04cfed47ed5e3e9c28afdbab4b89b969353c28e343e7ac15632d2c32658"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_12_keyF#min_110bpm.wav",
+    "sha256": "aa0d8687801e6e2bf4e4873214df547f45ba66a8b2d8c931f259b772c2475387"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_13_keyAMaj_105bpm.wav",
+    "sha256": "46dc4700d5d985988fa7181318ce43b5c3d117ee075ce584cfbbb7a5d87f5f69"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_14_keyAmin_105bpm.wav",
+    "sha256": "2c2bd36c00bd87bbfd369bf2e6b63d3b58d3da1470f8598d82cf473edef495c0"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_15_keyEMaj_110bpm.wav",
+    "sha256": "1c099060ee61831db778453e9b8ae2da4028135a6996d7fd0b0fe842eec1fe06"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_16_keyEmin_110bpm.wav",
+    "sha256": "efc24b5e5dcc6a9ef2159eadde2a0b877633789b2459ecb4f4901ea26141b7e5"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_17_keyEMaj_110bpm.wav",
+    "sha256": "6800aef359ada10898a4304ff1fe983837965d271519eeeb3cd4a4bb1eb60317"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_18_keyEMaj_110bpm.wav",
+    "sha256": "66720869f03d5eca8ac451e16cda82d5dc9c0156b458aa388744a4ba533d6a3b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_19_keyEMaj_110bpm.wav",
+    "sha256": "39474cceaac2e10807e08a9b5b673cee90d6564383239ae9c8c886907e7f22a9"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_20_keyEMaj_110bpm.wav",
+    "sha256": "1a1b6c319ee6dfd37cae144022f1e37a3181eba82d4ebb36b60246374b854e42"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_21_keyGMaj_130bpm.wav",
+    "sha256": "3776896190b6fbc0e97e68ceda45a7b31e6698df9f6e21602683242f0e534d16"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_22_keyG#Maj_130bpm.wav",
+    "sha256": "a93666c599c0f5146422f26c12c490e5593979a469cce1bf9eb728325701f997"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_23_keyAMaj_130bpm.wav",
+    "sha256": "d36f63b77fe1305cd20c74f9a6b437691c3466253e1d013207227479e39ad95b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_24_keyCMaj_130bpm.wav",
+    "sha256": "cac3ac6f5dcae8b74aff95a8226fad08e77fc783ae6b9464309b0e9d79b212bb"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_25_keyGMaj_130bpm.wav",
+    "sha256": "4af0654fd7cffff56b5ed39702d8904f63c13cdb96b861b3c584bd165c8a1ef7"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_26_keyA#Maj_180bpm.wav",
+    "sha256": "be3b25d663146060731445f7fa760a71dcde5891c89c9103ac366a574f935144"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_27_keyF#Maj_180bpm.wav",
+    "sha256": "65c7b72eada53081d6543de212c3aa165cffad2488e8b7ac660ee31b3aba0915"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_28_keyF#Maj_180bpm.wav",
+    "sha256": "004ccea0fb50532acb4e1197056e3147302f0e44434573447a89d3d0ef81a51d"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_29_keyF#Maj_180bpm.wav",
+    "sha256": "2e9c71eba4a4791d10746b5d6e78f1cec142eef9fedca93f680fdf17b5dd99c6"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_30_keyF#Maj_180bpm.wav",
+    "sha256": "99af7f931d3d74825a7be743e5e1f6cb8c9ab2bacc230facb8c4259a51a5ce7b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_31_keyC#Maj_110bpm.wav",
+    "sha256": "d87d0194d7942c299e5c8e86c9fc34e2c8b603ff3916ac98e8b9921944babbc2"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_32_keyF#Maj_110bpm.wav",
+    "sha256": "e5b72ba1f2c36d4e2c12221a75f90b99465ea2dcc9740563bbdb1f1d9462b06f"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_33_keyAMaj_110bpm.wav",
+    "sha256": "41e890d3ea33abf25a1125c75dd929dcd58028cc950e4a83e28265ba7b8a7c8b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_34_keyG#min_110bpm.wav",
+    "sha256": "049aac2daa0541e7c8f5cc5a962966822cad6caeaf33c68bff81135b248903f5"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_35_keyG#min_110bpm.wav",
+    "sha256": "606f7f7ac50abb3851abafd7febea166a17c34534eb6ba65d50c9157e59bd89c"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_36_keyG#Maj_110bpm.wav",
+    "sha256": "105076030d8c0ebf09749177ac2fa287cabe3306877e80b2becf2163e7565fa4"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_37_keyG#min_110bpm.wav",
+    "sha256": "8a9908a3b0d31445b14a8b83446074d54110f9456e4bd86d2f3a335a55eed57c"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_38_keyG#Maj_110bpm.wav",
+    "sha256": "5c998e45c98289cf8b075e933813d02cd17be872926e240ed8cf0ab0943bf47b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_39_keyDmin_110bpm.wav",
+    "sha256": "c66f457eef85ce02cf7fd938766aec224acc67748bfee5ea3ae86c6652bd55e1"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_40_keyBmin_110bpm.wav",
+    "sha256": "5df3778f31713f0b2258a340d4a20ba841c9249e6e050b53e882601272c4ac1a"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_41_keyDMaj_110bpm.wav",
+    "sha256": "e7657501b107bb2f0dd868d119483beb629849357ab2cbf209fa6b70272b1131"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_42_keyG#min_110bpm.wav",
+    "sha256": "80007f2dd9c58944b7a19ba8709428942b23b4ab1ccc20161d7181696ee9935e"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_43_keyG#min_110bpm.wav",
+    "sha256": "e6a776c3586dd4bc1b44b9c1645a4e92c0fd51b0a1823ebb7f1c858ba7a4b5bf"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_44_keyG#min_110bpm.wav",
+    "sha256": "f2ba5a3c2633a41c03eb5b2bbebcf06a43bc4730ebdda682b06b1db9048749a5"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_45_keyAMaj_110bpm.wav",
+    "sha256": "4ac13f9afe61fa37674b3840059a1080cc0b744ee055747121825087ffbf092c"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_46_keyEMaj_120bpm.wav",
+    "sha256": "7bc2672a5b0a1919941a0e2c785be807e5559021a2bb75f6ecd6cf5a02833aaa"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_47_keyEMaj_120bpm.wav",
+    "sha256": "efd69e4fc35d962ef2b5f45fa6d0b350251d7d5c4e85ff88c9352137853d98c2"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_48_keyAMaj_120bpm.wav",
+    "sha256": "76b12444009972c59c661140f773a05ad7ed03c18ebd25ae83101f9661e6389c"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_49_keyBmin_100bpm.wav",
+    "sha256": "9862ee5c63cd2de92f1657d768b69d40b5a6ccebec86f20b8812343d318f1dc9"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_50_keyBmin_115bpm.wav",
+    "sha256": "d47c325b8792886477b852fefd61822bba510b31b91ebb98e70ae28ae0fdb714"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_51_keyBmin_115bpm.wav",
+    "sha256": "5b3d1d5ac984d3968d158a8bd396341959d6bff17ded6e09cd4ddf056c263432"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_52_keyBmin_115bpm.wav",
+    "sha256": "be98551bd3203bee3088138c68386bf7028d6d79155b943f97d16633360dc992"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_53_keyBMaj_119bpm.wav",
+    "sha256": "eb1250fc4e23abe124468b3f4e35efa742ce012af6e8d273ccf1150599a83ea6"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_54_keyFMaj_119bpm.wav",
+    "sha256": "a7fa417115323b2f3594ccd73395e95b6d5ca1fa2207d3aa7e0c1e7813e99c49"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_55_keyBMaj_119bpm.wav",
+    "sha256": "d7d56defcac4baa705f0e9b921d86b5d4903dcffca205f0165780480bea11d5b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_56_keyFMaj_119bpm.wav",
+    "sha256": "1584963888d7351aa7cef16da0b7201f2ba33a1ff96a5facaac3679f189db6fa"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_57_keyFMaj_119bpm.wav",
+    "sha256": "2ceaf83216d59ede746138bccb7686cd34de574d0ea71a44bdc19d5313516556"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_58_keyD#Maj_120bpm.wav",
+    "sha256": "89b6cb9e420a11e93d769e554660a47c6bf078f4e477b60cd0abe5e0d507faa0"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_59_keyG#Maj_120bpm.wav",
+    "sha256": "1fba9f80c178facb0b4887bc18e8c96a42130a3ed1e0bbb70f3009e47d3d4c79"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_60_keyD#min_120bpm.wav",
+    "sha256": "5c4ad4207ea49c224cee212dc6f2e159f105adefd6e19a476162c150cce2554f"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_61_keyD#min_120bpm.wav",
+    "sha256": "b20db25b94f316a3dcb6b782767876b39b998b0188cf5d43e6a749899e5fbda4"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_62_keyD#min_120bpm.wav",
+    "sha256": "018021b4a8a412591b3617317198fc50fb0c13cbda266008b59d9fd84a691765"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_63_keyD#min_120bpm.wav",
+    "sha256": "8083bc0373ea76a7eacfc90d584be7ef807e6548bc85beff06109407f70c619a"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_64_keyD#min_120bpm.wav",
+    "sha256": "4241a6e295da7ebc6dbe9889a1b22cd038850d176983bb1e97456f4b34d48b36"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_65_keyAMaj_121bpm.wav",
+    "sha256": "fd4fdcd21805debd77a965e8e7be0cac448d42458334bb38c89088017e47a521"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_66_keyFMaj_121bpm.wav",
+    "sha256": "e9116cd557ef5c40530851f5d9c4e4effdbde2eebcebac3e521e79407d4fc8db"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_67_keyF#min_123bpm.wav",
+    "sha256": "eed48b3e36ca701c576f7e48bbec801e6d0f7a8438c7db9c3a223fdc78b39d88"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_68_keyF#min_123bpm.wav",
+    "sha256": "b84c49dea7c112ed97a0f0e49277a7f92719ab9cc319c16a1d587b68993dc97e"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_69_keyBmin_123bpm.wav",
+    "sha256": "338360367277c0c440ce1f0534e62ac9559aa6a26e7b948d0434d2f2ce512466"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_70_keyBmin_123bpm.wav",
+    "sha256": "6670dd5558879ecf6891f7ae4b779947471c4682dac3015d0249e0f7cb282ce6"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_71_keyBMaj_123bpm.wav",
+    "sha256": "f3fa2874022f67c532f7ec3685a9a94169372220ac8b6034cbe35d31049179bc"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_72_keyBmin_123bpm.wav",
+    "sha256": "568d1ccb2b9c85d89304b968b7d10d906ed6280af124c9ab7e6a14f95c220960"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_73_keyBmin_123bpm.wav",
+    "sha256": "5097149fa21b1bc2e0e3acaa3203451f0107e1cc3b1440bd9df1a56597ed459f"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_74_keyBmin_123bpm.wav",
+    "sha256": "5357a098a57b53503b6fbdd1a7c2074207c52a0cca1d8324af3901c3d7b6bc86"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_75_keyBmin_123bpm.wav",
+    "sha256": "2ae9a77e743f86228ffad362643fc2fd42f74a45899a749dc2f42b201d7203b0"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_76_keyBmin_123bpm.wav",
+    "sha256": "2abb17942735e60aad2939548d3fb264d5656cdebd2a2f65e50f95b90f209172"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_77_keyBmin_123bpm.wav",
+    "sha256": "a48ae5e89e777839407006a99ac141d3549f569df62c4123950dcde9e5b5168e"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_78_keyBmin_123bpm.wav",
+    "sha256": "8bc06fda87d26822729662510b0d08804421c09c596df158097ed103e1b6dcaf"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_79_keyBMaj_123bpm.wav",
+    "sha256": "665b83158efb0390375576755e1391fe9cb1c71ba96a609e323c67e196d5e37e"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_80_keyEMaj_123bpm.wav",
+    "sha256": "ba41b2883922a70678838fe2fe635bc04ec927b69275b15e4674ec9371fb0ddc"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_81_keyAMaj_123bpm.wav",
+    "sha256": "b0b5a2c861b48c58b5020bbeb7cee5e6af2ebee5cdcd61c7d6def4f8adc190a3"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_82_keyAMaj_123bpm.wav",
+    "sha256": "5f7d07926ed517ebf0ebff8e799aecc018f37b3e11033d68d1b56456c121be6b"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_83_keyAMaj_123bpm.wav",
+    "sha256": "fb2291c8998124f7a3d4a969802ae84610b62879935b1b0dd41f3aa76dbcba4c"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_84_keyBMaj_123bpm.wav",
+    "sha256": "3e14ead4bcba6fe610076a212a70dbeafd1a37caa35babec096de2ec43d4c0cd"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_85_keyFMaj_123bpm.wav",
+    "sha256": "8d4091464538b7aad7e113f30f92d418acd2dc79a16fd985b6e12bcf89eb7472"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_86_keyFMaj_123bpm.wav",
+    "sha256": "77ab827efacdc58a53a6c308182b2c5dbb77d38a45848c33530ca85fcca49c99"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_87_keyFMaj_123bpm.wav",
+    "sha256": "8359ae0a476044dc7884cf2c6b8b7ac249c37854db15db03a0472adac6fb2d5e"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_88_keyFMaj_123bpm.wav",
+    "sha256": "9c818d50162e0ac8511b22b6f33a607d20b0fc61255d7bfce30347b35981ab8d"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_89_keyFMaj_123bpm.wav",
+    "sha256": "5af8e414fbc3d689b170adffc4e0fa6d1c50a0eaf0c8eb88b026601038de6086"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_90_keyBmin_100bpm.wav",
+    "sha256": "b7317e9c51507da51c4ff5afd7c7fded7d372552d5facb517e95d2931a8110c8"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_91_keyBmin_100bpm.wav",
+    "sha256": "f5efaa28670cd43fc36bc3bfbfbfa6a011381ecba7841942d70ce7bb61808acb"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_92_keyBmin_100bpm.wav",
+    "sha256": "78d722a1297d3b70031910e03781016928f2f567357b9a833454b342708a2cde"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_93_keyBmin_100bpm.wav",
+    "sha256": "5e33ed55dcf651fa017f82f652483caec32c190ebe56c9cacf9f2f60d64f82da"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_94_keyBmin_100bpm.wav",
+    "sha256": "95797d0c43b358da4d8ede2d3b2d81b767a0afd02ed276cbfce51608effa0cbb"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_95_keyBMaj_100bpm.wav",
+    "sha256": "ee85b986acb084d2b2352c687b7339cfa809b360c546a03d662d5250377cba7d"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_96_keyBmin_100bpm.wav",
+    "sha256": "46c91e9279ffb30fcb6b0d4876cc57f9f355e3d5ed2808a8fed07d210f988609"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_97_keyBMaj_121bpm.wav",
+    "sha256": "dabc4ed176c27afb2687a3e12287bce17fbc36e28e31b2c6ed235dbdf366df42"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_98_keyAMaj_121bpm.wav",
+    "sha256": "17689a7debec5620ed2140d28a1835cb8e4423ea188f48634fcc39affc22fb20"
+  },
+  {
+    "relative_path": "Minnesota Funk/LL_MF_Electric Guitar_Funk_99_keyGMaj_100bpm.wav",
+    "sha256": "0e9b84c64c22975572ff2683333162077ff4f833de1911e3e949b8d297affdd3"
+  },
+  {
+    "relative_path": "Premium Afrobeats/005 Ngifuna  G Minor BGVs Right  Wet _107 BPM.wav",
+    "sha256": "e9bcb0e41c4ff1005b3246726ba852ab8c45a10a2d302f9d4d3780c8072dc39b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/006 Afroguitars Bmajor 102.wav",
+    "sha256": "6629ea4de44656a1eefb093410afcc28a50048396ad89960db4d777e9b82e449"
+  },
+  {
+    "relative_path": "Premium Afrobeats/03_JLWAS_F#m_114bpm_Drums Full.wav",
+    "sha256": "aa3a325a11f2005486ea8e71fd981f94271d461e35569aef61a89b020d98cc9e"
+  },
+  {
+    "relative_path": "Premium Afrobeats/03_VANILLA_Afrobeats_Guitar_1_Bm_93bpm.wav",
+    "sha256": "3d53348b4b38fe18277beefa1399b5ad70575e066fd107504a26b61d4cb96efb"
+  },
+  {
+    "relative_path": "Premium Afrobeats/043 Ngize Vocals Ngiphilise BG1 B minor Wet_112.wav",
+    "sha256": "fbbd657b58192fd5fbb2bc448cca222a545c12f511a6a1f2afaf8f6262d47db3"
+  },
+  {
+    "relative_path": "Premium Afrobeats/04_VANILLA_Afrobeats_Full_Drums_Em_100bpm.wav",
+    "sha256": "d57ec1decd470446cea9e78c28cbf1d0066657d54857bb151a8920ec9d61b208"
+  },
+  {
+    "relative_path": "Premium Afrobeats/04_guitar_Amn_102bpm.wav",
+    "sha256": "de474e14aa2bb2ad8c196823822fdd08da456b918b81a81212fa506d6507d0bf"
+  },
+  {
+    "relative_path": "Premium Afrobeats/05_JLWAS_Gm_106bpm_Electric Piano.wav",
+    "sha256": "118f4f5ed65465de605d03e421988f854788c892871063826a04532e0d2ff020"
+  },
+  {
+    "relative_path": "Premium Afrobeats/05_VANILLA_Afrobeats_Vocal_1_Bm_100bpm.wav",
+    "sha256": "5fab13cb0d39e538711a1b5893dc00fb630d413ffeef6ecc543fb9af5917d2fe"
+  },
+  {
+    "relative_path": "Premium Afrobeats/1_Guitar_Dmn_90bpm.wav",
+    "sha256": "eff350a75cae96154e19a09381766c47d601ace6a14e58acc9e29466c27f2b0b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/A001_112bpm_Log Drum_Bass_A#m.wav",
+    "sha256": "71582f7b15f920a3621009b1fc29cfccc444360350a22a05a8491c6e51a1a41b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/A005_112bpm_Transition_Amapiano_Am.wav",
+    "sha256": "d057156cd7087404fcd7da4ca04694e5d5791dab373f6882103432e25d8ddd99"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AB4-Guitar_125bpm_Bm.wav",
+    "sha256": "62b81144fddfc27c8dffa3774f7bc1faac53df003b1e9746364ff196ea39fdad"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AFK2_BRASS_120BPM - Am.wav",
+    "sha256": "80383df5bdf0112a235fb748d32dc1f5e7c061f2f7f2a260f7ebd4ce29dc7f3b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AFK2_PAD_120BPM - Am.wav",
+    "sha256": "6b82e401b9320df9aa577ba1af6bcd5875cde0dd9f31b4c0c2f893117e51c51f"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AST_AVA_110_drum_loop_ovo_influenced_C.wav",
+    "sha256": "a15495c803c2fa7a71b28054249fea4281735c74ea1cd41ddad5e3b5d314075b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AST_AVA_110_music_loop_calibri_C.wav",
+    "sha256": "7c153d2a73d67f07d98d797a5081d338f34b0c16136da84d42360ea0083dc391"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AS_KADE_07_Perc_Bodhram_08.wav",
+    "sha256": "8407c80f2d7bab88bcdef716442fdc167c59421c1be0775255d13eca83bfb29f"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AfroBeats_Drum_Loop_5_107BPM.wav",
+    "sha256": "59090d6eaf5d5a32507c1f4adb1dba52a16cd1969d84cfc868758f7e27baf6ad"
+  },
+  {
+    "relative_path": "Premium Afrobeats/AfroBeats_Drum_Loop_7_101BPM.wav",
+    "sha256": "d156fb2c34ce304cec1c8ee5d7fd527504c303bcbe31ad68da3799e02cf80d7e"
+  },
+  {
+    "relative_path": "Premium Afrobeats/BA_04_98bpm_Guitar3.wav",
+    "sha256": "96e22c50273f869814bf23a14665e9b2ae0a41c16d114c009e1822f81f3df6c6"
+  },
+  {
+    "relative_path": "Premium Afrobeats/BA_04_98bpm_Vocal.wav",
+    "sha256": "46db2e0f05b3e698618b303fde564add8867b2ec9c826a7a96f327c1de4fcc6b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/Drumloop_F_108.wav",
+    "sha256": "3caed3a69f0b6a40d45f1246f1aa77c6d91f98b580a7ccb3dc3b0cc626f729f7"
+  },
+  {
+    "relative_path": "Premium Afrobeats/FA_AL_03_DRY_110BPM_Bmin_Synth.wav",
+    "sha256": "6c30b51806ab394035a039f48467a778766e4a3aefcb2da5f74476f3441cf030"
+  },
+  {
+    "relative_path": "Premium Afrobeats/FA_AL_03_WET_110BPM_Bmin_Flute.wav",
+    "sha256": "27e457c4dc4ca788a839b3a92044b245338ea51fc3dd10ed8cd2560b32787128"
+  },
+  {
+    "relative_path": "Premium Afrobeats/FL_AB_Dont_107_Music_Loop_Dmin_01.wav",
+    "sha256": "06ae8adc4048f39122275c2f39273f6ca6d825029dc741a2e75f2389d9abf6a3"
+  },
+  {
+    "relative_path": "Premium Afrobeats/FL_AB_Love_102_Vocal_Loop_Fx_D#min_01.wav",
+    "sha256": "3ffe61aefb8072c59efa0d20bd9bc7ff9f93237db9d12372875ca7c650428cf6"
+  },
+  {
+    "relative_path": "Premium Afrobeats/Guitar_(NWAN2)_Cm_110.wav",
+    "sha256": "612b86ff5e04b1f9882c246cc25b657a1f16bdc3ce494bf8167e281d1aa87ee0"
+  },
+  {
+    "relative_path": "Premium Afrobeats/KLS1_Dm_95_DrumLoop3.wav",
+    "sha256": "868d7bb13716791659f57bd9526b5a05b17bfd029c456740f0875b126bfc6c77"
+  },
+  {
+    "relative_path": "Premium Afrobeats/KLS2_Gm_98_Plucks.wav",
+    "sha256": "b75d1aa6ad630182d30e2ae9ee3b68bfd3438e5d2aac97468a836e69dd6b2e2b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/Kalimba_F_98.wav",
+    "sha256": "428b651d430959f17295128c083be5d96e5d69267f650c8abfe70e811a823c70"
+  },
+  {
+    "relative_path": "Premium Afrobeats/MCT-AFT22-Key_34_120 - Bm.wav",
+    "sha256": "5bc8404fad96aeee13f8b5b74fb30cdbe12361000b4e3b657f4b8b03f8fc84bd"
+  },
+  {
+    "relative_path": "Premium Afrobeats/OMT_LoFiAmbience_AfroSphere2_DjembeTightDelay_120bpm.wav",
+    "sha256": "832433b4ec34bd65aa772c4d10a80acc1915f44cf0aee36edb9b4db2389a446e"
+  },
+  {
+    "relative_path": "Premium Afrobeats/OMT_LoFiAmbience_AfroSphere9_AfricanRadicalMoonWalk_70bpm.wav",
+    "sha256": "438dc07ef0d35946e4ff4c7f95b13d1d48b93b665a965358dc8c63cc4f02fc6c"
+  },
+  {
+    "relative_path": "Premium Afrobeats/Pad_(NWAN2)_KeyCm_110.wav",
+    "sha256": "3bcd3a030acac624ec7bb71ce8d31c9d04c54bc0509777936081e0e868aa25a2"
+  },
+  {
+    "relative_path": "Premium Afrobeats/Piano Chords_01.L.wav",
+    "sha256": "9aaac5b5c951106616f700a08621f8f434bfbec84a46217f51424bd4ea25c205"
+  },
+  {
+    "relative_path": "Premium Afrobeats/SC198 02 Bass 102bpm Bm Digital Sub 01.wav",
+    "sha256": "63e8c55300daec5942e75003ebc1ddcdcb9e12317d58df4bb09edc686140eb7b"
+  },
+  {
+    "relative_path": "Premium Afrobeats/SC198 04 Brass 90bpm Gm Sax Melodic 01.wav",
+    "sha256": "398d44fe44b3481557061ce6b0dcaa94d13e8f90210fee5e8fe27b99b6d15ea1"
+  },
+  {
+    "relative_path": "Premium Afrobeats/Zuwena_102_Gm_Guitar Melody.wav",
+    "sha256": "269ebd07435c8e24fe9d6ff1b836c8983ade9c82ba797d27c4243275cd0ea3e8"
+  },
+  {
+    "relative_path": "Premium Afrobeats/Zuwena_102_Gm_Vocals.wav",
+    "sha256": "4bd8a6d380b7c75d39a930c2abf6d58ad1f11fb5344c08a75391cf2e9fb47e1d"
+  },
+  {
+    "relative_path": "Premium Beats/05_late_break_open_hh_80bpm.wav",
+    "sha256": "ec1f92cf6bd38c3e722a2ce99cd35721f91056c73f80b845278a9e3c8deac725"
+  },
+  {
+    "relative_path": "Premium Beats/10_reveal_break_main_90bpm.wav",
+    "sha256": "48948354243efb0a2a5ae404933ec20ee4d9575f7df51d2756b6d6c67366db8b"
+  },
+  {
+    "relative_path": "Premium Beats/JSA3_Games_Pad_Loop_126BPM_G.wav",
+    "sha256": "7d5a437744e1df49dbc4c300965414e430ee94649c50bc0f938ad8a4e2fc3961"
+  },
+  {
+    "relative_path": "Premium Beats/JT_Full_Loop_14_90bpm.wav",
+    "sha256": "e11b5034cf5b5147144d244c0f87654d848df380eb430730322368a4b218b573"
+  },
+  {
+    "relative_path": "Premium Beats/JT_Full_Loop_15_90bpm.wav",
+    "sha256": "f5b59d4920a0a5c736f253de67e7c0529f3be0310821d216efe06f85d96c0e6d"
+  },
+  {
+    "relative_path": "Premium Beats/JT_Full_Loop_33_98bpm.wav",
+    "sha256": "3503f23d356897ba660a3d9e55b07cdbefb4563748b031d2c374f7922ea9ce40"
+  },
+  {
+    "relative_path": "Premium Beats/LAY12_145_Bpm_Fm.wav",
+    "sha256": "09b654f87638563e8ebb61cc0f01461f63cd324f737ade6a44102e8671e393ee"
+  },
+  {
+    "relative_path": "Premium Beats/LAY4_144_Bpm_Em.wav",
+    "sha256": "e8038793dc7394da1813b58d9020f8c4bacd70c374742b4aa709509756fe9f15"
+  },
+  {
+    "relative_path": "Premium Beats/LH_Electric Piano_01_keyFMaj_75bpm.wav",
+    "sha256": "2bbe83b7960da44db10aedbc19bd0dbdacd328dc01b74d07191a2bbcfccfdfee"
+  },
+  {
+    "relative_path": "Premium Beats/LH_Electric Piano_04_keyDMaj_75bpm.wav",
+    "sha256": "9c918ed12d825c1da6dceb9e6fd741dc21cf07f3a3ca1602863d415cd5f0eb43"
+  },
+  {
+    "relative_path": "Premium Beats/LH_Synth Pad_keyCMaj_75bpm.wav",
+    "sha256": "6da4af1b5676bad7816441726ae76d8205ed5268009ed5d9fa54f2e0d7520dd5"
+  },
+  {
+    "relative_path": "Premium Beats/LSCLFJH_Elixir_Music_Loop_94_EbMaj.wav",
+    "sha256": "a78b92530fc940a187ebd5640c80a83498737bb592a166f546ce9c856d268a52"
+  },
+  {
+    "relative_path": "Premium Beats/RVR_Keys_161_Vintage_Vinyl_Em.wav",
+    "sha256": "2766031ce97c79060287560f46b574458dd7892d7be335d524098e0c7952868c"
+  },
+  {
+    "relative_path": "Premium Beats/RVR_Synth Plucked_143_Filtered_Modulated_F#m.wav",
+    "sha256": "d03f93028a5c2495c6dd20b414fb55d5c707f49d2d61a1b9d19f2e00de4483b5"
+  },
+  {
+    "relative_path": "Premium Beats/Rhodes_19_keyCmin_90bpm.wav",
+    "sha256": "cc250abe1d56cd4fdaa1615cd84296031e869196698801d06f7cbae849e4ae09"
+  },
+  {
+    "relative_path": "Premium Beats/SCY015_05_Melody_Break_Loop_KeyCm_90bpm_03.wav",
+    "sha256": "4e2ea87410f43ab8a12abb8ef1ee71d881e24f637be5711ee6be8cd3808e3763"
+  },
+  {
+    "relative_path": "Premium Beats/SCY015_06_Melody_Brak_Loop_KeyF#m_90bpm_03.wav",
+    "sha256": "0b48fd3e469f674e1aed0a70ed1bc034f06e89539252089acb71dc8540a78754"
+  },
+  {
+    "relative_path": "Premium Beats/SLRB_Music_1_Loop_Aurora_140bpm_Abmaj.wav",
+    "sha256": "84314c5131936af6b407f462699c3373de56d91b3f36986087e02d0393b796e4"
+  },
+  {
+    "relative_path": "Premium Beats/SSDD2_Adapt_Melodic_92BPM_Dmin.wav",
+    "sha256": "09436b8b5087cfc0c3f731cc865d9ee211d6be4cee6c52fe8d5f2de9ee221f65"
+  },
+  {
+    "relative_path": "Premium Beats/SSDD2_Bounce_Epiano_91BPM_Cmin.wav",
+    "sha256": "ac2a2c30e7887261377818f8e09b087696ea69aaa1307d7f1441d02280f08b26"
+  },
+  {
+    "relative_path": "Premium Beats/Somewhere_1_73bpm_Dbmaj.wav",
+    "sha256": "5aabaa038ca4388cc6e7fce7aba3e167772acdb2ce6ac46226e98d17751995c0"
+  },
+  {
+    "relative_path": "Premium Beats/Somewhere_9_90bpm_Ebmaj.wav",
+    "sha256": "83179494b5133645ab88773fdef647275fc81a963c756456d90e1ba223c20b01"
+  },
+  {
+    "relative_path": "Premium Beats/Synth_26_keyCmin_95bpm.wav",
+    "sha256": "f1f368c34f442e266983b7831b5e0b69d1341bba636cc51c1df641656071d0a6"
+  },
+  {
+    "relative_path": "Premium BoomBap/02_Golden Era Beats_G#m_86bpm_Drums Full.wav",
+    "sha256": "bf5d721dd7d0640f09c0224682a2dcaa47e6603cb82b50e39b8f98b2f9f04d2d"
+  },
+  {
+    "relative_path": "Premium BoomBap/03 Drums 87bpm G#m Analog Layered.wav",
+    "sha256": "9a4247a05fed546d182be937451c41de98e6309d81514a3b27002afe960696b4"
+  },
+  {
+    "relative_path": "Premium BoomBap/04_SA_City Never Sleeps_Piano_Cm_bpm_90_Layered Melodic.wav",
+    "sha256": "baca0d2aa6b1b53eeafbde2af44ef7626255c753c55c9d9cd3f98058159d9cf3"
+  },
+  {
+    "relative_path": "Premium BoomBap/05_electric bass._114bpm_Cmwav.wav",
+    "sha256": "74fbedd6616da1301724f9fe9220dc652e9f8818c1fe9b5ec71646af0682ad90"
+  },
+  {
+    "relative_path": "Premium BoomBap/07_SA_Sinister_Piano_Fm_bpm_83_Layered Melodic.wav",
+    "sha256": "68fd91ee3f2bef0d9fe54cec761764bb2e794b60ddd5e9343f6e76108183ad87"
+  },
+  {
+    "relative_path": "Premium BoomBap/08 Piano 90bpm Am Deep Dark.wav",
+    "sha256": "45be11e16560ee09eb76d2ddeb27e7f8a3ad4d1bff0218185a9ec9a2b9db922f"
+  },
+  {
+    "relative_path": "Premium BoomBap/09. Melodic Multi Instrument 150BPM.wav",
+    "sha256": "0c3a665efa9f167df65ab0cbbd5ac06bc2f1ab9f66218785908262cc8917d45f"
+  },
+  {
+    "relative_path": "Premium BoomBap/09_Gomas_Drums_Break_82bpm.wav",
+    "sha256": "54ce38fc7c534fbc0681bb73bc595e709f72d966d6d0b0f652edc639cc782607"
+  },
+  {
+    "relative_path": "Premium BoomBap/10 Piano 90bpm F#m Deep Melodic.wav",
+    "sha256": "878a6a67dd47d845bbb9f70f4d953745ed05f9f52a9555a8588f9436bba0c8ab"
+  },
+  {
+    "relative_path": "Premium BoomBap/22 Saxophone 87bpm F# Dark Melodic.wav",
+    "sha256": "e3c22877a3b961d12078ca099c818fa4d299a9783842a0e54800974e89eb7eb1"
+  },
+  {
+    "relative_path": "Premium BoomBap/39_Bm_88 BPM_Full.wav",
+    "sha256": "3ce483cddce0103ec5627541ccd7836daa1fbc66b7197869e7e41927605caf64"
+  },
+  {
+    "relative_path": "Premium BoomBap/75_Groove3BDrums_SG_7.wav",
+    "sha256": "e13a179370bdc3009c471591a127ac40cd1b8532ed4dddc93ba4121b6eccbf89"
+  },
+  {
+    "relative_path": "Premium BoomBap/Attitude_Full Melody_Dark_Em_83BPM.wav",
+    "sha256": "3bbd7cde85101629f33a86f37beb17762ef55e2ab6e82c00e3be0fe763610104"
+  },
+  {
+    "relative_path": "Premium BoomBap/Boom_Bap_Full_Drum_Loop_22_90BPM.wav",
+    "sha256": "9034687ecd0b74e6c9d06dec2bf557978c748b59c3eee992cd0a65f7e4836f12"
+  },
+  {
+    "relative_path": "Premium BoomBap/Boom_Bap_Vocal_90bpm_16_Dry.wav",
+    "sha256": "d0c77604f9b1262083f31136b55d4f810ae758e4b610488e7379f2fe5157ce75"
+  },
+  {
+    "relative_path": "Premium BoomBap/Bpm92_JayDee_Break.wav",
+    "sha256": "e6ce9ed6be5b2e1a8673ee5a05d8f4981b36f059cf7a409114b9bb4d6afe2d01"
+  },
+  {
+    "relative_path": "Premium BoomBap/CLHHC_02_93BPM_F#m_WET_Trumpet.wav",
+    "sha256": "42b27f4ba06ec170d41617df96f4aabde67ed7597c79d11299ad0fa4201c64ca"
+  },
+  {
+    "relative_path": "Premium BoomBap/DN_SM_Butterflyz_Music_1_KeyDmaj_80bpm.wav",
+    "sha256": "239629a29ceb57ac83632eaf5ee026480ca6296e689ad7826d985ab18bf904b7"
+  },
+  {
+    "relative_path": "Premium BoomBap/DN_SS2_ClearYourMind_Music_4_KeyAmaj_75bpm.wav",
+    "sha256": "66bf0301cc5ce32707fdc10dcc1509a6523522422905f8fd27f896f80f3207ac"
+  },
+  {
+    "relative_path": "Premium BoomBap/Follow Me_Boom Bap Drum 84BPM Dmin Vintage Dirty.wav",
+    "sha256": "5af31040e03d9a9a61b1db8e71f3d5ddce7c1440d2e9ad08468b8cc99bb007db"
+  },
+  {
+    "relative_path": "Premium BoomBap/Follow Me_Organic Organs 84BPM Dmin Vintage Melodic Dirty.wav",
+    "sha256": "693f5f75e24410b5abae52e5984969aa87074ce63dea68aae8a97957886e2502"
+  },
+  {
+    "relative_path": "Premium BoomBap/HHM_loop 1_full_88 bpm_F.wav",
+    "sha256": "341d3a81eb6783ccde5edcf2ade2df30582f1b87a14183a24188645d92db6183"
+  },
+  {
+    "relative_path": "Premium BoomBap/KKMSH_Melodic_Lights_90BPM_Emin.wav",
+    "sha256": "c75773d867bb5928a6c5a0b95f8b0980f0bfa5efec2455154282a8bf650417d2"
+  },
+  {
+    "relative_path": "Premium BoomBap/Keys_Piano_Foley_Bmin_85.wav",
+    "sha256": "af3e27dff3b9b13bfd5ef2ae76b1bb077dcdfd44c2731de310e74271232d5be0"
+  },
+  {
+    "relative_path": "Premium BoomBap/Kit_02_Boom_Bap_Chords_Loop_84BPM_F.wav",
+    "sha256": "cc8ee248b261e80f7a7b632fed20a88a4b8f58c6fcb19cdc7ebd33f63ea7f82f"
+  },
+  {
+    "relative_path": "Premium BoomBap/LIB5_MULTI_INSTRUMENT_87BPM - Am.wav",
+    "sha256": "7e3623086efc37cfcd57bd0f8e115c08abbd3287ea3ba1aad308677e6aa1b1f6"
+  },
+  {
+    "relative_path": "Premium BoomBap/LSI_ESM_91_drum_full_loop_swordplay_variation_low_bass_dark.wav",
+    "sha256": "8631a6f471f2e2fd2360421ff767b9b4c3459439d643d81e2560a111a26dad20"
+  },
+  {
+    "relative_path": "Premium BoomBap/MCT-DUD3-Drums_04_80.wav",
+    "sha256": "cefaee77f20ffda0e53843e81bffdf2ca665ef743dddcf90675c5cf7bb073a34"
+  },
+  {
+    "relative_path": "Premium BoomBap/Melody 2_93bpm_Am.wav",
+    "sha256": "88f71daf1ec956a6565653a6226b1bb4c8a908566d878078adb11979ff724be1"
+  },
+  {
+    "relative_path": "Premium BoomBap/Multi Instrument_Piano_Foley_Noise_F#min_85.wav",
+    "sha256": "1491f68091df99c4bfdb0a9d3e1aeee3022a484db040e6058155f1ab77e8e6dc"
+  },
+  {
+    "relative_path": "Premium BoomBap/RVR_Clavinet_155_Streets_Movie_Dm.wav",
+    "sha256": "5e6edfef93795d0704defa8ba967f3a1cbe9e454e03613ee69a29a1fb3edf6f7"
+  },
+  {
+    "relative_path": "Premium BoomBap/SC110 02 Drums 80bpm Drum Loop 01.wav",
+    "sha256": "597d3d565b4c286dc8d52150fa9f88b1648f5c9286a9c8c3db397cf35d22ec6f"
+  },
+  {
+    "relative_path": "Premium BoomBap/SC139 05 Keys 90bpm Fm Melodic Layered 05.wav",
+    "sha256": "783fd074476b4df3371ca54c00ebf6a2fbc7fd7cdd48d92a7c9658a91e91206e"
+  },
+  {
+    "relative_path": "Premium BoomBap/SCY021_03_Melody_Loop_KeyEm_90bpm_04.wav",
+    "sha256": "f6f226ccbcaa80d2a2f71f8fe42773fd4cf8dc5518fb82cc14ec4749411a85f2"
+  },
+  {
+    "relative_path": "Premium BoomBap/Scratch Vocal Orange & Black G 110bpm.wav",
+    "sha256": "08613ff18ef16010fe45fd74b3db26f56bb16f40f905208b84da41a268851fcf"
+  },
+  {
+    "relative_path": "Premium BoomBap/Silence_1_77bpm_Cmin.wav",
+    "sha256": "fa46eefc9545eff61a63b03f33fc8ed70981912f9321020a4fddc06536858870"
+  },
+  {
+    "relative_path": "Premium BoomBap/Synths Layered Orange & Black G 110bpm.wav",
+    "sha256": "c8be538e11dbd8e93ec547749e8dcabc63c11759a2c2669dd5adaf128d59cf7b"
+  },
+  {
+    "relative_path": "Premium BoomBap/The Vault 2_Drum Loop 14_92BPM.wav",
+    "sha256": "45ab61715d97bd67c96c5ae928f40ac4bcf2f76ec1b9db3ff2b07cff97e05ff8"
+  },
+  {
+    "relative_path": "Premium BoomBap/Vocal_71_STREETSTYLE_100bpm_Dry.wav",
+    "sha256": "5e05a0eabff954ad8e3d8e4411e8700a64e8bbb02f77d73593dd795e0c6f5ae2"
+  },
+  {
+    "relative_path": "Premium BoomBap/[NDV1]_DRUM_BREAK_COMMON_80BPM.wav",
+    "sha256": "188de71563815a50491ae352d124cfd116908cc54b66bdc43a4001b896fcef53"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/01 The Blvd 90bpm full Drum Loop.wav",
+    "sha256": "6f4638f606280e892374f1dd7914d55624e09699f2342b821e1c07dd387e94ab"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/01_keys_Dmn_166bpm.wav",
+    "sha256": "0713cc31b8574ae172bc94ce7c77260de0130da38e47722918a52e4a98feb79c"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/04.bass_84bpm_Ebm.wav",
+    "sha256": "e295538e00aeb29c900453e06060b2deb6fa7d6c723b2e89051e2c02580c72e5"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/05_SA_City Never Sleeps_Piano_Gm_bpm_87_Layered Melodic.wav",
+    "sha256": "d20ac9fab5011d49293adaf7de34439102284eb4c69764598a029b5f625d0540"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/05_electric bass._114bpm_Cmwav.wav",
+    "sha256": "74fbedd6616da1301724f9fe9220dc652e9f8818c1fe9b5ec71646af0682ad90"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/06 Drums 90bpm Bm Analog Layered.wav",
+    "sha256": "b851b0a28f48c436bf19da48cc676ccb6e1ee3925895b3f5987d407e92b3b684"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/07_SA_Sinister_Piano_Fm_bpm_83_Layered Melodic.wav",
+    "sha256": "68fd91ee3f2bef0d9fe54cec761764bb2e794b60ddd5e9343f6e76108183ad87"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/95_Groove3BDrums_SG_7.wav",
+    "sha256": "e8e7cb81d490f551cba1ee5d69fa8cfc64bae47ae7818d1385e12b32b1233877"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/AA  Whisper  130 BPM  D Min (Full Stack Loop).wav",
+    "sha256": "b3e9b1af410094646affd6a1bb88712e42307196bd11db7e22f33562be1e82dd"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/AADB_full_drum_loop_160_hype.wav",
+    "sha256": "a13db04e4f95b1978953d7d97a0c011f35a7dec2c926f1e542f0ce207e4aa409"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/BBA_GRZR_92_Zero_Vox.wav",
+    "sha256": "6b5449dc8457311dcdf00862c798d24dbf2c7ec320224c338fca537c17a004a8"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Boom_Bap_Full_Drum_Loop_06_80BPM.wav",
+    "sha256": "2b71a83625eac3d544be86cd6e4f48a3addce08c855f21ddf6a01a1de9cda534"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Boom_Bap_Vocal_90bpm_3_Wet.wav",
+    "sha256": "ca4e90e57bb9c72a3c41f040d21fd0bceb8e0cffdc4210b7dba0953ee6e9af59"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/CLHHC2_03_90BPM_Fm_Bass.wav",
+    "sha256": "63e675ff4ebe34d64d40f8cbbd7f61beb7f920ef16e1a7037f67ea1f390deb91"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/CRRC4_MULTI_INSTRUMENT_91BPM - D.wav",
+    "sha256": "23ed9bb6b3ecdc8007ebcc9d87ba812ca38187fab9636fcc65f0f4019eef493b"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/CS_CB_bass_rubber_lofi_FMaj_82bpm.wav",
+    "sha256": "7e5bab5836ae90453e3d987747ab89eaa41f2109ff7e5d255caf13a0b66886da"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/DN_VC_Dreamin_Music_2_KeyF#min_63bpm.wav",
+    "sha256": "f2f828dbe45c69ef60ee5c17118beeab1760d8bd2aff07640dfd092e4fceea05"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Doc_Ish_Drum_Loop_CityHype_87bpm.wav",
+    "sha256": "56aaa531b3141deba26747d5cf4f465cec9ab2ddba20e4039e77f53e8b17ef08"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Drum Loop_4_72BPM.wav",
+    "sha256": "6f5ca9051eeb26ca371d20bc120db69e7ac7ba8dbf838b1d490bb30636e444fe"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/ESALD2_Lofi_Full_Drum_Loop_90bpm_Forest Whispers.wav",
+    "sha256": "0d2fa382aa52135b340124dfae766dfc32b1b42478a0bf72c7e948aa1a72613d"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/HHM2_loop 20_guitar_80 bpm_G#.wav",
+    "sha256": "4d8ee906a707ce883ec4db255b03d48ceca67dd5373c0db5284db1fd9338c8e7"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/JSF2_Pool_Music_Loop_02_80BPM_Fmin.wav",
+    "sha256": "a55c2e170877821589f361e4b590cbe0174dceb9acc2ae44d0afec7fe6ba6453"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Keys Vocal Loop Middle Child Cm.wav",
+    "sha256": "4d6e4278aa7c382c4fb43b707abf871e328ab727cc235adca4d69519031780cb"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/LSHHC_Music_Loop_05_90BPM_Fm.wav",
+    "sha256": "e4414395993c4f9f683c82c121f5c337542ec9c3b9609ea5c02f44541d2dbc5d"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/LoFi3-Piano-Chord_74bpm_Gb.wav",
+    "sha256": "9d476fb501f8fe650582a69ba4c69c9d0b48a525da1d3f0bc9303dda40f07097"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Male Vocal Hip Hop Phrase_29_90bpm_Em.wav",
+    "sha256": "c8d2bf0052b1b36939629743f709adbbd11d3b69b97d234adc4dd148e017bc35"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Melody_Layer_3_87bpm_G.wav",
+    "sha256": "c33d9fd7b9689bec197d258bb113d63c9ee2f378d80700ae0c2a3c1250788beb"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Multi Instrument_Mallets_Piano_Foley_AMaj_85.wav",
+    "sha256": "e4cb434aa59009f677c29f6fd9cacbe9eb68b4c7279d8965f75550b58089f018"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/PATZIK_Timeless_Music_Loop_16_keyFm_160bpm.wav",
+    "sha256": "775462aebe789cc90883ea8c191fceb66ffcbd970769e1c5029a9bb0a19052b2"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Piano_Loop_11_C#m_84bpm.wav",
+    "sha256": "7be29bd5a06a2f97c4466df8457ff34a49b5db1bc4b0429b1bbdb600f07c60ce"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/RS_LFVRV3_Drum_91_Cmaj.wav",
+    "sha256": "9b40453dfd8f25c0a396219c11ab325d96200898532d12b1c6c2f335f0752eba"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/SCY028_01_Dr_Full_Loop_90bpm_01.wav",
+    "sha256": "8a3b6da8453ee0ced5e089fb116d024fab08868af3547c1eb5c4284f622a1345"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/SCY028_06_Melody_Loop_KeyCm_77bpm_02.wav",
+    "sha256": "e0b55c93bcf71078d9ee1a1a06a4bd004228fbcdf74ea18bf1b6bf59681a8f55"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/SL_RRT_150_Drums_Loop_Accident.wav",
+    "sha256": "00a965890bed867b81c961e57f5f48c531993178269b6a7e810a96025406f139"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/SSDD2_Ghost_Piano_93BPM_Fmin.wav",
+    "sha256": "5752422742efc20502425210bfaf3d544c3c00ead3aaa1f4ec47fabc24b25f5e"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/ST002_147_Guitar_Chord_C#.wav",
+    "sha256": "27321a4eefa4d90e65d0b8d1def390182b45090fe8c49cf12bf7b303c7221e97"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Silence_8_74bpm_Cmin.wav",
+    "sha256": "32ea6166fefcb82eb1c97e499f5b655590e871cf811b90760acfeb48f60f6cd9"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Synth Melody_8_KeyG_150bpm.wav",
+    "sha256": "f16146a27245b4da8a5dcb330aba19be2712166611bfa1f1e725904605109ecc"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/Trials_Drums_98BPM.wav",
+    "sha256": "52102e0c2a8b3f9d9bcdecc3479587c2ffc637a4635f8c126961671825a1e927"
+  },
+  {
+    "relative_path": "Premium Hip-Hop Kits/WTM_Melodic_150BPM_Gmin_Error.wav",
+    "sha256": "e9005cfa5c37c6387646e5258e014247ca0a0af493b26654f9bac152cbc96e90"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/02_RNB_NIGHT_A#m_160bpm.wav",
+    "sha256": "894219959fa00aece4fcd6d24748fcaafc34e219b5932aa94588819118c2dd61"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/06 Vinyl_Harmony 96BPM F.wav",
+    "sha256": "8aced1b9afc0ab1d4deb21b79f80ed3a07a2523e7b52dd61c1b4b5fd6cd209b4"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/15_Lofi_Keys_Loop_90bpm_Gm_Dry.wav",
+    "sha256": "109661697be80d9b0ea5a5c1e3176fad3a6d3cf6d5901813de932b919665ea6e"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/23 Melody Loop Organ F# 86 BPM LoFi Ambient.wav",
+    "sha256": "44374d1a1cece1e6a926b5e9955e83447848f4dc0a2688e973a880df4aaffcc4"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/78_F_Fauna_ElectricGuitarChords_SG_21.wav",
+    "sha256": "053afc2cd1a9d3a071669ce6106c0b767ab3dbb4d9672adfbc36299f87c0baf0"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/AALS_Lo-Fi_FilterSpeakerPiano_KeyBmin_80bpm.wav",
+    "sha256": "fb51bf50631e65f1e475ebdb39f99ea8db995c7bfd1411c74e8852fd1bd67730"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/AST_FLR3_75_drum_loop_princess_alt.wav",
+    "sha256": "07a57eb2ec4390e7bea3426e195610eface244e94b2e621223ea0a91f823e7b8"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Acoustic 74bpm F.wav",
+    "sha256": "164c038b89f3a1e8582b4ef0b55564778602dfe89b9410f3bd188e2112372032"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Broken Bells After Hours A 134bpm.wav",
+    "sha256": "f2f9d1eb627c42b8ebb5368c714d447ac375a7ff98ae1819bb48d62a7d739580"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/CH_Kit_1_Pad_2_Am_80_BPM.wav",
+    "sha256": "bff508486deaa144d7b4c2b5687ef00333e62943a97e1dd93d499a6979a255fe"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/CK04 Piano 133 BPM E_@a.heardmusic.wav",
+    "sha256": "cc7aac7a086add7ac7644c0be2014758ffa6b97785f5162cbbdabb8218076b4e"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/CS_BN_drums_kit_lofi_90bpm.wav",
+    "sha256": "f4fa010beb6599f7b861053e33802b34215f783fdfff5c1548736363ddf5a96d"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/DIVA_Bedroom_Beats_Percussion_03_75BPM.wav",
+    "sha256": "26c1ff867bab527c442d0c1f96124db77be27a75384eeb39c1418b0b8357d943"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Doc_Ish_Melody_Resampled_chopped_Full__Piano_keyC#m_88bpm.wav",
+    "sha256": "2b70004d90fa852fdbc1754524a6bd707871b1b46879867ded73c981ff5b7819"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Dream Catcher_Full Melody_Mellow_D_92BPM.wav",
+    "sha256": "fec2d7f0ca56fc08789ece2411211cd8351fac074782b4bbe5b3ab3806ec440c"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Dreamz_Piano_E_80bpm.wav",
+    "sha256": "7d3984560bc54e344cbba4e062ca7f1feced89e2a0ab3c86bb4cd7917f1b27dc"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/ESALD2_Lofi_Full_Drum_Loop_90bpm_Forest Whispers.wav",
+    "sha256": "0d2fa382aa52135b340124dfae766dfc32b1b42478a0bf72c7e948aa1a72613d"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/FS_LWA_Loop 39_Keys_100bpm_Gm.wav",
+    "sha256": "ad81f7eb049e72bd0e1f96eb81234f947b1b7a97f42d96f33e9622ab5217dc45"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/JSRM_Touch_Music_Loop_80BPM_A#.wav",
+    "sha256": "82691789fe877e226d70d7b702fd8e89328d4009a9cb44386e156146fbe95a3d"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/KK_CZB_165BPM_Drum_Loop_Foggy.wav",
+    "sha256": "9454591347e76f655133a0cb00bae67ec2cdd4aa2291418f4616d1af358b3a90"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/LoFiGlow5-Kick_72bpm_Bm.wav",
+    "sha256": "b494fd58191b5de0695e88f711c844ea638772d43dd2bf55c65b1a6ce63b65c7"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Lo_Fi_HHDrums_150BPM_Cassette.wav",
+    "sha256": "5b9c1d82b1eff6015d8f3a0b5d2be3bc2e5ea3c38e09b2615b8d8acac0412eef"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/MS_SL_Songstarter_5_Bass_Cmin_103bpm.wav",
+    "sha256": "e48a8147d96ba6221ffdb57492aafdebe985c408ab3964c50964808e05e07813"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Melody_Layer_144Bpm_Gb.wav",
+    "sha256": "73696e0230564988071af537031fbb732a68a7ed01172929961c036e5a573b81"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Melody_Melodic Layer_Gbm_83Bpm.wav",
+    "sha256": "abf647f2c73518ff1f047c8f2f390305b39b49d6cb1180e6cd4b15309e02d7b4"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Multi Instrument_Harp_Keys_G#min_85.wav",
+    "sha256": "566c42da114ed8e2250b2793063326023ea47389aafedef83c8eeae89717a4f0"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Organic Lofi Melodies 22 80 BPM G.wav",
+    "sha256": "6a0f838781adfa3aea4d8b551197f887188710e99d5b8c605de853ece1843e13"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/PATZIK_MELLOW_Keys_Loop_10_keyF#m_85bpm.wav",
+    "sha256": "363dc400645a8d9085e442feb4669fc9e6bcfa4bdd9ef2e196b83f7d7f86b69c"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/PMSV_Bass_30_Cmaj_80.wav",
+    "sha256": "62723e1a63b3edce82d2e2676ab8e9b6b4ebe36ebb999f272b3d998bf5ef9989"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/RS_DLF_Nostalgia_Synth_Loop_85BPM_F#m.wav",
+    "sha256": "52fd0f41c65467ee4aa09bc8f2b99e81990a26da5ef77764965074d2f7bb2f8b"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/RS_LFRV3_Data_Pad_93_Emaj.wav",
+    "sha256": "e6b5e29d596dd7a681dd5252625d321c0821928e5fe4a5fe699b33a3232e52dd"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/SC088 08 Keys 90bpm Gm Melodic Layered 02.wav",
+    "sha256": "77e66f03007fbe45b3359f5f09b5c901772010d06f6d9830fe4c3b567ae55864"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/SL_SNS_80_Drums_Loop_Fright.wav",
+    "sha256": "f02b23be052159c22df80ea51d15f68c6c4b6bb9568b3a70dfa8fdb229219e31"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/SM_LOOP-GTR-81-Emin-Clement-SP404.wav",
+    "sha256": "a0edc1501ef9d9e2873dc5064577ba5b51dca5c2e600535765d5cc0e3514e392"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/SOF5_PIANO_77BPM - Bm.wav",
+    "sha256": "d4f8dfab87b80baeb5d485305c0c9934a1ff9df0cb7da86c3e5ab13100894128"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/SSDD2_Snakes_Drums_78BPM.wav",
+    "sha256": "504b2bd73f341c0433961d721a7864828ab38542fbf3a47d588bea02a35ced41"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Utopia_Vinyl - texture.wav",
+    "sha256": "646a515b3b7a14ac7a9ff3491d08bd53412aabf2b66fed4db9eb9505e4c2d032"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/VB_Full_Drum_Loop_LEX CORP_123bpm.wav",
+    "sha256": "6147b05e6e6f4c9998ebc22bf9406d37f9def3ffad6c0d74b33828d4e8e8000a"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/Wide Rhodes.wav",
+    "sha256": "a2e4069ee7695c057474ac99138d29dbb260f812ad0d86951ae61719b23755a7"
+  },
+  {
+    "relative_path": "Premium Lo-Fi/helium 90 bpm.wav",
+    "sha256": "60152c7170fc97eab33d9427f6fd1ce9055c507191163480d28d9c85fff64dfb"
+  },
+  {
+    "relative_path": "Premium Reggaeton/01 Accordion - 105 BPM - Am.wav",
+    "sha256": "c4d08392435fc89cc52856251a12f43ef40b22f57b6cbf22da18196934bbaf10"
+  },
+  {
+    "relative_path": "Premium Reggaeton/03_BUNNY_Pad_Fm_94bpm.wav",
+    "sha256": "1b0105960ff10fbf1fd217d4ccc616b924684ff3a0e20148f744b9a1dcd46e8b"
+  },
+  {
+    "relative_path": "Premium Reggaeton/03_BUNNY_Vocal_Fm_94bpm.wav",
+    "sha256": "0706304a520fbba3294d839062e922458ed4267091eee448ea875c1f5b190172"
+  },
+  {
+    "relative_path": "Premium Reggaeton/08-Dance-Latin2-Piano_100bpm.wav",
+    "sha256": "7e75e9ee39e9ce0a293e7c51575362a92c590f31253cdc59bb6dc594d680a415"
+  },
+  {
+    "relative_path": "Premium Reggaeton/43 Drums 100bpm Reggaeton Chill.wav",
+    "sha256": "b6cfb51a137fe9a4026f69924b102e03b43b441d8f68d88d7c384a49fbd33d98"
+  },
+  {
+    "relative_path": "Premium Reggaeton/AADDM_latin_chord_progression_loop_96_Gmaj_summer.wav",
+    "sha256": "140af66e4a731af52b83e484f4d464433b33e80a365e0a25b66ceaab838aec74"
+  },
+  {
+    "relative_path": "Premium Reggaeton/AADDM_latin_melody_loop_effected_96_Gmin_trapstuff.wav",
+    "sha256": "e412d28e74cb4f5b7ff1d751166aa4ece68e41e7d403fc3128a4c102d76544a1"
+  },
+  {
+    "relative_path": "Premium Reggaeton/AAVE_verano_full_drum_loop_88_awake.wav",
+    "sha256": "23b04cc3b80b57d176811ba289b4c72f7f8cd8a64c6da822f5136426f94eba2f"
+  },
+  {
+    "relative_path": "Premium Reggaeton/AS_KRXLDV1_01_Brujeria_Perc Loop_Dminor_100_Wet.wav",
+    "sha256": "6a1651569f1a08cc720297a49ea188ed0fdbd42c6696aab486dd715364b03e8f"
+  },
+  {
+    "relative_path": "Premium Reggaeton/AZULITO_MAIN GTR_F#m_92bpm_@soncity.wav.wav",
+    "sha256": "1a86a039d3739dd135ceda01d02b57be437bf5a38945b6033c9c675e5818e55f"
+  },
+  {
+    "relative_path": "Premium Reggaeton/Bass_(MOREGG3)_KeyAm_88.wav",
+    "sha256": "725095ee75f4a73302931d02b2a2faa96294584a11f26cb1e4943f8f4d93879f"
+  },
+  {
+    "relative_path": "Premium Reggaeton/CS_RGTNES_Drum_Loop_10_Full_98bpm.wav",
+    "sha256": "2985014054679021013e7943ce909158cac8a87da5c3e78f23b63dcf32ace946"
+  },
+  {
+    "relative_path": "Premium Reggaeton/CS_RGTNES_Drum_Loop_12_Full_98bpm.wav",
+    "sha256": "3394114e8bbe233d3ee1e0e4a0b4c4dd50385101c33f70f1492ed9657934dab4"
+  },
+  {
+    "relative_path": "Premium Reggaeton/CS_RGTNES_Music_Loop_05_Dry_Bmin_98bpm.wav",
+    "sha256": "a900435351303646e89670a3f8865c1611be4f2fa080a31b09416b9ecbb4ac8b"
+  },
+  {
+    "relative_path": "Premium Reggaeton/Drum_FullDrum_loop_Amiri_90bpm_@soncity.wav",
+    "sha256": "f45d071e05c3f4acc9dcec72c6192b2ed75281f6ede6058fec921870ef30a354"
+  },
+  {
+    "relative_path": "Premium Reggaeton/FA_GD_03_WET_102BPM_F#min_Guitar_2.wav",
+    "sha256": "d633ae298d1fcf6054c99ad8596bc2c09950d78229d0a4c3d46dcc7ac417c156"
+  },
+  {
+    "relative_path": "Premium Reggaeton/FL_SVR_Gusta_Vocal_Loop_92_Amin_02_Wet.wav",
+    "sha256": "b56d36ffcffe0a3a7623d53fadae6302fddc85e251d6e0129a525e6af4a300c6"
+  },
+  {
+    "relative_path": "Premium Reggaeton/HRAV_reggaeton_trap_bassline_loop_92_Fm_bando.wav",
+    "sha256": "00ea59d913e86ed6e7dbc21799915bc70eeadb2163a3d7e0ca12b0dc73d10eb7"
+  },
+  {
+    "relative_path": "Premium Reggaeton/HRAV_reggaeton_trap_melody_loop_92_Fm_rise up.wav",
+    "sha256": "ef4bc6d2ec25cc3e09d37bcb50cebca7db2237d7912b60eda4e8ca9e917c70d6"
+  },
+  {
+    "relative_path": "Premium Reggaeton/KH_001_Synth_123bpm_Gm_Kalimba.wav",
+    "sha256": "74bab22033af03dcb63f9fc433fed5fe03e33fc9f6445d8d7b0e4d8b6e5013b9"
+  },
+  {
+    "relative_path": "Premium Reggaeton/KK_Guitar_09_95bpm.wav",
+    "sha256": "d910cc2b03a8d568890573459f4fe399eb1492c17906ba7a8f8f852922d2be27"
+  },
+  {
+    "relative_path": "Premium Reggaeton/Kit_3_Synth_95BPM_E.wav",
+    "sha256": "db8d0ba13c5d95720e5d66fdfe31190d51f473225a3d28a42362c973ecd40b5a"
+  },
+  {
+    "relative_path": "Premium Reggaeton/LSLMP_Dime_Music_Loop_02_96_C#min.wav",
+    "sha256": "994a24d2bc1533b7c55da946a05a42fd2e88af2f6592dffad39d6a4797b3f32a"
+  },
+  {
+    "relative_path": "Premium Reggaeton/LSLMP_Increible_Music_Loop_03_Amin.wav",
+    "sha256": "babee7ddfed505d9730fd4cc514cb7238aebd36e7b1440e28695d39f5a21930c"
+  },
+  {
+    "relative_path": "Premium Reggaeton/Nomaada_Urbaana_BassSynth_keyCmin_110bpm.wav",
+    "sha256": "73356ad129d9c1762839831e2c8b78f97f03d367c448f185e41c7661735558d6"
+  },
+  {
+    "relative_path": "Premium Reggaeton/Nomaada_Urbaana_DrumsV1_03_withVocal_Loop_110bpm.wav",
+    "sha256": "4e8761081203284703b49db4db03a75df10c69698799473d89f969d602f1c83c"
+  },
+  {
+    "relative_path": "Premium Reggaeton/Nomaada_Urbaana_SynthRhythm_keyCmin_110bpm.wav",
+    "sha256": "ebc642822cd7ce6f2f0be4b42f808cda4616395b24d5275abb093a66a4dfeb26"
+  },
+  {
+    "relative_path": "Premium Reggaeton/PMBR_Bass_90_Amin_Modern_Slam_808.wav",
+    "sha256": "800b0ca3c7f7a75a14ada393f858f34305038483ff27d53d97ede9e0494a6633"
+  },
+  {
+    "relative_path": "Premium Reggaeton/PMBR_Vocal_90_Gmin_Pass_It.wav",
+    "sha256": "034552c8255241c2677d748c6f6c66bee4d0b64a9be92ad5321520f49b3288c1"
+  },
+  {
+    "relative_path": "Premium Reggaeton/PMLS_90_Full_Drum_Loop_Boxy.wav",
+    "sha256": "afb87dece3cf943786f433e9b55b10841992bd9fb4d53030a31db489011ebba6"
+  },
+  {
+    "relative_path": "Premium Reggaeton/PM_RGS_Exotic_Loop_02_Amin_100BPM.wav",
+    "sha256": "be8df38d0db86b48980111c28dfeb98e202b457f6c7a67eedb376b87564fbae9"
+  },
+  {
+    "relative_path": "Premium Reggaeton/Pad (Sidechain)_(MOREGG3)_KeyAm_88.wav",
+    "sha256": "b5723f8f3b5bde896d5681aa44bfcb7bf9e3ef286652f76ff45532e48126d113"
+  },
+  {
+    "relative_path": "Premium Reggaeton/RG3-808_101bpm_Gm.wav",
+    "sha256": "b402c7c9563ea366eb5c63173369c1b0c8e7d015242cb6f58171d3a6b66d669a"
+  },
+  {
+    "relative_path": "Premium Reggaeton/RP_Kit_2_Drum_Loop_Full_Gm_95_BPM.wav",
+    "sha256": "5806b83dd49353a4e0ce6001ad6edc4a5b332ef19ce4110dc203e2c725f8877a"
+  },
+  {
+    "relative_path": "Premium Reggaeton/RP_Kit_2_Pad_1_Gm_95_BPM.wav",
+    "sha256": "b06ba0a88319d5a7a1aa9b34efc894194499b8e373950c5993751434e30be2ee"
+  },
+  {
+    "relative_path": "Premium Reggaeton/RS_ER_Alli_Drum_100.wav",
+    "sha256": "4735ccbfca895efd448f143acd1259420bd8899a62e09e55f604d1c4141b88b0"
+  },
+  {
+    "relative_path": "Premium Reggaeton/RS_ER_Nada_Music_90_Ebmaj.wav",
+    "sha256": "f1640f5f106ea8e78ce7e3f8d8d50db581a317f136f550eaf648314ce6f934c4"
+  },
+  {
+    "relative_path": "Premium Reggaeton/RS_PL2_Viernes_Drum_90.wav",
+    "sha256": "71f0c00d34903ccc70b42f044f07bd9911f1a1a18a62fb8f64c4b3d2d5e9063a"
+  },
+  {
+    "relative_path": "Premium Reggaeton/SLLT_Melody_Loop_2_Costa_Rica_95bpm_Bbmaj.wav",
+    "sha256": "1f1680c6775c64ae7402b6b810119d0b5e080bcd5c5536eabc186175fc90187a"
+  },
+  {
+    "relative_path": "Premium Reggaeton/SS_LP_Baby_Boy_V.Chop_98_G#min_Dry.wav",
+    "sha256": "d7d86ce19e2a2b2d3a3713df92f712f8407d12a2f35c933adc73eac066376d5e"
+  },
+  {
+    "relative_path": "Premium Rock/01 Drums Mix - Part  14 - 140 BPM.wav",
+    "sha256": "5a01f82e9cae66e8920c582b276f72a97f0c1de9b700c628dc5cbee0eaf9d769"
+  },
+  {
+    "relative_path": "Premium Rock/01_drums._113bpm_Dwav.wav",
+    "sha256": "28568f900f3a692d6fd76efe52efaaedbb660f85b0a6ffb008dd688f5a3412a5"
+  },
+  {
+    "relative_path": "Premium Rock/03_room mic_83bpm_B.wav",
+    "sha256": "19fe2631e5faf0cd960767519a7fe0b5eeeda687d86fab6aa0495d0f5413573d"
+  },
+  {
+    "relative_path": "Premium Rock/08 Electric Guitar - 85 BPM - F.wav",
+    "sha256": "9e4f490cc97929fd534158c101e859e8c5ac7338c9863cf1cd3e87fcf97496e5"
+  },
+  {
+    "relative_path": "Premium Rock/1.Melody_Layer_2bpm_Cmaj9.wav",
+    "sha256": "a79d95c9b00838ec71274eeb889abe54a91c266f82b2e2d9d5a75d509bf775d5"
+  },
+  {
+    "relative_path": "Premium Rock/128 BPM - E - 2 - Accent 1 - pan left.wav",
+    "sha256": "6ff6646e5eef75000757599f260fd6c9f6db30228c625b9d80c19de23d85d56f"
+  },
+  {
+    "relative_path": "Premium Rock/128 BPM - E - 2 - Rhythm 2 - stereo.wav",
+    "sha256": "176d9582690d9baf275a78896fecbc7bc8709f2324c72ee12cbc742ee3fcef1f"
+  },
+  {
+    "relative_path": "Premium Rock/50 Electric Guitar - 155 BPM - Dm.wav",
+    "sha256": "c0b415408c80101eb44b361ea587811888a1fdc5f724fbde53908cc58b2931d0"
+  },
+  {
+    "relative_path": "Premium Rock/80 BPM_4.wav",
+    "sha256": "47d529e0222bb0848614aea6e78f7552547b9a138f0dfe86d9e3c1fbf4d47c94"
+  },
+  {
+    "relative_path": "Premium Rock/86. pt. 2 Weak Guitar Melodic 174 BPM C#min.wav",
+    "sha256": "7e31e4c6878303f42b129728d3497da5f8d0e441b762cd443e65a66038c94bff"
+  },
+  {
+    "relative_path": "Premium Rock/Acoustic Drums_Rhythm_6_90bpm.wav",
+    "sha256": "cb24e0a21c85c0d85b294b03631ec8b0b272799aeb8de646c9e731323eda0b6b"
+  },
+  {
+    "relative_path": "Premium Rock/Acoustic_Organic_Drum_Loop_02_120bpm.wav",
+    "sha256": "1088677d16d4ec02c9bef54735a455e1429f0b4a633e6a6b853f27fcde8312ed"
+  },
+  {
+    "relative_path": "Premium Rock/Acoustic_Organic_Drum_Loop_31_122bpm.wav",
+    "sha256": "537605cc6796ff3c5bea19dbfb30b8296021d09462f2a8df81e9d50dd25bbf7b"
+  },
+  {
+    "relative_path": "Premium Rock/Bass Guitar_2_Eb_106bpm.wav",
+    "sha256": "02ad8b2cf8d78d3f61621a03c0fbd542da0c89453f35383a2a4556735576c3ef"
+  },
+  {
+    "relative_path": "Premium Rock/CRRF_120_A_Late70s_Heavy_Rock.wav",
+    "sha256": "3b82072423b484adbc9953e3a6316f1a2aadd54875b6baffb00922bf80bf58fe"
+  },
+  {
+    "relative_path": "Premium Rock/CRRF_170_G_Toms_RockandRoll_Guitar_Break2.wav",
+    "sha256": "e5c0736eae58a9fce63fd28c1c5a1c6b9ba3ceb1bd4cdf3554b4663641a9d054"
+  },
+  {
+    "relative_path": "Premium Rock/Electric Guitar 07 147BPM Em Dry.wav",
+    "sha256": "b68997113c6041b6fd2de14947fbb6dcba014905f6ac5978d30bed0caafbab12"
+  },
+  {
+    "relative_path": "Premium Rock/Electric Guitar 09 147BPM Em Wet.wav",
+    "sha256": "c1590d01ae55de8b3b6a194e550ebef95389f8be454fa1b0a4b1a9404836db81"
+  },
+  {
+    "relative_path": "Premium Rock/Electric_Bass_EMO_8_Sample_2_Aminor_125BPM.wav",
+    "sha256": "54f4cb7116ab97c2d5859a789b409fe39f04b9e382cf1fc6d7a4432ed3c7377a"
+  },
+  {
+    "relative_path": "Premium Rock/Electric_Guitar_Bleak_KeyGm_120bpm.wav",
+    "sha256": "7fd050ce54e957d13656fce642ad11a6ba6246c7dc7b70e3a6f184fa6e3af5b5"
+  },
+  {
+    "relative_path": "Premium Rock/Electric_Guitar_Chords_Detached_KeyAm_130bpm.wav",
+    "sha256": "2dd4086cc1526e5dab8b76bd3999cefef9244da29ab2c7c0a126df1ce6f1846b"
+  },
+  {
+    "relative_path": "Premium Rock/Electric_Guitar_EMO_Ensemble_Sample_4_1_Am_140bpm.wav",
+    "sha256": "aa6a60ce11188b0c28aed1b3dad0cad633f60ba42c06f787be4a3f15af5d84f9"
+  },
+  {
+    "relative_path": "Premium Rock/Electric_Guitar_Joji_keyD_187bpm.wav",
+    "sha256": "8579d7fb4f96d1c13a6fce1dc9257e297666fd4fe3b5a15ec199418443d51c2c"
+  },
+  {
+    "relative_path": "Premium Rock/Electric_Guitar_OnetoFour_keyA_127bpm.wav",
+    "sha256": "81179866200a50a0f8c9f12480af33daf8a9de16d62f911fb0a977efcb6b731f"
+  },
+  {
+    "relative_path": "Premium Rock/HG2_Acoustic_Melody_02_120_C#m.wav",
+    "sha256": "87a12c53e6bbfa3e3da51bcb94a2fb296b7765282de81bb09df6f15946e023eb"
+  },
+  {
+    "relative_path": "Premium Rock/Kinney_Moore_Fills_80_Epic Rock Fill.wav",
+    "sha256": "b7ce596b36ef46ec256fbb69332a82bc40cbf84a36b72ab20f74c7b1314c6758"
+  },
+  {
+    "relative_path": "Premium Rock/LOOP-DRUMS-135-HeyBaby2.wav",
+    "sha256": "994fc5d2e7633de391495fba5830c61780b2702efedf491f9c42aaa5784adecf"
+  },
+  {
+    "relative_path": "Premium Rock/MA Boss - Bass Guitar Loop 61 - 110 BPM Emin.wav",
+    "sha256": "4a8aad1734a3ebb49c0e03c8b78b5f7e3c6f1c398edd381961a3a3c0b34cb2b9"
+  },
+  {
+    "relative_path": "Premium Rock/NBM135007 Guitar 80bpm Em Rock Hard.wav",
+    "sha256": "3c1d11bf4806c2a2a1c7dadad5fe523b40371bc29ce045cd797054302a90c515"
+  },
+  {
+    "relative_path": "Premium Rock/NBM300013 Guitar Ensemble 85bpm F Pop Soul.wav",
+    "sha256": "2ce29d2c2afd12a92931c3df2f3a127287fd56eaa49c4af076208453b23df4a3"
+  },
+  {
+    "relative_path": "Premium Rock/RS_BRS_Mind_Drum_Loop_133_02.wav",
+    "sha256": "42864fbd015a8f573faf1af77b56922d58de657a0ff708720c30e5ca973ba3fb"
+  },
+  {
+    "relative_path": "Premium Rock/RS_BRS_Sorry_Drum_Loop_156_01.wav",
+    "sha256": "1d45d68231d1a788b74f71244a074bf56d4fefeb6ab7c93a003d71970b789933"
+  },
+  {
+    "relative_path": "Premium Rock/RS_BRS_Sorry_Drum_Loop_156_02.wav",
+    "sha256": "df5beee0042139dc2ab5b4a052c653185417d924bfe45dff0ae4c5326ffa2e68"
+  },
+  {
+    "relative_path": "Premium Rock/Rock Guitar Rhythm_108_KeyEm_150bpm.wav",
+    "sha256": "076327b255990d65feeb6ba137e975a8169c49898dc8abcabeed9b5c8a582a14"
+  },
+  {
+    "relative_path": "Premium Rock/SA_PRG_03_Guitar Rhythm Stereo Pre-Chorus_185bpm_Am.wav",
+    "sha256": "7d9ab131298c98512da3abb407d39c560d1d2d070c605cc0cdfd4158262cf7ec"
+  },
+  {
+    "relative_path": "Premium Rock/SA_PRG_03_Stack Synth Bass Pre-Chorus_185bpm_Am.wav",
+    "sha256": "f35b896aa98e92043343af14e868a04a75b77ed061e46337463b08581ad80fd5"
+  },
+  {
+    "relative_path": "Premium Rock/SL Nexus Electric Guitar A 85 BPM.wav",
+    "sha256": "47690f90481eec810abff0348cc10dc8aede2a958404252f774cd245bd0852a7"
+  },
+  {
+    "relative_path": "Premium Rock/SL_ALT1_120_D_EGuitar_Rhythm_GroupB_09.wav",
+    "sha256": "7f0b3c59c103af5cc7d92d77c2efbdfbf80346380b0bb0d98d56edd7fd1f44c6"
+  },
+  {
+    "relative_path": "Premium Rock/SL_Mellow_Emo_Rock_120_Beat_6.wav",
+    "sha256": "00c75f92e60a53c42999adecbbbaedc593ec6ee9d16d36417b69b648077726b2"
+  },
+  {
+    "relative_path": "Premium Rock/werking.chords.140BPM.Dmajor.wav",
+    "sha256": "e810db545c41ba2fbc5e016945995860ef2f38bce994baa5349417ade74c5d60"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/02.fx_074bpm_CM.wav",
+    "sha256": "42a7ad882a369080c3aa00c525b45b65bd0bf6292c6e96beccd846438c79d098"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/AA No Love  Vinyl Crackle 8.wav",
+    "sha256": "33b1052649d2e8111617f0ce89775ef50ef1b9e7fe07213b6027f1609fc160ea"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/AAID_Trap_Fx_Loop_160_lowest.wav",
+    "sha256": "691239fcfcb8b1e288d0ce7a39d687e9ec8e0e82774c8f5386a065694c77ca9d"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/AS_KLHCV2_02_Furacao_Fx Rise 5_G#minor_122_Dry.wav",
+    "sha256": "9cf4a940344b6f339af97c48b8d19524f1336b6d613e220b4d6b999ca33f7cca"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/BSH_Impact_05_Eagle.wav",
+    "sha256": "ea1aa2cf01fdcaa66e83d54517fa53b9a861d42d8bb9940c1050d0eeef64ea34"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/BreathyThrum_oQGDK_02.wav",
+    "sha256": "cd67da236e1d2b5d078a3d84e0fa61582d5e17483494ccb2be702ee33ec6ea13"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/CS_CB_sfx_ambience_forest_rain_lofi_80bpm.wav",
+    "sha256": "c67410e47fb722c9213b027a9b9f2483ae267f46c97ef1dc250c35e785f65590"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/ESM_Loop_Foley_Fallen_Leaves_Scrape_Organic_Texture_SFX_Emotional.wav",
+    "sha256": "dd52aa1c12beda29223f3fc61e5882341af5bd86a35de4bd8931fa7eb81f842f"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/ESM_Loop_LoFi_SFX_and_Foley_80_Static_Noise_Radio_Tape_Hum_Foley_SFX_Emotional.wav",
+    "sha256": "e47541fb013d8881400302f2c51ac3038ae8f710efd1cd099a8656a5566eb4d1"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/ES_DTMT_fx_ 11.wav",
+    "sha256": "0395023355b0238bd59d3b4d319f2ef3880ac0b16364d830331d852e2b8c16af"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/HeavyRain_D7FhX_01.wav",
+    "sha256": "10331e33d904a35bed8bdf4011a7daa49628f482f151e31eef3a71cbb72cf2b0"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/HighwayTrafficAutoPassBys_1fM0A_01.wav",
+    "sha256": "4aefd3ec0a325a389fdd17ade679df3733ab83857febb095a71f2757590e6842"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/KOF_02_Transition_145_D#m.wav",
+    "sha256": "4c243a3e50c222ca9e7062fbd19161a143d0a79cfef4e5e6bcf475364ef70d3d"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/MTHD Construction Kit 02 LFO Downlifter Loop F#m 126.wav",
+    "sha256": "9b6da76d56050ae47db5bda4bc8771c8f9fafff776a01512eb2f74839f7d309a"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/OldIceMachine_Ys8cG_01.wav",
+    "sha256": "87b1fef06f2976af8d685ba8b930b5c53dfa3a3cf28b7634a6b974af2ea29d34"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/Sound_Effect_Fm_162bpm.wav",
+    "sha256": "4a904334c564087bade414a67a19a51a7f35502b047bd2b2dba3b18bd8df4961"
+  },
+  {
+    "relative_path": "Premium SFX/Loop/TP_1_Buzz_fx_90bpm_Cmin.wav",
+    "sha256": "5f5a6a2926e6ebb00f0c08a5ad1a3f9beaabb6b1743ca99ba789a310898f4028"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/04_160BPM_Cmin_Siren.wav",
+    "sha256": "2b89493efb68783e22e35aac07479dfa74b6e81abcc5f289f3d26010d4d1fae3"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/21 Sound Effects A#m Scream.wav",
+    "sha256": "fd8c0469227f2054f67788c2d1d668957aea8d3192880d54b8d539880c3efd03"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/55 Sound Effects Bm Digital Riser.wav",
+    "sha256": "9746ce77334829bec7cb5c80df6f35e0335be76a8b184049550135eaa13f4066"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/AACY_Mid_Tempo_Fx_Impact_Deep.wav",
+    "sha256": "eeb9be7d900f65826106102a7cd239dd345606e779523fcb9f60b39d1538aacb"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/AFFH_HipHop_FX_Ghost Pesto Sweep.wav",
+    "sha256": "88a99e51af05cb3c6ebfb6920b8c85ce295c3c70e32b74bf68fd8be66c9b1bea"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/Ambience_Bats_in_the_City_Binaural.wav",
+    "sha256": "050f6ec4cde7b21e5e5c8fad7d3a78b1e22c6b2211d3e18674a90f3cd06efbff"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/AmtrakViewliner_Cf3Ye_01.wav",
+    "sha256": "a87f24f37019d5cf4c3957d543dc81cdd0a4a274a8a9312bb9adb29f0b2c768f"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/BEAT SESSION BELL FX.wav",
+    "sha256": "b8afe3d575e4bca4b516a7f0c626ac891c369b0822ae7c7111f8c8d43634bdd1"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/BEAT SESSION IMPACT 2.wav",
+    "sha256": "d3ede65856d2a8a4e74b0ce7811fba7d2f38590f23b75c8fbd3634ceca0759dc"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/CCP_Kit_4_Moist_Fx_Shots_Oneshot.wav",
+    "sha256": "7b0348f9c41bc79637349ee07249d6569a4a1b15849192e488ce39415bdb9cc3"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav",
+    "sha256": "d39fd4bf2689566a0246c33089bdeb8c89c4f97db84ba88e976a004294544fa6"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/CS-SCI-FI Sustain Breath 2.wav",
+    "sha256": "401ccbe229394fff9c7251d47d9f804da0c128c40d5977a9663618f08943a5a9"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/CS_TM_Kit_05_Fx_02_Emin_128bpm.wav",
+    "sha256": "d9dfeec768fd7ddb0239f20be18f267a30fbf203e70be3b51c83888e19388699"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/Drill_Sweep_FX_05.wav",
+    "sha256": "a24266d304f953b1c74f43cf454b57472c5df440ec20eadf33c902d5676f4a84"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/ESM_Hi-Tech_Computer_Power_Up_2_Technology_Sci_fi_Interface_Click_Beep_Chirp_Futuristic.wav",
+    "sha256": "4521da3b3d4dec6459dbc5157a08722ce0c183b72390a58957dc638fce3085b3"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/ESM_Iconic_SFX_King_George_11_Magic_FX_Airy_Shimmer.wav",
+    "sha256": "e766a34949e2177305c8b2cef5d9b07d7749dcb541d353a369f26fdb4774fc8d"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/EvilDroidChatterConstant_ovBUP_02.wav",
+    "sha256": "719736c79bf2e70fe6b60340ba3d486fa30c66d196311b26e93bfc9e219321d0"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/ExplosionSoftCrack_CyK5f_05.wav",
+    "sha256": "40819b9353af4c755ff93c6773c1394b15f85e488c0253cc1809bc2e992a19de"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/FS_COM_Computer_Glitch_SFX 26.wav",
+    "sha256": "67603d04b80cbbfcc62b062391de2355b5dcec71a5289ccb35a69744ebe8f473"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/FX_13_C_Maj_140Bpm.wav",
+    "sha256": "2eed70a971b72becf9442bfe4fe9a58e578afe57d0ec0bfed13a5d5589dcb1fc"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/INDUSTRIAL STRENGTH_MRI_CHROME HITS.wav",
+    "sha256": "c42ca11bb7575eb9a88e1a1728c6b6f66bea31447ea1af013ab20a75d9d08ff8"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/Sfx 049.wav",
+    "sha256": "3b490c397ffc2f7c24c6099282f54bff0471ff04d0f3e7d882aceb902c39f402"
+  },
+  {
+    "relative_path": "Premium SFX/One_Shot/UNPLND_Riser 2.wav",
+    "sha256": "b1283483be1ff4ca87743a8c398630858ea68ce8868f26cb5ec8f6b0fb41bcbc"
+  },
+  {
+    "relative_path": "Premium Soul/01_drum_Fmn_140bpm.wav",
+    "sha256": "3de68d0e4a2349102272d28610be6142a709e0d8eae4bde15d9ec5d63d160a8e"
+  },
+  {
+    "relative_path": "Premium Soul/04 Electric Guitar - Miss I Var 2 - 86 BPM - D#m.wav",
+    "sha256": "e21ed65b01bcd866d60a9f2e1ed9b04893516128ba2e070e5b5fcca792d98898"
+  },
+  {
+    "relative_path": "Premium Soul/04. Lofi Soul Melodic G 150BPM.wav",
+    "sha256": "13233ab5d320eb33a01bf79cf8d95710171b7b838e1d52b3734f534a379adf06"
+  },
+  {
+    "relative_path": "Premium Soul/05_Dm_120 BPM_Full.wav",
+    "sha256": "f78ed34cbc84d12ad433cf5aa167ff606ff639344dbef2b52b24df3e42db35c8"
+  },
+  {
+    "relative_path": "Premium Soul/07-Chords-Em-94BPM.wav",
+    "sha256": "b1fc7f97262bd7cf7c345716625fb34dda6fc5cc4ccb93708718e6f8928a93a9"
+  },
+  {
+    "relative_path": "Premium Soul/116 Room - Supa Dupa Love 08 - 96 BPM.wav",
+    "sha256": "87b2830157aaf096c9e942265c9f1498b20e907c6f1d4333bb6edf1875d82b2f"
+  },
+  {
+    "relative_path": "Premium Soul/23. Old Days Melodic Em 160BPM.wav",
+    "sha256": "7cb8c85153fccd508b0e75baaf95907fef73f475243f909c0297a84eb5a407ec"
+  },
+  {
+    "relative_path": "Premium Soul/3_Rhodes Melody 80bpm Am.wav",
+    "sha256": "d8213aa605ea1f45ba13349086098bfc7849558343ea38c31700371bd522b4de"
+  },
+  {
+    "relative_path": "Premium Soul/5_Drum Beat 80bpm.wav",
+    "sha256": "31db1f13f305764a2df2c9b103d54b55427fa7d9459d6991a86f7c711b981450"
+  },
+  {
+    "relative_path": "Premium Soul/75_Amin_I_Promised_Vocal_8.wav",
+    "sha256": "638abe71af396c6cadd00df156a8175ba6b087225874fd311f29d42462f4c949"
+  },
+  {
+    "relative_path": "Premium Soul/AST_CF_140_music_loop_luv_sick_F.wav",
+    "sha256": "2d492a41a5080f74d724d99081b9cb0727916dfda1d9745835ad8d20a0b0e409"
+  },
+  {
+    "relative_path": "Premium Soul/AST_SNS_110_music_loop_03_silverlake_Gmin.wav",
+    "sha256": "d21b60a8975bdc28cd4cfa69287889077873f6e9749fad3513210446f042454e"
+  },
+  {
+    "relative_path": "Premium Soul/DBT6 D#m 120 bpm Piano, Bass, Flute, Brass, Vocals (Full Composition) (@a.heardmusic).wav",
+    "sha256": "2627a9bd91f3bbebded0f52f66ef3f462a151c8391e01ce1e2ac472775386f14"
+  },
+  {
+    "relative_path": "Premium Soul/DN_SM_Dreams_Vocals_1_KeyBmaj_79bpm.wav",
+    "sha256": "3ed7973a017ea19f8dfe1d6b2419bc2a149978ce6cbc4e7847c53765b056dfc8"
+  },
+  {
+    "relative_path": "Premium Soul/DN_SM_Honest_Music_4_KeyEmin_80bpm.wav",
+    "sha256": "7d201affbd87b71253ea2bd15f0704db5447d4302b38d7078affac6c9c5ffe1a"
+  },
+  {
+    "relative_path": "Premium Soul/DN_SS2_SunGoesDown_Drums_KeyC#maj_70bpm.wav",
+    "sha256": "e163e4143225fff8c8c40cdf9aaaf82483f946a4919cff929a5cdf3ee7a8aefc"
+  },
+  {
+    "relative_path": "Premium Soul/Electric Guitar_Amn_106bpm.wav",
+    "sha256": "b996dea411d47a412c1b7eea5d577722d3f4327ce612d10033cfed868e6f1adf"
+  },
+  {
+    "relative_path": "Premium Soul/Flux_10_88bpm_F#min.wav",
+    "sha256": "d54970ca9d91976bf33c7ff3fb26992b98e492c74b4307ddf453e703f45a1adb"
+  },
+  {
+    "relative_path": "Premium Soul/JHH4-Drumloop2_90bpm_Em.wav",
+    "sha256": "2d6d9cb155cf8d13c52c8238d9ddd5b2634472af4ad51d4c86041e639770920f"
+  },
+  {
+    "relative_path": "Premium Soul/JSMS_Vocal_Loop_Don't_You_Know_140_D#min.wav",
+    "sha256": "526138245d787f977b77c453eccc133e625950e2d131c06f91b0b817cb75655c"
+  },
+  {
+    "relative_path": "Premium Soul/LSCTRS_Ethereal_Music_Loop_2_120BPM_B.wav",
+    "sha256": "7774b5885474dc0c52970e87ba2dfef26b49a16f4bd3e0df2fdd730ed029f84c"
+  },
+  {
+    "relative_path": "Premium Soul/LSSH2_Manhattan_Music_Loop_90BPM_G#.wav",
+    "sha256": "0d9df41be7fe21a334cf8f3e1d5f7466060f9de4a43f26fa1d13fb04e80d61a1"
+  },
+  {
+    "relative_path": "Premium Soul/LSSH2_Purple_Music_Loop_90BPM_C.wav",
+    "sha256": "ea4675f028737e6428cf18ca9980758d4cbde8b6c248d5db3ce2f198c016c583"
+  },
+  {
+    "relative_path": "Premium Soul/MissinU_Vocal_keyAmin_128bpm.wav",
+    "sha256": "bf482fc9049a6927a2df692ae45a718feff4d48c1be12dff559b2eeb30da923e"
+  },
+  {
+    "relative_path": "Premium Soul/Music_Loop_Houston_KeyGm_87bpm.wav",
+    "sha256": "930d00030c995fcbe5c6202f82733550517baa8c617df3c3316543860c6e7cdb"
+  },
+  {
+    "relative_path": "Premium Soul/OMT_ATELLER_LBD_SimpleOne_150bpm.wav",
+    "sha256": "fa80aeb4a52c5add7700636d7247e322a70de6229753d7b96aab6bd2fc08965b"
+  },
+  {
+    "relative_path": "Premium Soul/OMT_RawTapeDrums_Beat3_DrumsDry_90bpm.wav",
+    "sha256": "5c883544afec56d21b392bb70f2a8b2fef77369eb197a53de9c96684e85e3f5e"
+  },
+  {
+    "relative_path": "Premium Soul/PDV2 8 Dm 122 bpm Synth, Electric Guitar, Vocals (@a.heardmusic).wav",
+    "sha256": "428460613d200fecdf597327c0fe344904326437ee45f22535f5cb5eb066da54"
+  },
+  {
+    "relative_path": "Premium Soul/Piano_keyCmaj_127bpm.wav",
+    "sha256": "fcdaed78ce619a2790e82de6b0a130d0b82da4869879a54c5ec104cec2740b97"
+  },
+  {
+    "relative_path": "Premium Soul/Price_Piano High BPM134 G#min Vinyl Sad.wav",
+    "sha256": "bc2cb26e5c88f6e3835e47dc12a2932cb744d63f2c47e0a195cc17355406ae8f"
+  },
+  {
+    "relative_path": "Premium Soul/RS_NRB_Erotica_Synth_Loop_60BPM_Fm.wav",
+    "sha256": "2284761f675678d0283be4f6ca1d67b14bcfe2b850fa1b884bf9e6145a6d7259"
+  },
+  {
+    "relative_path": "Premium Soul/SC110 01 Drums 75bpm Hi Hats Loop 01.wav",
+    "sha256": "f0a05bf7fce18c0f33672c7cc3e99f1ded98d9653f775d4d389e4601b1dda325"
+  },
+  {
+    "relative_path": "Premium Soul/SJ1-Drumloop3_96bpm_Em.wav",
+    "sha256": "45cb79ee341ab4888bcbd00400a252b18c47c2ed73976720ef9d0e2043cc03d0"
+  },
+  {
+    "relative_path": "Premium Soul/SLMS_Drums_Loop_Stilllife_82bpm.wav",
+    "sha256": "3984ac612cc79a6f6f2eb246187eaec69f34601cd7f81a387bebcdad0fec3448"
+  },
+  {
+    "relative_path": "Premium Soul/SRB08_Electric Guitar 55BPM Am Clean Blues Jazzy Chords.wav",
+    "sha256": "17ae7a8a2c52ef66119b35c361823b089cf8d0070b90b3a0f650d2224e14cd7b"
+  },
+  {
+    "relative_path": "Premium Soul/SS_DC_140_Am_Piano_Chorus_Layla.wav",
+    "sha256": "1a4034c5ec8bb16740d5f19be2c3d29de4ba92c3a474cff1869ad7507c7ee8c5"
+  },
+  {
+    "relative_path": "Premium Soul/TAY SCO_keyF#m_in63bpm.wav",
+    "sha256": "17f735c3ecc773f754cf33fac5c6fcee58e130435d8266b7cc1d6c1aefa566de"
+  },
+  {
+    "relative_path": "Premium Soul/Vox_Fall_KeyF#m_75bpm.wav",
+    "sha256": "5e8357a7cf1dee77209537a097758c3bf61cb00160ec239aea1f4737b8338585"
+  },
+  {
+    "relative_path": "Premium Soul/Vox_Know_Why_KeyBm_93bpm.wav",
+    "sha256": "ad783a59a9c69a392a03a066be6bf3d9caa1ec38cf53482eb188d6f9d99a6588"
+  },
+  {
+    "relative_path": "Premium Soul/music mix_Loop07_Dmin_092.wav",
+    "sha256": "30b6454c4b86bff3cb8d9fb00db0cd92b6c3230893202e46369e51b5f0fd5a0b"
+  },
+  {
+    "relative_path": "Premium Strings/02_87_Strings_Stab_Chords.wav",
+    "sha256": "739e7805e155c816079a74e18e1a75c09f22c704e76100e0c1cc45d036a85504"
+  },
+  {
+    "relative_path": "Premium Strings/03_Trippie Nation_Fm_144bpm_Strings.wav",
+    "sha256": "ea34ff2731c2c20c50297e678814f7c374ef7d494783805510f05b703c8af30c"
+  },
+  {
+    "relative_path": "Premium Strings/05_TOPIA_vol_2_Strings_Bm_116bpm.wav",
+    "sha256": "6d8f02e4464895944e6fb9e5a4b12798fb98d0298806e925db28ee84989f2153"
+  },
+  {
+    "relative_path": "Premium Strings/08-TB1-Stems_172bpm.wav",
+    "sha256": "16fada2cf5f2940b5a975a5170aa55c9930725fe0d1091509074c9b1346af2e6"
+  },
+  {
+    "relative_path": "Premium Strings/155BPM_BMinor_Strings.wav",
+    "sha256": "8928824265e0d051eb43bbd9a9f294234b87e32d58099ea4d5b85dee34719283"
+  },
+  {
+    "relative_path": "Premium Strings/AADT4_drill_melody_140_Fm_liquid strings.wav",
+    "sha256": "ced2f037523efaa0841bf43932e6c256f27c92e52c41bae87e554d01ad20b26b"
+  },
+  {
+    "relative_path": "Premium Strings/AST_BLC_162_viola_loop_pyrex_G.wav",
+    "sha256": "2039add8fb52bb58dd1e66613853cdc5800c64729476000feccbfbdec145d4e4"
+  },
+  {
+    "relative_path": "Premium Strings/All the brothers (E Min 155) Violin.wav",
+    "sha256": "897a63fa05220e91bcfd1776f5c0bdfb342c09749a56ae2e7ece7b1dcc2c466e"
+  },
+  {
+    "relative_path": "Premium Strings/BA_130_strings_loop_pain_Am.wav",
+    "sha256": "58adaf674362a469227e17c4ea3b0ffeea957be2eda9c82b841fa13104d5f040"
+  },
+  {
+    "relative_path": "Premium Strings/Business_Strings 85BPM Cmin Vintage Melodic.wav",
+    "sha256": "df4d6a31e9da1211616c90bfae584e13f1fd77f7c393ad118dd04d7877edfab1"
+  },
+  {
+    "relative_path": "Premium Strings/CS_LNV_synth_dusty_strings_Emin_83bpm.wav",
+    "sha256": "a69426b84f5171ed73d0a3fd81d1de50dec481e0888e157be8ecf279c44645de"
+  },
+  {
+    "relative_path": "Premium Strings/DN_MS_BeFree_Strings_2_KeyCmin_82bpm.wav",
+    "sha256": "277564160be9eb1499e590a95d97d0ce7ccd514ba77aa8c0a79982bd15140218"
+  },
+  {
+    "relative_path": "Premium Strings/Elevate_3_Synth_Strings_117bpm_F#maj.wav",
+    "sha256": "f96b29409a30900a59a28bd3cd4c160907adeb8a1afd864dbe1a0ad0d194db59"
+  },
+  {
+    "relative_path": "Premium Strings/FA_DT_01_WET_100BPM_D#min_Viola.wav",
+    "sha256": "a494e0a6a8e68620bbc0e0b3caf3cd99276bfceff87999d2900c283a731c6d0a"
+  },
+  {
+    "relative_path": "Premium Strings/FIREFLIES- STRINGS-  C# MAJ 132 BPM.wav",
+    "sha256": "d91605249af0b0be0ae0df6aba513e7254f3566714a85d936199f5e7d28c7324"
+  },
+  {
+    "relative_path": "Premium Strings/FL_UKDR_142_Strings_Loop_Spanish_Hell_Synthetic_D#m.wav",
+    "sha256": "17c4fe445cc5c4373aeafb99c263d28dc9e89585353aae77f0efc2e6ae4ae64a"
+  },
+  {
+    "relative_path": "Premium Strings/FOWV1 stem 03H strings C#m 114bpm (@a.heardmusic).wav",
+    "sha256": "af0af002a4ab4614d295e3a5259ee2933b9dff2d4a5dde8f3859068152a62673"
+  },
+  {
+    "relative_path": "Premium Strings/HRTC_trap_melody_loop_135_C#m_cookin up.wav",
+    "sha256": "62605b22663d0c5aef0412de4d0f5f7423e85de1b63583baa0d4e95af9270a70"
+  },
+  {
+    "relative_path": "Premium Strings/JSI_143_Strings_Loop_Bad_Habits_D.wav",
+    "sha256": "4e7ffa78514683133b1bf87c4d990754cf38a8a6bfcf683576dc737b94577618"
+  },
+  {
+    "relative_path": "Premium Strings/LAY14_130Bpm_A.wav",
+    "sha256": "57ab8ff1e0e1f290a9c1dc7aac4dbc31da8a00ad208a083dcb690351c2ce5ce3"
+  },
+  {
+    "relative_path": "Premium Strings/Member_Violin_158bpm_Bm.wav",
+    "sha256": "51e9d96599bf933ae127ba40d5bfb50aa4ba4d94994dd74884eba8b26897d5db"
+  },
+  {
+    "relative_path": "Premium Strings/Million 138bpm_C#m_Violin.wav",
+    "sha256": "80fb7c03aa419fdef5b912bcda45ea7df37d06705bfa6093609324e19df60f4e"
+  },
+  {
+    "relative_path": "Premium Strings/PATZIK_EMOTIONS_Strings_Loop_04_keyF#m_160bpm.wav",
+    "sha256": "8bf43be1a49d782a456240f6f93648634849862ab5de31d91c75806d28772317"
+  },
+  {
+    "relative_path": "Premium Strings/Quartet_Strings_D#m_152bpm.wav",
+    "sha256": "1ecf1648230f5c249344ccfb16be04e3bd6a2891d13a604dfa2e795fdd686f45"
+  },
+  {
+    "relative_path": "Premium Strings/RS_BG_Streetfight_Instrumental_Loop_160BPM_Em_Cello.wav",
+    "sha256": "d07a21e3480289222699fd8366dd5c3000a0bec702d6231239c381185b654681"
+  },
+  {
+    "relative_path": "Premium Strings/RTRVRS04_144_String Phrase_Dark_Dm.wav",
+    "sha256": "646d4a438c08ab9dbf0f6287dc588312c4cc172ba5e1fe09f225d86f2967823c"
+  },
+  {
+    "relative_path": "Premium Strings/SC155 03 Strings 135bpm Ebm Pizzicato 01.wav",
+    "sha256": "00ee0c8ea1bc45d1549d24bc013a4622d1959a8263a7244bfd1766f93b1dd44d"
+  },
+  {
+    "relative_path": "Premium Strings/SCS3_5_Stacc Strings_95_Cmin.wav",
+    "sha256": "22824944a0b533d99ad580c2766ba2426bef88c95918b5af51c2c176b420ec20"
+  },
+  {
+    "relative_path": "Premium Strings/SCY018_06_Strings_Loop_KeyEbm_180bpm_01.wav",
+    "sha256": "d4f3aa32c94a2ca007efeb7d5786cca1a31e080879ecbdae47aeb07bdc444321"
+  },
+  {
+    "relative_path": "Premium Strings/SSISO_Strings_PillowTalk_90BPM_Bmin.wav",
+    "sha256": "f616ff7c25eb9046b9572cd026464616305d746fd3ddcde4255f2d0a897bbe85"
+  },
+  {
+    "relative_path": "Premium Strings/SS_JR_Strings_14_Emin_93bpm.wav",
+    "sha256": "b141b6051cc55f21b9964dc03e9b2a230b7bcfa148ff120963fdbb3f6de0535d"
+  },
+  {
+    "relative_path": "Premium Strings/ST_LN_107_Strings_Loop_Fake_C#min.wav",
+    "sha256": "933d849ba31694f9f3b9e925ea3d25f32bfa440f9c327e2fccd52bdd02ec169d"
+  },
+  {
+    "relative_path": "Premium Strings/String_1_(Hats Off)_KeyCm_125.wav",
+    "sha256": "6e19f76d8a625d739205f6cf64f851f46c373b4cda54a5aa0d06e13ea530fffe"
+  },
+  {
+    "relative_path": "Premium Strings/String_Ensemble_C_130BPM.wav",
+    "sha256": "75b9725e0799f2229ce2b3966bb4bd7bf41b9f8b3b6b75bf2205aeca718c8e28"
+  },
+  {
+    "relative_path": "Premium Strings/Strings - 140 Bpm - Key C.wav",
+    "sha256": "91377528e6d29b05f5f8b6639960882b3c387d3b6ef0db08c1678a51d728f385"
+  },
+  {
+    "relative_path": "Premium Strings/Strings 3 - 167 Bpm - Key B.wav",
+    "sha256": "9781856ae0a0efed71b7802e8e21b4ee44ec62c6516f83d0ad7cee8d61e451c2"
+  },
+  {
+    "relative_path": "Premium Strings/Strings [147] Fm PushingTrapmosphere 2.wav",
+    "sha256": "d80da82bd2e3501f8ace8423aa1e6f25830d06484861a0096fcae7c98ac5a787"
+  },
+  {
+    "relative_path": "Premium Strings/Strings_Calore_Chase2_D#m_145BPM.wav",
+    "sha256": "18c6560d168a26bed148e55d954df6bcc5079b6eff0f1a4004560153dba46347"
+  },
+  {
+    "relative_path": "Premium Strings/Violin_1_140BPM_Bbm.wav",
+    "sha256": "e1ad505c20aa0cf873ea80f7d043a7db055f02400f9e7f080dc1cec234d00e71"
+  },
+  {
+    "relative_path": "Premium Strings/Wait Your Turn_Strings_G#m_80bpm.wav",
+    "sha256": "2e30b5ba3be6f727effe4cefa08ef733cfe2ef5483378cfeaf5c235d19560f09"
+  },
+  {
+    "relative_path": "Premium Subs/01 808 Bass - Emin - 150bpm.wav",
+    "sha256": "2ab2b28eff4d5639f25fa1ab289a8e1fc399e14d546f2a8663e899edf1be8626"
+  },
+  {
+    "relative_path": "Premium Subs/02 Bass 81bpm Bm Analog Sub.wav",
+    "sha256": "2114dcf1e182ce5d283e83e87846e180ca6a48ab3014587ca6614631edbec9d8"
+  },
+  {
+    "relative_path": "Premium Subs/02_CHAMPAPI_808_2_D#m_140bpm.wav",
+    "sha256": "3de512e11aa563ad74f82b16e8a9abbdc5df05ffdeebadcd67a5ac4891f75430"
+  },
+  {
+    "relative_path": "Premium Subs/04-Sub_Bass-120BPM.wav",
+    "sha256": "ce4b06e08f702b9afe437e7c208fce71a1f7fb8516cb2acbdbd7e71ef90f4da7"
+  },
+  {
+    "relative_path": "Premium Subs/06 SD SUB KICK DEEP LAYERED.wav",
+    "sha256": "2a56e0c09b7b87629e0ad46fe496bf698ed8236c3eda1666ae128370b1fd15cb"
+  },
+  {
+    "relative_path": "Premium Subs/06 Sub Bass - Espiaque Var - 125 BPM - Gm.wav",
+    "sha256": "7438462910840b099119f9d2c1ece601c7e3e4772e11f94cf4f1983bf521da71"
+  },
+  {
+    "relative_path": "Premium Subs/07_AIDB_Em_144bpm_808.wav",
+    "sha256": "acf0f34478ec24eb2520435d64b60c3e0edf915379aa889bf5b6fafa23b24320"
+  },
+  {
+    "relative_path": "Premium Subs/26 Bass 125bpm D Sub Analog.wav",
+    "sha256": "eefd63b66d3aecd73f56bdbc759e52fbb192251d24291716d75f7f877337e989"
+  },
+  {
+    "relative_path": "Premium Subs/808 Bass No Love 140bpm.wav",
+    "sha256": "843ce9f450a391baa6297ebe00209c5496353f53374d66ad197e97f4a16b4baf"
+  },
+  {
+    "relative_path": "Premium Subs/808_(Lemonade3)_KeyCm_140.wav",
+    "sha256": "3d246020970ea544b910502da93a877ee9408e93e1504476eccf431638b934f5"
+  },
+  {
+    "relative_path": "Premium Subs/808_153BPM_FMIN.wav",
+    "sha256": "98772bf04cd66de04b5b561f1ce2cf027dca1d0c314864b714818d263a650631"
+  },
+  {
+    "relative_path": "Premium Subs/AAV Pothos 808 Fill 100 BP.wav",
+    "sha256": "0fa28e835664fc0ddf4aecef5fec7f9be398866d262f50036aae82dcb4f7c0f5"
+  },
+  {
+    "relative_path": "Premium Subs/AS_KRXLDV1_04_Obsesion_Synth Bass Sub Fall_F#minor_95_Wet.wav",
+    "sha256": "66da68d6379723529a1549013b8689618d788e315680181980c869745e50a98a"
+  },
+  {
+    "relative_path": "Premium Subs/About You G#maj BPM91_808 Devil G#maj BPM91.wav",
+    "sha256": "dfb57c17d296f4fec83d100a82cb1aaf5bbc50047cebaa7dcef31f2bcfedd6d2"
+  },
+  {
+    "relative_path": "Premium Subs/DSS-125-Sub Bass Loop 06.wav",
+    "sha256": "d04fed9d648f617b434c05c6d59d79f3ea57e2117f762d64fcb8b5d525809b01"
+  },
+  {
+    "relative_path": "Premium Subs/Death_Trap_Metal_Vol.2_4_808_F_135BPM.wav",
+    "sha256": "7432c703fccf5d93392430dc66016e89b23d4d5a59f713d336b52350f897cf81"
+  },
+  {
+    "relative_path": "Premium Subs/Distract Kit 128 Sub Bass.wav",
+    "sha256": "c9d78be56185728949f19fb9e1d1e85a0303652231797081b5f9cabd340ebca0"
+  },
+  {
+    "relative_path": "Premium Subs/Drillablo_UK_Drill_808_2_Dbm_140BPM.wav",
+    "sha256": "066bdc84af6b4be86e23345d3ad3c5de0b2e876b5e9316b87ca9f4a7bf474f96"
+  },
+  {
+    "relative_path": "Premium Subs/ES808_Trap_808_C_Short Bustdown.wav",
+    "sha256": "28dd1f8a9aafad5f5085ead524fdb801e36993480ee743b7a2bf26e704368701"
+  },
+  {
+    "relative_path": "Premium Subs/ES_SAPPHIRE_Bassline_23_No_SC_Amin_123bpm.wav",
+    "sha256": "e4f07501769f04bf14481a494b4b6b3bf4f80c8ddb8b5576247ff31b724d4f0e"
+  },
+  {
+    "relative_path": "Premium Subs/El 04 F Min 158 808s.wav",
+    "sha256": "e9f9c77a99027a4d5fc19e7f9e7b984f79424c5bb7bc245bc4b96712cd7089f9"
+  },
+  {
+    "relative_path": "Premium Subs/Exchange_808_Fm_128Bpm.wav",
+    "sha256": "3bdf9909c6c8dec102b9d99abde3c404becddcc199d2fba789185209a1d65c33"
+  },
+  {
+    "relative_path": "Premium Subs/FL_CR_KIT02_150_F_SUB 02.wav",
+    "sha256": "eef6023edf88f453eb6db0d1c3794b733c9a0c5917ca78bd043909082928a7ec"
+  },
+  {
+    "relative_path": "Premium Subs/LOCO2_3_103bpm_808 Bass High.wav",
+    "sha256": "05e5d8d75ce08edf24e694b6f3c47546949b77bf6526ff9b5eb7ed12f960f272"
+  },
+  {
+    "relative_path": "Premium Subs/PATZIK_Pyramids_Bass_808_Loop_04_keyD_160bpm.wav",
+    "sha256": "c39cd46de57cadbf091d847236015f8d255c490909f93856ee2b3559422664ba"
+  },
+  {
+    "relative_path": "Premium Subs/PMBR_Bass_90_Amin_Modern_Slam_808.wav",
+    "sha256": "800b0ca3c7f7a75a14ada393f858f34305038483ff27d53d97ede9e0494a6633"
+  },
+  {
+    "relative_path": "Premium Subs/R3D8_AL_808_Loop_Bass_keyAmin_73bpm.wav",
+    "sha256": "179ae1b3c89ed55fc1bccc3bf125c9f24724615e7accf5d14516ad7f2df96810"
+  },
+  {
+    "relative_path": "Premium Subs/RS_VDH2_Kit5_break_loop_sub_bass_no_sc_122_A_minor.wav",
+    "sha256": "8bdc784cf66d5fea7bc2c79933efe594907764d45107ebe08acbc98f3bc9b5d0"
+  },
+  {
+    "relative_path": "Premium Subs/RT_bass_sub_ Key Cm Dub Vinyl 1.wav",
+    "sha256": "c079eac0c72faa1cc768a88500691210529df219f785a250909053579c378868"
+  },
+  {
+    "relative_path": "Premium Subs/SC215 01 Bass 122bpm G 808 Sub Trap 01.wav",
+    "sha256": "0ffafa1794c2fb8fae5534a8d0711157bcedab348a80a5f965f0e52dd52c851f"
+  },
+  {
+    "relative_path": "Premium Subs/SCY032_07_Bass_808_Loop_KeyAm_90bpm_01.wav",
+    "sha256": "4e8de56ce51d063510c91d8dac312ed5746346e869f1ceca0a3bd3167cb1d73e"
+  },
+  {
+    "relative_path": "Premium Subs/SFDH_35_Bass_122bpm_B_Synth Sub.wav",
+    "sha256": "36c53f1266ff4f7d96201aca6a1f9ec0d654f5a1049fdf3f58955b253ab05db1"
+  },
+  {
+    "relative_path": "Premium Subs/SL_SRM_140_808_Loop_Armenia_Abmin.wav",
+    "sha256": "f8243cf7bea87746750aca64331781d439d52d2a37521327fd16a0a6c527c570"
+  },
+  {
+    "relative_path": "Premium Subs/SU Inexpensive C.wav",
+    "sha256": "4c6b9b77c639eb06c3217202f6bbb50ce5d6e6c0fe479464581f99cdbe6afc30"
+  },
+  {
+    "relative_path": "Premium Subs/SW_ANT_Kit_3_Techno_Bass_Sub_126.wav",
+    "sha256": "0569b33b9449f926a3084b7fc7d3d4f940686b80040d6079187614c0c6f69ebc"
+  },
+  {
+    "relative_path": "Premium Subs/Silence_808_Dark_C#m_149BPM.wav",
+    "sha256": "1911abd84a3883d54ab48b6d2c0788ca049faaac6860d37eacc57e84e47a1a4e"
+  },
+  {
+    "relative_path": "Premium Subs/SubBass_Loop_PhonkRain_G#Maj_110bpm.wav",
+    "sha256": "6e160d42b5da7ed740154b6aae309c0b97faec4ffa00ac42fd299b3522c2ed6a"
+  },
+  {
+    "relative_path": "Premium Subs/The Two (C Min 98) 808s.wav",
+    "sha256": "ccf4d823964c3ed3aee2fecc5321088b9fe382c7b479b5c112b3843f26ff3095"
+  },
+  {
+    "relative_path": "Premium Subs/WASHS_Melody_Loop_10_124BPM_Amin_Sub_Pad.wav",
+    "sha256": "af2442f91ef225f3d1dd1869b131f955b3aea48b439b5c2e98655e2bc3dcc235"
+  },
+  {
+    "relative_path": "Premium Subs/donia_150_Cm_808 _2.wav",
+    "sha256": "61eb41982448444fd583b5970146e9578f095a25a777eb3a8dfde26506085f5d"
+  },
+  {
+    "relative_path": "Premium Synths/01 Cyber Securitas Synth swell Fm 150 bpm.wav",
+    "sha256": "226f37056e64d992aa598bdad58d7ddd34e47c4a72d2e86ed3143effc4fd91ff"
+  },
+  {
+    "relative_path": "Premium Synths/02_127BPM_Gminor_Pad 2.wav",
+    "sha256": "7db4178ead6e67de0ac941977ef7e7d265dd4561eb3af72e8f87635fae7302eb"
+  },
+  {
+    "relative_path": "Premium Synths/08_Trippie Nation_G#m_151bpm_Synth Lead.wav",
+    "sha256": "d35e318b5078821b1695d932d7829e435837c1a8217c987f11aeb2fe3cfee097"
+  },
+  {
+    "relative_path": "Premium Synths/100bpm_keyC#m_BurnedArp_1_SG_11.wav",
+    "sha256": "a3fedb49e6f353f371a8f40b88fa04a6a6c73f9fcb8b68020a7ffe0080c42ac9"
+  },
+  {
+    "relative_path": "Premium Synths/152BPM_EMinor_Synth.wav",
+    "sha256": "174e72e70bac859bef2943c30d33c25cd6f18a9a3879f2f647446888ef0b4185"
+  },
+  {
+    "relative_path": "Premium Synths/16_STUNNA_TRAP_115bpm.wav",
+    "sha256": "0b5c811d64d5132f44937988d8a80cbe7e49e123df38ff170c8999819cd1c5c2"
+  },
+  {
+    "relative_path": "Premium Synths/20_Analog_Techno_Arp_124BPM_Fmin_Sidechained.wav",
+    "sha256": "4b4b448e3fb17dc2bf8f469bdc90fbca0cb82d7b46d87be4f4126fbe76d3d030"
+  },
+  {
+    "relative_path": "Premium Synths/20_Trap_Synth_Melody_Loop_140BPM_Dm.wav",
+    "sha256": "a8c3b61bcbb66c813017b6fa4f0c21c1818be92b48fe1580c14ebf83c1dc25e6"
+  },
+  {
+    "relative_path": "Premium Synths/25_RM_Synth_Loop_B_127.wav",
+    "sha256": "328b82e96eaa4b3b573b073487d1c20b946736eeb6be45825bf8b0beb694461a"
+  },
+  {
+    "relative_path": "Premium Synths/2DEEP_MP_04_Perfect Illusion_Pluck Chords_125_Cmaj.wav",
+    "sha256": "a28c9aab4623ca6e38ab1b751f17febf4817133a7b4dfca64dd982fba70d3b2b"
+  },
+  {
+    "relative_path": "Premium Synths/58 Synth Lead 135bpm Gm Analog Dark.wav",
+    "sha256": "4ea8a4b7e7199c676495465e033745d65b4cca9b4820c0e61c35deb735c79b04"
+  },
+  {
+    "relative_path": "Premium Synths/AA - OVO - 90 BPM - F# Min.wav",
+    "sha256": "cd2c961bc014817e1bc2482004ce6fed735d7eed735c9f0575b9ab4ce1637398"
+  },
+  {
+    "relative_path": "Premium Synths/AAD69_PAD_Dmin_140bpm_35.wav",
+    "sha256": "99fd80d3c261d086ae58dacc70e0c7ae35c7ddb3770dcb0d10161407d65ea409"
+  },
+  {
+    "relative_path": "Premium Synths/APSK1 stem 10 Synth 1 F 121 bpm_@a.heardmusic.wav",
+    "sha256": "09628fabb058f3e9ca2f2c602c1ca568c2ddc6e445d78d0c7ff9db702b2818bd"
+  },
+  {
+    "relative_path": "Premium Synths/AST_SNS_93_pad_closer_G#min.wav",
+    "sha256": "2583df08539e8084b72ab6d8e5920c9119d542e8f3248d5622624e54c9ef9623"
+  },
+  {
+    "relative_path": "Premium Synths/BNG_DPH_Synth_155BPM_Cm_Flow.wav",
+    "sha256": "60118c38a7dfc41862be6090c869b1165cf27eaf36580e0e052aa913c1126cc8"
+  },
+  {
+    "relative_path": "Premium Synths/BTL1-Pad-Granular_160bpm_Gb.wav",
+    "sha256": "ea7ffa84471bfc604cb40d1e65ab5a1b725e84a74201fdc078de878d072ab49a"
+  },
+  {
+    "relative_path": "Premium Synths/CLSLS_Melody_Lowrider 137BPM Gm.wav",
+    "sha256": "47bf2a785c4f41a6a3d45fe9907a576c337312caaa0fc84d957c1f0e3752a012"
+  },
+  {
+    "relative_path": "Premium Synths/CS_DR_synth_lake_melody_Amin_140bpm.wav",
+    "sha256": "14c615b5640e2c24503e4f6b4f5f40950c9a60d82ec96fca27ba3e7154c843d2"
+  },
+  {
+    "relative_path": "Premium Synths/CS_Kit_03_Pad_Vintage_Wet_Bm_120bpm.wav",
+    "sha256": "f8e7fa32a9f570d25e3bda0bbffe9c0a133c44a804dfbbaca9468070312b2e23"
+  },
+  {
+    "relative_path": "Premium Synths/DN_VC2_Clarity_SynthLead_2_KeyAbmin_122bpm.wav",
+    "sha256": "c6cf0464411fa206dfb085925cb11ec78c2de867541f47f3072079bd22b9a7d5"
+  },
+  {
+    "relative_path": "Premium Synths/Elevate_5_Texture_92bpm_Ebmaj.wav",
+    "sha256": "b9b872ab62811bf1a8d61caa612f810a211aba2b6b503c0cd0d0fb84b3b78754"
+  },
+  {
+    "relative_path": "Premium Synths/FL_HRS_Kit05_Synth_Loop_Melody_Harpsichord_Degraded_140_Em.wav",
+    "sha256": "7a77bf1ab5e62e13b4225c98bf2011b78f151aa321ac4c2faeae46c8f4f3f025"
+  },
+  {
+    "relative_path": "Premium Synths/FRA_Kit_4_Drop_Lead_Bm_125_BPM_No_SC.wav",
+    "sha256": "49e20aee8ab11ee57cd2c6da2cd94eb76aa231a2f19288c8964064164527a675"
+  },
+  {
+    "relative_path": "Premium Synths/Good Vibes_Ambient Lead BPM140 Amaj Happy Mellow.wav",
+    "sha256": "d4fc89a946109dfa884d00db90de6437fe6355ca05480015590490b55a3bf750"
+  },
+  {
+    "relative_path": "Premium Synths/JSN_Lemon_Arp_Loop_A#m_105BPM.wav",
+    "sha256": "7efb4c816afd1ab3a75fd3732431fee59f16587abc330937e47403315e6ac749"
+  },
+  {
+    "relative_path": "Premium Synths/KK_RNB_Cassie_Synth_Chords_105BPM.wav",
+    "sha256": "133e41e8547c7c88f3283dffcd1b5eb0bc5c5d780ca71c2739b1866a12b5d7e1"
+  },
+  {
+    "relative_path": "Premium Synths/LSLMP_Increible_Pluck_Loop_02_100_Amin.wav",
+    "sha256": "eb24b47c1e74d2bc40909b5c4d581cfceb55cc63fc73530e4cbc5438bc81abe6"
+  },
+  {
+    "relative_path": "Premium Synths/MetaVinyl_Texture_Gladiator Dawn.wav",
+    "sha256": "6599237fdad96579a12090cb9360337a939bdfa3251acf76b92fd996125f665a"
+  },
+  {
+    "relative_path": "Premium Synths/OSTA_Plucked_01_keyCmin_145bpm.wav",
+    "sha256": "b6341fb79cb908e3135a074eb1ab12453edfd9fc99f033154a5553ba55667094"
+  },
+  {
+    "relative_path": "Premium Synths/OXYGEN_FLH_Kit02_Synth_Loop_Pad_Cm_85.wav",
+    "sha256": "d1b31ff8648b97e4430f28a225971d241dbec1cd8d303504e2135c582cf80b51"
+  },
+  {
+    "relative_path": "Premium Synths/PATZIK_Sunset_Synth_Loop_keyCm_130bpm.wav",
+    "sha256": "4a0c3f17f397d7b3939e7bac784994663663aa26d93cc6b8455f72de5b30d041"
+  },
+  {
+    "relative_path": "Premium Synths/PMPR_138_F#m_Synth_Loop_Epic.wav",
+    "sha256": "e985835fe800b5ddff0e66f8390d30217f2c499205564033e455d0a427939f68"
+  },
+  {
+    "relative_path": "Premium Synths/RS_LVR_Chillvibes_Pad_84_A#min.wav",
+    "sha256": "009aefd28b017d4547360c85892a60a99ec716a411b2db708b9fe79e3cc7b0b4"
+  },
+  {
+    "relative_path": "Premium Synths/SI_UFO61_synth_pad_evolving_one_shot_creative_C4.wav",
+    "sha256": "2fc58ac2c04324a659886f0b8930117af5441471cb4d787d2c813848d246c8f1"
+  },
+  {
+    "relative_path": "Premium Synths/SL_LAD_89_Synth_Up_Loop_Block_C#min.wav",
+    "sha256": "2ab3df7e01c54949d1fe1c423d487b736d388985867a7cbf94b510e06f89294e"
+  },
+  {
+    "relative_path": "Premium Synths/SSVR_Lead_Trappin_140BPM_Cmin.wav",
+    "sha256": "2dbcb600bfe608732b60a0460c5c0400a7e6a8018b688137dc1d6e1aeb0f64ee"
+  },
+  {
+    "relative_path": "Premium Synths/VB_Synth_Poly_Loop_Roadtrip_Cmin_113bpm.wav",
+    "sha256": "a25650376f694b3bf9937913682325747f698c83ab6e6884e839390117d61442"
+  },
+  {
+    "relative_path": "Premium Synths/Wonder_Song_Starter_Gm_80bpm.wav",
+    "sha256": "2e2d6a9ffa80a50f61bf5afdc33aef6818e10020ea754e9cb82577e654eb7270"
+  },
+  {
+    "relative_path": "Premium Synths/_Voage_Lead_Loop_144BPM_F#m.wav",
+    "sha256": "59a9fc3586d908ee250c06a4c18f59a321492c3a4fe1342bab5f7bf0ed2ae97e"
+  },
+  {
+    "relative_path": "Premium Synthwave/01 Drum MIx - Part 04 - 105 BPM 2.wav",
+    "sha256": "4c6e9d409f133c40ab7dde3dd5c801fa9c05f2cb19b745038f8f38f17530009e"
+  },
+  {
+    "relative_path": "Premium Synthwave/06-Melody-120BPM - C.wav",
+    "sha256": "bc3ecf1c33c8349a4c4c5580fabc6a08d3fb69848d6a8391eb1a9399eea5825d"
+  },
+  {
+    "relative_path": "Premium Synthwave/19_Energetic_Synthwave_Pop_Arp_130BPM_G#min.wav",
+    "sha256": "1e22f44f19aaf62863ea7010464162ba95ad7399fd7210fcb27c72c54f6e1d79"
+  },
+  {
+    "relative_path": "Premium Synthwave/20_Dreamy_Synthwave_Pop_Melody_120BPM_G#min.wav",
+    "sha256": "baf71e2bbffe629822a6099c6a9a3a66cbede46b9fc1c8fe3c9216ab85a2d824"
+  },
+  {
+    "relative_path": "Premium Synthwave/49-VHS_Rhythm-110BPM.wav",
+    "sha256": "f80208054a4463ab31c639012a6a0b3b58dbfbda54c607c538cd45608b33fc72"
+  },
+  {
+    "relative_path": "Premium Synthwave/65_Am_TurnMelody_SG_20.wav",
+    "sha256": "577aafd6d587dc09e42fb800a14f99c41f88cbf10d5dbc8b426a6b0a7676dc18"
+  },
+  {
+    "relative_path": "Premium Synthwave/AANN2_Synthwave_Chrome_Lead_Melody_Loop_KeyGmin_96bpm.wav",
+    "sha256": "8cd896ac235b057c4d7b87dc5ca313a1221c11ed85b2d60b0ab794c6f72e11de"
+  },
+  {
+    "relative_path": "Premium Synthwave/AATD2_Synthwave_Melody_Loop_104bpm_KeyFmin_Pad_Dirty.wav",
+    "sha256": "eea6d7b90e55921ec1f34f6ef2e8498be1d8128b72d5d8078dd921a8c47d2120"
+  },
+  {
+    "relative_path": "Premium Synthwave/AATD2_Synthwave_Melody_Loop_87bpm_KeyFmin_Bass_Solo.wav",
+    "sha256": "9cae2d15d5e462b51102719d8bc539b7dde0f6a8bc227726549628a513a7f038"
+  },
+  {
+    "relative_path": "Premium Synthwave/AATD2_Synthwave_Melody_Loop_87bpm_KeyGmin_Lead_Sunlight.wav",
+    "sha256": "bec125588fb9af60ba303fff6fb8e2cae66ebde1db47ce0f356adc9af8ab298d"
+  },
+  {
+    "relative_path": "Premium Synthwave/AST_CLT_140_arp_loop_psychedelic_G.wav",
+    "sha256": "f83f7452402b3aaf019658f1cef555cdbb867af90c06a4902e8a646a16775213"
+  },
+  {
+    "relative_path": "Premium Synthwave/CS-NDS-80-Synth Loop-C-10.wav",
+    "sha256": "e38e5bf1443fd34d8f17f35bec3cc32e2f85ddf6b47b3fa78baf589dcadc4f5e"
+  },
+  {
+    "relative_path": "Premium Synthwave/CS_EP_01_160bpm_Intro Pad.wav",
+    "sha256": "48516b827922254c766f0bb4f25a9a9bc2be65016598fb11b4e8ec80251a97b1"
+  },
+  {
+    "relative_path": "Premium Synthwave/ESRED_SYNTHWP_Bassline_Loop_16_No_SC_Amin_120bpm.wav",
+    "sha256": "2c76476ae5e5d85deffd9a2671b365d49958557dcdb6270404d227e5eff770f4"
+  },
+  {
+    "relative_path": "Premium Synthwave/ESRED_SYNTHWP_Synth_Loop_18_Dry_Amin_120bpm.wav",
+    "sha256": "6adaf6203a66183371c22f12963138348a8490f89278c05ad1b5159cf7d083bd"
+  },
+  {
+    "relative_path": "Premium Synthwave/ESSA2_synthwave_arp_loop_83_Fmaj_old soul.wav",
+    "sha256": "2607213c39b4648bdd6c32283512989babc8c935855f3007a3a3fb3123c8b053"
+  },
+  {
+    "relative_path": "Premium Synthwave/ESSM_synthwave_melody_loop_90_Am_panic room.wav",
+    "sha256": "936e1f05abec49fe711445d3873acf088587ebd33d503171372b547d7652aa68"
+  },
+  {
+    "relative_path": "Premium Synthwave/Fill 32_110.wav",
+    "sha256": "4da56059ed258f67006306ce024f6036f6537b0eb19ccd5cf59edd9c1879f90d"
+  },
+  {
+    "relative_path": "Premium Synthwave/Kit 07 Lead 100 F# Wet.wav",
+    "sha256": "821cd9d388470c7544799a7212f36b5350dfc55fafda4da45ede8ccab85f7a8a"
+  },
+  {
+    "relative_path": "Premium Synthwave/NF Kit 09 Bass Loop Fm 140.wav",
+    "sha256": "3807637fed5fc40c819b6078b9e65c08e37ec9b39479f1bf773772d7607c1b4c"
+  },
+  {
+    "relative_path": "Premium Synthwave/NSND_synthwave_synth_loop__92_Fmaj_lead_sunset.wav",
+    "sha256": "8582a92f15ed6bdf670427e6f6884aa9833574f7c7c7cc01a8ce8b2aa66b4515"
+  },
+  {
+    "relative_path": "Premium Synthwave/NSVC_synthwave_melody_loop_92_Fm_dirty_pad.wav",
+    "sha256": "a50de24c2133a5eafa1454c2a55e7c4f98d97da789c395616cc155f0e221db23"
+  },
+  {
+    "relative_path": "Premium Synthwave/Never Let U Go Vocal Lead Am 120 Dry.wav",
+    "sha256": "c700583bb427b5236a11cf6315474eb7a3c7f2d7e2b86d65e8b1b06b2aec43bf"
+  },
+  {
+    "relative_path": "Premium Synthwave/Nineteen Eighty Seven A Synth BPM 100.wav",
+    "sha256": "760a567dfcf403b50d4690426948040188b9f7c8ba3dfabaef997ac694c8c8e0"
+  },
+  {
+    "relative_path": "Premium Synthwave/OASD_Casette-Change_08.wav",
+    "sha256": "a51d95f5b1a55dbff56e864b5f0776b2dc7707f9bb89da3b04c7d42ced512969"
+  },
+  {
+    "relative_path": "Premium Synthwave/OASD_Full_Drum_Loop_145BPM_13.wav",
+    "sha256": "497eb80f34edde69765bc92f575c0cacaba1a5f1013b83a4045d25e0112e3e5a"
+  },
+  {
+    "relative_path": "Premium Synthwave/PATZIK_RETRO_Drumloop_01_145bpm.wav",
+    "sha256": "9d2981cef8e8d18b5a85fe3d735d9bc5225c0e0acefd453d10bedc7da303f8d9"
+  },
+  {
+    "relative_path": "Premium Synthwave/PR_MBP_04_Arps Chords Stack_128bpm_A#.wav",
+    "sha256": "d2e40560d6fd09b25bd07e1296481d06a113323fc8112e699eb6ff593208511e"
+  },
+  {
+    "relative_path": "Premium Synthwave/Playful_Synthwave_Chord_Loop_16_130BPM_Cmaj.wav",
+    "sha256": "320e0cf1d8fc04edfe0a71af3f18d6e2caaa1987ceafa5d349fb312aa887a469"
+  },
+  {
+    "relative_path": "Premium Synthwave/Pop_5_Synth_Keys_G#_100_NL030.wav",
+    "sha256": "e89d7377e117f35569c4b2cd2d8f3d344935676a9d3b98375657e612e41edeb1"
+  },
+  {
+    "relative_path": "Premium Synthwave/RL_Time_Machine_KIT_1_Drums_Mix_2_C_BPM_80.wav",
+    "sha256": "fc57c143c35a4a3b7f7b51aef0e36c741083b7fdfee0953da819134e05740a84"
+  },
+  {
+    "relative_path": "Premium Synthwave/SL_RCR_93_Music_Loop_1_Blue_Fmin.wav",
+    "sha256": "d422aaa3b9d3fbeea64df010d0cd51e5504386584014b6b8fb510d05d79e3ad4"
+  },
+  {
+    "relative_path": "Premium Synthwave/SW&D3_K5_ Key Chord_(Wet)_Fmin_115.wav",
+    "sha256": "aefccf50221fd3bf32fb8ce6e18e64bd32085985ee4f3f9732ff6abfbfdaf64a"
+  },
+  {
+    "relative_path": "Premium Synthwave/SW&D3_K5_ Lead 1_(Wet)_Fmin_115.wav",
+    "sha256": "c7d2a53241b7ed5fae5046070c333e7898670ee6f8e0298940a4b6748769d5db"
+  },
+  {
+    "relative_path": "Premium Synthwave/SWC3-Vocal-Lead2_90bpm_D.wav",
+    "sha256": "a10bf7fe49eca606d9351f94411144e399fae537ef44b1cfba2260509b301216"
+  },
+  {
+    "relative_path": "Premium Synthwave/Shutdown Bass 136BPM Amin..wav",
+    "sha256": "9e9537b86765b9fedee75304e21daaecedfd143b17006b97cf8cc1c553236a54"
+  },
+  {
+    "relative_path": "Premium Synthwave/Synth_Loop_15_Fm_110bpm.wav",
+    "sha256": "677e1c86a9b5d909c63bb99bfaf34b08488774d5779e5e722e16e90f547abd24"
+  },
+  {
+    "relative_path": "Premium Synthwave/SynthwaveKit2-Pad_100bpm_Fm.wav",
+    "sha256": "579bbec6625fedee78203a5d8751d2172b0e5d1ada1865fc65e2a0f4dfc4623a"
+  },
+  {
+    "relative_path": "Premium Synthwave/Texture_2_Vol3_keyCmaj_115bpm.wav",
+    "sha256": "1dc4524f5ba8ffc62fb882847e618cd384bbef45dbfaf7d69ddba5d1f7ae8017"
+  },
+  {
+    "relative_path": "Premium Synthwave/WASA_110BPM_DrumLoop_2.wav",
+    "sha256": "cee5323c0b3302f9140bc56449953856e2b6dffed6a8e7b184cc2ae0e5e88cf6"
+  },
+  {
+    "relative_path": "Premium Techno/140BPM_Bass_D_Gutter.wav",
+    "sha256": "2470c9f4540ddfbfad8468a3c93900d59fdd9118ca7f242993839473ade50114"
+  },
+  {
+    "relative_path": "Premium Techno/20 Synth Lead 135bpm Gm Analog Dark.wav",
+    "sha256": "00b3d3b2ddb8a8d3efce1465fb1ce59f56b68a1885b72bff7b36afc53076d5d6"
+  },
+  {
+    "relative_path": "Premium Techno/28 Synth Lead 134bpm Bm Melodic Analog.wav",
+    "sha256": "a224727caa943c001840a9e10d6bb68fe95b96940ccb0695309c42e73396a954"
+  },
+  {
+    "relative_path": "Premium Techno/35_Synth_Loop_keyG#maj_120bpm.wav",
+    "sha256": "1178a094b4bd76660954ffc1d1ecaf4b174a0d0787837e475f6df3fe3e105da2"
+  },
+  {
+    "relative_path": "Premium Techno/AAKO2_Techno_Bassline_Loop_125bpm_G#_Vibe.wav",
+    "sha256": "e6cd090564ec80ddc6d0943ba153b36f470cbefeed10ee84a5a7b36a3a210346"
+  },
+  {
+    "relative_path": "Premium Techno/AAKO_Techno_Glass_Top_Loop_125bpm.wav",
+    "sha256": "fe0d5b3f1623d17e6422a0b38025057649fa9193d9cc38954c389e27998979e4"
+  },
+  {
+    "relative_path": "Premium Techno/ALKNT_Techno_Percussion_Loop_123bpm_Pan Vocoder.wav",
+    "sha256": "e7e946f8c5d805771550086b6ea5309e5a73e6c3a74b0f9ac66ad3098fa29105"
+  },
+  {
+    "relative_path": "Premium Techno/AST_LT_140_bass_loop_heat_F#.wav",
+    "sha256": "136c8a64d1c3fde3c119c50463956ce7de6240e12f64cc85a4b0da46b8180c77"
+  },
+  {
+    "relative_path": "Premium Techno/BNG_RT_01_Beat_Loop_Fm_130bpm.wav",
+    "sha256": "d2d2dfc55855a2bd9e39db81c782fda7e2d79c724523117436beca650945783c"
+  },
+  {
+    "relative_path": "Premium Techno/CL_Polly_Kick_Loop_124bpm.wav",
+    "sha256": "49940e4c3a78635cc3a89c828e0e25fcc2583511aa39f43b8474a5da13c9432a"
+  },
+  {
+    "relative_path": "Premium Techno/CL_Wobble_Bass_Pad_keyBb_124bpm.wav",
+    "sha256": "5246c669fa2b706d33f809032aa7da6b302764324d1cba91c9f17f59babc0cbf"
+  },
+  {
+    "relative_path": "Premium Techno/CL_modern_churchbells_SFX_keyA_124bpm.wav",
+    "sha256": "2722718b479927b36ebcdfa4dda42215764747d10c6f45eef7382d80619e0f50"
+  },
+  {
+    "relative_path": "Premium Techno/CS_DT2_MUSIC_Cm_09.wav",
+    "sha256": "39c3aea051f077b18060b0810e3740b9150c881e7e6d4e51aa00dbf1873ff17a"
+  },
+  {
+    "relative_path": "Premium Techno/CS_UNDGT_Drum_Loop_18_Top_134bpm.wav",
+    "sha256": "490be7bef784e18f4f71159c6423d6f2c0c5b8186f3977585cfcb084b565df59"
+  },
+  {
+    "relative_path": "Premium Techno/CS_Vocal_Loop_17_125BPM.wav",
+    "sha256": "38dffd8b92f9b7dbc9972ce5394dcd656936ab761cf5ad8b111e733f589cafe7"
+  },
+  {
+    "relative_path": "Premium Techno/DF-DMT-124-Kit 02c-Top Loop.wav",
+    "sha256": "2e1539c0642c1acbe889d117b24047f504f917ce3d7d82ff1284bed15c002a74"
+  },
+  {
+    "relative_path": "Premium Techno/DF-TRFX-130-Riser FX-09-B.wav",
+    "sha256": "6d3752f0c1816e4aefce028c0c889152e44e9e129f64bf378621c078b9dfe960"
+  },
+  {
+    "relative_path": "Premium Techno/DM_TFX2_125_Loops_07_E.wav",
+    "sha256": "8e2db9cb9081d43bd93565f4c273b591a34868a04695753ded47a68d21335b9c"
+  },
+  {
+    "relative_path": "Premium Techno/ES_BERLINMIND_Bassline_Loop_05_SC_Bmin_138bpm.wav",
+    "sha256": "c0e43759af730f0c0123f30c94b0d766f9e71d048fa23407093a48ae70f72a8e"
+  },
+  {
+    "relative_path": "Premium Techno/ES_DARKM2_Dark_Atmos_05_Gmin_128bpm.wav",
+    "sha256": "93889719633317840b6ec0f38f9f0c1a1f3bc65eaf6e2dd37e1a906fe88f9fbc"
+  },
+  {
+    "relative_path": "Premium Techno/ES_MELTE6_Kit05_Oberheim_Bassline_Wet_no_SC_Dmin_125bpm.wav",
+    "sha256": "68485b30055f207bba46f8b3d86f4b555d005da6105723662d483bf17baefdda"
+  },
+  {
+    "relative_path": "Premium Techno/ES_TEIMP_Snare_Loop_13_F#min_122bpm.wav",
+    "sha256": "66bfbeba70af8790ea9c214f1be405443a7cc5ec17b671615cfc06852ae661a6"
+  },
+  {
+    "relative_path": "Premium Techno/Ebm9_DroningChord_SG_8.wav",
+    "sha256": "e7f36c84e7d9425f0a063081ac32064d50f82d19ff5c1b44453f6cc30c119d3a"
+  },
+  {
+    "relative_path": "Premium Techno/GRANDEL_HAT_01_D.wav",
+    "sha256": "f1af28609802e1af1a5393f51c1fee0eabf0ac479ce39137e32f391bee8cf099"
+  },
+  {
+    "relative_path": "Premium Techno/HT1_132bpm_Drum_Loop_Tonegem_Perc.wav",
+    "sha256": "f3e0571fdc6321e4d8beaa89e709f43cd4d4db93a943a4c7c2876ecb2ac9381e"
+  },
+  {
+    "relative_path": "Premium Techno/IS_130bpm_dusty_burial_1.wav",
+    "sha256": "96c5deb26a9566d59f65a49657810466e64e2671eb46bd6d617b3a9d7cc500cf"
+  },
+  {
+    "relative_path": "Premium Techno/Kit1_RA_Bass_Cm_124.wav",
+    "sha256": "0879e4466ff8ff87181017f3f420e1f2cefba34d5b9036d8d4e5a29062d6dab6"
+  },
+  {
+    "relative_path": "Premium Techno/MCT_Berlin_Influ6_Synth_92_120.wav",
+    "sha256": "747a1ecb48c8246934dfe93531aacad0eceea41b0cac89c663c39aaa784c0c48"
+  },
+  {
+    "relative_path": "Premium Techno/RT_11_Drum_130bpm_G#_Full.wav",
+    "sha256": "12cc82922e38e8579c9149b48d560eba15bb0d81d765a9d3b1e1ff64a9661ed3"
+  },
+  {
+    "relative_path": "Premium Techno/RT_bass_sub_ Key Cm Cliche Mod 1.wav",
+    "sha256": "bd1ac0cabf6ec07af9ec8b175f27b12e5d9d9d20c0fcc4bac6d54ae6e5af125c"
+  },
+  {
+    "relative_path": "Premium Techno/RT_hats_bastard 128bpm.wav",
+    "sha256": "e45d9f3a582802bda203bc8a8db7f51fc8cd9579c4fe4ab505fa93a4db6fac39"
+  },
+  {
+    "relative_path": "Premium Techno/RT_shaker_scrub_1_128.wav",
+    "sha256": "8510655efc9386b8cee7ecaf4a239822c47e68ebe58518d55a2606360857bbd5"
+  },
+  {
+    "relative_path": "Premium Techno/SHOO_techno_full_drum_loop_125_club destruction.wav",
+    "sha256": "d9ff79ae58e097fe8fd643115308c3f8d1a2aff88f648ea5e6f336456b08b8d3"
+  },
+  {
+    "relative_path": "Premium Techno/SLHL_KIT_Immateria_Granul_Loop_97PM_Ebmaj.wav",
+    "sha256": "667f4def1f501ea38fa423b204822d7352e2ba9a193adf19592b45daab70d2f7"
+  },
+  {
+    "relative_path": "Premium Techno/SYNTH LOOP 44_keyBb_129bpm.wav",
+    "sha256": "23035f5fe8d8407e85591377fe7f0265432002a44d391330fa7a88b66c7a15d4"
+  },
+  {
+    "relative_path": "Premium Techno/TM1-Lead-Drop2_134bpm_Dbm.wav",
+    "sha256": "fc6f3ff74e3aad847ac2a11ea01a6d6609048a485074883336080790a6f9e777"
+  },
+  {
+    "relative_path": "Premium Techno/TTE_14_Percussion_130bpm_Snare.wav",
+    "sha256": "308d925c1670d4a2bca839b8d4bbd11388ec7fd68b61b828b0dfb78e881dbbed"
+  },
+  {
+    "relative_path": "Premium Techno/Techno_Kick_Rumble_08_130BPM_D#.wav",
+    "sha256": "44291b66cc1f6a3c0a48d91e79bb702d8ff2c9de684f244a66ad4b2a28548294"
+  },
+  {
+    "relative_path": "Premium Techno/ts3_kick_loop_132bpm_9.wav",
+    "sha256": "db8e9bf838c9dc629e905fabe13afba03274a374c6dd6c4aa05e3a433047aa9f"
+  },
+  {
+    "relative_path": "Premium Techno/uglh_drum_loop_25_128bpm.wav",
+    "sha256": "8c903e6493433d9c20de413989e31f73e7c2fdd4372240d28458d388665e5dc3"
+  },
+  {
+    "relative_path": "Premium Trap/01_ET23_140bpm.wav",
+    "sha256": "d0c9b5b9f23fd9a7dd2720208316a654217f3db4d94fd7be9ddd6c53041633d6"
+  },
+  {
+    "relative_path": "Premium Trap/17_ET23_145bpm.wav",
+    "sha256": "be4b96afd864122547d6fb428db484ef9151cb2a35e5ae4da7c6ca4dbc02b8c0"
+  },
+  {
+    "relative_path": "Premium Trap/AAW_mainstream_melody_loop_150_Cm_safe to say.wav",
+    "sha256": "a4ab3913cba68b0c01efd4b90b654042aeaba7e0227b952749b78580e594cbf0"
+  },
+  {
+    "relative_path": "Premium Trap/AAW_mainstream_melody_loop_150_Fm_space.wav",
+    "sha256": "b190e7f2d9bfd473db24f3cae2b37ccda78011f1cfdab40673b17101ccebb26d"
+  },
+  {
+    "relative_path": "Premium Trap/AST_CLT_130_drum_loop_lotus.wav",
+    "sha256": "55968db6ddd851f63f64f5d883870c92bff171bb4caf563e353706264c668257"
+  },
+  {
+    "relative_path": "Premium Trap/AST_CLT_130_perc_loop_lotus.wav",
+    "sha256": "d0e7faca57c5e4733280ea91f118054f1234e4ec066444d7b7cdf246cd02286b"
+  },
+  {
+    "relative_path": "Premium Trap/Beat_04_Dm_85bpm.wav",
+    "sha256": "4a129496eb390e1aadac8d0d9045b9fe2f5010ebfe0551b3a7446b4fdda540ef"
+  },
+  {
+    "relative_path": "Premium Trap/CLSLS_Melody_Illvoice 101BPM Dm.wav",
+    "sha256": "217ac40d34a20f4cf4eed24d1203c898546edd57f3da31ac704636d7676b7899"
+  },
+  {
+    "relative_path": "Premium Trap/CLSLS_Melody_Neon 135BPM Dm.wav",
+    "sha256": "00a87e89d91ddbb7087d181285a02319f20e1194ab0a8ee80c1b99701465088d"
+  },
+  {
+    "relative_path": "Premium Trap/CS_DR_drums_trap_tape_140bpm.wav",
+    "sha256": "af6cbb1d76bd1737ae4cbeb7a0f026ae76d5cfa6a169f17dca6673c5ffc96dbc"
+  },
+  {
+    "relative_path": "Premium Trap/CS_DR_synth_lake_melody_Amin_140bpm.wav",
+    "sha256": "14c615b5640e2c24503e4f6b4f5f40950c9a60d82ec96fca27ba3e7154c843d2"
+  },
+  {
+    "relative_path": "Premium Trap/DIVA_Lost_Souls_Piano_19_Amin_140BPM.wav",
+    "sha256": "e220cdc568085ddcdf357e5741729f60cbb598238369b50c048eaa7b9b720b35"
+  },
+  {
+    "relative_path": "Premium Trap/DIVA_Lost_Souls_Piano_21_Emin_140BPM.wav",
+    "sha256": "4339fed551a23c116b9bc7e8b1d698d47516fbddd07bb4142417aff720fe1780"
+  },
+  {
+    "relative_path": "Premium Trap/DTB_Strings_Pad_02_keyAmin_140bpm.wav",
+    "sha256": "ab48900431d166f27408bb60f78e36d0e82673fca72aa1f7e5b316e7d47d368c"
+  },
+  {
+    "relative_path": "Premium Trap/DTB_Vocal_Choir_keyAmin_140bpm.wav",
+    "sha256": "7821b24323b5e9083f8b7fbe4be96bd64852fcb7974039a06151533c97a22b07"
+  },
+  {
+    "relative_path": "Premium Trap/ESTK_Trap_Kalimba_Loop_140bpm_C#min_Vinyl Tape.wav",
+    "sha256": "0cb4f091175eefa92f39023d7ed3089c6750b8f0dd6bf0a1a80c8f7f4c774031"
+  },
+  {
+    "relative_path": "Premium Trap/ESTK_Trap_Kalimba_Loop_140bpm_F#min_Poppin Club.wav",
+    "sha256": "ec9a723b302b11e2f47d2f4b5642197c15792438a9a03a012cce511cbfd56fae"
+  },
+  {
+    "relative_path": "Premium Trap/JSH_2099_Drum_Loop_140BPM.wav",
+    "sha256": "a7ee095bb897d2789e89e8953f12d7fec9feecbdc7c1e7feacce2490f1e4eec8"
+  },
+  {
+    "relative_path": "Premium Trap/JSH_Insomnia_Music_Loop_140BPM_E.wav",
+    "sha256": "64b091b1f66920faec1a3d97052c03d829ad18adacc4d79a79df87bfe5569107"
+  },
+  {
+    "relative_path": "Premium Trap/Keys_Effected_Vibe_Dark_keyDmin_140bpm.wav",
+    "sha256": "bba636785be8f93bf7d8007ddb43bb93cb0bf3c5a498eeb5c2ebd20ed558dd23"
+  },
+  {
+    "relative_path": "Premium Trap/LSWTS_Drum_FX_Hat_01.wav",
+    "sha256": "5c70377f7536025b61e9e40e1fcaecf821565e213f234be49d98bf3dbca0e30b"
+  },
+  {
+    "relative_path": "Premium Trap/LSWTS_FX_06.wav",
+    "sha256": "875f6221f713474ffc2fdf5ecc086f7990785d49e26dc85caf714b85138f3f2a"
+  },
+  {
+    "relative_path": "Premium Trap/LV_MS_Chill_Vocals_Rap_110bpm.wav",
+    "sha256": "c362101ca7a2a37bd1c63825d8966257b4cd078a6ca0825ac49c51eba3ade26e"
+  },
+  {
+    "relative_path": "Premium Trap/LV_MS_Wolves_Vocals_Rap_keyDmin_80bpm.wav",
+    "sha256": "c43de7a4c7c6ee04eae0421df7814c5e379bc42c4d6c749996febc939aac2f2c"
+  },
+  {
+    "relative_path": "Premium Trap/L_GB_808_Gucci Tears_keyAmin_155bpm.wav",
+    "sha256": "0200fdb159de8c21669a0fcf2efac9a288003dcb00acf2c0d4e4e707280c1aa3"
+  },
+  {
+    "relative_path": "Premium Trap/L_GB_Drums_King_and_Queen_02_150bpm.wav",
+    "sha256": "4ed727d18cb7185fbe202dfef96c2e45af629d628694a218e06ad17df86f1a00"
+  },
+  {
+    "relative_path": "Premium Trap/L_TSS_HiHats_Kit 02_keyDmin_140bpm.wav",
+    "sha256": "92d91c85bd2aa8853d85e2db58e49704df2869cdb8439879528ef9c3c10a2f1f"
+  },
+  {
+    "relative_path": "Premium Trap/L_TSS_Kick & Clap_Kit 02_keyDmin_140bpm..wav",
+    "sha256": "008e49c16c95350e7b2ef00d692878471e663d3663dbe2ab9949ff3e67fe882c"
+  },
+  {
+    "relative_path": "Premium Trap/My memories D minor 133 Bpm Melody stack.wav",
+    "sha256": "e4da2c22ac3fd0f4cb23ef0881b1f62697ce289fc90c42d64a9fab16fcf7d755"
+  },
+  {
+    "relative_path": "Premium Trap/PATZIK_Juice_Plucks_Loop_keyA#m_130bpm.wav",
+    "sha256": "bba7cbf86ea3b07bde1fb2a2e55e47159b4141670898f6e747d522a2e2f2bd98"
+  },
+  {
+    "relative_path": "Premium Trap/PATZIK_TalkBack_Music_Loop_keyA#m_130bpm.wav",
+    "sha256": "d0e83ae994ed3118c579a8f4b0d5fcbd17a3e03524789e7e22e54b0cebe3fc90"
+  },
+  {
+    "relative_path": "Premium Trap/RS_FT_Crush_127_Cmaj_Bass808.wav",
+    "sha256": "9f8f4aabcf3aac61ce453f68c33d6f7ba783896c9414696d522515ff54a0993d"
+  },
+  {
+    "relative_path": "Premium Trap/RS_FT_Gone_147_Fmin_Arp_Dry.wav",
+    "sha256": "362db1023700f09bd5894a7ee26d6271f17494d5163935b241a27eccbbc66577"
+  },
+  {
+    "relative_path": "Premium Trap/Repeat - 122 Bpm - D# minor Repeat - Melody 2.wav",
+    "sha256": "a2934cb8ed8881c6b129f06394aa00e493b4a9e559bed0484f6abf433010e187"
+  },
+  {
+    "relative_path": "Premium Trap/SCY018_02_Melody_Loop_KeyCm_125bpm_02.wav",
+    "sha256": "5d88fc8991d619e10184c65f0d46be885e63f4908340ad9c01ef9f2457195f9f"
+  },
+  {
+    "relative_path": "Premium Trap/SCY018_06_Melody_Piano_Loop_KeyEbm_180bpm_01.wav",
+    "sha256": "49b21ee1e75ab241a04967b667e60cf7b6fd695de4a88e1324b68985f0bfbc9c"
+  },
+  {
+    "relative_path": "Premium Trap/SL_LN_92_Atmos_Loop_Model_Fmaj.wav",
+    "sha256": "8f1b2b842495f2ba8c72a188cfdaf3cb9c50bd7d73691ed58faf236349661aad"
+  },
+  {
+    "relative_path": "Premium Trap/ST_LN_98_Synth_Loop_Goldfish_Dmaj.wav",
+    "sha256": "d46a2d9d8631e5e81c900a683d9d1643412519a91521148531be919a20afbde6"
+  },
+  {
+    "relative_path": "Premium Trap/Sensation_Piano_2_keyAmin_140bpm.wav",
+    "sha256": "d8ea5dc9716dc5455f4e944d0cb87f07b17157455c4d57d2c1c07116c35a3a5e"
+  },
+  {
+    "relative_path": "Premium Trap/She Wild_Guitar_keyAmin_120bpm.wav",
+    "sha256": "35a31638c444bfea66b226b643c9ec79e1fb976fcdb5f1caf4e3bd2de16e0530"
+  },
+  {
+    "relative_path": "Premium Trap/Skull_X_Bone_Drill_Trap_melody_loop_140_C#m_sheep.wav",
+    "sha256": "da578f03bb9fb88acd17ef378324795fe76a5baafbcd49db9a6e882867ce3ea7"
+  },
+  {
+    "relative_path": "Premium Trap/Skull_X_Bone_Drill_Trap_melody_loop_140_F_droptop.wav",
+    "sha256": "61805d6932f7d6566062ead1358945c0c966fb37b2bfe22edc2b03b593cb76df"
+  },
+  {
+    "relative_path": "Premium Trap/Synth_02_Fm_130bpm.wav",
+    "sha256": "219aa1b2e4ed185f7403da202b083fab9c1d7a0340649eed1d7296b2d068ed7c"
+  },
+  {
+    "relative_path": "Premium Trap/Synth_Deep_Pluck_keyDmin_140bpm.wav",
+    "sha256": "57c6b6325e0852cd30451d3c95c849af8e713c580c35637a08166369c3716c93"
+  },
+  {
+    "relative_path": "Premium Trap/TSTB1-Toploop_174bpm.wav",
+    "sha256": "59fb5b37bcca10a28bd9bff8a4453d507a548d360ac675abe02de1df51cce42c"
+  },
+  {
+    "relative_path": "Premium Trap/TSTB2-Pad-Piano2_140bpm_Abm.wav",
+    "sha256": "a14d89b4211edda9d855eaeee863014ece80b92985352452fcf731f7953e442c"
+  },
+  {
+    "relative_path": "Premium Trap/ZAZA_TRAP_Drum Loop_02_121BPM.wav",
+    "sha256": "397f5d84724696754b6ee9dd2ec5d22d05bba6eb4427bc04d168680e2900c461"
+  },
+  {
+    "relative_path": "Premium Trap/ZAZA_TRAP_SFX_03_ Reverse Riser.wav",
+    "sha256": "6a9ef13034dbaaf7c95a7cec8b75231a25a6681f1b8ec47946d20f3afabe249a"
+  },
+  {
+    "relative_path": "Premium Trap/_House_Choir_Loop_151BPM_F#m.wav",
+    "sha256": "43e2108ebc36cc8c095694b5ce1d910eac2554acc6274df775732cde06e2ba1a"
+  },
+  {
+    "relative_path": "Premium Trap/_Voage_Synth_Loop_144BPM_F#m.wav",
+    "sha256": "3cf28dc122aaf620988f7f246b301fbc03bb1edd36cdb1240395aa8cdf7b5f95"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_808 Sub & Snare_keyBMaj_91bpm.wav",
+    "sha256": "1801ec505dc67fccb10351ad24ca66b53c7b24ef412acd9a7fef3eddf7af30f9"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Bell_A.wav",
+    "sha256": "7a7de215b82c02c62d514c612d47b2cf98bde76b601bcf51837146790e39e3b8"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_BrushCrash.wav",
+    "sha256": "c1a5d59ce94d05bd289287635d6b788d1c37c4dfcc1103c25ed834c219d14c41"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_BrushCymbal.wav",
+    "sha256": "3d6a848a207d90e27928d69baee48aa59e8b2da0e38d821031b79be6654cff43"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Building Pad_keyGMaj_121bpm.wav",
+    "sha256": "3ed1b1d1458899a3362ece342bc61ef2d0706bce6daf4bf6be1d0cea8bd143fc"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Clap_01.wav",
+    "sha256": "d029de5bc1a5e0144a675b7fbd441b58053faaed7a698e04a5af06b3af299cac"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Clap_02.wav",
+    "sha256": "9d38c99df428377d037cb1d202f60bbf83158327bd9db53c42982374e0bd3e24"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_ClosedHat.wav",
+    "sha256": "20ec79233bf8d1b900d051e6c0293fe9a19d5f122f1a0db5e4b4846cac1529f0"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Dance Piano_keyCMaj_117bpm.wav",
+    "sha256": "6d294704437bb7897b9ae8d945db28d70feae8d2653195b08c748428f965c104"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Dark Piano_keyEmin_131bpm.wav",
+    "sha256": "5f78935c8db6a665fbb726622a16087e8867199cedf7587be4adb3bfe20212b6"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Deep_Kick.wav",
+    "sha256": "746f1dc9888c29e1a1695798424f3b26d481d24ece2e6eac8a7e9200ae08507b"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Dirty Rhodes_keyBmin_91BPM.wav",
+    "sha256": "74d3e8565d371788d69c992c693041bbadafeafe1f9b1de82e565f62b52e850a"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_Break_01__122bpm.wav",
+    "sha256": "87426c38f72ac188c1fb8d67e139c7d64dd74402485be4487592a4511dba8cca"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_Break_02_126bpm.wav",
+    "sha256": "1db8c0afc796d1806cac8800925b889d4a21cfedcc69951f24e6009f07984e9e"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_Break_03_97bpm.wav",
+    "sha256": "4ec5d52efa1ddca4325defb46fcb1a5fdb9c7d6b8d9d131ecddb2638a9e20374"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_DanceBeat_131bpm.wav",
+    "sha256": "78ee00aa6c6a8a8e3e19be9bf1c79efa089c0c4d0dc01921e5e66e622a16d4ba"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_DanceBreak_125bpm.wav",
+    "sha256": "609f0a05fb35018146efd2f0caaf32e9acc6450e7416aac7a07c2e08e9232b76"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_Dirty Break_Dry_91bpm.wav",
+    "sha256": "9ddb89b75e8b22c5da1639b980b8d0b624eab8d8e3a8f096ad95f55e82f35057"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_DiscoBreak_01_117bpm.wav",
+    "sha256": "31bca57a75750e755ae6f7c807444ff9e9e29ce74b9f48f24056688d83848568"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_DiscoBreak_02_121bpm.wav",
+    "sha256": "5c89aaabdb15ad4a1d15ea80a5dc2bb477080849a3bc2ae9aabe301eca992fc7"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_DiscoBreak_03_122bpm.wav",
+    "sha256": "9925faf748a7a61fc49f5f65aa1add1c300cc691d5392bc82024b9f6372ace19"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_Glitch_145bpm.wav",
+    "sha256": "eee916f6af767e95f81b5670d24728df1adc9696afcd94046908a1aa08147782"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_HipHopBreak_92bpm.wav",
+    "sha256": "b82ee7562fe0e91c69fb983d2b56eef055990669d2f6d3aae0851d1e7a4e5e15"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_StickBreak_97bpm.wav",
+    "sha256": "d89ef2d9551d4c4d6e4bc02412eccb0fdf3fd436fe81f5a8db46880b56dda3ba"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drumkit_ThrashBreak_125bpm.wav",
+    "sha256": "4e9fcbc0a82bc6a90f5178a6682c63ac1f9f8972bd81350436c13b8d2dc4ba60"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Drums_Roll_120bpm.wav",
+    "sha256": "e02a2c901b531353096a39402479561aa52de0b121686d922f8fa9a774fc94bb"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Dry_Snare_01.wav",
+    "sha256": "cb0640fa07bc307b194b7c42824d40036c541fd65658010e72df9cd5609f74e1"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Dry_Snare_02.wav",
+    "sha256": "f6e8520d0b1d09f47297cdfe4b6e0bcb18aaf07d4dc228c9b71fd1f21083ea1e"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Falling Cymbals_97bpm.wav",
+    "sha256": "283a09ec76c6f9e24c5db927041fa87e4e8422783dffcfb57ca580cfdf6158bb"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Guitar_Chord_Amaj.wav",
+    "sha256": "e335490edb00d99c22b77295f2868875d82fea7de13102c605c55182f9763563"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Guitar_DownStrum_keyF#min_121bpm.wav",
+    "sha256": "f45810acacd47ab4045011c51e680f68910338c333bb87654cb4e9cf17b93750"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Guitar_Electric_keyD#min_125bpm.wav",
+    "sha256": "98f32d73b0a329ef26e989acdc17c313e783d477912a01274902ee93ac1aa410"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Guitar_Feedback_keyEmin_125bpm.wav",
+    "sha256": "987f3a4a87dfa0fd758848af06355cfc8e722a101d47d74df1a1d3c6e4fc96af"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Guitar_Hit_02_G.wav",
+    "sha256": "987c48ae409b8af27e3022ed134a4add67f2e77844bd3b47fbc5ddaed0ce3616"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Guitar_keyFMaj_76bpm.wav",
+    "sha256": "751c4f0fec3bd1287633eb1c4d3d9bc392d95cb1b805b51c15605b426a1f532b"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_HiHat.wav",
+    "sha256": "103969b4d417d282066d84fd3b0eb437ccbe3a016781dab15223a6c16bf1998b"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Kick_01.wav",
+    "sha256": "4d635a32d59e5ec25201d60bdbf5e0df936fc0c4ab6f61307bc665c64e63dae9"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Kick_02.wav",
+    "sha256": "46dfa9f06f4a603b953a953073861d21f4dc3dc3845d6d95cc961d861a7ca252"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Kick_03.wav",
+    "sha256": "881a38662a01a97c17b5f4476ad92c81588d56298c3af5508cf1e09e4dd0422d"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Pad_Melody_keyCmin_97bpm.wav",
+    "sha256": "4715c50871cf4dc06ad49e81d6f897b69934ba420f844ba66b35726bce0e7695"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Pad_Mysterious_keyEMaj_94bpm.wav",
+    "sha256": "992534762b33baf2b71ac2325d9c8ffe50938a19df9ac98775231baeba7cf13e"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Pad_Spin_keyEmin_72bpm.wav",
+    "sha256": "fb3e216cead0c7476f6628c717ee621e73a4907e3f54a6df6be74a12a15b1ee7"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Perc_Click Noise_100bpm.wav",
+    "sha256": "6f0c8fa5954b9fa11b63346873c22460d433b85602ecdfc478d8bdd8113226ee"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Piano_keyGmin_92bpm.wav",
+    "sha256": "20a910dca1674a52bd61bc1378cf413e1cbfe8abd499d0ff901353b88e7bb3e6"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Pulsing_Pad_01_keyFMaj_121bpm.wav",
+    "sha256": "c1b3012549c22b5f0af60eecb4c659e2516ed32804d15db68a09771245602b4a"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Pulsing_Pad_02_keyGMaj_120bpm.wav",
+    "sha256": "1bf52e9384e541c67f2b7ddb2fd87fcf38b3aa487bb15067fd0e427d32241610"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_ChordsHigh_keyBbmin_145bpm.wav",
+    "sha256": "7a303db346cca7954fc81f19bcc87cd8f67f6d39b49a8b792a31f99e1f5417fd"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Chords_01_keyAMaj_122bpm.wav",
+    "sha256": "12c068dbf2b7e7da5b85012dc9359640874e8e174645a59a18a99cb642d80114"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Chords_02_keyBbmin_145bpm.wav",
+    "sha256": "60bba14d23703a2d2b5ae34e474e8e6e6ace6e042c1b746b7a66b31929a027c6"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Chords_03_keyBbmin_145bpm.wav",
+    "sha256": "c3ed4089183b091dc78d40e7ec131f416aa0d6f56c5e77e9af4ad97668ce69f5"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Melody_01_keyCmin_97bpm.wav",
+    "sha256": "d0421e5823907d8674125b4d1a9a323fbdddbbf42c06a61722f05afe56b9579b"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Melody_02_keyF#min_97bpm.wav",
+    "sha256": "69fc471a60a00c1ce3ceb51fb58a89d4d53db3e34d00495e24709fe402b7acd2"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Reverb_keyBmin_91bpm.wav",
+    "sha256": "9725671f601c0e761034ab06b2872dbec71211e64753fd9fcd30c461bbe60354"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Stabs_01_keyCMaj_110bpm.wav",
+    "sha256": "e69678c8d98ad4ee57f836d973dd5f585dd62ba5492229bf1751077f19f3a39c"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Stabs_02_keyBMaj_125bpm.wav",
+    "sha256": "2d27a85d05287adc3421c8496e34cc25d1eed9ed2c70bd62244e4f9b25ca259e"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Stabs_03_keyBMaj_125bpm.wav",
+    "sha256": "6f5eff6ea8f60666b697bdacc38cb21fa86089f545a0f706cc2c07aa5fab523e"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_Stabs_04_keyD#min_137bpm.wav",
+    "sha256": "1a1ed7deffc3bb1a73421555ed8983b0354b9727d91e7f51df97b64085aedf75"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Rhodes_keyF#Maj_106bpm.wav",
+    "sha256": "206b43ceae75d8ec83f211e6252397aa110984a45b71bea97abada6e72e4b066"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Shaker_01_125bpm.wav",
+    "sha256": "9b131849c07e3b660f2a9bb73a36eb07e8ae1194bbaa715573c59dcccadb6561"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Shaker_02_92bpm.wav",
+    "sha256": "24767b1c0ba9bc83df06b0d8c89b0190e8661ef803dc75d6487c0821983326d5"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Snare.wav",
+    "sha256": "cb1ae1f59c09748fedf677f384f0ba13c3f522fe7a62747565c302204dec5fc5"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Snare_Roll_149bpm.wav",
+    "sha256": "0db11d3f32e6ef75d73a7cc98f665e544d611442c180831c63fa6dc7e2cbef28"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth Bass_Drone_keyDMaj_76bpm.wav",
+    "sha256": "61df5e834ef99e1ed0bb88b97746e0b7fc238dbb0ab06f4422a1bae8a0fec242"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth Bass_Drop_keyDmin_92bpm.wav",
+    "sha256": "be6b51904181b8eb39a1ec5346397ffc87b00a6077cda94eff6257072518003b"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth Bass_keyG#min_131bpm.wav",
+    "sha256": "9eb7175d99f6ae1554280c6bf86b7a1fdd1cc14953c29e870f1aa24880f347a0"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth Perc_Distorted_keyF#Maj_100bpm.wav",
+    "sha256": "fd6988419b2f705e7d08a73b96d606427510f6b1e83809ba313338ad3a865aaa"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Chaos_01_keyBbmin_145bpm.wav",
+    "sha256": "bb086907f03b3d0b9a138e7600e20d967ee0febf221df04bd462e31fec318871"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Chaos_02_keyBbmin_145bpm.wav",
+    "sha256": "54ea6f59bca11b6216aa3540e821e958a88ec8f53ab6cc29885ad061baba2217"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Chop_keyGMaj_122bpm.wav",
+    "sha256": "446a535d7e2b4e02848f3726a337f10d5bfb92b6e530fceca982297a5d1bb3a2"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Crystal_C#.wav",
+    "sha256": "7d2e8bd7ecb21722290ef4babaa8e971ea9940bada9b79e2d01ebbde74f0002b"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Distorted_01_keyC#Maj_100bpm.wav",
+    "sha256": "555b0b83784fae4198bfde7244327d71cfdda3e0ec9cc4bb3f3c6371dbd6ff61"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_LullabyBells_keyBmin_91bpm.wav",
+    "sha256": "9f0c1670ec22379d3a1480529870dd90457e03a4c0e2b8fb899b722d8c4c4979"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Pulse_01_keyCMaj_94bpm.wav",
+    "sha256": "fcbfbf37508e00461bb6ae224693cf5065e7b273cc316389f4e4422a1baa2518"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Pulse_02_keyCMaj_94bpm.wav",
+    "sha256": "50230fd0b4be6af5799cdabd6c480f0a0394833ee020fd299848526038cdf0e6"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Reverse_01_keyC#min_100bpm.wav",
+    "sha256": "45726d1e46dc2b48c37689cdbb370aae49acef91a98e5db86adc69dcec9ded30"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Reverse_02_keyEMaj_100bpm.wav",
+    "sha256": "8a1160422fb54b345f049afac7257637edcc9d3a951d19562118edca79309597"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_SFX_Down_keyFMaj_114bpm.wav",
+    "sha256": "e35f579e41f60b4c4df13dfdfda3fc241f660e5ab1123d1464ee04f4aea61cba"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Shimmer_01_keyEmin_92bpm.wav",
+    "sha256": "cac7a0b51aae009ed4d3f8355132b6d342f84d2221fd3107a243dc0a996730f2"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Shimmer_02_keyEmin_92bpm.wav",
+    "sha256": "617d0d96c8eb7e1fb7e8fa565b67723a04dba970d9e64067bfcfacac669a5aee"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Shimmer_03_keyEmin_92bpm.wav",
+    "sha256": "e57d410e0140b06998edb24147dea54f5f2d92a969eb7892969f61dedf6aa346"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Space_GMaj.wav",
+    "sha256": "bbf0f47c5e04599d0740abdc6ae075bdb368a9059204628590ea25f3d6cb783d"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Stabs_01_keyA#min_137bpm.wav",
+    "sha256": "fac576118fa44cc39213c3c63cf0967c303967ec1ce1793c841fadf31a3c6b14"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Stabs_02_keyGMaj_122bpm.wav",
+    "sha256": "7d6e35efaa66b07ed265b22fe513ee2a055c0da75aa46765b3ed490e5f67b435"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Sustain_keyEmin_92bpm.wav",
+    "sha256": "67d42a266bffbab6e07074ce9412319f6eb07a906b53205079e5124213ad47dd"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Sweep_keyFMaj_121bpm.wav",
+    "sha256": "d452e11a431c349453cddfbb7f2edc023814d0287582b588340d224d07d7a789"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Synth_Wail_keyG#min_120bpm.wav",
+    "sha256": "9cc218ac86f2ca696340679d2f8517e2017c00b17d756b8cb80359cb4380eb4d"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Tambourine_94bpm.wav",
+    "sha256": "3f154bf9bc4faf28f25ae0718f04e986ac57f215c9cca4ac355e0a30d6bfb129"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Vocal_Chant_01_keyFMaj_76bpm.wav",
+    "sha256": "3d21b0f1a9eb3f131444df60b8de31c32c8ec629285a0132c0b10c2e9d9434e7"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Vocal_Chants_02_keyBmin_97bpm.wav",
+    "sha256": "7912ee74deb98563f381c208c225dac8b33d787ab0013e3e9d317e3fb440971e"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Vocal_Hits_keyCmin_97bpm.wav",
+    "sha256": "7396ad7d6bb45f55efcd2c3292efe64809671fdbc9db61abf4aada039569f047"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Vocal_Melody_01_keyDMaj_122bpm.wav",
+    "sha256": "578ad6e28147aa13003b6554c34955fb114e6b3caa36d31d8de20d5ca400ac7e"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Vocal_Melody_03_keyDMaj_122bpm.wav",
+    "sha256": "1ea8a14363dff93e20a34bf956837c96c7ee73c6c215ecca6c818be0712e20f2"
+  },
+  {
+    "relative_path": "Psychedelic Dub Disco/PDD_Vocal_OperaStabs_keyBbmin_145bpm.wav",
+    "sha256": "6c99d5f222c4d1cb6737571fccf79c948d0ee6ff031413a33f759900d24ba921"
+  }
+]

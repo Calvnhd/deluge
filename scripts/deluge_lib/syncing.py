@@ -134,7 +134,7 @@ def build_post_sync_manifest(
     """Build updated manifest after a successful sync"""
 
     from deluge_lib.deluge_sdk import hash_file
-    from deluge_lib.scanning import _FILTER_MAP
+    from deluge_lib.scanning import FILTER_MAP
 
     copied_keys: set[str] = set()
     for _src, dst in plan.files_to_copy:
@@ -177,7 +177,7 @@ def build_post_sync_manifest(
 
     # Preserve manifest entries for file types not included in this filtered sync.
     if file_filter != "both":
-        scanned_exts = _FILTER_MAP[file_filter]
+        scanned_exts = FILTER_MAP[file_filter]
         for key, old_entry in old_files.items():
             if key not in updated_manifest:
                 ext = Path(key).suffix.lower()
@@ -238,6 +238,10 @@ def _mtime_matches(mtime_a: float, mtime_b: float) -> bool:
 
     FAT32 has 2-second mtime resolution, so mtimes within ±2 seconds
     are treated as equal.
+
+    The ±2s tolerance on top of already-truncated timestamps is intentional:
+    FAT32 write/read cycles can shift a value by exactly one tick (2s),
+    so a single-tick difference must be treated as equivalent.
     """
     return abs(mtime_a - mtime_b) <= _MTIME_TOLERANCE_S
 
@@ -317,7 +321,7 @@ def compute_sync(
                     # No content change
                     # Update stale manifest data and fall through to local check
                     manifest_entry["sd_size"] = sd_entry.size
-                    manifest_entry["sd_mtime"] = normalise_mtime(sd_entry.mtime)
+                    manifest_entry["sd_mtime"] = sd_entry.mtime
                 else:
                     # No hash available
                     # To be safe, treat as if it's changed
@@ -328,7 +332,7 @@ def compute_sync(
             is_local_time_valid = local_entry.mtime > 0
             has_local_changed = (
                 local_entry.size != manifest_entry["local_size"]
-                or normalise_mtime(local_entry.mtime) != normalise_mtime(manifest_entry["local_mtime"])
+                or local_entry.mtime != manifest_entry["local_mtime"]
             )
             if is_local_time_valid and not has_local_changed:
                 # Both sides match manifest
@@ -341,7 +345,7 @@ def compute_sync(
                     if local_hash == cached_hash:
                         # No content change. Update stale manifest data
                         manifest_entry["local_size"] = local_entry.size
-                        manifest_entry["local_mtime"] = normalise_mtime(local_entry.mtime)
+                        manifest_entry["local_mtime"] = local_entry.mtime
                         plan.files_unchanged += 1
                     else:
                         plan.files_to_copy.append((src_path, dst_path))
@@ -350,14 +354,14 @@ def compute_sync(
                     local_hash = hash_file(local_path)
                     manifest_entry["hash"] = local_hash
                     manifest_entry["local_size"] = local_entry.size
-                    manifest_entry["local_mtime"] = normalise_mtime(local_entry.mtime)
+                    manifest_entry["local_mtime"] = local_entry.mtime
                     # To be safe, treat as if it's changed
                     plan.files_to_copy.append((src_path, dst_path))
         else:
             # No manifest entry. Fall back to direct source vs dest comparison.
             if src_entry.size != dst_entry.size:
                 plan.files_to_copy.append((src_path, dst_path))
-            elif not _mtime_matches(src_entry.mtime, normalise_mtime(dst_entry.mtime)):
+            elif not _mtime_matches(src_entry.mtime, dst_entry.mtime):
                 plan.files_to_copy.append((src_path, dst_path))
             else:
                 plan.files_unchanged += 1
@@ -469,9 +473,9 @@ def execute_plan(
                 remaining=trash_count - trashed - 1,
             ) from exc
     elif trash_count and delete_mode == "delete":
-        print(f"Deleting {trash_count} files...")
         try:
-            for path in plan.files_to_delete:
+            for i, path in enumerate(plan.files_to_delete, 1):
+                print(f"\rDeleting... {i}/{trash_count}", end="", flush=True)
                 path.unlink()
                 trashed += 1
                 # Clean up empty ancestor directories up to dest
@@ -491,6 +495,8 @@ def execute_plan(
                 unchanged=plan.files_unchanged,
                 remaining=trash_count - trashed - 1,
             ) from exc
+        if trash_count:
+            print()
 
     return SyncResult(
         copied=copied,
@@ -534,11 +540,11 @@ def report_empty_dirs(dest: Path) -> None:
 
     Bottom-up walk, skips .trash/.
     """
-    from deluge_lib.scanning import _SKIP_DIRS, print_path
+    from deluge_lib.scanning import SKIP_DIRS, print_path
 
     empties: list[Path] = []
     for dirpath, dirnames, filenames in os.walk(dest, topdown=False):
-        dirnames[:] = [d for d in dirnames if d.lower() not in _SKIP_DIRS]
+        dirnames[:] = [d for d in dirnames if d.lower() not in SKIP_DIRS]
         current = Path(dirpath)
         if current == dest:
             continue

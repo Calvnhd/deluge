@@ -103,7 +103,7 @@ def compute_migration_map(
                 cached_hash is not None
                 and entry.mtime > 0
                 and entry.size == manifest_entry["local_size"]
-                and normalise_mtime(entry.mtime) == normalise_mtime(manifest_entry["local_mtime"])
+                and entry.mtime == normalise_mtime(manifest_entry["local_mtime"])
             ):
                 # Stat-cache hit: trust cached hash without reading the file
                 after_hashes[cached_hash].append(orig_path)
@@ -278,7 +278,7 @@ def update_sample_refs(xml_path: Path, mapping: dict[str, str]) -> int:
     data = xml_path.read_text(encoding="utf-8")
     count = 0
 
-    for old_path, new_path in mapping.items():
+    for old_path, new_path in sorted(mapping.items(), key=lambda x: len(x[0]), reverse=True):
         occurrences = data.count(old_path)
         if occurrences:
             data = data.replace(old_path, new_path)

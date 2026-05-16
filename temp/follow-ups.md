@@ -6,7 +6,7 @@ Issues identified during code review (2026-05-15) that weren't immediately actio
 
 **`_execute_to_sd` duplicates `execute_plan`** — `sync_to_sd.py` lines 34–111
 
-The 77-line `_execute_to_sd` function is functionally identical to `execute_plan(plan, dest=sd_path, delete_mode="delete")` from `syncing.py`. Both copy files, then hard-delete with empty-parent cleanup. Could be replaced with a single call to `execute_plan`.
+✅ **Resolved** — function removed, `sync_to_sd.py` now calls `execute_plan`.
 
 ## Edge cases
 
@@ -24,13 +24,13 @@ When stat data is stale but hashes match, `compute_sync` silently updates `manif
 
 **Double SAMPLES scan in `fix_references`** — `fix_references.py` lines 466–468
 
-`compute_migration_map` and `classify_ref_changes` both independently scan the SAMPLES directory via `scan_tree`. The first scan result could be passed through to avoid redundant I/O.
+✅ **Resolved** — `classify_ref_changes` uses `migration.after_hashes`.
 
 ## Minor inconsistencies
 
 **Redundant `normalise_mtime`** — `syncing.py` line 368
 
-In the no-manifest fallback: `normalise_mtime(dst_entry.mtime)` where `dst_entry.mtime` is already normalised by `scan_tree`. No-op.
+✅ **Resolved** — wrapper removed from no-manifest fallback.
 
 **`_mtime_matches` tolerance stacks with normalisation** — `syncing.py` lines 259–265
 

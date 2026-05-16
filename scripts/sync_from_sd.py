@@ -96,7 +96,7 @@ def main(argv: list[str] | None = None) -> None:
         print()
         print(f"ERROR: Operation failed on: {exc.file}")
         print(f"  {exc}")
-        print(f"  {exc.copied} copied, {exc.remaining} remaining")
+        print(f"  {exc.copied} copied, {exc.trashed} trashed, {exc.remaining} remaining")
         print()
         print("Sync FAILED. Manifest was NOT updated.")
         raise SystemExit(1) from None
