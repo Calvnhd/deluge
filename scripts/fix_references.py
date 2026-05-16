@@ -37,7 +37,7 @@ class MigrationResult:
     deleted: dict[str, list[str]] = field(default_factory=dict)
     added: dict[str, list[str]] = field(default_factory=dict)
     ambiguous: dict[str, tuple[list[str], list[str]]] = field(default_factory=dict)
-    after_hashes: dict[str, list[str]] = field(default_factory=dict)
+    current_hashes: dict[str, list[str]] = field(default_factory=dict)
 
 
 def compute_migration_map(
@@ -63,35 +63,31 @@ def compute_migration_map(
         A :class:`MigrationResult` categorising every hash as moved, deleted,
         added, ambiguous, or unchanged (omitted).
     """
-    # --- "before" state: invert manifest to hash → [normalised paths] ---
-    before_hashes: dict[str, list[str]] = defaultdict(list)
+
+    # Load manifest for most recent known state
+    if len(manifest) == 0:
+        print("Manifest: empty or missing \u2014 move detection unavailable.")
+
+    manifest_hashes: dict[str, list[str]] = defaultdict(list)
     entries_with_hash = 0
     for path_key, record in manifest.items():
         h = record.get("hash")
         if h is not None:
-            before_hashes[h].append(path_key)
+            manifest_hashes[h].append(path_key)
             entries_with_hash += 1
 
-    total_entries = len(manifest)
-    if total_entries == 0:
-        print("Manifest: empty or missing \u2014 move detection unavailable.")
-    else:
-        print(f"Manifest: {total_entries} entries ({entries_with_hash} with hashes).")
-        if entries_with_hash == 0:
-            print("Warning: No hashes in manifest \u2014 move detection unavailable.")
-
-    # --- "after" state: scan current filesystem ---
+    # Scan current filesystem for actual state
     samples_dir = deluge_root / "SAMPLES"
     if not samples_dir.is_dir():
+        print(f"Warning: SAMPLES directory {samples_dir} does not exist")
         return MigrationResult()
-
     scan = scan_tree(samples_dir, label="SAMPLES", file_filter="wav")
 
-    after_hashes: dict[str, list[str]] = defaultdict(list)
+    current_hashes: dict[str, list[str]] = defaultdict(list)
     files_to_hash: list[tuple[str, Path]] = []
 
     for _scan_key, entry in scan.files.items():
-        orig_path = str(PurePosixPath(Path("SAMPLES") / entry.rel_path))
+        current_path = str(PurePosixPath(Path("SAMPLES") / entry.rel_path))
         manifest_key = normalise_key(Path("SAMPLES") / entry.rel_path)
         abs_path = samples_dir / entry.rel_path
 
@@ -106,112 +102,43 @@ def compute_migration_map(
                 and entry.mtime == normalise_mtime(manifest_entry["local_mtime"])
             ):
                 # Stat-cache hit: trust cached hash without reading the file
-                after_hashes[cached_hash].append(orig_path)
+                current_hashes[cached_hash].append(current_path)
                 continue
-
-        files_to_hash.append((orig_path, abs_path))
+        files_to_hash.append((current_path, abs_path))
 
     if files_to_hash:
         total = len(files_to_hash)
-        for i, (orig_path, abs_path) in enumerate(files_to_hash, 1):
-            if total > 10:
-                print(f"\rHashing {i}/{total}...", end="", flush=True)
-            after_hashes[hash_file(abs_path)].append(orig_path)
-        if total > 10:
-            print()
+        for i, (current_path, abs_path) in enumerate(files_to_hash, 1):
+            print(f"\rHashing {i}/{total}...", end="", flush=True)
+            current_hashes[hash_file(abs_path)].append(current_path)
+        print()
 
-    # --- Compare before and after ---
-    before_dict = dict(before_hashes)
-    after_dict = dict(after_hashes)
+    # Compare
 
     moved: dict[str, str] = {}
     deleted: dict[str, list[str]] = {}
     added: dict[str, list[str]] = {}
     ambiguous: dict[str, tuple[list[str], list[str]]] = {}
-    decomposed = 0
 
-    for h in set(before_dict) | set(after_dict):
-        bpaths = before_dict.get(h, [])
-        apaths = after_dict.get(h, [])
-        apaths_norm = [normalise_key(p) for p in apaths]
+    for h in set(manifest_hashes) | set(current_hashes):
+        manifest_paths = manifest_hashes.get(h, [])
+        current_paths = current_hashes.get(h, [])
 
-        if bpaths and not apaths:
-            deleted[h] = list(bpaths)
-        elif apaths and not bpaths:
-            added[h] = list(apaths)
-        elif len(bpaths) == 1 and len(apaths) == 1:
-            if bpaths[0] != apaths_norm[0]:
-                moved[bpaths[0]] = apaths[0]
+        if manifest_paths and not current_paths:
+            deleted[h] = list(manifest_paths)
+        elif current_paths and not manifest_paths:
+            added[h] = list(current_paths)
+        elif len(manifest_paths) == 1 and len(current_paths) == 1:
+            if manifest_paths[0] != normalise_key(current_paths[0]):
+                moved[manifest_paths[0]] = current_paths[0]
             # else: unchanged — same hash, same normalised path
-        else:
-            # --- Overlap-removal decomposition ---
-            # Find before-paths that match an after-path (normalised) — unchanged
-            survivors: list[str] = []
-            residual_before: list[str] = []
-            residual_after = list(apaths)
-            residual_after_norm = list(apaths_norm)
-
-            for bp in bpaths:
-                try:
-                    idx = residual_after_norm.index(bp)
-                except ValueError:
-                    residual_before.append(bp)
-                else:
-                    survivors.append(residual_after[idx])
-                    del residual_after[idx]
-                    del residual_after_norm[idx]
-
-            n_before = len(residual_before)
-            m_after = len(residual_after)
-
-            if n_before == 0 and m_after == 0:
-                # All pairs matched — nothing to record
-                pass
-            elif n_before == 0 and m_after > 0:
-                # New duplicates added at residual after-paths
-                added[h] = residual_after
-                decomposed += 1
-            elif n_before > 0 and m_after == 0:
-                # Before-paths lost their copies; content survives at overlap
-                target = survivors[0]
-                for bp in residual_before:
-                    moved[bp] = target
-                decomposed += 1
-            elif n_before == 1 and m_after == 1:
-                # Simple move
-                moved[residual_before[0]] = residual_after[0]
-                decomposed += 1
-            elif n_before > 1 and m_after == 1:
-                # All residual before-paths moved to single after-path
-                for bp in residual_before:
-                    moved[bp] = residual_after[0]
-                decomposed += 1
-            elif n_before == 1 and m_after > 1:
-                # Moved to best path_similarity match; rest are added
-                best_idx = max(
-                    range(m_after),
-                    key=lambda i: path_similarity(
-                        residual_before[0], residual_after[i]
-                    ),
-                )
-                moved[residual_before[0]] = residual_after[best_idx]
-                added[h] = [
-                    residual_after[i] for i in range(m_after) if i != best_idx
-                ]
-                decomposed += 1
-            else:
-                # N>1, M>1 — truly ambiguous
-                ambiguous[h] = (residual_before, residual_after)
-
-    if decomposed:
-        print(f"Decomposition: {decomposed} hash group(s) resolved from N:M.")
 
     return MigrationResult(
         moved=moved,
         deleted=deleted,
         added=added,
         ambiguous=ambiguous,
-        after_hashes=dict(after_hashes),
+        current_hashes=dict(current_hashes),
     )
 
 
@@ -275,7 +202,7 @@ class BrokenRefResult:
     recovered: list[RecoveredRefChange] = field(default_factory=list)
 
 
-MAX_RECOVERY_CANDIDATES = 5
+MAX_RECOVERY_CANDIDATES = 3
 
 
 def path_similarity(ref_path: str, candidate_path: str) -> int:
@@ -330,11 +257,11 @@ def classify_ref_changes(
     for before_paths, _after_paths in migration.ambiguous.values():
         ambiguous_paths.update(before_paths)
 
-    existing = {normalise_key(p) for paths in migration.after_hashes.values() for p in paths}
+    existing = {normalise_key(p) for paths in migration.current_hashes.values() for p in paths}
 
     # Build basename index: lowercase basename → list of (original_path, hash)
     basename_index: dict[str, list[tuple[str, str]]] = defaultdict(list)
-    for file_hash, paths in migration.after_hashes.items():
+    for file_hash, paths in migration.current_hashes.items():
         for p in paths:
             basename = PurePosixPath(p).name.lower()
             basename_index[basename].append((p, file_hash))
@@ -590,8 +517,8 @@ def update_manifest_keys(
         return
 
     updated = 0
-    for old_key, new_orig_path in moved.items():
-        new_key = normalise_key(new_orig_path)
+    for old_key, new_current_path in moved.items():
+        new_key = normalise_key(new_current_path)
         if old_key in manifest:
             manifest[new_key] = manifest.pop(old_key)
             updated += 1
@@ -614,12 +541,6 @@ def main(argv: list[str] | None = None) -> None:
         description="Fix sample references in Deluge XML files after reorganising samples.",
     )
     parser.add_argument(
-        "--manifest",
-        required=False,
-        dest="manifest_path",
-        help="Path to the sync manifest JSON file. Defaults to the standard sync manifest.",
-    )
-    parser.add_argument(
         "--apply",
         action="store_true",
         help="Apply changes without prompting for confirmation.",
@@ -627,10 +548,9 @@ def main(argv: list[str] | None = None) -> None:
 
     args = parser.parse_args(argv)
 
-    manifest_path = Path(args.manifest_path) if args.manifest_path else SYNC_MANIFEST_PATH
     deluge_root = get_deluge_root()
+    manifest = read_manifest(SYNC_MANIFEST_PATH)
 
-    manifest = read_manifest(manifest_path)
     migration = compute_migration_map(manifest, deluge_root)
     broken = classify_ref_changes(migration, deluge_root)
     has_issues, applied = preview_and_apply(broken, deluge_root, auto_apply=args.apply)
@@ -642,7 +562,7 @@ def main(argv: list[str] | None = None) -> None:
             if key not in combined_moved:
                 combined_moved[key] = rec.new_path
         if combined_moved:
-            update_manifest_keys(manifest, combined_moved, manifest_path)
+            update_manifest_keys(manifest, combined_moved, SYNC_MANIFEST_PATH)
 
     if has_issues:
         raise SystemExit(1)

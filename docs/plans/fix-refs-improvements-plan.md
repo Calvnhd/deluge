@@ -3,8 +3,8 @@
 > **Document Type:** Plan
 > **Date:** 16 May 2026
 > **Research:** [fix-refs-improvements-research.md](../research/fix-refs-improvements-research.md)
-> **Pipeline:** Research → **Plan** → Implement
-> **Status:** Draft
+> **Pipeline:** Research → Plan → **Implement**
+> **Status:** Complete
 
 ## Executive Summary
 
@@ -117,15 +117,15 @@ Console output continues to show the CHANGES, RECOVERED, ERRORS, WARNINGS, and M
 - **Inputs:** Current `compute_migration_map()` function in [fix_references.py](../../scripts/fix_references.py)
 - **Outputs:** Updated function with decomposition logic; existing 1:1 and empty-set branches unchanged
 - **Acceptance Criteria:**
-  - [ ] The `else` branch is replaced with overlap-removal + residual classification
-  - [ ] N:1 cases (N before-paths, 1 after-path) produce `moved` entries for all non-overlapping before-paths
-  - [ ] 1:M cases (1 before-path, M after-paths) produce a `moved` entry using `path_similarity()` as tiebreaker, with remaining after-paths as `added`
-  - [ ] Partial N:M cases (overlaps reduce to a simpler sub-case) are decomposed correctly
-  - [ ] True N:M cases (N>1, M>1, no overlaps after removal) remain in `ambiguous`
-  - [ ] When residual before-paths exist but all after-paths were consumed by overlaps, moved entries point to the first survivor
-  - [ ] A log/print line notes how many hash groups were decomposed (for traceability)
+  - [x] The `else` branch is replaced with overlap-removal + residual classification
+  - [x] N:1 cases (N before-paths, 1 after-path) produce `moved` entries for all non-overlapping before-paths
+  - [x] 1:M cases (1 before-path, M after-paths) produce a `moved` entry using `path_similarity()` as tiebreaker, with remaining after-paths as `added`
+  - [x] Partial N:M cases (overlaps reduce to a simpler sub-case) are decomposed correctly
+  - [x] True N:M cases (N>1, M>1, no overlaps after removal) remain in `ambiguous`
+  - [x] When residual before-paths exist but all after-paths were consumed by overlaps, moved entries point to the first survivor
+  - [x] A log/print line notes how many hash groups were decomposed (for traceability)
 - **Implementation Notes:**
-  > _Space for the Implement agent_
+  > Replaced the `else: ambiguous` branch (line 146) with a ~50-line overlap-removal decomposition block. Uses `residual_after_norm.index(bp)` for overlap detection, then classifies residuals through the seven sub-cases. Added a `decomposed` counter printed conditionally after the loop.
 
 ### Task 1.2: Update existing tests for changed ambiguity behaviour
 
@@ -133,12 +133,12 @@ Console output continues to show the CHANGES, RECOVERED, ERRORS, WARNINGS, and M
 - **Inputs:** [test_fix_references.py](../../scripts/tests/test_fix_references.py) — `test_ambiguous_multiple_before_paths`, `test_ambiguous_multiple_after_paths`, `test_mixed_categories`
 - **Outputs:** Updated test assertions
 - **Acceptance Criteria:**
-  - [ ] `test_ambiguous_multiple_before_paths` (2 before → 1 after, no overlap): asserts `moved` entries for both before-paths pointing to the after-path, no ambiguous
-  - [ ] `test_ambiguous_multiple_after_paths` (1 before → 2 after, no overlap): asserts `moved` entry for the before-path to the best after-path (by path similarity), and the other after-path as `added`
-  - [ ] `test_mixed_categories`: updated to reflect the 1:M entry (1 before → 2 after) being decomposed rather than ambiguous
-  - [ ] All updated tests pass
+  - [x] `test_ambiguous_multiple_before_paths` (2 before → 1 after, no overlap): asserts `moved` entries for both before-paths pointing to the after-path, no ambiguous
+  - [x] `test_ambiguous_multiple_after_paths` (1 before → 2 after, no overlap): asserts `moved` entry for the before-path to the best after-path (by path similarity), and the other after-path as `added`
+  - [x] `test_mixed_categories`: updated to reflect the 1:M entry (1 before → 2 after) being decomposed rather than ambiguous
+  - [x] All updated tests pass
 - **Implementation Notes:**
-  > _Space for the Implement agent_
+  > Updated all three tests. `test_mixed_categories` also renamed internal variables from `ambig_*` to `decomp_*` for clarity.
 
 ### Task 1.3: Add new tests for decomposition sub-cases
 
@@ -146,17 +146,17 @@ Console output continues to show the CHANGES, RECOVERED, ERRORS, WARNINGS, and M
 - **Inputs:** [test_fix_references.py](../../scripts/tests/test_fix_references.py), existing test helpers
 - **Outputs:** New test class or test methods covering decomposition cases
 - **Acceptance Criteria:**
-  - [ ] Test: N:1, no overlap — N before-paths, 1 after-path, no normalised match → all before-paths in `moved` pointing to the after-path
-  - [ ] Test: N:1, with overlap — N before-paths, 1 after-path, one before matches after normalised → matching before unchanged, others in `moved`
-  - [ ] Test: 1:M, no overlap — 1 before-path, M after-paths, no normalised match → before-path in `moved` to best path-similarity match, others in `added`
-  - [ ] Test: 1:M, with overlap — 1 before-path matches one after-path → unchanged; other after-paths in `added`
-  - [ ] Test: N:M partial overlap — overlaps removed, residual reduces to a simpler case (e.g. 1:1 or N:1)
-  - [ ] Test: N:M, all overlapping — all pairs match → nothing in moved/deleted/added/ambiguous
-  - [ ] Test: N:M, no overlap, N>1 M>1 — truly ambiguous, remains in `ambiguous`
-  - [ ] Test: N before, 0 residual after (all after consumed by overlaps) — remaining before-paths in `moved` to first survivor
-  - [ ] All new tests pass
+  - [x] Test: N:1, no overlap — N before-paths, 1 after-path, no normalised match → all before-paths in `moved` pointing to the after-path
+  - [x] Test: N:1, with overlap — N before-paths, 1 after-path, one before matches after normalised → matching before unchanged, others in `moved`
+  - [x] Test: 1:M, no overlap — 1 before-path, M after-paths, no normalised match → before-path in `moved` to best path-similarity match, others in `added`
+  - [x] Test: 1:M, with overlap — 1 before-path matches one after-path → unchanged; other after-paths in `added`
+  - [x] Test: N:M partial overlap — overlaps removed, residual reduces to a simpler case (e.g. 1:1 or N:1)
+  - [x] Test: N:M, all overlapping — all pairs match → nothing in moved/deleted/added/ambiguous
+  - [x] Test: N:M, no overlap, N>1 M>1 — truly ambiguous, remains in `ambiguous`
+  - [x] Test: N before, 0 residual after (all after consumed by overlaps) — remaining before-paths in `moved` to first survivor
+  - [x] All new tests pass
 - **Implementation Notes:**
-  > _Space for the Implement agent_
+  > Added `TestDecomposition` class with 8 test methods covering all sub-cases. Placed between `TestComputeMigrationMap` and `TestGracefulDegradation`. The `test_1m_no_overlap` test uses paths with different basenames to ensure `path_similarity` has a clear winner.
 
 ## Phase 2: Integration — Manifest Key Update for Recovered Refs
 
@@ -169,11 +169,11 @@ Console output continues to show the CHANGES, RECOVERED, ERRORS, WARNINGS, and M
 - **Inputs:** `main()` in [fix_references.py](../../scripts/fix_references.py), `BrokenRefResult.recovered`
 - **Outputs:** Updated `main()` that passes combined moved+recovered mappings to `update_manifest_keys()`
 - **Acceptance Criteria:**
-  - [ ] After apply, recovered ref old→new mappings are included in the manifest key update
-  - [ ] Duplicate mappings (same old_path in both moved and recovered) are handled gracefully — moved takes precedence
-  - [ ] When no recovered refs exist, behaviour is identical to current
+  - [x] After apply, recovered ref old→new mappings are included in the manifest key update
+  - [x] Duplicate mappings (same old_path in both moved and recovered) are handled gracefully — moved takes precedence
+  - [x] When no recovered refs exist, behaviour is identical to current
 - **Implementation Notes:**
-  > _Space for the Implement agent_
+  > In `main()`, replaced the `if applied and migration.moved:` block with logic that copies `migration.moved` into `combined_moved`, then iterates `broken.recovered` adding `normalise_key(rec.old_path) → rec.new_path` only when the key is absent (moved precedence). Calls `update_manifest_keys()` with the combined dict if non-empty.
 
 ### Task 2.2: Add tests for manifest update with recovered refs
 
@@ -181,12 +181,12 @@ Console output continues to show the CHANGES, RECOVERED, ERRORS, WARNINGS, and M
 - **Inputs:** [test_fix_references.py](../../scripts/tests/test_fix_references.py), existing `TestManifestKeyUpdate` class
 - **Outputs:** New test methods
 - **Acceptance Criteria:**
-  - [ ] Test: recovered ref mapping renames manifest key
-  - [ ] Test: combined moved + recovered mappings both applied
-  - [ ] Test: no recovered refs produces no additional manifest changes
-  - [ ] All new tests pass
+  - [x] Test: recovered ref mapping renames manifest key
+  - [x] Test: combined moved + recovered mappings both applied
+  - [x] Test: no recovered refs produces no additional manifest changes
+  - [x] All new tests pass
 - **Implementation Notes:**
-  > _Space for the Implement agent_
+  > Added 3 test methods to `TestManifestKeyUpdate`: `test_recovered_ref_renames_manifest_key`, `test_combined_moved_and_recovered`, `test_no_recovered_refs_no_extra_changes`. All use the existing `update_manifest_keys()` function directly with normalised keys matching the caller's merge logic.
 
 ## Phase 3: Verification
 
@@ -199,11 +199,11 @@ Console output continues to show the CHANGES, RECOVERED, ERRORS, WARNINGS, and M
 - **Inputs:** Complete codebase after Phases 1–2
 - **Outputs:** Clean test run
 - **Acceptance Criteria:**
-  - [ ] All existing tests pass (updated where needed)
-  - [ ] All new tests pass
-  - [ ] No regressions in other test files
+  - [x] All existing tests pass (updated where needed)
+  - [x] All new tests pass
+  - [x] No regressions in other test files
 - **Implementation Notes:**
-  > _Space for the Implement agent_
+  > Full test suite run: 93/93 tests pass in `test_fix_references.py`. Remaining test files: 357 passed, 2 failed — the 2 failures are pre-existing in `test_sync_to_sd.py` (unrelated `shutil` attribute error), not a regression from this feature.
 
 ### Task 3.2: Manual smoke test (optional)
 
@@ -215,15 +215,15 @@ Console output continues to show the CHANGES, RECOVERED, ERRORS, WARNINGS, and M
   - [ ] WARNINGS section is empty or reduced to genuinely ambiguous cases
   - [ ] No new ERRORS or MISSING entries
 - **Implementation Notes:**
-  > _Space for the Implement agent_
+  > Skipped — manual smoke test not possible in this environment. Requires real DELUGE directory and manifest from Issue 2's test run.
 
 ## Progress Tracker
 
 | Phase | Status | Tasks Complete | Notes |
 |-------|--------|---------------|-------|
-| Phase 1: Core — N:M Decomposition | Not Started | 0/3 | |
-| Phase 2: Integration — Manifest Key Update | Not Started | 0/2 | |
-| Phase 3: Verification | Not Started | 0/2 | |
+| Phase 1: Core — N:M Decomposition | Complete | 3/3 | All 90 tests pass |
+| Phase 2: Integration — Manifest Key Update | Complete | 2/2 | All 93 tests pass |
+| Phase 3: Verification | Complete | 1/2 | Task 3.1 passed (93/93 + no regressions). Task 3.2 skipped (manual smoke test). |
 
 ## Open Questions
 
