@@ -260,8 +260,7 @@ def compute_sync(
     Args:
         source: Source directory to sync with
         dest: Destination to sync
-        manifest: Optional manifest dict used during SD syncs. Maps normalised 
-            keys to status data for both SD and local sides
+        manifest: Optional manifest dict used during syncs
         source_is_sd: When True (default), source is the SD card and dest is the
             local directory.  When False, source is local and dest is SD.
             Controls which manifest fields are compared against source vs dest.
@@ -329,12 +328,12 @@ def compute_sync(
                     continue
 
             # Check if local file status differs from last sync recorded by manifest
-            is_local_time_valid = local_entry.mtime > 0
             has_local_changed = (
                 local_entry.size != manifest_entry["local_size"]
                 or local_entry.mtime != manifest_entry["local_mtime"]
             )
-            if is_local_time_valid and not has_local_changed:
+            # mtime check here guards against Deluge not recording time
+            if (local_entry.mtime > 0) and not has_local_changed:
                 # Both sides match manifest
                 plan.files_unchanged += 1
             else:

@@ -195,7 +195,7 @@ class TestComputeMigrationMap:
         assert not result.moved
 
     def test_ambiguous_multiple_before_paths(self, tmp_path: Path) -> None:
-        """Hash with multiple manifest paths is categorised as ambiguous."""
+        """Hash with 2 before-paths, 1 after-path, no overlap: both moved."""
         content = b"shared content"
         deluge_root = _make_deluge_tree(tmp_path, {"current.wav": content})
         digest = hashlib.sha256(content).hexdigest()
@@ -206,14 +206,14 @@ class TestComputeMigrationMap:
 
         result = compute_migration_map(manifest, deluge_root)
 
-        assert digest in result.ambiguous
-        before_paths, after_paths = result.ambiguous[digest]
-        assert set(before_paths) == {"samples/a.wav", "samples/b.wav"}
-        assert after_paths == ["SAMPLES/current.wav"]
-        assert not result.moved
+        assert result.moved == {
+            "samples/a.wav": "SAMPLES/current.wav",
+            "samples/b.wav": "SAMPLES/current.wav",
+        }
+        assert not result.ambiguous
 
     def test_ambiguous_multiple_after_paths(self, tmp_path: Path) -> None:
-        """Hash with multiple disk paths is categorised as ambiguous."""
+        """Hash with 1 before-path, 2 after-paths, no overlap: moved + added."""
         content = b"duplicated content"
         deluge_root = _make_deluge_tree(tmp_path, {
             "copy1.wav": content,
@@ -224,11 +224,14 @@ class TestComputeMigrationMap:
 
         result = compute_migration_map(manifest, deluge_root)
 
-        assert digest in result.ambiguous
-        before_paths, after_paths = result.ambiguous[digest]
-        assert before_paths == ["samples/original.wav"]
-        assert set(after_paths) == {"SAMPLES/copy1.wav", "SAMPLES/copy2.wav"}
-        assert not result.moved
+        # Moved to best path_similarity match; the other is added
+        assert "samples/original.wav" in result.moved
+        assert result.moved["samples/original.wav"] in {
+            "SAMPLES/copy1.wav", "SAMPLES/copy2.wav",
+        }
+        assert digest in result.added
+        assert len(result.added[digest]) == 1
+        assert not result.ambiguous
 
     def test_unchanged_file_not_in_results(self, tmp_path: Path) -> None:
         """Same hash and same normalised path produces no entries."""
@@ -290,34 +293,37 @@ class TestComputeMigrationMap:
         assert not result.ambiguous
 
     def test_mixed_categories(self, tmp_path: Path) -> None:
-        """A single run can produce moved, deleted, added, and ambiguous entries."""
+        """A single run can produce moved, deleted, added, and decomposed entries."""
         moved_content = b"moved file"
         added_content = b"added file"
-        ambig_content = b"ambig file"
+        decomp_content = b"ambig file"
 
         deluge_root = _make_deluge_tree(tmp_path, {
             "new_location.wav": moved_content,
             "brand_new.wav": added_content,
-            "dup1.wav": ambig_content,
-            "dup2.wav": ambig_content,
+            "dup1.wav": decomp_content,
+            "dup2.wav": decomp_content,
         })
 
         moved_hash = hashlib.sha256(moved_content).hexdigest()
         deleted_hash = "cc" * 32
-        ambig_hash = hashlib.sha256(ambig_content).hexdigest()
+        decomp_hash = hashlib.sha256(decomp_content).hexdigest()
 
         manifest = _make_manifest({
             "samples/old_location.wav": moved_hash,
             "samples/gone.wav": deleted_hash,
-            "samples/original.wav": ambig_hash,
+            "samples/original.wav": decomp_hash,
         })
 
         result = compute_migration_map(manifest, deluge_root)
 
         assert "samples/old_location.wav" in result.moved
         assert deleted_hash in result.deleted
-        assert len(result.added) == 1
-        assert ambig_hash in result.ambiguous
+        # 1:M decomposition — moved + added, not ambiguous
+        assert "samples/original.wav" in result.moved
+        assert decomp_hash in result.added
+        assert len(result.added[decomp_hash]) == 1
+        assert not result.ambiguous
 
     def test_after_hashes_populated(self, tmp_path: Path) -> None:
         """after_hashes maps hashes to original-case filesystem paths."""
@@ -346,6 +352,179 @@ class TestComputeMigrationMap:
         result = compute_migration_map({}, deluge_root)
 
         assert result.after_hashes == {}
+
+
+# ---------------------------------------------------------------------------
+# Decomposition sub-cases
+# ---------------------------------------------------------------------------
+
+
+class TestDecomposition:
+    """Tests for overlap-removal decomposition in compute_migration_map."""
+
+    def test_n1_no_overlap(self, tmp_path: Path) -> None:
+        """N before-paths, 1 after-path, no normalised match: all moved."""
+        content = b"shared audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"new.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({
+            "samples/old_a.wav": digest,
+            "samples/old_b.wav": digest,
+            "samples/old_c.wav": digest,
+        })
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert result.moved == {
+            "samples/old_a.wav": "SAMPLES/new.wav",
+            "samples/old_b.wav": "SAMPLES/new.wav",
+            "samples/old_c.wav": "SAMPLES/new.wav",
+        }
+        assert not result.ambiguous
+        assert not result.deleted
+
+    def test_n1_with_overlap(self, tmp_path: Path) -> None:
+        """N before-paths, 1 after-path, one before matches after: overlap unchanged, others moved."""
+        content = b"overlap audio"
+        deluge_root = _make_deluge_tree(tmp_path, {"survivor.wav": content})
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({
+            "samples/survivor.wav": digest,
+            "samples/removed.wav": digest,
+        })
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        # survivor is unchanged (overlap), removed is moved to survivor
+        assert result.moved == {
+            "samples/removed.wav": "SAMPLES/survivor.wav",
+        }
+        assert not result.ambiguous
+
+    def test_1m_no_overlap(self, tmp_path: Path) -> None:
+        """1 before-path, M after-paths, no normalised match: moved + added."""
+        content = b"duplicated audio"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "new_folder/kick.wav": content,
+            "other/snare.wav": content,
+        })
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({"samples/old_folder/kick.wav": digest})
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        # path_similarity: "kick.wav" matches → new_folder/kick.wav wins
+        assert result.moved == {
+            "samples/old_folder/kick.wav": "SAMPLES/new_folder/kick.wav",
+        }
+        assert digest in result.added
+        assert result.added[digest] == ["SAMPLES/other/snare.wav"]
+        assert not result.ambiguous
+
+    def test_1m_with_overlap(self, tmp_path: Path) -> None:
+        """1 before-path matches one after-path: unchanged; other after-paths added."""
+        content = b"overlap dup audio"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "existing.wav": content,
+            "copy.wav": content,
+        })
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({"samples/existing.wav": digest})
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        # Before-path overlaps — unchanged; copy.wav is added
+        assert not result.moved
+        assert digest in result.added
+        assert result.added[digest] == ["SAMPLES/copy.wav"]
+        assert not result.ambiguous
+
+    def test_nm_partial_overlap_reduces_to_1_1(self, tmp_path: Path) -> None:
+        """N:M with overlaps that reduce residual to 1:1."""
+        content = b"partial overlap audio"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "kept_a.wav": content,
+            "kept_b.wav": content,
+            "new_loc.wav": content,
+        })
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({
+            "samples/kept_a.wav": digest,
+            "samples/kept_b.wav": digest,
+            "samples/old_loc.wav": digest,
+        })
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        # kept_a and kept_b overlap; old_loc → new_loc is 1:1 residual
+        assert result.moved == {
+            "samples/old_loc.wav": "SAMPLES/new_loc.wav",
+        }
+        assert not result.ambiguous
+
+    def test_nm_all_overlapping(self, tmp_path: Path) -> None:
+        """All N:M pairs match normalised — nothing in any result dict."""
+        content = b"all overlap audio"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "a.wav": content,
+            "b.wav": content,
+        })
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({
+            "samples/a.wav": digest,
+            "samples/b.wav": digest,
+        })
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert not result.moved
+        assert not result.deleted
+        assert not result.added
+        assert not result.ambiguous
+
+    def test_nm_no_overlap_truly_ambiguous(self, tmp_path: Path) -> None:
+        """N>1 before, M>1 after, no overlap: truly ambiguous."""
+        content = b"ambig audio"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "x.wav": content,
+            "y.wav": content,
+        })
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({
+            "samples/a.wav": digest,
+            "samples/b.wav": digest,
+        })
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        assert digest in result.ambiguous
+        before_paths, after_paths = result.ambiguous[digest]
+        assert set(before_paths) == {"samples/a.wav", "samples/b.wav"}
+        assert set(after_paths) == {"SAMPLES/x.wav", "SAMPLES/y.wav"}
+        assert not result.moved
+
+    def test_n_before_zero_residual_after(self, tmp_path: Path) -> None:
+        """N before-paths, all after-paths consumed by overlaps: moved to first survivor."""
+        content = b"survivor audio"
+        deluge_root = _make_deluge_tree(tmp_path, {
+            "kept.wav": content,
+        })
+        digest = hashlib.sha256(content).hexdigest()
+        manifest = _make_manifest({
+            "samples/kept.wav": digest,
+            "samples/removed_a.wav": digest,
+            "samples/removed_b.wav": digest,
+        })
+
+        result = compute_migration_map(manifest, deluge_root)
+
+        # kept.wav overlaps; removed_a and removed_b moved to survivor
+        assert result.moved == {
+            "samples/removed_a.wav": "SAMPLES/kept.wav",
+            "samples/removed_b.wav": "SAMPLES/kept.wav",
+        }
+        assert not result.ambiguous
+        assert not result.deleted
 
 
 # ---------------------------------------------------------------------------
@@ -551,6 +730,76 @@ class TestManifestKeyUpdate:
         assert entry["local_size"] == 42
         assert entry["local_mtime"] == 888.0
         assert entry["hash"] == "deadbeef"
+
+    def test_recovered_ref_renames_manifest_key(self, tmp_path: Path) -> None:
+        """Recovered ref mapping renames the corresponding manifest key."""
+        manifest: FilesDict = {
+            "samples/old.wav": {
+                "sd_size": 100, "sd_mtime": 1000.0,
+                "local_size": 100, "local_mtime": 1000.0, "hash": "aaa",
+            },
+        }
+        recovered_moved = {normalise_key("SAMPLES/Old.wav"): "SAMPLES/NEW/Found.wav"}
+        manifest_path = tmp_path / "manifest.json"
+
+        update_manifest_keys(manifest, recovered_moved, manifest_path)
+
+        assert "samples/old.wav" not in manifest
+        assert "samples/new/found.wav" in manifest
+        assert manifest["samples/new/found.wav"]["hash"] == "aaa"
+        assert manifest_path.is_file()
+
+    def test_combined_moved_and_recovered(self, tmp_path: Path) -> None:
+        """Both moved and recovered mappings are applied to the manifest."""
+        manifest: FilesDict = {
+            "samples/moved.wav": {
+                "sd_size": 10, "sd_mtime": 100.0,
+                "local_size": 10, "local_mtime": 100.0, "hash": "h1",
+            },
+            "samples/recovered.wav": {
+                "sd_size": 20, "sd_mtime": 200.0,
+                "local_size": 20, "local_mtime": 200.0, "hash": "h2",
+            },
+        }
+        # Simulate combined mapping: moved + recovered merged by caller
+        combined = {
+            normalise_key("SAMPLES/Moved.wav"): "SAMPLES/Moved-New.wav",
+            normalise_key("SAMPLES/Recovered.wav"): "SAMPLES/Recovered-New.wav",
+        }
+        manifest_path = tmp_path / "manifest.json"
+
+        update_manifest_keys(manifest, combined, manifest_path)
+
+        assert "samples/moved.wav" not in manifest
+        assert "samples/recovered.wav" not in manifest
+        assert "samples/moved-new.wav" in manifest
+        assert manifest["samples/moved-new.wav"]["hash"] == "h1"
+        assert "samples/recovered-new.wav" in manifest
+        assert manifest["samples/recovered-new.wav"]["hash"] == "h2"
+
+    def test_no_recovered_refs_no_extra_changes(self, tmp_path: Path) -> None:
+        """No recovered refs produces no additional manifest changes beyond moved."""
+        manifest: FilesDict = {
+            "samples/a.wav": {
+                "sd_size": 10, "sd_mtime": 100.0,
+                "local_size": 10, "local_mtime": 100.0, "hash": "h1",
+            },
+            "samples/b.wav": {
+                "sd_size": 20, "sd_mtime": 200.0,
+                "local_size": 20, "local_mtime": 200.0, "hash": "h2",
+            },
+        }
+        # Only moved, no recovered refs merged
+        moved = {normalise_key("SAMPLES/A.wav"): "SAMPLES/A-New.wav"}
+        manifest_path = tmp_path / "manifest.json"
+
+        update_manifest_keys(manifest, moved, manifest_path)
+
+        assert "samples/a.wav" not in manifest
+        assert "samples/a-new.wav" in manifest
+        # b.wav is untouched
+        assert "samples/b.wav" in manifest
+        assert manifest["samples/b.wav"]["hash"] == "h2"
 
 
 # ---------------------------------------------------------------------------

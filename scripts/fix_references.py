@@ -128,6 +128,7 @@ def compute_migration_map(
     deleted: dict[str, list[str]] = {}
     added: dict[str, list[str]] = {}
     ambiguous: dict[str, tuple[list[str], list[str]]] = {}
+    decomposed = 0
 
     for h in set(before_dict) | set(after_dict):
         bpaths = before_dict.get(h, [])
@@ -143,7 +144,67 @@ def compute_migration_map(
                 moved[bpaths[0]] = apaths[0]
             # else: unchanged — same hash, same normalised path
         else:
-            ambiguous[h] = (list(bpaths), list(apaths))
+            # --- Overlap-removal decomposition ---
+            # Find before-paths that match an after-path (normalised) — unchanged
+            survivors: list[str] = []
+            residual_before: list[str] = []
+            residual_after = list(apaths)
+            residual_after_norm = list(apaths_norm)
+
+            for bp in bpaths:
+                try:
+                    idx = residual_after_norm.index(bp)
+                except ValueError:
+                    residual_before.append(bp)
+                else:
+                    survivors.append(residual_after[idx])
+                    del residual_after[idx]
+                    del residual_after_norm[idx]
+
+            n_before = len(residual_before)
+            m_after = len(residual_after)
+
+            if n_before == 0 and m_after == 0:
+                # All pairs matched — nothing to record
+                pass
+            elif n_before == 0 and m_after > 0:
+                # New duplicates added at residual after-paths
+                added[h] = residual_after
+                decomposed += 1
+            elif n_before > 0 and m_after == 0:
+                # Before-paths lost their copies; content survives at overlap
+                target = survivors[0]
+                for bp in residual_before:
+                    moved[bp] = target
+                decomposed += 1
+            elif n_before == 1 and m_after == 1:
+                # Simple move
+                moved[residual_before[0]] = residual_after[0]
+                decomposed += 1
+            elif n_before > 1 and m_after == 1:
+                # All residual before-paths moved to single after-path
+                for bp in residual_before:
+                    moved[bp] = residual_after[0]
+                decomposed += 1
+            elif n_before == 1 and m_after > 1:
+                # Moved to best path_similarity match; rest are added
+                best_idx = max(
+                    range(m_after),
+                    key=lambda i: path_similarity(
+                        residual_before[0], residual_after[i]
+                    ),
+                )
+                moved[residual_before[0]] = residual_after[best_idx]
+                added[h] = [
+                    residual_after[i] for i in range(m_after) if i != best_idx
+                ]
+                decomposed += 1
+            else:
+                # N>1, M>1 — truly ambiguous
+                ambiguous[h] = (residual_before, residual_after)
+
+    if decomposed:
+        print(f"Decomposition: {decomposed} hash group(s) resolved from N:M.")
 
     return MigrationResult(
         moved=moved,
@@ -574,8 +635,14 @@ def main(argv: list[str] | None = None) -> None:
     broken = classify_ref_changes(migration, deluge_root)
     has_issues, applied = preview_and_apply(broken, deluge_root, auto_apply=args.apply)
 
-    if applied and migration.moved:
-        update_manifest_keys(manifest, migration.moved, manifest_path)
+    if applied:
+        combined_moved = dict(migration.moved)
+        for rec in broken.recovered:
+            key = normalise_key(rec.old_path)
+            if key not in combined_moved:
+                combined_moved[key] = rec.new_path
+        if combined_moved:
+            update_manifest_keys(manifest, combined_moved, manifest_path)
 
     if has_issues:
         raise SystemExit(1)
