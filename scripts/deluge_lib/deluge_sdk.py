@@ -95,7 +95,8 @@ def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
         deluge_root: Absolute path to the DELUGE directory.
 
     Returns:
-        Mapping of SHA-256 hex digests to lists of relative paths
+        Mapping of SHA-256 hex digests to lists of relative paths.
+            k: SHA-256 hex digest, v: list of relative paths
     """
     samples_dir = deluge_root / "SAMPLES"
     wav_files = find_all_wav_files(samples_dir)

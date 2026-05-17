@@ -15,29 +15,18 @@ import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import TypedDict
+from typing import TypedDict, NotRequired
 
 from deluge_lib.paths import SYNC_LOG_PATH
 from deluge_lib.scanning import FileFilter, ScanResult, normalise_key, print_path, normalise_mtime, scan_tree
 
 
-class _FileRecordRequired(TypedDict):
-    """Required fields for a manifest entry."""
-
+class FileRecord(TypedDict):
     sd_size: int
     sd_mtime: float
     local_size: int
     local_mtime: float
-
-
-class FileRecord(_FileRecordRequired, total=False):
-    """Per-file dual-stat manifest entry with optional content hash.
-
-    The ``hash`` field holds a SHA-256 hex digest or is absent/None when
-    the hash has not yet been computed (v1 manifests, newly added entries).
-    """
-
-    hash: str | None
+    hash: NotRequired[str | None]
 
 
 FilesDict = dict[str, FileRecord]
@@ -49,15 +38,15 @@ def read_manifest(path: Path) -> FilesDict:
     if not path.is_file():
         print(f"Warning: No manifest at {path}")
         return {}
-
+    print("Reading manifest file...")
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        manifest_data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         print(f"Warning: corrupt manifest at {path} ({exc}) \u2014 treating as empty")
         return {}
 
-    files: dict[str, FileRecord] = {}
-    for key, val in data.get("files", {}).items():
+    manifest_files: dict[str, FileRecord] = {}
+    for key, val in manifest_data.get("files", {}).items():
         if isinstance(val, dict) and "sd_size" in val and "sd_mtime" in val and "local_size" in val and "local_mtime" in val:
             entry: FileRecord = {
                 "sd_size": int(val["sd_size"]),
@@ -66,9 +55,9 @@ def read_manifest(path: Path) -> FilesDict:
                 "local_mtime": float(val["local_mtime"]),
                 "hash": val.get("hash")
             }
-            files[key] = entry
+            manifest_files[key] = entry
 
-    return files
+    return manifest_files
 
 
 def write_manifest(
@@ -81,6 +70,10 @@ def write_manifest(
     The output includes ``"version": 2`` at the top level and each file
     entry includes a ``"hash"`` key (value is a hex string or ``null``).
     A ``last_sync_timestamp`` is generated automatically.
+
+    Args:
+        files: Manifest file entries.
+            k: normalised path, v: FileRecord
     """
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -131,7 +124,16 @@ def build_post_sync_manifest(
     source_is_sd: bool,
     file_filter: str = "both",
 ) -> dict[str, FileRecord]:
-    """Build updated manifest after a successful sync"""
+    """Build updated manifest after a successful sync.
+
+    Args:
+        old_files: Previous manifest entries.
+            k: normalised path, v: FileRecord
+
+    Returns:
+        Updated manifest entries.
+            k: normalised path, v: FileRecord
+    """
 
     from deluge_lib.deluge_sdk import hash_file
     from deluge_lib.scanning import FILTER_MAP

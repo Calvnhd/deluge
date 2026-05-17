@@ -43,7 +43,12 @@ def _sample_ref(path: str, xml_file: str = "KITS/Kit.XML", preset: str = "Kit") 
 
 def _scan_result(entries: dict[str, FileEntry]) -> ScanResult:
     # TODO-v0.1-REVIEW
-    """Wrap a dict of normalised-key → FileEntry into a ScanResult."""
+    """Wrap entries into a ScanResult.
+
+    Args:
+        entries: Scan entries to wrap.
+            k: normalised key, v: FileEntry
+    """
     result = ScanResult()
     result.files = entries
     return result

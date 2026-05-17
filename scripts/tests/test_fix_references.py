@@ -35,7 +35,8 @@ def _make_deluge_tree(tmp_path: Path, wav_files: dict[str, bytes]) -> Path:
 
     Args:
         tmp_path: pytest tmp_path fixture.
-        wav_files: Mapping of relative paths (under SAMPLES/) to file contents.
+        wav_files: WAV files to create in the tree.
+            k: relative path (under SAMPLES/), v: file contents (bytes)
 
     Returns:
         Path to the DELUGE root directory.
@@ -53,7 +54,8 @@ def _make_manifest(entries: dict[str, str | None]) -> FilesDict:
     """Create a manifest dict for testing.
 
     Args:
-        entries: Mapping of normalised path keys to hash values (or None).
+        entries: Manifest entries with dummy stats.
+            k: normalised path, v: hash value (or None)
                  Stats are set to dummy values that won't match disk files.
     """
     result: FilesDict = {}

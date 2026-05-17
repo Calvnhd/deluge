@@ -1982,9 +1982,12 @@ class TestSelectExtendedClips:
         # TODO-v0.1-REVIEW
         """Build an InstrumentClipGroup with synth clips at the given sections.
 
-        Each section value is a dict of soundParams overrides (e.g. lpfFrequency).
         The instrument element is a minimal embedded <sound> that will go through
         extract_synth() internally.
+
+        Args:
+            sections: Clip overrides by section.
+                k: section_id, v: dict of soundParams overrides (e.g. lpfFrequency)
         """
         inst_el = etree.Element(
             "sound",
@@ -2480,10 +2483,12 @@ class TestIsSidechainKit:
         # TODO-v0.1-REVIEW
         """Build a minimal InstrumentClipGroup for a kit.
 
-        sounds: list of dicts with keys: name, sideChainSend (optional).
-        note_rows: list of dicts with keys: drumIndex, noteDataWithLift (optional),
-                   volume (optional, for soundParams).
-        kit_volume: hex volume for the clip's <kitParams>.
+        Args:
+            sounds: List of sound dicts, one per kit row.
+                k: attribute (name, sideChainSend), v: string value
+            note_rows: List of note row dicts, one per row.
+                k: attribute (drumIndex, noteDataWithLift, volume), v: string value or None
+            kit_volume: Hex volume for the clip's <kitParams>.
         """
         # Build the instrument <kit> element with <soundSources>.
         kit_el = etree.Element("kit")
