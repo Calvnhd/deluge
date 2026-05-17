@@ -122,7 +122,7 @@ def _compute_migration_map(
                 cached_hash is not None
                 and library_entry.mtime > 0 # guard against FAT32 and Deluge quirks
                 and library_entry.size == manifest_entry["local_size"]
-                # scan_tree() will have normalised both these values already
+                # Both mtime values are FAT32-normalised: library by scan_tree(), manifest at write time
                 and library_entry.mtime == manifest_entry["local_mtime"]
             ):
                 # Cache hit: trust the manifest hash
@@ -159,7 +159,7 @@ def _compute_migration_map(
             if manifest_paths[0] != normalise_key(library_paths[0]):
                 moved[manifest_paths[0]] = library_paths[0]
         # duplicates?
-        if len(library_paths) > 0:
+        if len(library_paths) > 1:
             duplicate[h] = list(library_paths)
 
     return MigrationResult(
@@ -226,7 +226,7 @@ def _classify_ref_changes(
             # Deleted? We need to notify user about broken reference
             elif xml_ref_norm in deleted_paths:
                 result.errors.append(
-                    BrokenRefError(ref=xml_ref, deleted_path=xml_ref.path)
+                    BrokenRefError(ref=xml_ref, broken_path=xml_ref.path)
                 )
             elif xml_ref_norm not in library_paths:
                 # No matching path in the library but not deleted or moved either
@@ -238,7 +238,7 @@ def _classify_ref_changes(
                     # File is either genuinely missing or has been renamed on move
                     print(f"WARNING: No file at {xml_ref_norm}. Insufficient data for recovery.")
                     result.errors.append(
-                        BrokenRefError(ref=xml_ref, deleted_path=xml_ref.path)
+                        BrokenRefError(ref=xml_ref, broken_path=xml_ref.path)
                     )
                 elif len(recovery_candidates) == 1:
                     # Unique name match - treat like a planned change
@@ -248,7 +248,7 @@ def _classify_ref_changes(
                         PlannedChange(
                             ref=xml_ref,
                             old_path=xml_ref.path,
-                            new_path=migration.moved[matched_path] # TODO - check normalisation here?
+                            new_path=matched_path
                         )
                     )
                 else:
@@ -262,14 +262,14 @@ def _classify_ref_changes(
                             PlannedChange(
                                 ref=xml_ref,
                                 old_path=xml_ref.path,
-                                new_path=migration.moved[matched_path] # TODO - check normalisation here?
+                                new_path=matched_path
                             )
                         )
                     else:
                         # Different hashes, ambiguous match. Treat as broken
                         print(f"WARNING: No file at {xml_ref_norm}. Insufficient data for recovery.")
                         result.errors.append(
-                            BrokenRefError(ref=xml_ref, deleted_path=xml_ref.path)
+                            BrokenRefError(ref=xml_ref, broken_path=xml_ref.path)
                         )
     return result
 
@@ -354,7 +354,7 @@ def _preview_and_apply(
     # --- Summary ---
     print()
     print(
-        f"{len(ref_classification.changes)} planned changes"
+        f"{len(ref_classification.changes)} planned changes, "
         f"{len(ref_classification.errors)} errors to be manually resolved"
     )
 
@@ -364,12 +364,12 @@ def _preview_and_apply(
         return False
 
     # --- Apply ---
-    # Build per-file mappings from both changes and recovered refs, then apply
     total_updated = 0
     files_modified = 0
-    for xml_file, planned_change in sorted(changes_by_file):
+    for xml_file, planned_changes in sorted(changes_by_file.items()):
         mapping: dict[str, str] = {}
-        mapping[planned_change.old_path] = planned_change.new_path
+        for change in planned_changes:
+            mapping[change.old_path] = change.new_path
         updated = _update_sample_refs(deluge_root / xml_file, mapping)
         if updated > 0:
             files_modified += 1
@@ -390,7 +390,6 @@ def _update_manifest_keys(
         moved: Moved file mappings.
             k: normalised_old_key, v: original_new_path
     """
-    # TODO - unsure if the normalised note above is still true?
     if not moved:
         return
     print("\nUpdating manifest...")
@@ -434,7 +433,6 @@ def main(argv: list[str] | None = None) -> None:
     manifest = read_manifest(SYNC_MANIFEST_PATH)
 
     migration_map = _compute_migration_map(manifest, deluge_root)
-
     if len(migration_map.duplicate) > 0:
         print("Duplicates detected!")
         if confirm_apply("Wanna remove the duplicates while we're at it?"):
