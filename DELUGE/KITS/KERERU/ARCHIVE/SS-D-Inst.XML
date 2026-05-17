@@ -55,7 +55,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="48000" />
@@ -180,7 +180,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="48000"
 					endSamplePos="96000" />
@@ -305,7 +305,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="96000"
 					endSamplePos="144000" />
@@ -430,7 +430,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="144000"
 					endSamplePos="192000" />
@@ -555,7 +555,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="192000"
 					endSamplePos="240000" />
@@ -680,7 +680,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="240000"
 					endSamplePos="288000" />
@@ -805,7 +805,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="288000"
 					endSamplePos="336000" />
@@ -930,7 +930,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SLPSPK-D-Inst-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-D-Inst-120bpm.wav">
 				<zone
 					startSamplePos="336000"
 					endSamplePos="384000" />

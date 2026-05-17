@@ -371,7 +371,7 @@ def _preview_and_apply(
     num_changes = len(ref_classification.changes)
     if num_changes == 0:
         print("No sample references to fix")
-        print(f"{len(ref_classification.errors)} errors to be manually resolved")
+        print(f"{len(ref_classification.errors)} to be manually resolved")
         return False
 
     print(f"{num_changes} sample reference fixes planned")

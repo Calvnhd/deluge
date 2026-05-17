@@ -652,7 +652,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="96000" />
@@ -729,7 +729,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="96000"
 							endSamplePos="192000" />
@@ -806,7 +806,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="192000"
 							endSamplePos="288000" />
@@ -883,7 +883,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="288000"
 							endSamplePos="384000" />
@@ -960,7 +960,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="384000"
 							endSamplePos="480000" />
@@ -1037,7 +1037,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="480000"
 							endSamplePos="576000" />
@@ -1114,7 +1114,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="576000"
 							endSamplePos="672000" />
@@ -1191,7 +1191,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Bass-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Bass-120bpm.wav">
 						<zone
 							startSamplePos="672000"
 							endSamplePos="768000" />
@@ -2731,7 +2731,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="96000" />
@@ -2808,7 +2808,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="96000"
 							endSamplePos="192000" />
@@ -2885,7 +2885,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="192000"
 							endSamplePos="288000" />
@@ -2962,7 +2962,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="288000"
 							endSamplePos="384000" />
@@ -3039,7 +3039,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="384000"
 							endSamplePos="480000" />
@@ -3116,7 +3116,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="480000"
 							endSamplePos="576000" />
@@ -3193,7 +3193,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="576000"
 							endSamplePos="672000" />
@@ -3270,7 +3270,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="672000"
 							endSamplePos="768000" />
@@ -3347,7 +3347,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="768000"
 							endSamplePos="864000" />
@@ -3424,7 +3424,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="864000"
 							endSamplePos="960000" />
@@ -3501,7 +3501,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="960000"
 							endSamplePos="1056000" />
@@ -3578,7 +3578,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="1056000"
 							endSamplePos="1152000" />
@@ -3655,7 +3655,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="1152000"
 							endSamplePos="1248000" />
@@ -3732,7 +3732,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="1248000"
 							endSamplePos="1344000" />
@@ -3809,7 +3809,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="1344000"
 							endSamplePos="1440000" />
@@ -3886,7 +3886,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SLPSPK-Chorus-Inst-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/SLPSPK-Chorus-Inst-120bpm.wav">
 						<zone
 							startSamplePos="1440000"
 							endSamplePos="1536000" />
