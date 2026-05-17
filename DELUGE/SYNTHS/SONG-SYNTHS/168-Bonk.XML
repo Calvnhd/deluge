@@ -2,10 +2,10 @@
 <sound polyphonic="poly" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" clippingAmount="1" maxVoices="8" firmwareVersion="c1.2.1" earliestCompatibleFirmware="4.1.0-alpha">
 			<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
 				<sampleRanges>
-					<sampleRange rangeTopNote="72" fileName="SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/1.wav">
+					<sampleRange rangeTopNote="72" fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Hangdrum/1.wav">
 						<zone startSamplePos="0" endSamplePos="146506" startLoopPos="19101" endLoopPos="19603"/>
 					</sampleRange>
-					<sampleRange fileName="SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/2.wav" transpose="-12">
+					<sampleRange fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Hangdrum/2.wav" transpose="-12">
 						<zone startSamplePos="0" endSamplePos="137227" startLoopPos="8089" endLoopPos="8256"/>
 					</sampleRange>
 				</sampleRanges>

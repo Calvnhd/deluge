@@ -225,7 +225,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Kick.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Kick.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="68103" />
@@ -527,7 +527,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Snare.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Snare.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="34860" />
@@ -1282,7 +1282,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/Roman Hatz/Kit 1/Clap.wav">
+				fileName="SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Clap.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="14519" />

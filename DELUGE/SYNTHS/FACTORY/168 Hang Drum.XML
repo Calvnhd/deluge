@@ -19,7 +19,7 @@
 		<sampleRanges>
 			<sampleRange
 				rangeTopNote="72"
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/1.wav">
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Hangdrum/1.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="146506"
@@ -27,7 +27,7 @@
 					endLoopPos="19603" />
 			</sampleRange>
 			<sampleRange
-				fileName="SAMPLES/Artists/Leonard Ludvigsen/Hangdrum/2.wav"
+				fileName="SAMPLES/FACTORY/Artists/Leonard Ludvigsen/Hangdrum/2.wav"
 				transpose="-12">
 				<zone
 					startSamplePos="0"

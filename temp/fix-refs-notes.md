@@ -23,4 +23,5 @@ fix_references.py
         - got rid of auto apply flag
         - heaps of changes to match classify changes
     * _update_manifest_keys
-        - 
+
+    also added dupe deletion!

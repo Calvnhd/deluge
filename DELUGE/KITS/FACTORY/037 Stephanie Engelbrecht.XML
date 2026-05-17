@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/7.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/7.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1433</endMilliseconds>
@@ -210,7 +210,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/8.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/8.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1144</endMilliseconds>
@@ -374,7 +374,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/1.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/1.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>557</endMilliseconds>
@@ -538,7 +538,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/2.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/2.wav</fileName>
 				<zone>
 					<startMilliseconds>30</startMilliseconds>
 					<endMilliseconds>717</endMilliseconds>
@@ -702,7 +702,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/3.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/3.wav</fileName>
 				<zone>
 					<startMilliseconds>50</startMilliseconds>
 					<endMilliseconds>874</endMilliseconds>
@@ -866,7 +866,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/4.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/4.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>2400</endMilliseconds>
@@ -1030,7 +1030,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/5.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/5.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1381</endMilliseconds>
@@ -1194,7 +1194,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stephanie Engelbrecht/6.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stephanie Engelbrecht/6.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>4888</endMilliseconds>

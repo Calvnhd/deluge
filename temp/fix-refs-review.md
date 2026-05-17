@@ -1,190 +1,118 @@
 # fix_references.py — Code Review
 
-Review of `scripts/fix_references.py` after major refactor. Covers bugs, logic errors, stale code, TODO analysis, and path normalisation.
-
----
-
-## Bugs (will crash at runtime)
-
-### 1. `BrokenRefError` field name mismatch
-
-**Severity: Critical — TypeError on every broken-ref path**
-
-The dataclass defines `broken_path`:
-
-```python
-@dataclass
-class BrokenRefError:
-    ref: SampleRef
-    broken_path: str
-```
-
-But all four construction sites in `_classify_ref_changes` use `deleted_path=`:
-
-```python
-result.errors.append(
-    BrokenRefError(ref=xml_ref, deleted_path=xml_ref.path)  # ← TypeError
-)
-```
-
-**Fix:** Change all `deleted_path=` to `broken_path=` (4 occurrences in `_classify_ref_changes`).
-
----
-
-### 2. `_preview_and_apply` — broken apply loop
-
-**Severity: Critical — crashes during apply phase**
-
-```python
-for xml_file, planned_change in sorted(changes_by_file):
-```
-
-`changes_by_file` is a `dict[Path, list[PlannedChange]]`. Iterating `sorted(dict)` yields keys only — unpacking a single `Path` into two variables will raise `ValueError`.
-
-Even if fixed to `sorted(changes_by_file.items())`, the value is a **list** of `PlannedChange`, not a single item. The loop body treats it as singular:
-
-```python
-mapping[planned_change.old_path] = planned_change.new_path
-```
-
-**Fix:**
-
-```python
-for xml_file, planned_changes in sorted(changes_by_file.items()):
-    mapping: dict[str, str] = {}
-    for change in planned_changes:
-        mapping[change.old_path] = change.new_path
-    updated = _update_sample_refs(deluge_root / xml_file, mapping)
-```
-
----
-
-### 3. Recovery section looks up wrong dict
-
-**Severity: Critical — KeyError at runtime**
-
-In `_classify_ref_changes`, the basename-recovery paths do:
-
-```python
-new_path=migration.moved[matched_path]
-```
-
-`matched_path` is a **current library path** from `basename_index`. But `migration.moved` is keyed by **old normalised manifest paths**. A current library path will almost never be a key in `moved` — this raises `KeyError`.
-
-The intent is to use the library path directly as the new path (the file was found there):
-
-**Fix** (all 3 recovery sites):
-
-```python
-new_path=matched_path
-```
-
----
-
-## Logic Errors
-
-### 4. Duplicate detection flags every file
-
-```python
-if len(library_paths) > 0:
-    duplicate[h] = list(library_paths)
-```
-
-This marks **every hash with any library presence** as a duplicate, including files that exist exactly once. The `main()` function then triggers "Duplicates detected!" for all non-empty libraries.
-
-**Fix:**
-
-```python
-if len(library_paths) > 1:
-    duplicate[h] = list(library_paths)
-```
-
----
-
-### 5. Missing separator in summary line
-
-```python
-print(
-    f"{len(ref_classification.changes)} planned changes"
-    f"{len(ref_classification.errors)} errors to be manually resolved"
-)
-```
-
-Python concatenates adjacent f-strings, producing: `"5 planned changes3 errors to be manually resolved"`.
-
-**Fix:** Add a separator — e.g. `", "` or `" | "` or `"\n"`:
-
-```python
-print(
-    f"{len(ref_classification.changes)} planned changes, "
-    f"{len(ref_classification.errors)} errors to be manually resolved"
-)
-```
-
----
-
-## Stale / Misleading Code
-
-### 6. Misleading mtime comment
-
-```python
-and library_entry.mtime == manifest_entry["local_mtime"]
-# scan_tree() will have normalised both these values already
-```
-
-`manifest_entry["local_mtime"]` comes from JSON, not `scan_tree()`. It works because the manifest was written with normalised values during sync, but the comment is wrong about **who** normalised it.
-
-**Suggestion:** Update comment to: `# Both values are FAT32-normalised: library by scan_tree(), manifest at write time`
-
----
-
-## TODO Analysis
-
-| Location | TODO | Verdict |
-|----------|------|---------|
-| `_classify_ref_changes` — moved branch | `# TODO - should this be normalised?` | **No.** `migration.moved[xml_ref_norm]` returns the original-case library path. You want original case for writing to XML. Normalisation would break actual file references. Remove TODO. |
-| `_classify_ref_changes` — recovery branches (×3) | `# TODO - check normalisation here?` | **Moot** — these lines have Bug 3 (wrong dict lookup). After fixing to `new_path=matched_path`, the library path from `basename_index` preserves original case, which is correct. Remove TODO. |
-| `_update_manifest_keys` | `# TODO - unsure if the normalised note above is still true?` | **It is.** The `moved` dict keys are manifest paths (normalised by `read_manifest` consumers). The docstring "k: normalised_old_key" is accurate. Remove TODO. |
-| `main()` | `# TODO - what about added?` | **Valid concern.** New samples (in library but not manifest) won't get manifest entries until next sync. Low priority — the fix-refs script isn't responsible for manifest completeness — but worth noting for future work. Keep TODO or convert to a comment. |
-| `_handle_duplicates` | `# TODO - all of this!` | Acknowledged placeholder. Fine as-is. |
-
----
-
-## Path Normalisation Assessment
-
-The normalisation strategy is **sound in design** but has implementation gaps (Bugs 1–3 above). Here's the intended flow:
-
-| Context | Key/Path Format | Correct? |
-|---------|----------------|----------|
-| Manifest dict keys | Normalised (lowercase, forward-slash) | ✓ |
-| `migration.moved` keys | Normalised (from manifest) | ✓ |
-| `migration.moved` values | Original-case library paths | ✓ — correct for XML writes |
-| `library_hashes` keys | Hash string | ✓ |
-| `library_hashes` values | Original-case library paths | ✓ |
-| `deleted_paths` set | Normalised (from manifest keys) | ✓ |
-| `library_paths` set | Normalised via `normalise_key()` | ✓ |
-| `basename_index` keys | Lowercase basename | ✓ |
-| `basename_index` values | Original-case library paths | ✓ |
-| XML ref lookup (`xml_ref_norm`) | Normalised via `normalise_key()` | ✓ |
-
-**One subtlety:** `manifest_hashes` values are manifest keys (normalised), while `library_hashes` values are original-case paths. The move comparison normalises the library side before comparing, which is correct:
-
-```python
-if manifest_paths[0] != normalise_key(library_paths[0]):
-    moved[manifest_paths[0]] = library_paths[0]
-```
-
-The design is consistent. Once the three runtime bugs are fixed, the normalisation should work correctly throughout.
+Review of `scripts/fix_references.py` and its library dependencies after major refactor.
 
 ---
 
 ## Summary
 
-| # | Category | Issue | Severity |
-|---|----------|-------|----------|
-| 1 | Bug | `BrokenRefError` — `deleted_path` vs `broken_path` | Critical |
-| 2 | Bug | Apply loop — iterates keys, not items; treats list as single | Critical |
-| 3 | Bug | Recovery — `migration.moved[matched_path]` KeyError | Critical |
-| 4 | Logic | Duplicate threshold `> 0` should be `> 1` | Medium |
-| 5 | Logic | Missing separator in summary print | Low |
-| 6 | Stale | Misleading mtime normalisation comment | Cosmetic |
+The script is well-structured and the overall flow is sound. Path normalisation is consistent throughout — the `SAMPLES/` prefix is correctly maintained across manifest keys, library hashes, and XML reference comparisons. The data classes are clean, the recovery logic (stale manifest → basename matching) is a good layered fallback design, and the duplicate handling with re-computation is clever.
+
+Several issues found below, one real bug and a handful of robustness concerns.
+
+---
+
+## Bug
+
+### 1. Unhandled 1:N migration case in `_compute_migration_map()`
+
+**Lines 127–143.** The `elif` chain that categorises each hash has a gap. When one manifest entry maps to 2+ library files (same hash), no branch fires:
+
+| Condition | mp=1, lp=2+ |
+|---|---|
+| `len(mp) == 1 and len(lp) == 1` | False (lp > 1) |
+| `mp and not lp` | False (lp truthy) |
+| `lp and not mp` | False (mp truthy) |
+| `len(mp) > 1 and len(lp) > 0` | False (mp == 1) |
+
+The hash falls through with no categorisation. The only thing captured is `lib_duplicates`.
+
+**Impact:** If the original file was moved/renamed to one of the duplicate locations, the XML reference to the old path won't be in `moved`. It'll reach `_classify_ref_changes`, fail all early checks, and fall to basename recovery — which works but is accidental. If the filename also changed, it becomes a broken error with no explanation of the underlying cause.
+
+**Fix:** Add an explicit branch for 1:N. Since there are multiple library candidates, you can't pick a single move target. Options:
+- Treat the manifest path as stale (add to `stale` dict) so `_classify_ref_changes` can recover via the hash
+- Or pick the library path matching the manifest path's basename as the move target, falling back to stale if ambiguous
+
+---
+
+## Robustness Concerns
+
+### 2. Non-deterministic keeper selection in `_handle_duplicates()`
+
+`paths[0]` is used as the keeper for each duplicate group. The order of `paths` depends on insertion order in `library_hashes`, which comes from `os.walk` — non-deterministic across platforms and runs.
+
+**Impact:** Different runs may keep different files and delete different duplicates. The recovery logic handles this (stale manifest → reference fix), but the user sees inconsistent behaviour.
+
+**Suggestion:** Sort each group before selecting the keeper. Prefer the shortest path, or alphabetically first, or — ideally — the path that's already referenced by XML files.
+
+### 3. Stale manifest entries after duplicate deletion
+
+After `_handle_duplicates()` deletes files, their manifest entries persist. `_update_manifest_keys()` only handles `moved` entries. The deleted duplicate paths remain as ghost entries.
+
+**Impact:** 
+- Running `fix_references` again before the next sync would re-flag the ghost entries as deleted/stale
+- Manifest bloat over time
+
+**Suggestion:** After applying reference fixes, purge manifest entries whose paths no longer exist on disk. Could be a small cleanup step at the end of `main()`.
+
+### 4. Non-atomic XML writes in `_update_sample_refs()`
+
+Uses `Path.write_text()` directly. If the process crashes mid-write, the XML is truncated. Compare with `write_manifest()` in `syncing.py` which uses a temp-file + atomic rename pattern.
+
+**Impact:** Low probability, but data loss on crash. These are preset/song files.
+
+**Suggestion:** Use the same temp-file pattern as `write_manifest()`, or extract a shared `atomic_write()` helper.
+
+### 5. Cascading string replacement in `_update_sample_refs()`
+
+Replacements are sorted longest-first, which prevents prefix collisions. But if a replacement's *new* path matches another replacement's *old* path, the second replacement corrupts the first's result.
+
+Example: Replace `"SAMPLES/Old/test2.wav"` → `"SAMPLES/New/test.wav"` (longer, done first), then `"SAMPLES/New/test.wav"` → `"SAMPLES/Other/test.wav"` (shorter, done second) — the second replacement hits the text just inserted by the first.
+
+**Impact:** Very unlikely in practice (requires one sample's new location to exactly match another sample's old location). But worth noting.
+
+**Mitigation if needed:** Build all replacements into a single pass using `re.sub` with an alternation pattern, or process the XML via the parsed tree rather than raw text.
+
+---
+
+## Path Normalisation Audit
+
+Traced normalisation through the full data flow. **No issues found.**
+
+| Data | Format | Prefix |
+|---|---|---|
+| Manifest keys | Normalised (lowercase, fwd slash) | `samples/...` |
+| `manifest_hashes` values | Raw manifest keys (normalised) | `samples/...` |
+| `library_hashes` values | Original case, fwd slash | `SAMPLES/...` |
+| `moved` keys | Normalised | `samples/...` |
+| `moved` values | Original case | `SAMPLES/...` |
+| `deleted` values | Normalised (from manifest) | `samples/...` |
+| `stale` values | Normalised (from manifest) | `samples/...` |
+| `xml_ref.path` | Original case (from XML) | `SAMPLES/...` |
+| `xml_ref_norm` | Normalised via `normalise_key()` | `samples/...` |
+
+All comparisons between manifest-sourced and XML-sourced paths go through `normalise_key()`. The `SAMPLES/` prefix is consistently present in all paths. Cross-domain lookups (e.g., checking an XML ref against `deleted_paths` or `library_paths`) normalise both sides. **Correct.**
+
+---
+
+## Minor / Style Notes
+
+- **`continue` in stale recovery** (line ~185): Works correctly — skips basename recovery when stale recovery succeeds. Could be slightly cleaner as an `elif` chain but not wrong.
+- **Unused argparse result** in `main()`: `parser.parse_args(argv)` result isn't captured. Fine since there are no args, but `_args = parser.parse_args(argv)` would be more conventional.
+- **Comment about added samples** at end of `main()` is useful — keep it.
+
+---
+
+## No TODOs Found
+
+`fix_references.py` contains no TODO/FIXME markers. The associated library files have one relevant TODO in `syncing.py:310` (`# TODO: test if you can break this by changing a very minor value`) — this is in the sync comparison logic, not directly related to fix_references but is used during manifest-based cache hits in `_compute_migration_map()`.
+
+---
+
+## What's Working Well
+
+- Clean data class hierarchy: `MigrationResult` → `ReferenceStatus` → preview/apply is easy to follow
+- Layered recovery strategy: moved → deleted → stale manifest → basename match → broken error
+- Duplicate handling re-computes the migration map, so downstream classification automatically picks up the changes
+- Deduplication of preview output (pair counting, error counting) is a nice touch
+- The `confirm_apply` gate before destructive actions is consistent

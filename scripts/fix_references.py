@@ -336,8 +336,10 @@ def _preview_and_apply(
     for change in ref_classification.changes:
         changes_by_file[change.ref.xml_file].append(change)
     if changes_by_file:
-        print("\nCHANGES")
-        print("-------")
+        print()
+        print("-----------")
+        print("  CHANGES")
+        print("-----------")
         for xml_file in sorted(changes_by_file):
             print(f"  {print_path(xml_file)}:")
             # Deduplicate same old→new pairs and count occurrences
@@ -350,12 +352,13 @@ def _preview_and_apply(
                 suffix = f" (× {count} refs)" if count > 1 else ""
                 quoted_old = f'"{old}"'
                 print(f"    {quoted_old:<{max_old_len}} → \"{new}\"{suffix}")
-            print()
 
     # --- Errors ---
     if ref_classification.errors:
-        print("\nERROR: Samples not found — manual resolution required")
-        print("------------------------------------")
+        print()
+        print("----------------------------------------------")
+        print("  WAV not found, manual resolution required:")
+        print("----------------------------------------------")
         error_counts: dict[tuple[Path, str], int] = defaultdict(int)
         for error in ref_classification.errors:
             error_counts[(error.ref.xml_file, error.broken_path)] += 1
@@ -372,11 +375,11 @@ def _preview_and_apply(
         return False
 
     print(f"{num_changes} sample reference fixes planned")
-    print(f"{len(ref_classification.errors)} errors to be manually resolved")      
+    print(f"{len(ref_classification.errors)} to be manually resolved")      
 
     # --- Confirm ---
-    if not confirm_apply(f"Apply {num_changes} changes to {len(changes_by_file)} files?"):
-        print("No changes applied")
+    if not confirm_apply(f"\nApply {num_changes} changes to {len(changes_by_file)} files?"):
+        print("\nNo changes applied")
         return False
 
     # --- Apply ---
@@ -391,7 +394,7 @@ def _preview_and_apply(
             files_modified += 1
             total_updated += updated
 
-    print(f"Applied!\n{files_modified} files modified\n{total_updated} references updated")
+    print(f"\n*** Applied! ***\n{files_modified} files modified\n{total_updated} references updated")
     return True
 
 
