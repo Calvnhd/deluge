@@ -88,9 +88,6 @@ def _compute_migration_map(
         A :class:`MigrationResult` categorising every hash as moved, deleted,
         added, duplicate, or unchanged (omitted).
     """
-
-    print("Comparing manifest to sample library...")
-
     # ----- Get hashes from manifest, mapped to path(s) -----
     manifest_hashes: dict[str, list[str]] = defaultdict(list)
     if len(manifest) == 0:
@@ -194,8 +191,6 @@ def _classify_ref_changes(
         A :class:`ReferenceStatus` separating fixable changes, errors, and warnings.
     """
 
-    print("Comparing SAMPLE references in XML files to the manifest-library analysis")
-
     result = ReferenceStatus()
 
     # ----- Build flat lookup sets -----
@@ -248,7 +243,6 @@ def _classify_ref_changes(
                     matching_lib_paths = migration.library_hashes[stale_entry_hash]
                     # Could be duplicates, doesn't matter, just take first
                     recovered_path = matching_lib_paths[0]
-                    print(f"Recovered sample via stale manifest! Matched {xml_ref_norm} to {recovered_path}")
                     result.changes.append(
                         PlannedChange(ref=xml_ref, old_path=xml_ref.path, new_path=recovered_path)
                     )
@@ -266,7 +260,6 @@ def _classify_ref_changes(
                 elif len(recovery_candidates) == 1:
                     # Unique name match. Treat like a planned change
                     matched_path, _matched_hash = recovery_candidates[0]
-                    print(f"Recovered missing file! Matched {xml_ref_norm} to {matched_path}")
                     result.changes.append(
                         PlannedChange(ref=xml_ref, old_path=xml_ref.path, new_path=matched_path)
                     )
@@ -276,7 +269,6 @@ def _classify_ref_changes(
                     if len(hashes) == 1:
                         # Same hashes, same files. Take first match and treat as a planned change
                         matched_path, _matched_hash = recovery_candidates[0]
-                        print(f"Recovered missing file! Matched {xml_ref_norm} to {matched_path}")
                         result.changes.append(
                             PlannedChange(ref=xml_ref, old_path=xml_ref.path, new_path=matched_path)
                         )
@@ -347,13 +339,18 @@ def _preview_and_apply(
         print("\nCHANGES")
         print("-------")
         for xml_file in sorted(changes_by_file):
+            print(f"  {print_path(xml_file)}:")
             # Deduplicate same old→new pairs and count occurrences
             pair_counts: dict[tuple[str, str], int] = defaultdict(int)
             for change in changes_by_file[xml_file]:
                 pair_counts[(change.old_path, change.new_path)] += 1
+            # Align arrows based on longest quoted old path in this group
+            max_old_len = max(len(f'"{old}"') for old, _ in pair_counts)
             for (old, new), count in pair_counts.items():
                 suffix = f" (× {count} refs)" if count > 1 else ""
-                print(f'  {print_path(xml_file)}: "{old}" → "{new}"{suffix}')
+                quoted_old = f'"{old}"'
+                print(f"    {quoted_old:<{max_old_len}} → \"{new}\"{suffix}")
+            print()
 
     # --- Errors ---
     if ref_classification.errors:
@@ -430,13 +427,63 @@ def _update_manifest_keys(
         print(f"Warning: Failed to update manifest: {exc}")
 
 def _handle_duplicates(
-        migration_map: MigrationResult
-)  -> MigrationResult:
-    """Removes duplicate WAVs from SAMPLES
-    TODO - all of this!
+    migration_map: MigrationResult,
+    manifest: FilesDict,
+    deluge_root: Path,
+) -> MigrationResult:
+    """Remove duplicate WAVs from SAMPLES and re-compute the migration map.
+
+    For each group of identical files, keeps the first path and deletes the rest.
+    Re-runs migration map computation so deleted duplicates are recovered
+    via stale manifest entries during reference classification.
+
+    Args:
+        migration_map: Current migration result containing lib_duplicates.
+        manifest: Current sync manifest.
+        deluge_root: Absolute path to the DELUGE directory.
+
+    Returns:
+        Fresh :class:`MigrationResult` reflecting the de-duplicated library.
     """
-    print("duplication handling is WIP, sorry!")
-    return migration_map
+
+    # Build deletion plan
+    to_delete: list[tuple[str, str]] = []  # (keeper, dupe_to_delete)
+    for _h, paths in migration_map.lib_duplicates.items():
+        keeper = paths[0]
+        for dupe in paths[1:]:
+            to_delete.append((keeper, dupe))
+    if not to_delete:
+        return migration_map
+
+    # Preview
+    print(f"\nWanna delete some duplicates?\n")
+    groups: dict[str, list[str]] = {}
+    for keeper, dupe in to_delete:
+        groups.setdefault(keeper, []).append(dupe)
+    for keeper, dupes in groups.items():
+        print(f"  **  KEEP   -- {keeper}")
+        for dupe in dupes:
+            print(f"      DELETE -- {dupe}")
+
+    if not confirm_apply(f"\nDelete {len(to_delete)} file(s)?"):
+        print("No duplicates removed.\n")
+        return migration_map
+
+    # Delete
+    deleted_count = 0
+    for _keeper, dupe in to_delete:
+        abs_path = deluge_root / dupe
+        try:
+            abs_path.unlink()
+            deleted_count += 1
+        except OSError as exc:
+            print(f"  Warning: could not delete {dupe}: {exc}")
+    print()
+    print(f"Deleted {deleted_count} duplicate file(s)")
+    print()
+
+    # Re-compute migration map with updated library state
+    return _compute_migration_map(manifest, deluge_root)
 
 # ===== MAIN =====
 
@@ -452,17 +499,16 @@ def main(argv: list[str] | None = None) -> None:
     manifest = read_manifest(SYNC_MANIFEST_PATH)
 
     migration_map = _compute_migration_map(manifest, deluge_root)
-    if len(migration_map.lib_duplicates) > 0:
-        print("Duplicates detected!")
-        if confirm_apply("Wanna remove the duplicates while we're at it?"):
-            migration_map =_handle_duplicates(migration_map)
+    if migration_map.lib_duplicates:
+        migration_map = _handle_duplicates(migration_map, manifest, deluge_root)
     ref_classification_result = _classify_ref_changes(migration_map, deluge_root)
     apply_changes_confirmed = _preview_and_apply(ref_classification_result, deluge_root)
 
     if apply_changes_confirmed:
         if migration_map.moved:
             _update_manifest_keys(manifest, migration_map.moved, SYNC_MANIFEST_PATH)
-        # TODO - what about added?
+        # Added samples (in library, not in manifest) are not handled here —
+        # manifest population is the sync scripts' responsibility
 
 
 if __name__ == "__main__":
