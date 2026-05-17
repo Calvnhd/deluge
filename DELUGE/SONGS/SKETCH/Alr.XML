@@ -6548,6 +6548,7 @@
 			length="3072"
 			colourOffset="11"
 			section="1"
+			selected="1"
 			keyboardLayout="0"
 			keyboardRowInterval="5"
 			drumsScrollOffset="0"
@@ -6645,7 +6646,7 @@
 					<patchCable
 						source="compressor"
 						destination="volumePostReverbSend"
-						amount="0x22000000" />
+						amount="0x23800000" />
 				</patchCables>
 				<equalizer
 					bass="0x00000000"
@@ -8014,7 +8015,6 @@
 			length="192"
 			colourOffset="4"
 			section="0"
-			selected="1"
 			keyboardLayout="0"
 			keyboardRowInterval="5"
 			drumsScrollOffset="0"

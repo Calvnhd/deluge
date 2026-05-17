@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
 
 from deluge_lib.cli_utils import confirm_apply, get_deluge_root
-from deluge_lib.scanning import normalise_key, normalise_mtime, print_path, scan_tree
+from deluge_lib.scanning import normalise_key, print_path, scan_tree
 from deluge_lib.deluge_sdk import (
     SampleRef,
     extract_sample_refs,
@@ -22,16 +22,18 @@ from deluge_lib.paths import SYNC_MANIFEST_PATH
 
 @dataclass
 class MigrationResult:
-    """Result of comparing sample data in manifest state with the actual library
+    """Result of comparing sample data in manifest state with the current library
 
     Attributes:
         moved: Unambiguous 1:1 moves
             k: old_path, v: new_path
-        deleted: Sample present in manifest, absent from current library
+        deleted: Sample present in manifest, absent from library
             k: hash, v: list of old path(s)
-        added: Sample present in current library, absent from manifest
+        added: Sample present in library, absent from manifest
             k: hash, v: list of new path(s)
-        duplicate: Sample exists at multiple library locations
+        stale: Sample present in both, manifest entry count exceeds library entry count
+            k: hash, v: list of manifest path(s)
+        lib_duplicates: Sample exists at multiple library locations
             k: hash, v: list of current path(s)
         library_hashes: Full index of unique hashes present in sample library
             k: hash, v: list of current path(s)
@@ -40,7 +42,8 @@ class MigrationResult:
     moved: dict[str, str] = field(default_factory=dict)
     deleted: dict[str, list[str]] = field(default_factory=dict)
     added: dict[str, list[str]] = field(default_factory=dict)
-    duplicate: dict[str, list[str]] = field(default_factory=dict)
+    stale: dict[str, list[str]] = field(default_factory=dict)
+    lib_duplicates: dict[str, list[str]] = field(default_factory=dict)
     library_hashes: dict[str, list[str]] = field(default_factory=dict)
 
 
@@ -130,7 +133,7 @@ def _compute_migration_map(
                 continue
         files_to_hash.append((library_path, abs_library_path))
         
-    # Hash library files without a trustworthy manifest entry
+    # Hash library files that do not have a trustworthy manifest entry
     if files_to_hash:
         total = len(files_to_hash)
         for i, (library_path, abs_library_path) in enumerate(files_to_hash, 1):
@@ -139,35 +142,41 @@ def _compute_migration_map(
         print()
 
     # ----- Compare manifest data with actual library -----
-    moved: dict[str, str] = {}
     deleted: dict[str, list[str]] = {}
     added: dict[str, list[str]] = {}
-    duplicate: dict[str, list[str]] = {}
+    moved: dict[str, str] = {}
+    stale: dict[str, list[str]] = {}
+    lib_duplicates: dict[str, list[str]] = {}
 
-    # loop through ALL unique hashes
+    # loop through ALL unique hashes and compare
     for h in set(manifest_hashes) | set(library_hashes):
-        # Get the associated path according to manifest and library
+
         manifest_paths = manifest_hashes.get(h, [])
         library_paths = library_hashes.get(h, [])
 
-        # Compare: deleted, added, or moved?
-        if manifest_paths and not library_paths:
+        if len(manifest_paths) == 1 and len(library_paths) == 1:
+            if manifest_paths[0] != normalise_key(library_paths[0]):
+                moved[manifest_paths[0]] = library_paths[0]
+        elif manifest_paths and not library_paths:
             deleted[h] = list(manifest_paths)
         elif library_paths and not manifest_paths:
             added[h] = list(library_paths)
-        elif len(manifest_paths) == 1 and len(library_paths) == 1:
-            if manifest_paths[0] != normalise_key(library_paths[0]):
-                moved[manifest_paths[0]] = library_paths[0]
-        # duplicates?
+        elif len(manifest_paths) > 1 and len(library_paths) > 0:
+            library_paths_norm = {normalise_key(p) for p in library_paths}
+            stale_path = [mp for mp in manifest_paths if mp not in library_paths_norm]
+            if stale_path:
+                stale[h] = stale_path
+
         if len(library_paths) > 1:
-            duplicate[h] = list(library_paths)
+            lib_duplicates[h] = list(library_paths)
 
     return MigrationResult(
         moved=moved,
         deleted=deleted,
         added=added,
-        duplicate=duplicate,
-        library_hashes=dict(library_hashes),
+        lib_duplicates=lib_duplicates,
+        stale=stale,
+        library_hashes=dict(library_hashes)
     )
 
 
@@ -200,14 +209,20 @@ def _classify_ref_changes(
         for p in paths:
                 library_paths.add(normalise_key(p))
 
+    stale_entry_hashes: dict[str, str] = {}
+    for file_hash, paths in migration.stale.items():
+        for p in paths:
+            stale_entry_hashes[p] = file_hash
+
     # ----- Build index that matches lowercase basename to list of (library_path, hash) -----
+
     basename_index: dict[str, list[tuple[str, str]]] = defaultdict(list)
     for file_hash, paths in migration.library_hashes.items():
         for p in paths:
             basename_index[PurePosixPath(p).name.lower()].append((p, file_hash))
 
-
     # ----- Iterate through each xml and check each SAMPLE reference -----
+
     xml_files = find_all_xml_files(deluge_root)
     for xml_path in xml_files:
         refs = extract_sample_refs(xml_path, deluge_root)
@@ -217,53 +232,53 @@ def _classify_ref_changes(
             # Moved? We need to update reference path from old to new
             if xml_ref_norm in migration.moved:
                 result.changes.append(
-                    PlannedChange(
-                        ref=xml_ref,
-                        old_path=xml_ref.path,
-                        new_path=migration.moved[xml_ref_norm] # TODO - should this be normalised?
-                    )
+                    PlannedChange(ref=xml_ref, old_path=xml_ref.path, new_path=migration.moved[xml_ref_norm])
                 )
             # Deleted? We need to notify user about broken reference
             elif xml_ref_norm in deleted_paths:
                 result.errors.append(
                     BrokenRefError(ref=xml_ref, broken_path=xml_ref.path)
                 )
+            # No matching library path but not deleted or moved
             elif xml_ref_norm not in library_paths:
-                # No matching path in the library but not deleted or moved either
-                # File must exist somewhere -- attempt recovery via basename matching
+
+                # Can we find a hash in the stale manifest data?
+                stale_entry_hash = stale_entry_hashes.get(xml_ref_norm)
+                if stale_entry_hash is not None:
+                    matching_lib_paths = migration.library_hashes[stale_entry_hash]
+                    # Could be duplicates, doesn't matter, just take first
+                    recovered_path = matching_lib_paths[0]
+                    print(f"Recovered sample via stale manifest! Matched {xml_ref_norm} to {recovered_path}")
+                    result.changes.append(
+                        PlannedChange(ref=xml_ref, old_path=xml_ref.path, new_path=recovered_path)
+                    )
+                    continue
+
+                # Can we match the basename to another existing file?
                 xml_ref_basename = PurePosixPath(xml_ref.path).name.lower()
                 recovery_candidates = basename_index.get(xml_ref_basename, [])
 
                 if len(recovery_candidates) == 0:
                     # File is either genuinely missing or has been renamed on move
-                    print(f"WARNING: No file at {xml_ref_norm}. Insufficient data for recovery.")
                     result.errors.append(
                         BrokenRefError(ref=xml_ref, broken_path=xml_ref.path)
                     )
                 elif len(recovery_candidates) == 1:
-                    # Unique name match - treat like a planned change
+                    # Unique name match. Treat like a planned change
                     matched_path, _matched_hash = recovery_candidates[0]
                     print(f"Recovered missing file! Matched {xml_ref_norm} to {matched_path}")
                     result.changes.append(
-                        PlannedChange(
-                            ref=xml_ref,
-                            old_path=xml_ref.path,
-                            new_path=matched_path
-                        )
+                        PlannedChange(ref=xml_ref, old_path=xml_ref.path, new_path=matched_path)
                     )
                 else:
                     # Multiple candidates - check for duplicated files
                     hashes = {h for _, h in recovery_candidates}
                     if len(hashes) == 1:
-                        # Same hashes, same files. Take first match and treat it as a planned change
+                        # Same hashes, same files. Take first match and treat as a planned change
                         matched_path, _matched_hash = recovery_candidates[0]
                         print(f"Recovered missing file! Matched {xml_ref_norm} to {matched_path}")
                         result.changes.append(
-                            PlannedChange(
-                                ref=xml_ref,
-                                old_path=xml_ref.path,
-                                new_path=matched_path
-                            )
+                            PlannedChange(ref=xml_ref, old_path=xml_ref.path, new_path=matched_path)
                         )
                     else:
                         # Different hashes, ambiguous match. Treat as broken
@@ -342,25 +357,29 @@ def _preview_and_apply(
 
     # --- Errors ---
     if ref_classification.errors:
-        print("\nERRORS — Requires Manual Resolution")
+        print("\nERROR: Samples not found — manual resolution required")
         print("------------------------------------")
         error_counts: dict[tuple[Path, str], int] = defaultdict(int)
         for error in ref_classification.errors:
             error_counts[(error.ref.xml_file, error.broken_path)] += 1
         for (xml_file, broken_path), count in sorted(error_counts.items()):
             suffix = f" (× {count} refs)" if count > 1 else ""
-            print(f'  {print_path(xml_file)}: "{broken_path}" — sample not found{suffix}')
+            print(f'  {print_path(xml_file)}: "{broken_path}" {suffix}')
 
     # --- Summary ---
     print()
-    print(
-        f"{len(ref_classification.changes)} planned changes, "
-        f"{len(ref_classification.errors)} errors to be manually resolved"
-    )
+    num_changes = len(ref_classification.changes)
+    if num_changes == 0:
+        print("No sample references to fix")
+        print(f"{len(ref_classification.errors)} errors to be manually resolved")
+        return False
+
+    print(f"{num_changes} sample reference fixes planned")
+    print(f"{len(ref_classification.errors)} errors to be manually resolved")      
 
     # --- Confirm ---
-    if not confirm_apply(f"Apply {len(ref_classification.changes)} changes to {len(changes_by_file)} files?"):
-        print("No changes applied.")
+    if not confirm_apply(f"Apply {num_changes} changes to {len(changes_by_file)} files?"):
+        print("No changes applied")
         return False
 
     # --- Apply ---
@@ -433,7 +452,7 @@ def main(argv: list[str] | None = None) -> None:
     manifest = read_manifest(SYNC_MANIFEST_PATH)
 
     migration_map = _compute_migration_map(manifest, deluge_root)
-    if len(migration_map.duplicate) > 0:
+    if len(migration_map.lib_duplicates) > 0:
         print("Duplicates detected!")
         if confirm_apply("Wanna remove the duplicates while we're at it?"):
             migration_map =_handle_duplicates(migration_map)
