@@ -21,7 +21,7 @@ def _setup_env(
     deluge_root: Path,
     sd_path: Path,
 ) -> None:
-    # TODO-v0.1-REVIEW
+    
     """Set environment variables and stub load_dotenv."""
     monkeypatch.setenv("DELUGE_ROOT", str(deluge_root))
     monkeypatch.setenv("SD_CARD_PATH", str(sd_path))
@@ -40,7 +40,7 @@ class TestDryRun:
         capsys: pytest.CaptureFixture[str],
     ) -> None:
         # Repo has a file, SD does not
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "MyKit.XML", b"<kit/>", mtime=1_700_000_000.0)
 
@@ -64,7 +64,7 @@ class TestDryRun:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
 
@@ -94,7 +94,7 @@ class TestUpToDate:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
 
@@ -122,7 +122,7 @@ class TestFullSync:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "NewKit.XML", b"<new/>", mtime=1_700_000_000.0)
         _touch(deluge / "SYNTHS" / "Synth.XML", b"<synth/>", mtime=1_700_000_000.0)
@@ -148,7 +148,7 @@ class TestFullSync:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kit.XML", b"<updated/>", mtime=1_700_001_000.0)
 
@@ -170,7 +170,7 @@ class TestFullSync:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kept.XML", b"<kept/>", mtime=1_700_000_000.0)
 
@@ -199,7 +199,7 @@ class TestFullSync:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Same.XML", b"<same/>", mtime=1_700_000_000.0)
         _touch(deluge / "KITS" / "New.XML", b"<new/>", mtime=1_700_000_000.0)
@@ -226,7 +226,7 @@ class TestFullSync:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "A.XML", b"<a/>", mtime=1_700_000_000.0)
         _touch(deluge / "KITS" / "B.XML", b"<b/>", mtime=1_700_000_000.0)
@@ -253,7 +253,7 @@ class TestFullSync:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
 
@@ -281,7 +281,7 @@ class TestFullSync:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         """When a file is deleted from SD and its parent becomes empty, clean up."""
         deluge = tmp_path / "DELUGE"
         deluge.mkdir()
@@ -568,7 +568,7 @@ class TestAbort:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
 
@@ -600,7 +600,7 @@ class TestErrorHandling:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
 
@@ -610,7 +610,7 @@ class TestErrorHandling:
         _setup_env(monkeypatch, deluge, sd)
 
         def failing_copy2(*args: object, **kwargs: object) -> None:
-            # TODO-v0.1-REVIEW
+            
             raise OSError("Disk full")
 
         with (
@@ -630,7 +630,7 @@ class TestErrorHandling:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         _touch(deluge / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
 
@@ -641,7 +641,7 @@ class TestErrorHandling:
         _setup_env(monkeypatch, deluge, sd)
 
         def failing_copy2(*args: object, **kwargs: object) -> None:
-            # TODO-v0.1-REVIEW
+            
             raise OSError("Disk full")
 
         with (
@@ -661,7 +661,7 @@ class TestErrorHandling:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         deluge.mkdir()
 
@@ -677,7 +677,7 @@ class TestErrorHandling:
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         sd = tmp_path / "SD"
         sd.mkdir()
 
@@ -694,7 +694,7 @@ class TestErrorHandling:
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
     ) -> None:
-        # TODO-v0.1-REVIEW
+        
         deluge = tmp_path / "DELUGE"
         deluge.mkdir()
 
@@ -707,7 +707,7 @@ class TestErrorHandling:
         original_unlink = Path.unlink
 
         def failing_unlink(self: Path, *args: object, **kwargs: object) -> None:
-            # TODO-v0.1-REVIEW
+            
             if self.name == "Old.XML" and "SD" in str(self):
                 raise OSError("Permission denied")
             original_unlink(self, *args, **kwargs)

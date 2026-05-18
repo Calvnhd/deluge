@@ -23,7 +23,7 @@ from deluge_lib.syncing import FileRecord, SyncError, SyncPlan, SyncResult, exec
 
 class TestBuildPostSyncManifest:
     def test_creates_correct_entries_after_sync(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         kit_file = dest / "KITS" / "Kit.XML"
         _touch(kit_file, b"<kit/>", mtime=1_700_000_000.0)
@@ -52,7 +52,7 @@ class TestBuildPostSyncManifest:
         assert entry["local_mtime"] == normalise_mtime(kit_file.stat().st_mtime)
 
     def test_trashed_files_excluded(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
 
         # Source scan has only one file (the surviving one)
@@ -115,7 +115,7 @@ class TestBuildPostSyncManifest:
         assert entry["local_mtime"] == normalise_mtime(kit_file.stat().st_mtime)
 
     def test_manifest_not_written_on_failure(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         """Verify the main() contract: manifest is only written on success.
 
         We test this at the unit level by confirming execute_plan raises
@@ -139,12 +139,12 @@ class TestBuildPostSyncManifest:
 
 class TestReadManifest:
     def test_missing_file_returns_empty(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         files = read_manifest(tmp_path / "nonexistent.json")
         assert files == {}
 
     def test_corrupt_json_returns_empty(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         bad = tmp_path / "manifest.json"
         bad.write_text("{invalid json!!!", encoding="utf-8")
 
@@ -153,7 +153,7 @@ class TestReadManifest:
         assert files == {}
 
     def test_corrupt_json_prints_warning(self, tmp_path: Path, capsys: object) -> None:
-        # TODO-v0.1-REVIEW
+        
         bad = tmp_path / "manifest.json"
         bad.write_text("{broken", encoding="utf-8")
 
@@ -167,7 +167,7 @@ class TestReadManifest:
         assert "corrupt" in captured.out.lower()
 
     def test_valid_manifest_round_trip(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         mf = tmp_path / "manifest.json"
         files: dict[str, FileRecord] = {
             "kits/mykit.xml": {
@@ -215,7 +215,7 @@ class TestReadManifest:
 
 class TestWriteManifest:
     def test_creates_file(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         mf_path = tmp_path / "manifest.json"
         write_manifest(mf_path, files={})
 
@@ -224,7 +224,7 @@ class TestWriteManifest:
         assert "files" in raw
 
     def test_atomic_write_no_temp_file_lingers(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         mf_path = tmp_path / "manifest.json"
         write_manifest(mf_path, files={})
 
@@ -232,7 +232,7 @@ class TestWriteManifest:
         assert tmp_files == []
 
     def test_creates_parent_directory(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         mf_path = tmp_path / "scripts" / "data" / "manifest.json"
         write_manifest(mf_path, files={})
 

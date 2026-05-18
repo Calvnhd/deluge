@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Sync the contents of a mounted Deluge SD card into the local DELUGE/ directory.
 
 By default, shows a preview of changes then prompts to apply.

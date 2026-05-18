@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Centralized path constants for script-generated data."""
 
 from __future__ import annotations

@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Shared sync primitives used by sync scripts.
 
 Contains dataclasses, comparison logic, plan computation, plan display,

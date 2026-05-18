@@ -1,1 +1,1 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2

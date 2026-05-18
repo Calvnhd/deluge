@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Fix sample references in Deluge XML files after reorganising samples."""
 
 from __future__ import annotations

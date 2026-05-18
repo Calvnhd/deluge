@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Extract standalone synth and kit presets from Deluge song XMLs.
 
 Scans all song XMLs in DELUGE/SONGS/, extracts embedded instruments as

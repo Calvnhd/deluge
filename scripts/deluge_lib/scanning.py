@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Generic filtered file scanner with stat capture.
 
 Accepts any root directory and returns a case-normalised path dict.

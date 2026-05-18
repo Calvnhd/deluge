@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Deluge SDK — Deluge filesystem discovery, reference extraction, and in-place updating."""
 
 from __future__ import annotations

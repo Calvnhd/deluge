@@ -39,7 +39,7 @@ def _extract_default_results(
     norm_config: object,
     kit_init_template: object,
 ) -> list[ExtractionResult]:
-    # TODO-v0.1-REVIEW
+    
     """Run the default-mode extraction pipeline once (no dedup) and return all results."""
     all_results: list[ExtractionResult] = []
     used_synth_filenames: set[str] = set()
@@ -111,7 +111,7 @@ def _extract_extended_results(
     kit_init_template: object,
     comp_config: ComparisonConfig,
 ) -> list[ExtractionResult]:
-    # TODO-v0.1-REVIEW
+    
     """Run the extended-mode extraction pipeline with a given config (no cross-song dedup)."""
     all_results: list[ExtractionResult] = []
     used_synth_filenames: set[str] = set()
@@ -195,7 +195,7 @@ def _extract_extended_results(
 
 
 def _count_by_type(results: list[ExtractionResult]) -> tuple[int, int]:
-    # TODO-v0.1-REVIEW
+    
     """Return (kit_count, synth_count) from a list of results."""
     kits = sum(1 for r in results if r.instrument_type == "kit")
     synths = sum(1 for r in results if r.instrument_type == "synth")
@@ -203,14 +203,14 @@ def _count_by_type(results: list[ExtractionResult]) -> tuple[int, int]:
 
 
 def _fmt_cell(kits: int, synths: int, total: int) -> str:
-    # TODO-v0.1-REVIEW
+    
     """Format a cell as '  K,   S ( T)' with 3-digit aligned numbers."""
     return f"{kits:3d}, {synths:3d} ({total:3d})"
 
 
 @contextmanager
 def _suppress_stdout():
-    # TODO-v0.1-REVIEW
+    
     """Temporarily redirect stdout to devnull to suppress library output."""
     old_stdout = sys.stdout
     sys.stdout = io.StringIO()
@@ -221,7 +221,7 @@ def _suppress_stdout():
 
 
 def main(argv: list[str] | None = None) -> None:
-    # TODO-v0.1-REVIEW
+    
     parser = argparse.ArgumentParser(
         description="Benchmark dedup threshold configurations against the current song library.",
     )

@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Sample library analysis — cross-reference XML refs against disk state.
 
 This module receives pre-collected data (sample references and scan results)

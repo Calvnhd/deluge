@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """
 Sync the local DELUGE/ directory back to a mounted Deluge SD card.
 

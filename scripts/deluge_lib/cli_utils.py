@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Environment and output utilities for Deluge scripts."""
 
 from __future__ import annotations

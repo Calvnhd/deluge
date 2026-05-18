@@ -29,24 +29,24 @@ from deluge_lib.syncing import (
 
 class TestMtimeMatches:
     def test_identical_times(self) -> None:
-        # TODO-v0.1-REVIEW
+        
         assert _mtime_matches(1000.0, 1000.0) is True
 
     def test_within_fat32_tolerance(self) -> None:
-        # TODO-v0.1-REVIEW
+        
         assert _mtime_matches(1000.0, 1001.5) is True
 
     def test_exactly_at_tolerance(self) -> None:
-        # TODO-v0.1-REVIEW
+        
         assert _mtime_matches(1000.0, 1002.0) is True
 
     def test_beyond_tolerance(self) -> None:
-        # TODO-v0.1-REVIEW
+        
         assert _mtime_matches(1000.0, 1005.0) is False
 
     def test_dst_offset_not_matched(self) -> None:
         # DST shift (3600s) should NOT be treated as matching
-        # TODO-v0.1-REVIEW
+        
         assert _mtime_matches(1000.0, 4600.0) is False
 
 
@@ -59,7 +59,7 @@ class TestComputeSyncNewFile:
     """New file on source not in dest → files_to_copy."""
 
     def test_new_file_added_to_copy(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         _touch(src / "KITS" / "NewKit.XML", b"<kit/>")
@@ -75,7 +75,7 @@ class TestComputeSyncDeletedFile:
     """File in dest not on source → files_to_delete."""
 
     def test_extra_dest_file_marked_for_delete(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         src.mkdir()
@@ -91,7 +91,7 @@ class TestComputeSyncUnchanged:
     """Same file (same size, same mtime) → unchanged."""
 
     def test_identical_files_unchanged(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         mtime = 1_700_000_000.0
@@ -105,7 +105,7 @@ class TestComputeSyncUnchanged:
         assert plan.files_unchanged == 1
 
     def test_mtime_within_fat32_tolerance_unchanged(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         _touch(src / "KITS" / "Kit.XML", b"<kit/>", mtime=1_700_000_000.0)
@@ -121,7 +121,7 @@ class TestComputeSyncOverwrite:
     """Different size or mtime beyond tolerance → files_to_copy."""
 
     def test_different_size_triggers_copy(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         mtime = 1_700_000_000.0
@@ -133,7 +133,7 @@ class TestComputeSyncOverwrite:
         assert len(plan.files_to_copy) == 1
 
     def test_same_size_different_mtime_triggers_copy(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         content = b"<kit/>"
@@ -149,7 +149,7 @@ class TestComputeSyncCaseVariant:
     """Case-only difference with same size → unchanged."""
 
     def test_case_variant_treated_as_unchanged(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         mtime = 1_700_000_000.0
@@ -166,7 +166,7 @@ class TestComputeSyncManifest:
     """Manifest-aware comparison."""
 
     def test_manifest_entry_used_when_available(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         content = b"<kit/>"
@@ -189,7 +189,7 @@ class TestComputeSyncManifest:
         assert plan.files_unchanged == 1
 
     def test_fallback_to_dest_stat_when_no_manifest_entry(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src = tmp_path / "src"
         dst = tmp_path / "dst"
         content = b"<kit/>"
@@ -357,7 +357,7 @@ class TestComputeSyncManifest:
 
 class TestExecutePlanCopy:
     def test_copies_files_correctly(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         src_file = tmp_path / "src" / "KITS" / "Kit.XML"
         dst_file = tmp_path / "dst" / "KITS" / "Kit.XML"
         _touch(src_file, b"<kit>content</kit>")
@@ -372,7 +372,7 @@ class TestExecutePlanCopy:
 
 class TestExecutePlanTrash:
     def test_trashes_files_to_trash_directory(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "KITS" / "OldKit.XML"
         _touch(target, b"<kit/>")
@@ -391,7 +391,7 @@ class TestExecutePlanTrash:
 
 class TestExecutePlanFailure:
     def test_stops_on_copy_failure_and_raises_sync_error(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         # First file is valid
         good_src = tmp_path / "src" / "good.xml"
@@ -420,7 +420,7 @@ class TestExecutePlanFailure:
 
 class TestAppendSyncLog:
     def test_creates_entry_on_success(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         log_path = tmp_path / "data" / "sync.log"
         result = SyncResult(
             copied=5,
@@ -444,7 +444,7 @@ class TestAppendSyncLog:
         assert "error=" not in line
 
     def test_creates_entry_on_failure_with_error(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         log_path = tmp_path / "data" / "sync.log"
         result = SyncResult(
             copied=2,
@@ -467,7 +467,7 @@ class TestAppendSyncLog:
         assert 'error="Permission denied: /mnt/sd/file.wav"' in line
 
     def test_log_file_created_in_data_directory(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         log_path = tmp_path / "data" / "sync.log"
         result = SyncResult()
 
@@ -478,7 +478,7 @@ class TestAppendSyncLog:
         assert log_path.parent.name == "data"
 
     def test_multiple_entries_appended(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         log_path = tmp_path / "data" / "sync.log"
         r1 = SyncResult(copied=1)
         r2 = SyncResult(copied=2)
@@ -501,7 +501,7 @@ class TestAppendSyncLog:
 
 class TestExecutePlanDeleteMode:
     def test_hard_delete_removes_files(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "KITS" / "OldKit.XML"
         _touch(target, b"<kit/>")
@@ -516,7 +516,7 @@ class TestExecutePlanDeleteMode:
         assert not (dest / ".trash").exists()
 
     def test_hard_delete_cleans_empty_parents(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "SAMPLES" / "DRUMS" / "Kick" / "kick.wav"
         _touch(target, b"\x00")
@@ -533,7 +533,7 @@ class TestExecutePlanDeleteMode:
         assert dest.exists()
 
     def test_hard_delete_preserves_non_empty_parents(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "SAMPLES" / "DRUMS" / "kick.wav"
         sibling = dest / "SAMPLES" / "DRUMS" / "snare.wav"
@@ -550,7 +550,7 @@ class TestExecutePlanDeleteMode:
         assert (dest / "SAMPLES" / "DRUMS").exists()
 
     def test_trash_mode_default_still_works(self, tmp_path: Path) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "KITS" / "OldKit.XML"
         _touch(target, b"<kit/>")
@@ -572,7 +572,7 @@ class TestExecutePlanDeleteMode:
 
 class TestPrintPlanDeleteLabel:
     def test_default_label_is_trash(self, tmp_path: Path, capsys) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "old.xml"
         _touch(target, b"x")
@@ -585,7 +585,7 @@ class TestPrintPlanDeleteLabel:
         assert "trash" in output
 
     def test_custom_label_delete(self, tmp_path: Path, capsys) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "old.wav"
         _touch(target, b"x")
@@ -599,7 +599,7 @@ class TestPrintPlanDeleteLabel:
         assert "trash" not in output
 
     def test_summary_uses_custom_label(self, tmp_path: Path, capsys) -> None:
-        # TODO-v0.1-REVIEW
+        
         dest = tmp_path / "dst"
         target = dest / "old.wav"
         _touch(target, b"x")

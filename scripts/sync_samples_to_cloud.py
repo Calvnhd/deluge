@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Sync WAV samples from DELUGE/SAMPLES/ to a local cloud-backup folder.
 
 Mirrors all .wav files to CLOUD_BACKUP_PATH, preserving directory structure.

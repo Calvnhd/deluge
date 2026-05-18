@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Create a timestamped .zip backup of the Deluge SD card or repo DELUGE/ directory.
 
 Archives all XML and WAV files into a compressed zip file.

@@ -1,4 +1,4 @@
-# Deluge CLI v0.1
+# Deluge CLI v0.2
 """Sample library overview — cross-referenced reports for the Deluge sample library."""
 
 from __future__ import annotations
