@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="TuiChirpPop" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiChirpPop.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiChirpPop.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -53,7 +53,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiHonk" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiHonk.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiHonk.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -95,7 +95,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiSkrch" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiSkrch.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiSkrch.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -137,7 +137,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiSkrch2" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiSkrch2.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiSkrch2.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -179,7 +179,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiSqwk" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiSqwk.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiSqwk.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -221,7 +221,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiSqwk2" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiSqwk2.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiSqwk2.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -263,7 +263,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiTweet" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiTweet.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiTweet.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -305,7 +305,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiTwitter" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiTwitter.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiTwitter.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -347,7 +347,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TuiWeo" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Tui/TuiWeo.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FOUND/Field/Tui/TuiWeo.wav">
 						<zone startSamplePos="0" endSamplePos="27759"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">

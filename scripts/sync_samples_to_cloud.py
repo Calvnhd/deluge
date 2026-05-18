@@ -19,7 +19,7 @@ from deluge_lib.syncing import (
     compute_sync,
     execute_plan,
     print_plan,
-    report_empty_dirs,
+    clean_empty_dirs,
 )
 
 
@@ -95,7 +95,7 @@ def main(argv: list[str] | None = None) -> None:
         f"{result.trashed} deleted, "
         f"{result.unchanged} unchanged."
     )
-    report_empty_dirs(dest)
+    clean_empty_dirs(dest)
 
 
 if __name__ == "__main__":

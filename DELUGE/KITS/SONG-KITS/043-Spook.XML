@@ -305,7 +305,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BEAT SESSION BELL FX" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/Assorted/BEAT SESSION BELL FX.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/Loops/BEAT SESSION BELL FX.wav">
 						<zone startSamplePos="0" endSamplePos="325661"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -347,7 +347,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BEAT SESSION IMPACT 2" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/Assorted/BEAT SESSION IMPACT 2.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/Loops/BEAT SESSION IMPACT 2.wav">
 						<zone startSamplePos="0" endSamplePos="244245"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -389,7 +389,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CCP_Kit_4_Moist_Fx_Shots_Oneshot" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/FX/CCP_Kit_4_Moist_Fx_Shots_Oneshot.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/One-Shot/CCP_Kit_4_Moist_Fx_Shots_Oneshot.wav">
 						<zone startSamplePos="0" endSamplePos="211680"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -473,7 +473,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CS-ABT-100-Drum Hit 02-Kit 09 Impact" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/Assorted/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/Loops/CS-ABT-100-Drum Hit 02-Kit 09 Impact.wav">
 						<zone startSamplePos="0" endSamplePos="343980"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">

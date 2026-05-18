@@ -23,7 +23,6 @@ deluge-overview = "sample_overview:main"
 deluge-backup = "create_backup:main"
 deluge-to-sd = "sync_to_sd:main"
 deluge-extract = "extract_instruments:main"
-deluge-threshold-test = "dedup_threshold_test:main"
 
 [project.optional-dependencies]
 dev = [

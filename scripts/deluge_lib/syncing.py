@@ -536,24 +536,30 @@ def append_sync_log(
         f.write(line + "\n")
 
 
-def report_empty_dirs(dest: Path) -> None:
-    """Print any empty subdirectories of *dest*.
+def clean_empty_dirs(root: Path) -> int:
+    """Remove empty subdirectories of *root* and report what was removed
 
-    Bottom-up walk, skips .trash/.
+    Walks bottom-up so nested empties are removed leaf-first
+    Skips .trash/.  Uses ``rmdir()`` which only succeeds on empty directories
+
+    Returns the number of directories removed
     """
     from deluge_lib.scanning import SKIP_DIRS, print_path
 
-    empties: list[Path] = []
-    for dirpath, dirnames, filenames in os.walk(dest, topdown=False):
+    removed: dict[Path, None] = {}
+    for dirpath, dirnames, filenames in os.walk(root, topdown=False):
         dirnames[:] = [d for d in dirnames if d.lower() not in SKIP_DIRS]
         current = Path(dirpath)
-        if current == dest:
+        if current == root or current.parent == root:
             continue
-        # Empty if no files and all subdirs were already flagged as empty.
-        if not filenames and all((current / d) in empties for d in dirnames):
-            empties.append(current)
+        # A directory is empty if it has no files and all its subdirs were
+        # already removed (i.e. were themselves empty).
+        if not filenames and all((current / d) in removed for d in dirnames):
+            current.rmdir()  # safe: only succeeds if truly empty
+            removed[current] = None
 
-    if empties:
-        print(f"\nFound {len(empties)} empty director{'y' if len(empties) == 1 else 'ies'} in {dest}:")
-        for p in empties:
-            print(f"  {print_path(p.relative_to(dest))}")
+    if removed:
+        print(f"\nRemoved {len(removed)} empty director{'y' if len(removed) == 1 else 'ies'}:")
+        for p in removed:
+            print(f"  {print_path(p.relative_to(root))}")
+    return len(removed)

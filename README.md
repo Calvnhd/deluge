@@ -4,7 +4,7 @@ Back-up and management scripts for a [Synthstrom Deluge](https://synthstrom.com/
 
 XML presets for kits, synths, and songs are backed up in version control. Due to their size, samples are gitignored and synced to cloud backup via scripts.
 
-> **Note:** This repository is a work in progress. Some folders (e.g. `scripts/`) may be empty or incomplete.
+> **Note:** This repository is a work in progress.
 
 ---
 
@@ -30,6 +30,13 @@ The `DELUGE/` folder mirrors the contents of the Deluge SD card:
 
 SONGS store their own kit and synth data, so KITS and SYNTHS can be altered independently. Sample paths in XMLs are hardcoded and case-sensitive — moving or renaming samples breaks referencing presets.
 
+### Sync manifest
+
+The sync manifest (`scripts/data/sync_manifest.json`) tracks per-file SHA256 hashes and metadata (size, mtime) for both the SD card and local repository. It enables change detection during syncs and hash-based move detection when fixing broken references.
+
+- **Updated by:** `sync_from_sd.py`, `sync_to_sd.py`, `fix_references.py`
+- **Not used by:** `sync_samples_to_cloud.py`, `sample_overview.py`, `extract_instruments.py`, `create_backup.py`
+
 ---
 
 ## Scripts
@@ -42,8 +49,7 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 |------|-------------|--------|--------|
 | 1 | Pull everything off the SD card into the repo | `sync_from_sd.py` | ✅ |
 | 2 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
-| 3 | Take a snapshot of samples | `create_snapshot.py` | ✅ |
-| 4 | Create a .zip backup (optional) | `create_backup.py` | ✅ |
+| 3 | Create a .zip backup (optional) | `create_backup.py` | ✅ |
 
 **Phase 2: Organise**
 
@@ -59,10 +65,9 @@ SONGS store their own kit and synth data, so KITS and SYNTHS can be altered inde
 | Step | What you do | Script | Status |
 |------|-------------|--------|--------|
 | 1 | Verify sample references are intact | `sample_overview.py missing` | ✅ |
-| 2 | Fix any broken references | `fix_references.py` | ✅ |
+| 2 | Fix any broken references (uses sync manifest) | `fix_references.py` | ✅ |
 | 3 | Sync samples to cloud backup | `sync_samples_to_cloud.py` | ✅ |
 | 4 | Sync repo back to SD card | `sync_to_sd.py` | ✅ |
-| 5 | Take a fresh sample snapshot | `create_snapshot.py` | ✅ |
 
 ### Setup
 
@@ -90,7 +95,7 @@ All scripts read configuration from `scripts/.env`. See `.env.example` for avail
 
 #### `sync_from_sd.py`
 
-Syncs the mounted SD card into the local `DELUGE/` directory. The SD card is not modified.
+Syncs the mounted SD card into the local `DELUGE/` directory. Uses the sync manifest for change detection. Deleted files are moved to `.trash/` rather than permanently removed. The SD card is not modified.
 
 ```
 uv run sync_from_sd.py            # preview changes, then prompt to apply
@@ -106,14 +111,6 @@ Syncs WAV files from `DELUGE/SAMPLES/` to a local folder for cloud backup, prese
 ```
 uv run sync_samples_to_cloud.py            # preview changes, then prompt to apply
 uv run sync_samples_to_cloud.py --dry-run  # preview only
-```
-
-#### `create_snapshot.py`
-
-Hashes all samples and saves a dated JSON snapshot to `docs/manifests/`. Take a snapshot before reorganising samples so `fix_references.py` can detect what moved.
-
-```
-uv run create_snapshot.py
 ```
 
 #### `create_backup.py`
@@ -142,30 +139,19 @@ uv run extract_instruments.py --naming preset           # Preset-SongName filena
 uv run extract_instruments.py --naming song             # SongName-Preset filenames
 ```
 
-#### `dedup_threshold_test.py`
-
-Benchmarks dedup threshold configurations against the current song library. Produces a markdown table showing how many instruments survive dedup at each (percent, count) threshold combination.
-
-```
-uv run dedup_threshold_test.py                                      # default: %=1-99/10, count=1-5/2
-uv run dedup_threshold_test.py --percent 1 99 10 --count 1 5 2      # explicit (same as default)
-uv run dedup_threshold_test.py --percent 10 50 10 --count 3 3 1     # narrow test range
-uv run dedup_threshold_test.py > results.md                         # pipe table to file (progress on stderr)
-```
-
 #### `fix_references.py`
 
-Fixes broken sample references after samples have been moved or renamed. Compares a before-snapshot against the current filesystem and updates XML paths. Auto-finds the latest snapshot if `--snapshot` is omitted.
+Fixes broken sample references after samples have been moved or renamed. Reads the sync manifest for hash-based move detection and computes a migration map of moved, deleted, added, and stale files. 
+
+Also includes duplicate detection with optional (naive) deletion.
 
 ```
-uv run fix_references.py                                             # use latest snapshot, preview and prompt
-uv run fix_references.py --snapshot docs/manifests/<snapshot>.json   # use specific snapshot
-uv run fix_references.py --apply                                     # skip confirmation prompt
+uv run fix_references.py
 ```
 
 #### `sync_to_sd.py`
 
-Syncs the local `DELUGE/` directory back to the mounted SD card. Files on the SD card that don't exist in the local directory are deleted.
+Syncs the local `DELUGE/` directory back to the mounted SD card. Uses the sync manifest for change detection. Files on the SD card that don't exist in the local directory are hard-deleted (not trashed).
 
 ```
 uv run sync_to_sd.py            # preview changes, then prompt to apply
@@ -186,22 +172,7 @@ uv run sample_overview.py unused --all                      # full listing of al
 uv run sample_overview.py unused --folder DRUMS             # full listing filtered to specific folder(s)
 uv run sample_overview.py unused --top N                    # top N largest unreferenced samples
 uv run sample_overview.py missing                           # samples referenced in XML but missing from disk
-uv run sample_overview.py duplicates                        # find duplicate samples by content hash (hashes live)
-uv run sample_overview.py duplicates -s latest              # find duplicates using the latest snapshot
-uv run sample_overview.py duplicates -s path/to/snap.json   # find duplicates using a specific snapshot
+uv run sample_overview.py duplicates                        # find duplicate samples by content hash
 uv run sample_overview.py usage "Kick"                      # usage detail for samples matching a search term
 ```
 
----
-
-### v0.1 Review
-
-- `sync_from_sd.py`: DONE
-- `sync_samples_to_cloud.py`: DONE
-- `create_snapshot.py`: DONE
-- `create_backup.py`: DONE
-- `extract_instruments.py`
-- `dedup_threshold_test.py`: Utility - no further review required yet
-- `fix_references.py` DONE - yet to test
-- `sync_to_sd.py`
-- `sample_overview.py`: DONE

@@ -23,7 +23,7 @@ from deluge_lib.syncing import (
     execute_plan,
     print_plan,
     read_manifest,
-    report_empty_dirs,
+    clean_empty_dirs,
     write_manifest,
 )
 
@@ -122,7 +122,7 @@ def main(argv: list[str] | None = None) -> None:
         f"Sync complete: {result.copied} copied, "
         f"{result.trashed} deleted from SD."
     )
-    report_empty_dirs(sd_path)
+    clean_empty_dirs(sd_path)
 
 
 if __name__ == "__main__":
