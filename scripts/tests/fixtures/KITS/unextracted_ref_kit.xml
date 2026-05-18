@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture: kit with a sample path in an unexpected element.
+     Covers: Sub-task 2.1.2 — Unextracted Reference Detection
+     - osc1 has a normal fileName attribute (should be extracted)
+     - <customData> contains a sample path that extract_sample_refs() does NOT handle
+-->
+<kit
+	firmwareVersion="4.0.1"
+	earliestCompatibleFirmware="4.0.0">
+	<soundSources>
+		<sound name="NormalSound">
+			<osc1 type="sample" fileName="SAMPLES/DRUMS/Kick/NormalKick.wav"/>
+			<customData>SAMPLES/HIDDEN/SecretSample.wav</customData>
+		</sound>
+	</soundSources>
+</kit>

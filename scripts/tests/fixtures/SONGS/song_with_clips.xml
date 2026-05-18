@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture: attribute-style song with embedded instruments and audioClip (c1.2.1 firmware)
+     Covers: Pattern 3 — fileName="..." attribute on <osc1> within embedded kit
+             Pattern 4 — fileName="..." attribute on <sampleRange> within embedded synth
+             Pattern 5 — filePath="..." attribute on <audioClip>
+     - Embedded kit with one sound using osc1 fileName (pattern 3)
+     - Embedded synth with sampleRanges using fileName attributes (patterns 3, 4)
+     - audioClip with filePath attribute (pattern 5)
+-->
+<song
+	firmwareVersion="c1.2.1"
+	earliestCompatibleFirmware="4.1.0-alpha"
+	xScroll="0"
+	xZoom="192"
+	rootNote="64">
+	<instruments>
+		<kit
+			presetName="K01Perc2"
+			presetFolder="KITS/KERERU"
+			defaultVelocity="64"
+			colour="0"
+			lpfMode="24dB"
+			modFXType="flanger">
+			<soundSources>
+				<sound
+					name="Rhythmace Kick"
+					polyphonic="auto"
+					voicePriority="1"
+					mode="subtractive">
+					<osc1
+						type="sample"
+						loopMode="1"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0"
+						fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+						<zone
+							startSamplePos="0"
+							endSamplePos="25000" />
+					</osc1>
+					<osc2
+						type="sample"
+						loopMode="0"
+						reversed="0"
+						timeStretchEnable="0"
+						timeStretchAmount="0">
+					</osc2>
+				</sound>
+			</soundSources>
+		</kit>
+		<sound
+			presetName="DoubleBass"
+			presetFolder="SYNTHS"
+			defaultVelocity="64"
+			colour="0"
+			polyphonic="poly"
+			voicePriority="1"
+			mode="subtractive"
+			lpfMode="24dB"
+			modFXType="none">
+			<osc1
+				type="sample"
+				loopMode="0"
+				reversed="0"
+				timeStretchEnable="0"
+				timeStretchAmount="0">
+				<sampleRanges>
+					<sampleRange
+						rangeTopNote="37"
+						fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/36 b.WAV"
+						transpose="24">
+						<zone
+							startSamplePos="0"
+							endSamplePos="324506" />
+					</sampleRange>
+					<sampleRange
+						rangeTopNote="41"
+						fileName="SAMPLES/Artists/Leonard Ludvigsen/Double bass/Lo/39 b.WAV"
+						transpose="21">
+						<zone
+							startSamplePos="0"
+							endSamplePos="180147" />
+					</sampleRange>
+				</sampleRanges>
+			</osc1>
+			<osc2
+				type="saw"
+				transpose="0"
+				cents="0"
+				retrigPhase="-1" />
+		</sound>
+	</instruments>
+	<sessionClips>
+		<instrumentClip
+			instrumentPresetName="K01Perc2"
+			instrumentPresetFolder="KITS/KERERU"
+			isPlaying="0"
+			length="3072"
+			colourOffset="0"
+			section="0">
+		</instrumentClip>
+		<instrumentClip
+			instrumentPresetName="DoubleBass"
+			instrumentPresetFolder="SYNTHS"
+			isPlaying="0"
+			length="3072"
+			colourOffset="0"
+			section="0">
+		</instrumentClip>
+		<audioClip
+			trackName="AUDIO2"
+			filePath="SAMPLES/CLIPS/REC00040.WAV"
+			startSamplePos="2086"
+			endSamplePos="707686"
+			pitchSpeedIndependent="1"
+			isPlaying="0"
+			length="3072"
+			colourOffset="26"
+			section="9">
+		</audioClip>
+	</sessionClips>
+</song>

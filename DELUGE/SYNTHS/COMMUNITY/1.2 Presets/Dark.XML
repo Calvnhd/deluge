@@ -19,7 +19,7 @@
 		<sampleRanges>
 			<sampleRange
 				rangeTopNote="25"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - C2.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - C2.wav"
 				transpose="36"
 				cents="-8">
 				<zone
@@ -28,7 +28,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="27"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - D2.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - D2.wav"
 				transpose="34"
 				cents="-9">
 				<zone
@@ -37,7 +37,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="28"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - E2.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - E2.wav"
 				transpose="32"
 				cents="-4">
 				<zone
@@ -46,7 +46,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="29"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - F2.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - F2.wav"
 				transpose="31"
 				cents="-9">
 				<zone
@@ -55,7 +55,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="31"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - G2.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - G2.wav"
 				transpose="29"
 				cents="12">
 				<zone
@@ -64,7 +64,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="34"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - A2.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - A2.wav"
 				transpose="27"
 				cents="-4">
 				<zone
@@ -73,7 +73,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="35"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - B2.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - B2.wav"
 				transpose="25"
 				cents="-15">
 				<zone
@@ -82,7 +82,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="37"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - C3.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - C3.wav"
 				transpose="24"
 				cents="-5">
 				<zone
@@ -91,7 +91,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="39"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - D3.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - D3.wav"
 				transpose="22"
 				cents="-4">
 				<zone
@@ -100,7 +100,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="40"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - E3.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - E3.wav"
 				transpose="20"
 				cents="-5">
 				<zone
@@ -109,7 +109,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="42"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - F3.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - F3.wav"
 				transpose="19"
 				cents="-6">
 				<zone
@@ -118,7 +118,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="44"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - G3.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - G3.wav"
 				transpose="17"
 				cents="-21">
 				<zone
@@ -127,7 +127,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="46"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - A3.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - A3.wav"
 				transpose="15"
 				cents="-8">
 				<zone
@@ -136,7 +136,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="47"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - B3.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - B3.wav"
 				transpose="13"
 				cents="-14">
 				<zone
@@ -145,7 +145,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="49"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - C4.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - C4.wav"
 				transpose="12"
 				cents="6">
 				<zone
@@ -154,7 +154,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="51"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - D4.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - D4.wav"
 				transpose="10"
 				cents="-14">
 				<zone
@@ -163,7 +163,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="52"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - E4.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - E4.wav"
 				transpose="8"
 				cents="13">
 				<zone
@@ -172,7 +172,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="54"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - F4.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - F4.wav"
 				transpose="7"
 				cents="-17">
 				<zone
@@ -181,7 +181,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="56"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - G4.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - G4.wav"
 				transpose="5"
 				cents="-4">
 				<zone
@@ -190,7 +190,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="58"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - A4.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - A4.wav"
 				transpose="3"
 				cents="-6">
 				<zone
@@ -199,7 +199,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="59"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - B4.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - B4.wav"
 				transpose="1"
 				cents="-11">
 				<zone
@@ -208,7 +208,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="61"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - C5.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - C5.wav"
 				cents="-18">
 				<zone
 					startSamplePos="0"
@@ -216,7 +216,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="63"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - D5.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - D5.wav"
 				transpose="-2"
 				cents="-14">
 				<zone
@@ -225,7 +225,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="64"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - E5.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - E5.wav"
 				transpose="-4"
 				cents="-3">
 				<zone
@@ -234,7 +234,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="66"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - F5.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - F5.wav"
 				transpose="-5"
 				cents="-23">
 				<zone
@@ -243,7 +243,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="68"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - G5.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - G5.wav"
 				transpose="-7"
 				cents="-18">
 				<zone
@@ -252,7 +252,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="70"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - A5.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - A5.wav"
 				transpose="-9"
 				cents="-18">
 				<zone
@@ -261,7 +261,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="71"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - B5.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - B5.wav"
 				transpose="-11"
 				cents="-12">
 				<zone
@@ -270,7 +270,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="73"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - C6.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - C6.wav"
 				transpose="-12"
 				cents="-10">
 				<zone
@@ -279,7 +279,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="75"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - D6.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - D6.wav"
 				transpose="-14"
 				cents="-17">
 				<zone
@@ -288,7 +288,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="76"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - E6.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - E6.wav"
 				transpose="-16"
 				cents="-10">
 				<zone
@@ -297,7 +297,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="78"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - F6.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - F6.wav"
 				transpose="-17"
 				cents="-24">
 				<zone
@@ -306,7 +306,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="80"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - G6.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - G6.wav"
 				transpose="-19"
 				cents="-22">
 				<zone
@@ -315,7 +315,7 @@
 			</sampleRange>
 			<sampleRange
 				rangeTopNote="82"
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - A6.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - A6.wav"
 				transpose="-21"
 				cents="-27">
 				<zone
@@ -323,7 +323,7 @@
 					endSamplePos="226996" />
 			</sampleRange>
 			<sampleRange
-				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dark/LAB_Dark - B6.wav"
+				fileName="SAMPLES/COMMUNITY/1.2 Presets/Dystopia Keys/LAB_Dark - B6.wav"
 				transpose="-23"
 				cents="-29">
 				<zone

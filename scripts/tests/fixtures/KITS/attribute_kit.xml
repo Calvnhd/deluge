@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test fixture: attribute-style kit (3.x+ firmware)
+     Covers: Pattern 3 — fileName="..." attribute on <osc1> and <osc2>
+     - First sound: osc1 has type="sample" with fileName, osc2 has no fileName (omitted entirely)
+     - Second sound: osc1 has type="wavetable" with fileName (verifies extraction is NOT filtered on type="sample")
+-->
+<kit
+	firmwareVersion="4.0.1"
+	earliestCompatibleFirmware="4.0.0"
+	lpfMode="24dB"
+	modFXType="flanger"
+	currentFilterType="lpf">
+	<defaultParams
+		volume="0x3504F334"
+		pan="0x00000000">
+	</defaultParams>
+	<soundSources>
+		<sound
+			name="Deep Sky Kick HQ9094"
+			polyphonic="auto"
+			voicePriority="1"
+			mode="subtractive">
+			<osc1
+				type="sample"
+				loopMode="1"
+				reversed="0"
+				timeStretchEnable="0"
+				timeStretchAmount="0"
+				fileName="SAMPLES/DRUMS/Kick/Deep Sky Kick HQ9094.wav">
+				<zone
+					startSamplePos="0"
+					endSamplePos="17471" />
+			</osc1>
+			<osc2
+				type="sample"
+				loopMode="0"
+				reversed="0"
+				timeStretchEnable="0"
+				timeStretchAmount="0">
+			</osc2>
+		</sound>
+		<sound
+			name="WT Pad"
+			polyphonic="auto"
+			voicePriority="1"
+			mode="subtractive">
+			<osc1
+				type="wavetable"
+				loopMode="0"
+				reversed="0"
+				timeStretchEnable="0"
+				timeStretchAmount="0"
+				fileName="SAMPLES/WAVETABLES/Basic Shapes.wav">
+			</osc1>
+			<osc2
+				type="sample"
+				loopMode="0"
+				reversed="0"
+				timeStretchEnable="0"
+				timeStretchAmount="0"
+				fileName="SAMPLES/DRUMS/Hat/CR-78 Hat.wav">
+			</osc2>
+		</sound>
+	</soundSources>
+</kit>
