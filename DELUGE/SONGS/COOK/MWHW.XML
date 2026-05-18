@@ -685,7 +685,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Kick.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11333" />
@@ -762,7 +762,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10584" />
@@ -839,7 +839,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare2.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10804" />
@@ -916,7 +916,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_PercRev.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_PercRev.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="5733" />
@@ -993,7 +993,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash2.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="26063" />
@@ -1070,7 +1070,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker2.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10363" />
@@ -1147,7 +1147,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_HiHat.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_HiHat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3351" />
@@ -1224,7 +1224,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Clap.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Clap.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="8687" />
@@ -1301,7 +1301,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Perc.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Perc.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="17904" />
@@ -1378,7 +1378,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7011" />
@@ -1455,7 +1455,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="36029" />
@@ -1532,7 +1532,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Rim.wav">
+						fileName="SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Rim.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3307" />

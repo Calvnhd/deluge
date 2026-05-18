@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Kick/R100 Kick.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Kick/R100 Kick.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>122</endMilliseconds>
@@ -218,7 +218,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Snare/R100 Snare.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Snare/R100 Snare.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>279</endMilliseconds>
@@ -390,7 +390,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatC/R100 Closed hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatC/R100 Closed hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>100</endMilliseconds>
@@ -562,7 +562,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatO/R100 Open hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatO/R100 Open hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>597</endMilliseconds>
@@ -734,7 +734,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Shaker/R100 Shaker.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Shaker/R100 Shaker.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>150</endMilliseconds>
@@ -906,7 +906,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Block/R100 Woodblock.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Block/R100 Woodblock.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>135</endMilliseconds>
@@ -1078,7 +1078,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Cowbell/R100 Cowbell.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Cowbell/R100 Cowbell.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>135</endMilliseconds>
@@ -1250,7 +1250,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Rim/R100 Rim.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Rim/R100 Rim.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>77</endMilliseconds>
@@ -1422,7 +1422,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Ride/R100 Ride.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Ride/R100 Ride.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>680</endMilliseconds>
@@ -1594,7 +1594,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Crash/R100 Crash.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Crash/R100 Crash.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1138</endMilliseconds>
@@ -1766,7 +1766,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Shaker/R100 Percussion.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Shaker/R100 Percussion.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>60</endMilliseconds>
@@ -1938,7 +1938,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomL/R100 Tom low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomL/R100 Tom low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>325</endMilliseconds>
@@ -2110,7 +2110,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomH/R100 Tom high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomH/R100 Tom high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>231</endMilliseconds>
@@ -2282,7 +2282,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConL/R100 Conga low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConL/R100 Conga low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>194</endMilliseconds>
@@ -2454,7 +2454,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConH/R100 Conga high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConH/R100 Conga high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>128</endMilliseconds>
@@ -2626,7 +2626,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Guiro/R100 Quijada.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Guiro/R100 Quijada.wav</fileName>
 				<zone>
 					<startMilliseconds>30</startMilliseconds>
 					<endMilliseconds>187</endMilliseconds>
@@ -2798,7 +2798,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Other/R100 Chime.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Other/R100 Chime.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>503</endMilliseconds>
@@ -2970,7 +2970,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Other/R100 Triangle.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Other/R100 Triangle.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>492</endMilliseconds>

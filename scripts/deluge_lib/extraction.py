@@ -183,7 +183,12 @@ class ClipInfo:
 @dataclass
 class InstrumentClipGroup:
     # TODO-v0.1-REVIEW
-    """Groups an instrument with all its clips, keyed by section ID."""
+    """Groups an instrument with all its clips, keyed by section ID.
+
+    Attributes:
+        clips_by_section: Clips indexed by section.
+            k: section_id, v: ClipInfo
+    """
 
     instrument: InstrumentInfo
     clips_by_section: dict[int, ClipInfo]  # section_id → ClipInfo
@@ -218,13 +223,21 @@ class ComparisonConfig:
     # TODO-v0.1-REVIEW
     """Configurable ruleset for the generalised comparison engine.
 
-    Maps element paths to sets of attribute names that constitute hard markers
-    (structural identity).  Sentinel values prefixed with ``_`` signal special
-    comparison logic in the engine:
+    Sentinel values prefixed with ``_`` signal special comparison logic:
 
     * ``_structure`` — compare child-element structure (e.g. patchCable routing)
     * ``_count``     — compare child-element count
     * ``_names``     — compare child-element ``name`` attributes as a set
+
+    Attributes:
+        synth_hard_attrs: Synth hard markers (structural identity).
+            k: element path, v: set of attribute names (or sentinel keys)
+        kit_hard_attrs: Kit hard markers (structural identity).
+            k: element path, v: set of attribute names (or sentinel keys)
+        synth_soft_elements: Synth elements walked for soft-marker diffs.
+            k: element tag, v: set of attributes to skip
+        kit_sound_soft_elements: Kit sound elements walked for soft-marker diffs.
+            k: element tag, v: set of attributes to skip
     """
 
     # Hard markers — structural attributes that make instruments immediately distinct.
@@ -1656,11 +1669,9 @@ def build_manifest_entry(result: ExtractionResult) -> dict[str, str | int | list
     # TODO-v0.1-REVIEW
     """Build a single manifest entry dict from an ExtractionResult.
 
-    Steps:
-        1. Construct dict with: output_filename, source_song, preset_name,
-           preset_folder, instrument_type, section_id, colour_name,
-           colour_abbr, differing_params (for extended mode)
-        2. Return the dict
+    Returns:
+        Manifest entry dict.
+            k: field name (output_filename, source_song, etc.), v: field value
     """
     return {
         "output_filename": result.output_filename,
@@ -2047,7 +2058,11 @@ def _build_patchcable_dict(
     default_params: etree._Element | None,
 ) -> dict[tuple[str, str], str]:
     # TODO-v0.1-REVIEW
-    """Build a ``(source, destination) -> amount`` dict from ``<patchCables>``."""
+    """Build a patchCable routing dict from ``<patchCables>``.
+
+    Returns:
+        k: (source, destination) tuple, v: amount string
+    """
     result: dict[tuple[str, str], str] = {}
     if default_params is None:
         return result
@@ -2068,7 +2083,11 @@ def _build_patchcable_element_dict(
     default_params: etree._Element | None,
 ) -> dict[tuple[str, str], etree._Element]:
     # TODO-v0.1-REVIEW
-    """Build a ``(source, destination) -> element`` dict from ``<patchCables>``."""
+    """Build a patchCable element dict from ``<patchCables>``.
+
+    Returns:
+        k: (source, destination) tuple, v: patchCable element
+    """
     result: dict[tuple[str, str], etree._Element] = {}
     if default_params is None:
         return result

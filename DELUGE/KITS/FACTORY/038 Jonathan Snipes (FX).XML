@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/Gunshot.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/Gunshot.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1872</endMilliseconds>
@@ -209,7 +209,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/GlasTap.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/GlasTap.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>375</endMilliseconds>
@@ -373,7 +373,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/HammeringLoop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/HammeringLoop.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>3330</endMilliseconds>
@@ -537,7 +537,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/WaterJug-Hit.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/WaterJug-Hit.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1991</endMilliseconds>
@@ -701,7 +701,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/Alarm.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/Alarm.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>546</endMilliseconds>
@@ -865,7 +865,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/CinderBlock-Drop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/CinderBlock-Drop.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1532</endMilliseconds>
@@ -1029,7 +1029,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/TheMessage.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/TheMessage.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1800</endMilliseconds>
@@ -1193,7 +1193,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/JS-Clipping/TrashCan-KickDownStairs.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/JS-Clipping/TrashCan-KickDownStairs.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>5000</endMilliseconds>

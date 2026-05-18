@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="KICK" polyphonic="auto" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Kick/Rhythmace Kick.wav">
 						<zone startSamplePos="0" endSamplePos="88244"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -54,7 +54,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SNAR" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Snare/Rhythmace Snare.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav">
 						<zone startSamplePos="0" endSamplePos="5100"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -97,7 +97,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HATC" polyphonic="choke" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/HatC/Rhythmace Closed hihat.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/HatC/Rhythmace Closed hihat.wav">
 						<zone startSamplePos="0" endSamplePos="2178"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -140,7 +140,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HATO" polyphonic="choke" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/HatO/Rhythmace Open hihat.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/HatO/Rhythmace Open hihat.wav">
 						<zone startSamplePos="0" endSamplePos="13915"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -183,7 +183,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CONL" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/ConL/Rhythmace Conga low.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/ConL/Rhythmace Conga low.wav">
 						<zone startSamplePos="0" endSamplePos="7717"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -226,7 +226,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CONH" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/ConH/Rhythmace Conga high.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/ConH/Rhythmace Conga high.wav">
 						<zone startSamplePos="0" endSamplePos="3219"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -269,7 +269,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CLAV" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Claves/Rhythmace Claves.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Claves/Rhythmace Claves.WAV">
 						<zone startSamplePos="0" endSamplePos="4116"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -312,7 +312,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="PERC" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Claves/Rhythmace Percussion.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Claves/Rhythmace Percussion.wav">
 						<zone startSamplePos="0" endSamplePos="11520"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">

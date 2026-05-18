@@ -150,7 +150,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/XV5080 Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/XV5080 Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9256" />
@@ -231,7 +231,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/XV5080 Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/XV5080 Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="41792" />
@@ -312,7 +312,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/XV5080 Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/XV5080 Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11853" />
@@ -393,7 +393,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/XV5080 Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/XV5080 Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="99200" />
@@ -474,7 +474,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Ride/XV5080 Ride cup.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Ride/XV5080 Ride cup.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="116992" />
@@ -555,7 +555,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/XV5080 Crash.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/XV5080 Crash.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="140543" />
@@ -636,7 +636,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Rim/XV5080 Rim.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Rim/XV5080 Rim.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="12832" />
@@ -717,7 +717,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomL/XV5080 Tom low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomL/XV5080 Tom low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="81919" />
@@ -798,7 +798,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomM/XV5080 Tom medium.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomM/XV5080 Tom medium.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="68351" />
@@ -879,7 +879,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomH/XV5080 Tom high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomH/XV5080 Tom high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="51071" />
@@ -1192,7 +1192,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/goat throats.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/goat throats.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3230013" />
@@ -1267,7 +1267,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/blurting bagpipe.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/blurting bagpipe.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2262255" />
@@ -1342,7 +1342,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/bowed roof.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/bowed roof.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="1849541" />
@@ -1417,7 +1417,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/dogskinning guitar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/dogskinning guitar.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2240289" />
@@ -1492,7 +1492,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/bells of grenoble.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/bells of grenoble.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="970122" />
@@ -1567,7 +1567,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/arctic trem guitar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/arctic trem guitar.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4384641" />
@@ -1648,7 +1648,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/antihuman guitar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/antihuman guitar.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2969684" />
@@ -1729,7 +1729,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Campbell Kneale/karma shovel.wav">
+						fileName="SAMPLES/FACTORY/Artists/Campbell Kneale/karma shovel.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4134293" />

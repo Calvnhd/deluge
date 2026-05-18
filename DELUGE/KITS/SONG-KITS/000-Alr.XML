@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="KICK" polyphonic="auto" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Kick/808 Kick.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Kick/808 Kick.wav">
 						<zone startSamplePos="0" endSamplePos="22051"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -54,7 +54,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SNARE" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Snare/808 Snare.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Snare/808 Snare.wav">
 						<zone startSamplePos="0" endSamplePos="22051"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -97,7 +97,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HATC" polyphonic="choke" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/HatC/808 Closed hihat.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/HatC/808 Closed hihat.wav">
 						<zone startSamplePos="0" endSamplePos="11025"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -140,7 +140,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HATO" polyphonic="choke" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/HatO/808 Open hihat.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/HatO/808 Open hihat.wav">
 						<zone startSamplePos="0" endSamplePos="33076"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -183,7 +183,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="MARACA" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Shaker/808 Maraca.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Shaker/808 Maraca.wav">
 						<zone startSamplePos="0" endSamplePos="11025"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -226,7 +226,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="RIM" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Rim/808 Rim.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Rim/808 Rim.wav">
 						<zone startSamplePos="0" endSamplePos="11026"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -269,7 +269,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CLAV" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Claves/808 Claves.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Claves/808 Claves.WAV">
 						<zone startSamplePos="0" endSamplePos="11025"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -312,7 +312,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CLAP" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Clap/808 Clap.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Clap/808 Clap.WAV">
 						<zone startSamplePos="0" endSamplePos="88201"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -355,7 +355,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CRAS" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Crash/808 Cymbal.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Crash/808 Cymbal.wav">
 						<zone startSamplePos="0" endSamplePos="66151"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -398,7 +398,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="COWB" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/Cowbell/808 Cowbell.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/Cowbell/808 Cowbell.wav">
 						<zone startSamplePos="1234" endSamplePos="17280"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -441,7 +441,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TOML" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/TomL/808 Tom low.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/TomL/808 Tom low.wav">
 						<zone startSamplePos="0" endSamplePos="44101"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -484,7 +484,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TOMM" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/TomM/808 Tom medium.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/TomM/808 Tom medium.wav">
 						<zone startSamplePos="0" endSamplePos="44101"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -527,7 +527,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TOMH" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/TomH/808 Tom high.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/TomH/808 Tom high.wav">
 						<zone startSamplePos="0" endSamplePos="44101"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -570,7 +570,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CONL" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/ConL/808 Conga low.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/ConL/808 Conga low.wav">
 						<zone startSamplePos="0" endSamplePos="22051"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -613,7 +613,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CONM" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/ConM/808 Conga medium.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/ConM/808 Conga medium.wav">
 						<zone startSamplePos="0" endSamplePos="22051"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -656,7 +656,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CONH" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/DRUMS/ConH/808 Conga high.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/DRUMS/ConH/808 Conga high.wav">
 						<zone startSamplePos="0" endSamplePos="22051"/>
 					</osc1>
 					<osc2 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">

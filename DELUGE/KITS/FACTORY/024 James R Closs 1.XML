@@ -74,7 +74,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/00 KICK01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/00 KICK01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="51665" />
@@ -225,7 +225,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/01 KICK02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/01 KICK02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="34862" />
@@ -376,7 +376,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/02 SNARE01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/02 SNARE01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="13151" />
@@ -527,7 +527,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/03 SNARE02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/03 SNARE02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="27328" />
@@ -678,7 +678,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/05 CH 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/05 CH 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="13179" />
@@ -829,7 +829,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/04 OH 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/04 OH 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="81549" />
@@ -980,7 +980,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/06 OH 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/06 OH 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="37612" />
@@ -1131,7 +1131,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/07 CH 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/07 CH 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="18060" />
@@ -1282,7 +1282,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/08 CLAP 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/08 CLAP 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="22146" />
@@ -1433,7 +1433,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/09 SHAKER.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/09 SHAKER.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="30870" />
@@ -1584,7 +1584,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/10 CWBL 01.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/10 CWBL 01.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="19084" />
@@ -1735,7 +1735,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/11 CYMBAL.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/11 CYMBAL.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="157635" />
@@ -1886,7 +1886,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/12 TOML.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/12 TOML.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="20980" />
@@ -2037,7 +2037,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/13 TOMM.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/13 TOMM.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="20601" />
@@ -2188,7 +2188,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/14 TOMH.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/14 TOMH.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="19894" />
@@ -2339,7 +2339,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/15 GUIRO.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/15 GUIRO.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="66841" />
@@ -2490,7 +2490,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/Artists/James Closs/Kit2/16 CWBL 02.wav">
+				fileName="SAMPLES/FACTORY/Artists/James Closs/Kit2/16 CWBL 02.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="9332" />

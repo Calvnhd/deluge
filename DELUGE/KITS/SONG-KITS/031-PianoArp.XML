@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="KICK" polyphonic="choke" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/808 Bass C Deep-O.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/808 Bass C Deep-O.wav">
 						<zone startSamplePos="0" endSamplePos="207900"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -52,7 +52,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SNAR" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/Snare Drum 018 Dilla.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/Snare Drum 018 Dilla.wav">
 						<zone startSamplePos="0" endSamplePos="13797"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -93,7 +93,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HATC" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/HiHat Closed 001 Widened.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/HiHat Closed 001 Widened.wav">
 						<zone startSamplePos="0" endSamplePos="10081"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -134,7 +134,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="KIC2" polyphonic="choke" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/Kick 003 Sensible.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/Kick 003 Sensible.wav">
 						<zone startSamplePos="0" endSamplePos="14175"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -175,7 +175,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BELL" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/Percussion Bell 003 Agogo High.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Bell 003 Agogo High.wav">
 						<zone startSamplePos="0" endSamplePos="21920"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -216,7 +216,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CLAP" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/cp02.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/cp02.wav">
 						<zone startSamplePos="0" endSamplePos="19840"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -257,7 +257,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="COWB" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/Percussion Cowbell 004 808.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Cowbell 004 808.wav">
 						<zone startSamplePos="0" endSamplePos="3042"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -298,7 +298,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="RIMS" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/Percussion Rimshot 003.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Rimshot 003.wav">
 						<zone startSamplePos="0" endSamplePos="103461"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -339,7 +339,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BUBB" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/Percussion bubble 001.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Bubble 001.wav">
 						<zone startSamplePos="0" endSamplePos="3008"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -380,7 +380,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="POLY" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/SYNTH-FancyPoly800longCool.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/SYNTH-FancyPoly800longCool.wav">
 						<zone startSamplePos="0" endSamplePos="148043"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -421,7 +421,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="PAD" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/PAD-LosAngeles92.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/PAD-LosAngeles92.wav">
 						<zone startSamplePos="0" endSamplePos="937984"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -462,7 +462,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="FORM" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Totems/SYNTH-Bellishform1.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Totems/SYNTH-Bellishform1.wav">
 						<zone startSamplePos="0" endSamplePos="148011"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>

@@ -214,7 +214,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/KICK-Bonus01.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Bonus01.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10598" />
@@ -295,7 +295,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="19212" />
@@ -376,7 +376,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4127" />
@@ -458,7 +458,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/KICK-Silence.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Silence.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11911" />
@@ -539,7 +539,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7700" />
@@ -620,7 +620,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6457" />
@@ -702,7 +702,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/KICK-Radar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Radar.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="15186" />
@@ -783,7 +783,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="15580" />
@@ -864,7 +864,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3618" />
@@ -945,7 +945,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10472" />
@@ -1026,7 +1026,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Silence.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Silence.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7758" />
@@ -1107,7 +1107,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/SHAKER-Radar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SHAKER-Radar.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9554" />
@@ -1188,7 +1188,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="12184" />
@@ -1269,7 +1269,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLAP-Dimension.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLAP-Dimension.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7498" />
@@ -1350,7 +1350,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension1.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension1.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9462" />
@@ -1431,7 +1431,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension2.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9668" />

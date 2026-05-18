@@ -15,7 +15,7 @@
 					<patchCable source="velocity" destination="lpfFrequency" amount="0x0F5C28F0"/>
 					<patchCable source="envelope2" destination="lpfFrequency" amount="0x2CCCCCBC"/>
 					<patchCable source="y" destination="lpfFrequency" amount="0x19999990"/>
-					<patchCable source="compressor" destination="volumePostReverbSend" amount="0x22000000"/>
+					<patchCable source="compressor" destination="volumePostReverbSend" amount="0x23800000"/>
 				</patchCables>
 				<equalizer bass="0x00000000" treble="0x00000000" bassFrequency="0x00000000" trebleFrequency="0x00000000"/>
 			</defaultParams>

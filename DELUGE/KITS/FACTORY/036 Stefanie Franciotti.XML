@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/07.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/07.wav</fileName>
 				<zone>
 					<startMilliseconds>50</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -209,7 +209,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/05.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/05.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -373,7 +373,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/00.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/00.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -537,7 +537,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/01.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/01.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -701,7 +701,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/02.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/02.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -865,7 +865,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/03.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/03.wav</fileName>
 				<zone>
 					<startMilliseconds>120</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -1029,7 +1029,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/04.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/04.wav</fileName>
 				<zone>
 					<startMilliseconds>50</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -1193,7 +1193,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/06.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/06.wav</fileName>
 				<zone>
 					<startMilliseconds>80</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -1357,7 +1357,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/08.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/08.wav</fileName>
 				<zone>
 					<startMilliseconds>100</startMilliseconds>
 					<endMilliseconds>929</endMilliseconds>
@@ -1521,7 +1521,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/09.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/09.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>
@@ -1685,7 +1685,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Stefanie Franciotti/10.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Stefanie Franciotti/10.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1500</endMilliseconds>

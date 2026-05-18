@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/DRUMS 130.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/DRUMS 130.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>29538</endMilliseconds>
@@ -209,7 +209,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/BASS STABS.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/BASS STABS.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>29538</endMilliseconds>
@@ -373,7 +373,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/ALPHA CHORDS.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/ALPHA CHORDS.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>14769</endMilliseconds>
@@ -537,7 +537,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/JOY RIDER NO EFFECTS.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/JOY RIDER NO EFFECTS.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>29555</endMilliseconds>
@@ -701,7 +701,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/JOY RIDER POINTED BASS.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/JOY RIDER POINTED BASS.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>29555</endMilliseconds>
@@ -865,7 +865,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/POP.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/POP.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>29555</endMilliseconds>
@@ -1029,7 +1029,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/TINY STROKES.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/TINY STROKES.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>29555</endMilliseconds>
@@ -1193,7 +1193,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Travis Egedy/UP STROKES.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Travis Egedy/UP STROKES.WAV</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>29555</endMilliseconds>

@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Kick/KR55 Kick.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Kick/KR55 Kick.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>331</endMilliseconds>
@@ -218,7 +218,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Snare/KR55 Snare.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Snare/KR55 Snare.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>210</endMilliseconds>
@@ -390,7 +390,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatC/KR55 Closed hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatC/KR55 Closed hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>128</endMilliseconds>
@@ -562,7 +562,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatO/KR55 Open hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatO/KR55 Open hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>346</endMilliseconds>
@@ -734,7 +734,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Ride/KR55 Ride.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Ride/KR55 Ride.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>853</endMilliseconds>
@@ -906,7 +906,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Claves/KR55 Claves.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Claves/KR55 Claves.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>42</endMilliseconds>
@@ -1078,7 +1078,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Rim/KR55 Rim.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Rim/KR55 Rim.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>43</endMilliseconds>
@@ -1250,7 +1250,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Cowbell/KR55 Cowbell.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Cowbell/KR55 Cowbell.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>244</endMilliseconds>
@@ -1422,7 +1422,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomL/KR55 Tom low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomL/KR55 Tom low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>380</endMilliseconds>
@@ -1594,7 +1594,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/TomH/KR55 Tom high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/TomH/KR55 Tom high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>292</endMilliseconds>

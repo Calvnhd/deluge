@@ -694,7 +694,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/808 Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/808 Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -775,7 +775,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/808 Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/808 Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -856,7 +856,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/808 Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/808 Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11025" />
@@ -937,7 +937,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/808 Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/808 Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="33076" />
@@ -1018,7 +1018,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Shaker/808 Maraca.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Shaker/808 Maraca.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11025" />
@@ -1099,7 +1099,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Rim/808 Rim.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Rim/808 Rim.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11026" />
@@ -1180,7 +1180,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Claves/808 Claves.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Claves/808 Claves.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11025" />
@@ -1261,7 +1261,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Clap/808 Clap.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Clap/808 Clap.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="88201" />
@@ -1342,7 +1342,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/808 Cymbal.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/808 Cymbal.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="66151" />
@@ -1423,7 +1423,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Cowbell/808 Cowbell.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Cowbell/808 Cowbell.wav">
 						<zone
 							startSamplePos="1234"
 							endSamplePos="17280" />
@@ -1504,7 +1504,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomL/808 Tom low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomL/808 Tom low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44101" />
@@ -1585,7 +1585,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomM/808 Tom medium.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomM/808 Tom medium.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44101" />
@@ -1666,7 +1666,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomH/808 Tom high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomH/808 Tom high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44101" />
@@ -1747,7 +1747,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConL/808 Conga low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConL/808 Conga low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -1828,7 +1828,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConM/808 Conga medium.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConM/808 Conga medium.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -1909,7 +1909,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConH/808 Conga high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConH/808 Conga high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -2099,7 +2099,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/Deep Sky Kick HQ9094.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/Deep Sky Kick HQ9094.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="17471" />
@@ -2176,7 +2176,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/Rhythmace Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="5100" />
@@ -2253,7 +2253,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Clap/909 Clap.WAV">
+						fileName="SAMPLES/FACTORY/DRUMS/Clap/909 Clap.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="17760" />
@@ -2330,7 +2330,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/Linndrum Crash.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/Linndrum Crash.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="54400" />

@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Kick/HR16B Kick.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Kick/HR16B Kick.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>451</endMilliseconds>
@@ -218,7 +218,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Snare/HR16B Snare dry.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Snare/HR16B Snare dry.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>468</endMilliseconds>
@@ -390,7 +390,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatC/HR16B Closed hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatC/HR16B Closed hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>187</endMilliseconds>
@@ -562,7 +562,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatO/HR16B Open hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatO/HR16B Open hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1522</endMilliseconds>
@@ -734,7 +734,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Tambourine/HR16B Tambourine.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Tambourine/HR16B Tambourine.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>503</endMilliseconds>
@@ -906,7 +906,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Crash/HR16B Crash.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Crash/HR16B Crash.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1810</endMilliseconds>
@@ -1078,7 +1078,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Clap/HR16B Clap.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Clap/HR16B Clap.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>437</endMilliseconds>
@@ -1250,7 +1250,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Block/HR16B Block.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Block/HR16B Block.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>116</endMilliseconds>

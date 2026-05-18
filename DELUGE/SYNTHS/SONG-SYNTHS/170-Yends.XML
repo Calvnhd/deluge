@@ -2,67 +2,67 @@
 <sound polyphonic="poly" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" maxVoices="8" firmwareVersion="c1.2.1" earliestCompatibleFirmware="4.1.0-alpha">
 			<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
 				<sampleRanges>
-					<sampleRange rangeTopNote="53" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224345].wav" transpose="7" cents="8">
+					<sampleRange rangeTopNote="53" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224345].wav" transpose="7" cents="8">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="54" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224344].wav" transpose="6">
+					<sampleRange rangeTopNote="54" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224344].wav" transpose="6">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="55" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224341].wav" transpose="5" cents="6">
+					<sampleRange rangeTopNote="55" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224341].wav" transpose="5" cents="6">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="56" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224340].wav" transpose="4">
+					<sampleRange rangeTopNote="56" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224340].wav" transpose="4">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="57" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224338].wav" transpose="3">
+					<sampleRange rangeTopNote="57" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224338].wav" transpose="3">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="58" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224336].wav" transpose="2" cents="3">
+					<sampleRange rangeTopNote="58" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224336].wav" transpose="2" cents="3">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="59" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224334].wav" transpose="1">
+					<sampleRange rangeTopNote="59" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224334].wav" transpose="1">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="60" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
+					<sampleRange rangeTopNote="60" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="61" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
+					<sampleRange rangeTopNote="61" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="62" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav" transpose="-3" cents="8">
+					<sampleRange rangeTopNote="62" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav" transpose="-3" cents="8">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="63" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav" transpose="-3" cents="8">
+					<sampleRange rangeTopNote="63" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav" transpose="-3" cents="8">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="64" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224325].wav" transpose="-4">
+					<sampleRange rangeTopNote="64" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224325].wav" transpose="-4">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="65" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224324].wav" transpose="-5">
+					<sampleRange rangeTopNote="65" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224324].wav" transpose="-5">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="66" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323]-1.wav" transpose="-6">
+					<sampleRange rangeTopNote="66" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323]-1.wav" transpose="-6">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="68" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323].wav" transpose="-7">
+					<sampleRange rangeTopNote="68" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323].wav" transpose="-7">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="70" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224322].wav" transpose="-9">
+					<sampleRange rangeTopNote="70" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224322].wav" transpose="-9">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="71" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224320].wav" transpose="-11">
+					<sampleRange rangeTopNote="71" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224320].wav" transpose="-11">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="72" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224319].wav" transpose="-12">
+					<sampleRange rangeTopNote="72" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224319].wav" transpose="-12">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="74" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317]-1.wav" transpose="-14">
+					<sampleRange rangeTopNote="74" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317]-1.wav" transpose="-14">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange rangeTopNote="78" fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav" transpose="-15" cents="-1">
+					<sampleRange rangeTopNote="78" fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav" transpose="-15" cents="-1">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
-					<sampleRange fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav" transpose="-15" cents="-1">
+					<sampleRange fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav" transpose="-15" cents="-1">
 						<zone startSamplePos="0" endSamplePos="264600"/>
 					</sampleRange>
 				</sampleRanges>

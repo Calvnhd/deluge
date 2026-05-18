@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Kick/Deep Sky Kick HQ9094.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Kick/Deep Sky Kick HQ9094.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="17471" />
@@ -226,7 +226,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Snare/Rhythmace Snare.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5100" />
@@ -377,7 +377,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Clap/909 Clap.WAV">
+				fileName="SAMPLES/FACTORY/DRUMS/Clap/909 Clap.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="17760" />
@@ -528,7 +528,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Crash/Linndrum Crash.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Crash/Linndrum Crash.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="54400" />
@@ -680,7 +680,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/HatC/808 Closed hihat.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/HatC/808 Closed hihat.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="11025" />

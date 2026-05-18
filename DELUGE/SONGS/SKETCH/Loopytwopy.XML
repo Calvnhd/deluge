@@ -180,7 +180,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/R100 Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/R100 Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="5820" />
@@ -261,7 +261,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/R100 Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/R100 Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="13365" />
@@ -342,7 +342,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/R100 Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/R100 Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4781" />
@@ -423,7 +423,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/R100 Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/R100 Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="28629" />
@@ -504,7 +504,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Ride/R100 Ride.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Ride/R100 Ride.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="32639" />
@@ -585,7 +585,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Rim/R100 Rim.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Rim/R100 Rim.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3680" />
@@ -666,7 +666,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomL/R100 Tom low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomL/R100 Tom low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="15569" />
@@ -747,7 +747,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Shaker/R100 Shaker.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Shaker/R100 Shaker.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7197" />
@@ -828,7 +828,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/R100 Crash.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/R100 Crash.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="54594" />
@@ -909,7 +909,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Block/R100 Woodblock.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Block/R100 Woodblock.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6444" />
@@ -990,7 +990,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Cowbell/R100 Cowbell.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Cowbell/R100 Cowbell.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6438" />
@@ -1071,7 +1071,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Shaker/R100 Percussion.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Shaker/R100 Percussion.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2848" />
@@ -1152,7 +1152,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomH/R100 Tom high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomH/R100 Tom high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11046" />
@@ -1233,7 +1233,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConL/R100 Conga low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConL/R100 Conga low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9281" />
@@ -1314,7 +1314,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConH/R100 Conga high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConH/R100 Conga high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6141" />
@@ -1395,7 +1395,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Guiro/R100 Quijada.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Guiro/R100 Quijada.wav">
 						<zone
 							startSamplePos="1440"
 							endSamplePos="8934" />
@@ -1476,7 +1476,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Other/R100 Chime.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Other/R100 Chime.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="24120" />
@@ -1557,7 +1557,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Other/R100 Triangle.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Other/R100 Triangle.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="23577" />

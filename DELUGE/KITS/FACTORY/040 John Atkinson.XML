@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/Homecoming Lo Loop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/Homecoming Lo Loop.wav</fileName>
 				<zone>
 					<startMilliseconds>100</startMilliseconds>
 					<endMilliseconds>4595</endMilliseconds>
@@ -209,7 +209,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/Homecoming Loop.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/Homecoming Loop.wav</fileName>
 				<zone>
 					<startMilliseconds>100</startMilliseconds>
 					<endMilliseconds>4729</endMilliseconds>
@@ -373,7 +373,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/Metal Bell Junk.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/Metal Bell Junk.wav</fileName>
 				<zone>
 					<startMilliseconds>839</startMilliseconds>
 					<endMilliseconds>48875</endMilliseconds>
@@ -537,7 +537,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/SolarClangs.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/SolarClangs.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>32000</endMilliseconds>
@@ -701,7 +701,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/Trash Hits Buzz.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/Trash Hits Buzz.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>26514</endMilliseconds>
@@ -865,7 +865,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/Truck Scrape.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/Truck Scrape.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>5736</endMilliseconds>
@@ -1029,7 +1029,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/Wave Drone.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/Wave Drone.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>51429</endMilliseconds>
@@ -1193,7 +1193,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/John Atkinson/Rank Riff.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/John Atkinson/Rank Riff.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1749</endMilliseconds>

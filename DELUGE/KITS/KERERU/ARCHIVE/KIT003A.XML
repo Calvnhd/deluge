@@ -56,7 +56,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Kick/909 Kick.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Kick/909 Kick.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="88244" />
@@ -185,7 +185,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Snare/909 Snare.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Snare/909 Snare.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="15397" />
@@ -314,7 +314,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/HatC/909 Closed hihat.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/HatC/909 Closed hihat.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="4712" />
@@ -443,7 +443,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/HatO/909 Open hihat.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/HatO/909 Open hihat.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="20251" />
@@ -572,7 +572,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Ride/909 Ride.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Ride/909 Ride.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="35862" />
@@ -706,7 +706,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Crash/909 Crash.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Crash/909 Crash.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="47625" />
@@ -835,7 +835,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Clap/909 Clap.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Clap/909 Clap.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="17760" />
@@ -964,7 +964,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/Rim/909 Rim.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/Rim/909 Rim.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="2984" />
@@ -1093,7 +1093,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/TomM/909 Tom medium.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/TomM/909 Tom medium.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="17440" />
@@ -1222,7 +1222,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/TomL/909 Tom low.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/TomL/909 Tom low.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="18853" />
@@ -1351,7 +1351,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/DRUMS/TomH/909 Tom high.wav">
+				fileName="SAMPLES/FACTORY/DRUMS/TomH/909 Tom high.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="16023" />

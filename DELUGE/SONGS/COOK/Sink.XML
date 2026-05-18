@@ -745,7 +745,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/Rhythmace Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/Rhythmace Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="29015" />
@@ -823,7 +823,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Ride/XV5080 Ride edge.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Ride/XV5080 Ride edge.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="112640" />
@@ -900,7 +900,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/Rhythmace Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="5100" />
@@ -977,7 +977,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/909 Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/909 Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="20251" />
@@ -1090,7 +1090,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/XV5080 Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/XV5080 Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9256" />
@@ -1171,7 +1171,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/XV5080 Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/XV5080 Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="41792" />
@@ -1252,7 +1252,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/XV5080 Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/XV5080 Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11853" />
@@ -1333,7 +1333,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/XV5080 Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/XV5080 Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="99200" />
@@ -1414,7 +1414,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Ride/XV5080 Ride cup.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Ride/XV5080 Ride cup.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="116992" />
@@ -1495,7 +1495,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomH/XV5080 Tom high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomH/XV5080 Tom high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="51071" />
@@ -1576,7 +1576,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Rim/XV5080 Rim.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Rim/XV5080 Rim.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="12832" />
@@ -1657,7 +1657,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/XV5080 Crash.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/XV5080 Crash.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="140543" />
@@ -1738,7 +1738,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomL/XV5080 Tom low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomL/XV5080 Tom low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="81919" />
@@ -1819,7 +1819,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomM/XV5080 Tom medium.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomM/XV5080 Tom medium.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="68351" />
@@ -1936,7 +1936,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/808 Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/808 Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />

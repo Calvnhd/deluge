@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="KICK" polyphonic="auto" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 01.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - KICK - 01.wav">
 						<zone startSamplePos="0" endSamplePos="13488"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -54,7 +54,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SNAR" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 01.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - SNARE - 01.wav">
 						<zone startSamplePos="0" endSamplePos="15015"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -97,7 +97,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="KIC2" polyphonic="auto" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 02.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - KICK - 02.wav">
 						<zone startSamplePos="0" endSamplePos="30628"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -140,7 +140,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="KIC3" polyphonic="auto" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 03.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - KICK - 03.wav">
 						<zone startSamplePos="0" endSamplePos="9373"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -183,7 +183,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="KIC4" polyphonic="auto" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 04.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - KICK - 04.wav">
 						<zone startSamplePos="0" endSamplePos="37153"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -226,7 +226,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="KIC5" polyphonic="auto" voicePriority="1" sideChainSend="2147483647" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - KICK - 05.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - KICK - 05.wav">
 						<zone startSamplePos="0" endSamplePos="13208"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -269,7 +269,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SNA2" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 02.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - SNARE - 02.wav">
 						<zone startSamplePos="0" endSamplePos="8848"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -312,7 +312,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SNA3" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SNARE - 03.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - SNARE - 03.wav">
 						<zone startSamplePos="0" endSamplePos="60762"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -355,7 +355,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HATC" polyphonic="choke" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 01.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - HAT - 01.wav">
 						<zone startSamplePos="0" endSamplePos="2018"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -398,7 +398,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HATO" polyphonic="choke" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 03.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - HAT - 03.wav">
 						<zone startSamplePos="0" endSamplePos="58100"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -441,7 +441,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HAT2" polyphonic="choke" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - HAT - 02.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - HAT - 02.wav">
 						<zone startSamplePos="0" endSamplePos="41860"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -484,7 +484,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SHAK" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - SHAKER - 01.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - SHAKER - 01.wav">
 						<zone startSamplePos="0" endSamplePos="4314"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -527,7 +527,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TAMB" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - TAMB - 01.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - TAMB - 01.wav">
 						<zone startSamplePos="0" endSamplePos="4887"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -570,7 +570,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CLAP" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - CLAP - 01.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - CLAP - 01.wav">
 						<zone startSamplePos="0" endSamplePos="19830"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -613,7 +613,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CLA2" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - CLAP - 02.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - CLAP - 02.wav">
 						<zone startSamplePos="0" endSamplePos="72488"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">
@@ -656,7 +656,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="RIM " polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/Artists/Dean Daughters/Y2K/Y2K - RIM - 01.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - RIM - 01.wav">
 						<zone startSamplePos="0" endSamplePos="2913"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="">

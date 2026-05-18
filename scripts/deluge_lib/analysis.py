@@ -58,7 +58,9 @@ class LibrarySummary:
 class UsageIndex:
     """Complete cross-reference of samples on disk and in XML.
 
-    Keys are normalised paths (lowercase, forward-slash) relative to SAMPLES/
+    Attributes:
+        entries: All known samples.
+            k: normalised path (lowercase, forward-slash) relative to SAMPLES/, v: SampleUsage
     """
 
     entries: dict[str, SampleUsage] = field(default_factory=dict)

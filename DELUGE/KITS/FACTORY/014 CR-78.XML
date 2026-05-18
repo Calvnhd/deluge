@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Kick/CR78 Kick.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Kick/CR78 Kick.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>129</endMilliseconds>
@@ -218,7 +218,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Snare/CR78 Snare.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Snare/CR78 Snare.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>258</endMilliseconds>
@@ -390,7 +390,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatC/CR78 Closed hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatC/CR78 Closed hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>83</endMilliseconds>
@@ -562,7 +562,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatO/CR78 Open hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatO/CR78 Open hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>557</endMilliseconds>
@@ -734,7 +734,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Claves/CR78 Claves.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Claves/CR78 Claves.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>52</endMilliseconds>
@@ -906,7 +906,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Tambourine/CR78 Tambourine.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Tambourine/CR78 Tambourine.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>268</endMilliseconds>
@@ -1078,7 +1078,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Crash/CR78 Cymbal.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Crash/CR78 Cymbal.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>255</endMilliseconds>
@@ -1250,7 +1250,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Rim/CR78 Rim.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Rim/CR78 Rim.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>61</endMilliseconds>
@@ -1422,7 +1422,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Cowbell/CR78 Cowbell.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Cowbell/CR78 Cowbell.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>93</endMilliseconds>
@@ -1594,7 +1594,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Other/CR78 Metal.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Other/CR78 Metal.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>115</endMilliseconds>
@@ -1766,7 +1766,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConL/CR78 Conga low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConL/CR78 Conga low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>204</endMilliseconds>
@@ -1938,7 +1938,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConM/CR78 Conga medium.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConM/CR78 Conga medium.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>140</endMilliseconds>
@@ -2110,7 +2110,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/ConH/CR78 Conga high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/ConH/CR78 Conga high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>110</endMilliseconds>
@@ -2282,7 +2282,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Guiro/CR78 Guiro.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Guiro/CR78 Guiro.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>215</endMilliseconds>

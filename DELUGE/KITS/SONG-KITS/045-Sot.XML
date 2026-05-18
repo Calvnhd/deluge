@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="72 - 8 Ptn" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/_SELECTED/PERC/Indian-Dholak/Dholak 72 - 8 Ptn.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/LANDR/PERC/Indian-Dholak/Dholak 72 - 8 Ptn.wav">
 						<zone startSamplePos="0" endSamplePos="588000"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">

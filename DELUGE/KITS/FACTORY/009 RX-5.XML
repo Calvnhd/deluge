@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Kick/RX-5 Kick.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Kick/RX-5 Kick.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>111</endMilliseconds>
@@ -218,7 +218,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Snare/RX-5 Snare.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Snare/RX-5 Snare.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>251</endMilliseconds>
@@ -390,7 +390,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatC/RX-5 Closed hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatC/RX-5 Closed hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>110</endMilliseconds>
@@ -562,7 +562,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/HatO/RX-5 Open hihat.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/HatO/RX-5 Open hihat.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>935</endMilliseconds>
@@ -734,7 +734,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Tambourine/RX-5 Tambourine.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Tambourine/RX-5 Tambourine.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>352</endMilliseconds>
@@ -906,7 +906,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Ride/RX-5 Ride.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Ride/RX-5 Ride.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>2213</endMilliseconds>
@@ -1078,7 +1078,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Crash/RX-5 Crash.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Crash/RX-5 Crash.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1895</endMilliseconds>
@@ -1250,7 +1250,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/China/RX-5 China.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/China/RX-5 China.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>1646</endMilliseconds>
@@ -1422,7 +1422,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Rim/RX-5 Rim.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Rim/RX-5 Rim.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>92</endMilliseconds>
@@ -1594,7 +1594,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Cowbell/RX-5 Cowbell.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Cowbell/RX-5 Cowbell.wav</fileName>
 				<zone>
 					<startMilliseconds>20</startMilliseconds>
 					<endMilliseconds>236</endMilliseconds>
@@ -1766,7 +1766,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Block/RX-5 Bongo low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Block/RX-5 Bongo low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>252</endMilliseconds>
@@ -1938,7 +1938,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Block/RX-5 Bongo high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Block/RX-5 Bongo high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>170</endMilliseconds>
@@ -2110,7 +2110,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Timpany/RX-5 Timpany low.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Timpany/RX-5 Timpany low.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>378</endMilliseconds>
@@ -2282,7 +2282,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/DRUMS/Timpany/RX-5 Timpany high.wav</fileName>
+				<fileName>SAMPLES/FACTORY/DRUMS/Timpany/RX-5 Timpany high.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>347</endMilliseconds>

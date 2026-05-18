@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="CHOR" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/Chord Clearmoon.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Chord Clearmoon.wav">
 						<zone startSamplePos="5760" endSamplePos="356528"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -52,7 +52,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="GONG" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/Gong Clearmoon.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Gong Clearmoon.wav">
 						<zone startSamplePos="0" endSamplePos="795135"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -93,7 +93,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BASS" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/Bass Houseshape.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Bass Houseshape.wav">
 						<zone startSamplePos="5760" endSamplePos="375082"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -134,7 +134,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="GUIT" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/Guitar OceanRoar.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Guitar Oceanroar.wav">
 						<zone startSamplePos="1440" endSamplePos="907035"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -177,7 +177,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="CLAV" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/Clavichord Palelights.WAV">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Clavichord Palelights.wav">
 						<zone startSamplePos="3360" endSamplePos="157872"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -218,7 +218,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="FEED" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/Feedback The Place I Live.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Feedback The Place I Live.wav">
 						<zone startSamplePos="0" endSamplePos="1892697"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -259,7 +259,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HIGH" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/HighDrone The Place Lives.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/HighDrone The Place Lives.wav">
 						<zone startSamplePos="0" endSamplePos="2000806"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -300,7 +300,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="BLOS" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/Phil Elverum/Blossom Clearmoon.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Blossom Clearmoon.wav">
 						<zone startSamplePos="14400" endSamplePos="326656"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>

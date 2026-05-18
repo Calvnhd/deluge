@@ -15,29 +15,18 @@ import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import TypedDict
+from typing import TypedDict, NotRequired
 
 from deluge_lib.paths import SYNC_LOG_PATH
 from deluge_lib.scanning import FileFilter, ScanResult, normalise_key, print_path, normalise_mtime, scan_tree
 
 
-class _FileRecordRequired(TypedDict):
-    """Required fields for a manifest entry."""
-
+class FileRecord(TypedDict):
     sd_size: int
     sd_mtime: float
     local_size: int
     local_mtime: float
-
-
-class FileRecord(_FileRecordRequired, total=False):
-    """Per-file dual-stat manifest entry with optional content hash.
-
-    The ``hash`` field holds a SHA-256 hex digest or is absent/None when
-    the hash has not yet been computed (v1 manifests, newly added entries).
-    """
-
-    hash: str | None
+    hash: NotRequired[str | None]
 
 
 FilesDict = dict[str, FileRecord]
@@ -49,15 +38,15 @@ def read_manifest(path: Path) -> FilesDict:
     if not path.is_file():
         print(f"Warning: No manifest at {path}")
         return {}
-
+    print("Reading manifest file...")
     try:
-        data = json.loads(path.read_text(encoding="utf-8"))
+        manifest_data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         print(f"Warning: corrupt manifest at {path} ({exc}) \u2014 treating as empty")
         return {}
 
-    files: dict[str, FileRecord] = {}
-    for key, val in data.get("files", {}).items():
+    manifest_files: dict[str, FileRecord] = {}
+    for key, val in manifest_data.get("files", {}).items():
         if isinstance(val, dict) and "sd_size" in val and "sd_mtime" in val and "local_size" in val and "local_mtime" in val:
             entry: FileRecord = {
                 "sd_size": int(val["sd_size"]),
@@ -66,9 +55,9 @@ def read_manifest(path: Path) -> FilesDict:
                 "local_mtime": float(val["local_mtime"]),
                 "hash": val.get("hash")
             }
-            files[key] = entry
+            manifest_files[key] = entry
 
-    return files
+    return manifest_files
 
 
 def write_manifest(
@@ -81,6 +70,10 @@ def write_manifest(
     The output includes ``"version": 2`` at the top level and each file
     entry includes a ``"hash"`` key (value is a hex string or ``null``).
     A ``last_sync_timestamp`` is generated automatically.
+
+    Args:
+        files: Manifest file entries.
+            k: normalised path, v: FileRecord
     """
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -131,7 +124,16 @@ def build_post_sync_manifest(
     source_is_sd: bool,
     file_filter: str = "both",
 ) -> dict[str, FileRecord]:
-    """Build updated manifest after a successful sync"""
+    """Build updated manifest after a successful sync.
+
+    Args:
+        old_files: Previous manifest entries.
+            k: normalised path, v: FileRecord
+
+    Returns:
+        Updated manifest entries.
+            k: normalised path, v: FileRecord
+    """
 
     from deluge_lib.deluge_sdk import hash_file
     from deluge_lib.scanning import FILTER_MAP
@@ -260,8 +262,7 @@ def compute_sync(
     Args:
         source: Source directory to sync with
         dest: Destination to sync
-        manifest: Optional manifest dict used during SD syncs. Maps normalised 
-            keys to status data for both SD and local sides
+        manifest: Optional manifest dict used during syncs
         source_is_sd: When True (default), source is the SD card and dest is the
             local directory.  When False, source is local and dest is SD.
             Controls which manifest fields are compared against source vs dest.
@@ -329,12 +330,12 @@ def compute_sync(
                     continue
 
             # Check if local file status differs from last sync recorded by manifest
-            is_local_time_valid = local_entry.mtime > 0
             has_local_changed = (
                 local_entry.size != manifest_entry["local_size"]
                 or local_entry.mtime != manifest_entry["local_mtime"]
             )
-            if is_local_time_valid and not has_local_changed:
+            # mtime check here guards against Deluge not recording time
+            if (local_entry.mtime > 0) and not has_local_changed:
                 # Both sides match manifest
                 plan.files_unchanged += 1
             else:
@@ -535,24 +536,30 @@ def append_sync_log(
         f.write(line + "\n")
 
 
-def report_empty_dirs(dest: Path) -> None:
-    """Print any empty subdirectories of *dest*.
+def clean_empty_dirs(root: Path) -> int:
+    """Remove empty subdirectories of *root* and report what was removed
 
-    Bottom-up walk, skips .trash/.
+    Walks bottom-up so nested empties are removed leaf-first
+    Skips .trash/.  Uses ``rmdir()`` which only succeeds on empty directories
+
+    Returns the number of directories removed
     """
     from deluge_lib.scanning import SKIP_DIRS, print_path
 
-    empties: list[Path] = []
-    for dirpath, dirnames, filenames in os.walk(dest, topdown=False):
+    removed: dict[Path, None] = {}
+    for dirpath, dirnames, filenames in os.walk(root, topdown=False):
         dirnames[:] = [d for d in dirnames if d.lower() not in SKIP_DIRS]
         current = Path(dirpath)
-        if current == dest:
+        if current == root or current.parent == root:
             continue
-        # Empty if no files and all subdirs were already flagged as empty.
-        if not filenames and all((current / d) in empties for d in dirnames):
-            empties.append(current)
+        # A directory is empty if it has no files and all its subdirs were
+        # already removed (i.e. were themselves empty).
+        if not filenames and all((current / d) in removed for d in dirnames):
+            current.rmdir()  # safe: only succeeds if truly empty
+            removed[current] = None
 
-    if empties:
-        print(f"\nFound {len(empties)} empty director{'y' if len(empties) == 1 else 'ies'} in {dest}:")
-        for p in empties:
-            print(f"  {print_path(p.relative_to(dest))}")
+    if removed:
+        print(f"\nRemoved {len(removed)} empty director{'y' if len(removed) == 1 else 'ies'}:")
+        for p in removed:
+            print(f"  {print_path(p.relative_to(root))}")
+    return len(removed)

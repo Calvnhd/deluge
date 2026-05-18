@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/7.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/7.wav</fileName>
 				<zone>
 					<startMilliseconds>390</startMilliseconds>
 					<endMilliseconds>5953</endMilliseconds>
@@ -210,7 +210,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/2.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/2.wav</fileName>
 				<zone>
 					<startMilliseconds>210</startMilliseconds>
 					<endMilliseconds>1482</endMilliseconds>
@@ -374,7 +374,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/5.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/5.wav</fileName>
 				<zone>
 					<startMilliseconds>94</startMilliseconds>
 					<endMilliseconds>1285</endMilliseconds>
@@ -538,7 +538,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/1.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/1.wav</fileName>
 				<zone>
 					<startMilliseconds>170</startMilliseconds>
 					<endMilliseconds>1952</endMilliseconds>
@@ -703,7 +703,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/3.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/3.wav</fileName>
 				<zone>
 					<startMilliseconds>40</startMilliseconds>
 					<endMilliseconds>3117</endMilliseconds>
@@ -867,7 +867,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/4.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/4.wav</fileName>
 				<zone>
 					<startMilliseconds>110</startMilliseconds>
 					<endMilliseconds>1113</endMilliseconds>
@@ -1031,7 +1031,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/6.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/6.wav</fileName>
 				<zone>
 					<startMilliseconds>1000</startMilliseconds>
 					<endMilliseconds>9718</endMilliseconds>
@@ -1195,7 +1195,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Kody Nielson/8.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Kody Nielson/8.wav</fileName>
 				<zone>
 					<startMilliseconds>2000</startMilliseconds>
 					<endMilliseconds>17299</endMilliseconds>

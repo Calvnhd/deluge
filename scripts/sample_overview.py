@@ -41,7 +41,11 @@ def _print_header(text: str) -> None:
 def _group_by_folder(
     samples: list[SampleUsage],
 ) -> dict[str, list[SampleUsage]]:
-    """Group samples by top-level folder, sorted alphabetically by folder."""
+    """Group samples by top-level folder, sorted alphabetically by folder.
+
+    Returns:
+        k: top-level folder name, v: list of SampleUsage in that folder
+    """
 
     groups: dict[str, list[SampleUsage]] = defaultdict(list)
     for s in samples:
@@ -351,7 +355,12 @@ def cmd_missing(index, _args, *, refs_by_file: dict[Path, list[SampleRef]], delu
     print()
 
 def cmd_duplicates(deluge_root: Path, hashes: dict[str, list[str]]) -> None:
-    """Find and report duplicate sample files by content hash."""
+    """Find and report duplicate sample files by content hash.
+
+    Args:
+        hashes: All sample file hashes.
+            k: SHA-256 hex digest, v: list of relative paths
+    """
 
     # Filter to only groups with duplicates
     dupes = {digest: paths for digest, paths in hashes.items() if len(paths) > 1}

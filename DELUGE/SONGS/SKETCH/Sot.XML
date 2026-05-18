@@ -152,7 +152,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/_SELECTED/PERC/Indian-Dholak/Dholak 72 - 8 Ptn.wav">
+						fileName="SAMPLES/LANDR/PERC/Indian-Dholak/Dholak 72 - 8 Ptn.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="588000" />
@@ -453,7 +453,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/Chord Clearmoon.wav">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Chord Clearmoon.wav">
 						<zone
 							startSamplePos="5760"
 							endSamplePos="356528" />
@@ -528,7 +528,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/Gong Clearmoon.wav">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Gong Clearmoon.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="795135" />
@@ -603,7 +603,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/Bass Houseshape.wav">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Bass Houseshape.wav">
 						<zone
 							startSamplePos="5760"
 							endSamplePos="375082" />
@@ -678,7 +678,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/Guitar OceanRoar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Guitar Oceanroar.wav">
 						<zone
 							startSamplePos="1440"
 							endSamplePos="907035" />
@@ -753,7 +753,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/Clavichord Palelights.WAV">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Clavichord Palelights.wav">
 						<zone
 							startSamplePos="3360"
 							endSamplePos="157872" />
@@ -828,7 +828,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/Feedback The Place I Live.wav">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Feedback The Place I Live.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="1892697" />
@@ -903,7 +903,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/HighDrone The Place Lives.wav">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/HighDrone The Place Lives.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2000806" />
@@ -978,7 +978,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Phil Elverum/Blossom Clearmoon.wav">
+						fileName="SAMPLES/FACTORY/Artists/Phil Elverum/Blossom Clearmoon.wav">
 						<zone
 							startSamplePos="14400"
 							endSamplePos="326656" />
@@ -1153,7 +1153,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/KR55 Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/KR55 Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="5643"
@@ -1231,7 +1231,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/KR55 Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/KR55 Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="5643"

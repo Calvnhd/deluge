@@ -388,7 +388,7 @@
 				<sampleRanges>
 					<sampleRange
 						rangeTopNote="53"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224345].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224345].wav"
 						transpose="7"
 						cents="8">
 						<zone
@@ -397,7 +397,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="54"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224344].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224344].wav"
 						transpose="6">
 						<zone
 							startSamplePos="0"
@@ -405,7 +405,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="55"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224341].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224341].wav"
 						transpose="5"
 						cents="6">
 						<zone
@@ -414,7 +414,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="56"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224340].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224340].wav"
 						transpose="4">
 						<zone
 							startSamplePos="0"
@@ -422,7 +422,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="57"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224338].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224338].wav"
 						transpose="3">
 						<zone
 							startSamplePos="0"
@@ -430,7 +430,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="58"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224336].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224336].wav"
 						transpose="2"
 						cents="3">
 						<zone
@@ -439,7 +439,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="59"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224334].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224334].wav"
 						transpose="1">
 						<zone
 							startSamplePos="0"
@@ -447,21 +447,21 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="60"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="264600" />
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="61"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224332].wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="264600" />
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="62"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav"
 						transpose="-3"
 						cents="8">
 						<zone
@@ -470,7 +470,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="63"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224328].wav"
 						transpose="-3"
 						cents="8">
 						<zone
@@ -479,7 +479,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="64"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224325].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224325].wav"
 						transpose="-4">
 						<zone
 							startSamplePos="0"
@@ -487,7 +487,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="65"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224324].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224324].wav"
 						transpose="-5">
 						<zone
 							startSamplePos="0"
@@ -495,7 +495,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="66"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323]-1.wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323]-1.wav"
 						transpose="-6">
 						<zone
 							startSamplePos="0"
@@ -503,7 +503,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="68"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224323].wav"
 						transpose="-7">
 						<zone
 							startSamplePos="0"
@@ -511,7 +511,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="70"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224322].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224322].wav"
 						transpose="-9">
 						<zone
 							startSamplePos="0"
@@ -519,7 +519,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="71"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224320].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224320].wav"
 						transpose="-11">
 						<zone
 							startSamplePos="0"
@@ -527,7 +527,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="72"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224319].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224319].wav"
 						transpose="-12">
 						<zone
 							startSamplePos="0"
@@ -535,7 +535,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="74"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317]-1.wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317]-1.wav"
 						transpose="-14">
 						<zone
 							startSamplePos="0"
@@ -543,7 +543,7 @@
 					</sampleRange>
 					<sampleRange
 						rangeTopNote="78"
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav"
 						transpose="-15"
 						cents="-1">
 						<zone
@@ -551,7 +551,7 @@
 							endSamplePos="264600" />
 					</sampleRange>
 					<sampleRange
-						fileName="SAMPLES/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav"
+						fileName="SAMPLES/FACTORY/Artists/Michael Bulaw/Sitar/Freeze Sitar [2018-12-06 224317].wav"
 						transpose="-15"
 						cents="-1">
 						<zone
@@ -1312,7 +1312,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Kick/808 Kick.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Kick/808 Kick.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -1393,7 +1393,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Snare/808 Snare.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Snare/808 Snare.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -1474,7 +1474,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatC/808 Closed hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatC/808 Closed hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11025" />
@@ -1555,7 +1555,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/HatO/808 Open hihat.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/HatO/808 Open hihat.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="33076" />
@@ -1636,7 +1636,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Shaker/808 Maraca.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Shaker/808 Maraca.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11025" />
@@ -1717,7 +1717,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Rim/808 Rim.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Rim/808 Rim.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11026" />
@@ -1798,7 +1798,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Claves/808 Claves.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Claves/808 Claves.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11025" />
@@ -1879,7 +1879,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Clap/808 Clap.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Clap/808 Clap.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="88201" />
@@ -1960,7 +1960,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Crash/808 Cymbal.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Crash/808 Cymbal.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="66151" />
@@ -2041,7 +2041,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/Cowbell/808 Cowbell.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/Cowbell/808 Cowbell.wav">
 						<zone
 							startSamplePos="1234"
 							endSamplePos="17280" />
@@ -2122,7 +2122,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomL/808 Tom low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomL/808 Tom low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44101" />
@@ -2203,7 +2203,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomM/808 Tom medium.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomM/808 Tom medium.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44101" />
@@ -2284,7 +2284,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/TomH/808 Tom high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/TomH/808 Tom high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44101" />
@@ -2365,7 +2365,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConL/808 Conga low.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConL/808 Conga low.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -2446,7 +2446,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConM/808 Conga medium.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConM/808 Conga medium.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -2527,7 +2527,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/DRUMS/ConH/808 Conga high.wav">
+						fileName="SAMPLES/FACTORY/DRUMS/ConH/808 Conga high.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="22051" />
@@ -2644,7 +2644,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/KICK-Bonus01.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Bonus01.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10598" />
@@ -2726,7 +2726,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/KICK-Silence.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Silence.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="11911" />
@@ -2807,7 +2807,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7700" />
@@ -2888,7 +2888,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="6457" />
@@ -2970,7 +2970,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/KICK-Radar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Radar.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="15186" />
@@ -3051,7 +3051,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="19212" />
@@ -3132,7 +3132,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="4127" />
@@ -3213,7 +3213,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="15580" />
@@ -3294,7 +3294,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3618" />
@@ -3375,7 +3375,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10472" />
@@ -3456,7 +3456,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/OPHAT-Silence.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Silence.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7758" />
@@ -3537,7 +3537,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/SHAKER-Radar.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SHAKER-Radar.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9554" />
@@ -3618,7 +3618,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="12184" />
@@ -3699,7 +3699,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/CLAP-Dimension.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLAP-Dimension.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="7498" />
@@ -3780,7 +3780,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension1.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension1.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9462" />
@@ -3861,7 +3861,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/Artists/Dean Daughters/Psy/PERC-Dimension2.wav">
+						fileName="SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension2.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="9668" />

@@ -246,7 +246,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/808 Bass C Deep-O.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/808 Bass C Deep-O.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="207900" />
@@ -321,7 +321,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/Snare Drum 018 Dilla.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/Snare Drum 018 Dilla.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="13797" />
@@ -396,7 +396,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/HiHat Closed 001 Widened.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/HiHat Closed 001 Widened.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10081" />
@@ -472,7 +472,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/Kick 003 Sensible.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/Kick 003 Sensible.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="14175" />
@@ -547,7 +547,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/Percussion Bell 003 Agogo High.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Bell 003 Agogo High.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="21920" />
@@ -622,7 +622,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/cp02.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/cp02.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="19840" />
@@ -697,7 +697,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/Percussion Cowbell 004 808.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Cowbell 004 808.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3042" />
@@ -772,7 +772,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/Percussion Rimshot 003.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Rimshot 003.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="103461" />
@@ -847,7 +847,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/Percussion bubble 001.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/Percussion Bubble 001.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="3008" />
@@ -922,7 +922,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/SYNTH-FancyPoly800longCool.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/SYNTH-FancyPoly800longCool.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="148043" />
@@ -997,7 +997,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/PAD-LosAngeles92.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/PAD-LosAngeles92.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="937984" />
@@ -1072,7 +1072,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/ARTISTS/Totems/SYNTH-Bellishform1.wav">
+						fileName="SAMPLES/FACTORY/Artists/Totems/SYNTH-Bellishform1.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="148011" />

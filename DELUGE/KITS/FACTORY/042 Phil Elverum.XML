@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/Chord Clearmoon.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/Chord Clearmoon.wav</fileName>
 				<zone>
 					<startMilliseconds>120</startMilliseconds>
 					<endMilliseconds>7428</endMilliseconds>
@@ -209,7 +209,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/Gong Clearmoon.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/Gong Clearmoon.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>16566</endMilliseconds>
@@ -373,7 +373,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/Bass Houseshape.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/Bass Houseshape.wav</fileName>
 				<zone>
 					<startMilliseconds>120</startMilliseconds>
 					<endMilliseconds>7815</endMilliseconds>
@@ -537,7 +537,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/Guitar OceanRoar.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/Guitar Oceanroar.wav</fileName>
 				<zone>
 					<startMilliseconds>30</startMilliseconds>
 					<endMilliseconds>18897</endMilliseconds>
@@ -701,7 +701,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/Clavichord Palelights.WAV</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/Clavichord Palelights.wav</fileName>
 				<zone>
 					<startMilliseconds>70</startMilliseconds>
 					<endMilliseconds>3289</endMilliseconds>
@@ -865,7 +865,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/Feedback The Place I Live.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/Feedback The Place I Live.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>39432</endMilliseconds>
@@ -1029,7 +1029,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/HighDrone The Place Lives.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/HighDrone The Place Lives.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>41684</endMilliseconds>
@@ -1193,7 +1193,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/ARTISTS/Phil Elverum/Blossom Clearmoon.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Phil Elverum/Blossom Clearmoon.wav</fileName>
 				<zone>
 					<startMilliseconds>300</startMilliseconds>
 					<endMilliseconds>6806</endMilliseconds>

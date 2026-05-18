@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="HCLO" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/John Atkinson/Homecoming Lo Loop.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/John Atkinson/Homecoming Lo Loop.wav">
 						<zone startSamplePos="4410" endSamplePos="202639"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -52,7 +52,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="HOME" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/John Atkinson/Homecoming Loop.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/John Atkinson/Homecoming Loop.wav">
 						<zone startSamplePos="4410" endSamplePos="208548"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -93,7 +93,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="META" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="1" timeStretchEnable="0" timeStretchAmount="-7" fileName="SAMPLES/ARTISTS/John Atkinson/Metal Bell Junk.wav">
+					<osc1 type="sample" loopMode="2" reversed="1" timeStretchEnable="0" timeStretchAmount="-7" fileName="SAMPLES/FACTORY/Artists/John Atkinson/Metal Bell Junk.wav">
 						<zone startSamplePos="36999" endSamplePos="2155381"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -135,7 +135,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="SOLA" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/John Atkinson/SolarClangs.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/John Atkinson/SolarClangs.wav">
 						<zone startSamplePos="0" endSamplePos="1411200"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -176,7 +176,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TRAS" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/John Atkinson/Trash Hits Buzz.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/John Atkinson/Trash Hits Buzz.wav">
 						<zone startSamplePos="0" endSamplePos="1169259"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -217,7 +217,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="TRUC" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/John Atkinson/Truck Scrape.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/John Atkinson/Truck Scrape.wav">
 						<zone startSamplePos="0" endSamplePos="252927"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -258,7 +258,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="DRON" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/John Atkinson/Wave Drone.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/John Atkinson/Wave Drone.wav">
 						<zone startSamplePos="0" endSamplePos="2268000"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>
@@ -299,7 +299,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="RANK" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="12dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/ARTISTS/John Atkinson/Rank Riff.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/FACTORY/Artists/John Atkinson/Rank Riff.wav">
 						<zone startSamplePos="0" endSamplePos="77099"/>
 					</osc1>
 					<osc2 type="square" transpose="0" cents="0" retrigPhase="0"/>

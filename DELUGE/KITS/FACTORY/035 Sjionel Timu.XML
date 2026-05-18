@@ -45,7 +45,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss01.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss01.wav</fileName>
 				<zone>
 					<startMilliseconds>97</startMilliseconds>
 					<endMilliseconds>2930</endMilliseconds>
@@ -209,7 +209,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss02.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss02.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>6777</endMilliseconds>
@@ -373,7 +373,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss03.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss03.wav</fileName>
 				<zone>
 					<startMilliseconds>470</startMilliseconds>
 					<endMilliseconds>8660</endMilliseconds>
@@ -537,7 +537,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss04.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss04.wav</fileName>
 				<zone>
 					<startMilliseconds>170</startMilliseconds>
 					<endMilliseconds>11989</endMilliseconds>
@@ -701,7 +701,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>0</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss05.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss05.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>17832</endMilliseconds>
@@ -865,7 +865,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss06.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss06.wav</fileName>
 				<zone>
 					<startMilliseconds>1500</startMilliseconds>
 					<endMilliseconds>10020</endMilliseconds>
@@ -1029,7 +1029,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss07.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss07.wav</fileName>
 				<zone>
 					<startMilliseconds>20</startMilliseconds>
 					<endMilliseconds>3929</endMilliseconds>
@@ -1193,7 +1193,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss08.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss08.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>8695</endMilliseconds>
@@ -1357,7 +1357,7 @@
 				<reversed>0</reversed>
 				<timeStretchEnable>1</timeStretchEnable>
 				<timeStretchAmount>0</timeStretchAmount>
-				<fileName>SAMPLES/Artists/Sjionel Timu/cutss09.wav</fileName>
+				<fileName>SAMPLES/FACTORY/Artists/Sjionel Timu/cutss09.wav</fileName>
 				<zone>
 					<startMilliseconds>0</startMilliseconds>
 					<endMilliseconds>7701</endMilliseconds>
