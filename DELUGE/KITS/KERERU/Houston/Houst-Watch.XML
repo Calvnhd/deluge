@@ -9,19 +9,19 @@
 	hpfMode="HPLadder"
 	filterRoute="H2L">
 	<defaultParams
-		reverbAmount="0x80000000"
-		volume="0x3504F334"
-		pan="0x00000000"
+		reverbAmount="0x84000000"
+		volume="0x5A000000"
+		pan="0x9A000000"
 		pitchAdjust="0xFC000000"
-		sidechainCompressorVolume="0x82000000"
+		sidechainCompressorVolume="0x8C000000"
 		sidechainCompressorShape="0xDC28F5B2"
-		modFXDepth="0x00000000"
-		modFXRate="0xE0000000"
+		modFXDepth="0x1E000000"
+		modFXRate="0x08000000"
 		stutterRate="0x00000000"
 		sampleRateReduction="0x80000000"
 		bitCrush="0x80000000"
 		modFXOffset="0x00000000"
-		modFXFeedback="0x80000000"
+		modFXFeedback="0xAE000000"
 		compressorThreshold="0x00000000"
 		lpfMorph="0x80000000"
 		hpfMorph="0x80000000"
@@ -30,11 +30,11 @@
 			rate="0x00000000"
 			feedback="0x80000000" />
 		<lpf
-			frequency="0x7FFFFFFF"
+			frequency="0x40000000"
 			resonance="0x80000000" />
 		<hpf
-			frequency="0x80000000"
-			resonance="0x80000000" />
+			frequency="0xB8000000"
+			resonance="0xB8000000" />
 		<equalizer
 			bass="0x00000000"
 			treble="0x00000000"
@@ -42,7 +42,7 @@
 			trebleFrequency="0x00000000" />
 	</defaultParams>
 	<delay
-		pingPong="1"
+		pingPong="0"
 		analog="0"
 		syncLevel="7"
 		syncType="0" />
@@ -72,9 +72,9 @@
 			maxVoices="8">
 			<osc1
 				type="sample"
-				loopMode="1"
+				loopMode="3"
 				reversed="0"
-				timeStretchEnable="0"
+				timeStretchEnable="1"
 				timeStretchAmount="0"
 				fileName="SAMPLES/KERERU/RECORD/Houston.WAV">
 				<zone
@@ -177,8 +177,8 @@
 			<modKnobs>
 				<modKnob controlsParam="pan" />
 				<modKnob controlsParam="volumePostFX" />
-				<modKnob controlsParam="lpfResonance" />
-				<modKnob controlsParam="lpfFrequency" />
+				<modKnob controlsParam="bass" />
+				<modKnob controlsParam="treble" />
 				<modKnob controlsParam="env1Release" />
 				<modKnob controlsParam="env1Attack" />
 				<modKnob controlsParam="delayFeedback" />
@@ -268,6 +268,7 @@
 				modulator2Feedback="0x80000000"
 				carrier1Feedback="0x80000000"
 				carrier2Feedback="0x80000000"
+				pitchAdjust="0x06000000"
 				modFXRate="0x00000000"
 				modFXDepth="0x00000000"
 				delayRate="0x00000000"
@@ -288,7 +289,7 @@
 				sequenceLength="0x80000000"
 				rhythm="0x80000000">
 				<envelope1
-					attack="0x851EB851"
+					attack="0x9E000000"
 					decay="0xE6666654"
 					sustain="0x7FFFFFD2"
 					release="0x851EB851" />
@@ -350,7 +351,7 @@
 				syncLevel="7"
 				syncType="0" />
 			<sidechain
-				attack="327244"
+				attack="636588"
 				release="936"
 				syncLevel="6"
 				syncType="0" />
@@ -383,7 +384,7 @@
 				cents="10">
 				<zone
 					startSamplePos="59392"
-					endSamplePos="69888" />
+					endSamplePos="69632" />
 			</osc1>
 			<osc2
 				type="sample"
@@ -440,7 +441,7 @@
 				sequenceLength="0x80000000"
 				rhythm="0x80000000">
 				<envelope1
-					attack="0x851EB851"
+					attack="0xAA000000"
 					decay="0xE6666654"
 					sustain="0x7FFFFFD2"
 					release="0x851EB851" />
@@ -563,7 +564,7 @@
 				lpfResonance="0x80000000"
 				hpfFrequency="0x80000000"
 				hpfResonance="0x80000000"
-				lfo1Rate="0x1999997E"
+				lfo1Rate="0x4CCCCCA8"
 				lfo2Rate="0x00000000"
 				modulator1Amount="0x80000000"
 				modulator1Feedback="0x80000000"
@@ -591,7 +592,7 @@
 				sequenceLength="0x80000000"
 				rhythm="0x80000000">
 				<envelope1
-					attack="0x851EB851"
+					attack="0xB8000000"
 					decay="0xE6666654"
 					sustain="0x7FFFFFD2"
 					release="0x851EB851" />
@@ -613,6 +614,10 @@
 						source="y"
 						destination="lpfFrequency"
 						amount="0x19999990" />
+					<patchCable
+						source="lfo1"
+						destination="pitch"
+						amount="0xFF800000" />
 				</patchCables>
 				<equalizer
 					bass="0x00000000"
@@ -648,7 +653,7 @@
 				<modKnob controlsParam="sampleRateReduction" />
 			</modKnobs>
 			<delay
-				pingPong="1"
+				pingPong="0"
 				analog="0"
 				syncLevel="7"
 				syncType="0" />
@@ -695,7 +700,7 @@
 				timeStretchEnable="0"
 				timeStretchAmount="0">
 			</osc2>
-			<lfo1 type="triangle" syncLevel="0" syncType="0" />
+			<lfo1 type="square" syncLevel="7" syncType="0" />
 			<lfo2 type="triangle" syncLevel="0" syncType="0" />
 			<unison num="1" detune="8" spread="0" />
 			<defaultParams
@@ -715,7 +720,7 @@
 				lpfResonance="0x80000000"
 				hpfFrequency="0x80000000"
 				hpfResonance="0x80000000"
-				lfo1Rate="0x1999997E"
+				lfo1Rate="0x4CCCCCA8"
 				lfo2Rate="0x00000000"
 				modulator1Amount="0x80000000"
 				modulator1Feedback="0x80000000"
@@ -723,6 +728,7 @@
 				modulator2Feedback="0x80000000"
 				carrier1Feedback="0x80000000"
 				carrier2Feedback="0x80000000"
+				pitchAdjust="0xFC000000"
 				modFXRate="0x00000000"
 				modFXDepth="0x00000000"
 				delayRate="0x00000000"
@@ -743,7 +749,7 @@
 				sequenceLength="0x80000000"
 				rhythm="0x80000000">
 				<envelope1
-					attack="0x851EB851"
+					attack="0xB2000000"
 					decay="0xE6666654"
 					sustain="0x7FFFFFD2"
 					release="0x851EB851" />
@@ -800,8 +806,8 @@
 				<modKnob controlsParam="sampleRateReduction" />
 			</modKnobs>
 			<delay
-				pingPong="1"
-				analog="0"
+				pingPong="0"
+				analog="1"
 				syncLevel="7"
 				syncType="0" />
 			<sidechain
@@ -834,9 +840,10 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/RECORD/Houston.WAV">
+				fileName="SAMPLES/KERERU/RECORD/Houston.WAV"
+				transpose="-2">
 				<zone
-					startSamplePos="116224"
+					startSamplePos="115200"
 					endSamplePos="150016" />
 			</osc1>
 			<osc2
@@ -846,7 +853,7 @@
 				timeStretchEnable="0"
 				timeStretchAmount="0">
 			</osc2>
-			<lfo1 type="triangle" syncLevel="0" syncType="0" />
+			<lfo1 type="triangle" syncLevel="2" syncType="0" />
 			<lfo2 type="triangle" syncLevel="0" syncType="0" />
 			<unison num="1" detune="8" spread="0" />
 			<defaultParams
@@ -866,7 +873,7 @@
 				lpfResonance="0x80000000"
 				hpfFrequency="0x80000000"
 				hpfResonance="0x80000000"
-				lfo1Rate="0x1999997E"
+				lfo1Rate="0x4CCCCCA8"
 				lfo2Rate="0x00000000"
 				modulator1Amount="0x80000000"
 				modulator1Feedback="0x80000000"
@@ -875,7 +882,7 @@
 				carrier1Feedback="0x80000000"
 				carrier2Feedback="0x80000000"
 				modFXRate="0x00000000"
-				modFXDepth="0x00000000"
+				modFXDepth="0xFFFFFFE9"
 				delayRate="0x00000000"
 				delayFeedback="0x80000000"
 				reverbAmount="0x80000000"
@@ -894,7 +901,7 @@
 				sequenceLength="0x80000000"
 				rhythm="0x80000000">
 				<envelope1
-					attack="0x851EB851"
+					attack="0xB4000000"
 					decay="0xE6666654"
 					sustain="0x7FFFFFD2"
 					release="0x80000000" />
@@ -916,6 +923,10 @@
 						source="y"
 						destination="lpfFrequency"
 						amount="0x19999990" />
+					<patchCable
+						source="lfo1"
+						destination="pitch"
+						amount="0x13800000" />
 				</patchCables>
 				<equalizer
 					bass="0x00000000"
@@ -952,8 +963,8 @@
 			</modKnobs>
 			<delay
 				pingPong="1"
-				analog="0"
-				syncLevel="7"
+				analog="1"
+				syncLevel="6"
 				syncType="0" />
 			<sidechain
 				attack="327244"
@@ -969,5 +980,5 @@
 				compBlend="2147483647" />
 		</sound>
 	</soundSources>
-	<selectedDrumIndex>2</selectedDrumIndex>
+	<selectedDrumIndex>4</selectedDrumIndex>
 </kit>
