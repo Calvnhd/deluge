@@ -2,7 +2,7 @@
 <runtimeFeatureSettings
 	firmwareVersion="c1.2.1"
 	earliestCompatibleFirmware="4.1.3"
-	startupSong="SONGS/COOK/Sink.XML">
+	startupSong="SONGS/.XML">
 	<setting name="drumRandomizer" value="1"></setting>
 	<setting name="quantize" value="1"></setting>
 	<setting name="fineTempoKnob" value="1"></setting>
