@@ -16,7 +16,6 @@
 					<patchCable source="y" destination="lpfFrequency" amount="0x19999990"/>
 					<patchCable source="lfo1" destination="lpfFrequency" amount="0x0CCCCCC8"/>
 					<patchCable source="compressor" destination="volumePostReverbSend" amount="0x20000000"/>
-					<patchCable source="lfo1" destination="pitch" amount="0x00000000"/>
 				</patchCables>
 				<equalizer bass="0x00000000" treble="0x00000000" bassFrequency="0x00000000" trebleFrequency="0x00000000"/>
 			</defaultParams>

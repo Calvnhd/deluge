@@ -399,7 +399,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="11" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="3" fileName="SAMPLES/CLIPS/Houston 11/balanced_000.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="3" fileName="SAMPLES/CLIPS/Houston 11/balanced_000.wav">
 						<zone startSamplePos="720128" endSamplePos="823296"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">

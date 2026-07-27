@@ -1,7 +1,7 @@
 {
-  "generated": "2026-07-27T03:17:50.108384+00:00",
-  "songs_processed": 212,
-  "total_count": 190,
+  "generated": "2026-07-27T05:05:59.192671+00:00",
+  "songs_processed": 74,
+  "total_count": 188,
   "extractions": [
     {
       "output_filename": "000-Beginagain.XML",
@@ -840,17 +840,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "080A-FiveAlive 2.XML",
-      "source_song": "FiveAlive 2",
-      "preset_name": "080A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "080A-NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "080A",
@@ -1643,8 +1632,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Init-Synth-Aygwipppp.XML",
-      "source_song": "Aygwipppp",
+      "output_filename": "Init-Synth-AYG.XML",
+      "source_song": "AYG",
       "preset_name": "Init-Synth",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1841,8 +1830,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Fuzzbass-Sink-Houst-Bounce.XML",
-      "source_song": "Houst-Bounce",
+      "output_filename": "K01Fuzzbass-Sink-Houst-Vox-Bounce.XML",
+      "source_song": "Houst-Vox-Bounce",
       "preset_name": "K01Fuzzbass-Sink",
       "preset_folder": "SYNTHS/SONG-SYNTHS",
       "instrument_type": "synth",
@@ -1907,17 +1896,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "Pad-Hazy-Houst-Messy.XML",
-      "source_song": "Houst-Messy",
-      "preset_name": "Pad-Hazy",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 7,
-      "colour_name": "Orange",
-      "colour_abbr": "Orn",
-      "differing_params": []
-    },
-    {
       "output_filename": "Padfoot-Arparty.XML",
       "source_song": "Arparty",
       "preset_name": "Padfoot",
@@ -1951,14 +1929,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "SYNT2-Eoy-Health.XML",
-      "source_song": "Eoy-Health",
+      "output_filename": "SYNT2-Eoy-Town-Hall.XML",
+      "source_song": "Eoy-Town-Hall",
       "preset_name": "SYNT2",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -2050,8 +2028,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Wall Of Static-Oddish-Houst-Bounce.XML",
-      "source_song": "Houst-Bounce",
+      "output_filename": "Wall Of Static-Oddish-Houst-Vox-Bounce.XML",
+      "source_song": "Houst-Vox-Bounce",
       "preset_name": "Wall Of Static-Oddish",
       "preset_folder": "SYNTHS/SONG-SYNTHS",
       "instrument_type": "synth",
