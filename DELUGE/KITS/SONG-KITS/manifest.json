@@ -1,19 +1,8 @@
 {
-  "generated": "2026-07-27T05:05:59.196933+00:00",
-  "songs_processed": 74,
-  "total_count": 107,
+  "generated": "2026-08-10T11:18:41.926276+00:00",
+  "songs_processed": 96,
+  "total_count": 106,
   "extractions": [
-    {
-      "output_filename": "000-Alr.XML",
-      "source_song": "Alr",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
     {
       "output_filename": "000-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
@@ -23,6 +12,17 @@
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000-Ape.XML",
+      "source_song": "Ape",
+      "preset_name": "000",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
       "differing_params": []
     },
     {
@@ -202,17 +202,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "016-Alr.XML",
-      "source_song": "Alr",
-      "preset_name": "016",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "016-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "016",
@@ -254,6 +243,17 @@
       "section_id": 1,
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "018-Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "018",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -587,8 +587,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bs2-Houst-Bass-Houst-Arranged.XML",
-      "source_song": "Houst-Arranged",
+      "output_filename": "Bs2-Houst-Bass-Houst-10-8.XML",
+      "source_song": "Houst-10-8",
       "preset_name": "Bs2-Houst-Bass",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -697,8 +697,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deepfill-Houst-Arranged.XML",
-      "source_song": "Houst-Arranged",
+      "output_filename": "Deepfill-Houst-10-8.XML",
+      "source_song": "Houst-10-8",
       "preset_name": "Deepfill",
       "preset_folder": "KITS/KERERU/ARCHIVE",
       "instrument_type": "kit",
@@ -708,25 +708,25 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fills-Houst-Arranged.XML",
-      "source_song": "Houst-Arranged",
+      "output_filename": "Default-Lollybuy 19.XML",
+      "source_song": "Lollybuy 19",
+      "preset_name": "Default",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Fills-Houst-10-8.XML",
+      "source_song": "Houst-10-8",
       "preset_name": "Fills",
       "preset_folder": "KITS",
       "instrument_type": "kit",
       "section_id": 3,
       "colour_name": "Cyan",
       "colour_abbr": "Cyn",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Fills-Houst108.XML",
-      "source_song": "Houst108",
-      "preset_name": "Fills",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
       "differing_params": []
     },
     {
@@ -763,8 +763,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Hazy-Slice-Houst-Arranged.XML",
-      "source_song": "Houst-Arranged",
+      "output_filename": "Hazy-Slice-Houst-10-8.XML",
+      "source_song": "Houst-10-8",
       "preset_name": "Hazy-Slice",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -807,8 +807,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Believes-Houst-Arranged.XML",
-      "source_song": "Houst-Arranged",
+      "output_filename": "Houst-Believes-Houst-10-8.XML",
+      "source_song": "Houst-10-8",
       "preset_name": "Houst-Believes",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -884,17 +884,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Vox-Bounced-Houst108.XML",
-      "source_song": "Houst108",
-      "preset_name": "Houst-Vox-Bounced",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "Houst-Watch-Houst-Vox-Bounce.XML",
       "source_song": "Houst-Vox-Bounce",
       "preset_name": "Houst-Watch",
@@ -917,8 +906,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst108-Houst-Arranged.XML",
-      "source_song": "Houst-Arranged",
+      "output_filename": "Houst108-Houst-10-8.XML",
+      "source_song": "Houst-10-8",
       "preset_name": "Houst108",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -1027,17 +1016,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT2-Houst108.XML",
-      "source_song": "Houst108",
-      "preset_name": "KIT2",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": []
-    },
-    {
       "output_filename": "KIT2-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "KIT2",
@@ -1046,6 +1024,17 @@
       "section_id": 1,
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT2-Polly.XML",
+      "source_song": "Polly",
+      "preset_name": "KIT2",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
       "differing_params": []
     },
     {
