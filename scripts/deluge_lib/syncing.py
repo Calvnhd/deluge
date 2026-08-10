@@ -555,7 +555,11 @@ def clean_empty_dirs(root: Path) -> int:
         # A directory is empty if it has no files and all its subdirs were
         # already removed (i.e. were themselves empty).
         if not filenames and all((current / d) in removed for d in dirnames):
-            current.rmdir()  # safe: only succeeds if truly empty
+            try:
+                current.rmdir()  # safe: only succeeds if truly empty
+            except OSError as exc:
+                print(f"Warning: could not remove empty directory {current} ({exc})")
+                continue
             removed[current] = None
 
     if removed:

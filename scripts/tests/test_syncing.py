@@ -16,6 +16,7 @@ from deluge_lib.syncing import (
     SyncResult,
     _mtime_matches,
     append_sync_log,
+    clean_empty_dirs,
     compute_sync,
     execute_plan,
     print_plan,
@@ -610,6 +611,43 @@ class TestPrintPlanDeleteLabel:
 
         output = capsys.readouterr().out
         assert "1 to remove" in output
+
+
+# =============================================================================
+# clean_empty_dirs
+# =============================================================================
+
+
+class TestCleanEmptyDirs:
+    def test_warns_and_continues_when_directory_cannot_be_removed(
+        self,
+        tmp_path: Path,
+        monkeypatch: pytest.MonkeyPatch,
+        capsys: pytest.CaptureFixture[str],
+    ) -> None:
+        root = tmp_path / "root"
+        blocked = root / "CLIPS" / "Blocked"
+        removable = root / "EXPORTS" / "Removable"
+        blocked.mkdir(parents=True)
+        removable.mkdir(parents=True)
+
+        original_rmdir = Path.rmdir
+
+        def rmdir(path: Path) -> None:
+            if path == blocked:
+                raise PermissionError(13, "Access is denied", str(path))
+            original_rmdir(path)
+
+        monkeypatch.setattr(Path, "rmdir", rmdir)
+
+        removed = clean_empty_dirs(root)
+
+        output = capsys.readouterr().out
+        assert removed == 1
+        assert blocked.exists()
+        assert not removable.exists()
+        assert "Warning: could not remove empty directory" in output
+        assert str(blocked) in output
 
 
 # =============================================================================
