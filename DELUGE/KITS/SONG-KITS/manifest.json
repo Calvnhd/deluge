@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-10T11:18:41.926276+00:00",
-  "songs_processed": 96,
-  "total_count": 106,
+  "generated": "2026-08-23T15:48:01.927383+00:00",
+  "songs_processed": 75,
+  "total_count": 104,
   "extractions": [
     {
       "output_filename": "000-Ambient-Fishes.XML",
@@ -48,14 +48,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "003-Bmtk.XML",
-      "source_song": "Bmtk",
+      "output_filename": "003-Aa00.XML",
+      "source_song": "Aa00",
       "preset_name": "003",
       "preset_folder": "KITS",
       "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -213,6 +213,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "016-Mountain-Aa11.XML",
+      "source_song": "Aa11",
+      "preset_name": "016-Mountain",
+      "preset_folder": "KITS/SONG-KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "018-Alr.XML",
       "source_song": "Alr",
       "preset_name": "018",
@@ -301,8 +312,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "021-FiveAlive.XML",
-      "source_song": "FiveAlive",
+      "output_filename": "021-Aa00.XML",
+      "source_song": "Aa00",
       "preset_name": "021",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -587,19 +598,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Bs2-Houst-Bass-Houst-10-8.XML",
-      "source_song": "Houst-10-8",
-      "preset_name": "Bs2-Houst-Bass",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Bs2-Houst-Bass-Houst-Final-Iteration.XML",
-      "source_song": "Houst-Final-Iteration",
+      "output_filename": "Bs2-Houst-Bass-Houston.XML",
+      "source_song": "Houston",
       "preset_name": "Bs2-Houst-Bass",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -642,8 +642,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Deeper-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Deeper",
       "preset_folder": "KITS/KERERU/ARCHIVE",
       "instrument_type": "kit",
@@ -697,8 +697,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deepfill-Houst-10-8.XML",
-      "source_song": "Houst-10-8",
+      "output_filename": "Deepfill-Houston.XML",
+      "source_song": "Houston",
       "preset_name": "Deepfill",
       "preset_folder": "KITS/KERERU/ARCHIVE",
       "instrument_type": "kit",
@@ -708,8 +708,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Default-Lollybuy 19.XML",
-      "source_song": "Lollybuy 19",
+      "output_filename": "Default-Lollybuy.XML",
+      "source_song": "Lollybuy",
       "preset_name": "Default",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -719,8 +719,19 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fills-Houst-10-8.XML",
-      "source_song": "Houst-10-8",
+      "output_filename": "Eeeahh-Aa00.XML",
+      "source_song": "Aa00",
+      "preset_name": "Eeeahh",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Fills-Houston.XML",
+      "source_song": "Houston",
       "preset_name": "Fills",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -763,8 +774,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Hazy-Slice-Houst-10-8.XML",
-      "source_song": "Houst-10-8",
+      "output_filename": "Hazy-Slice-Houston.XML",
+      "source_song": "Houston",
       "preset_name": "Hazy-Slice",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -774,8 +785,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Hazy-Slice-Houst-Final-Iteration.XML",
-      "source_song": "Houst-Final-Iteration",
+      "output_filename": "Hazy-Slice-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Hazy-Slice",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -785,19 +796,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Hazy-Slice-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
-      "preset_name": "Hazy-Slice",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Houst-Amen-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Amen-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Amen",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -807,8 +807,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Believes-Houst-10-8.XML",
-      "source_song": "Houst-10-8",
+      "output_filename": "Houst-Believes-Houston.XML",
+      "source_song": "Houston",
       "preset_name": "Houst-Believes",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -818,8 +818,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Believes-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Believes-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Believes",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -829,8 +829,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Build-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Build-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Build",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -840,8 +840,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Do-Not-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Do-Not-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Do-Not",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -851,8 +851,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Doubts-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Doubts-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Doubts",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -862,8 +862,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Intro-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Intro-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Intro",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -873,8 +873,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Moment-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Moment-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Moment",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -884,8 +884,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Watch-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Watch-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Watch",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -895,8 +895,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst-Watch-Alt-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Houst-Watch-Alt-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Houst-Watch-Alt",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -906,19 +906,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Houst108-Houst-10-8.XML",
-      "source_song": "Houst-10-8",
-      "preset_name": "Houst108",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Houst108-Houst-Final-Iteration.XML",
-      "source_song": "Houst-Final-Iteration",
+      "output_filename": "Houst108-Houston.XML",
+      "source_song": "Houston",
       "preset_name": "Houst108",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -983,19 +972,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT1-Houst-Final-Iteration-Template.XML",
-      "source_song": "Houst-Final-Iteration-Template",
-      "preset_name": "KIT1",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
-      "differing_params": []
-    },
-    {
-      "output_filename": "KIT1-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "KIT1-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "KIT1",
       "preset_folder": "KITS",
       "instrument_type": "kit",

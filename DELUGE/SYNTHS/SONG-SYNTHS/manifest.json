@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-10T11:18:41.925215+00:00",
-  "songs_processed": 96,
-  "total_count": 197,
+  "generated": "2026-08-23T15:48:01.924626+00:00",
+  "songs_processed": 75,
+  "total_count": 194,
   "extractions": [
     {
       "output_filename": "000-Beginagain.XML",
@@ -378,39 +378,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "014-BeautifulStranger-Lollybuy 10.XML",
-      "source_song": "Lollybuy 10",
-      "preset_name": "014-BeautifulStranger",
-      "preset_folder": "SYNTHS/SONG-SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "014-BeautifulStranger-Lollybuy 19.XML",
-      "source_song": "Lollybuy 19",
-      "preset_name": "014-BeautifulStranger",
-      "preset_folder": "SYNTHS/SONG-SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": []
-    },
-    {
-      "output_filename": "014-BeautifulStranger-Lollybuy 20.XML",
-      "source_song": "Lollybuy 20",
-      "preset_name": "014-BeautifulStranger",
-      "preset_folder": "SYNTHS/SONG-SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": []
-    },
-    {
       "output_filename": "014A-Arparty.XML",
       "source_song": "Arparty",
       "preset_name": "014A",
@@ -543,25 +510,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "027-Lollybuy 10.XML",
-      "source_song": "Lollybuy 10",
+      "output_filename": "027-Lollybuy.XML",
+      "source_song": "Lollybuy",
       "preset_name": "027",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
       "section_id": 1,
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "027-Lollybuy 4.XML",
-      "source_song": "Lollybuy 4",
-      "preset_name": "027",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
       "differing_params": []
     },
     {
@@ -1060,19 +1016,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "136-Lollybuy 10.XML",
-      "source_song": "Lollybuy 10",
-      "preset_name": "136",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": []
-    },
-    {
-      "output_filename": "136-Lollybuy 24.XML",
-      "source_song": "Lollybuy 24",
+      "output_filename": "136-Lollybuy.XML",
+      "source_song": "Lollybuy",
       "preset_name": "136",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1588,6 +1533,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "5Alivefuzzbass-Aa00.XML",
+      "source_song": "Aa00",
+      "preset_name": "5Alivefuzzbass",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "62-EFFECTSOUND1-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "62-EFFECTSOUND1",
@@ -1702,6 +1658,17 @@
       "source_song": "No-More-Colour",
       "preset_name": "Dystopia Keys",
       "preset_folder": "SYNTHS/COMMUNITY/1.2 Presets",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Fuzz-Aa11.XML",
+      "source_song": "Aa11",
+      "preset_name": "Fuzz",
+      "preset_folder": "SYNTHS/KERERU/ARCHIVE",
       "instrument_type": "synth",
       "section_id": 0,
       "colour_name": "LightBlue",
@@ -1907,8 +1874,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Fuzzbass-Sink-Houst-10-8.XML",
-      "source_song": "Houst-10-8",
+      "output_filename": "K01Fuzzbass-Sink-Houston.XML",
+      "source_song": "Houston",
       "preset_name": "K01Fuzzbass-Sink",
       "preset_folder": "SYNTHS/SONG-SYNTHS",
       "instrument_type": "synth",
@@ -1918,8 +1885,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Fuzzbass-Sink-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "K01Fuzzbass-Sink-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "K01Fuzzbass-Sink",
       "preset_folder": "SYNTHS/SONG-SYNTHS",
       "instrument_type": "synth",
@@ -1984,8 +1951,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Lully-Pad-Lollybuy 21.XML",
-      "source_song": "Lollybuy 21",
+      "output_filename": "Lully-Pad-Lollybuy.XML",
+      "source_song": "Lollybuy",
       "preset_name": "Lully-Pad",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -2039,8 +2006,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "TB02-FiveAlive.XML",
-      "source_song": "FiveAlive",
+      "output_filename": "TB02-Aa00.XML",
+      "source_song": "Aa00",
       "preset_name": "TB02",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -2127,8 +2094,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Wall Of Static-Oddish-Houst-Vox-Bounce.XML",
-      "source_song": "Houst-Vox-Bounce",
+      "output_filename": "Wall Of Static-Oddish-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
       "preset_name": "Wall Of Static-Oddish",
       "preset_folder": "SYNTHS/SONG-SYNTHS",
       "instrument_type": "synth",
