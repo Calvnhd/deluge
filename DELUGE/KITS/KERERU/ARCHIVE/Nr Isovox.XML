@@ -55,7 +55,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/REC00000.WAV">
+				fileName="SAMPLES/KERERU/RECORD/Noise.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="73461" />

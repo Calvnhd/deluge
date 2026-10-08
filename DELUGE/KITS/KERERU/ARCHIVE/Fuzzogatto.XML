@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/REC00023.WAV">
+				fileName="SAMPLES/KERERU/RECORD/FuzzGat-4.WAV">
 				<zone
 					startSamplePos="356352"
 					endSamplePos="1473658" />
@@ -234,7 +234,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/REC00019.WAV">
+				fileName="SAMPLES/KERERU/RECORD/FuzzGat-2.WAV">
 				<zone
 					startSamplePos="132608"
 					endSamplePos="370734" />
@@ -389,7 +389,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/REC00020.WAV">
+				fileName="SAMPLES/KERERU/RECORD/FuzzGat-3.WAV">
 				<zone
 					startSamplePos="133376"
 					endSamplePos="1190592" />
@@ -540,7 +540,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/REC00024.WAV">
+				fileName="SAMPLES/KERERU/RECORD/FuzzGat-5.WAV">
 				<zone
 					startSamplePos="135168"
 					endSamplePos="916175" />
@@ -691,7 +691,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/REC00025.WAV">
+				fileName="SAMPLES/KERERU/RECORD/FuzzGat-6.WAV">
 				<zone
 					startSamplePos="189440"
 					endSamplePos="238428" />
@@ -842,7 +842,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/REC00028.WAV">
+				fileName="SAMPLES/KERERU/RECORD/FuzzGat-1.WAV">
 				<zone
 					startSamplePos="88960"
 					endSamplePos="795222" />
