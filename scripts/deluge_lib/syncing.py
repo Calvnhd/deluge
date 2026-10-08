@@ -259,6 +259,8 @@ def compute_sync(
     """Walk both trees to build a plan of copy/delete actions for altering
     the destination directory such that it becomes identical to source.
 
+    Print a per-file comparison counter, including while verifying hashes.
+
     Args:
         source: Source directory to sync with
         dest: Destination to sync
@@ -281,7 +283,9 @@ def compute_sync(
     dst_scan = scan_tree(dest, label="destination", file_filter=file_filter)
 
     # --- compare source → dest, file by file ---
-    for key, src_entry in src_scan.files.items():
+    total = len(src_scan.files)
+    for i, (key, src_entry) in enumerate(src_scan.files.items(), 1):
+        print(f"\rComparing... {i}/{total}", end="", flush=True)
         src_path = source / src_entry.rel_path
         dst_path = dest / src_entry.rel_path
 
@@ -372,6 +376,7 @@ def compute_sync(
         if key not in src_scan.files:
             plan.files_to_delete.append(dest / dst_entry.rel_path)
 
+    print(f"\rComparing... {total}/{total} files compared")
     return plan, src_scan
 
 
