@@ -1,19 +1,8 @@
 {
-  "generated": "2026-05-18T13:06:56.677082+00:00",
-  "songs_processed": 61,
-  "total_count": 74,
+  "generated": "2026-08-23T15:48:01.927383+00:00",
+  "songs_processed": 75,
+  "total_count": 104,
   "extractions": [
-    {
-      "output_filename": "000-Alr.XML",
-      "source_song": "Alr",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
     {
       "output_filename": "000-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
@@ -23,6 +12,17 @@
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000-Ape.XML",
+      "source_song": "Ape",
+      "preset_name": "000",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
       "differing_params": []
     },
     {
@@ -37,14 +37,25 @@
       "differing_params": []
     },
     {
-      "output_filename": "003-Bmtk.XML",
-      "source_song": "Bmtk",
+      "output_filename": "000-Alr-AYG.XML",
+      "source_song": "AYG",
+      "preset_name": "000-Alr",
+      "preset_folder": "KITS/SONG-KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003-Aa00.XML",
+      "source_song": "Aa00",
       "preset_name": "003",
       "preset_folder": "KITS",
       "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -125,6 +136,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "010A-Arparty-Rearr.XML",
+      "source_song": "Arparty-Rearr",
+      "preset_name": "010A",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "010A-Arparty-old.XML",
       "source_song": "Arparty-old",
       "preset_name": "010A",
@@ -180,21 +202,21 @@
       "differing_params": []
     },
     {
-      "output_filename": "016-Alr.XML",
-      "source_song": "Alr",
-      "preset_name": "016",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "016-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "016",
       "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "016-Mountain-Aa11.XML",
+      "source_song": "Aa11",
+      "preset_name": "016-Mountain",
+      "preset_folder": "KITS/SONG-KITS",
       "instrument_type": "kit",
       "section_id": 0,
       "colour_name": "LightBlue",
@@ -232,6 +254,17 @@
       "section_id": 1,
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "018-Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "018",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -279,8 +312,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "021-FiveAlive.XML",
-      "source_song": "FiveAlive",
+      "output_filename": "021-Aa00.XML",
+      "source_song": "Aa00",
       "preset_name": "021",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -532,6 +565,50 @@
       "differing_params": []
     },
     {
+      "output_filename": "Analog Machine Lofi-Eoy-Town-Hall.XML",
+      "source_song": "Eoy-Town-Hall",
+      "preset_name": "Analog Machine Lofi",
+      "preset_folder": "KITS/COMMUNITY/1.2 Presets",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Ayg-AYG.XML",
+      "source_song": "AYG",
+      "preset_name": "Ayg",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Ayg-Tight-AYG.XML",
+      "source_song": "AYG",
+      "preset_name": "Ayg-Tight",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Bs2-Houst-Bass-Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Bs2-Houst-Bass",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
       "output_filename": "Chug-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "Chug",
@@ -558,6 +635,17 @@
       "source_song": "Ell",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Deeper-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Deeper",
+      "preset_folder": "KITS/KERERU/ARCHIVE",
       "instrument_type": "kit",
       "section_id": 0,
       "colour_name": "LightBlue",
@@ -609,6 +697,50 @@
       "differing_params": []
     },
     {
+      "output_filename": "Deepfill-Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Deepfill",
+      "preset_folder": "KITS/KERERU/ARCHIVE",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Default-Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "Default",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Eeeahh-Aa00.XML",
+      "source_song": "Aa00",
+      "preset_name": "Eeeahh",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Fills-Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Fills",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
       "output_filename": "Fuzzgat-Arparty-old.XML",
       "source_song": "Arparty-old",
       "preset_name": "Fuzzgat",
@@ -628,6 +760,160 @@
       "section_id": 2,
       "colour_name": "Gold",
       "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Fuzzogatto-Arparty-Rearr.XML",
+      "source_song": "Arparty-Rearr",
+      "preset_name": "Fuzzogatto",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Hazy-Slice-Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Hazy-Slice",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Hazy-Slice-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Hazy-Slice",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Amen-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Amen",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 8,
+      "colour_name": "Purple",
+      "colour_abbr": "Pur",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Believes-Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Houst-Believes",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 7,
+      "colour_name": "Orange",
+      "colour_abbr": "Orn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Believes-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Believes",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Build-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Build",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 7,
+      "colour_name": "Orange",
+      "colour_abbr": "Orn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Do-Not-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Do-Not",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Doubts-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Doubts",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Intro-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Intro",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Moment-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Moment",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 11,
+      "colour_name": "Magenta",
+      "colour_abbr": "Mag",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Watch-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Watch",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Watch-Alt-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Watch-Alt",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst108-Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Houst108",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -686,6 +972,28 @@
       "differing_params": []
     },
     {
+      "output_filename": "KIT1-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "KIT1",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT1-Nz126.XML",
+      "source_song": "Nz126",
+      "preset_name": "KIT1",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "KIT2-Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "KIT2",
@@ -694,6 +1002,28 @@
       "section_id": 1,
       "colour_name": "Pink",
       "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT2-Polly.XML",
+      "source_song": "Polly",
+      "preset_name": "KIT2",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT3-Eoy-Town-Hall.XML",
+      "source_song": "Eoy-Town-Hall",
+      "preset_name": "KIT3",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
       "differing_params": []
     },
     {
