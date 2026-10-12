@@ -1,4 +1,7 @@
-# Deluge
+---
+title: Deluge
+description: Backup and management scripts for a Synthstrom Deluge SD card
+---
 
 Back-up and management scripts for a [Synthstrom Deluge](https://synthstrom.com/product/deluge/) SD card.
 
@@ -175,4 +178,34 @@ uv run sample_overview.py missing                           # samples referenced
 uv run sample_overview.py duplicates                        # find duplicate samples by content hash
 uv run sample_overview.py usage "Kick"                      # usage detail for samples matching a search term
 ```
+### Development checks with pou
 
+With `pou` installed, run these commands from the repository root:
+
+```powershell
+pou help
+pou instructions test
+pou doctor
+pou test
+```
+
+[pou.config.mjs](./pou.config.mjs) imports the repo-local Python configuration
+from [.pou/python.mjs](./.pou/python.mjs). It uses the built-in `base` profile;
+no changes to the installed `pou` are required.
+
+`pou doctor` checks Node, configuration loading, and `uv` availability. It does
+not verify Python, installed dependencies, or test correctness.
+
+`pou test` runs the full pytest suite from `scripts/` using the committed
+lockfile and the `dev` dependency extra:
+
+```powershell
+uv run --directory scripts --locked --extra dev python -m pytest
+```
+
+The command may download Python or dependencies and update `scripts/.venv`.
+It does not change the lockfile or run lint, type checks, or real SD-card and
+cloud-backup operations. Collection errors and failing tests are reported as
+failures, not skipped.
+
+Record workflow friction with `pou observe "symptom and consequence"`.
