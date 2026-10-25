@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #f8fafc;
+      --text: #17243a;
+      --muted: #526277;
+      --guide: #cbd5e1;
+      --app: #166534;
+      --library: #7635a4;
+      --framework: #1d4ed8;
+      --result: #0f766e;
+      --condition: #925000;
+      --badge: #e9eef5;
+      --focus: #c06800;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #151b25;
+        --text: #e4ebf5;
+        --muted: #a9b8cc;
+        --guide: #3d4b61;
+        --app: #8bddaa;
+        --library: #d1a7ff;
+        --framework: #90baff;
+        --result: #74d8cb;
+        --condition: #efbd74;
+        --badge: #263246;
+        --focus: #ffc477;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 20px; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 30px 28px 48px; }
+    h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.2; letter-spacing: -0.6px; }
+    header { margin-bottom: 26px; }
+    header p { margin: 0 0 12px; color: var(--muted); }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+    .legend { font-weight: 650; }
+    .app { color: var(--app); }
+    .library { color: var(--library); }
+    .framework { color: var(--framework); }
+    a { color: var(--framework); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button { font: inherit; }
+    .depth-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; }
+    .depth-controls button {
+      border: 1px solid var(--guide);
+      border-radius: 4px;
+      padding: 3px 9px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .depth-controls button[aria-pressed="true"] { background: var(--badge); border-color: var(--framework); }
+    .fold-toggle {
+      flex: 0 0 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      align-self: center;
+    }
+    .fold-toggle::before { content: "\25BE"; }
+    .fold-toggle[aria-expanded="false"]::before { content: "\25B8"; }
+    .fold-toggle:hover { background: var(--badge); color: var(--text); }
+    .fold-summary { color: var(--muted); font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    code { font: 0.93em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    ol.trace, ol.steps { list-style: none; padding: 0; margin: 0; }
+    ol.steps {
+      margin: 5px 0 8px 5px;
+      padding-left: 19px;
+      border-left: 1px solid var(--guide);
+    }
+    li.call { margin: 9px 0; }
+    .call-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+    .file { font-size: 12px; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .file:hover { text-decoration: underline; }
+    .signature { font-size: 13px; }
+    .type { padding: 1px 6px; border-radius: 4px; background: var(--badge); color: var(--muted); font-size: 11px; }
+    .annotation { margin: 2px 0 5px; color: var(--muted); font-size: 13px; }
+    .annotation::before { content: "\2022"; margin-right: 7px; }
+    .state, .return { margin: 5px 0; font-size: 12px; }
+    .state { color: var(--muted); }
+    .return { color: var(--result); }
+    .kind { margin-right: 7px; font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.5px; }
+    .condition, .repeat { color: var(--condition); font-size: 12px; font-weight: 650; }
+    li.branch { margin: 9px 0; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--guide); color: var(--muted); font-size: 12px; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 700px) {
+      main { padding: 20px 12px; }
+      ol.steps { padding-left: 11px; margin-left: 2px; }
+      .call-head { column-gap: 7px; }
+      .signature { font-size: 12px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: black; }
+      main { max-width: none; padding: 0; }
+      .depth-controls, .fold-toggle, .fold-summary { display: none !important; }
+      ol.steps[hidden] { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Execution flow</p>
+    <h1>{{TITLE}}</h1>
+    <p>{{SUMMARY}}</p>
+    <div class="legend" aria-label="Source layers">
+      {{LEGEND}}
+    </div>
+    <div class="depth-controls" role="group" aria-label="Visible call depth" hidden>
+      <span>Show depth</span>
+      <button type="button" data-depth="1" aria-pressed="false">1</button>
+      <button type="button" data-depth="2" aria-pressed="false">2</button>
+      <button type="button" data-depth="3" aria-pressed="false">3</button>
+      <button type="button" data-depth="all" aria-pressed="true">All</button>
+    </div>
+    <span class="sr-only" id="fold-status" role="status" aria-live="polite"></span>
+  </header>
+
+  <ol class="trace" aria-label="Nested execution calls in order">
+{{TRACE}}
+  </ol>
+
+  <footer>
+    {{NOTES}}
+    <p>Updated <time datetime="{{UPDATED}}">{{UPDATED}}</time></p>
+  </footer>
+</main>
+<script>
+  const calls = [...document.querySelectorAll(".trace .call")];
+  const depthControls = document.querySelector(".depth-controls");
+  const depthButtons = [...depthControls.querySelectorAll("button")];
+  const foldStatus = document.getElementById("fold-status");
+  const entries = new Map();
+
+  function selectDepth(value) {
+    for (const button of depthButtons)
+      button.setAttribute("aria-pressed", String(button.dataset.depth === value));
+  }
+
+  function setExpanded(entry, expanded) {
+    entry.steps.hidden = !expanded;
+    entry.button.setAttribute("aria-expanded", String(expanded));
+    entry.button.setAttribute("aria-label",
+      `${expanded ? "Collapse" : "Expand"} nested calls in ${entry.label}`);
+    entry.summary.hidden = expanded;
+  }
+
+  for (const [index, call] of calls.entries()) {
+    const steps = [...call.children].find(child => child.matches("ol.steps"));
+    if (!steps || !steps.querySelector(".call"))
+      continue;
+
+    const head = [...call.children].find(child => child.classList.contains("call-head"));
+    const label = `${head.querySelector(".file").textContent} ${head.querySelector(".signature").textContent}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "fold-toggle";
+    steps.id = `call-steps-${index + 1}`;
+    button.setAttribute("aria-controls", steps.id);
+
+    const summary = document.createElement("span");
+    summary.className = "fold-summary";
+    const count = steps.querySelectorAll(".call").length;
+    summary.textContent = `${count} nested ${count === 1 ? "call" : "calls"} hidden`;
+
+    let depth = 1;
+    for (let parent = call.parentElement.closest(".call"); parent;
+      parent = parent.parentElement.closest(".call"))
+      depth++;
+
+    const entry = { steps, button, summary, label, depth };
+    entries.set(call, entry);
+    head.prepend(button);
+    head.append(summary);
+    setExpanded(entry, true);
+
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      setExpanded(entry, expanded);
+      selectDepth(null);
+      foldStatus.textContent = `${expanded ? "Expanded" : "Collapsed"} ${label}`;
+    });
+  }
+
+  for (const button of depthButtons) {
+    button.addEventListener("click", () => {
+      const value = button.dataset.depth;
+      for (const entry of entries.values())
+        setExpanded(entry, value === "all" || entry.depth < Number(value));
+      selectDepth(value);
+      foldStatus.textContent = value === "all" ? "All calls expanded" : `Showing call depth ${value}`;
+    });
+  }
+
+  function revealTarget(hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (!target)
+      return;
+
+    let changed = false;
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      const entry = entries.get(parent);
+      if (entry && entry.steps.hidden) {
+        setExpanded(entry, true);
+        changed = true;
+      }
+    }
+    if (changed) {
+      selectDepth(null);
+      foldStatus.textContent = "Expanded the path to the linked step";
+    }
+    target.scrollIntoView({ block: "start" });
+  }
+
+  document.addEventListener("click", event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link)
+      revealTarget(link.getAttribute("href"));
+  });
+  window.addEventListener("hashchange", () => revealTarget(location.hash));
+  depthControls.hidden = false;
+  if (location.hash)
+    revealTarget(location.hash);
+</script>
+</body>
+</html>
