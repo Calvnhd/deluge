@@ -189,6 +189,15 @@ deterministic path ordering for stable Git diffs.
 
 ### Development checks with pou
 
+> [!WARNING]
+> The [sync-to-SD tests](./scripts/tests/test_sync_to_sd.py) and
+> [cloud-sync tests](./scripts/tests/test_sync_samples_to_cloud.py) are temporarily
+> disabled. They can overwrite the live sync manifest or append test records to
+> the live sync log. The test suite needs isolation fixes: redirect all persistent
+> state to temporary paths and add regression coverage proving live files remain
+> untouched before re-enabling these modules. The remaining tests are not covered
+> by this quarantine.
+
 With `pou` installed, run these commands from the repository root:
 
 ```powershell

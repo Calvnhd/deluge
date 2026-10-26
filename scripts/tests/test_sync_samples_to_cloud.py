@@ -12,6 +12,11 @@ from sync_samples_to_cloud import main
 from tests.conftest import _touch
 
 
+pytestmark = pytest.mark.skip(
+    reason="Unsafe CLI tests write to the live sync log. Isolate persistent state before re-enabling.",
+)
+
+
 def _setup_env(
     monkeypatch: pytest.MonkeyPatch,
     deluge_root: Path,

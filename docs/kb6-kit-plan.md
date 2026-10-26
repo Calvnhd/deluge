@@ -110,57 +110,6 @@ DELUGE\SAMPLES\KB6-LIB\Roland TR727\Original\<sample>.wav
 DELUGE\SAMPLES\KB6-LIB\Roland TR727\DirtyTubeAmp\<sample>.wav
 ```
 
-Flatten chosen samples from all source `Kit`, `Set` and other subfolders.
-The TR-727 deliberately retains its two named version folders, each flat;
-do not retain other source nesting or create other alternative-kit folders.
-Repeated basenames need unique destination names, with a future mapping from
-the exact source root, instrument folder and relative path to the destination
-filename. Renaming must not discard provenance.
-
-In the original 2026-10-26 inventory, the approved roster drew 11 instruments
-from C and 39 from D, covering 3,645 raw source files, all WAV. These are
-historical candidate counts, not current local counts or final kit counts.
-Raw counts include
-variants, duplicates, long recordings and the known truncated file. They
-are neither proposed kit sizes nor counts of unique timbres or usable hits.
-One long recording may contain several events; several files may represent
-the same voice.
-
-For context, that historical full-library inventory contained 49 C instrument folders with
-3,711 audio files and 432 external sample-bearing folders with 45,045 audio
-files. The roots then had no shared top-level names. The external `compressed`
-folder contained archives and was not an instrument. These full-library
-figures are not additions to the approved roster.
-
-The [sample catalogue](sample-catalogue.csv) inventories local files only.
-At the latest check, its 262 KB6 entries match the rebuilt working
-collection's paths, including both TR-727 version folders. It does not
-inventory the remaining external collections. Regenerate it manually after
-further changes; this documentation update does not run the generator.
-Catalogue reference counts do not constrain selection.
-
-The following verification and roster findings are dated 2026-10-26
-analysis observations, not fresh verification of transferred copies.
-The temporary compiled analysis files were cleaned up; no persistent
-report files are available. Re-verify if file contents change.
-
-In that analysis, Python's standard `wave` reader independently verified metadata and
-audio-payload hashes for all 3,448 complete integer-PCM files. The other
-196 float-format files were inspected with the RIFF parser; the remaining
-file is the confirmed truncated CR-78 `LOOP2.WAV`. The compiled verification
-also confirmed that all 3,645 original source files then retained their
-initial size and modification time, and all 50 source-folder counts were
-unchanged at that time, before the subsequent consolidation and transfers.
-
-Effort estimates describe the expected selection workflow, not audition
-quality or a verdict on the instrument. Low means a relatively short or
-clearly labelled set, not automatic keep-all. Medium means more comparison
-or identification. High means substantial mapping, cross-set comparison or
-long-recording assessment. The split is 17 Low, 18 Medium and 15 High.
-There is no 16-file effort threshold: both PO-12 and Maestro need a short
-complete mapping and audition pass. Format/playback quality control (QC) is
-additional where noted.
-
 ## Foundational machines
 
 IDs 1-10 provide contrasting machine voices and signature percussion.
@@ -279,26 +228,6 @@ These findings come from the original 2026-10-26 analysis, not a new scan
 of the working collection. Bringing over a complete folder does not
 resolve its outstanding content or playback checks.
 
-### Exact duplicates are not near-similarity
-
-There are three byte-identical duplicate pairs:
-
-* TR-909: `Set1\RIDED4.WAV` and `Set1\RIDED6.WAV`
-* Fairlight: `Symtom.wav` and `Symtomlo.wav`
-* Simmons: `Snare19.wav` and `Tom6.wav`
-
-There are five identical audio-payload pairs in total, including those three.
-The additional pairs have matching encoding, sample rate, channels and bit
-depth but differing file headers:
-
-* Machinedrum: `Hats 0057.wav` and `Snares 0029.wav`
-* Wavedrum: `Hat5.wav` and `Hat7.wav`
-
-These are five specific pairs, not evidence that five whole instruments
-contain mostly near-duplicates. Hashes establish exact matches, not audible
-similarity. Listening is still needed to remove near-redundant variants and
-to resolve misleading role labels on identical sounds.
-
 ### Formats and recording structure
 
 There are 196 float WAV files: DMX 30, Fairlight 69, Kawai 24, HR-16B 47 and
@@ -325,70 +254,3 @@ musical event boundaries, prove every burst is a strike or select a trim.
 Long Pearl recordings, Wavedrum fills, Sideman rhythms and Polivoks grooves
 also need content-specific assessment. A filename or duration alone does
 not prove that a file is a loop or a clean one-shot.
-
-### Flattening and preservation
-
-The ER-1 has 19 case-insensitive colliding basename groups, and the LXR has
-nine. Give any chosen conflicting files unique names within their one flat
-instrument folder. Preserve the original nested paths in the future mapping.
-Simmons has nested sources but no current flat-basename collisions.
-
-The original TR-727 source folder `Roland TR727` contained `Orig`,
-`TubeAmp-Clean`, `TubeAmp-Dirty`, `TubeEQ` and a different set. Keep the
-approved original and dirty tube-amp versions separate in
-`Roland TR727\Original` and `Roland TR727\DirtyTubeAmp`. Keep each version
-flat inside the shared instrument folder; do not merge the versions or
-bring over other source subfolders. Preserve each version's original
-relative paths in the mapping.
-
-Before pruning or replacing anything in the working destination, verify
-where the original recordings now reside and preserve them safely outside
-it. Do not assume D is available or still holds a second copy. Stage and
-archive the only available originals before any
-destructive change. Never clear or overwrite the only source copy.
-Do not leave unchosen originals mixed into the eventual flat curated folder.
-
-## Practical selection workflow
-
-* Map all files to observed roles or sound functions first, including numbered
-  files and unclear abbreviations. Separate hits, phrases, sustained sounds
-  and uncertain material without inferring roles solely from filenames.
-* Shortlist by distinct function, timbre, envelope, articulation and useful
-  register. Start with the instrument's characteristic voices and accents;
-  do not fill absent roles from another instrument.
-* Audition at sensible, comparable listening levels so louder captures do
-  not win by default. Compare source sets and processed versions in context,
-  while preserving the differences that make the instrument distinctive.
-* Compare within each role and drop near-redundancy. Keep an alternative
-  only when its contrast is musically useful, even in a set below 16.
-* Test one coherent, playable kit per instrument by default, with separate
-  original and dirty tube-amp TR-727 kits as approved. Check balance, register
-  spread and practical access to useful sounds. Stop when additional samples
-  add no useful contribution, not when a numeric quota is reached.
-* Record each kept sound's role, reason for inclusion, exact original source
-  path, proposed destination and any later trims, slices, gain changes or
-  format conversions. Keep source-to-destination provenance through every
-  edit, and resolve uncertain instrument provenance before inclusion.
-* After selection is approved, preserve originals and flatten the chosen
-  material collision-safely into the exact instrument folder spelling,
-  except for the approved TR-727 layout with two flat version folders under
-  its instrument folder. Keep those versions separate. Do not create other
-  alternate-kit subfolders or retain other source Set/Kit nesting.
-* Validate chosen files on the target Deluge firmware for loading, playback,
-  starts, tails, levels and coherent kit use. Resolve format issues with
-  traceable delivery copies only where needed.
-
-## Recommended next steps
-
-Audition and QC the transferred sets, retaining or removing samples for
-usefulness rather than set size. Build kit XMLs when requested; no XMLs
-are created by this update.
-
-For later contrast additions, the assistant recommendation is TR-808,
-then TR-909, then optionally Machinedrum or SR-16. This is not a user-approved
-reordering of the roster or a sample choice. All are already among the
-approved 50 instruments, so no new instrument approval is needed.
-
-Initial transfers are underway; final curation, any required edits and
-kit creation remain ahead. No final sample counts are implied by the
-historical roster or the current working collection.
