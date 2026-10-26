@@ -121,17 +121,19 @@ class TestFullSync:
 
 
 class TestNonWavHandling:
+    @pytest.mark.parametrize("ignored_name", ["preset.xml", "README.txt"])
     def test_non_wav_in_source_ignored(
         self,
         tmp_path: Path,
         monkeypatch: pytest.MonkeyPatch,
         capsys: pytest.CaptureFixture[str],
+        ignored_name: str,
     ) -> None:
         
         deluge = tmp_path / "DELUGE"
         samples = deluge / "SAMPLES"
         _touch(samples / "kick.wav", b"kick", mtime=1_700_000_000.0)
-        _touch(samples / "preset.xml", b"<xml/>", mtime=1_700_000_000.0)
+        _touch(samples / ignored_name, b"supporting file", mtime=1_700_000_000.0)
 
         dest = tmp_path / "cloud"
         dest.mkdir()
@@ -145,7 +147,8 @@ class TestNonWavHandling:
             main([])
 
         assert (dest / "kick.wav").exists()
-        assert not (dest / "preset.xml").exists()
+        assert not (dest / ignored_name).exists()
+        assert (samples / ignored_name).read_bytes() == b"supporting file"
 
     def test_non_wav_at_destination_untouched(
         self,

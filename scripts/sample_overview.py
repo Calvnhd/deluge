@@ -4,11 +4,15 @@
 from __future__ import annotations
 
 import argparse
+import csv
 from collections import Counter, defaultdict
+from decimal import Decimal
 from pathlib import Path
+from tempfile import NamedTemporaryFile
 
 from deluge_lib.analysis import (
     SampleUsage,
+    UsageIndex,
     top_folder,
     build_usage_index,
     compute_folder_breakdown,
@@ -18,7 +22,10 @@ from deluge_lib.analysis import (
 )
 from deluge_lib.cli_utils import get_deluge_root
 from deluge_lib.deluge_sdk import SampleRef, extract_sample_refs, find_all_xml_files, find_unextracted_refs, hash_all_samples
+from deluge_lib.paths import SAMPLE_CATALOGUE_PATH
 from deluge_lib.scanning import format_size, print_path, scan_tree
+
+_CATALOGUE_AUDIO_EXTENSIONS = frozenset({".wav", ".aif", ".aiff"})
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -63,6 +70,68 @@ def _strip_folder(path: str, folder: str) -> str:
 # ---------------------------------------------------------------------------
 # Subcommands
 # ---------------------------------------------------------------------------
+
+def cmd_catalogue(index: UsageIndex, args: argparse.Namespace) -> None:
+    """Write a stable audio-only CSV and report unexpected non-audio files."""
+    on_disk = sorted(
+        (sample for sample in index.entries.values() if sample.on_disk),
+        key=lambda sample: (sample.path.casefold(), sample.path),
+    )
+    samples: list[SampleUsage] = []
+    unexpected: list[str] = []
+    for sample in on_disk:
+        extension = Path(sample.path).suffix.casefold()
+        if extension in _CATALOGUE_AUDIO_EXTENSIONS:
+            samples.append(sample)
+        elif not (
+            extension == ".txt" and top_folder(sample.path).casefold() == "citizen-dj"
+        ):
+            unexpected.append(f"SAMPLES/{sample.path}")
+
+    output = Path(args.output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path: Path | None = None
+    try:
+        with NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            newline="",
+            dir=output.parent,
+            prefix=f".{output.name}.",
+            suffix=".tmp",
+            delete=False,
+        ) as handle:
+            temporary_path = Path(handle.name)
+            writer = csv.writer(handle, lineterminator="\n")
+            writer.writerow(["sample_path", "size_mb", "kit_presets", "synth_presets", "songs"])
+            for sample in samples:
+                if sample.size is None:
+                    raise ValueError(f"On-disk file has no recorded size: {sample.path}")
+                totals = Counter(
+                    xml_type
+                    for xml_type, _ in {(ref.xml_type, ref.xml_file) for ref in sample.refs}
+                )
+                writer.writerow(
+                    [
+                        f"SAMPLES/{sample.path}",
+                        f"{Decimal(sample.size) / 1_000_000:.3f}",
+                        totals["kit"],
+                        totals["synth"],
+                        totals["song"],
+                    ]
+                )
+        temporary_path.replace(output)
+    finally:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
+    print(f"Catalogue written: {output} ({len(samples):,} audio files)")
+    if unexpected:
+        print(
+            f"Warning: {len(unexpected):,} unexpected non-audio files excluded from catalogue. "
+            "Investigate before removal:"
+        )
+        for path in unexpected:
+            print(f"  {path}")
 
 
 def cmd_summary(index, args):
@@ -508,6 +577,16 @@ def main(argv: list[str] | None = None) -> None:
     )
     subparsers = parser.add_subparsers(dest="command")
 
+    sp_catalogue = subparsers.add_parser(
+        "catalogue", help="Manually generate a WAV/AIF/AIFF CSV and report unexpected file types"
+    )
+    sp_catalogue.add_argument(
+        "--output",
+        type=Path,
+        default=SAMPLE_CATALOGUE_PATH,
+        help=f"Destination CSV (default: {SAMPLE_CATALOGUE_PATH})",
+    )
+
     # uv run sample_overview summary --top 5
     sp_summary = subparsers.add_parser(
         "summary", help="Library overview with totals and folder breakdown"
@@ -575,8 +654,14 @@ def main(argv: list[str] | None = None) -> None:
         return
 
     # Data collection for XML-based subcommands
-    sample_scan = scan_tree(deluge_root / "SAMPLES", label="SAMPLES", file_filter="wav")
-    xml_files = find_all_xml_files(deluge_root)
+    catalogue = args.command == "catalogue"
+    sample_scan = scan_tree(
+        deluge_root / "SAMPLES",
+        label="SAMPLES",
+        file_filter="all" if catalogue else "wav",
+        strict=catalogue,
+    )
+    xml_files = find_all_xml_files(deluge_root, strict=catalogue)
     refs: list[SampleRef] = []
     refs_by_file: dict[Path, list[SampleRef]] = {}
     total = len(xml_files)
@@ -589,7 +674,9 @@ def main(argv: list[str] | None = None) -> None:
     index = build_usage_index(refs, sample_scan)
 
     # Branch to subcommand
-    if args.command == "missing":
+    if catalogue:
+        cmd_catalogue(index, args)
+    elif args.command == "missing":
         cmd_missing(index, args, refs_by_file=refs_by_file, deluge_root=deluge_root)
     else:
         commands = {

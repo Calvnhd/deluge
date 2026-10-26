@@ -15,3 +15,4 @@ LOGS_DIR = DATA_DIR / "logs"
 # Individual file paths.
 SYNC_MANIFEST_PATH = DATA_DIR / "sync_manifest.json"
 SYNC_LOG_PATH = LOGS_DIR / "sync.log"
+SAMPLE_CATALOGUE_PATH = SCRIPTS_DIR.parent / "docs" / "sample-catalogue.csv"

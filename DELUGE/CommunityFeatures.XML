@@ -2,7 +2,7 @@
 <runtimeFeatureSettings
 	firmwareVersion="c1.2.1"
 	earliestCompatibleFirmware="4.1.3"
-	startupSong="SONGS/Weirdsaw-B 12.XML">
+	startupSong="SONGS/.XML">
 	<setting name="drumRandomizer" value="1"></setting>
 	<setting name="quantize" value="1"></setting>
 	<setting name="fineTempoKnob" value="1"></setting>
@@ -22,7 +22,7 @@
 	<setting name="emulatedDisplay" value="0"></setting>
 	<setting name="enableKeyboardViewSidebarMenuExit" value="0"></setting>
 	<setting name="enableLaunchEventPlayhead" value="1"></setting>
-	<setting name="displayChordKeyboard" value="0"></setting>
+	<setting name="displayChordKeyboard" value="1"></setting>
 	<setting name="alternativePlaybackStartBehaviour" value="0"></setting>
 	<setting name="accessibilityShortcuts" value="0"></setting>
 	<setting name="enableGridViewLoopPads" value="0"></setting>

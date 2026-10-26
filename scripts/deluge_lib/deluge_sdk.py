@@ -114,10 +114,11 @@ def hash_all_samples(deluge_root: Path) -> dict[str, list[str]]:
     return dict(hashes)
 
 
-def find_all_xml_files(deluge_root: Path) -> list[Path]:
+def find_all_xml_files(deluge_root: Path, *, strict: bool = False) -> list[Path]:
     """Recursively find all XML files in KITS/, SYNTHS/, SONGS/ under *deluge_root*.
 
-    Returns a sorted list of absolute paths.  Missing subdirectories are skipped.
+    Returns a sorted list of absolute paths. Missing subdirectories are skipped.
+    With strict=True, fail on scan errors rather than returning a partial list.
     """
     results: list[Path] = []
     for subdir in _DELUGE_XML_SUBDIRS:
@@ -125,7 +126,7 @@ def find_all_xml_files(deluge_root: Path) -> list[Path]:
         if not d.is_dir():
             continue
         # Use scan_tree for reliability even though we throw away so much of the result
-        scan = scan_tree(d, label=subdir, file_filter="xml")
+        scan = scan_tree(d, label=subdir, file_filter="xml", strict=strict)
         for entry in scan.files.values():
             results.append(d / entry.rel_path)
     return sorted(results)

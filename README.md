@@ -177,7 +177,16 @@ uv run sample_overview.py unused --top N                    # top N largest unre
 uv run sample_overview.py missing                           # samples referenced in XML but missing from disk
 uv run sample_overview.py duplicates                        # find duplicate samples by content hash
 uv run sample_overview.py usage "Kick"                      # usage detail for samples matching a search term
+uv run sample_overview.py catalogue                         # manually regenerate docs/sample-catalogue.csv
 ```
+
+The [sample catalogue](./docs/sample-catalogue.md) is an audio-only CSV inventory
+of WAV, AIF, and AIFF files with relative paths, three-decimal MB sizes, and
+distinct kit, synth, and song reference counts. Citizen DJ TXT sidecars are
+excluded without warnings; other unexpected file types are reported separately.
+The existing sync filters are unchanged. Generation is manual, with
+deterministic path ordering for stable Git diffs.
+
 ### Development checks with pou
 
 With `pou` installed, run these commands from the repository root:
