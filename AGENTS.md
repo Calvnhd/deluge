@@ -3,6 +3,8 @@ title: Project pou guidance
 description: Operating the project through pou
 ---
 
+# Pou
+
 `pou` is a project operations CLI that gives humans and agents a shared way to run this repo's commands, check readiness, and record friction.
 
 ## Base commands
@@ -31,3 +33,7 @@ Arguments in brackets are optional. Add `--json` for machine-readable results, o
 * Select a `profile` and configure its `params`. The `dotnet` profile adds `build`, `test`, and `checks` for explicitly selected targets.
 * Add readiness checks under `doctor` and command descriptions under `briefings`.
 * Review `.pou/friction.md` for recurring issues; propose a small, tested improvement for human approval before changing shared tooling.
+
+# Repo conventions
+
+* Do not hard-wrap Markdown prose. Keep each paragraph and list items on one source line and rely on VS Code's word wrap. Preserve structural line breaks for headings, lists, tables, and code blocks.

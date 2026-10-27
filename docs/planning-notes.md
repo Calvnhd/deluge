@@ -72,27 +72,20 @@ The user will be able to use a single command (`delly`, short for deluge) that i
 
 Optionally add `--dry-run` or `-n` where applicable for dry run functionality
 
-`delly sd-sync` —> `sync_from_sd.py`
-`delly cloud-sync` —> `sync_samples_to_cloud.py`
-`delly snap` —> `create_snapshot.py`
-`delly zip` —> `create_backup.py`
-`delly get-inst` -> `extract_instruments.py`
+`delly sd-sync` —> `sync_from_sd.py` `delly cloud-sync` —> `sync_samples_to_cloud.py` `delly snap` —> `create_snapshot.py` `delly zip` —> `create_backup.py` `delly get-inst` -> `extract_instruments.py`
     optionally add `--extended` or `-x` for multi version extraction
     `--sd-direct` ?
 `delly fix` —> `fix_references.py`
     optionally add `--snapshot` or `-s` for specific snapshot
     optionally add `--apply` or `-a` to skip confirmation (note: fix refs is WIP, this flag may change)
-`delly sd-update` —> `sync_to_sd.py`
-`delly samples` —> `sample_overview.py summary`
+`delly sd-update` —> `sync_to_sd.py` `delly samples` —> `sample_overview.py summary`
     optionally add `--top` or `-t` for custom output list length
 `delly samples unused` —> `sample_overview.py unused`
     default: condensed per-folder summary (folder name, file count, total size)
     optionally add `--all` or `-a` for full listing of every unreferenced file grouped by folder
     optionally add `--folder` or `-f` with folder name(s) for filtered full listing
     optionally add `--top` or `-t` for top N largest unreferenced samples
-`delly samples missing` —> `sample_overview.py missing`
-`delly samples usage <term>` —> `sample_overview.py usage <term>`
-`delly samples duplicates` —> `sample_overview.py duplicates`
+`delly samples missing` —> `sample_overview.py missing` `delly samples usage <term>` —> `sample_overview.py usage <term>` `delly samples duplicates` —> `sample_overview.py duplicates`
     optionally add `--snapshot` or `-s` with a path or `latest` to use existing snapshot
 
 

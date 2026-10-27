@@ -6,13 +6,7 @@ ms.date: 2026-10-26
 
 ## Current progress as of 2026-10-26
 
-The working destination `C:\source\deluge\DELUGE\SAMPLES\KB6-LIB` now holds
-19 instrument folders containing 20 flat kit folders and 262 samples
-(audio files), approximately 12.19 MiB. The TR-727 instrument folder contains
-two flat version folders; the other 18 instrument folders are flat.
-There are no non-audio files.
-These represent 19 of the 50 planned instruments, with 31 not yet
-represented locally. The two TR-727 versions count as one instrument.
+The working destination `C:\source\deluge\DELUGE\SAMPLES\KB6-LIB` now holds 19 instrument folders containing 20 flat kit folders and 262 samples (audio files), approximately 12.19 MiB. The TR-727 instrument folder contains two flat version folders; the other 18 instrument folders are flat. There are no non-audio files. These represent 19 of the 50 planned instruments, with 31 not yet represented locally. The two TR-727 versions count as one instrument.
 
 | Current local kit folder           | Audio files |
 |------------------------------------|-------------|
@@ -37,45 +31,17 @@ represented locally. The two TR-727 versions count as one instrument.
 | `Teenage-Engineering PO-12`        | 16          |
 | `Wurlitzer Sideman`                | 14          |
 
-All 15 original sets with 16 or fewer samples have been brought over,
-totalling 172 samples. Maestro (17), Linn LM-1 (19) and Kawai (24) bring
-that to 18 instruments and 232 samples; the two 15-sample TR-727 versions
-bring the working collection to 20 kit folders, 19 instruments and 262 samples.
-Small-folder-first is an initial transfer convenience, not a selection rule.
+All 15 original sets with 16 or fewer samples have been brought over, totalling 172 samples. Maestro (17), Linn LM-1 (19) and Kawai (24) bring that to 18 instruments and 232 samples; the two 15-sample TR-727 versions bring the working collection to 20 kit folders, 19 instruments and 262 samples. Small-folder-first is an initial transfer convenience, not a selection rule.
 
-These complete sets are present locally awaiting audition, QC and eventual
-kit XML creation when requested. Bringing over raw folders is not final
-curation, completion or approval of every sample. No audio audition has
-been performed by the assistant, and there is no evidence that kit XMLs
-have been created. The CR-78 loops and truncated file, Sideman rhythms,
-SK-1 loop and CZ-bass provenance, Mattel repeated-strike screening and
-Kawai float-format playback check remain unresolved.
+These complete sets are present locally awaiting audition, QC and eventual kit XML creation when requested. Bringing over raw folders is not final curation, completion or approval of every sample. No audio audition has been performed by the assistant, and there is no evidence that kit XMLs have been created. The CR-78 loops and truncated file, Sideman rhythms, SK-1 loop and CZ-bass provenance, Mattel repeated-strike screening and Kawai float-format playback check remain unresolved.
 
 ## Selection principles
 
-Build one manageable, playable kit per instrument by default across the
-50 approved instruments. The two TR-727 versions, original and dirty
-tube-amp, are an approved intentional exception: keep both as separate
-flat folders and eventual kit versions. Do not merge them or choose only
-one. This permits 51 eventual kits, not 51 instruments.
-Use only that instrument's samples. Do not mix instruments, pad missing roles
-or create other unapproved alternative kits. Missing conventional drum roles is fine.
-Preserve distinctive flavour rather than trying to make every instrument
-behave like a complete conventional drum machine.
+Build one manageable, playable kit per instrument by default across the 50 approved instruments. The two TR-727 versions, original and dirty tube-amp, are an approved intentional exception: keep both as separate flat folders and eventual kit versions. Do not merge them or choose only one. This permits 51 eventual kits, not 51 instruments. Use only that instrument's samples. Do not mix instruments, pad missing roles or create other unapproved alternative kits. Missing conventional drum roles is fine. Preserve distinctive flavour rather than trying to make every instrument behave like a complete conventional drum machine.
 
-Sixteen is a convenience for choosing initial transfers, not a minimum,
-target, ceiling or audition/selection effort threshold. Every chosen
-sample needs a useful function or unique timbral contribution. Near-identical
-kicks, snares or other variants should not dominate, even when a source set
-contains fewer than 16 files. Conversely, more than 16 is acceptable when
-each sound earns its place.
+Sixteen is a convenience for choosing initial transfers, not a minimum, target, ceiling or audition/selection effort threshold. Every chosen sample needs a useful function or unique timbral contribution. Near-identical kicks, snares or other variants should not dominate, even when a source set contains fewer than 16 files. Conversely, more than 16 is acceptable when each sound earns its place.
 
-The working collection has been brought over, but final sample selections
-and kit sizes remain undecided. Assessments use historical filesystem information, filenames,
-hashes, WAV headers and simple signal-activity screening, not listening
-results. Proposed roles, contrasts and editing needs still require audition.
-Selection starts fresh; existing usage or reference counts are not a ranking
-constraint.
+The working collection has been brought over, but final sample selections and kit sizes remain undecided. Assessments use historical filesystem information, filenames, hashes, WAV headers and simple signal-activity screening, not listening results. Proposed roles, contrasts and editing needs still require audition. Selection starts fresh; existing usage or reference counts are not a ranking constraint.
 
 ## Sources, counts and destination layout
 
@@ -84,26 +50,17 @@ The current library roles are:
 * `D:\Creative\KB6-LIB`: Nominated bulk-library source after consolidation.
 * `C:\source\deluge\DELUGE\SAMPLES\KB6-LIB`: Rebuilt working destination.
 
-Roster source-folder names and raw counts refer to the original inventory,
-not guaranteed current source availability. Verify each folder's current
-location and source-drive availability before copying or moving. Presence
-in the working destination does not prove that a second copy or backup
-exists; do not infer a move solely from an unavailable source path.
+Roster source-folder names and raw counts refer to the original inventory, not guaranteed current source availability. Verify each folder's current location and source-drive availability before copying or moving. Presence in the working destination does not prove that a second copy or backup exists; do not infer a move solely from an unavailable source path.
 
-Human instrument names are display labels, not replacement folder names.
-Preserve spellings such as `Electron Sidstation` and
-`SequentialCircuits Drumtraks` when forming destinations, with the
-approved TR-727 version-folder layout below as an intentional exception.
+Human instrument names are display labels, not replacement folder names. Preserve spellings such as `Electron Sidstation` and `SequentialCircuits Drumtraks` when forming destinations, with the approved TR-727 version-folder layout below as an intentional exception.
 
-All 50 source folder names are unique. The default destination is one
-flat folder directly under `DELUGE\SAMPLES\KB6-LIB`:
+All 50 source folder names are unique. The default destination is one flat folder directly under `DELUGE\SAMPLES\KB6-LIB`:
 
 ```text
 DELUGE\SAMPLES\KB6-LIB\<source folder>\<selected sample>.wav
 ```
 
-The TR-727 keeps these two separate flat destinations, already present
-with 15 samples each:
+The TR-727 keeps these two separate flat destinations, already present with 15 samples each:
 
 ```text
 DELUGE\SAMPLES\KB6-LIB\Roland TR727\Original\<sample>.wav
@@ -112,8 +69,7 @@ DELUGE\SAMPLES\KB6-LIB\Roland TR727\DirtyTubeAmp\<sample>.wav
 
 ## Foundational machines
 
-IDs 1-10 provide contrasting machine voices and signature percussion.
-Their 714 raw files range from short named palettes to large capture sets.
+IDs 1-10 provide contrasting machine voices and signature percussion. Their 714 raw files range from short named palettes to large capture sets.
 
 | ID  | Instrument                    | Sample transfer | Exact source folder            | Raw files | Effort | Evidence and next selection work                                                                                                                                                              |
 |-----|-------------------------------|-----------------|--------------------------------|-----------|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -130,9 +86,7 @@ Their 714 raw files range from short named palettes to large capture sets.
 
 ## Digital drums and samplers
 
-IDs 11-20 add sampled drum palettes and sampler character across 676 raw
-files. Treat supplied sampler collections as supplied material, not proof
-of a canonical factory sound set.
+IDs 11-20 add sampled drum palettes and sampler character across 676 raw files. Treat supplied sampler collections as supplied material, not proof of a canonical factory sound set.
 
 | ID  | Instrument        | Sample transfer | Exact source folder | Raw files | Effort | Evidence and next selection work                                                                                                                                                                                              |
 |-----|-------------------|-----------------|---------------------|-----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -149,9 +103,7 @@ of a canonical factory sound set.
 
 ## Dance, drum synthesis and later electronic instruments
 
-IDs 21-30 cover synthetic voice contrasts, preset collections and distinctive
-electronic accents across 1,366 raw files. Large kick families and preset
-counts are comparison work, not reasons to enlarge the eventual kits.
+IDs 21-30 cover synthetic voice contrasts, preset collections and distinctive electronic accents across 1,366 raw files. Large kick families and preset counts are comparison work, not reasons to enlarge the eventual kits.
 
 | ID  | Instrument                           | Sample transfer | Exact source folder                    | Raw files | Effort | Evidence and next selection work                                                                                                                                                                                                            |
 |-----|--------------------------------------|-----------------|----------------------------------------|-----------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -168,9 +120,7 @@ counts are comparison work, not reasons to enlarge the eventual kits.
 
 ## Early rhythm boxes
 
-IDs 31-35 contribute compact rhythm-box voices across 70 raw files.
-Numbered hits need identification, and supplied rhythm recordings need
-separate assessment rather than automatic inclusion.
+IDs 31-35 contribute compact rhythm-box voices across 70 raw files. Numbered hits need identification, and supplied rhythm recordings need separate assessment rather than automatic inclusion.
 
 | ID  | Instrument          | Sample transfer | Exact source folder   | Raw files | Effort | Evidence and next selection work                                                                                                                     |
 |-----|---------------------|-----------------|-----------------------|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -182,9 +132,7 @@ separate assessment rather than automatic inclusion.
 
 ## Electronic drums and dedicated percussion
 
-IDs 36-40 add pitched drums, synthetic gestures, Latin articulations and
-stroke variety across 470 raw files. Capture variants should support useful
-contrasts rather than overwhelm the instrument's playable identity.
+IDs 36-40 add pitched drums, synthetic gestures, Latin articulations and stroke variety across 470 raw files. Capture variants should support useful contrasts rather than overwhelm the instrument's playable identity.
 
 | ID  | Instrument                | Sample transfer      | Exact source folder         | Raw files | Effort | Evidence and next selection work                                                                                                                                                                                                                                              |
 |-----|---------------------------|----------------------|-----------------------------|-----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -196,9 +144,7 @@ contrasts rather than overwhelm the instrument's playable identity.
 
 ## Synth-derived percussion
 
-IDs 41-45 cover analogue, FM, digital and characterful synth-derived
-percussion across 273 raw files. Tonal and effects voices can be valuable
-accents without being forced into conventional drum roles.
+IDs 41-45 cover analogue, FM, digital and characterful synth-derived percussion across 273 raw files. Tonal and effects voices can be valuable accents without being forced into conventional drum roles.
 
 | ID  | Instrument          | Sample transfer | Exact source folder             | Raw files | Effort | Evidence and next selection work                                                                                                                                                                                        |
 |-----|---------------------|-----------------|---------------------------------|-----------|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -210,9 +156,7 @@ accents without being forced into conventional drum roles.
 
 ## Home keyboards, games and unusual instruments
 
-IDs 46-50 provide small character sets and unconventional sound functions
-across 76 raw files. Supplied labels do not establish every sound's role,
-provenance or suitability as a one-shot.
+IDs 46-50 provide small character sets and unconventional sound functions across 76 raw files. Supplied labels do not establish every sound's role, provenance or suitability as a one-shot.
 
 | ID  | Instrument                   | Sample transfer | Exact source folder                | Raw files | Effort | Evidence and next selection work                                                                                                                                                                                                                                     |
 |-----|------------------------------|-----------------|------------------------------------|-----------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -224,33 +168,14 @@ provenance or suitability as a one-shot.
 
 ## Cross-library findings and quality checks
 
-These findings come from the original 2026-10-26 analysis, not a new scan
-of the working collection. Bringing over a complete folder does not
-resolve its outstanding content or playback checks.
+These findings come from the original 2026-10-26 analysis, not a new scan of the working collection. Bringing over a complete folder does not resolve its outstanding content or playback checks.
 
 ### Formats and recording structure
 
-There are 196 float WAV files: DMX 30, Fairlight 69, Kawai 24, HR-16B 47 and
-Polivoks set2 26. Check playback on the target Deluge firmware. Do not assume
-float is unsupported. If compatibility requires another encoding, prepare
-compatible copies later while preserving the originals. Kawai's Low musical
-selection estimate does not remove this separate format check.
+There are 196 float WAV files: DMX 30, Fairlight 69, Kawai 24, HR-16B 47 and Polivoks set2 26. Check playback on the target Deluge firmware. Do not assume float is unsupported. If compatibility requires another encoding, prepare compatible copies later while preserving the originals. Kawai's Low musical selection estimate does not remove this separate format check.
 
-The SR-16 collection is entirely 96 kHz/24-bit stereo. Check chosen files on
-the target playback system before deciding whether delivery conversion is
-needed. Do not preemptively resample low-rate originals away: the Maestro
-files are 32 kHz, and four Simmons files are 22.05 kHz. Preserve their source
-character and keep any later delivery copies traceable.
+The SR-16 collection is entirely 96 kHz/24-bit stereo. Check chosen files on the target playback system before deciding whether delivery conversion is needed. Do not preemptively resample low-rate originals away: the Maestro files are 32 kHz, and four Simmons files are 22.05 kHz. Preserve their source character and keep any later delivery copies traceable.
 
-The CR-78 `LOOP2.WAV` has a confirmed truncated audio payload. An independent
-Python wave read found 407,286 declared data bytes but only 131,350 available.
-Treat it as a known exception, not a usable candidate by default. Do not
-silently repair it or include it because the source count is small.
+The CR-78 `LOOP2.WAV` has a confirmed truncated audio payload. An independent Python wave read found 407,286 declared data bytes but only 131,350 available. Treat it as a known exception, not a usable candidate by default. Do not silently repair it or include it because the source count is small.
 
-The three Basimilus `Perc` recordings have complete audio payloads but many
-separated activity bursts. Mattel's seven files each show two activity
-bursts. Screening flags the need to inspect and listen; it does not establish
-musical event boundaries, prove every burst is a strike or select a trim.
-Long Pearl recordings, Wavedrum fills, Sideman rhythms and Polivoks grooves
-also need content-specific assessment. A filename or duration alone does
-not prove that a file is a loop or a clean one-shot.
+The three Basimilus `Perc` recordings have complete audio payloads but many separated activity bursts. Mattel's seven files each show two activity bursts. Screening flags the need to inspect and listen; it does not establish musical event boundaries, prove every burst is a strike or select a trim. Long Pearl recordings, Wavedrum fills, Sideman rhythms and Polivoks grooves also need content-specific assessment. A filename or duration alone does not prove that a file is a loop or a clean one-shot.

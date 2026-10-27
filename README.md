@@ -187,6 +187,10 @@ excluded without warnings; other unexpected file types are reported separately.
 The existing sync filters are unchanged. Generation is manual, with
 deterministic path ordering for stable Git diffs.
 
+For voices, field recordings, ambience and other material to sample, see
+[sample sources](./docs/sample-sources.md), including source links, digging
+suggestions and reuse/licensing notes.
+
 ### Development checks with pou
 
 > [!WARNING]
