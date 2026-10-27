@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-26T07:03:18.250145+00:00",
-  "songs_processed": 91,
+  "generated": "2026-10-27T07:12:24.804282+00:00",
+  "songs_processed": 85,
   "total_count": 117,
   "extractions": [
     {
@@ -1104,8 +1104,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT2-Lazygat 2.XML",
-      "source_song": "Lazygat 2",
+      "output_filename": "KIT2-Lazygat.XML",
+      "source_song": "Lazygat",
       "preset_name": "KIT2",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1280,8 +1280,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Tuikit-Twangin 5.XML",
-      "source_song": "Twangin 5",
+      "output_filename": "Tuikit-Twangin.XML",
+      "source_song": "Twangin",
       "preset_name": "Tuikit",
       "preset_folder": "KITS/KERERU/WIP",
       "instrument_type": "kit",
