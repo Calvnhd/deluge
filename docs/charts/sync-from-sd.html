@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sync from SD</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #f8fafc;
+      --text: #17243a;
+      --muted: #526277;
+      --guide: #cbd5e1;
+      --app: #166534;
+      --library: #7635a4;
+      --framework: #1d4ed8;
+      --result: #0f766e;
+      --condition: #925000;
+      --badge: #e9eef5;
+      --focus: #c06800;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #151b25;
+        --text: #e4ebf5;
+        --muted: #a9b8cc;
+        --guide: #3d4b61;
+        --app: #8bddaa;
+        --library: #d1a7ff;
+        --framework: #90baff;
+        --result: #74d8cb;
+        --condition: #efbd74;
+        --badge: #263246;
+        --focus: #ffc477;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 20px; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 30px 28px 48px; }
+    h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.2; letter-spacing: -0.6px; }
+    header { margin-bottom: 26px; }
+    header p { margin: 0 0 12px; color: var(--muted); }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+    .legend { font-weight: 650; }
+    .app { color: var(--app); }
+    .library { color: var(--library); }
+    .framework { color: var(--framework); }
+    a { color: var(--framework); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button { font: inherit; }
+    .depth-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; }
+    .depth-controls button {
+      border: 1px solid var(--guide);
+      border-radius: 4px;
+      padding: 3px 9px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .depth-controls button[aria-pressed="true"] { background: var(--badge); border-color: var(--framework); }
+    .fold-toggle {
+      flex: 0 0 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      align-self: center;
+    }
+    .fold-toggle::before { content: "\25BE"; }
+    .fold-toggle[aria-expanded="false"]::before { content: "\25B8"; }
+    .fold-toggle:hover { background: var(--badge); color: var(--text); }
+    .fold-summary { color: var(--muted); font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    code { font: 0.93em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    ol.trace, ol.steps { list-style: none; padding: 0; margin: 0; }
+    ol.steps {
+      margin: 5px 0 8px 5px;
+      padding-left: 19px;
+      border-left: 1px solid var(--guide);
+    }
+    li.call { margin: 9px 0; }
+    .call-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+    .file { font-size: 12px; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .file:hover { text-decoration: underline; }
+    .signature { font-size: 13px; }
+    .type { padding: 1px 6px; border-radius: 4px; background: var(--badge); color: var(--muted); font-size: 11px; }
+    .annotation { margin: 2px 0 5px; color: var(--muted); font-size: 13px; }
+    .annotation::before { content: "\2022"; margin-right: 7px; }
+    .state, .return { margin: 5px 0; font-size: 12px; }
+    .state { color: var(--muted); }
+    .return { color: var(--result); }
+    .kind { margin-right: 7px; font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.5px; }
+    .condition, .repeat { color: var(--condition); font-size: 12px; font-weight: 650; }
+    li.branch { margin: 9px 0; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--guide); color: var(--muted); font-size: 12px; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 700px) {
+      main { padding: 20px 12px; }
+      ol.steps { padding-left: 11px; margin-left: 2px; }
+      .call-head { column-gap: 7px; }
+      .signature { font-size: 12px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: black; }
+      main { max-width: none; padding: 0; }
+      .depth-controls, .fold-toggle, .fold-summary { display: none !important; }
+      ol.steps[hidden] { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Execution flow</p>
+    <h1>Sync from SD</h1>
+    <p>Preview and confirm an SD-to-local mirror, apply its plan, then update the sync manifest</p>
+    <div class="legend" aria-label="Source layers">
+      <span class="app">Script</span>
+      <span class="library">Shared Deluge library</span>
+      <span class="framework">Python standard library</span>
+    </div>
+    <div class="depth-controls" role="group" aria-label="Visible call depth" hidden>
+      <span>Show depth</span>
+      <button type="button" data-depth="1" aria-pressed="false">1</button>
+      <button type="button" data-depth="2" aria-pressed="false">2</button>
+      <button type="button" data-depth="3" aria-pressed="false">3</button>
+      <button type="button" data-depth="all" aria-pressed="true">All</button>
+    </div>
+    <span class="sr-only" id="fold-status" role="status" aria-live="polite"></span>
+  </header>
+
+  <ol class="trace" aria-label="Nested execution calls in order">
+    <li class="call" id="main">
+      <div class="call-head">
+        <a class="file app" href="../../scripts/sync_from_sd.py">sync_from_sd.py</a>
+        <code class="signature">main(argv: list[str] | None = None)</code>
+        <span class="type">None</span>
+      </div>
+      <p class="annotation">Entered by the module guard when run as a script; SD files are read, not modified</p>
+      <ol class="steps">
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/argparse.html">argparse.py</a><code class="signature">argparse.ArgumentParser(description="Sync Deluge SD card contents into the local DELUGE/ directory.")</code></div>
+          <div class="return"><span class="kind">Result</span>Argument parser</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/argparse.html">argparse.py</a><code class="signature">parser.add_argument("--dry-run", action="store_true", help="Show what would change and exit without prompting.")</code></div>
+          <div class="state"><span class="kind">State</span>Register the preview-only flag</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/argparse.html">argparse.py</a><code class="signature">parser.add_argument("--xml", action="store_true", help="Sync only XML files. Combine with --wav to sync both.")</code></div>
+          <div class="state"><span class="kind">State</span>Register the XML selection flag</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/argparse.html">argparse.py</a><code class="signature">parser.add_argument("--wav", action="store_true", help="Sync only WAV files. Combine with --xml to sync both.")</code></div>
+          <div class="state"><span class="kind">State</span>Register the WAV selection flag</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/argparse.html">argparse.py</a><code class="signature">parser.parse_args(argv)</code><span class="type">Namespace</span></div>
+          <div class="return"><span class="kind">Return</span>Parsed flags; argv=None reads command-line arguments</div>
+          <div class="state"><span class="kind">Exit</span>Help or invalid arguments exit through argparse before configuration is loaded</div>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>XML alone selects "xml"; WAV alone selects "wav"; neither or both selects "both"</div></li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">get_sd_card_path()</code><span class="type">Path</span></div>
+          <p class="annotation">Load scripts/.env with load_dotenv, read SD_CARD_PATH, resolve the path, and require a directory</p>
+          <div class="return"><span class="kind">Return</span>Validated SD-card path</div>
+          <div class="state"><span class="kind">Exit</span>Missing setting or missing directory raises SystemExit</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">get_deluge_root()</code><span class="type">Path</span></div>
+          <p class="annotation">Load scripts/.env again, read DELUGE_ROOT, resolve the path, and require a directory</p>
+          <div class="return"><span class="kind">Return</span>Validated local destination</div>
+          <div class="state"><span class="kind">Exit</span>Missing setting or missing directory raises SystemExit</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">read_manifest(SYNC_MANIFEST_PATH)</code><span class="type">FilesDict</span></div>
+          <p class="annotation">Read scripts/data/sync_manifest.json; convert accepted records into SD/local size and mtime fields plus an optional hash</p>
+          <div class="return"><span class="kind">Return</span>Manifest records, or an empty dict with a warning for a missing file or caught read/JSON errors</div>
+          <div class="state"><span class="kind">Exception</span>Unexpected JSON structure or invalid per-record conversions are not caught here</div>
+        </li>
+        <li class="step"><div class="state"><span class="kind">Output</span>Print source and destination paths</div></li>
+        <li class="call" id="planning">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">compute_sync(sd_path, deluge_root, manifest=manifest_files, source_is_sd=True, file_filter=file_filter)</code><span class="type">tuple[SyncPlan, ScanResult]</span></div>
+          <p class="annotation">Scan both trees and compare files; <a href="sync-planning.html#compute-sync">expand sync planning</a></p>
+          <div class="state"><span class="kind">State</span>May refresh manifest_files in memory while checking metadata and hashes</div>
+          <div class="return"><span class="kind">Return</span>plan with copies, removals, and unchanged count; src_scan retained for manifest rebuilding</div>
+        </li>
+        <li class="branch">
+          <div class="condition">If both plan.files_to_copy and plan.files_to_delete are empty</div>
+          <ol class="steps"><li class="step"><div class="state"><span class="kind">Exit</span>Print "Already up to date" and return; no log, manifest write, or cleanup</div></li></ol>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">print_plan(plan, dest=deluge_root)</code><span class="type">None</span></div>
+          <p class="annotation">Show existing copy targets as updates, new targets as copies, removals as trash, and action totals</p>
+          <div class="state"><span class="kind">Output</span>Human-readable preview; no files changed</div>
+        </li>
+        <li class="branch">
+          <div class="condition">If args.dry_run</div>
+          <ol class="steps"><li class="step"><div class="state"><span class="kind">Exit</span>Print "Dry run complete" and return before confirmation or writes</div></li></ol>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">confirm_apply(f"This will overwrite {deluge_root} to match {sd_path} &#92;nContinue?")</code><span class="type">bool</span></div>
+          <p class="annotation">Print the warning, prompt with [y/N], strip whitespace, and lowercase the response</p>
+          <div class="return"><span class="kind">Return</span>True only for "y" after normalization; otherwise False</div>
+        </li>
+        <li class="branch">
+          <div class="condition">If confirmation is False</div>
+          <ol class="steps"><li class="step"><div class="state"><span class="kind">Exit</span>Print "Aborted" and return without writes</div></li></ol>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/time.html">time</a><code class="signature">time.monotonic()</code><span class="type">float</span></div>
+          <div class="return"><span class="kind">Return</span>start_time for file-operation timing</div>
+        </li>
+        <li class="call" id="execution">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">execute_plan(plan, dest=deluge_root)</code><span class="type">SyncResult</span></div>
+          <p class="annotation">Copy first, then trash destination-only files using the default delete_mode="trash"; <a href="sync-execution.html#execute-plan">expand plan execution</a></p>
+          <div class="return"><span class="kind">Return</span>result with copied, trashed, and unchanged counts on success</div>
+          <div class="state"><span class="kind">Exception</span>SyncError carries partial progress; completed operations are not rolled back</div>
+        </li>
+        <li class="branch">
+          <div class="condition">If execute_plan raises SyncError</div>
+          <ol class="steps">
+            <li class="call">
+              <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/time.html">time</a><code class="signature">time.monotonic()</code><span class="type">float</span></div>
+              <div class="return"><span class="kind">Return</span>Failure time; subtract start_time to compute elapsed</div>
+            </li>
+            <li class="call">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncResult(copied=exc.copied, trashed=exc.trashed, unchanged=exc.unchanged)</code></div>
+              <div class="return"><span class="kind">Result</span>error_result describing completed work</div>
+            </li>
+            <li class="call">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">append_sync_log(error_result, direction="from-sd", elapsed_seconds=elapsed, error=str(exc))</code><span class="type">None</span></div>
+              <div class="state"><span class="kind">Output</span>Append FAILED, timestamp, direction, counters, elapsed time, and error to scripts/data/logs/sync.log</div>
+            </li>
+            <li class="step"><div class="state"><span class="kind">Exit</span>Print failure details and raise SystemExit(1); manifest rebuilding, success reporting, and cleanup are skipped</div></li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="condition">If execute_plan returns successfully</div>
+          <ol class="steps">
+            <li class="call">
+              <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/time.html">time</a><code class="signature">time.monotonic()</code><span class="type">float</span></div>
+              <div class="return"><span class="kind">Return</span>Completion time; subtract start_time to compute elapsed</div>
+            </li>
+            <li class="call">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">append_sync_log(result, direction="from-sd", elapsed_seconds=elapsed)</code><span class="type">None</span></div>
+              <div class="state"><span class="kind">Output</span>Append SUCCESS and file-operation counters to scripts/data/logs/sync.log before any manifest update</div>
+            </li>
+            <li class="branch" id="manifest-update">
+              <div class="condition">Try to rebuild and persist the manifest</div>
+              <ol class="steps">
+                <li class="call">
+                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, source_is_sd=True, file_filter=file_filter)</code><span class="type">dict[str, FileRecord]</span></div>
+                  <p class="annotation">Reuse unchanged records, capture destination metadata, and hash copied/new files; <a href="post-sync-manifest.html#build-manifest">expand manifest rebuilding</a></p>
+                  <div class="return"><span class="kind">Return</span>updated_manifest, preserving records for excluded file types</div>
+                </li>
+                <li class="call">
+                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">write_manifest(SYNC_MANIFEST_PATH, files=updated_manifest)</code><span class="type">None</span></div>
+                  <p class="annotation">Create the parent directory and serialize version 2, a current timestamp, and records with explicit hash fields</p>
+                  <ol class="steps">
+                    <li class="call">
+                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/tempfile.html">tempfile.py</a><code class="signature">tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=str(path.parent), suffix=".tmp", delete=False)</code></div>
+                      <div class="return"><span class="kind">Result</span>Temporary text file in the manifest directory, entered as fd</div>
+                    </li>
+                    <li class="step"><div class="state"><span class="kind">Output</span>Write and flush JSON through fd, then close the file on leaving its context</div></li>
+                    <li class="call">
+                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib.py</a><code class="signature">tmp_path.replace(path)</code></div>
+                      <div class="state"><span class="kind">Output</span>Atomically replace the manifest with the completed temporary file</div>
+                    </li>
+                  </ol>
+                  <div class="state"><span class="kind">Exception</span>Write/flush or replace failures attempt temporary-file removal and re-raise</div>
+                </li>
+              </ol>
+            </li>
+            <li class="branch">
+              <div class="condition">If rebuilding or writing raises OSError</div>
+              <ol class="steps"><li class="step"><div class="state"><span class="kind">Output</span>Print a warning that file sync succeeded but manifest updating failed; continue</div></li></ol>
+            </li>
+            <li class="step"><div class="state"><span class="kind">Output</span>Print "Sync complete" with copied and trashed counts</div></li>
+            <li class="call">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">clean_empty_dirs(deluge_root)</code><span class="type">int</span></div>
+              <p class="annotation">Walk bottom-up, preserve the root and its immediate children, and attempt rmdir for directories deemed empty</p>
+              <p class="annotation">Filter .trash names from child checks; bottom-up traversal does not prune already-visited .trash subtrees</p>
+              <div class="state"><span class="kind">Output</span>Report removals and warn on caught rmdir failures</div>
+              <div class="return"><span class="kind">Return</span>Number of directories removed, ignored by main</div>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>None after a successful sync or a documented early return</div>
+    </li>
+  </ol>
+
+  <footer>
+    <p>Source-derived alternatives, not a runtime recording; dry runs still scan and may hash files</p><p>Only execute_plan SyncError and manifest-update OSError have dedicated handlers; other failures, including log I/O errors, can propagate</p><p>Standard-library calls are shown at API level; Python 3.12 documentation links do not assert the executing interpreter version</p>
+    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+  </footer>
+</main>
+<script>
+  const calls = [...document.querySelectorAll(".trace .call")];
+  const depthControls = document.querySelector(".depth-controls");
+  const depthButtons = [...depthControls.querySelectorAll("button")];
+  const foldStatus = document.getElementById("fold-status");
+  const entries = new Map();
+
+  function selectDepth(value) {
+    for (const button of depthButtons)
+      button.setAttribute("aria-pressed", String(button.dataset.depth === value));
+  }
+
+  function setExpanded(entry, expanded) {
+    entry.steps.hidden = !expanded;
+    entry.button.setAttribute("aria-expanded", String(expanded));
+    entry.button.setAttribute("aria-label",
+      `${expanded ? "Collapse" : "Expand"} nested calls in ${entry.label}`);
+    entry.summary.hidden = expanded;
+  }
+
+  for (const [index, call] of calls.entries()) {
+    const steps = [...call.children].find(child => child.matches("ol.steps"));
+    if (!steps || !steps.querySelector(".call"))
+      continue;
+
+    const head = [...call.children].find(child => child.classList.contains("call-head"));
+    const label = `${head.querySelector(".file").textContent} ${head.querySelector(".signature").textContent}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "fold-toggle";
+    steps.id = `call-steps-${index + 1}`;
+    button.setAttribute("aria-controls", steps.id);
+
+    const summary = document.createElement("span");
+    summary.className = "fold-summary";
+    const count = steps.querySelectorAll(".call").length;
+    summary.textContent = `${count} nested ${count === 1 ? "call" : "calls"} hidden`;
+
+    let depth = 1;
+    for (let parent = call.parentElement.closest(".call"); parent;
+      parent = parent.parentElement.closest(".call"))
+      depth++;
+
+    const entry = { steps, button, summary, label, depth };
+    entries.set(call, entry);
+    head.prepend(button);
+    head.append(summary);
+    setExpanded(entry, true);
+
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      setExpanded(entry, expanded);
+      selectDepth(null);
+      foldStatus.textContent = `${expanded ? "Expanded" : "Collapsed"} ${label}`;
+    });
+  }
+
+  for (const button of depthButtons) {
+    button.addEventListener("click", () => {
+      const value = button.dataset.depth;
+      for (const entry of entries.values())
+        setExpanded(entry, value === "all" || entry.depth < Number(value));
+      selectDepth(value);
+      foldStatus.textContent = value === "all" ? "All calls expanded" : `Showing call depth ${value}`;
+    });
+  }
+
+  function revealTarget(hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (!target)
+      return;
+
+    let changed = false;
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      const entry = entries.get(parent);
+      if (entry && entry.steps.hidden) {
+        setExpanded(entry, true);
+        changed = true;
+      }
+    }
+    if (changed) {
+      selectDepth(null);
+      foldStatus.textContent = "Expanded the path to the linked step";
+    }
+    target.scrollIntoView({ block: "start" });
+  }
+
+  document.addEventListener("click", event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link)
+      revealTarget(link.getAttribute("href"));
+  });
+  window.addEventListener("hashchange", () => revealTarget(location.hash));
+  depthControls.hidden = false;
+  if (location.hash)
+    revealTarget(location.hash);
+</script>
+</body>
+</html>

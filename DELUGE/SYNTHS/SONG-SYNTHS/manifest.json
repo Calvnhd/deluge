@@ -1,7 +1,7 @@
 {
-  "generated": "2026-05-18T13:06:56.676071+00:00",
-  "songs_processed": 61,
-  "total_count": 181,
+  "generated": "2026-10-27T07:12:24.801491+00:00",
+  "songs_processed": 85,
+  "total_count": 200,
   "extractions": [
     {
       "output_filename": "000-Beginagain.XML",
@@ -510,6 +510,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "027-Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "027",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
       "output_filename": "027A-Yends.XML",
       "source_song": "Yends",
       "preset_name": "027A",
@@ -1005,6 +1016,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "136-Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "136",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "137-Ape.XML",
       "source_song": "Ape",
       "preset_name": "137",
@@ -1357,6 +1379,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "172-Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "172",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "172-Yends.XML",
       "source_song": "Yends",
       "preset_name": "172",
@@ -1500,6 +1533,39 @@
       "differing_params": []
     },
     {
+      "output_filename": "5Alivearps-Weirdsaw-A.XML",
+      "source_song": "Weirdsaw-A",
+      "preset_name": "5Alivearps",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "5Alivefuzzbass-5Motre.XML",
+      "source_song": "5Motre",
+      "preset_name": "5Alivefuzzbass",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "5Alivefuzzbass-Jamming5Alive.XML",
+      "source_song": "Jamming5Alive",
+      "preset_name": "5Alivefuzzbass",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
       "output_filename": "62-EFFECTSOUND1-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "62-EFFECTSOUND1",
@@ -1530,6 +1596,17 @@
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp1-Wf-Redo.XML",
+      "source_song": "Wf-Redo",
+      "preset_name": "Arp1",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
       "differing_params": []
     },
     {
@@ -1610,10 +1687,32 @@
       "differing_params": []
     },
     {
+      "output_filename": "Fuzz-Aa11.XML",
+      "source_song": "Aa11",
+      "preset_name": "Fuzz",
+      "preset_folder": "SYNTHS/KERERU/ARCHIVE",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "Fuzz-Ambient-Fishes.XML",
       "source_song": "Ambient-Fishes",
       "preset_name": "Fuzz",
       "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Init-Synth-AYG.XML",
+      "source_song": "AYG",
+      "preset_name": "Init-Synth",
+      "preset_folder": "SYNTHS",
       "instrument_type": "synth",
       "section_id": 0,
       "colour_name": "LightBlue",
@@ -1665,8 +1764,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Arp-Wf-full.XML",
-      "source_song": "Wf-full",
+      "output_filename": "K01Arp-Weirdsaw-A.XML",
+      "source_song": "Weirdsaw-A",
       "preset_name": "K01Arp",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1687,14 +1786,25 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Bass-Wf-og.XML",
-      "source_song": "Wf-og",
+      "output_filename": "K01Bass-Weirdsaw-A.XML",
+      "source_song": "Weirdsaw-A",
       "preset_name": "K01Bass",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Bass-Wf-Redo.XML",
+      "source_song": "Wf-Redo",
+      "preset_name": "K01Bass",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
       "differing_params": []
     },
     {
@@ -1742,8 +1852,19 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-Wf-full.XML",
-      "source_song": "Wf-full",
+      "output_filename": "K01Drone-Wf-Jfip.XML",
+      "source_song": "Wf-Jfip",
+      "preset_name": "K01Drone",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Drone-Wf-Redo.XML",
+      "source_song": "Wf-Redo",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1786,6 +1907,28 @@
       "differing_params": []
     },
     {
+      "output_filename": "K01Fuzzbass-Sink-Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "K01Fuzzbass-Sink",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Fuzzbass-Sink-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "K01Fuzzbass-Sink",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
       "output_filename": "K01Twinkle2-Sink.XML",
       "source_song": "Sink",
       "preset_name": "K01Twinkle2",
@@ -1805,6 +1948,17 @@
       "section_id": 2,
       "colour_name": "Gold",
       "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Violin-Weirdsaw-C.XML",
+      "source_song": "Weirdsaw-C",
+      "preset_name": "K01Violin",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -1841,6 +1995,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "Lully-Pad-Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "Lully-Pad",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
       "output_filename": "Padfoot-Arparty.XML",
       "source_song": "Arparty",
       "preset_name": "Padfoot",
@@ -1874,8 +2039,30 @@
       "differing_params": []
     },
     {
-      "output_filename": "TB02-FiveAlive.XML",
-      "source_song": "FiveAlive",
+      "output_filename": "SYNT1-Wf-Jfip.XML",
+      "source_song": "Wf-Jfip",
+      "preset_name": "SYNT1",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "SYNT2-Eoy-Town-Hall.XML",
+      "source_song": "Eoy-Town-Hall",
+      "preset_name": "SYNT2",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "TB02-Aa00.XML",
+      "source_song": "Aa00",
       "preset_name": "TB02",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1962,6 +2149,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "Wall Of Static-Oddish-Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Wall Of Static-Oddish",
+      "preset_folder": "SYNTHS/SONG-SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
       "output_filename": "Warm DX7 Pad-Dim.XML",
       "source_song": "Dim",
       "preset_name": "Warm DX7 Pad",
@@ -1970,6 +2168,17 @@
       "section_id": 2,
       "colour_name": "Gold",
       "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Wfjslead-Weirdsaw-C.XML",
+      "source_song": "Weirdsaw-C",
+      "preset_name": "Wfjslead",
+      "preset_folder": "SYNTHS/KERERU/ARCHIVE",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
       "differing_params": []
     },
     {

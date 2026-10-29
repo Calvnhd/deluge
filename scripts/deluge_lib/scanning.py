@@ -2,8 +2,8 @@
 """Generic filtered file scanner with stat capture.
 
 Accepts any root directory and returns a case-normalised path dict.
-Only .xml and .wav files are yielded; .trash directories are silently
-skipped.
+By default only .xml and .wav files are yielded. An explicit "all" filter
+includes every file type; .trash directories are always skipped.
 """
 
 from __future__ import annotations
@@ -73,25 +73,36 @@ def scan_tree(
     root: Path,
     *,
     label: str = "source",
-    file_filter: FileFilter = "both",
+    file_filter: FileFilter | Literal["all"] = "both",
+    strict: bool = False,
 ) -> ScanResult:
     """Walk *root* and collect filtered file entries
 
     Args:
         root: Directory to scan
         label: Human-readable name shown in progress messages
-        file_filter: File types to include: `"wav"`, `"xml"`, or `"both"` (default)
+        file_filter: File types to include: `"wav"`, `"xml"`, `"both"` (default),
+            or `"all"` for every file type.
+        strict: Fail on a missing root, traversal/stat errors, or case-colliding
+            paths instead of returning an incomplete scan.
 
     Returns:
         The computed ScanResult
     """
-    allowed = FILTER_MAP[file_filter]
+    allowed = None if file_filter == "all" else FILTER_MAP[file_filter]
     result = ScanResult()
     file_count = 0
 
+    if strict and not root.is_dir():
+        raise NotADirectoryError(f"Scan directory does not exist or is not a directory: {root}")
+
+    def on_walk_error(exc: OSError) -> None:
+        if strict:
+            raise exc
+
     print(f"Scanning {label}...", end="", flush=True)
 
-    for dirpath, dirnames, filenames in os.walk(root):
+    for dirpath, dirnames, filenames in os.walk(root, onerror=on_walk_error):
         current_dir = Path(dirpath)
 
         # Prune skipped directories in-place so os.walk does not descend.
@@ -101,18 +112,24 @@ def scan_tree(
             file_path = current_dir / fname
 
             ext = file_path.suffix.lower()
-            if ext not in allowed:
+            if allowed is not None and ext not in allowed:
                 continue
 
             try:
                 st = file_path.stat()
             except OSError as exc:
+                if strict:
+                    raise
                 rel = file_path.relative_to(root)
                 print(f"\nWarning: cannot stat {rel}: {exc}")
                 continue
 
             rel = file_path.relative_to(root)
             key = normalise_key(rel)
+            if strict and key in result.files:
+                raise ValueError(
+                    f"Case-insensitive path collision: {result.files[key].rel_path} and {rel}"
+                )
             entry = FileEntry(rel_path=rel, size=st.st_size, mtime=normalise_mtime(st.st_mtime))
             result.files[key] = entry
 

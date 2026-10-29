@@ -1,4 +1,7 @@
-# Deluge
+---
+title: Deluge
+description: Backup and management scripts for a Synthstrom Deluge SD card
+---
 
 Back-up and management scripts for a [Synthstrom Deluge](https://synthstrom.com/product/deluge/) SD card.
 
@@ -174,5 +177,57 @@ uv run sample_overview.py unused --top N                    # top N largest unre
 uv run sample_overview.py missing                           # samples referenced in XML but missing from disk
 uv run sample_overview.py duplicates                        # find duplicate samples by content hash
 uv run sample_overview.py usage "Kick"                      # usage detail for samples matching a search term
+uv run sample_overview.py catalogue                         # manually regenerate docs/sample-catalogue.csv
 ```
 
+The [sample catalogue](./docs/sample-catalogue.md) is an audio-only CSV inventory
+of WAV, AIF, and AIFF files with relative paths, three-decimal MB sizes, and
+distinct kit, synth, and song reference counts. Citizen DJ TXT sidecars are
+excluded without warnings; other unexpected file types are reported separately.
+The existing sync filters are unchanged. Generation is manual, with
+deterministic path ordering for stable Git diffs.
+
+For voices, field recordings, ambience and other material to sample, see
+[sample sources](./docs/sample-sources.md), including source links, digging
+suggestions and reuse/licensing notes.
+
+### Development checks with pou
+
+> [!WARNING]
+> The [sync-to-SD tests](./scripts/tests/test_sync_to_sd.py) and
+> [cloud-sync tests](./scripts/tests/test_sync_samples_to_cloud.py) are temporarily
+> disabled. They can overwrite the live sync manifest or append test records to
+> the live sync log. The test suite needs isolation fixes: redirect all persistent
+> state to temporary paths and add regression coverage proving live files remain
+> untouched before re-enabling these modules. The remaining tests are not covered
+> by this quarantine.
+
+With `pou` installed, run these commands from the repository root:
+
+```powershell
+pou help
+pou instructions test
+pou doctor
+pou test
+```
+
+[pou.config.mjs](./pou.config.mjs) imports the repo-local Python configuration
+from [.pou/python.mjs](./.pou/python.mjs). It uses the built-in `base` profile;
+no changes to the installed `pou` are required.
+
+`pou doctor` checks Node, configuration loading, and `uv` availability. It does
+not verify Python, installed dependencies, or test correctness.
+
+`pou test` runs the full pytest suite from `scripts/` using the committed
+lockfile and the `dev` dependency extra:
+
+```powershell
+uv run --directory scripts --locked --extra dev python -m pytest
+```
+
+The command may download Python or dependencies and update `scripts/.venv`.
+It does not change the lockfile or run lint, type checks, or real SD-card and
+cloud-backup operations. Collection errors and failing tests are reported as
+failures, not skipped.
+
+Record workflow friction with `pou observe "symptom and consequence"`.

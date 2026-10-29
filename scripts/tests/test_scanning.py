@@ -3,7 +3,12 @@
 
 from __future__ import annotations
 
+import os
+from collections.abc import Callable
 from pathlib import Path, PurePosixPath
+from unittest.mock import patch
+
+import pytest
 
 from tests.conftest import _touch
 from deluge_lib.scanning import FileEntry, ScanResult, normalise_key, scan_tree
@@ -145,3 +150,72 @@ class TestFileFilterParameter:
         result = scan_tree(tmp_path, file_filter="wav")
 
         assert len(result.files) == 1
+
+
+class TestCatalogueScanning:
+    def test_all_filter_includes_audio_and_supporting_files(self, tmp_path: Path) -> None:
+        names = {"kick.wav", "bell.AIFF", "short.aif", "README.txt", "other.bin"}
+        for name in names:
+            _touch(tmp_path / name)
+        _touch(tmp_path / ".trash" / "deleted.wav")
+
+        result = scan_tree(tmp_path, file_filter="all", strict=True)
+
+        assert {entry.rel_path.name for entry in result.files.values()} == names
+
+    def test_strict_scan_rejects_missing_directory(self, tmp_path: Path) -> None:
+        with pytest.raises(NotADirectoryError, match="Scan directory"):
+            scan_tree(tmp_path / "missing", file_filter="all", strict=True)
+
+    def test_strict_scan_propagates_traversal_error(self, tmp_path: Path) -> None:
+        def fail_walk(
+            root: Path, *, onerror: Callable[[OSError], None]
+        ) -> list[tuple[str, list[str], list[str]]]:
+            onerror(PermissionError(f"cannot read {root}"))
+            return []
+
+        with (
+            patch("deluge_lib.scanning.os.walk", side_effect=fail_walk),
+            pytest.raises(PermissionError, match="cannot read"),
+        ):
+            scan_tree(tmp_path, file_filter="all", strict=True)
+
+    @pytest.mark.parametrize("strict", [False, True])
+    def test_stat_error_handling(self, tmp_path: Path, strict: bool) -> None:
+        sample = tmp_path / "sample.wav"
+        _touch(sample)
+        original_stat = Path.stat
+
+        def fail_sample_stat(
+            path: Path, *, follow_symlinks: bool = True
+        ) -> os.stat_result:
+            if path == sample:
+                raise PermissionError("cannot stat sample")
+            return original_stat(path, follow_symlinks=follow_symlinks)
+
+        with patch.object(Path, "stat", fail_sample_stat):
+            if strict:
+                with pytest.raises(PermissionError, match="cannot stat sample"):
+                    scan_tree(tmp_path, file_filter="all", strict=True)
+            else:
+                assert scan_tree(tmp_path).files == {}
+
+    def test_strict_scan_rejects_case_collisions(self, tmp_path: Path) -> None:
+        _touch(tmp_path / "kick.wav")
+        existing_stat = (tmp_path / "kick.wav").stat()
+        original_stat = Path.stat
+
+        def sample_stat(path: Path, *, follow_symlinks: bool = True) -> os.stat_result:
+            if path.name in {"kick.wav", "KICK.WAV"}:
+                return existing_stat
+            return original_stat(path, follow_symlinks=follow_symlinks)
+
+        with (
+            patch(
+                "deluge_lib.scanning.os.walk",
+                return_value=[(str(tmp_path), [], ["kick.wav", "KICK.WAV"])],
+            ),
+            patch.object(Path, "stat", sample_stat),
+            pytest.raises(ValueError, match="Case-insensitive path collision"),
+        ):
+            scan_tree(tmp_path, file_filter="all", strict=True)

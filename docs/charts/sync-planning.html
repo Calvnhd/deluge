@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sync planning and change detection</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #f8fafc;
+      --text: #17243a;
+      --muted: #526277;
+      --guide: #cbd5e1;
+      --app: #166534;
+      --library: #7635a4;
+      --framework: #1d4ed8;
+      --result: #0f766e;
+      --condition: #925000;
+      --badge: #e9eef5;
+      --focus: #c06800;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #151b25;
+        --text: #e4ebf5;
+        --muted: #a9b8cc;
+        --guide: #3d4b61;
+        --app: #8bddaa;
+        --library: #d1a7ff;
+        --framework: #90baff;
+        --result: #74d8cb;
+        --condition: #efbd74;
+        --badge: #263246;
+        --focus: #ffc477;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 20px; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 30px 28px 48px; }
+    h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.2; letter-spacing: -0.6px; }
+    header { margin-bottom: 26px; }
+    header p { margin: 0 0 12px; color: var(--muted); }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+    .legend { font-weight: 650; }
+    .app { color: var(--app); }
+    .library { color: var(--library); }
+    .framework { color: var(--framework); }
+    a { color: var(--framework); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button { font: inherit; }
+    .depth-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; }
+    .depth-controls button {
+      border: 1px solid var(--guide);
+      border-radius: 4px;
+      padding: 3px 9px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .depth-controls button[aria-pressed="true"] { background: var(--badge); border-color: var(--framework); }
+    .fold-toggle {
+      flex: 0 0 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      align-self: center;
+    }
+    .fold-toggle::before { content: "\25BE"; }
+    .fold-toggle[aria-expanded="false"]::before { content: "\25B8"; }
+    .fold-toggle:hover { background: var(--badge); color: var(--text); }
+    .fold-summary { color: var(--muted); font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    code { font: 0.93em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    ol.trace, ol.steps { list-style: none; padding: 0; margin: 0; }
+    ol.steps {
+      margin: 5px 0 8px 5px;
+      padding-left: 19px;
+      border-left: 1px solid var(--guide);
+    }
+    li.call { margin: 9px 0; }
+    .call-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+    .file { font-size: 12px; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .file:hover { text-decoration: underline; }
+    .signature { font-size: 13px; }
+    .type { padding: 1px 6px; border-radius: 4px; background: var(--badge); color: var(--muted); font-size: 11px; }
+    .annotation { margin: 2px 0 5px; color: var(--muted); font-size: 13px; }
+    .annotation::before { content: "\2022"; margin-right: 7px; }
+    .state, .return { margin: 5px 0; font-size: 12px; }
+    .state { color: var(--muted); }
+    .return { color: var(--result); }
+    .kind { margin-right: 7px; font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.5px; }
+    .condition, .repeat { color: var(--condition); font-size: 12px; font-weight: 650; }
+    li.branch { margin: 9px 0; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--guide); color: var(--muted); font-size: 12px; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 700px) {
+      main { padding: 20px 12px; }
+      ol.steps { padding-left: 11px; margin-left: 2px; }
+      .call-head { column-gap: 7px; }
+      .signature { font-size: 12px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: black; }
+      main { max-width: none; padding: 0; }
+      .depth-controls, .fold-toggle, .fold-summary { display: none !important; }
+      ol.steps[hidden] { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Execution flow</p>
+    <h1>Sync planning and change detection</h1>
+    <p>Scan source and destination, classify each source file, then schedule removal of destination-only files</p>
+    <div class="legend" aria-label="Source layers">
+      <span class="app">Script</span>
+      <span class="library">Shared Deluge library</span>
+      <span class="framework">Python standard library</span>
+    </div>
+    <div class="depth-controls" role="group" aria-label="Visible call depth" hidden>
+      <span>Show depth</span>
+      <button type="button" data-depth="1" aria-pressed="false">1</button>
+      <button type="button" data-depth="2" aria-pressed="false">2</button>
+      <button type="button" data-depth="3" aria-pressed="false">3</button>
+      <button type="button" data-depth="all" aria-pressed="true">All</button>
+    </div>
+    <span class="sr-only" id="fold-status" role="status" aria-live="polite"></span>
+  </header>
+
+  <ol class="trace" aria-label="Nested execution calls in order">
+    <li class="call" id="compute-sync">
+      <div class="call-head">
+        <a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a>
+        <code class="signature">compute_sync(source: Path, dest: Path, *, manifest: FilesDict | None = None, source_is_sd: bool = True, file_filter: FileFilter = "both")</code>
+        <span class="type">tuple[SyncPlan, ScanResult]</span>
+      </div>
+      <p class="annotation">Called from <a href="sync-from-sd.html#planning">SD-to-local orchestration</a>; direction changes manifest field mapping, not the source-wins copy policy</p>
+      <ol class="steps">
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncPlan()</code></div>
+          <div class="return"><span class="kind">Result</span>Empty copy/removal lists and files_unchanged=0</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">scan_tree(source, label="source", file_filter=file_filter)</code><span class="type">ScanResult</span></div>
+          <p class="annotation">Collect filtered source metadata; <a href="filesystem-scanning.html#scan-tree">expand filesystem scanning</a></p>
+          <div class="return"><span class="kind">Return</span>src_scan indexed by normalized relative key</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">scan_tree(dest, label="destination", file_filter=file_filter)</code><span class="type">ScanResult</span></div>
+          <p class="annotation">Complete source scanning before starting destination scanning; <a href="filesystem-scanning.html#scan-tree">same scanner flow</a></p>
+          <div class="return"><span class="kind">Return</span>dst_scan indexed by normalized relative key</div>
+        </li>
+        <li class="branch">
+          <div class="repeat">For each (key, src_entry) in src_scan.files, in scan insertion order</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Print comparison progress; src_path=source/src_entry.rel_path and dst_path=dest/src_entry.rel_path</div></li>
+            <li class="branch">
+              <div class="condition">If key is absent from dst_scan.files</div>
+              <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Append (src_path, dst_path) to files_to_copy; continue with the next source file</div></li></ol>
+            </li>
+            <li class="branch">
+              <div class="condition">Otherwise, if manifest is not None and contains key</div>
+              <ol class="steps">
+                <li class="step"><div class="state"><span class="kind">Input</span>manifest_entry references the caller's existing record; refreshes below mutate that record</div></li>
+                <li class="step"><div class="state"><span class="kind">State</span>If source_is_sd: SD=source and local=destination; otherwise SD=destination and local=source</div></li>
+                <li class="branch">
+                  <div class="condition">If SD sizes match, evaluate the second operand of the metadata-change check</div>
+                  <ol class="steps">
+                    <li class="call">
+                      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">_mtime_matches(sd_entry.mtime, manifest_entry["sd_mtime"])</code><span class="type">bool</span></div>
+                      <div class="return"><span class="kind">Return</span>abs(mtime_a - mtime_b) &lt;= 2.0</div>
+                    </li>
+                  </ol>
+                </li>
+                <li class="branch">
+                  <div class="condition">If SD size differs or SD mtime is outside the tolerance</div>
+                  <ol class="steps">
+                    <li class="branch">
+                      <div class="condition">If a cached hash exists</div>
+                      <ol class="steps">
+                        <li class="call">
+                          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(sd_path)</code><span class="type">str</span></div>
+                          <p class="annotation">Read in 64 KiB chunks and compute SHA256</p>
+                          <div class="return"><span class="kind">Return</span>Current SD content digest</div>
+                        </li>
+                        <li class="branch">
+                          <div class="condition">If digest differs from the cached hash</div>
+                          <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Schedule source-to-destination copy and continue with the next source file</div></li></ol>
+                        </li>
+                        <li class="branch">
+                          <div class="condition">Otherwise, SD content matches the cached hash</div>
+                          <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Refresh sd_size and sd_mtime in manifest_entry; continue to the local check below</div></li></ol>
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="branch">
+                      <div class="condition">Otherwise, no cached hash exists</div>
+                      <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Conservatively schedule source-to-destination copy and continue with the next source file</div></li></ol>
+                    </li>
+                  </ol>
+                </li>
+                <li class="step"><div class="state"><span class="kind">State</span>has_local_changed compares local size and exact local mtime against the manifest</div></li>
+                <li class="branch">
+                  <div class="condition">If local mtime &gt; 0 and local metadata has not changed</div>
+                  <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Increment files_unchanged without hashing</div></li></ol>
+                </li>
+                <li class="branch">
+                  <div class="condition">Otherwise, verify the local file, including when mtime is zero</div>
+                  <ol class="steps">
+                    <li class="branch">
+                      <div class="condition">If a cached hash exists</div>
+                      <ol class="steps">
+                        <li class="call">
+                          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(local_path)</code><span class="type">str</span></div>
+                          <div class="return"><span class="kind">Return</span>Current local SHA256 digest</div>
+                        </li>
+                        <li class="branch">
+                          <div class="condition">If local digest matches the cached hash</div>
+                          <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Refresh local_size and local_mtime in manifest_entry; increment files_unchanged</div></li></ol>
+                        </li>
+                        <li class="branch">
+                          <div class="condition">Otherwise, local content differs</div>
+                          <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Schedule source-to-destination copy</div></li></ol>
+                        </li>
+                      </ol>
+                    </li>
+                    <li class="branch">
+                      <div class="condition">Otherwise, no cached hash exists</div>
+                      <ol class="steps">
+                        <li class="call">
+                          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(local_path)</code><span class="type">str</span></div>
+                          <div class="return"><span class="kind">Return</span>Local SHA256 digest to seed the existing record</div>
+                        </li>
+                        <li class="step"><div class="state"><span class="kind">State</span>Store the local hash, size, and mtime in manifest_entry; conservatively schedule a copy anyway</div></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li class="branch">
+              <div class="condition">Otherwise, no manifest record exists for this file</div>
+              <ol class="steps">
+                <li class="branch">
+                  <div class="condition">If source and destination sizes differ</div>
+                  <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Schedule source-to-destination copy without checking mtime</div></li></ol>
+                </li>
+                <li class="branch">
+                  <div class="condition">Otherwise, compare modification times</div>
+                  <ol class="steps">
+                    <li class="call">
+                      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">_mtime_matches(src_entry.mtime, dst_entry.mtime)</code><span class="type">bool</span></div>
+                      <div class="return"><span class="kind">Return</span>True for an absolute difference of at most 2 seconds</div>
+                    </li>
+                    <li class="step"><div class="state"><span class="kind">State</span>True: increment files_unchanged; False: schedule a copy</div></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="repeat">For each (key, dst_entry) in dst_scan.files</div>
+          <ol class="steps">
+            <li class="branch">
+              <div class="condition">If key is absent from src_scan.files</div>
+              <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Append dest/dst_entry.rel_path to files_to_delete</div></li></ol>
+            </li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">Output</span>Print final comparison count</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>(plan, src_scan); no copy, removal, or manifest persistence occurs here</div>
+      <div class="state"><span class="kind">Exception</span>Hashing errors propagate; no SyncError conversion is performed during planning</div>
+    </li>
+  </ol>
+
+  <footer>
+    <p>Existing callers: <a href="../../scripts/sync_from_sd.py">sync_from_sd.py</a> uses source_is_sd=True; <a href="../../scripts/sync_to_sd.py">sync_to_sd.py</a> uses False; <a href="../../scripts/sync_samples_to_cloud.py">sync_samples_to_cloud.py</a> uses manifest=None and file_filter="wav"</p><p>No-manifest comparison uses size and mtime, not hashes; unchanged metadata is not a proof of identical content</p>
+    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+  </footer>
+</main>
+<script>
+  const calls = [...document.querySelectorAll(".trace .call")];
+  const depthControls = document.querySelector(".depth-controls");
+  const depthButtons = [...depthControls.querySelectorAll("button")];
+  const foldStatus = document.getElementById("fold-status");
+  const entries = new Map();
+
+  function selectDepth(value) {
+    for (const button of depthButtons)
+      button.setAttribute("aria-pressed", String(button.dataset.depth === value));
+  }
+
+  function setExpanded(entry, expanded) {
+    entry.steps.hidden = !expanded;
+    entry.button.setAttribute("aria-expanded", String(expanded));
+    entry.button.setAttribute("aria-label",
+      `${expanded ? "Collapse" : "Expand"} nested calls in ${entry.label}`);
+    entry.summary.hidden = expanded;
+  }
+
+  for (const [index, call] of calls.entries()) {
+    const steps = [...call.children].find(child => child.matches("ol.steps"));
+    if (!steps || !steps.querySelector(".call"))
+      continue;
+
+    const head = [...call.children].find(child => child.classList.contains("call-head"));
+    const label = `${head.querySelector(".file").textContent} ${head.querySelector(".signature").textContent}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "fold-toggle";
+    steps.id = `call-steps-${index + 1}`;
+    button.setAttribute("aria-controls", steps.id);
+
+    const summary = document.createElement("span");
+    summary.className = "fold-summary";
+    const count = steps.querySelectorAll(".call").length;
+    summary.textContent = `${count} nested ${count === 1 ? "call" : "calls"} hidden`;
+
+    let depth = 1;
+    for (let parent = call.parentElement.closest(".call"); parent;
+      parent = parent.parentElement.closest(".call"))
+      depth++;
+
+    const entry = { steps, button, summary, label, depth };
+    entries.set(call, entry);
+    head.prepend(button);
+    head.append(summary);
+    setExpanded(entry, true);
+
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      setExpanded(entry, expanded);
+      selectDepth(null);
+      foldStatus.textContent = `${expanded ? "Expanded" : "Collapsed"} ${label}`;
+    });
+  }
+
+  for (const button of depthButtons) {
+    button.addEventListener("click", () => {
+      const value = button.dataset.depth;
+      for (const entry of entries.values())
+        setExpanded(entry, value === "all" || entry.depth < Number(value));
+      selectDepth(value);
+      foldStatus.textContent = value === "all" ? "All calls expanded" : `Showing call depth ${value}`;
+    });
+  }
+
+  function revealTarget(hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (!target)
+      return;
+
+    let changed = false;
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      const entry = entries.get(parent);
+      if (entry && entry.steps.hidden) {
+        setExpanded(entry, true);
+        changed = true;
+      }
+    }
+    if (changed) {
+      selectDepth(null);
+      foldStatus.textContent = "Expanded the path to the linked step";
+    }
+    target.scrollIntoView({ block: "start" });
+  }
+
+  document.addEventListener("click", event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link)
+      revealTarget(link.getAttribute("href"));
+  });
+  window.addEventListener("hashchange", () => revealTarget(location.hash));
+  depthControls.hidden = false;
+  if (location.hash)
+    revealTarget(location.hash);
+</script>
+</body>
+</html>
