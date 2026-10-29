@@ -1,19 +1,8 @@
 {
-  "generated": "2026-10-27T07:12:24.804282+00:00",
-  "songs_processed": 85,
-  "total_count": 117,
+  "generated": "2026-10-29T02:05:50.241904+00:00",
+  "songs_processed": 77,
+  "total_count": 111,
   "extractions": [
-    {
-      "output_filename": "000-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
     {
       "output_filename": "000-Ape.XML",
       "source_song": "Ape",
@@ -26,19 +15,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "000-SlpspkArpsOld.XML",
-      "source_song": "SlpspkArpsOld",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "000-Weirdsaw-A.XML",
-      "source_song": "Weirdsaw-A",
+      "output_filename": "000-SLPSPK-Arps.XML",
+      "source_song": "SLPSPK-Arps",
       "preset_name": "000",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -59,6 +37,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "000-Wf-og.XML",
+      "source_song": "Wf-og",
+      "preset_name": "000",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "000-Alr-AYG.XML",
       "source_song": "AYG",
       "preset_name": "000-Alr",
@@ -70,8 +59,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "001-Weirdsaw-A.XML",
-      "source_song": "Weirdsaw-A",
+      "output_filename": "001-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "001",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -81,8 +70,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "003-Aa00.XML",
-      "source_song": "Aa00",
+      "output_filename": "003-5IVE.XML",
+      "source_song": "5IVE",
       "preset_name": "003",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -169,28 +158,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "010A-Arparty-Rearr.XML",
-      "source_song": "Arparty-Rearr",
-      "preset_name": "010A",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "010A-Arparty-old.XML",
-      "source_song": "Arparty-old",
-      "preset_name": "010A",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "010A-Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "010A",
@@ -246,8 +213,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "016-Mountain-Aa11.XML",
-      "source_song": "Aa11",
+      "output_filename": "016-Mountain-5IVE-fuzz-B.XML",
+      "source_song": "5IVE-fuzz-B",
       "preset_name": "016-Mountain",
       "preset_folder": "KITS/SONG-KITS",
       "instrument_type": "kit",
@@ -301,8 +268,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "018-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "018",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -323,17 +290,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "019-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "019",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "019-MWHW.XML",
       "source_song": "MWHW",
       "preset_name": "019",
@@ -345,8 +301,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "019-Weirdsaw-A.XML",
-      "source_song": "Weirdsaw-A",
+      "output_filename": "019-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "019",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -367,8 +323,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "019-Wf-Jfip.XML",
-      "source_song": "Wf-Jfip",
+      "output_filename": "019-Wf-og.XML",
+      "source_song": "Wf-og",
       "preset_name": "019",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -378,8 +334,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "021-Aa00.XML",
-      "source_song": "Aa00",
+      "output_filename": "021-5IVE.XML",
+      "source_song": "5IVE",
       "preset_name": "021",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -521,8 +477,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-FiveAlive.XML",
-      "source_song": "FiveAlive",
+      "output_filename": "045-5IVE.XML",
+      "source_song": "5IVE",
       "preset_name": "045",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -532,8 +488,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-Slpspk.XML",
-      "source_song": "Slpspk",
+      "output_filename": "045-SLPSPK.XML",
+      "source_song": "SLPSPK",
       "preset_name": "045",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -554,8 +510,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "046-Slpspk.XML",
-      "source_song": "Slpspk",
+      "output_filename": "046-SLPSPK.XML",
+      "source_song": "SLPSPK",
       "preset_name": "046",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -598,8 +554,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "051-Slpspk.XML",
-      "source_song": "Slpspk",
+      "output_filename": "051-SLPSPK.XML",
+      "source_song": "SLPSPK",
       "preset_name": "051",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -796,8 +752,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Eeeahh-Aa00.XML",
-      "source_song": "Aa00",
+      "output_filename": "Eeeahh-5IVE-fuzz-A.XML",
+      "source_song": "5IVE-fuzz-A",
       "preset_name": "Eeeahh",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -818,36 +774,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzzgat-Arparty-old.XML",
-      "source_song": "Arparty-old",
+      "output_filename": "Fuzzgat-Arparty.XML",
+      "source_song": "Arparty",
       "preset_name": "Fuzzgat",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
       "section_id": 2,
       "colour_name": "Gold",
       "colour_abbr": "Gld",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Fuzzogatto-Arparty.XML",
-      "source_song": "Arparty",
-      "preset_name": "Fuzzogatto",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Fuzzogatto-Arparty-Rearr.XML",
-      "source_song": "Arparty-Rearr",
-      "preset_name": "Fuzzogatto",
-      "preset_folder": "KITS/KERERU",
-      "instrument_type": "kit",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
       "differing_params": []
     },
     {
@@ -1093,17 +1027,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT1-Wf-Jfip.XML",
-      "source_song": "Wf-Jfip",
-      "preset_name": "KIT1",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "KIT2-Lazygat.XML",
       "source_song": "Lazygat",
       "preset_name": "KIT2",
@@ -1214,8 +1137,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Bass-Slpspk.XML",
-      "source_song": "Slpspk",
+      "output_filename": "SS-C-Bass-SLPSPK.XML",
+      "source_song": "SLPSPK",
       "preset_name": "SS-C-Bass",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1225,8 +1148,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Bass-SlpspkRemix.XML",
-      "source_song": "SlpspkRemix",
+      "output_filename": "SS-C-Bass-SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
       "preset_name": "SS-C-Bass",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1236,8 +1159,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Inst-Slpspk.XML",
-      "source_song": "Slpspk",
+      "output_filename": "SS-C-Inst-SLPSPK.XML",
+      "source_song": "SLPSPK",
       "preset_name": "SS-C-Inst",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1247,8 +1170,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-vox-SlpspkRemix.XML",
-      "source_song": "SlpspkRemix",
+      "output_filename": "SS-C-vox-SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
       "preset_name": "SS-C-vox",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1258,8 +1181,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-Drums-SlpspkRemix.XML",
-      "source_song": "SlpspkRemix",
+      "output_filename": "SS-Drums-SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
       "preset_name": "SS-Drums",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1288,6 +1211,17 @@
       "section_id": 3,
       "colour_name": "Cyan",
       "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Wobble-Crash-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
+      "preset_name": "Wobble-Crash",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     }
   ]

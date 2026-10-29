@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-27T07:12:24.801491+00:00",
-  "songs_processed": 85,
-  "total_count": 200,
+  "generated": "2026-10-29T02:05:50.238908+00:00",
+  "songs_processed": 77,
+  "total_count": 185,
   "extractions": [
     {
       "output_filename": "000-Beginagain.XML",
@@ -257,17 +257,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "009-Arparty-old.XML",
-      "source_song": "Arparty-old",
-      "preset_name": "009",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": []
-    },
-    {
       "output_filename": "009-BeautifulStranger.XML",
       "source_song": "BeautifulStranger",
       "preset_name": "009",
@@ -279,8 +268,19 @@
       "differing_params": []
     },
     {
-      "output_filename": "013-SlpspkArpsOld.XML",
-      "source_song": "SlpspkArpsOld",
+      "output_filename": "009-Paddy.XML",
+      "source_song": "Paddy",
+      "preset_name": "009",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "013-SLPSPK-Arps.XML",
+      "source_song": "SLPSPK-Arps",
       "preset_name": "013",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -378,14 +378,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "014A-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "014A-5IVE.XML",
+      "source_song": "5IVE",
       "preset_name": "014A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
       "differing_params": []
     },
     {
@@ -400,8 +400,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "014B-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "014B-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "014B",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -444,8 +444,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-SlpspkRemix.XML",
-      "source_song": "SlpspkRemix",
+      "output_filename": "018-SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
       "preset_name": "018",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -521,8 +521,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "027A-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "027A-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "027A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -537,14 +537,14 @@
       "preset_name": "028",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
+      "section_id": 10,
+      "colour_name": "Green",
+      "colour_abbr": "Grn",
       "differing_params": []
     },
     {
-      "output_filename": "030-SlpspkArpsOld.XML",
-      "source_song": "SlpspkArpsOld",
+      "output_filename": "030-SLPSPK-Arps.XML",
+      "source_song": "SLPSPK-Arps",
       "preset_name": "030",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -565,17 +565,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "034-Arparty-old.XML",
-      "source_song": "Arparty-old",
-      "preset_name": "034",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 10,
-      "colour_name": "Green",
-      "colour_abbr": "Grn",
-      "differing_params": []
-    },
-    {
       "output_filename": "034-Repeatbeat.XML",
       "source_song": "Repeatbeat",
       "preset_name": "034",
@@ -587,8 +576,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "035-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "035-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "035",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -708,17 +697,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "050-Arparty-old.XML",
-      "source_song": "Arparty-old",
-      "preset_name": "050",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": []
-    },
-    {
       "output_filename": "050-Dject.XML",
       "source_song": "Dject",
       "preset_name": "050",
@@ -774,8 +752,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "059-SlpspkArpsOld.XML",
-      "source_song": "SlpspkArpsOld",
+      "output_filename": "059-SLPSPK-Arps.XML",
+      "source_song": "SLPSPK-Arps",
       "preset_name": "059",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -840,8 +818,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "080A-FiveAlive.XML",
-      "source_song": "FiveAlive",
+      "output_filename": "080A-5IVE.XML",
+      "source_song": "5IVE",
       "preset_name": "080A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -864,17 +842,6 @@
     {
       "output_filename": "085A-Arparty.XML",
       "source_song": "Arparty",
-      "preset_name": "085A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "085A-Arparty-old.XML",
-      "source_song": "Arparty-old",
       "preset_name": "085A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -917,8 +884,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "097-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "097-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "097",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -961,8 +928,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "128-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "128-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "128",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1038,8 +1005,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "142A-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "142A-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "142A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1148,8 +1115,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "161-SlpspkArpsOld.XML",
-      "source_song": "SlpspkArpsOld",
+      "output_filename": "161-SLPSPK-Arps.XML",
+      "source_song": "SLPSPK-Arps",
       "preset_name": "161",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1313,8 +1280,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "170-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "170-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "170",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1390,8 +1357,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "172-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "172-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "172",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1412,8 +1379,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "172A-Arparty-old.XML",
-      "source_song": "Arparty-old",
+      "output_filename": "172A-Arparty.XML",
+      "source_song": "Arparty",
       "preset_name": "172A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1522,47 +1489,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "55-POPCORN-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
+      "output_filename": "55-POPCORN-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "55-POPCORN",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "5Alivearps-Weirdsaw-A.XML",
-      "source_song": "Weirdsaw-A",
-      "preset_name": "5Alivearps",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 6,
-      "colour_name": "DarkBlue",
-      "colour_abbr": "Dbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "5Alivefuzzbass-5Motre.XML",
-      "source_song": "5Motre",
-      "preset_name": "5Alivefuzzbass",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "5Alivefuzzbass-Jamming5Alive.XML",
-      "source_song": "Jamming5Alive",
-      "preset_name": "5Alivefuzzbass",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
       "differing_params": []
     },
     {
@@ -1588,25 +1522,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arp1-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
+      "output_filename": "Arp1-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "Arp1",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
       "section_id": 0,
       "colour_name": "LightBlue",
       "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Arp1-Wf-Redo.XML",
-      "source_song": "Wf-Redo",
-      "preset_name": "Arp1",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
       "differing_params": []
     },
     {
@@ -1621,8 +1544,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arp1-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "Arp1-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "Arp1",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1643,17 +1566,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arp2-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "Arp2",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "Arp2-Bingbong.XML",
       "source_song": "Bingbong",
       "preset_name": "Arp2",
@@ -1665,8 +1577,19 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arp2-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "Arp2-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
+      "preset_name": "Arp2",
+      "preset_folder": "SYNTHS/KERERU",
+      "instrument_type": "synth",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Arp2-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "Arp2",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1687,8 +1610,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzz-Aa11.XML",
-      "source_song": "Aa11",
+      "output_filename": "Fuzz-5IVE-fuzz-B.XML",
+      "source_song": "5IVE-fuzz-B",
       "preset_name": "Fuzz",
       "preset_folder": "SYNTHS/KERERU/ARCHIVE",
       "instrument_type": "synth",
@@ -1698,8 +1621,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzz-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
+      "output_filename": "Fuzz-Weirdsaw-C.XML",
+      "source_song": "Weirdsaw-C",
       "preset_name": "Fuzz",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1742,17 +1665,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Arp-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "K01Arp",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "K01Arp-Sink.XML",
       "source_song": "Sink",
       "preset_name": "K01Arp",
@@ -1764,8 +1676,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Arp-Weirdsaw-A.XML",
-      "source_song": "Weirdsaw-A",
+      "output_filename": "K01Arp-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "K01Arp",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1775,8 +1687,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Bass-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
+      "output_filename": "K01Bass-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "K01Bass",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1786,8 +1698,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Bass-Weirdsaw-A.XML",
-      "source_song": "Weirdsaw-A",
+      "output_filename": "K01Bass-Weirdsaw-C.XML",
+      "source_song": "Weirdsaw-C",
       "preset_name": "K01Bass",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1797,20 +1709,9 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Bass-Wf-Redo.XML",
-      "source_song": "Wf-Redo",
+      "output_filename": "K01Bass-Wf-og.XML",
+      "source_song": "Wf-og",
       "preset_name": "K01Bass",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
-      "differing_params": []
-    },
-    {
-      "output_filename": "K01Drone-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
       "section_id": 0,
@@ -1830,8 +1731,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-Arparty-old.XML",
-      "source_song": "Arparty-old",
+      "output_filename": "K01Drone-SLPSPK.XML",
+      "source_song": "SLPSPK",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1841,8 +1742,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-Sink.XML",
-      "source_song": "Sink",
+      "output_filename": "K01Drone-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1852,19 +1753,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-Wf-Jfip.XML",
-      "source_song": "Wf-Jfip",
-      "preset_name": "K01Drone",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "K01Drone-Wf-Redo.XML",
-      "source_song": "Wf-Redo",
+      "output_filename": "K01Drone-Wf-og.XML",
+      "source_song": "Wf-og",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1940,8 +1830,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Violin-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
+      "output_filename": "K01Violin-Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
       "preset_name": "K01Violin",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1984,17 +1874,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "KRumchybass-Arparty-old.XML",
-      "source_song": "Arparty-old",
-      "preset_name": "KRumchybass",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "Lully-Pad-Lollybuy.XML",
       "source_song": "Lollybuy",
       "preset_name": "Lully-Pad",
@@ -2003,28 +1882,6 @@
       "section_id": 2,
       "colour_name": "Gold",
       "colour_abbr": "Gld",
-      "differing_params": []
-    },
-    {
-      "output_filename": "Padfoot-Arparty.XML",
-      "source_song": "Arparty",
-      "preset_name": "Padfoot",
-      "preset_folder": "SYNTHS/KERERU",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "SYNT056-Arparty.XML",
-      "source_song": "Arparty",
-      "preset_name": "SYNT056",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
       "differing_params": []
     },
     {
@@ -2039,17 +1896,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "SYNT1-Wf-Jfip.XML",
-      "source_song": "Wf-Jfip",
-      "preset_name": "SYNT1",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "SYNT2-Eoy-Town-Hall.XML",
       "source_song": "Eoy-Town-Hall",
       "preset_name": "SYNT2",
@@ -2061,8 +1907,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "TB02-Aa00.XML",
-      "source_song": "Aa00",
+      "output_filename": "TB02-5IVE.XML",
+      "source_song": "5IVE",
       "preset_name": "TB02",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -2094,8 +1940,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "TB13-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "TB13-YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "TB13",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -2107,17 +1953,6 @@
     {
       "output_filename": "VISA-PAD-Arparty.XML",
       "source_song": "Arparty",
-      "preset_name": "VISA-PAD",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "VISA-PAD-Arparty-old.XML",
-      "source_song": "Arparty-old",
       "preset_name": "VISA-PAD",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
