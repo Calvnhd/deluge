@@ -1,7 +1,3 @@
----
-title: Project pou guidance
-description: Operating the project through pou
----
 
 # Pou
 
