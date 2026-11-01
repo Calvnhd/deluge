@@ -3,12 +3,16 @@
 
 from __future__ import annotations
 
+import errno
+import os
+import stat
+import subprocess
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 import pytest
 
-from tests.conftest import _touch
 from deluge_lib.scanning import FileEntry, ScanResult, normalise_mtime
 from deluge_lib.syncing import (
     SyncError,
@@ -21,7 +25,7 @@ from deluge_lib.syncing import (
     execute_plan,
     print_plan,
 )
-
+from tests.conftest import _touch
 
 # =============================================================================
 # _mtime_matches
@@ -619,6 +623,394 @@ class TestPrintPlanDeleteLabel:
 
 
 class TestCleanEmptyDirs:
+    def test_preserves_root_top_level_and_nonempty_directories(self, tmp_path: Path) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty" / "Nested"
+        empty.mkdir(parents=True)
+        sample = root / "CLIPS" / "Nonempty" / ".hidden.wav"
+        _touch(sample, b"sample data")
+
+        assert clean_empty_dirs(root) == 2
+        assert root.is_dir()
+        assert (root / "CLIPS").is_dir()
+        assert sample.read_bytes() == b"sample data"
+
+    def test_does_not_enter_trash(self, tmp_path: Path) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / ".TrAsH" / "Backup" / "Empty"
+        empty.mkdir(parents=True)
+
+        assert clean_empty_dirs(root) == 0
+        assert empty.is_dir()
+
+    def test_skips_reparse_root(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        root.mkdir()
+        info = SimpleNamespace(
+            st_mode=stat.S_IFDIR,
+            st_file_attributes=stat.FILE_ATTRIBUTE_REPARSE_POINT,
+        )
+        with (
+            patch.object(Path, "lstat", return_value=info),
+            patch.object(Path, "rmdir") as rmdir,
+            patch.object(Path, "chmod") as chmod,
+        ):
+            assert clean_empty_dirs(root) == 0
+        rmdir.assert_not_called()
+        chmod.assert_not_called()
+        assert "reparse point" in capsys.readouterr().out
+
+    def test_does_not_enter_reparse_subdirectory(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        special = root / "CLIPS" / "Special"
+        descendant = special / "Empty"
+        descendant.mkdir(parents=True)
+        original_lstat = Path.lstat
+        info = SimpleNamespace(
+            st_mode=stat.S_IFDIR,
+            st_file_attributes=stat.FILE_ATTRIBUTE_REPARSE_POINT,
+        )
+        with (
+            patch.object(Path, "lstat", autospec=True) as lstat,
+            patch.object(Path, "rmdir") as rmdir,
+            patch.object(Path, "chmod") as chmod,
+        ):
+            lstat.side_effect = lambda path: info if path == special else original_lstat(path)
+            assert clean_empty_dirs(root) == 0
+        rmdir.assert_not_called()
+        chmod.assert_not_called()
+        assert descendant.is_dir()
+        assert "reparse point" in capsys.readouterr().out
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows junctions")
+    def test_does_not_enter_junction_target(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        (root / "CLIPS").mkdir(parents=True)
+        target = tmp_path / "outside"
+        empty = target / "Empty"
+        empty.mkdir(parents=True)
+        sample = target / "sample.wav"
+        sample.write_bytes(b"outside sample")
+        junction = root / "CLIPS" / "Junction"
+        subprocess.run(
+            ["cmd", "/c", "mklink", "/J", str(junction), str(target)],
+            check=True,
+            capture_output=True,
+        )
+        try:
+            assert clean_empty_dirs(root) == 0
+            assert junction.is_junction()
+            assert empty.is_dir()
+            assert sample.read_bytes() == b"outside sample"
+            assert "reparse point" in capsys.readouterr().out
+        finally:
+            junction.rmdir()
+
+    def test_enumeration_failure_does_not_remove_directory(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        (root / "CLIPS" / "Empty").mkdir(parents=True)
+        with (
+            patch("deluge_lib.syncing.os.scandir", side_effect=PermissionError("Cannot list")),
+            patch.object(Path, "rmdir") as rmdir,
+            patch.object(Path, "chmod") as chmod,
+        ):
+            assert clean_empty_dirs(root) == 0
+        rmdir.assert_not_called()
+        chmod.assert_not_called()
+        assert "Cannot list" in capsys.readouterr().out
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    def test_retries_readonly_empty_directory(self, tmp_path: Path) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        empty.chmod(stat.S_IREAD)
+        original_rmdir = Path.rmdir
+        attempts = 0
+
+        def rmdir(path: Path) -> None:
+            nonlocal attempts
+            if path == empty:
+                attempts += 1
+            original_rmdir(path)
+
+        try:
+            with patch.object(Path, "rmdir", rmdir):
+                assert clean_empty_dirs(root) == 1
+            assert attempts == 2
+            assert not empty.exists()
+            assert (root / "CLIPS").is_dir()
+        finally:
+            if empty.exists():
+                empty.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    def test_failed_attribute_change_does_not_retry(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        empty.chmod(stat.S_IREAD)
+        original_attributes = empty.stat().st_file_attributes
+        try:
+            with (
+                patch.object(Path, "rmdir", wraps=empty.rmdir) as rmdir,
+                patch.object(Path, "chmod", side_effect=PermissionError("Cannot clear flag")),
+            ):
+                assert clean_empty_dirs(root) == 0
+            assert rmdir.call_count == 1
+            assert empty.stat().st_file_attributes == original_attributes
+            assert "Cannot clear flag" in capsys.readouterr().out
+        finally:
+            empty.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    def test_nonempty_readonly_directory_is_not_modified(self, tmp_path: Path) -> None:
+        root = tmp_path / "root"
+        sample = root / "CLIPS" / "Nonempty" / ".hidden.wav"
+        _touch(sample, b"sample data")
+        sample.parent.chmod(stat.S_IREAD)
+        try:
+            with patch.object(Path, "chmod") as chmod:
+                assert clean_empty_dirs(root) == 0
+            chmod.assert_not_called()
+            assert sample.read_bytes() == b"sample data"
+            assert sample.parent.stat().st_file_attributes & stat.FILE_ATTRIBUTE_READONLY
+        finally:
+            sample.parent.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows error codes")
+    def test_access_denied_without_readonly_is_not_retried(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        error = PermissionError(errno.EACCES, "Access is denied", str(empty), 5)
+        with (
+            patch.object(Path, "rmdir", side_effect=error) as rmdir,
+            patch.object(Path, "chmod") as chmod,
+        ):
+            assert clean_empty_dirs(root) == 0
+        assert rmdir.call_count == 1
+        chmod.assert_not_called()
+        assert "Access is denied" in capsys.readouterr().out
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    def test_other_windows_error_is_not_retried(self, tmp_path: Path) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        empty.chmod(stat.S_IREAD)
+        error = PermissionError(errno.EACCES, "Sharing violation", str(empty), 32)
+        try:
+            with (
+                patch.object(Path, "rmdir", side_effect=error) as rmdir,
+                patch.object(Path, "chmod") as chmod,
+            ):
+                assert clean_empty_dirs(root) == 0
+            assert rmdir.call_count == 1
+            chmod.assert_not_called()
+        finally:
+            empty.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    @pytest.mark.parametrize("changed_part", ["directory", "ancestor"])
+    def test_identity_change_prevents_retry(
+        self,
+        tmp_path: Path,
+        capsys: pytest.CaptureFixture[str],
+        changed_part: str,
+    ) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        replacement = tmp_path / "replacement"
+        replacement.mkdir()
+        replacement_info = replacement.lstat()
+        empty.chmod(stat.S_IREAD)
+        changed_path = empty if changed_part == "directory" else empty.parent
+        original_rmdir = Path.rmdir
+        original_lstat = Path.lstat
+        failed = False
+
+        def lstat(path: Path) -> os.stat_result:
+            if failed and path == changed_path:
+                return replacement_info
+            return original_lstat(path)
+
+        def rmdir(path: Path) -> None:
+            nonlocal failed
+            failed = True
+            original_rmdir(path)
+
+        try:
+            with (
+                patch.object(Path, "rmdir", rmdir),
+                patch.object(Path, "lstat", lstat),
+                patch.object(Path, "chmod") as chmod,
+            ):
+                assert clean_empty_dirs(root) == 0
+            chmod.assert_not_called()
+            assert empty.is_dir()
+            assert "Directory changed during cleanup" in capsys.readouterr().out
+        finally:
+            empty.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    @pytest.mark.parametrize("create_sample", [False, True])
+    def test_failed_retry_restores_readonly_and_preserves_data(
+        self,
+        tmp_path: Path,
+        capsys: pytest.CaptureFixture[str],
+        create_sample: bool,
+    ) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        empty.chmod(stat.S_IREAD)
+        original_attributes = empty.stat().st_file_attributes
+        original_rmdir = Path.rmdir
+        attempts = 0
+        sample = empty / "new.wav"
+
+        def rmdir(path: Path) -> None:
+            nonlocal attempts
+            if path == empty:
+                attempts += 1
+                if attempts == 2:
+                    if create_sample:
+                        sample.write_bytes(b"new sample")
+                        original_rmdir(path)
+                    raise PermissionError(errno.EACCES, "Still denied", str(path), 5)
+            original_rmdir(path)
+
+        try:
+            with patch.object(Path, "rmdir", rmdir):
+                assert clean_empty_dirs(root) == 0
+            assert attempts == 2
+            assert empty.stat().st_file_attributes & stat.FILE_ATTRIBUTE_READONLY
+            if not create_sample:
+                assert empty.stat().st_file_attributes == original_attributes
+            assert "Warning: could not remove empty directory" in capsys.readouterr().out
+            if create_sample:
+                assert sample.read_bytes() == b"new sample"
+        finally:
+            empty.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    def test_identity_change_after_clearing_does_not_modify_replacement(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        empty.chmod(stat.S_IREAD)
+        sample = tmp_path / "replacement" / "sample.wav"
+        _touch(sample, b"replacement sample")
+        replacement_info = sample.parent.lstat()
+        original_lstat = Path.lstat
+        original_chmod = Path.chmod
+        cleared = False
+        chmod_attempts = 0
+
+        def lstat(path: Path) -> os.stat_result:
+            if cleared and path == empty:
+                return replacement_info
+            return original_lstat(path)
+
+        def chmod(path: Path, mode: int) -> None:
+            nonlocal cleared, chmod_attempts
+            chmod_attempts += 1
+            original_chmod(path, mode)
+            cleared = True
+
+        try:
+            with (
+                patch.object(Path, "lstat", lstat),
+                patch.object(Path, "chmod", chmod),
+            ):
+                assert clean_empty_dirs(root) == 0
+            assert chmod_attempts == 1
+            assert empty.is_dir()
+            assert sample.read_bytes() == b"replacement sample"
+            output = capsys.readouterr().out
+            assert "Directory changed during cleanup" in output
+            assert "could not restore ReadOnly" in output
+        finally:
+            empty.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    def test_new_sample_before_retry_prevents_attribute_change(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        empty.chmod(stat.S_IREAD)
+        sample = empty / "new.wav"
+
+        def rmdir(path: Path) -> None:
+            sample.write_bytes(b"new sample")
+            raise PermissionError(errno.EACCES, "Access is denied", str(path), 5)
+
+        try:
+            with (
+                patch.object(Path, "rmdir", rmdir),
+                patch.object(Path, "chmod") as chmod,
+            ):
+                assert clean_empty_dirs(root) == 0
+            chmod.assert_not_called()
+            assert sample.read_bytes() == b"new sample"
+            assert empty.stat().st_file_attributes & stat.FILE_ATTRIBUTE_READONLY
+            assert "no longer empty" in capsys.readouterr().out
+        finally:
+            empty.chmod(stat.S_IWRITE)
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows directory ReadOnly behavior")
+    def test_reports_attribute_restoration_failure(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = tmp_path / "root"
+        empty = root / "CLIPS" / "Empty"
+        empty.mkdir(parents=True)
+        empty.chmod(stat.S_IREAD)
+        original_chmod = Path.chmod
+        chmod_attempts = 0
+
+        def chmod(path: Path, mode: int) -> None:
+            nonlocal chmod_attempts
+            chmod_attempts += 1
+            if chmod_attempts == 2:
+                raise PermissionError("Restoration denied")
+            original_chmod(path, mode)
+
+        error = PermissionError(errno.EACCES, "Access is denied", str(empty), 5)
+        try:
+            with (
+                patch.object(Path, "chmod", chmod),
+                patch.object(Path, "rmdir", side_effect=error) as rmdir,
+            ):
+                assert clean_empty_dirs(root) == 0
+            assert rmdir.call_count == 2
+            assert chmod_attempts == 2
+            assert empty.is_dir()
+            output = capsys.readouterr().out
+            assert "could not restore ReadOnly" in output
+            assert "Restoration denied" in output
+            assert "could not remove empty directory" in output
+        finally:
+            empty.chmod(stat.S_IWRITE)
+
     def test_warns_and_continues_when_directory_cannot_be_removed(
         self,
         tmp_path: Path,
