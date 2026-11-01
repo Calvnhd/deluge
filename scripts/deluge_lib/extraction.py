@@ -1184,10 +1184,10 @@ def generate_filename(
     # TODO-v0.1-REVIEW
     """Generate a unique output filename following the naming convention.
 
-    Default mode:   <SongName>-<PresetName>.XML  (naming="song")
-                    <PresetName>-<SongName>.XML  (naming="preset")
-    Extended mode:  <SongName>-<PresetName>-<Abbr>.XML  (naming="song")
-                    <PresetName>-<SongName>-<Abbr>.XML  (naming="preset")
+    Default mode:   <SongName>_<PresetName>.XML  (naming="song")
+                    <PresetName>_<SongName>.XML  (naming="preset")
+    Extended mode:  <SongName>_<PresetName>-<Abbr>.XML  (naming="song")
+                    <PresetName>_<SongName>-<Abbr>.XML  (naming="preset")
 
     Args:
         song_name: Stem of the song XML filename (e.g. "Bloop").
@@ -1196,10 +1196,10 @@ def generate_filename(
         section_id: Section ID for colour abbreviation lookup (extended mode only).
         extended: Whether extended mode is active.
         used_filenames: Set of filenames already used — for collision detection.
-        naming: Filename ordering — "song" for SongName-Preset, "preset" for Preset-SongName.
+        naming: Filename ordering — "song" for SongName_Preset, "preset" for Preset_SongName.
 
     Returns:
-        A unique filename string (e.g. "Bloop-133.XML").
+        A unique filename string (e.g. "133_Bloop.XML").
 
     Steps:
         1. Construct base name based on naming mode
@@ -1210,10 +1210,7 @@ def generate_filename(
         5. Add the final filename to used_filenames
         6. Return the filename
     """
-    if naming == "preset":
-        base = f"{preset_name}-{song_name}"
-    else:
-        base = f"{song_name}-{preset_name}"
+    base = f"{preset_name}_{song_name}" if naming == "preset" else f"{song_name}_{preset_name}"
     if extended:
         _colour_name, abbr = SECTION_COLOURS[section_id]
         base = f"{base}-{abbr}"
@@ -2518,6 +2515,4 @@ def _compare_kit_soft(
             f" (threshold: {config.param_count_threshold})"
         ),
     )
-
-
 

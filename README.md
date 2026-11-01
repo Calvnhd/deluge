@@ -148,9 +148,11 @@ uv run extract_instruments.py --include-sidechain       # include sidechain-only
 uv run extract_instruments.py --exclude-dir testing     # skip songs in a subdirectory
 uv run extract_instruments.py --sd-direct               # read/write directly to SD card
 uv run extract_instruments.py --verbose                 # detailed dedup comparison logging
-uv run extract_instruments.py --naming preset           # Preset-SongName filenames (default)
-uv run extract_instruments.py --naming song             # SongName-Preset filenames
+uv run extract_instruments.py --naming preset           # Preset_SongName filenames (default)
+uv run extract_instruments.py --naming song             # SongName_Preset filenames
 ```
+
+Extracted filenames use `_` between the preset and song names, preserving spaces and hyphens within each name. For example, preset `Houst-Do-Not` from song `Houston-Vox-Bounce` becomes `Houst-Do-Not_Houston-Vox-Bounce.XML`. Extended-mode colour suffixes such as `-Lbl` and collision suffixes such as `-2` are unchanged.
 
 #### `find_similar_kits.py`
 

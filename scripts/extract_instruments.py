@@ -94,7 +94,7 @@ def main(argv: list[str] | None = None) -> None:
         "--naming",
         choices=["song", "preset"],
         default="preset",
-        help="Filename ordering: 'preset' for Preset-SongName (default), 'song' for SongName-Preset",
+        help="Filename ordering: 'preset' for Preset_SongName (default), 'song' for SongName_Preset",
     )
     args = parser.parse_args(argv)
 
