@@ -52,7 +52,7 @@
 		modFXRate="0xB333332A"
 		modFXDepth="0x7FFFFFFF"
 		delayRate="0x00000000"
-		delayFeedback="0x04000000"
+		delayFeedback="0xFC000000"
 		reverbAmount="0x50000000"
 		arpeggiatorRate="0x00000000"
 		stutterRate="0x00000000"
