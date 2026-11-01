@@ -94,6 +94,14 @@ cp scripts/.env.example scripts/.env
 
 All scripts read configuration from `scripts/.env`. See `.env.example` for available options. Run all scripts from the `scripts/` directory.
 
+### Empty-directory cleanup
+
+After applying changes, the three sync scripts run shared empty-directory cleanup on the destination. This post-sync cleanup preserves the destination root, its immediate subdirectories, and every `.trash` subtree. It skips symlinks and detected reparse points, including junctions and cloud placeholders, rather than following or removing them. Hard-delete syncs also retain their existing ancestor cleanup when deleting individual files.
+
+On Windows, an access-denied error gets one retry only if the directory is still empty, its identity and ancestor identities still match the scan, and its ReadOnly attribute is set. The retry clears only the directory's ReadOnly flag; it does not change file attributes or security permissions. If removal fails, cleanup attempts to restore ReadOnly and reports both removal and restoration failures.
+
+Cleanup uses non-recursive directory removal, never deletes files to empty a directory, and leaves directories alone when it cannot verify safety. Enumeration includes hidden entries. These checks do not establish whether a cloud provider has finished synchronizing remote contents. Cleanup is skipped for dry runs and when sync reports "Already up to date".
+
 ### Script reference
 
 #### `sync_from_sd.py`
@@ -141,6 +149,23 @@ uv run extract_instruments.py --verbose                 # detailed dedup compari
 uv run extract_instruments.py --naming preset           # Preset-SongName filenames (default)
 uv run extract_instruments.py --naming song             # SongName-Preset filenames
 ```
+
+#### `find_similar_kits.py`
+
+> [!WARNING]
+> This script is a work in progress. Review comparison results before acting on them.
+
+Read-only comparison of existing kit presets, including subdirectories but excluding `.trash`. Reports equivalent pairs and near-duplicate candidates with every changed numerical field. Kit and sound names, XML formatting, and `selectedDrumIndex` are ignored; volume, pan, sample boundaries, and small parameter changes are not.
+
+```powershell
+uv run find_similar_kits.py                           # scan DELUGE_ROOT/KITS
+uv run find_similar_kits.py --max-differences 0        # equivalent pairs only
+uv run find_similar_kits.py --max-differences 5        # allow up to five changed numerical fields
+uv run find_similar_kits.py ..\DELUGE\KITS\KERERU\Chopped-Lead.XML  # compare one kit against the library
+uv run find_similar_kits.py --kits-dir C:\path\to\KITS # scan another library
+```
+
+The default limit is three changed numerical fields across the whole kit, regardless of change magnitude. Sample paths (including case), sound order, XML structure, and non-numerical settings must match. Unknown settings are retained; missing values are not replaced with inferred firmware defaults. Malformed XML fails explicitly rather than using the SDK's recovering parser, which can drop data. Near-duplicates are review candidates, not an audio similarity score or permission to delete a preset. No samples need to be loaded, and no files are modified.
 
 #### `fix_references.py`
 
@@ -231,3 +256,8 @@ cloud-backup operations. Collection errors and failing tests are reported as
 failures, not skipped.
 
 Record workflow friction with `pou observe "symptom and consequence"`.
+
+## Notes
+
+- A kit or synth name can contain 16 chars and still fit in the entire screen
+- A kit inst name must be <20 chars long or it will not display
