@@ -7,6 +7,8 @@ import errno
 import os
 import stat
 import subprocess
+from collections.abc import Iterator
+from contextlib import nullcontext
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -19,6 +21,7 @@ from deluge_lib.syncing import (
     SyncPlan,
     SyncResult,
     _mtime_matches,
+    _windows_volume_identity,
     append_sync_log,
     clean_empty_dirs,
     compute_sync,
@@ -623,6 +626,115 @@ class TestPrintPlanDeleteLabel:
 
 
 class TestCleanEmptyDirs:
+    @pytest.mark.skipif(os.name != "nt", reason="Windows drive-root identity")
+    @pytest.mark.parametrize(
+        "scenario",
+        [
+            "stable",
+            "volume-changed",
+            "device-changed",
+            "missing-device-id",
+            "missing-child-id",
+            "volume-query-failed",
+            "volume-query-failed-after-scan",
+            "reparse-root",
+        ],
+    )
+    def test_fat32_drive_root(
+        self, scenario: str, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        root = Path("Q:\\")
+        top = root / "KITS"
+        empty = top / "Empty"
+        scanned = False
+        infos = {
+            path: SimpleNamespace(
+                st_mode=stat.S_IFDIR,
+                st_file_attributes=stat.FILE_ATTRIBUTE_DIRECTORY,
+                st_ino=index,
+                st_dev=42,
+            )
+            for index, path in enumerate([root, top, empty])
+        }
+        if scenario == "missing-device-id":
+            infos[root].st_dev = 0
+        elif scenario == "missing-child-id":
+            infos[empty].st_ino = 0
+        elif scenario == "reparse-root":
+            infos[root].st_file_attributes |= stat.FILE_ATTRIBUTE_REPARSE_POINT
+
+        def lstat(path: Path) -> SimpleNamespace:
+            info = SimpleNamespace(**vars(infos[path]))
+            if scanned and path == root and scenario == "device-changed":
+                info.st_dev = 43
+            return info
+
+        def walk(_root: Path, **_kwargs: object) -> Iterator[tuple[str, list[str], list[str]]]:
+            nonlocal scanned
+            yield str(root), ["KITS"], []
+            yield str(top), ["Empty"], []
+            if scenario != "missing-child-id":
+                yield str(empty), [], []
+            scanned = True
+
+        def volume_identity(_root: Path) -> str:
+            if scenario == "volume-query-failed" or (
+                scanned and scenario == "volume-query-failed-after-scan"
+            ):
+                raise OSError("Cannot query volume identity")
+            return (
+                "replacement-volume"
+                if scanned and scenario == "volume-changed"
+                else "original-volume"
+            )
+
+        with (
+            patch.object(Path, "lstat", lstat),
+            patch.object(Path, "rmdir", autospec=True) as rmdir,
+            patch.object(Path, "chmod") as chmod,
+            patch("deluge_lib.syncing.os.walk", side_effect=walk),
+            patch("deluge_lib.syncing.os.scandir", side_effect=lambda _path: nullcontext(iter(()))),
+            patch("deluge_lib.syncing._windows_volume_identity", side_effect=volume_identity),
+        ):
+            assert clean_empty_dirs(root) == (1 if scenario == "stable" else 0)
+        chmod.assert_not_called()
+        output = capsys.readouterr().out
+        if scenario == "stable":
+            rmdir.assert_called_once_with(empty)
+            assert "Warning:" not in output
+        else:
+            rmdir.assert_not_called()
+            assert "Warning:" in output
+        if scenario in {"volume-changed", "device-changed"}:
+            assert "changed during cleanup" in output
+
+    @pytest.mark.skipif(os.name != "nt", reason="Windows volume identity API")
+    def test_windows_volume_identity_is_stable(self, tmp_path: Path) -> None:
+        root = Path(tmp_path.anchor)
+        identity = _windows_volume_identity(root)
+        assert identity.startswith("\\\\?\\volume{")
+        assert identity.endswith("}\\")
+        assert _windows_volume_identity(root) == identity
+
+    def test_zero_identity_on_non_drive_root_is_still_rejected(
+        self, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+    ) -> None:
+        info = SimpleNamespace(
+            st_mode=stat.S_IFDIR,
+            st_file_attributes=stat.FILE_ATTRIBUTE_DIRECTORY,
+            st_ino=0,
+            st_dev=42,
+        )
+        with (
+            patch.object(Path, "lstat", return_value=info),
+            patch.object(Path, "rmdir") as rmdir,
+            patch.object(Path, "chmod") as chmod,
+        ):
+            assert clean_empty_dirs(tmp_path) == 0
+        rmdir.assert_not_called()
+        chmod.assert_not_called()
+        assert "Cannot verify directory identity" in capsys.readouterr().out
+
     def test_preserves_root_top_level_and_nonempty_directories(self, tmp_path: Path) -> None:
         root = tmp_path / "root"
         empty = root / "CLIPS" / "Empty" / "Nested"

@@ -549,17 +549,40 @@ def append_sync_log(
         f.write(line + "\n")
 
 
+def _windows_volume_identity(root: Path) -> str:
+    import ctypes
+    from ctypes import wintypes
+
+    get_name = ctypes.WinDLL("kernel32", use_last_error=True).GetVolumeNameForVolumeMountPointW
+    get_name.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+    get_name.restype = wintypes.BOOL
+    name = ctypes.create_unicode_buffer(50)
+    if not get_name(str(root), name, len(name)):
+        raise ctypes.WinError(ctypes.get_last_error())
+    if not name.value:
+        raise OSError(f"Cannot verify volume identity: {root}")
+    return name.value.casefold()
+
+
 def clean_empty_dirs(root: Path) -> int:
     """Remove empty descendants, preserving root, top-level folders and .trash.
 
     Skip links and reparse points. Retry Windows access-denied errors once when
     an unchanged, empty directory has ReadOnly set; restore it on retry failure.
+    Use volume identity for Windows drive roots without a directory ID.
     """
     from deluge_lib.scanning import SKIP_DIRS, print_path
 
     root = root.absolute()
     removed: dict[Path, None] = {}
     directories: dict[Path, os.stat_result] = {}
+    drive_root = (
+        os.name == "nt"
+        and root.parent == root
+        and len(root.drive) == 2
+        and root.drive.endswith(":")
+    )
+    root_volume: str | None = None
 
     def directory_stat(path: Path) -> os.stat_result:
         info = path.lstat()
@@ -567,7 +590,7 @@ def clean_empty_dirs(root: Path) -> int:
             raise OSError(f"Not an ordinary directory (links are skipped): {path}")
         if getattr(info, "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT:
             raise OSError(f"Skipping reparse point: {path}")
-        if not info.st_ino:
+        if not info.st_ino and not (path == root and drive_root and info.st_dev):
             raise OSError(f"Cannot verify directory identity: {path}")
         return info
 
@@ -579,6 +602,8 @@ def clean_empty_dirs(root: Path) -> int:
             if not os.path.samestat(current_info, directories[current]):
                 raise OSError(f"Directory changed during cleanup: {current}")
             if current == root:
+                if root_volume is not None and _windows_volume_identity(root) != root_volume:
+                    raise OSError(f"Volume changed during cleanup: {root}")
                 return info
             current = current.parent
 
@@ -594,6 +619,8 @@ def clean_empty_dirs(root: Path) -> int:
 
     try:
         directories[root] = directory_stat(root)
+        if not directories[root].st_ino:
+            root_volume = _windows_volume_identity(root)
     except OSError as exc:
         warn_scan(exc)
         return 0
