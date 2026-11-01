@@ -1,4 +1,7 @@
-# Deluge
+---
+title: Deluge
+description: Backup and management scripts for a Synthstrom Deluge SD card
+---
 
 Back-up and management scripts for a [Synthstrom Deluge](https://synthstrom.com/product/deluge/) SD card.
 
@@ -91,6 +94,16 @@ cp scripts/.env.example scripts/.env
 
 All scripts read configuration from `scripts/.env`. See `.env.example` for available options. Run all scripts from the `scripts/` directory.
 
+### Empty-directory cleanup
+
+After applying changes, the three sync scripts run shared empty-directory cleanup on the destination. This post-sync cleanup preserves the destination root, its immediate subdirectories, and every `.trash` subtree. It skips symlinks and detected reparse points, including junctions and cloud placeholders, rather than following or removing them. Hard-delete syncs also retain their existing ancestor cleanup when deleting individual files.
+
+On Windows, an access-denied error gets one retry only if the directory is still empty, its identity and ancestor identities still match the scan, and its ReadOnly attribute is set. The retry clears only the directory's ReadOnly flag; it does not change file attributes or security permissions. If removal fails, cleanup attempts to restore ReadOnly and reports both removal and restoration failures.
+
+FAT32 drive roots on Windows can report a directory ID of zero. For these drive roots only, cleanup verifies the volume GUID and non-zero device ID instead, rechecking both before removing any descendant. Subfolders still require non-zero directory IDs. A changed or unavailable identity stops cleanup of the affected directories and produces a warning.
+
+Cleanup uses non-recursive directory removal, never deletes files to empty a directory, and leaves directories alone when it cannot verify safety. Enumeration includes hidden entries. These checks do not establish whether a cloud provider has finished synchronizing remote contents. Cleanup is skipped for dry runs and when sync reports "Already up to date".
+
 ### Script reference
 
 #### `sync_from_sd.py`
@@ -135,9 +148,28 @@ uv run extract_instruments.py --include-sidechain       # include sidechain-only
 uv run extract_instruments.py --exclude-dir testing     # skip songs in a subdirectory
 uv run extract_instruments.py --sd-direct               # read/write directly to SD card
 uv run extract_instruments.py --verbose                 # detailed dedup comparison logging
-uv run extract_instruments.py --naming preset           # Preset-SongName filenames (default)
-uv run extract_instruments.py --naming song             # SongName-Preset filenames
+uv run extract_instruments.py --naming preset           # Preset_SongName filenames (default)
+uv run extract_instruments.py --naming song             # SongName_Preset filenames
 ```
+
+Extracted filenames use `_` between the preset and song names, preserving spaces and hyphens within each name. For example, preset `Houst-Do-Not` from song `Houston-Vox-Bounce` becomes `Houst-Do-Not_Houston-Vox-Bounce.XML`. Extended-mode colour suffixes such as `-Lbl` and collision suffixes such as `-2` are unchanged.
+
+#### `find_similar_kits.py`
+
+> [!WARNING]
+> This script is a work in progress. Review comparison results before acting on them.
+
+Read-only comparison of existing kit presets, including subdirectories but excluding `.trash`. Reports equivalent pairs and near-duplicate candidates with every changed numerical field. Kit and sound names, XML formatting, and `selectedDrumIndex` are ignored; volume, pan, sample boundaries, and small parameter changes are not.
+
+```powershell
+uv run find_similar_kits.py                           # scan DELUGE_ROOT/KITS
+uv run find_similar_kits.py --max-differences 0        # equivalent pairs only
+uv run find_similar_kits.py --max-differences 5        # allow up to five changed numerical fields
+uv run find_similar_kits.py ..\DELUGE\KITS\KERERU\Chopped-Lead.XML  # compare one kit against the library
+uv run find_similar_kits.py --kits-dir C:\path\to\KITS # scan another library
+```
+
+The default limit is three changed numerical fields across the whole kit, regardless of change magnitude. Sample paths (including case), sound order, XML structure, and non-numerical settings must match. Unknown settings are retained; missing values are not replaced with inferred firmware defaults. Malformed XML fails explicitly rather than using the SDK's recovering parser, which can drop data. Near-duplicates are review candidates, not an audio similarity score or permission to delete a preset. No samples need to be loaded, and no files are modified.
 
 #### `fix_references.py`
 
@@ -174,5 +206,62 @@ uv run sample_overview.py unused --top N                    # top N largest unre
 uv run sample_overview.py missing                           # samples referenced in XML but missing from disk
 uv run sample_overview.py duplicates                        # find duplicate samples by content hash
 uv run sample_overview.py usage "Kick"                      # usage detail for samples matching a search term
+uv run sample_overview.py catalogue                         # manually regenerate docs/sample-catalogue.csv
 ```
 
+The [sample catalogue](./docs/sample-catalogue.md) is an audio-only CSV inventory
+of WAV, AIF, and AIFF files with relative paths, three-decimal MB sizes, and
+distinct kit, synth, and song reference counts. Citizen DJ TXT sidecars are
+excluded without warnings; other unexpected file types are reported separately.
+The existing sync filters are unchanged. Generation is manual, with
+deterministic path ordering for stable Git diffs.
+
+For voices, field recordings, ambience and other material to sample, see
+[sample sources](./docs/sample-sources.md), including source links, digging
+suggestions and reuse/licensing notes.
+
+### Development checks with pou
+
+> [!WARNING]
+> The [sync-to-SD tests](./scripts/tests/test_sync_to_sd.py) and
+> [cloud-sync tests](./scripts/tests/test_sync_samples_to_cloud.py) are temporarily
+> disabled. They can overwrite the live sync manifest or append test records to
+> the live sync log. The test suite needs isolation fixes: redirect all persistent
+> state to temporary paths and add regression coverage proving live files remain
+> untouched before re-enabling these modules. The remaining tests are not covered
+> by this quarantine.
+
+With `pou` installed, run these commands from the repository root:
+
+```powershell
+pou help
+pou instructions test
+pou doctor
+pou test
+```
+
+[pou.config.mjs](./pou.config.mjs) imports the repo-local Python configuration
+from [.pou/python.mjs](./.pou/python.mjs). It uses the built-in `base` profile;
+no changes to the installed `pou` are required.
+
+`pou doctor` checks Node, configuration loading, and `uv` availability. It does
+not verify Python, installed dependencies, or test correctness.
+
+`pou test` runs the full pytest suite from `scripts/` using the committed
+lockfile and the `dev` dependency extra:
+
+```powershell
+uv run --directory scripts --locked --extra dev python -m pytest
+```
+
+The command may download Python or dependencies and update `scripts/.venv`.
+It does not change the lockfile or run lint, type checks, or real SD-card and
+cloud-backup operations. Collection errors and failing tests are reported as
+failures, not skipped.
+
+Record workflow friction with `pou observe "symptom and consequence"`.
+
+## Notes
+
+- A kit or synth name can contain 16 chars and still fit in the entire screen
+- A kit inst name must be <20 chars long or it will not display

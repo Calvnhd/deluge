@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sync plan execution</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #f8fafc;
+      --text: #17243a;
+      --muted: #526277;
+      --guide: #cbd5e1;
+      --app: #166534;
+      --library: #7635a4;
+      --framework: #1d4ed8;
+      --result: #0f766e;
+      --condition: #925000;
+      --badge: #e9eef5;
+      --focus: #c06800;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #151b25;
+        --text: #e4ebf5;
+        --muted: #a9b8cc;
+        --guide: #3d4b61;
+        --app: #8bddaa;
+        --library: #d1a7ff;
+        --framework: #90baff;
+        --result: #74d8cb;
+        --condition: #efbd74;
+        --badge: #263246;
+        --focus: #ffc477;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 20px; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 30px 28px 48px; }
+    h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.2; letter-spacing: -0.6px; }
+    header { margin-bottom: 26px; }
+    header p { margin: 0 0 12px; color: var(--muted); }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+    .legend { font-weight: 650; }
+    .app { color: var(--app); }
+    .library { color: var(--library); }
+    .framework { color: var(--framework); }
+    a { color: var(--framework); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button { font: inherit; }
+    .depth-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; }
+    .depth-controls button {
+      border: 1px solid var(--guide);
+      border-radius: 4px;
+      padding: 3px 9px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .depth-controls button[aria-pressed="true"] { background: var(--badge); border-color: var(--framework); }
+    .fold-toggle {
+      flex: 0 0 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      align-self: center;
+    }
+    .fold-toggle::before { content: "\25BE"; }
+    .fold-toggle[aria-expanded="false"]::before { content: "\25B8"; }
+    .fold-toggle:hover { background: var(--badge); color: var(--text); }
+    .fold-summary { color: var(--muted); font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    code { font: 0.93em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    ol.trace, ol.steps { list-style: none; padding: 0; margin: 0; }
+    ol.steps {
+      margin: 5px 0 8px 5px;
+      padding-left: 19px;
+      border-left: 1px solid var(--guide);
+    }
+    li.call { margin: 9px 0; }
+    .call-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+    .file { font-size: 12px; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .file:hover { text-decoration: underline; }
+    .signature { font-size: 13px; }
+    .type { padding: 1px 6px; border-radius: 4px; background: var(--badge); color: var(--muted); font-size: 11px; }
+    .annotation { margin: 2px 0 5px; color: var(--muted); font-size: 13px; }
+    .annotation::before { content: "\2022"; margin-right: 7px; }
+    .state, .return { margin: 5px 0; font-size: 12px; }
+    .state { color: var(--muted); }
+    .return { color: var(--result); }
+    .kind { margin-right: 7px; font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.5px; }
+    .condition, .repeat { color: var(--condition); font-size: 12px; font-weight: 650; }
+    li.branch { margin: 9px 0; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--guide); color: var(--muted); font-size: 12px; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 700px) {
+      main { padding: 20px 12px; }
+      ol.steps { padding-left: 11px; margin-left: 2px; }
+      .call-head { column-gap: 7px; }
+      .signature { font-size: 12px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: black; }
+      main { max-width: none; padding: 0; }
+      .depth-controls, .fold-toggle, .fold-summary { display: none !important; }
+      ol.steps[hidden] { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Execution flow</p>
+    <h1>Sync plan execution</h1>
+    <p>Copy planned files, then trash or permanently delete extras, returning counts or raising a partial-progress error</p>
+    <div class="legend" aria-label="Source layers">
+      <span class="app">Script</span>
+      <span class="library">Shared Deluge library</span>
+      <span class="framework">Python standard library</span>
+    </div>
+    <div class="depth-controls" role="group" aria-label="Visible call depth" hidden>
+      <span>Show depth</span>
+      <button type="button" data-depth="1" aria-pressed="false">1</button>
+      <button type="button" data-depth="2" aria-pressed="false">2</button>
+      <button type="button" data-depth="3" aria-pressed="false">3</button>
+      <button type="button" data-depth="all" aria-pressed="true">All</button>
+    </div>
+    <span class="sr-only" id="fold-status" role="status" aria-live="polite"></span>
+  </header>
+
+  <ol class="trace" aria-label="Nested execution calls in order">
+    <li class="call" id="execute-plan">
+      <div class="call-head">
+        <a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a>
+        <code class="signature">execute_plan(plan: SyncPlan, *, dest: Path, delete_mode: str = "trash")</code>
+        <span class="type">SyncResult</span>
+      </div>
+      <p class="annotation"><a href="sync-from-sd.html#execution">Sync from SD</a> takes the default trash branch; the other sync scripts pass delete_mode="delete"</p>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">State</span>copied=0; total_copy=len(plan.files_to_copy)</div></li>
+        <li class="branch">
+          <div class="repeat">Try each (src, dst) in plan.files_to_copy, in plan order</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">Output</span>Print copy progress</div></li>
+            <li class="call">
+              <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib.py</a><code class="signature">dst.parent.mkdir(parents=True, exist_ok=True)</code></div>
+              <div class="state"><span class="kind">Output</span>Ensure the destination parent directory exists</div>
+            </li>
+            <li class="call">
+              <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/shutil.html">shutil.py</a><code class="signature">shutil.copy2(src, dst)</code></div>
+              <div class="state"><span class="kind">Output</span>Copy file content and attempt to preserve metadata; an existing destination can be overwritten</div>
+            </li>
+            <li class="step"><div class="state"><span class="kind">State</span>Increment copied only after copy2 returns</div></li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="condition">If mkdir or copying raises OSError</div>
+          <ol class="steps">
+            <li class="call">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(src), copied=copied, unchanged=plan.files_unchanged, remaining=total_copy - copied - 1)</code></div>
+              <div class="return"><span class="kind">Result</span>Error with source path, completed copies, trashed=0, and remaining copies excluding the failed item</div>
+            </li>
+            <li class="step"><div class="state"><span class="kind">Raise</span>Raise the constructed SyncError from exc; skip all removals and the normal return</div></li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>After all copies succeed: trashed=0; trash_count=len(plan.files_to_delete)</div></li>
+        <li class="branch">
+          <div class="condition">If trash_count &gt; 0 and delete_mode == "trash"</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">Output</span>Print the number of files to trash</div></li>
+            <li class="call">
+              <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/datetime.html">datetime</a><code class="signature">datetime.now().strftime("%Y%m%d_%H%M%S")</code><span class="type">str</span></div>
+              <div class="return"><span class="kind">Return</span>Timestamp used once to form trash_base=dest/".trash"/timestamp</div>
+            </li>
+            <li class="branch">
+              <div class="repeat">Try each path in plan.files_to_delete</div>
+              <ol class="steps">
+                <li class="step"><div class="state"><span class="kind">State</span>rel=path.relative_to(dest); trash_dest=trash_base/rel</div></li>
+                <li class="call">
+                  <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib.py</a><code class="signature">trash_dest.parent.mkdir(parents=True, exist_ok=True)</code></div>
+                  <div class="state"><span class="kind">Output</span>Preserve relative directory layout under the trash timestamp</div>
+                </li>
+                <li class="call">
+                  <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/shutil.html">shutil.py</a><code class="signature">shutil.move(str(path), str(trash_dest))</code></div>
+                  <div class="state"><span class="kind">Output</span>Move the extra destination file into trash</div>
+                </li>
+                <li class="step"><div class="state"><span class="kind">State</span>Increment trashed after the move returns</div></li>
+              </ol>
+            </li>
+            <li class="branch">
+              <div class="condition">If a trash operation raises OSError</div>
+              <ol class="steps">
+                <li class="call">
+                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(path), copied=copied, trashed=trashed, unchanged=plan.files_unchanged, remaining=trash_count - trashed - 1)</code></div>
+                  <div class="return"><span class="kind">Result</span>Error with completed work and remaining removals excluding the failed item</div>
+                </li>
+                <li class="step"><div class="state"><span class="kind">Raise</span>Raise SyncError from exc; no rollback or normal result</div></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="condition">Otherwise, if trash_count &gt; 0 and delete_mode == "delete"</div>
+          <ol class="steps">
+            <li class="branch">
+              <div class="repeat">Try each path in plan.files_to_delete</div>
+              <ol class="steps">
+                <li class="step"><div class="state"><span class="kind">Output</span>Print deletion progress</div></li>
+                <li class="call">
+                  <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib.py</a><code class="signature">path.unlink()</code></div>
+                  <div class="state"><span class="kind">Output</span>Permanently delete the file</div>
+                </li>
+                <li class="step"><div class="state"><span class="kind">State</span>Increment trashed; the same counter records permanent deletions</div></li>
+                <li class="branch">
+                  <div class="repeat">Starting at path.parent, while parent != dest</div>
+                  <ol class="steps">
+                    <li class="call">
+                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib.py</a><code class="signature">parent.rmdir()</code></div>
+                      <div class="state"><span class="kind">Output</span>Remove the parent only if empty</div>
+                      <div class="state"><span class="kind">Exception</span>Any OSError breaks this ancestor loop without failing the sync</div>
+                    </li>
+                    <li class="step"><div class="state"><span class="kind">State</span>After successful rmdir, advance parent=parent.parent</div></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li class="branch">
+              <div class="condition">If deletion raises OSError outside the handled ancestor cleanup</div>
+              <ol class="steps">
+                <li class="call">
+                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(path), copied=copied, trashed=trashed, unchanged=plan.files_unchanged, remaining=trash_count - trashed - 1)</code></div>
+                  <div class="return"><span class="kind">Result</span>Error with completed copies/deletions and remaining removals excluding the failed item</div>
+                </li>
+                <li class="step"><div class="state"><span class="kind">Raise</span>Raise SyncError from exc; no rollback or normal result</div></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="condition">Otherwise, no removals or an unrecognized delete_mode</div>
+          <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>No removal branch runs; delete_mode is not validated by this function</div></li></ol>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncResult(copied=copied, trashed=trashed, unchanged=plan.files_unchanged)</code></div>
+          <div class="return"><span class="kind">Result</span>Completed operation counts</div>
+        </li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Constructed SyncResult to the caller for logging and subsequent work</div>
+    </li>
+  </ol>
+
+  <footer>
+    <p>Existing callers: <a href="../../scripts/sync_from_sd.py">sync_from_sd.py</a> trashes extras; <a href="../../scripts/sync_to_sd.py">sync_to_sd.py</a> and <a href="../../scripts/sync_samples_to_cloud.py">sync_samples_to_cloud.py</a> permanently delete extras</p><p>Logging, confirmation, manifest updates, and final clean_empty_dirs calls belong to callers; this function performs no rollback</p><p>SyncError.remaining counts later items in the failing phase, not all outstanding plan operations</p>
+    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+  </footer>
+</main>
+<script>
+  const calls = [...document.querySelectorAll(".trace .call")];
+  const depthControls = document.querySelector(".depth-controls");
+  const depthButtons = [...depthControls.querySelectorAll("button")];
+  const foldStatus = document.getElementById("fold-status");
+  const entries = new Map();
+
+  function selectDepth(value) {
+    for (const button of depthButtons)
+      button.setAttribute("aria-pressed", String(button.dataset.depth === value));
+  }
+
+  function setExpanded(entry, expanded) {
+    entry.steps.hidden = !expanded;
+    entry.button.setAttribute("aria-expanded", String(expanded));
+    entry.button.setAttribute("aria-label",
+      `${expanded ? "Collapse" : "Expand"} nested calls in ${entry.label}`);
+    entry.summary.hidden = expanded;
+  }
+
+  for (const [index, call] of calls.entries()) {
+    const steps = [...call.children].find(child => child.matches("ol.steps"));
+    if (!steps || !steps.querySelector(".call"))
+      continue;
+
+    const head = [...call.children].find(child => child.classList.contains("call-head"));
+    const label = `${head.querySelector(".file").textContent} ${head.querySelector(".signature").textContent}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "fold-toggle";
+    steps.id = `call-steps-${index + 1}`;
+    button.setAttribute("aria-controls", steps.id);
+
+    const summary = document.createElement("span");
+    summary.className = "fold-summary";
+    const count = steps.querySelectorAll(".call").length;
+    summary.textContent = `${count} nested ${count === 1 ? "call" : "calls"} hidden`;
+
+    let depth = 1;
+    for (let parent = call.parentElement.closest(".call"); parent;
+      parent = parent.parentElement.closest(".call"))
+      depth++;
+
+    const entry = { steps, button, summary, label, depth };
+    entries.set(call, entry);
+    head.prepend(button);
+    head.append(summary);
+    setExpanded(entry, true);
+
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      setExpanded(entry, expanded);
+      selectDepth(null);
+      foldStatus.textContent = `${expanded ? "Expanded" : "Collapsed"} ${label}`;
+    });
+  }
+
+  for (const button of depthButtons) {
+    button.addEventListener("click", () => {
+      const value = button.dataset.depth;
+      for (const entry of entries.values())
+        setExpanded(entry, value === "all" || entry.depth < Number(value));
+      selectDepth(value);
+      foldStatus.textContent = value === "all" ? "All calls expanded" : `Showing call depth ${value}`;
+    });
+  }
+
+  function revealTarget(hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (!target)
+      return;
+
+    let changed = false;
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      const entry = entries.get(parent);
+      if (entry && entry.steps.hidden) {
+        setExpanded(entry, true);
+        changed = true;
+      }
+    }
+    if (changed) {
+      selectDepth(null);
+      foldStatus.textContent = "Expanded the path to the linked step";
+    }
+    target.scrollIntoView({ block: "start" });
+  }
+
+  document.addEventListener("click", event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link)
+      revealTarget(link.getAttribute("href"));
+  });
+  window.addEventListener("hashchange", () => revealTarget(location.hash));
+  depthControls.hidden = false;
+  if (location.hash)
+    revealTarget(location.hash);
+</script>
+</body>
+</html>

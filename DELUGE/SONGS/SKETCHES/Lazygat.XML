@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<song
+	firmwareVersion="c1.2.1"
+	earliestCompatibleFirmware="4.1.0-alpha"
+	previewNumPads="144"
+	preview="000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF2020601010600000400000500000B0101070101030000070101040000030000060101030000020000020000020000000FF06B0004F600010200000500010801010600010FF202050001030000050001040000020000050000040000020000010000010000000FF06B0004F1000201000304010802010503010705010B04010A04010A05020C05010B05010B0301070401080100020200040200040FF0000005AA51000301000203010604010803010704010804010905020C0301070401080301060201050301070301060100030200040FF0000005AA52010502010603010804010903010603010703010703010603010705020C04010A05010B04010A04010A04010A05010C0FF0000005AA50000000000002000505020C0201050201050301060301070200040201060200050200040100030100020000010000010FF0000005AA5"
+	arrangementAutoScrollOn="0"
+	xScroll="0"
+	xZoom="48"
+	yScrollSongView="-2"
+	yScrollArrangementView="-2"
+	xScrollArrangementView="0"
+	xZoomArrangementView="192"
+	timePerTimerTick="296"
+	timerTickFraction="1593294319"
+	rootNote="0"
+	inputTickMagnitude="2"
+	swingAmount="0"
+	swingInterval="7"
+	affectEntire="0"
+	activeModFunction="0"
+	modFXCurrentParam="depth"
+	currentFilterType="eq"
+	modFXType="StereoChorus"
+	lpfMode="24dB"
+	hpfMode="HPLadder"
+	filterRoute="H2L"
+	songGridScrollX="0"
+	songGridScrollY="0"
+	sessionLayout="0">
+	<modeNotes>
+		<modeNote>0</modeNote>
+		<modeNote>2</modeNote>
+		<modeNote>4</modeNote>
+		<modeNote>5</modeNote>
+		<modeNote>7</modeNote>
+		<modeNote>9</modeNote>
+		<modeNote>11</modeNote>
+	</modeNotes>
+	<reverb
+		roomSize="1889785600"
+		dampening="1932735232"
+		width="2147483647"
+		hpf="0"
+		pan="0"
+		model="1">
+		<compressor
+			attack="327244"
+			release="936"
+			volume="-21474836"
+			shape="-601295438"
+			syncLevel="5" />
+	</reverb>
+	<delay
+		pingPong="1"
+		analog="1"
+		syncLevel="7"
+		syncType="0" />
+	<sidechain
+		attack="327244"
+		release="936"
+		syncLevel="6"
+		syncType="0" />
+	<audioCompressor
+		attack="83886080"
+		release="83886080"
+		thresh="0"
+		ratio="1073741824"
+		compHPF="0"
+		compBlend="2147483647" />
+	<songParams
+		reverbAmount="0x80000000"
+		volume="0x36000000"
+		pan="0x00000000"
+		sidechainCompressorShape="0xDC28F5B2"
+		modFXDepth="0x80000000"
+		modFXRate="0xE4000000"
+		stutterRate="0x00000000"
+		sampleRateReduction="0x80000000"
+		bitCrush="0x80000000"
+		modFXOffset="0x00000000"
+		modFXFeedback="0x9A000000"
+		compressorThreshold="0x00000000"
+		lpfMorph="0x80000000"
+		hpfMorph="0x80000000"
+		tempo="0x00002454">
+		<delay
+			rate="0x00000000"
+			feedback="0x80000000" />
+		<lpf
+			frequency="0x3C000000"
+			resonance="0x80000000" />
+		<hpf
+			frequency="0x80000000"
+			resonance="0x80000000" />
+		<equalizer
+			bass="0x00000000"
+			treble="0x7FFFFFFF"
+			bassFrequency="0x00000000"
+			trebleFrequency="0x00000000" />
+	</songParams>
+	<instruments>
+		<audioTrack
+			name="AUDIO10"
+			inputChannel="output"
+			outputRecordingIndex="0"
+			isArmedForRecording="0"
+			activeModFunction="0"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="lpf"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</audioTrack>
+		<audioTrack
+			name="AUDIO8"
+			inputChannel="output"
+			outputRecordingIndex="0"
+			isArmedForRecording="0"
+			activeModFunction="0"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="hpf"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</audioTrack>
+		<audioTrack
+			name="AUDIO6"
+			inputChannel="left"
+			outputRecordingIndex="0"
+			isArmedForRecording="0"
+			activeModFunction="6"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="lpf"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</audioTrack>
+		<audioTrack
+			name="AUDIO5"
+			inputChannel="left"
+			outputRecordingIndex="0"
+			isArmedForRecording="0"
+			activeModFunction="0"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="lpf"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</audioTrack>
+		<audioTrack
+			name="AUDIO4"
+			inputChannel="left"
+			outputRecordingIndex="0"
+			isArmedForRecording="0"
+			activeModFunction="0"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="lpf"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</audioTrack>
+		<audioTrack
+			name="AUDIO3"
+			inputChannel="left"
+			outputRecordingIndex="0"
+			isArmedForRecording="0"
+			activeModFunction="0"
+			colour="0"
+			modFXCurrentParam="feedback"
+			currentFilterType="lpf"
+			modFXType="none"
+			lpfMode="24dB"
+			hpfMode="HPLadder"
+			filterRoute="H2L">
+			<delay
+				pingPong="1"
+				analog="0"
+				syncLevel="7"
+				syncType="0" />
+			<sidechain
+				attack="327244"
+				release="936"
+				syncLevel="6"
+				syncType="0" />
+			<audioCompressor
+				attack="83886080"
+				release="83886080"
+				thresh="0"
+				ratio="1073741824"
+				compHPF="0"
+				compBlend="2147483647" />
+		</audioTrack>
+	</instruments>
+	<sections>
+		<section id="0" numRepeats="0" />
+		<section id="1" numRepeats="0" />
+		<section id="2" numRepeats="0" />
+		<section id="3" numRepeats="0" />
+		<section id="4" numRepeats="0" />
+		<section id="5" numRepeats="0" />
+		<section id="6" numRepeats="0" />
+		<section id="7" numRepeats="0" />
+		<section id="8" numRepeats="0" />
+		<section id="9" numRepeats="0" />
+		<section id="10" numRepeats="0" />
+		<section id="11" numRepeats="0" />
+	</sections>
+	<sessionClips>
+		<audioClip
+			trackName="AUDIO10"
+			filePath="SAMPLES/CLIPS/Lazygat/output_002.wav"
+			startSamplePos="0"
+			endSamplePos="1058400"
+			pitchSpeedIndependent="1"
+			attack="-2147483648"
+			priority="1"
+			overdubsShouldCloneAudioTrack="1"
+			isPlaying="1"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="71"
+			section="1"
+			isPlaying="1"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="71"
+			section="1">
+			<params
+				reverbAmount="0x80000000"
+				volume="0xE0000000"
+				pan="0xB6000000"
+				sidechainCompressorShape="0xDC28F5B2"
+				modFXDepth="0x00000000"
+				modFXRate="0xE0000000"
+				stutterRate="0x00000000"
+				sampleRateReduction="0x80000000"
+				bitCrush="0x80000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
+				<delay
+					rate="0x00000000"
+					feedback="0x80000000" />
+				<lpf
+					frequency="0x7FFFFFFF"
+					resonance="0x80000000" />
+				<hpf
+					frequency="0x80000000"
+					resonance="0x80000000" />
+				<equalizer
+					bass="0x00000000"
+					treble="0x00000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
+			</params>
+		</audioClip>
+		<audioClip
+			trackName="AUDIO8"
+			filePath="SAMPLES/CLIPS/Lazygat/output_000.wav"
+			startSamplePos="0"
+			endSamplePos="3175200"
+			pitchSpeedIndependent="1"
+			attack="-2147483648"
+			priority="1"
+			overdubsShouldCloneAudioTrack="1"
+			isPlaying="1"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="9216"
+			colourOffset="2"
+			section="1"
+			isPlaying="1"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="9216"
+			colourOffset="2"
+			section="1">
+			<params
+				reverbAmount="0x3C000000"
+				volume="0xA0000000"
+				pan="0x56000000"
+				sidechainCompressorShape="0xDC28F5B2"
+				modFXDepth="0x00000000"
+				modFXRate="0xE0000000"
+				stutterRate="0x00000000"
+				sampleRateReduction="0x80000000"
+				bitCrush="0x80000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
+				<delay
+					rate="0x00000000"
+					feedback="0xD2000000" />
+				<lpf
+					frequency="0x28000000"
+					resonance="0x80000000" />
+				<hpf
+					frequency="0xFE000000"
+					resonance="0x80000000" />
+				<equalizer
+					bass="0x00000000"
+					treble="0x00000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
+			</params>
+		</audioClip>
+		<audioClip
+			trackName="AUDIO6"
+			filePath="SAMPLES/CLIPS/Lazygat/gat_lazy4.WAV"
+			startSamplePos="2086"
+			endSamplePos="1060486"
+			pitchSpeedIndependent="1"
+			attack="-1546188233"
+			priority="1"
+			overdubsShouldCloneAudioTrack="1"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0">
+			<params
+				reverbAmount="0x80000000"
+				volume="0xBE000000"
+				pan="0x7FFFFFFF"
+				sidechainCompressorShape="0xDC28F5B2"
+				modFXDepth="0x00000000"
+				modFXRate="0xE0000000"
+				stutterRate="0x00000000"
+				sampleRateReduction="0x80000000"
+				bitCrush="0x80000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
+				<delay
+					rate="0x00000000"
+					feedback="0x80000000" />
+				<lpf
+					frequency="0x7FFFFFFF"
+					resonance="0x80000000" />
+				<hpf
+					frequency="0x80000000"
+					resonance="0x80000000" />
+				<equalizer
+					bass="0x00000000"
+					treble="0x00000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
+			</params>
+		</audioClip>
+		<audioClip
+			trackName="AUDIO5"
+			filePath="SAMPLES/CLIPS/Lazygat/gat_lazy3.WAV"
+			startSamplePos="2086"
+			endSamplePos="1060486"
+			pitchSpeedIndependent="1"
+			attack="-1546188233"
+			priority="1"
+			overdubsShouldCloneAudioTrack="1"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0">
+			<params
+				reverbAmount="0x80000000"
+				volume="0xE0000000"
+				pan="0x80000000"
+				sidechainCompressorShape="0xDC28F5B2"
+				modFXDepth="0x00000000"
+				modFXRate="0xE0000000"
+				stutterRate="0x00000000"
+				sampleRateReduction="0x80000000"
+				bitCrush="0x80000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
+				<delay
+					rate="0x00000000"
+					feedback="0x80000000" />
+				<lpf
+					frequency="0x7FFFFFFF"
+					resonance="0x80000000" />
+				<hpf
+					frequency="0x80000000"
+					resonance="0x80000000" />
+				<equalizer
+					bass="0x00000000"
+					treble="0x00000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
+			</params>
+		</audioClip>
+		<audioClip
+			trackName="AUDIO4"
+			filePath="SAMPLES/CLIPS/Lazygat/gat_lazy2.WAV"
+			startSamplePos="2086"
+			endSamplePos="1060486"
+			pitchSpeedIndependent="1"
+			attack="-1546188233"
+			priority="1"
+			overdubsShouldCloneAudioTrack="1"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0">
+			<params
+				reverbAmount="0x80000000"
+				volume="0xE0000000"
+				pan="0x7FFFFFFF"
+				sidechainCompressorShape="0xDC28F5B2"
+				modFXDepth="0x00000000"
+				modFXRate="0xE0000000"
+				stutterRate="0x00000000"
+				sampleRateReduction="0x80000000"
+				bitCrush="0x80000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
+				<delay
+					rate="0x00000000"
+					feedback="0x80000000" />
+				<lpf
+					frequency="0x7FFFFFFF"
+					resonance="0x80000000" />
+				<hpf
+					frequency="0x80000000"
+					resonance="0x80000000" />
+				<equalizer
+					bass="0x00000000"
+					treble="0x00000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
+			</params>
+		</audioClip>
+		<audioClip
+			trackName="AUDIO3"
+			filePath="SAMPLES/CLIPS/Lazygat/gat_lazy.WAV"
+			startSamplePos="2086"
+			endSamplePos="1060486"
+			pitchSpeedIndependent="1"
+			attack="-1546188233"
+			priority="1"
+			overdubsShouldCloneAudioTrack="1"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0"
+			isPlaying="0"
+			isSoloing="0"
+			isArmedForRecording="1"
+			length="3072"
+			colourOffset="16"
+			section="0">
+			<params
+				reverbAmount="0x80000000"
+				volume="0xE0000000"
+				pan="0x80000000"
+				sidechainCompressorShape="0xDC28F5B2"
+				modFXDepth="0x00000000"
+				modFXRate="0xE0000000"
+				stutterRate="0x00000000"
+				sampleRateReduction="0x80000000"
+				bitCrush="0x80000000"
+				modFXOffset="0x00000000"
+				modFXFeedback="0x80000000"
+				compressorThreshold="0x00000000"
+				lpfMorph="0x80000000"
+				hpfMorph="0x80000000"
+				tempo="0x00000000">
+				<delay
+					rate="0x00000000"
+					feedback="0x80000000" />
+				<lpf
+					frequency="0x7FFFFFFF"
+					resonance="0x80000000" />
+				<hpf
+					frequency="0x80000000"
+					resonance="0x80000000" />
+				<equalizer
+					bass="0x00000000"
+					treble="0x00000000"
+					bassFrequency="0x00000000"
+					trebleFrequency="0x00000000" />
+			</params>
+		</audioClip>
+	</sessionClips>
+	<scales>
+		<userScale>0</userScale>
+		<disabledPresetScales>0</disabledPresetScales>
+	</scales>
+</song>

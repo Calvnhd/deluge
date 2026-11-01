@@ -1,45 +1,12 @@
 {
-  "generated": "2026-05-18T13:06:56.677082+00:00",
-  "songs_processed": 61,
-  "total_count": 74,
+  "generated": "2026-11-01T14:23:30.332229+00:00",
+  "songs_processed": 77,
+  "total_count": 109,
   "extractions": [
     {
-      "output_filename": "000-Alr.XML",
-      "source_song": "Alr",
+      "output_filename": "000_Ape.XML",
+      "source_song": "Ape",
       "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "000-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "000-SlpspkArpsOld.XML",
-      "source_song": "SlpspkArpsOld",
-      "preset_name": "000",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "003-Bmtk.XML",
-      "source_song": "Bmtk",
-      "preset_name": "003",
       "preset_folder": "KITS",
       "instrument_type": "kit",
       "section_id": 1,
@@ -48,7 +15,73 @@
       "differing_params": []
     },
     {
-      "output_filename": "003-Bmtk-Oneshort.XML",
+      "output_filename": "000_SLPSPK-Arps.XML",
+      "source_song": "SLPSPK-Arps",
+      "preset_name": "000",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000_Weirdsaw-C.XML",
+      "source_song": "Weirdsaw-C",
+      "preset_name": "000",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000_Wf-og.XML",
+      "source_song": "Wf-og",
+      "preset_name": "000",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "000-Alr_AYG.XML",
+      "source_song": "AYG",
+      "preset_name": "000-Alr",
+      "preset_folder": "KITS/SONG-KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "001_Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
+      "preset_name": "001",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003_5IVE 2.XML",
+      "source_song": "5IVE 2",
+      "preset_name": "003",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "003-Bmtk_Oneshort.XML",
       "source_song": "Oneshort",
       "preset_name": "003-Bmtk",
       "preset_folder": "KITS/SONG-KITS",
@@ -59,7 +92,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "005-Kg.XML",
+      "output_filename": "005_Kg.XML",
       "source_song": "Kg",
       "preset_name": "005",
       "preset_folder": "KITS",
@@ -70,7 +103,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "008-Arpo.XML",
+      "output_filename": "008_Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "008",
       "preset_folder": "KITS",
@@ -81,7 +114,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010-Env.XML",
+      "output_filename": "010_Env.XML",
       "source_song": "Env",
       "preset_name": "010",
       "preset_folder": "KITS",
@@ -92,7 +125,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010-Offbeat.XML",
+      "output_filename": "010_Offbeat.XML",
       "source_song": "Offbeat",
       "preset_name": "010",
       "preset_folder": "KITS",
@@ -103,7 +136,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010-Yeti.XML",
+      "output_filename": "010_Yeti.XML",
       "source_song": "Yeti",
       "preset_name": "010",
       "preset_folder": "KITS",
@@ -114,8 +147,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "010A-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "010A_Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "010A",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -125,18 +158,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010A-Arparty-old.XML",
-      "source_song": "Arparty-old",
-      "preset_name": "010A",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "010A-Japarps.XML",
+      "output_filename": "010A_Japarps.XML",
       "source_song": "Japarps",
       "preset_name": "010A",
       "preset_folder": "KITS",
@@ -147,7 +169,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "010A-Stoner.XML",
+      "output_filename": "010A_Stoner.XML",
       "source_song": "Stoner",
       "preset_name": "010A",
       "preset_folder": "KITS",
@@ -158,7 +180,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "012-Colour.XML",
+      "output_filename": "012_Colour.XML",
       "source_song": "Colour",
       "preset_name": "012",
       "preset_folder": "KITS",
@@ -169,7 +191,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "013-Paddy.XML",
+      "output_filename": "013_Paddy.XML",
       "source_song": "Paddy",
       "preset_name": "013",
       "preset_folder": "KITS",
@@ -180,18 +202,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "016-Alr.XML",
-      "source_song": "Alr",
-      "preset_name": "016",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "016-Mountain.XML",
+      "output_filename": "016_Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "016",
       "preset_folder": "KITS",
@@ -202,7 +213,18 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Alr.XML",
+      "output_filename": "016-Mountain_5IVE-fuzz-B.XML",
+      "source_song": "5IVE-fuzz-B",
+      "preset_name": "016-Mountain",
+      "preset_folder": "KITS/SONG-KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "018_Alr.XML",
       "source_song": "Alr",
       "preset_name": "018",
       "preset_folder": "KITS",
@@ -213,7 +235,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Beginagain.XML",
+      "output_filename": "018_Beginagain.XML",
       "source_song": "Beginagain",
       "preset_name": "018",
       "preset_folder": "KITS",
@@ -224,7 +246,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Dject.XML",
+      "output_filename": "018_Dject.XML",
       "source_song": "Dject",
       "preset_name": "018",
       "preset_folder": "KITS",
@@ -235,8 +257,19 @@
       "differing_params": []
     },
     {
-      "output_filename": "018-Yends.XML",
-      "source_song": "Yends",
+      "output_filename": "018_Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "018",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "018_YENDS.XML",
+      "source_song": "YENDS",
       "preset_name": "018",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -246,7 +279,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "018 Electronisounds 3-Oddish.XML",
+      "output_filename": "018 Electronisounds 3_Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "018 Electronisounds 3",
       "preset_folder": "KITS/FACTORY",
@@ -257,18 +290,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "019-Ambient-Fishes.XML",
-      "source_song": "Ambient-Fishes",
-      "preset_name": "019",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
-      "output_filename": "019-MWHW.XML",
+      "output_filename": "019_MWHW.XML",
       "source_song": "MWHW",
       "preset_name": "019",
       "preset_folder": "KITS",
@@ -279,8 +301,41 @@
       "differing_params": []
     },
     {
-      "output_filename": "021-FiveAlive.XML",
-      "source_song": "FiveAlive",
+      "output_filename": "019_Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
+      "preset_name": "019",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "019_Weirdsaw-C.XML",
+      "source_song": "Weirdsaw-C",
+      "preset_name": "019",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "019_Wf-og.XML",
+      "source_song": "Wf-og",
+      "preset_name": "019",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "021_5IVE 2.XML",
+      "source_song": "5IVE 2",
       "preset_name": "021",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -290,7 +345,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "021-Rr.XML",
+      "output_filename": "021_Rr.XML",
       "source_song": "Rr",
       "preset_name": "021",
       "preset_folder": "KITS",
@@ -301,7 +356,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "031-PianoArp.XML",
+      "output_filename": "031_PianoArp.XML",
       "source_song": "PianoArp",
       "preset_name": "031",
       "preset_folder": "KITS",
@@ -312,7 +367,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "031-PianoFatBass.XML",
+      "output_filename": "031_PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "031",
       "preset_folder": "KITS",
@@ -323,7 +378,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "039-Offbeat.XML",
+      "output_filename": "039_Offbeat.XML",
       "source_song": "Offbeat",
       "preset_name": "039",
       "preset_folder": "KITS",
@@ -334,7 +389,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "040-Env.XML",
+      "output_filename": "040_Env.XML",
       "source_song": "Env",
       "preset_name": "040",
       "preset_folder": "KITS",
@@ -345,7 +400,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "042-Sot.XML",
+      "output_filename": "042_Sot.XML",
       "source_song": "Sot",
       "preset_name": "042",
       "preset_folder": "KITS",
@@ -356,7 +411,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Arpo.XML",
+      "output_filename": "043_Arpo.XML",
       "source_song": "Arpo",
       "preset_name": "043",
       "preset_folder": "KITS",
@@ -367,7 +422,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Lemon.XML",
+      "output_filename": "043_Lemon.XML",
       "source_song": "Lemon",
       "preset_name": "043",
       "preset_folder": "KITS",
@@ -378,7 +433,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Sot.XML",
+      "output_filename": "043_Sot.XML",
       "source_song": "Sot",
       "preset_name": "043",
       "preset_folder": "KITS",
@@ -389,18 +444,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "043-Spook.XML",
-      "source_song": "Spook",
-      "preset_name": "043",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
-      "output_filename": "044-Sot.XML",
+      "output_filename": "044_Sot.XML",
       "source_song": "Sot",
       "preset_name": "044",
       "preset_folder": "KITS",
@@ -411,7 +455,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "044-Spook.XML",
+      "output_filename": "044_Spook.XML",
       "source_song": "Spook",
       "preset_name": "044",
       "preset_folder": "KITS",
@@ -422,18 +466,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-FiveAlive.XML",
-      "source_song": "FiveAlive",
-      "preset_name": "045",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 2,
-      "colour_name": "Gold",
-      "colour_abbr": "Gld",
-      "differing_params": []
-    },
-    {
-      "output_filename": "045-Slpspk.XML",
+      "output_filename": "045_Slpspk.XML",
       "source_song": "Slpspk",
       "preset_name": "045",
       "preset_folder": "KITS",
@@ -444,7 +477,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-Sot.XML",
+      "output_filename": "045_Sot.XML",
       "source_song": "Sot",
       "preset_name": "045",
       "preset_folder": "KITS",
@@ -455,7 +488,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "046-Slpspk.XML",
+      "output_filename": "046_Slpspk.XML",
       "source_song": "Slpspk",
       "preset_name": "046",
       "preset_folder": "KITS",
@@ -466,18 +499,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "046-Yeti.XML",
-      "source_song": "Yeti",
-      "preset_name": "046",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 5,
-      "colour_name": "Yellow",
-      "colour_abbr": "Ylw",
-      "differing_params": []
-    },
-    {
-      "output_filename": "051-Beepboop.XML",
+      "output_filename": "051_Beepboop.XML",
       "source_song": "Beepboop",
       "preset_name": "051",
       "preset_folder": "KITS",
@@ -488,7 +510,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "051-Polygon.XML",
+      "output_filename": "051_Polygon.XML",
       "source_song": "Polygon",
       "preset_name": "051",
       "preset_folder": "KITS",
@@ -499,7 +521,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "051-Slpspk.XML",
+      "output_filename": "051_Slpspk.XML",
       "source_song": "Slpspk",
       "preset_name": "051",
       "preset_folder": "KITS",
@@ -510,7 +532,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "053-Beepboop.XML",
+      "output_filename": "053_Beepboop.XML",
       "source_song": "Beepboop",
       "preset_name": "053",
       "preset_folder": "KITS",
@@ -521,7 +543,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "053-Polygon.XML",
+      "output_filename": "053_Polygon.XML",
       "source_song": "Polygon",
       "preset_name": "053",
       "preset_folder": "KITS",
@@ -532,7 +554,62 @@
       "differing_params": []
     },
     {
-      "output_filename": "Chug-Oddish.XML",
+      "output_filename": "Analog Machine Lofi_Eoy-Town-Hall.XML",
+      "source_song": "Eoy-Town-Hall",
+      "preset_name": "Analog Machine Lofi",
+      "preset_folder": "KITS/COMMUNITY/1.2 Presets",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Ayg_AYG.XML",
+      "source_song": "AYG",
+      "preset_name": "Ayg",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Ayg-Tight_AYG.XML",
+      "source_song": "AYG",
+      "preset_name": "Ayg-Tight",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Bs2-Houst-Bass_Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Bs2-Houst-Bass",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Chopped-Lead_5IVE 2.XML",
+      "source_song": "5IVE 2",
+      "preset_name": "Chopped-Lead",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Chug_Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "Chug",
       "preset_folder": "KITS/COMMUNITY/1.2 Presets",
@@ -543,7 +620,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-BeautifulStranger.XML",
+      "output_filename": "Deeper_BeautifulStranger.XML",
       "source_song": "BeautifulStranger",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -554,7 +631,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-Ell.XML",
+      "output_filename": "Deeper_Ell.XML",
       "source_song": "Ell",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -565,7 +642,18 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-NatRad.XML",
+      "output_filename": "Deeper_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Deeper",
+      "preset_folder": "KITS/KERERU/ARCHIVE",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Deeper_NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -576,7 +664,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-No-More-Colour.XML",
+      "output_filename": "Deeper_No-More-Colour.XML",
       "source_song": "No-More-Colour",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -587,7 +675,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-Noize.XML",
+      "output_filename": "Deeper_Noize.XML",
       "source_song": "Noize",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -598,7 +686,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Deeper-One-Eye-Tea.XML",
+      "output_filename": "Deeper_One-Eye-Tea.XML",
       "source_song": "One-Eye-Tea",
       "preset_name": "Deeper",
       "preset_folder": "KITS",
@@ -609,8 +697,63 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzzgat-Arparty-old.XML",
-      "source_song": "Arparty-old",
+      "output_filename": "Deepfill_Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Deepfill",
+      "preset_folder": "KITS/KERERU/ARCHIVE",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Default_Lollybuy.XML",
+      "source_song": "Lollybuy",
+      "preset_name": "Default",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Default_Weirdsaw-B.XML",
+      "source_song": "Weirdsaw-B",
+      "preset_name": "Default",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Eeeahh_5IVE-fuzz-A.XML",
+      "source_song": "5IVE-fuzz-A",
+      "preset_name": "Eeeahh",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Fills_Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Fills",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Fuzzgat_Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "Fuzzgat",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
@@ -620,9 +763,75 @@
       "differing_params": []
     },
     {
-      "output_filename": "Fuzzogatto-Arparty.XML",
-      "source_song": "Arparty",
-      "preset_name": "Fuzzogatto",
+      "output_filename": "Hazy-Slice_Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Hazy-Slice",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Hazy-Slice_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Hazy-Slice",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Amen_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Amen",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 8,
+      "colour_name": "Purple",
+      "colour_abbr": "Pur",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Believes_Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Houst-Believes",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 7,
+      "colour_name": "Orange",
+      "colour_abbr": "Orn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Believes_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Believes",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Build_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Build",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 7,
+      "colour_name": "Orange",
+      "colour_abbr": "Orn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Do-Not_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Do-Not",
       "preset_folder": "KITS/KERERU",
       "instrument_type": "kit",
       "section_id": 2,
@@ -631,7 +840,73 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Perc-Sink.XML",
+      "output_filename": "Houst-Doubts_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Doubts",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Intro_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Intro",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Moment_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Moment",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 11,
+      "colour_name": "Magenta",
+      "colour_abbr": "Mag",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Watch_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Watch",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst-Watch-Alt_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "Houst-Watch-Alt",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Houst108_Houston.XML",
+      "source_song": "Houston",
+      "preset_name": "Houst108",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "K01Perc_Sink.XML",
       "source_song": "Sink",
       "preset_name": "K01Perc",
       "preset_folder": "KITS/KERERU",
@@ -642,7 +917,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Perc2-Sink.XML",
+      "output_filename": "K01Perc2_Sink.XML",
       "source_song": "Sink",
       "preset_name": "K01Perc2",
       "preset_folder": "KITS/KERERU",
@@ -653,7 +928,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT051-Noize.XML",
+      "output_filename": "KIT051_Noize.XML",
       "source_song": "Noize",
       "preset_name": "KIT051",
       "preset_folder": "KITS",
@@ -664,7 +939,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT053-PianoFatBass.XML",
+      "output_filename": "KIT053_PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "KIT053",
       "preset_folder": "KITS",
@@ -675,7 +950,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT056-PianoFatBass.XML",
+      "output_filename": "KIT056_PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "KIT056",
       "preset_folder": "KITS",
@@ -686,7 +961,51 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT2-Oddish.XML",
+      "output_filename": "KIT1_Houston-Vox-Bounce.XML",
+      "source_song": "Houston-Vox-Bounce",
+      "preset_name": "KIT1",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT1_Nz126.XML",
+      "source_song": "Nz126",
+      "preset_name": "KIT1",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT1_Weirdsaw-B.XML",
+      "source_song": "Weirdsaw-B",
+      "preset_name": "KIT1",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT1_Weirdsaw-C.XML",
+      "source_song": "Weirdsaw-C",
+      "preset_name": "KIT1",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT2_Oddish.XML",
       "source_song": "Oddish",
       "preset_name": "KIT2",
       "preset_folder": "KITS",
@@ -697,7 +1016,40 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Drums-NatRad.XML",
+      "output_filename": "KIT2_Polly.XML",
+      "source_song": "Polly",
+      "preset_name": "KIT2",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 4,
+      "colour_name": "Red",
+      "colour_abbr": "Red",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT3_Eoy-Town-Hall.XML",
+      "source_song": "Eoy-Town-Hall",
+      "preset_name": "KIT3",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
+      "differing_params": []
+    },
+    {
+      "output_filename": "KIT3_Weirdsaw-B.XML",
+      "source_song": "Weirdsaw-B",
+      "preset_name": "KIT3",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Nr Drums_NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "Nr Drums",
       "preset_folder": "KITS",
@@ -708,7 +1060,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Hits-NatRad.XML",
+      "output_filename": "Nr Hits_NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "Nr Hits",
       "preset_folder": "KITS",
@@ -719,7 +1071,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Hook-NatRad.XML",
+      "output_filename": "Nr Hook_NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "Nr Hook",
       "preset_folder": "KITS",
@@ -730,7 +1082,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Isovox-NatRad.XML",
+      "output_filename": "Nr Isovox_NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "Nr Isovox",
       "preset_folder": "KITS",
@@ -741,7 +1093,7 @@
       "differing_params": []
     },
     {
-      "output_filename": "Nr Piano-NatRad.XML",
+      "output_filename": "Nr Piano_NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "Nr Piano",
       "preset_folder": "KITS",
@@ -752,19 +1104,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Bass-Slpspk.XML",
-      "source_song": "Slpspk",
-      "preset_name": "SS-C-Bass",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": []
-    },
-    {
-      "output_filename": "SS-C-Bass-SlpspkRemix.XML",
-      "source_song": "SlpspkRemix",
+      "output_filename": "SS-C-Bass_SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
       "preset_name": "SS-C-Bass",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -774,9 +1115,9 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Inst-Slpspk.XML",
+      "output_filename": "SS-C-Bass_Slpspk.XML",
       "source_song": "Slpspk",
-      "preset_name": "SS-C-Inst",
+      "preset_name": "SS-C-Bass",
       "preset_folder": "KITS",
       "instrument_type": "kit",
       "section_id": 8,
@@ -785,8 +1126,19 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-vox-SlpspkRemix.XML",
-      "source_song": "SlpspkRemix",
+      "output_filename": "SS-C-Inst_SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
+      "preset_name": "SS-C-Inst",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "SS-C-vox_SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
       "preset_name": "SS-C-vox",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -796,8 +1148,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-Drums-SlpspkRemix.XML",
-      "source_song": "SlpspkRemix",
+      "output_filename": "SS-Drums_SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
       "preset_name": "SS-Drums",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -807,9 +1159,42 @@
       "differing_params": []
     },
     {
-      "output_filename": "Tuikit-PianoFatBass.XML",
+      "output_filename": "Spook_Spook.XML",
+      "source_song": "Spook",
+      "preset_name": "Spook",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Tuikit_PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "Tuikit",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Tuikit_Twangin.XML",
+      "source_song": "Twangin",
+      "preset_name": "Tuikit",
+      "preset_folder": "KITS/KERERU/WIP",
+      "instrument_type": "kit",
+      "section_id": 3,
+      "colour_name": "Cyan",
+      "colour_abbr": "Cyn",
+      "differing_params": []
+    },
+    {
+      "output_filename": "Wobble-Crash_Weird-Fishes.XML",
+      "source_song": "Weird-Fishes",
+      "preset_name": "Wobble-Crash",
       "preset_folder": "KITS",
       "instrument_type": "kit",
       "section_id": 0,

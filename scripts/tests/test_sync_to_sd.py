@@ -16,6 +16,11 @@ from deluge_lib.scanning import FileEntry, ScanResult, normalise_mtime
 from deluge_lib.syncing import build_post_sync_manifest, FileRecord, SyncPlan, read_manifest, write_manifest
 
 
+pytestmark = pytest.mark.skip(
+    reason="Unsafe CLI tests use the live sync manifest/log. Isolate persistent state before re-enabling.",
+)
+
+
 def _setup_env(
     monkeypatch: pytest.MonkeyPatch,
     deluge_root: Path,

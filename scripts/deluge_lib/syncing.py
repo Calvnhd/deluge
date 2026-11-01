@@ -11,14 +11,22 @@ from __future__ import annotations
 import json
 import os
 import shutil
+import stat
 import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import TypedDict, NotRequired
+from typing import NotRequired, TypedDict
 
 from deluge_lib.paths import SYNC_LOG_PATH
-from deluge_lib.scanning import FileFilter, ScanResult, normalise_key, print_path, normalise_mtime, scan_tree
+from deluge_lib.scanning import (
+    FileFilter,
+    ScanResult,
+    normalise_key,
+    normalise_mtime,
+    print_path,
+    scan_tree,
+)
 
 
 class FileRecord(TypedDict):
@@ -259,6 +267,8 @@ def compute_sync(
     """Walk both trees to build a plan of copy/delete actions for altering
     the destination directory such that it becomes identical to source.
 
+    Print a per-file comparison counter, including while verifying hashes.
+
     Args:
         source: Source directory to sync with
         dest: Destination to sync
@@ -281,7 +291,9 @@ def compute_sync(
     dst_scan = scan_tree(dest, label="destination", file_filter=file_filter)
 
     # --- compare source → dest, file by file ---
-    for key, src_entry in src_scan.files.items():
+    total = len(src_scan.files)
+    for i, (key, src_entry) in enumerate(src_scan.files.items(), 1):
+        print(f"\rComparing... {i}/{total}", end="", flush=True)
         src_path = source / src_entry.rel_path
         dst_path = dest / src_entry.rel_path
 
@@ -372,6 +384,7 @@ def compute_sync(
         if key not in src_scan.files:
             plan.files_to_delete.append(dest / dst_entry.rel_path)
 
+    print(f"\rComparing... {total}/{total} files compared")
     return plan, src_scan
 
 
@@ -536,27 +549,136 @@ def append_sync_log(
         f.write(line + "\n")
 
 
+def _windows_volume_identity(root: Path) -> str:
+    import ctypes
+    from ctypes import wintypes
+
+    get_name = ctypes.WinDLL("kernel32", use_last_error=True).GetVolumeNameForVolumeMountPointW
+    get_name.argtypes = [wintypes.LPCWSTR, wintypes.LPWSTR, wintypes.DWORD]
+    get_name.restype = wintypes.BOOL
+    name = ctypes.create_unicode_buffer(50)
+    if not get_name(str(root), name, len(name)):
+        raise ctypes.WinError(ctypes.get_last_error())
+    if not name.value:
+        raise OSError(f"Cannot verify volume identity: {root}")
+    return name.value.casefold()
+
+
 def clean_empty_dirs(root: Path) -> int:
-    """Remove empty subdirectories of *root* and report what was removed
+    """Remove empty descendants, preserving root, top-level folders and .trash.
 
-    Walks bottom-up so nested empties are removed leaf-first
-    Skips .trash/.  Uses ``rmdir()`` which only succeeds on empty directories
-
-    Returns the number of directories removed
+    Skip links and reparse points. Retry Windows access-denied errors once when
+    an unchanged, empty directory has ReadOnly set; restore it on retry failure.
+    Use volume identity for Windows drive roots without a directory ID.
     """
     from deluge_lib.scanning import SKIP_DIRS, print_path
 
+    root = root.absolute()
     removed: dict[Path, None] = {}
-    for dirpath, dirnames, filenames in os.walk(root, topdown=False):
-        dirnames[:] = [d for d in dirnames if d.lower() not in SKIP_DIRS]
+    directories: dict[Path, os.stat_result] = {}
+    drive_root = (
+        os.name == "nt"
+        and root.parent == root
+        and len(root.drive) == 2
+        and root.drive.endswith(":")
+    )
+    root_volume: str | None = None
+
+    def directory_stat(path: Path) -> os.stat_result:
+        info = path.lstat()
+        if not stat.S_ISDIR(info.st_mode):
+            raise OSError(f"Not an ordinary directory (links are skipped): {path}")
+        if getattr(info, "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT:
+            raise OSError(f"Skipping reparse point: {path}")
+        if not info.st_ino and not (path == root and drive_root and info.st_dev):
+            raise OSError(f"Cannot verify directory identity: {path}")
+        return info
+
+    def verify_path(path: Path) -> os.stat_result:
+        info = directory_stat(path)
+        current = path
+        while True:
+            current_info = info if current == path else directory_stat(current)
+            if not os.path.samestat(current_info, directories[current]):
+                raise OSError(f"Directory changed during cleanup: {current}")
+            if current == root:
+                if root_volume is not None and _windows_volume_identity(root) != root_volume:
+                    raise OSError(f"Volume changed during cleanup: {root}")
+                return info
+            current = current.parent
+
+    def empty_directory_stat(path: Path) -> os.stat_result | None:
+        info = verify_path(path)
+        with os.scandir(path) as entries:
+            if next(entries, None) is not None:
+                return None
+        return info
+
+    def warn_scan(exc: OSError) -> None:
+        print(f"Warning: could not inspect directory during cleanup ({exc})")
+
+    try:
+        directories[root] = directory_stat(root)
+        if not directories[root].st_ino:
+            root_volume = _windows_volume_identity(root)
+    except OSError as exc:
+        warn_scan(exc)
+        return 0
+
+    # Prune before descending; bottom-up os.walk cannot protect .trash or links.
+    for dirpath, dirnames, _filenames in os.walk(root, topdown=True, onerror=warn_scan):
         current = Path(dirpath)
+        try:
+            verify_path(current)
+        except OSError as exc:
+            warn_scan(exc)
+            dirnames.clear()
+            continue
+        descend: list[str] = []
+        for name in dirnames:
+            if name.lower() in SKIP_DIRS:
+                continue
+            child = current / name
+            try:
+                directories[child] = directory_stat(child)
+            except OSError as exc:
+                warn_scan(exc)
+                continue
+            descend.append(name)
+        dirnames[:] = descend
+
+    for current in reversed(directories):
         if current == root or current.parent == root:
             continue
-        # A directory is empty if it has no files and all its subdirs were
-        # already removed (i.e. were themselves empty).
-        if not filenames and all((current / d) in removed for d in dirnames):
-            current.rmdir()  # safe: only succeeds if truly empty
+        try:
+            if empty_directory_stat(current) is None:
+                continue
+            try:
+                current.rmdir()
+            except PermissionError as exc:
+                if os.name != "nt" or getattr(exc, "winerror", None) != 5:
+                    raise
+                original_info = empty_directory_stat(current)
+                if original_info is None:
+                    raise OSError(f"Directory is no longer empty: {current}") from exc
+                if not original_info.st_file_attributes & stat.FILE_ATTRIBUTE_READONLY:
+                    raise
+                current.chmod(original_info.st_mode | stat.S_IWRITE)
+                print(f"Retrying empty directory removal after clearing ReadOnly: {current}")
+                try:
+                    if empty_directory_stat(current) is None:
+                        raise OSError(f"Directory is no longer empty: {current}")
+                    current.rmdir()
+                except OSError:
+                    try:
+                        verify_path(current)
+                        current.chmod(original_info.st_mode)
+                    except OSError as restore_exc:
+                        print(f"Warning: could not restore ReadOnly on {current} ({restore_exc})")
+                    raise
             removed[current] = None
+        except OSError as exc:
+            print(f"Warning: could not remove empty directory {current} ({exc})")
 
     if removed:
         print(f"\nRemoved {len(removed)} empty director{'y' if len(removed) == 1 else 'ies'}:")
