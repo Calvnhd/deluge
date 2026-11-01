@@ -4017,7 +4017,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/One-Shot/DTB_HiHat_03_One Shot.wav">
+						fileName="SAMPLES/LANDR/Perc_One-Shot/DTB_HiHat_03_One Shot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="30857" />

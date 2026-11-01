@@ -292,7 +292,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/One-Shot/MTH_Kick_01_One Shot.wav">
+						fileName="SAMPLES/LANDR/Perc_One-Shot/MTH_Kick_01_One Shot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="21339" />
@@ -369,7 +369,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/One-Shot/DTB_Snare_03_One Shot.wav">
+						fileName="SAMPLES/LANDR/Perc_One-Shot/DTB_Snare_03_One Shot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="41143" />
@@ -446,7 +446,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/One-Shot/DTB_Snare_01_One Shot.wav">
+						fileName="SAMPLES/LANDR/Perc_One-Shot/DTB_Snare_01_One Shot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="41143" />
@@ -523,7 +523,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/One-Shot/DTB_Shaker_One Shot.wav">
+						fileName="SAMPLES/LANDR/Perc_One-Shot/DTB_Shaker_One Shot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="10286" />
@@ -600,7 +600,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/One-Shot/DTB_Ride_One Shot.wav">
+						fileName="SAMPLES/LANDR/Perc_One-Shot/DTB_Ride_One Shot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="102857" />
@@ -677,7 +677,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/LANDR/PERC/One-Shot/DTB_Open HiHat_02_One Shot.wav">
+						fileName="SAMPLES/LANDR/Perc_One-Shot/DTB_Open HiHat_02_One Shot.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="41143" />
