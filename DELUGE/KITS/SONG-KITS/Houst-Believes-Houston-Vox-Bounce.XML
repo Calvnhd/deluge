@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="4" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="450560" endSamplePos="470016"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -53,7 +53,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="6" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="311296" endSamplePos="349696"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -95,7 +95,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="7" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="350208" endSamplePos="438272"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -137,7 +137,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="9" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="582144" endSamplePos="725027"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -179,7 +179,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="33" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2773374" endSamplePos="2883584"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -221,7 +221,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="1" polyphonic="auto" voicePriority="1" sideChainSend="1073741825" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2826240" endSamplePos="2871296"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -263,7 +263,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="2" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2850304" endSamplePos="2867200"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -305,7 +305,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="3" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="80776" endSamplePos="151995"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -347,7 +347,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="8" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="473088" endSamplePos="495616"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -389,7 +389,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="11" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1202176" endSamplePos="1243136"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -431,7 +431,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="12" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1264640" endSamplePos="1318912"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -473,7 +473,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="13" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1355776" endSamplePos="1454080"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -515,7 +515,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="14" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav" transpose="-1">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav" transpose="-1">
 						<zone startSamplePos="1457796" endSamplePos="1537954"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -557,7 +557,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="16" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1558045" endSamplePos="1626774"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -599,7 +599,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="17" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1626774" endSamplePos="1679299"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -641,7 +641,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="18" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1679299" endSamplePos="1759769"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -683,7 +683,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="19" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1759769" endSamplePos="1908670"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -725,7 +725,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="20" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="1908670" endSamplePos="2015507"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -767,7 +767,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="21" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2015507" endSamplePos="2095234"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -809,7 +809,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="23" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2369536" endSamplePos="2394256"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -851,7 +851,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="24" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2409472" endSamplePos="2441216"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -893,7 +893,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="25" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2449920" endSamplePos="2483466"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -935,7 +935,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="26" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2498560" endSamplePos="2539520"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -977,7 +977,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="29" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2678938" endSamplePos="2695808"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -1019,7 +1019,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="30" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2695168" endSamplePos="2711754"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -1061,7 +1061,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="31" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2711754" endSamplePos="2725888"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -1103,7 +1103,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="32" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="3" reversed="0" timeStretchEnable="1" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2723840" endSamplePos="2773374"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -1145,7 +1145,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="42" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="2736128" endSamplePos="2965606"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -1187,7 +1187,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="43" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+					<osc1 type="sample" loopMode="2" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 						<zone startSamplePos="0" endSamplePos="2965606" startLoopPos="2086"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">

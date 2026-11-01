@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <sound firmwareVersion="c1.2.0" earliestCompatibleFirmware="4.1.0-alpha" polyphonic="poly" voicePriority="1" mode="subtractive" modFXType="StereoChorus" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" maxVoices="8">
-	<osc1 type="wavetable" transpose="-24" cents="10" retrigPhase="119304640" fileName="SAMPLES/COMMUNITY/1.2 Presets B-Sides/Low Drone Bass/uwahwah2.wav" />
+	<osc1 type="wavetable" transpose="-24" cents="10" retrigPhase="119304640" fileName="SAMPLES/COMMUNITY/1.2 Presets B-Sides/Ample Vocal Pad/uwahwah2.wav" />
 	<osc2 type="analogSquare" transpose="-12" cents="-10" retrigPhase="357913920" />
 	<lfo1 type="triangle" syncLevel="0" syncType="0" />
 	<lfo2 type="triangle" syncLevel="0" syncType="0" />

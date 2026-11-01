@@ -2190,11 +2190,14 @@ SAMPLES/CITIZEN-DJ/variety-stage/excerpts/The-Arkansas-traveler-descriptive-scen
 SAMPLES/CITIZEN-DJ/variety-stage/excerpts/The-Arkansas-traveler-descriptive-scene--Flanagans-troubles-in-a-restaurant--vaudeville-specialty_2018620415_007_00-03-01.wav,5.773,0,0,0
 SAMPLES/CITIZEN-DJ/variety-stage/excerpts/The-Arkansas-traveler-descriptive-scene--Flanagans-troubles-in-a-restaurant--vaudeville-specialty_2018620415_008_00-03-31.wav,5.764,0,0,0
 SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav,12.348,4,0,2
-SAMPLES/CLIPS/Arparty-Rearr/balanced_008.wav,2.029,0,0,1
-SAMPLES/CLIPS/Arparty-Rearr/balanced_010.wav,2.029,0,0,1
-SAMPLES/CLIPS/Arparty-Rearr/balanced_012.wav,2.029,0,0,1
-SAMPLES/CLIPS/Arparty-Rearr/balanced_026.wav,2.029,0,0,1
-SAMPLES/CLIPS/Arparty-Rearr/balanced_030.wav,2.029,0,0,1
+SAMPLES/CLIPS/Arparty 3/balanced_006.wav,1.997,0,0,4
+SAMPLES/CLIPS/Arparty 3/balanced_022.wav,1.997,0,0,4
+SAMPLES/CLIPS/Arparty 3/balanced_028.wav,1.997,0,0,4
+SAMPLES/CLIPS/Arparty-Rearr/balanced_008.wav,2.029,0,0,0
+SAMPLES/CLIPS/Arparty-Rearr/balanced_010.wav,2.029,0,0,0
+SAMPLES/CLIPS/Arparty-Rearr/balanced_012.wav,2.029,0,0,0
+SAMPLES/CLIPS/Arparty-Rearr/balanced_026.wav,2.029,0,0,0
+SAMPLES/CLIPS/Arparty-Rearr/balanced_030.wav,2.029,0,0,0
 SAMPLES/CLIPS/Eoy-Th 4/output_008.wav,61.182,0,0,1
 SAMPLES/CLIPS/Houst-Very-Bounce 2/output_000.wav,9.408,0,0,1
 SAMPLES/CLIPS/Houst-Very-Bounce 3/balanced_002.wav,2.365,0,0,1
@@ -2214,8 +2217,8 @@ SAMPLES/CLIPS/Houston 7/output_000.wav,25.162,1,0,0
 SAMPLES/CLIPS/Houston 85/output_002.wav,21.567,3,0,2
 SAMPLES/CLIPS/Houston/balanced_000.wav,14.391,3,0,2
 SAMPLES/CLIPS/Hugh-Stun-Is-Done/output_002.wav,4.704,0,0,1
-SAMPLES/CLIPS/Lazygat/output_000.wav,19.051,0,0,2
-SAMPLES/CLIPS/Lazygat/output_002.wav,6.350,0,0,2
+SAMPLES/CLIPS/Lazygat/output_000.wav,19.051,0,0,1
+SAMPLES/CLIPS/Lazygat/output_002.wav,6.350,0,0,1
 SAMPLES/CLIPS/Loopytwopy/left_000.wav,1.071,0,0,1
 SAMPLES/CLIPS/Loopytwopy/left_002.wav,1.071,0,0,1
 SAMPLES/CLIPS/One-Eye-Tea/balanced_000.wav,1.997,0,0,0
@@ -2253,8 +2256,8 @@ SAMPLES/CLIPS/REC00005.WAV,17.806,2,0,2
 SAMPLES/CLIPS/REC00009.WAV,1.714,0,0,1
 SAMPLES/CLIPS/REC00011.WAV,1.714,0,0,1
 SAMPLES/CLIPS/REC00013.WAV,1.714,0,0,1
-SAMPLES/CLIPS/REC00015.WAV,2.129,0,0,1
-SAMPLES/CLIPS/REC00018.WAV,6.061,3,0,3
+SAMPLES/CLIPS/REC00015.WAV,2.129,0,0,7
+SAMPLES/CLIPS/REC00018.WAV,6.061,4,0,4
 SAMPLES/CLIPS/REC00040.WAV,4.246,0,0,1
 SAMPLES/CLIPS/REC00041.WAV,2.129,0,0,1
 SAMPLES/CLIPS/REC00042.WAV,4.775,0,0,1
@@ -2264,24 +2267,37 @@ SAMPLES/CLIPS/REC00050.WAV,3.338,0,0,1
 SAMPLES/CLIPS/REC00053.WAV,2.129,0,0,1
 SAMPLES/CLIPS/REC00054.WAV,1.071,0,0,1
 SAMPLES/CLIPS/REC00055.WAV,1.071,0,0,1
-SAMPLES/CLIPS/REC00061.WAV,3.188,0,0,3
-SAMPLES/CLIPS/REC00062.WAV,3.188,0,0,3
-SAMPLES/CLIPS/REC00063.WAV,3.188,0,0,3
-SAMPLES/CLIPS/REC00064.WAV,3.188,0,0,3
-SAMPLES/CLIPS/REC00074.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00076.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00077.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00078.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00080.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00084.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00085.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00086.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00087.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00088.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00089.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00090.WAV,1.937,0,0,5
-SAMPLES/CLIPS/REC00110.WAV,3.861,0,0,5
-SAMPLES/CLIPS/REC00111.WAV,3.861,0,0,5
+SAMPLES/CLIPS/REC00061.WAV,3.188,0,0,1
+SAMPLES/CLIPS/REC00062.WAV,3.188,0,0,1
+SAMPLES/CLIPS/REC00063.WAV,3.188,0,0,1
+SAMPLES/CLIPS/REC00064.WAV,3.188,0,0,1
+SAMPLES/CLIPS/REC00074.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00076.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00077.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00078.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00080.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00084.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00085.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00086.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00087.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00088.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00089.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00090.WAV,1.937,0,0,1
+SAMPLES/CLIPS/REC00110.WAV,3.861,0,0,1
+SAMPLES/CLIPS/REC00111.WAV,3.861,0,0,1
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_000.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_002.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_004.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_008.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_010.wav,0.684,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_012.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_014.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_016.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_018.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_020.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_024.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_026.wav,1.997,0,0,0
+SAMPLES/CLIPS/TEMP/Arparty 3/balanced_030.wav,1.997,0,0,0
 SAMPLES/CLIPS/TEMP/REC00056.WAV,0.409,0,0,0
 SAMPLES/CLIPS/TEMP/REC00057.WAV,0.409,0,0,0
 SAMPLES/CLIPS/TEMP/REC00058.WAV,1.600,0,0,0
@@ -2374,6 +2390,21 @@ SAMPLES/CLIPS/TEMP/REC00162.WAV,1.179,0,0,0
 SAMPLES/CLIPS/TEMP/REC00163.WAV,2.029,0,0,0
 SAMPLES/CLIPS/TEMP/REC00165.WAV,2.029,0,0,0
 SAMPLES/CLIPS/TEMP/REC00166.WAV,2.029,0,0,0
+SAMPLES/CLIPS/TEMP/Weird-Fishes/balanced_000.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weird-Fishes/balanced_002.wav,6.158,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_000.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_002.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_004.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_006.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_008.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_010.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_012.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_014.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_016.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_018.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_020.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_022.wav,3.085,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/balanced_024.wav,3.597,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/left_000.wav,1.037,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/left_002.wav,1.037,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-A 10/left_004.wav,1.037,0,0,0
@@ -2464,6 +2495,7 @@ SAMPLES/CLIPS/TEMP/Weirdsaw-A 19/left_024.wav,3.085,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-A 19/left_026.wav,3.085,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-A 19/left_028.wav,3.085,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-A 19/left_030.wav,3.597,0,0,0
+SAMPLES/CLIPS/TEMP/Weirdsaw-A 9/left_000.wav,3.085,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-B/mix_000.wav,13.608,0,0,0
 SAMPLES/CLIPS/TEMP/Weirdsaw-B/output_000.wav,6.993,0,0,0
 SAMPLES/CLIPS/TEMP/Wf-Jfip 6/left_000.wav,6.061,0,0,0
@@ -2479,8 +2511,11 @@ SAMPLES/CLIPS/TEMP/Wf-Jfip 8/balanced_014.wav,3.541,0,0,0
 SAMPLES/CLIPS/TEMP/Wf-Jfip 8/balanced_016.wav,3.541,0,0,0
 SAMPLES/CLIPS/TEMP/Wf-Jfip 8/balanced_018.wav,3.541,0,0,0
 SAMPLES/CLIPS/TEMP/Wf-Jfip 8/balanced_022.wav,3.541,0,0,0
+SAMPLES/CLIPS/Weirdsaw-A 10/balanced_026.wav,3.597,0,0,1
+SAMPLES/CLIPS/Weirdsaw-A 10/balanced_028.wav,3.597,0,0,1
+SAMPLES/CLIPS/Weirdsaw-A 10/balanced_030.wav,3.597,0,0,1
 SAMPLES/CLIPS/Weirdsaw-B 2/output_000.wav,6.804,1,0,1
-SAMPLES/CLIPS/Wf-Jfip 6/left_002.wav,6.061,0,0,1
+SAMPLES/CLIPS/Wf-Jfip 6/left_002.wav,6.061,0,0,0
 SAMPLES/CLIPS/Wf-Jfip 7/balanced_000.wav,3.541,0,0,0
 SAMPLES/CLIPS/Wf-Jfip 7/balanced_002.wav,3.541,0,0,0
 SAMPLES/CLIPS/Wf-Jfip 7/balanced_004.wav,3.541,0,0,0
@@ -2491,12 +2526,12 @@ SAMPLES/CLIPS/Wf-Jfip 7/balanced_012.wav,3.541,0,0,0
 SAMPLES/CLIPS/Wf-Jfip 7/balanced_014.wav,3.541,0,0,0
 SAMPLES/CLIPS/Wf-Jfip 7/balanced_016.wav,3.541,0,0,0
 SAMPLES/CLIPS/Wf-Jfip 7/balanced_018.wav,3.541,0,0,0
-SAMPLES/CLIPS/Wf-Jfip 8/balanced_020.wav,3.541,2,0,3
-SAMPLES/CLIPS/Wf-Redo 2/balanced_002.wav,4.045,1,0,2
-SAMPLES/CLIPS/Wf-Redo 2/balanced_004.wav,4.045,1,0,2
-SAMPLES/CLIPS/Wf-Redo 2/balanced_006.wav,4.045,1,0,2
-SAMPLES/CLIPS/Wf-Redo 2/balanced_008.wav,4.045,1,0,2
-SAMPLES/CLIPS/Wf-Redo 2/balanced_010.wav,4.045,1,0,2
+SAMPLES/CLIPS/Wf-Jfip 8/balanced_020.wav,3.541,2,0,2
+SAMPLES/CLIPS/Wf-Redo 2/balanced_002.wav,4.045,0,0,0
+SAMPLES/CLIPS/Wf-Redo 2/balanced_004.wav,4.045,0,0,0
+SAMPLES/CLIPS/Wf-Redo 2/balanced_006.wav,4.045,0,0,0
+SAMPLES/CLIPS/Wf-Redo 2/balanced_008.wav,4.045,0,0,0
+SAMPLES/CLIPS/Wf-Redo 2/balanced_010.wav,4.045,0,0,0
 SAMPLES/COMMUNITY/1.2 Presets B-Sides/A Scw 02/folded.wav,0.001,0,1,0
 SAMPLES/COMMUNITY/1.2 Presets B-Sides/Ample Vocal Pad/uwahwah2.wav,0.524,0,1,0
 SAMPLES/COMMUNITY/1.2 Presets B-Sides/AnalogVoice/AnalogVoice c1.wav,0.767,0,1,0
@@ -3244,22 +3279,22 @@ SAMPLES/FACTORY/Artists/Dean Daughters/Bass Music/SN - Girth.wav,0.091,1,0,0
 SAMPLES/FACTORY/Artists/Dean Daughters/Bass Music/SN - ReallyNice.wav,0.123,1,0,0
 SAMPLES/FACTORY/Artists/Dean Daughters/Bass Music/SN - Seasoned.wav,0.257,1,0,0
 SAMPLES/FACTORY/Artists/Dean Daughters/Bass Music/SN - Tiburon.wav,0.151,1,0,0
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLAP-Dimension.wav,0.045,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav,0.025,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav,0.039,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav,0.022,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Bonus01.wav,0.064,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Radar.wav,0.091,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Silence.wav,0.072,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav,0.094,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav,0.063,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Silence.wav,0.047,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension1.wav,0.057,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension2.wav,0.058,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav,0.073,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SHAKER-Radar.wav,0.057,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav,0.115,7,0,7
-SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav,0.046,7,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLAP-Dimension.wav,0.045,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus02.wav,0.025,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Bonus04.wav,0.039,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/CLHAT-Radar1.wav,0.022,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Bonus01.wav,0.064,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Radar.wav,0.091,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/KICK-Silence.wav,0.072,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar1.wav,0.094,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Radar3.wav,0.063,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/OPHAT-Silence.wav,0.047,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension1.wav,0.057,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/PERC-Dimension2.wav,0.058,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/RIDE-Bonus01.wav,0.073,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SHAKER-Radar.wav,0.057,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-BigPryda.wav,0.115,8,0,7
+SAMPLES/FACTORY/Artists/Dean Daughters/Psy/SNARE-Bonus01.wav,0.046,8,0,7
 SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - CLAP - 01.wav,0.119,3,0,3
 SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - CLAP - 02.wav,0.435,3,0,3
 SAMPLES/FACTORY/Artists/Dean Daughters/Y2K/Y2K - HAT - 01.wav,0.012,3,0,3
@@ -3413,21 +3448,21 @@ SAMPLES/FACTORY/Artists/Phil Elverum/Feedback The Place I Live.wav,3.786,2,0,1
 SAMPLES/FACTORY/Artists/Phil Elverum/Gong Clearmoon.wav,1.591,2,0,1
 SAMPLES/FACTORY/Artists/Phil Elverum/Guitar Oceanroar.wav,1.815,2,0,1
 SAMPLES/FACTORY/Artists/Phil Elverum/HighDrone The Place Lives.wav,4.002,2,0,1
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00171.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00172.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00173.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00174.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00175.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00176.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00177.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00178.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00179.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00180.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00183.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00184.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00185.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00187.WAV,0.265,3,0,4
-SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00188.WAV,0.265,3,0,4
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00171.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00172.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00173.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00174.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00175.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00176.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00177.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00178.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00179.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00180.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00183.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00184.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00185.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00187.WAV,0.265,3,0,5
+SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 1/REC00188.WAV,0.265,3,0,5
 SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 2/REC00130.WAV,0.265,1,0,0
 SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 2/REC00131.WAV,0.265,1,0,0
 SAMPLES/FACTORY/Artists/Philippe Palmieri/Kit 2/REC00132.WAV,0.265,1,0,0
@@ -3467,18 +3502,18 @@ SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Perc Zap.wav,0.008,1,0,0
 SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Snare HiMetal.wav,0.060,1,0,0
 SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Snare Metallic Punch.wav,0.033,1,0,0
 SAMPLES/FACTORY/Artists/Roman Hatz/Kit 1/Snare.wav,0.072,1,0,0
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Clap.wav,0.018,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash.wav,0.072,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash2.wav,0.052,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_HiHat.wav,0.007,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Kick.wav,0.023,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Perc.wav,0.036,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_PercRev.wav,0.012,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Rim.wav,0.007,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker.wav,0.014,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker2.wav,0.021,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare.wav,0.022,6,0,9
-SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare2.wav,0.022,6,0,9
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Clap.wav,0.018,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash.wav,0.072,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Crash2.wav,0.052,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_HiHat.wav,0.007,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Kick.wav,0.023,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Perc.wav,0.036,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_PercRev.wav,0.012,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Rim.wav,0.007,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker.wav,0.014,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Shaker2.wav,0.021,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare.wav,0.022,5,0,4
+SAMPLES/FACTORY/Artists/Samuel Verburg/Deluge Mic Kit/DelugeMicKit_Snare2.wav,0.022,5,0,4
 SAMPLES/FACTORY/Artists/Sjionel Timu/cutss01.wav,0.766,1,0,0
 SAMPLES/FACTORY/Artists/Sjionel Timu/cutss02.wav,1.201,1,0,0
 SAMPLES/FACTORY/Artists/Sjionel Timu/cutss03.wav,1.533,1,0,0
@@ -3536,8 +3571,8 @@ SAMPLES/FACTORY/DRUMS/China/R-50 China.wav,0.045,1,0,0
 SAMPLES/FACTORY/DRUMS/China/R100 Brush.wav,0.096,0,0,0
 SAMPLES/FACTORY/DRUMS/China/RX-5 China.wav,0.145,1,0,0
 SAMPLES/FACTORY/DRUMS/Clap/808 Clap.WAV,0.176,10,0,29
-SAMPLES/FACTORY/DRUMS/Clap/909 Clap.WAV,0.036,11,0,16
-SAMPLES/FACTORY/DRUMS/Clap/DDD1 Clap.wav,0.055,2,0,8
+SAMPLES/FACTORY/DRUMS/Clap/909 Clap.WAV,0.036,11,0,17
+SAMPLES/FACTORY/DRUMS/Clap/DDD1 Clap.wav,0.055,2,0,3
 SAMPLES/FACTORY/DRUMS/Clap/HR16B Clap.wav,0.039,1,0,0
 SAMPLES/FACTORY/DRUMS/Clap/Linndrum Clap.wav,0.017,1,0,0
 SAMPLES/FACTORY/DRUMS/Clap/R-50 Clap.wav,0.016,1,0,0
@@ -3566,16 +3601,16 @@ SAMPLES/FACTORY/DRUMS/ConM/Linndrum Conga medium.wav,0.024,1,0,0
 SAMPLES/FACTORY/DRUMS/ConM/R-50 Conga medium.wav,0.019,1,0,0
 SAMPLES/FACTORY/DRUMS/Cowbell/808 Cowbell.wav,0.069,10,0,29
 SAMPLES/FACTORY/DRUMS/Cowbell/CR78 Cowbell.wav,0.008,1,0,0
-SAMPLES/FACTORY/DRUMS/Cowbell/DDD1 Cowbell.wav,0.060,2,0,8
+SAMPLES/FACTORY/DRUMS/Cowbell/DDD1 Cowbell.wav,0.060,2,0,3
 SAMPLES/FACTORY/DRUMS/Cowbell/KR55 Cowbell.wav,0.022,1,0,0
 SAMPLES/FACTORY/DRUMS/Cowbell/R-50 Cowbell.wav,0.013,1,0,0
 SAMPLES/FACTORY/DRUMS/Cowbell/R100 Cowbell.wav,0.026,2,0,2
 SAMPLES/FACTORY/DRUMS/Cowbell/RX-5 Cowbell.wav,0.042,1,0,0
 SAMPLES/FACTORY/DRUMS/Cowbell/Sequential Circuits Drumtraks Cowbell.wav,0.014,2,0,1
-SAMPLES/FACTORY/DRUMS/Crash/808 Cymbal.wav,0.132,10,0,29
-SAMPLES/FACTORY/DRUMS/Crash/909 Crash.wav,0.095,4,0,9
+SAMPLES/FACTORY/DRUMS/Crash/808 Cymbal.wav,0.132,11,0,30
+SAMPLES/FACTORY/DRUMS/Crash/909 Crash.wav,0.095,4,0,10
 SAMPLES/FACTORY/DRUMS/Crash/CR78 Cymbal.wav,0.023,1,0,0
-SAMPLES/FACTORY/DRUMS/Crash/DDD1 Crash.wav,0.249,2,0,8
+SAMPLES/FACTORY/DRUMS/Crash/DDD1 Crash.wav,0.249,2,0,3
 SAMPLES/FACTORY/DRUMS/Crash/Hammond Rhythm II Crash.wav,0.036,2,0,1
 SAMPLES/FACTORY/DRUMS/Crash/HR16B Crash.wav,0.160,1,0,0
 SAMPLES/FACTORY/DRUMS/Crash/Linndrum Crash.wav,0.109,8,0,7
@@ -3583,13 +3618,13 @@ SAMPLES/FACTORY/DRUMS/Crash/R-50 Crash.wav,0.101,1,0,0
 SAMPLES/FACTORY/DRUMS/Crash/R100 Crash.wav,0.219,3,0,3
 SAMPLES/FACTORY/DRUMS/Crash/RX-5 Crash.wav,0.167,1,0,0
 SAMPLES/FACTORY/DRUMS/Crash/Sequential Circuits Drumtraks Crash.wav,0.106,2,0,1
-SAMPLES/FACTORY/DRUMS/Crash/XV5080 Crash.wav,0.281,12,0,9
+SAMPLES/FACTORY/DRUMS/Crash/XV5080 Crash.wav,0.281,10,0,13
 SAMPLES/FACTORY/DRUMS/Guiro/CR78 Guiro.wav,0.019,1,0,0
 SAMPLES/FACTORY/DRUMS/Guiro/R100 Quijada.wav,0.036,2,0,2
-SAMPLES/FACTORY/DRUMS/HatC/808 Closed hihat.wav,0.022,16,0,35
-SAMPLES/FACTORY/DRUMS/HatC/909 Closed hihat.wav,0.009,4,0,9
+SAMPLES/FACTORY/DRUMS/HatC/808 Closed hihat.wav,0.022,17,0,36
+SAMPLES/FACTORY/DRUMS/HatC/909 Closed hihat.wav,0.009,4,0,10
 SAMPLES/FACTORY/DRUMS/HatC/CR78 Closed hihat.wav,0.007,1,0,0
-SAMPLES/FACTORY/DRUMS/HatC/DDD1 Closed hihat.wav,0.060,2,0,8
+SAMPLES/FACTORY/DRUMS/HatC/DDD1 Closed hihat.wav,0.060,2,0,3
 SAMPLES/FACTORY/DRUMS/HatC/Hammond Rhythm II Closed hihat.wav,0.012,2,0,1
 SAMPLES/FACTORY/DRUMS/HatC/HR16B Closed hihat.wav,0.016,1,0,0
 SAMPLES/FACTORY/DRUMS/HatC/KR55 Closed hihat.wav,0.011,2,0,1
@@ -3601,11 +3636,11 @@ SAMPLES/FACTORY/DRUMS/HatC/RX-5 Closed hihat.wav,0.010,1,0,0
 SAMPLES/FACTORY/DRUMS/HatC/SDS5 Closed hihat.wav,0.004,1,0,0
 SAMPLES/FACTORY/DRUMS/HatC/SDS5 Pedal hihat.wav,0.017,0,0,0
 SAMPLES/FACTORY/DRUMS/HatC/Sequential Circuits Drumtraks Closed hihat.wav,0.013,2,0,1
-SAMPLES/FACTORY/DRUMS/HatC/XV5080 Closed hihat.wav,0.024,13,0,10
+SAMPLES/FACTORY/DRUMS/HatC/XV5080 Closed hihat.wav,0.024,11,0,14
 SAMPLES/FACTORY/DRUMS/HatO/808 Open hihat.wav,0.066,10,0,29
-SAMPLES/FACTORY/DRUMS/HatO/909 Open hihat.wav,0.041,6,0,10
+SAMPLES/FACTORY/DRUMS/HatO/909 Open hihat.wav,0.041,6,0,11
 SAMPLES/FACTORY/DRUMS/HatO/CR78 Open hihat.wav,0.049,1,0,0
-SAMPLES/FACTORY/DRUMS/HatO/DDD1 Open hihat.wav,0.106,2,0,8
+SAMPLES/FACTORY/DRUMS/HatO/DDD1 Open hihat.wav,0.106,2,0,3
 SAMPLES/FACTORY/DRUMS/HatO/Hammond Rhythm II Open hihat.wav,0.030,2,0,1
 SAMPLES/FACTORY/DRUMS/HatO/HR16B Open hihat.wav,0.134,1,0,0
 SAMPLES/FACTORY/DRUMS/HatO/KR55 Open hihat.wav,0.031,1,0,0
@@ -3616,16 +3651,16 @@ SAMPLES/FACTORY/DRUMS/HatO/Rhythmace Open hihat.wav,0.028,2,0,2
 SAMPLES/FACTORY/DRUMS/HatO/RX-5 Open hihat.wav,0.083,1,0,0
 SAMPLES/FACTORY/DRUMS/HatO/SDS5 Open hihat.wav,0.067,1,0,0
 SAMPLES/FACTORY/DRUMS/HatO/Sequential Circuits Drumtraks Open hihat.wav,0.020,2,0,1
-SAMPLES/FACTORY/DRUMS/HatO/XV5080 Open hihat.wav,0.199,12,0,9
+SAMPLES/FACTORY/DRUMS/HatO/XV5080 Open hihat.wav,0.199,10,0,13
 SAMPLES/FACTORY/DRUMS/Kick/808 Kick descending.wav,0.056,0,0,0
 SAMPLES/FACTORY/DRUMS/Kick/808 Kick distorted.wav,0.045,0,0,0
 SAMPLES/FACTORY/DRUMS/Kick/808 Kick sustained.wav,0.265,0,0,0
-SAMPLES/FACTORY/DRUMS/Kick/808 Kick.wav,0.044,12,0,32
+SAMPLES/FACTORY/DRUMS/Kick/808 Kick.wav,0.044,13,0,33
 SAMPLES/FACTORY/DRUMS/Kick/909 Kick distorted.wav,0.033,0,0,0
 SAMPLES/FACTORY/DRUMS/Kick/909 Kick dry.wav,0.010,0,0,0
-SAMPLES/FACTORY/DRUMS/Kick/909 Kick.wav,0.040,7,0,12
+SAMPLES/FACTORY/DRUMS/Kick/909 Kick.wav,0.040,5,0,17
 SAMPLES/FACTORY/DRUMS/Kick/CR78 Kick.wav,0.011,1,0,0
-SAMPLES/FACTORY/DRUMS/Kick/DDD1 Kick.wav,0.008,2,0,8
+SAMPLES/FACTORY/DRUMS/Kick/DDD1 Kick.wav,0.008,2,0,3
 SAMPLES/FACTORY/DRUMS/Kick/Deep Sky Kick descending.wav,0.361,0,0,0
 SAMPLES/FACTORY/DRUMS/Kick/Deep Sky Kick distorted.wav,0.033,0,0,1
 SAMPLES/FACTORY/DRUMS/Kick/Deep Sky Kick HQ9094.wav,0.035,9,0,8
@@ -3645,8 +3680,8 @@ SAMPLES/FACTORY/DRUMS/Other/R-50 Click.wav,0.009,1,0,0
 SAMPLES/FACTORY/DRUMS/Other/R-50 Snap.wav,0.011,1,0,0
 SAMPLES/FACTORY/DRUMS/Other/R100 Chime.wav,0.097,2,0,2
 SAMPLES/FACTORY/DRUMS/Other/R100 Triangle.wav,0.095,2,0,2
-SAMPLES/FACTORY/DRUMS/Ride/909 Ride.wav,0.072,5,0,10
-SAMPLES/FACTORY/DRUMS/Ride/DDD1 Ride.wav,0.249,2,0,8
+SAMPLES/FACTORY/DRUMS/Ride/909 Ride.wav,0.072,5,0,11
+SAMPLES/FACTORY/DRUMS/Ride/DDD1 Ride.wav,0.249,2,0,3
 SAMPLES/FACTORY/DRUMS/Ride/KR55 Ride.wav,0.075,1,0,0
 SAMPLES/FACTORY/DRUMS/Ride/Linndrum Ride.wav,0.112,1,0,0
 SAMPLES/FACTORY/DRUMS/Ride/R-50 Ride cup.wav,0.044,0,0,0
@@ -3655,30 +3690,30 @@ SAMPLES/FACTORY/DRUMS/Ride/R100 Ride.wav,0.131,2,0,2
 SAMPLES/FACTORY/DRUMS/Ride/RX-5 Ride cup.wav,0.180,0,0,0
 SAMPLES/FACTORY/DRUMS/Ride/RX-5 Ride.wav,0.195,1,0,0
 SAMPLES/FACTORY/DRUMS/Ride/Sequential Circuits Drumtraks Ride.wav,0.115,2,0,1
-SAMPLES/FACTORY/DRUMS/Ride/XV5080 Ride cup.wav,0.234,12,0,9
+SAMPLES/FACTORY/DRUMS/Ride/XV5080 Ride cup.wav,0.234,10,0,13
 SAMPLES/FACTORY/DRUMS/Ride/XV5080 Ride edge.wav,0.225,2,0,1
 SAMPLES/FACTORY/DRUMS/Rim/808 Rim.wav,0.022,10,0,29
-SAMPLES/FACTORY/DRUMS/Rim/909 Rim.wav,0.006,4,0,9
+SAMPLES/FACTORY/DRUMS/Rim/909 Rim.wav,0.006,4,0,10
 SAMPLES/FACTORY/DRUMS/Rim/CR78 Rim.wav,0.005,1,0,0
-SAMPLES/FACTORY/DRUMS/Rim/DDD1 Rim.wav,0.042,2,0,8
+SAMPLES/FACTORY/DRUMS/Rim/DDD1 Rim.wav,0.042,2,0,3
 SAMPLES/FACTORY/DRUMS/Rim/KR55 Rim.wav,0.004,1,0,0
 SAMPLES/FACTORY/DRUMS/Rim/Linndrum Rim.wav,0.010,1,0,0
 SAMPLES/FACTORY/DRUMS/Rim/R100 Rim.wav,0.015,2,0,2
 SAMPLES/FACTORY/DRUMS/Rim/RX-5 Rim.wav,0.008,1,0,0
 SAMPLES/FACTORY/DRUMS/Rim/SDS5 Rim.wav,0.008,1,0,0
 SAMPLES/FACTORY/DRUMS/Rim/Sequential Circuits Drumtraks Rim.wav,0.013,2,0,1
-SAMPLES/FACTORY/DRUMS/Rim/XV5080 Rim.wav,0.026,13,0,10
+SAMPLES/FACTORY/DRUMS/Rim/XV5080 Rim.wav,0.026,11,0,14
 SAMPLES/FACTORY/DRUMS/Shaker/808 Maraca.wav,0.022,10,0,29
-SAMPLES/FACTORY/DRUMS/Shaker/DDD1 Cabasa.wav,0.051,2,0,8
+SAMPLES/FACTORY/DRUMS/Shaker/DDD1 Cabasa.wav,0.051,2,0,3
 SAMPLES/FACTORY/DRUMS/Shaker/Linndrum Cabasa.wav,0.007,1,0,0
 SAMPLES/FACTORY/DRUMS/Shaker/R-50 Shaker.wav,0.016,1,0,0
 SAMPLES/FACTORY/DRUMS/Shaker/R100 Percussion.wav,0.012,2,0,2
 SAMPLES/FACTORY/DRUMS/Shaker/R100 Shaker.wav,0.029,2,0,2
 SAMPLES/FACTORY/DRUMS/Shaker/Sequential Circuits Drumtraks Cabasa.wav,0.009,2,0,1
 SAMPLES/FACTORY/DRUMS/Snare/808 Snare.wav,0.044,10,0,29
-SAMPLES/FACTORY/DRUMS/Snare/909 Snare.wav,0.031,7,0,12
+SAMPLES/FACTORY/DRUMS/Snare/909 Snare.wav,0.031,5,0,11
 SAMPLES/FACTORY/DRUMS/Snare/CR78 Snare.wav,0.023,2,0,1
-SAMPLES/FACTORY/DRUMS/Snare/DDD1 Snare dry.wav,0.069,2,0,8
+SAMPLES/FACTORY/DRUMS/Snare/DDD1 Snare dry.wav,0.069,2,0,3
 SAMPLES/FACTORY/DRUMS/Snare/DDD1 Snare wet.wav,0.083,0,0,0
 SAMPLES/FACTORY/DRUMS/Snare/Hammond Rhythm II Snare.wav,0.012,2,0,1
 SAMPLES/FACTORY/DRUMS/Snare/HR16B Snare dry.wav,0.041,1,0,0
@@ -3691,12 +3726,12 @@ SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav,0.010,14,0,12
 SAMPLES/FACTORY/DRUMS/Snare/RX-5 Snare low.wav,0.028,0,0,0
 SAMPLES/FACTORY/DRUMS/Snare/RX-5 Snare.wav,0.022,1,0,0
 SAMPLES/FACTORY/DRUMS/Snare/SDS5 Snare.wav,0.036,1,0,0
-SAMPLES/FACTORY/DRUMS/Snare/Sequential Circuits Drumtraks Snare.wav,0.018,5,0,4
+SAMPLES/FACTORY/DRUMS/Snare/Sequential Circuits Drumtraks Snare.wav,0.018,3,0,8
 SAMPLES/FACTORY/DRUMS/Snare/XV5080 Snare dry.wav,0.039,0,0,0
 SAMPLES/FACTORY/DRUMS/Snare/XV5080 Snare piccolo.wav,0.050,0,0,0
 SAMPLES/FACTORY/DRUMS/Snare/XV5080 Snare.wav,0.167,9,0,6
 SAMPLES/FACTORY/DRUMS/Tambourine/CR78 Tambourine.wav,0.024,1,0,0
-SAMPLES/FACTORY/DRUMS/Tambourine/DDD1 Tambourine.wav,0.046,2,0,8
+SAMPLES/FACTORY/DRUMS/Tambourine/DDD1 Tambourine.wav,0.046,2,0,3
 SAMPLES/FACTORY/DRUMS/Tambourine/HR16B Tambourine.wav,0.044,1,0,0
 SAMPLES/FACTORY/DRUMS/Tambourine/Linndrum Tambourine.wav,0.014,1,0,0
 SAMPLES/FACTORY/DRUMS/Tambourine/R-50 Tambourine.wav,0.015,1,0,0
@@ -3707,8 +3742,8 @@ SAMPLES/FACTORY/DRUMS/Timpany/R-50 Timpany low.WAV,0.034,0,0,0
 SAMPLES/FACTORY/DRUMS/Timpany/RX-5 Timpany high.wav,0.031,1,0,0
 SAMPLES/FACTORY/DRUMS/Timpany/RX-5 Timpany low.wav,0.033,1,0,0
 SAMPLES/FACTORY/DRUMS/TomH/808 Tom high.wav,0.088,10,0,29
-SAMPLES/FACTORY/DRUMS/TomH/909 Tom high.wav,0.032,4,0,9
-SAMPLES/FACTORY/DRUMS/TomH/DDD1 Tom high.wav,0.088,2,0,8
+SAMPLES/FACTORY/DRUMS/TomH/909 Tom high.wav,0.032,4,0,10
+SAMPLES/FACTORY/DRUMS/TomH/DDD1 Tom high.wav,0.088,2,0,3
 SAMPLES/FACTORY/DRUMS/TomH/KR55 Tom high.wav,0.026,1,0,0
 SAMPLES/FACTORY/DRUMS/TomH/Linndrum Tom extra high.wav,0.021,1,0,0
 SAMPLES/FACTORY/DRUMS/TomH/Linndrum Tom high.wav,0.026,1,0,0
@@ -3717,10 +3752,10 @@ SAMPLES/FACTORY/DRUMS/TomH/R-50 Tom high.wav,0.017,1,0,0
 SAMPLES/FACTORY/DRUMS/TomH/R100 Tom high.wav,0.044,2,0,2
 SAMPLES/FACTORY/DRUMS/TomH/SDS5 Tom extra high.wav,0.058,1,0,0
 SAMPLES/FACTORY/DRUMS/TomH/SDS5 Tom high.wav,0.096,1,0,0
-SAMPLES/FACTORY/DRUMS/TomH/XV5080 Tom high.wav,0.102,12,0,9
+SAMPLES/FACTORY/DRUMS/TomH/XV5080 Tom high.wav,0.102,10,0,13
 SAMPLES/FACTORY/DRUMS/TomL/808 Tom low.wav,0.088,10,0,29
-SAMPLES/FACTORY/DRUMS/TomL/909 Tom low.wav,0.038,4,0,9
-SAMPLES/FACTORY/DRUMS/TomL/DDD1 Tom low.wav,0.143,2,0,8
+SAMPLES/FACTORY/DRUMS/TomL/909 Tom low.wav,0.038,4,0,10
+SAMPLES/FACTORY/DRUMS/TomL/DDD1 Tom low.wav,0.143,2,0,3
 SAMPLES/FACTORY/DRUMS/TomL/KR55 Tom low.wav,0.034,1,0,0
 SAMPLES/FACTORY/DRUMS/TomL/Linndrum Tom extra low.wav,0.080,1,0,0
 SAMPLES/FACTORY/DRUMS/TomL/Linndrum Tom low.wav,0.055,1,0,0
@@ -3730,16 +3765,16 @@ SAMPLES/FACTORY/DRUMS/TomL/R100 Tom low.wav,0.063,2,0,2
 SAMPLES/FACTORY/DRUMS/TomL/SDS5 Tom extra low.wav,0.066,1,0,0
 SAMPLES/FACTORY/DRUMS/TomL/SDS5 Tom low.wav,0.075,1,0,0
 SAMPLES/FACTORY/DRUMS/TomL/Sequential Circuits Drumtraks Tom low.wav,0.071,2,0,1
-SAMPLES/FACTORY/DRUMS/TomL/XV5080 Tom low.wav,0.164,12,0,9
+SAMPLES/FACTORY/DRUMS/TomL/XV5080 Tom low.wav,0.164,10,0,13
 SAMPLES/FACTORY/DRUMS/TomM/808 Tom medium.wav,0.088,10,0,29
-SAMPLES/FACTORY/DRUMS/TomM/909 Tom medium.wav,0.035,4,0,9
-SAMPLES/FACTORY/DRUMS/TomM/DDD1 Tom medium.wav,0.134,2,0,8
+SAMPLES/FACTORY/DRUMS/TomM/909 Tom medium.wav,0.035,4,0,10
+SAMPLES/FACTORY/DRUMS/TomM/DDD1 Tom medium.wav,0.134,2,0,3
 SAMPLES/FACTORY/DRUMS/TomM/Linndrum Tom medium.wav,0.036,1,0,0
 SAMPLES/FACTORY/DRUMS/TomM/R-50 Tom electronic medium.wav,0.019,0,0,0
 SAMPLES/FACTORY/DRUMS/TomM/R-50 Tom medium.wav,0.020,1,0,0
 SAMPLES/FACTORY/DRUMS/TomM/SDS5 Tom medium.wav,0.046,1,0,0
 SAMPLES/FACTORY/DRUMS/TomM/Sequential Circuits Drumtraks Tom medium.wav,0.053,2,0,1
-SAMPLES/FACTORY/DRUMS/TomM/XV5080 Tom medium.wav,0.137,12,0,9
+SAMPLES/FACTORY/DRUMS/TomM/XV5080 Tom medium.wav,0.137,10,0,13
 SAMPLES/FOUND/Field/dawn-chorus-ec-rd-1.wav,32.017,0,0,0
 SAMPLES/FOUND/Field/dawn-chorus-ec-rd-2.wav,38.632,0,0,1
 SAMPLES/FOUND/Field/dawn-chorus-eureka.wav,18.787,0,0,0
@@ -3776,43 +3811,43 @@ SAMPLES/FOUND/Games/LoZ WW Fanfare Small Item.wav,0.459,0,0,0
 SAMPLES/FOUND/Games/Mario Coin.wav,0.040,0,0,0
 SAMPLES/FOUND/Music/KG-PG-Drums.wav,1.923,2,0,2
 SAMPLES/FOUND/Music/KG-PG-DrumsBass.wav,1.923,2,0,2
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/CLAVE.WAV,0.008,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/HHCL.WAV,0.004,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/HHOP.WAV,0.028,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/KICK1.WAV,0.057,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/KICK2.WAV,0.056,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/KICK3.WAV,0.058,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC1.WAV,0.015,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC2.WAV,0.039,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC3.WAV,0.004,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC4.WAV,0.028,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC5.WAV,0.013,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC6.WAV,0.004,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC7.WAV,0.006,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/SNARE1.WAV,0.010,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/SNARE2.WAV,0.010,0,0,0
-SAMPLES/KB6-LIB/Acetone Rhythm-Ace/SNARE3.WAV,0.029,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/BassDrum_1.wav,0.066,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/BassDrum_2.wav,0.051,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/BassDrum_3.wav,0.034,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Clap1.wav,0.050,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Clap2.wav,0.044,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Cow1.wav,0.052,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Cow2.wav,0.060,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Maraca.wav,0.025,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Perc.wav,0.061,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Shake1.wav,0.030,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Shake2.wav,0.026,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Stick.wav,0.045,0,0,0
-SAMPLES/KB6-LIB/Alesis Andromeda-A6/Tamb.wav,0.035,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Chh.wav,0.009,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Cht.wav,0.035,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Clp.wav,0.059,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Cym.wav,0.119,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Kik.wav,0.023,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Ohh.wav,0.075,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Oht.wav,0.098,0,0,0
-SAMPLES/KB6-LIB/Boss DR-110/Snr.wav,0.033,0,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/CLAVE.WAV,0.008,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/HHCL.WAV,0.004,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/HHOP.WAV,0.028,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/KICK1.WAV,0.057,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/KICK2.WAV,0.056,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/KICK3.WAV,0.058,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC1.WAV,0.015,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC2.WAV,0.039,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC3.WAV,0.004,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC4.WAV,0.028,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC5.WAV,0.013,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC6.WAV,0.004,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC7.WAV,0.006,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/SNARE1.WAV,0.010,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/SNARE2.WAV,0.010,1,0,0
+SAMPLES/KB6-LIB/Acetone Rhythm-Ace/SNARE3.WAV,0.029,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/BassDrum_1.wav,0.066,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/BassDrum_2.wav,0.051,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/BassDrum_3.wav,0.034,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Clap1.wav,0.050,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Clap2.wav,0.044,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Cow1.wav,0.052,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Cow2.wav,0.060,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Maraca.wav,0.025,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Perc.wav,0.061,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Shake1.wav,0.030,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Shake2.wav,0.026,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Stick.wav,0.045,1,0,0
+SAMPLES/KB6-LIB/Alesis Andromeda-A6/Tamb.wav,0.035,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Chh.wav,0.009,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Cht.wav,0.035,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Clp.wav,0.059,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Cym.wav,0.119,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Kik.wav,0.023,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Ohh.wav,0.075,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Oht.wav,0.098,1,0,0
+SAMPLES/KB6-LIB/Boss DR-110/Snr.wav,0.033,1,0,0
 SAMPLES/KB6-LIB/Casio RZ1/01- CBRZ.wav,0.016,0,0,0
 SAMPLES/KB6-LIB/Casio RZ1/01- CCRZ.wav,0.067,0,0,0
 SAMPLES/KB6-LIB/Casio RZ1/01- CLRZ.wav,0.021,0,0,0
@@ -3965,36 +4000,36 @@ SAMPLES/KB6-LIB/Roland TR707/Rim.wav,0.006,0,0,0
 SAMPLES/KB6-LIB/Roland TR707/Sd0.wav,0.012,0,0,0
 SAMPLES/KB6-LIB/Roland TR707/Sd1.wav,0.013,0,0,0
 SAMPLES/KB6-LIB/Roland TR707/Tam.wav,0.014,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Cabasa-TubeAmp-Dirty.wav,0.025,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Agogo-TubeAmp-Dirty.wav,0.021,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Bongo-TubeAmp-Dirty.wav,0.027,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Conga-Mute-TubeAmp-Dirty.wav,0.023,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Conga-Open-TubeAmp-Dirty.wav,0.028,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Timbale-TubeAmp-Dirty.wav,0.090,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Long-Whistle-TubeAmp-Dirty.wav,0.043,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Low-Agogo-TubeAmp-Dirty.wav,0.023,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Low-Bongo-TubeAmp-Dirty.wav,0.024,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Low-Timbale-TubeAmp-Durty.wav,0.094,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/LowConga-TubeAmp-Dirty.wav,0.055,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Maracas-TubeAmp-Dirty.wav,0.036,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Quijada-TubeAmp-Dirty.wav,0.179,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Short-Whistle-TubeAmp-Dirty.wav,0.020,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Star-Chime-TubeAmp-Dirty.wav,0.176,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Cabasa-Orig.wav,0.021,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Agogo-Orig.wav,0.019,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Bongo-Orig.wav,0.037,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Conga-Mute-Orig.wav,0.024,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Conga-Open-Orig.wav,0.023,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Timbale-Orig.wav,0.089,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Long-Whistle-Orig.wav,0.036,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Low-Agogo-Orig.wav,0.022,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Low-Bongo-Orig.wav,0.028,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Low-Conga-Orig.wav,0.062,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Low-Timbale-Orig.wav,0.090,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Maracas-Orig.wav,0.014,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Quijada-Orig.wav,0.188,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Short-Whistle-Orig.wav,0.018,0,0,0
-SAMPLES/KB6-LIB/Roland TR727/Original/Star-Chime-Orig.wav,0.190,0,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Cabasa-TubeAmp-Dirty.wav,0.025,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Agogo-TubeAmp-Dirty.wav,0.021,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Bongo-TubeAmp-Dirty.wav,0.027,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Conga-Mute-TubeAmp-Dirty.wav,0.023,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Conga-Open-TubeAmp-Dirty.wav,0.028,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Hi-Timbale-TubeAmp-Dirty.wav,0.090,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Long-Whistle-TubeAmp-Dirty.wav,0.043,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Low-Agogo-TubeAmp-Dirty.wav,0.023,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Low-Bongo-TubeAmp-Dirty.wav,0.024,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Low-Timbale-TubeAmp-Durty.wav,0.094,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/LowConga-TubeAmp-Dirty.wav,0.055,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Maracas-TubeAmp-Dirty.wav,0.036,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Quijada-TubeAmp-Dirty.wav,0.179,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Short-Whistle-TubeAmp-Dirty.wav,0.020,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/DirtyTubeAmp/Star-Chime-TubeAmp-Dirty.wav,0.176,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Cabasa-Orig.wav,0.021,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Agogo-Orig.wav,0.019,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Bongo-Orig.wav,0.037,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Conga-Mute-Orig.wav,0.024,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Conga-Open-Orig.wav,0.023,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Hi-Timbale-Orig.wav,0.089,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Long-Whistle-Orig.wav,0.036,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Low-Agogo-Orig.wav,0.022,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Low-Bongo-Orig.wav,0.028,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Low-Conga-Orig.wav,0.062,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Low-Timbale-Orig.wav,0.090,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Maracas-Orig.wav,0.014,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Quijada-Orig.wav,0.188,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Short-Whistle-Orig.wav,0.018,1,0,0
+SAMPLES/KB6-LIB/Roland TR727/Original/Star-Chime-Orig.wav,0.190,1,0,0
 SAMPLES/KB6-LIB/SequentialCircuits Drumtraks/DT_Cabasa.wav,0.029,0,0,0
 SAMPLES/KB6-LIB/SequentialCircuits Drumtraks/DT_Clap.wav,0.031,0,0,0
 SAMPLES/KB6-LIB/SequentialCircuits Drumtraks/DT_Closedhat.wav,0.021,0,0,0
@@ -4039,12 +4074,12 @@ SAMPLES/KB6-LIB/Wurlitzer Sideman/Side_Drum8.wav,0.013,0,0,0
 SAMPLES/KB6-LIB/Wurlitzer Sideman/Side_Drum9.wav,0.013,0,0,0
 SAMPLES/KB6-LIB/Wurlitzer Sideman/Side_Samba.wav,0.417,0,0,0
 SAMPLES/KERERU/DrumLoops/SLPSPK-DrumLoop-120bpm.wav,1.153,2,0,1
-SAMPLES/KERERU/RECORD/FuzzGat-1.WAV,2.386,5,0,3
-SAMPLES/KERERU/RECORD/FuzzGat-2.WAV,1.112,5,0,3
-SAMPLES/KERERU/RECORD/FuzzGat-3.WAV,3.572,5,0,3
-SAMPLES/KERERU/RECORD/FuzzGat-4.WAV,4.421,5,0,3
-SAMPLES/KERERU/RECORD/FuzzGat-5.WAV,2.749,5,0,3
-SAMPLES/KERERU/RECORD/FuzzGat-6.WAV,1.907,5,0,3
+SAMPLES/KERERU/RECORD/FuzzGat-1.WAV,2.386,3,0,7
+SAMPLES/KERERU/RECORD/FuzzGat-2.WAV,1.112,3,0,7
+SAMPLES/KERERU/RECORD/FuzzGat-3.WAV,3.572,3,0,7
+SAMPLES/KERERU/RECORD/FuzzGat-4.WAV,4.421,3,0,7
+SAMPLES/KERERU/RECORD/FuzzGat-5.WAV,2.749,3,0,7
+SAMPLES/KERERU/RECORD/FuzzGat-6.WAV,1.907,3,0,7
 SAMPLES/KERERU/RECORD/Houston.WAV,0.948,7,0,1
 SAMPLES/KERERU/RECORD/Noise.WAV,0.669,1,0,0
 SAMPLES/KERERU/Sink/1-Drone-120bpm.wav,13.825,1,0,0
@@ -8056,7 +8091,7 @@ SAMPLES/MICE/NatRad-BassHook-8Bars-108bpm.wav,5.121,0,0,0
 SAMPLES/MICE/NatRad-ChaosStrings-2Bars-108bpm.wav,1.281,4,0,1
 SAMPLES/MICE/NatRad-DrumIntro-8Bars-108bpm.wav,4.705,0,0,0
 SAMPLES/MICE/NatRad-DrumsHook-8Bars-108bpm.wav,5.121,2,0,1
-SAMPLES/MICE/NatRad-HeavySax-8Bars-108bpm.wav,4.705,0,0,0
+SAMPLES/MICE/NatRad-HeavySax-8Bars-108bpm.wav,4.705,1,0,0
 SAMPLES/MICE/NatRad-Hook-8Bars-108bpm.wav,4.705,2,0,1
 SAMPLES/MICE/NatRad-Hook2-8Bars-108bpm.wav,4.705,0,0,0
 SAMPLES/MICE/NatRad-IsoHook-8Bars-108bpm.wav,5.121,4,0,1

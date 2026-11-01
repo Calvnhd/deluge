@@ -2610,7 +2610,7 @@
 	<sessionClips>
 		<audioClip
 			trackName="AUDIO20"
-			filePath="SAMPLES/CLIPS/REC00111.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_fuzz_altharm2.WAV"
 			startSamplePos="2086"
 			endSamplePos="1284995"
 			pitchSpeedIndependent="1"
@@ -2663,7 +2663,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO19"
-			filePath="SAMPLES/CLIPS/REC00110.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_fuzz_altharmony.WAV"
 			startSamplePos="2086"
 			endSamplePos="1284995"
 			pitchSpeedIndependent="1"
@@ -2716,7 +2716,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO12"
-			filePath="SAMPLES/CLIPS/REC00086.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang8.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -2769,7 +2769,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO11"
-			filePath="SAMPLES/CLIPS/REC00085.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang7.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -2822,7 +2822,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO10"
-			filePath="SAMPLES/CLIPS/REC00084.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang6.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -2875,7 +2875,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO9"
-			filePath="SAMPLES/CLIPS/REC00080.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang5.WAV"
 			startSamplePos="2086"
 			endSamplePos="643669"
 			pitchSpeedIndependent="1"
@@ -2928,7 +2928,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO6"
-			filePath="SAMPLES/CLIPS/REC00076.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang2.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -2981,7 +2981,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO16"
-			filePath="SAMPLES/CLIPS/REC00090.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_fuzz2.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -3035,7 +3035,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO15"
-			filePath="SAMPLES/CLIPS/REC00089.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_fuzz.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -3089,7 +3089,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO14"
-			filePath="SAMPLES/CLIPS/REC00088.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang10.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -3143,7 +3143,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO13"
-			filePath="SAMPLES/CLIPS/REC00087.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang9.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -3197,7 +3197,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO8"
-			filePath="SAMPLES/CLIPS/REC00078.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang4.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -3250,7 +3250,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO7"
-			filePath="SAMPLES/CLIPS/REC00077.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang3.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -3303,7 +3303,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO6"
-			filePath="SAMPLES/CLIPS/REC00076.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang2.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -3356,7 +3356,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO5"
-			filePath="SAMPLES/CLIPS/REC00074.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -3409,7 +3409,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO6"
-			filePath="SAMPLES/CLIPS/REC00076.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang2.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -3462,7 +3462,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO5"
-			filePath="SAMPLES/CLIPS/REC00074.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -3515,7 +3515,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO14"
-			filePath="SAMPLES/CLIPS/REC00088.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang10.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"
@@ -3569,7 +3569,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO13"
-			filePath="SAMPLES/CLIPS/REC00087.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang9.WAV"
 			startSamplePos="2086"
 			endSamplePos="643541"
 			pitchSpeedIndependent="1"
@@ -3623,7 +3623,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO8"
-			filePath="SAMPLES/CLIPS/REC00078.WAV"
+			filePath="SAMPLES/CLIPS/Twangin/gat_twang4.WAV"
 			startSamplePos="2086"
 			endSamplePos="643540"
 			pitchSpeedIndependent="1"

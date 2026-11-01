@@ -3335,7 +3335,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="Fuzzgat-Chords"
-			filePath="SAMPLES/CLIPS/Weirdsaw-A 10/balanced_030.wav"
+			filePath="SAMPLES/CLIPS/Weird-Fishes/balanced_030.wav"
 			startSamplePos="2086"
 			endSamplePos="1197053"
 			pitchSpeedIndependent="1"
@@ -3389,7 +3389,7 @@
 		</audioClip>
 		<audioClip
 			trackName="Fuzzriff-R"
-			filePath="SAMPLES/CLIPS/Weirdsaw-A 10/balanced_028.wav"
+			filePath="SAMPLES/CLIPS/Weird-Fishes/balanced_028.wav"
 			startSamplePos="2086"
 			endSamplePos="1197054"
 			pitchSpeedIndependent="1"
@@ -3443,7 +3443,7 @@
 		</audioClip>
 		<audioClip
 			trackName="Fuzzriff-L"
-			filePath="SAMPLES/CLIPS/Weirdsaw-A 10/balanced_026.wav"
+			filePath="SAMPLES/CLIPS/Weird-Fishes/balanced_026.wav"
 			startSamplePos="2086"
 			endSamplePos="1197054"
 			pitchSpeedIndependent="1"

@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/Houst108 9/stereo_004.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_stereo_6.wav">
 				<zone
 					startSamplePos="50688"
 					endSamplePos="86016" />
@@ -232,7 +232,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/RECORD/Houst108 9/stereo_000.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_stereo_5.wav">
 				<zone
 					startSamplePos="180224"
 					endSamplePos="204800" />

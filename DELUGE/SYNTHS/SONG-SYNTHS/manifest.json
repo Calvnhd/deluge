@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-01T07:32:39.795949+00:00",
-  "songs_processed": 84,
-  "total_count": 188,
+  "generated": "2026-11-01T12:40:36.221770+00:00",
+  "songs_processed": 77,
+  "total_count": 186,
   "extractions": [
     {
       "output_filename": "000-Beginagain.XML",
@@ -246,8 +246,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "009-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "009-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "009",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -378,8 +378,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "014A-5IVE.XML",
-      "source_song": "5IVE",
+      "output_filename": "014A-5IVE 2.XML",
+      "source_song": "5IVE 2",
       "preset_name": "014A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -532,8 +532,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "028-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "028-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "028",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -554,30 +554,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "034-Arparty.XML",
-      "source_song": "Arparty",
-      "preset_name": "034",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 10,
-      "colour_name": "Green",
-      "colour_abbr": "Grn",
-      "differing_params": []
-    },
-    {
-      "output_filename": "034-Arparty 4.XML",
-      "source_song": "Arparty 4",
-      "preset_name": "034",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 10,
-      "colour_name": "Green",
-      "colour_abbr": "Grn",
-      "differing_params": []
-    },
-    {
-      "output_filename": "034-Arparty 5.XML",
-      "source_song": "Arparty 5",
+      "output_filename": "034-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "034",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -708,8 +686,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "050-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "050-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "050",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -840,17 +818,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "080A-5IVE.XML",
-      "source_song": "5IVE",
-      "preset_name": "080A",
-      "preset_folder": "SYNTHS",
-      "instrument_type": "synth",
-      "section_id": 1,
-      "colour_name": "Pink",
-      "colour_abbr": "Pnk",
-      "differing_params": []
-    },
-    {
       "output_filename": "080A-NatRad.XML",
       "source_song": "NatRad",
       "preset_name": "080A",
@@ -862,14 +829,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "085A-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "085A-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "085A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
+      "section_id": 6,
+      "colour_name": "DarkBlue",
+      "colour_abbr": "Dbl",
       "differing_params": []
     },
     {
@@ -1214,8 +1181,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "165-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "165-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "165",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1401,14 +1368,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "172A-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "172A-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "172A",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
-      "section_id": 4,
-      "colour_name": "Red",
-      "colour_abbr": "Red",
+      "section_id": 9,
+      "colour_name": "Lime",
+      "colour_abbr": "Lme",
       "differing_params": []
     },
     {
@@ -1522,6 +1489,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "5Alivearps-5IVE-fuzz-A.XML",
+      "source_song": "5IVE-fuzz-A",
+      "preset_name": "5Alivearps",
+      "preset_folder": "SYNTHS",
+      "instrument_type": "synth",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
+      "differing_params": []
+    },
+    {
       "output_filename": "62-EFFECTSOUND1-Mountain.XML",
       "source_song": "Mountain",
       "preset_name": "62-EFFECTSOUND1",
@@ -1544,8 +1522,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Arp-Arparty 6.XML",
-      "source_song": "Arparty 6",
+      "output_filename": "Arp-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "Arp",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1753,8 +1731,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Drone-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "K01Drone-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "K01Drone",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1808,8 +1786,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "K01Fuzzbass-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "K01Fuzzbass-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "K01Fuzzbass",
       "preset_folder": "SYNTHS/KERERU",
       "instrument_type": "synth",
@@ -1896,8 +1874,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "KRumchybass-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "KRumchybass-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "KRumchybass",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1940,8 +1918,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "TB02-5IVE.XML",
-      "source_song": "5IVE",
+      "output_filename": "TB02-5IVE 2.XML",
+      "source_song": "5IVE 2",
       "preset_name": "TB02",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1962,8 +1940,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "TB11-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "TB11-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "TB11",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",
@@ -1984,8 +1962,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "VISA-PAD-Arparty.XML",
-      "source_song": "Arparty",
+      "output_filename": "VISA-PAD-Arparty 7.XML",
+      "source_song": "Arparty 7",
       "preset_name": "VISA-PAD",
       "preset_folder": "SYNTHS",
       "instrument_type": "synth",

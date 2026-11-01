@@ -215,7 +215,7 @@
 						reversed="1"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00002.WAV">
+						fileName="SAMPLES/CLIPS/Arpo/early_wind_beat.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="758376"
@@ -3320,7 +3320,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO3"
-			filePath="SAMPLES/CLIPS/REC00002.WAV"
+			filePath="SAMPLES/CLIPS/Arpo/early_wind_beat.WAV"
 			startSamplePos="2086"
 			endSamplePos="758376"
 			pitchSpeedIndependent="1"

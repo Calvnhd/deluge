@@ -7849,7 +7849,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO3"
-			filePath="SAMPLES/CLIPS/REC00043.WAV"
+			filePath="SAMPLES/CLIPS/YENDS/noise_freq_rise.WAV"
 			startSamplePos="1590708"
 			endSamplePos="2118886"
 			pitchSpeedIndependent="1"
@@ -9269,7 +9269,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO2"
-			filePath="SAMPLES/CLIPS/REC00042.WAV"
+			filePath="SAMPLES/CLIPS/YENDS/white_noise_wash.WAV"
 			startSamplePos="2086"
 			endSamplePos="1589686"
 			pitchSpeedIndependent="1"
@@ -9323,7 +9323,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00041.WAV"
+			filePath="SAMPLES/CLIPS/YENDS/white_noise.WAV"
 			startSamplePos="532308"
 			endSamplePos="707686"
 			pitchSpeedIndependent="1"
@@ -10303,7 +10303,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00041.WAV"
+			filePath="SAMPLES/CLIPS/YENDS/white_noise.WAV"
 			startSamplePos="354872"
 			endSamplePos="686932"
 			pitchSpeedIndependent="1"
@@ -11137,7 +11137,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00041.WAV"
+			filePath="SAMPLES/CLIPS/YENDS/white_noise.WAV"
 			startSamplePos="354872"
 			endSamplePos="686932"
 			pitchSpeedIndependent="1"
@@ -20302,7 +20302,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00041.WAV"
+			filePath="SAMPLES/CLIPS/YENDS/white_noise.WAV"
 			startSamplePos="354872"
 			endSamplePos="686932"
 			pitchSpeedIndependent="1"

@@ -74,7 +74,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="449320" />
@@ -225,7 +225,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="449320"
 					endSamplePos="898641" />
@@ -376,7 +376,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="802816"
 					endSamplePos="1343488" />
@@ -527,7 +527,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="1179648"
 					endSamplePos="1797283" />
@@ -679,7 +679,7 @@
 				timeStretchEnable="1"
 				timeStretchAmount="0"
 				linearInterpolation="1"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="1703936"
 					endSamplePos="2246603" />
@@ -830,7 +830,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="2246603"
 					endSamplePos="2695924" />
@@ -981,7 +981,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="2695924"
 					endSamplePos="3145245" />
@@ -1132,7 +1132,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="3145245"
 					endSamplePos="3594566" />
@@ -1283,7 +1283,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 85/output_002.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_output_5.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="3594566" />

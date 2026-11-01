@@ -987,7 +987,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="185478"
@@ -1065,7 +1065,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="185478"
 							endSamplePos="370956" />
@@ -1142,7 +1142,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="370956"
 							endSamplePos="556435" />
@@ -1219,7 +1219,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="556435"
 							endSamplePos="741913" />
@@ -1296,7 +1296,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="741913"
 							endSamplePos="927391" />
@@ -1373,7 +1373,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="927391"
 							endSamplePos="1112870" />
@@ -1450,7 +1450,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="1112870"
 							endSamplePos="1298348" />
@@ -1527,7 +1527,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="1298348"
 							endSamplePos="1483827" />
@@ -1604,7 +1604,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="1483827"
 							endSamplePos="1669305" />
@@ -1681,7 +1681,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="1669305"
 							endSamplePos="1854783" />
@@ -1758,7 +1758,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="1854783"
 							endSamplePos="2040262" />
@@ -1835,7 +1835,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="2040262"
 							endSamplePos="2225740" />
@@ -1912,7 +1912,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="2225740"
 							endSamplePos="2411218" />
@@ -1989,7 +1989,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="2411218"
 							endSamplePos="2596697" />
@@ -2066,7 +2066,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="2596697"
 							endSamplePos="2782175" />
@@ -2143,7 +2143,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="2782175"
 							endSamplePos="2967654" />
@@ -2674,7 +2674,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/REC00005.WAV">
+						fileName="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV">
 						<zone
 							startSamplePos="0"
 							endSamplePos="2965606"
@@ -5626,7 +5626,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00005.WAV"
+			filePath="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV"
 			startSamplePos="2086"
 			endSamplePos="1695526"
 			pitchSpeedIndependent="1"

@@ -148,7 +148,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/RESAMPLE/REC00017.WAV">
+						fileName="SAMPLES/RESAMPLE/spooky_oscilate.WAV">
 						<zone
 							startSamplePos="24576"
 							endSamplePos="307840" />
@@ -1274,7 +1274,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/RESAMPLE/REC00017.WAV"
+			filePath="SAMPLES/RESAMPLE/spooky_oscilate.WAV"
 			startSamplePos="0"
 			endSamplePos="950856"
 			pitchSpeedIndependent="1"

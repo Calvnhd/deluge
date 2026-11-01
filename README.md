@@ -100,6 +100,8 @@ After applying changes, the three sync scripts run shared empty-directory cleanu
 
 On Windows, an access-denied error gets one retry only if the directory is still empty, its identity and ancestor identities still match the scan, and its ReadOnly attribute is set. The retry clears only the directory's ReadOnly flag; it does not change file attributes or security permissions. If removal fails, cleanup attempts to restore ReadOnly and reports both removal and restoration failures.
 
+FAT32 drive roots on Windows can report a directory ID of zero. For these drive roots only, cleanup verifies the volume GUID and non-zero device ID instead, rechecking both before removing any descendant. Subfolders still require non-zero directory IDs. A changed or unavailable identity stops cleanup of the affected directories and produces a warning.
+
 Cleanup uses non-recursive directory removal, never deletes files to empty a directory, and leaves directories alone when it cannot verify safety. Enumeration includes hidden entries. These checks do not establish whether a cloud provider has finished synchronizing remote contents. Cleanup is skipped for dry runs and when sync reports "Already up to date".
 
 ### Script reference

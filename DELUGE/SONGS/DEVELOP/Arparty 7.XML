@@ -879,7 +879,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/RECORD/FuzzGat-2.WAV">
+						fileName="SAMPLES/CLIPS/Arparty/FuzzGat-2.WAV">
 						<zone
 							startSamplePos="132608"
 							endSamplePos="370734" />
@@ -956,7 +956,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/RECORD/FuzzGat-3.WAV">
+						fileName="SAMPLES/CLIPS/Arparty/FuzzGat-3.WAV">
 						<zone
 							startSamplePos="133376"
 							endSamplePos="1190592" />
@@ -1033,7 +1033,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/RECORD/FuzzGat-4.WAV">
+						fileName="SAMPLES/CLIPS/Arparty/FuzzGat-4.WAV">
 						<zone
 							startSamplePos="356352"
 							endSamplePos="1473658" />
@@ -1110,7 +1110,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/RECORD/FuzzGat-5.WAV">
+						fileName="SAMPLES/CLIPS/Arparty/FuzzGat-5.WAV">
 						<zone
 							startSamplePos="135168"
 							endSamplePos="916175" />
@@ -1187,7 +1187,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/RECORD/FuzzGat-6.WAV">
+						fileName="SAMPLES/CLIPS/Arparty/FuzzGat-6.WAV">
 						<zone
 							startSamplePos="189440"
 							endSamplePos="238428" />
@@ -1264,7 +1264,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/RECORD/FuzzGat-1.WAV">
+						fileName="SAMPLES/CLIPS/Arparty/FuzzGat-1.WAV">
 						<zone
 							startSamplePos="88960"
 							endSamplePos="795222" />
@@ -7597,7 +7597,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO3"
-			filePath="SAMPLES/CLIPS/Arparty 3/balanced_006.wav"
+			filePath="SAMPLES/CLIPS/Arparty/balanced_006.wav"
 			startSamplePos="2086"
 			endSamplePos="663586"
 			pitchSpeedIndependent="1"
@@ -7651,7 +7651,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO11"
-			filePath="SAMPLES/CLIPS/Arparty 3/balanced_022.wav"
+			filePath="SAMPLES/CLIPS/Arparty/balanced_022.wav"
 			startSamplePos="2086"
 			endSamplePos="663586"
 			pitchSpeedIndependent="1"
@@ -7705,7 +7705,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO12"
-			filePath="SAMPLES/CLIPS/Arparty 3/balanced_028.wav"
+			filePath="SAMPLES/CLIPS/Arparty/balanced_028.wav"
 			startSamplePos="2086"
 			endSamplePos="663586"
 			pitchSpeedIndependent="1"
@@ -9627,7 +9627,7 @@
 	<arrangementOnlyTracks>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00015.WAV"
+			filePath="SAMPLES/CLIPS/Arparty/arparty_fuzzriff.WAV"
 			startSamplePos="2086"
 			endSamplePos="707686"
 			pitchSpeedIndependent="1"
@@ -9679,7 +9679,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00015.WAV"
+			filePath="SAMPLES/CLIPS/Arparty/arparty_fuzzriff.WAV"
 			startSamplePos="2086"
 			endSamplePos="707686"
 			pitchSpeedIndependent="1"

@@ -212,7 +212,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44576" />
@@ -289,7 +289,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="44576"
 							endSamplePos="95365" />
@@ -366,7 +366,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="95365"
 							endSamplePos="184725" />
@@ -443,7 +443,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="184725"
 							endSamplePos="236882" />
@@ -520,7 +520,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="236882"
 							endSamplePos="314811" />
@@ -597,7 +597,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="314811"
 							endSamplePos="365854" />
@@ -674,7 +674,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="365854"
 							endSamplePos="436122" />
@@ -751,7 +751,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="436122"
 							endSamplePos="484041" />
@@ -828,7 +828,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="484041"
 							endSamplePos="548724" />
@@ -905,7 +905,7 @@
 						reversed="0"
 						timeStretchEnable="1"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="548724"
 							endSamplePos="599341" />
@@ -982,7 +982,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="599341"
 							endSamplePos="669219" />
@@ -1059,7 +1059,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="669219"
 							endSamplePos="724082" />
@@ -1136,7 +1136,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="724082"
 							endSamplePos="802690" />
@@ -1213,7 +1213,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="802690"
 							endSamplePos="850608" />
@@ -1290,7 +1290,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="850608"
 							endSamplePos="916638" />
@@ -1367,7 +1367,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="916638"
 							endSamplePos="963849" />
@@ -1444,7 +1444,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="963849"
 							endSamplePos="1037076" />
@@ -1521,7 +1521,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1037076"
 							endSamplePos="1090347" />
@@ -1598,7 +1598,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1090347"
 							endSamplePos="1183482" />
@@ -1675,7 +1675,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1183482"
 							endSamplePos="1223970" />
@@ -1752,7 +1752,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1223970"
 							endSamplePos="1285304" />
@@ -1829,7 +1829,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1285304"
 							endSamplePos="1336761" />
@@ -1906,7 +1906,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1336761"
 							endSamplePos="1423385" />
@@ -1983,7 +1983,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1423385"
 							endSamplePos="1470167" />
@@ -2060,7 +2060,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1470167"
 							endSamplePos="1533734" />
@@ -2137,7 +2137,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1533734"
 							endSamplePos="1592615" />
@@ -2214,7 +2214,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1592615"
 							endSamplePos="1655533" />
@@ -2291,7 +2291,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1655533"
 							endSamplePos="1702553" />
@@ -2368,7 +2368,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1702553"
 							endSamplePos="1789436" />
@@ -2445,7 +2445,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1789436"
 							endSamplePos="1838031" />
@@ -2522,7 +2522,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1838031"
 							endSamplePos="1900252" />
@@ -2599,7 +2599,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1904640"
 							endSamplePos="1965395" />
@@ -2676,7 +2676,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1965395"
 							endSamplePos="2058000" />
@@ -2787,7 +2787,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="44222" />
@@ -2864,7 +2864,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="44222"
 							endSamplePos="185744" />
@@ -2941,7 +2941,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="185744"
 							endSamplePos="308076" />
@@ -3018,7 +3018,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="308076"
 							endSamplePos="435769" />
@@ -3095,7 +3095,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="435769"
 							endSamplePos="547284" />
@@ -3172,7 +3172,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="547284"
 							endSamplePos="670218" />
@@ -3249,7 +3249,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="670218"
 							endSamplePos="798138" />
@@ -3326,7 +3326,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="798138"
 							endSamplePos="1038919" />
@@ -3403,7 +3403,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1038919"
 							endSamplePos="1178834" />
@@ -3480,7 +3480,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1178834"
 							endSamplePos="1286910" />
@@ -3557,7 +3557,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1286910"
 							endSamplePos="1425395" />
@@ -3634,7 +3634,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1425395"
 							endSamplePos="1532835" />
@@ -3711,7 +3711,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1532835"
 							endSamplePos="1655760" />
@@ -3788,7 +3788,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1655760"
 							endSamplePos="1790446" />
@@ -3865,7 +3865,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1790446"
 							endSamplePos="1905275" />
@@ -3942,7 +3942,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav">
+						fileName="SAMPLES/CLIPS/AYG/mix_000.wav">
 						<zone
 							startSamplePos="1905275"
 							endSamplePos="2058000" />

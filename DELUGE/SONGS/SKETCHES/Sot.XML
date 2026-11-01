@@ -2765,7 +2765,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00047.WAV"
+			filePath="SAMPLES/CLIPS/SpiritOfTas/maybe_blank.WAV"
 			startSamplePos="0"
 			endSamplePos="1245810"
 			pitchSpeedIndependent="1"
@@ -3861,7 +3861,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00047.WAV"
+			filePath="SAMPLES/CLIPS/SpiritOfTas/maybe_blank.WAV"
 			startSamplePos="0"
 			endSamplePos="1245810"
 			pitchSpeedIndependent="1"
@@ -4743,7 +4743,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00047.WAV"
+			filePath="SAMPLES/CLIPS/SpiritOfTas/maybe_blank.WAV"
 			startSamplePos="0"
 			endSamplePos="1245810"
 			pitchSpeedIndependent="1"

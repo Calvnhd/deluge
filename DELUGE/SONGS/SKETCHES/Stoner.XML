@@ -1253,7 +1253,7 @@
 	<sessionClips>
 		<audioClip
 			trackName="AUDIO3"
-			filePath="SAMPLES/CLIPS/REC00013.WAV"
+			filePath="SAMPLES/CLIPS/Stoner/bassgat.WAV"
 			startSamplePos="2086"
 			endSamplePos="475137"
 			pitchSpeedIndependent="1"
@@ -1705,7 +1705,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO2"
-			filePath="SAMPLES/CLIPS/REC00011.WAV"
+			filePath="SAMPLES/CLIPS/Stoner/gat_fuzzriff.WAV"
 			startSamplePos="2086"
 			endSamplePos="474586"
 			pitchSpeedIndependent="1"
@@ -1759,7 +1759,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00009.WAV"
+			filePath="SAMPLES/CLIPS/Stoner/gat_fuzznoise.WAV"
 			startSamplePos="2086"
 			endSamplePos="474586"
 			pitchSpeedIndependent="1"
@@ -1813,7 +1813,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00009.WAV"
+			filePath="SAMPLES/CLIPS/Stoner/gat_fuzznoise.WAV"
 			startSamplePos="2086"
 			endSamplePos="474586"
 			pitchSpeedIndependent="1"

@@ -1749,7 +1749,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00055.WAV"
+			filePath="SAMPLES/CLIPS/Loopytwopy/bass_octaves3.WAV"
 			startSamplePos="2086"
 			endSamplePos="354886"
 			pitchSpeedIndependent="1"
@@ -1802,7 +1802,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00054.WAV"
+			filePath="SAMPLES/CLIPS/Loopytwopy/bass_octaves2.WAV"
 			startSamplePos="2086"
 			endSamplePos="354886"
 			pitchSpeedIndependent="1"
@@ -1855,7 +1855,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00053.WAV"
+			filePath="SAMPLES/CLIPS/Loopytwopy/bass_octaves.WAV"
 			startSamplePos="2086"
 			endSamplePos="707686"
 			pitchSpeedIndependent="1"

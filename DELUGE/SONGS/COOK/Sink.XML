@@ -2734,7 +2734,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO2"
-			filePath="SAMPLES/CLIPS/REC00040.WAV"
+			filePath="SAMPLES/CLIPS/Sink/sink_synth_simple_lead.WAV"
 			startSamplePos="2086"
 			endSamplePos="707686"
 			pitchSpeedIndependent="1"
@@ -4221,7 +4221,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO2"
-			filePath="SAMPLES/CLIPS/REC00040.WAV"
+			filePath="SAMPLES/CLIPS/Sink/sink_synth_simple_lead.WAV"
 			startSamplePos="2086"
 			endSamplePos="707686"
 			pitchSpeedIndependent="1"

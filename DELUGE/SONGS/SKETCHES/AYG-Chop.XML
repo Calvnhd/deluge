@@ -180,7 +180,7 @@
 	<sessionClips>
 		<audioClip
 			trackName="AUDIO2"
-			filePath="SAMPLES/CLIPS/Afteryouregone 3/mix_000.wav"
+			filePath="SAMPLES/CLIPS/AYG/mix_000.wav"
 			startSamplePos="0"
 			endSamplePos="2058000"
 			pitchSpeedIndependent="1"

@@ -9718,7 +9718,7 @@
 	<arrangementOnlyTracks>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/Eoy-Th 4/output_008.wav"
+			filePath="SAMPLES/CLIPS/Eoy-Townhall/output_008.wav"
 			startSamplePos="0"
 			endSamplePos="10187113"
 			pitchSpeedIndependent="1"

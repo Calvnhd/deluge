@@ -75,7 +75,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 				<zone
 					startSamplePos="2752512"
 					endSamplePos="2768896" />
@@ -226,7 +226,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 				<zone
 					startSamplePos="2850816"
 					endSamplePos="2855936" />
@@ -377,7 +377,7 @@
 				reversed="0"
 				timeStretchEnable="1"
 				timeStretchAmount="0"
-				fileName="SAMPLES/CLIPS/Houston 11/balanced_004.wav">
+				fileName="SAMPLES/KERERU/Houston/houst_balanced_5.wav">
 				<zone
 					startSamplePos="2854912"
 					endSamplePos="2871296" />

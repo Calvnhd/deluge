@@ -1286,7 +1286,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO1"
-			filePath="SAMPLES/CLIPS/REC00005.WAV"
+			filePath="SAMPLES/CLIPS/PianoJam/piano_jazzy_rhythm.WAV"
 			startSamplePos="2086"
 			endSamplePos="1695526"
 			pitchSpeedIndependent="1"

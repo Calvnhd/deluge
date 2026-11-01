@@ -1477,7 +1477,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO2"
-			filePath="SAMPLES/CLIPS/REC00050.WAV"
+			filePath="SAMPLES/CLIPS/Lemon/muted_arp.WAV"
 			startSamplePos="1706"
 			endSamplePos="1110570"
 			pitchSpeedIndependent="1"

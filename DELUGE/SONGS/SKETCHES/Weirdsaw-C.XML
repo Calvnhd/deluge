@@ -150,7 +150,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="-1"
-						fileName="SAMPLES/CLIPS/Wf-Jfip 8/balanced_020.wav">
+						fileName="SAMPLES/CLIPS/Weird-Fishes/balanced_020.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="1178086"
@@ -7320,7 +7320,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO2"
-			filePath="SAMPLES/CLIPS/Wf-Jfip 8/balanced_020.wav"
+			filePath="SAMPLES/CLIPS/Weird-Fishes/balanced_020.wav"
 			startSamplePos="2086"
 			endSamplePos="1178086"
 			pitchSpeedIndependent="1"
