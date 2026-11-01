@@ -1,6 +1,6 @@
 {
-  "generated": "2026-10-29T02:05:50.241904+00:00",
-  "songs_processed": 77,
+  "generated": "2026-11-01T07:32:39.798088+00:00",
+  "songs_processed": 84,
   "total_count": 111,
   "extractions": [
     {
@@ -488,8 +488,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "045-SLPSPK.XML",
-      "source_song": "SLPSPK",
+      "output_filename": "045-Slpspk.XML",
+      "source_song": "Slpspk",
       "preset_name": "045",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -510,8 +510,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "046-SLPSPK.XML",
-      "source_song": "SLPSPK",
+      "output_filename": "046-Slpspk.XML",
+      "source_song": "Slpspk",
       "preset_name": "046",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -554,8 +554,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "051-SLPSPK.XML",
-      "source_song": "SLPSPK",
+      "output_filename": "051-Slpspk.XML",
+      "source_song": "Slpspk",
       "preset_name": "051",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1137,17 +1137,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Bass-SLPSPK.XML",
-      "source_song": "SLPSPK",
-      "preset_name": "SS-C-Bass",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 8,
-      "colour_name": "Purple",
-      "colour_abbr": "Pur",
-      "differing_params": []
-    },
-    {
       "output_filename": "SS-C-Bass-SLPSPK-Remix.XML",
       "source_song": "SLPSPK-Remix",
       "preset_name": "SS-C-Bass",
@@ -1159,14 +1148,25 @@
       "differing_params": []
     },
     {
-      "output_filename": "SS-C-Inst-SLPSPK.XML",
-      "source_song": "SLPSPK",
-      "preset_name": "SS-C-Inst",
+      "output_filename": "SS-C-Bass-Slpspk.XML",
+      "source_song": "Slpspk",
+      "preset_name": "SS-C-Bass",
       "preset_folder": "KITS",
       "instrument_type": "kit",
       "section_id": 8,
       "colour_name": "Purple",
       "colour_abbr": "Pur",
+      "differing_params": []
+    },
+    {
+      "output_filename": "SS-C-Inst-SLPSPK-Remix.XML",
+      "source_song": "SLPSPK-Remix",
+      "preset_name": "SS-C-Inst",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 1,
+      "colour_name": "Pink",
+      "colour_abbr": "Pnk",
       "differing_params": []
     },
     {
