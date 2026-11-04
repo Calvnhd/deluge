@@ -11,7 +11,7 @@
 			<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 			<soundSources>
 				<sound name="1" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
 						<zone startSamplePos="0" endSamplePos="192000"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -53,7 +53,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="2" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
 						<zone startSamplePos="192000" endSamplePos="384000"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -95,7 +95,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="3" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
 						<zone startSamplePos="384000" endSamplePos="576000"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">
@@ -137,7 +137,7 @@
 					<audioCompressor attack="83886080" release="83886080" thresh="0" ratio="1073741824" compHPF="0" compBlend="2147483647"/>
 				</sound>
 				<sound name="4" polyphonic="auto" voicePriority="1" mode="subtractive" modFXType="none" lpfMode="24dB" hpfMode="HPLadder" filterRoute="H2L" path="" maxVoices="8">
-					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
+					<osc1 type="sample" loopMode="1" reversed="0" timeStretchEnable="0" timeStretchAmount="0" fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
 						<zone startSamplePos="576000" endSamplePos="768000"/>
 					</osc1>
 					<osc2 type="sample" loopMode="0" reversed="0" timeStretchEnable="0" timeStretchAmount="0">

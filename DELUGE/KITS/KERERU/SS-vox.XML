@@ -55,7 +55,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="0"
 					endSamplePos="192000" />
@@ -180,7 +180,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="192000"
 					endSamplePos="384000" />
@@ -305,7 +305,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="384000"
 					endSamplePos="576000" />
@@ -430,7 +430,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="576000"
 					endSamplePos="768000" />
@@ -555,7 +555,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="768000"
 					endSamplePos="960000" />
@@ -680,7 +680,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="960000"
 					endSamplePos="1152000" />
@@ -805,7 +805,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="1152000"
 					endSamplePos="1344000" />
@@ -930,7 +930,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav">
+				fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav">
 				<zone
 					startSamplePos="1344000"
 					endSamplePos="1536000" />
