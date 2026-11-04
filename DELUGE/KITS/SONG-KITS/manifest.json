@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-01T14:23:30.332229+00:00",
+  "generated": "2026-11-04T12:56:39.822577+00:00",
   "songs_processed": 77,
-  "total_count": 109,
+  "total_count": 110,
   "extractions": [
     {
       "output_filename": "000_Ape.XML",
@@ -59,14 +59,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "001_Weird-Fishes.XML",
-      "source_song": "Weird-Fishes",
+      "output_filename": "001_Weird-Fishes 25.XML",
+      "source_song": "Weird-Fishes 25",
       "preset_name": "001",
       "preset_folder": "KITS",
       "instrument_type": "kit",
-      "section_id": 3,
-      "colour_name": "Cyan",
-      "colour_abbr": "Cyn",
+      "section_id": 5,
+      "colour_name": "Yellow",
+      "colour_abbr": "Ylw",
       "differing_params": []
     },
     {
@@ -301,14 +301,14 @@
       "differing_params": []
     },
     {
-      "output_filename": "019_Weird-Fishes.XML",
-      "source_song": "Weird-Fishes",
+      "output_filename": "019_Weird-Fishes 25.XML",
+      "source_song": "Weird-Fishes 25",
       "preset_name": "019",
       "preset_folder": "KITS",
       "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
+      "section_id": 2,
+      "colour_name": "Gold",
+      "colour_abbr": "Gld",
       "differing_params": []
     },
     {
@@ -972,17 +972,6 @@
       "differing_params": []
     },
     {
-      "output_filename": "KIT1_Nz126.XML",
-      "source_song": "Nz126",
-      "preset_name": "KIT1",
-      "preset_folder": "KITS",
-      "instrument_type": "kit",
-      "section_id": 0,
-      "colour_name": "LightBlue",
-      "colour_abbr": "Lbl",
-      "differing_params": []
-    },
-    {
       "output_filename": "KIT1_Weirdsaw-B.XML",
       "source_song": "Weirdsaw-B",
       "preset_name": "KIT1",
@@ -1104,6 +1093,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "Nz126_Nz126.XML",
+      "source_song": "Nz126",
+      "preset_name": "Nz126",
+      "preset_folder": "KITS/KERERU",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "SS-C-Bass_SLPSPK-Remix.XML",
       "source_song": "SLPSPK-Remix",
       "preset_name": "SS-C-Bass",
@@ -1170,6 +1170,17 @@
       "differing_params": []
     },
     {
+      "output_filename": "Tr8S-Midi_Weird-Fishes 25.XML",
+      "source_song": "Weird-Fishes 25",
+      "preset_name": "Tr8S-Midi",
+      "preset_folder": "KITS",
+      "instrument_type": "kit",
+      "section_id": 0,
+      "colour_name": "LightBlue",
+      "colour_abbr": "Lbl",
+      "differing_params": []
+    },
+    {
       "output_filename": "Tuikit_PianoFatBass.XML",
       "source_song": "PianoFatBass",
       "preset_name": "Tuikit",
@@ -1192,8 +1203,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Wobble-Crash_Weird-Fishes.XML",
-      "source_song": "Weird-Fishes",
+      "output_filename": "Wobble-Crash_Weird-Fishes 25.XML",
+      "source_song": "Weird-Fishes 25",
       "preset_name": "Wobble-Crash",
       "preset_folder": "KITS",
       "instrument_type": "kit",
