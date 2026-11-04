@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kit
+	firmwareVersion="c1.2.1"
+	earliestCompatibleFirmware="4.1.0-alpha"
+	modFXCurrentParam="feedback"
+	currentFilterType="lpf"
+	modFXType="none"
+	lpfMode="24dB"
+	hpfMode="HPLadder"
+	filterRoute="H2L">
+	<defaultParams
+		reverbAmount="0x80000000"
+		volume="0x3504F334"
+		pan="0x00000000"
+		sidechainCompressorShape="0xDC28F5B2"
+		modFXDepth="0x00000000"
+		modFXRate="0xE0000000"
+		stutterRate="0x00000000"
+		sampleRateReduction="0x80000000"
+		bitCrush="0x80000000"
+		modFXOffset="0x00000000"
+		modFXFeedback="0x80000000"
+		compressorThreshold="0x00000000"
+		lpfMorph="0x80000000"
+		hpfMorph="0x80000000"
+		tempo="0x00000000">
+		<delay
+			rate="0x00000000"
+			feedback="0x80000000" />
+		<lpf
+			frequency="0x7FFFFFFF"
+			resonance="0x80000000" />
+		<hpf
+			frequency="0x80000000"
+			resonance="0x80000000" />
+		<equalizer
+			bass="0x00000000"
+			treble="0x00000000"
+			bassFrequency="0x00000000"
+			trebleFrequency="0x00000000" />
+	</defaultParams>
+	<delay
+		pingPong="1"
+		analog="0"
+		syncLevel="7"
+		syncType="0" />
+	<sidechain
+		attack="327244"
+		release="936"
+		syncLevel="6"
+		syncType="0" />
+	<audioCompressor
+		attack="83886080"
+		release="83886080"
+		thresh="0"
+		ratio="1073741824"
+		compHPF="0"
+		compBlend="2147483647" />
+	<soundSources>
+		<midiOutput channel="0" note="36" />
+		<midiOutput channel="0" note="37" />
+		<midiOutput channel="0" note="38" />
+		<midiOutput channel="0" note="39" />
+		<midiOutput channel="0" note="40" />
+		<midiOutput channel="0" note="41" />
+		<midiOutput channel="0" note="42" />
+		<midiOutput channel="0" note="43" />
+		<midiOutput channel="0" note="44" />
+		<midiOutput channel="0" note="45" />
+		<midiOutput channel="0" note="46" />
+	</soundSources>
+	<selectedDrumIndex>7</selectedDrumIndex>
+</kit>
