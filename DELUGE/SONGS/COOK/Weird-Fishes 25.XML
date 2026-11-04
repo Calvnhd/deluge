@@ -334,27 +334,27 @@
 				compHPF="0"
 				compBlend="2147483647" />
 			<soundSources>
-				<midiOutput channel="0" note="36">
+				<midiOutput channel="9" note="36">
 				</midiOutput>
-				<midiOutput channel="0" note="37">
+				<midiOutput channel="9" note="38">
 				</midiOutput>
-				<midiOutput channel="0" note="38">
+				<midiOutput channel="9" note="43">
 				</midiOutput>
-				<midiOutput channel="0" note="39">
+				<midiOutput channel="9" note="47">
 				</midiOutput>
-				<midiOutput channel="0" note="40">
+				<midiOutput channel="9" note="50">
 				</midiOutput>
-				<midiOutput channel="0" note="41">
+				<midiOutput channel="9" note="37">
 				</midiOutput>
-				<midiOutput channel="0" note="42">
+				<midiOutput channel="9" note="39">
 				</midiOutput>
-				<midiOutput channel="0" note="43">
+				<midiOutput channel="9" note="42">
 				</midiOutput>
-				<midiOutput channel="0" note="44">
+				<midiOutput channel="9" note="46">
 				</midiOutput>
-				<midiOutput channel="0" note="45">
+				<midiOutput channel="9" note="49">
 				</midiOutput>
-				<midiOutput channel="0" note="46">
+				<midiOutput channel="9" note="51">
 				</midiOutput>
 			</soundSources>
 			<selectedDrumIndex>7</selectedDrumIndex>
