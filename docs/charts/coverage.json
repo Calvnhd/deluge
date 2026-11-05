@@ -1,0 +1,1728 @@
+{
+  "updated": "2026-11-05",
+  "description": "One canonical implementation owner per qualified function; block ranges partition extract_instruments.main",
+  "definitions": [
+    {
+      "source": "scripts/create_backup.py",
+      "symbol": "main",
+      "chart": "create-backup.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          20,
+          98
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "SampleUsage.ref_count",
+      "chart": "sample-usage-index.html",
+      "anchor": "sampleusage-ref-count",
+      "kind": "definition",
+      "ranges": [
+        [
+          31,
+          32
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "UsageIndex.referenced",
+      "chart": "sample-usage-index.html",
+      "anchor": "usageindex-referenced",
+      "kind": "definition",
+      "ranges": [
+        [
+          69,
+          71
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "UsageIndex.unreferenced",
+      "chart": "sample-usage-index.html",
+      "anchor": "usageindex-unreferenced",
+      "kind": "definition",
+      "ranges": [
+        [
+          74,
+          76
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "UsageIndex.missing",
+      "chart": "sample-usage-index.html",
+      "anchor": "usageindex-missing",
+      "kind": "definition",
+      "ranges": [
+        [
+          79,
+          81
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "_ref_key",
+      "chart": "sample-usage-index.html",
+      "anchor": "ref-key",
+      "kind": "definition",
+      "ranges": [
+        [
+          84,
+          93
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "top_folder",
+      "chart": "sample-reports.html",
+      "anchor": "top-folder",
+      "kind": "definition",
+      "ranges": [
+        [
+          96,
+          107
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "build_usage_index",
+      "chart": "sample-usage-index.html",
+      "anchor": "build-usage-index",
+      "kind": "definition",
+      "ranges": [
+        [
+          110,
+          153
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "compute_summary",
+      "chart": "sample-reports.html",
+      "anchor": "compute-summary",
+      "kind": "definition",
+      "ranges": [
+        [
+          156,
+          187
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "compute_folder_breakdown",
+      "chart": "sample-reports.html",
+      "anchor": "compute-folder-breakdown",
+      "kind": "definition",
+      "ranges": [
+        [
+          190,
+          207
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "top_by_refs",
+      "chart": "sample-reports.html",
+      "anchor": "top-by-refs",
+      "kind": "definition",
+      "ranges": [
+        [
+          210,
+          216
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/analysis.py",
+      "symbol": "filter_by_pattern",
+      "chart": "sample-reports.html",
+      "anchor": "filter-by-pattern",
+      "kind": "definition",
+      "ranges": [
+        [
+          219,
+          222
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/cli_utils.py",
+      "symbol": "get_deluge_root",
+      "chart": "shared-cli.html",
+      "anchor": "get-deluge-root",
+      "kind": "definition",
+      "ranges": [
+        [
+          14,
+          29
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/cli_utils.py",
+      "symbol": "get_sd_card_path",
+      "chart": "shared-cli.html",
+      "anchor": "get-sd-card-path",
+      "kind": "definition",
+      "ranges": [
+        [
+          32,
+          50
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/cli_utils.py",
+      "symbol": "get_cloud_backup_path",
+      "chart": "shared-cli.html",
+      "anchor": "get-cloud-backup-path",
+      "kind": "definition",
+      "ranges": [
+        [
+          53,
+          68
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/cli_utils.py",
+      "symbol": "get_zip_source_path",
+      "chart": "shared-cli.html",
+      "anchor": "get-zip-source-path",
+      "kind": "definition",
+      "ranges": [
+        [
+          71,
+          86
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/cli_utils.py",
+      "symbol": "get_zip_dest_path",
+      "chart": "shared-cli.html",
+      "anchor": "get-zip-dest-path",
+      "kind": "definition",
+      "ranges": [
+        [
+          89,
+          104
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/cli_utils.py",
+      "symbol": "confirm_apply",
+      "chart": "shared-cli.html",
+      "anchor": "confirm-apply",
+      "kind": "definition",
+      "ranges": [
+        [
+          107,
+          114
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "hash_file",
+      "chart": "content-hashing.html",
+      "anchor": "hash-file",
+      "kind": "definition",
+      "ranges": [
+        [
+          50,
+          63
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "find_all_wav_files",
+      "chart": "content-hashing.html",
+      "anchor": "find-all-wav-files",
+      "kind": "definition",
+      "ranges": [
+        [
+          66,
+          75
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "get_existing_samples",
+      "chart": "xml-discovery.html",
+      "anchor": "get-existing-samples",
+      "kind": "definition",
+      "ranges": [
+        [
+          78,
+          88
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "hash_all_samples",
+      "chart": "content-hashing.html",
+      "anchor": "hash-all-samples",
+      "kind": "definition",
+      "ranges": [
+        [
+          91,
+          114
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "find_all_xml_files",
+      "chart": "xml-discovery.html",
+      "anchor": "find-all-xml-files",
+      "kind": "definition",
+      "ranges": [
+        [
+          117,
+          132
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "detect_xml_type",
+      "chart": "sample-reference-extraction.html",
+      "anchor": "detect-xml-type",
+      "kind": "definition",
+      "ranges": [
+        [
+          135,
+          146
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "_get_preset_name",
+      "chart": "sample-reference-extraction.html",
+      "anchor": "get-preset-name",
+      "kind": "definition",
+      "ranges": [
+        [
+          149,
+          177
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "parse_deluge_xml",
+      "chart": "xml-parsing.html",
+      "anchor": "parse-deluge-xml",
+      "kind": "definition",
+      "ranges": [
+        [
+          180,
+          217
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "extract_sample_refs",
+      "chart": "sample-reference-extraction.html",
+      "anchor": "extract-sample-refs",
+      "kind": "definition",
+      "ranges": [
+        [
+          220,
+          297
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/deluge_sdk.py",
+      "symbol": "find_unextracted_refs",
+      "chart": "sample-reference-extraction.html",
+      "anchor": "find-unextracted-refs",
+      "kind": "definition",
+      "ranges": [
+        [
+          307,
+          316
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "ComparisonConfig.default",
+      "chart": "preset-comparison.html",
+      "anchor": "comparisonconfig-default",
+      "kind": "definition",
+      "ranges": [
+        [
+          263,
+          361
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "load_init_defaults",
+      "chart": "song-discovery.html",
+      "anchor": "load-init-defaults",
+      "kind": "definition",
+      "ranges": [
+        [
+          421,
+          471
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "load_kit_init_template",
+      "chart": "song-discovery.html",
+      "anchor": "load-kit-init-template",
+      "kind": "definition",
+      "ranges": [
+        [
+          474,
+          507
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "discover_songs",
+      "chart": "song-discovery.html",
+      "anchor": "discover-songs",
+      "kind": "definition",
+      "ranges": [
+        [
+          515,
+          600
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "discover_instruments",
+      "chart": "instrument-matching.html",
+      "anchor": "discover-instruments",
+      "kind": "definition",
+      "ranges": [
+        [
+          608,
+          645
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "discover_clips",
+      "chart": "instrument-matching.html",
+      "anchor": "discover-clips",
+      "kind": "definition",
+      "ranges": [
+        [
+          648,
+          694
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "match_instruments_to_clips",
+      "chart": "instrument-matching.html",
+      "anchor": "match-instruments-to-clips",
+      "kind": "definition",
+      "ranges": [
+        [
+          697,
+          786
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "is_sidechain_kit",
+      "chart": "clip-selection.html",
+      "anchor": "is-sidechain-kit",
+      "kind": "definition",
+      "ranges": [
+        [
+          794,
+          891
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "select_default_clip",
+      "chart": "clip-selection.html",
+      "anchor": "select-default-clip",
+      "kind": "definition",
+      "ranges": [
+        [
+          899,
+          912
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "extract_synth",
+      "chart": "synth-extraction.html",
+      "anchor": "extract-synth",
+      "kind": "definition",
+      "ranges": [
+        [
+          920,
+          983
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "extract_kit",
+      "chart": "kit-extraction.html",
+      "anchor": "extract-kit",
+      "kind": "definition",
+      "ranges": [
+        [
+          991,
+          1094
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "normalise_params",
+      "chart": "preset-normalisation.html",
+      "anchor": "normalise-params",
+      "kind": "definition",
+      "ranges": [
+        [
+          1102,
+          1139
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "strip_automation",
+      "chart": "preset-normalisation.html",
+      "anchor": "strip-automation",
+      "kind": "definition",
+      "ranges": [
+        [
+          1149,
+          1167
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "generate_filename",
+      "chart": "extraction-output.html",
+      "anchor": "generate-filename",
+      "kind": "definition",
+      "ranges": [
+        [
+          1175,
+          1227
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "serialise_xml",
+      "chart": "extraction-output.html",
+      "anchor": "serialise-xml",
+      "kind": "definition",
+      "ranges": [
+        [
+          1235,
+          1257
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "compare_instruments",
+      "chart": "preset-comparison.html",
+      "anchor": "compare-instruments",
+      "kind": "definition",
+      "ranges": [
+        [
+          1265,
+          1385
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "select_extended_clips",
+      "chart": "clip-selection.html",
+      "anchor": "select-extended-clips",
+      "kind": "definition",
+      "ranges": [
+        [
+          1393,
+          1428
+        ],
+        [
+          1441,
+          1474
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "select_extended_clips._assemble",
+      "chart": "clip-selection.html",
+      "anchor": "select-extended-clips-assemble",
+      "kind": "definition",
+      "ranges": [
+        [
+          1429,
+          1440
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_dedup_pass",
+      "chart": "extraction-deduplication.html",
+      "anchor": "dedup-pass",
+      "kind": "definition",
+      "ranges": [
+        [
+          1482,
+          1599
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "deduplicate_results",
+      "chart": "extraction-deduplication.html",
+      "anchor": "deduplicate-results",
+      "kind": "definition",
+      "ranges": [
+        [
+          1602,
+          1657
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "build_manifest_entry",
+      "chart": "extraction-output.html",
+      "anchor": "build-manifest-entry",
+      "kind": "definition",
+      "ranges": [
+        [
+          1665,
+          1683
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_strip_song_attrs",
+      "chart": "preset-normalisation.html",
+      "anchor": "strip-song-attrs",
+      "kind": "definition",
+      "ranges": [
+        [
+          1691,
+          1702
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_extract_arpeggiator_from_clip",
+      "chart": "synth-extraction.html",
+      "anchor": "extract-arpeggiator-from-clip",
+      "kind": "definition",
+      "ranges": [
+        [
+          1705,
+          1729
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_reorder_synth_children",
+      "chart": "synth-extraction.html",
+      "anchor": "reorder-synth-children",
+      "kind": "definition",
+      "ranges": [
+        [
+          1732,
+          1771
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_reorder_kit_children",
+      "chart": "kit-extraction.html",
+      "anchor": "reorder-kit-children",
+      "kind": "definition",
+      "ranges": [
+        [
+          1774,
+          1810
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_reorder_kit_sound_children",
+      "chart": "kit-extraction.html",
+      "anchor": "reorder-kit-sound-children",
+      "kind": "definition",
+      "ranges": [
+        [
+          1813,
+          1849
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_merge_noterow_params",
+      "chart": "kit-default-params.html",
+      "anchor": "merge-noterow-params",
+      "kind": "definition",
+      "ranges": [
+        [
+          1852,
+          1890
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_ensure_all_sounds_have_default_params",
+      "chart": "kit-default-params.html",
+      "anchor": "ensure-all-sounds-have-default-params",
+      "kind": "definition",
+      "ranges": [
+        [
+          1893,
+          1951
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_create_init_default_params",
+      "chart": "kit-default-params.html",
+      "anchor": "create-init-default-params",
+      "kind": "definition",
+      "ranges": [
+        [
+          1954,
+          2028
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_parse_hex_value",
+      "chart": "comparison-soft.html",
+      "anchor": "parse-hex-value",
+      "kind": "definition",
+      "ranges": [
+        [
+          2031,
+          2043
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_hex_diff_exceeds",
+      "chart": "comparison-soft.html",
+      "anchor": "hex-diff-exceeds",
+      "kind": "definition",
+      "ranges": [
+        [
+          2046,
+          2051
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_build_patchcable_dict",
+      "chart": "comparison-structure.html",
+      "anchor": "build-patchcable-dict",
+      "kind": "definition",
+      "ranges": [
+        [
+          2054,
+          2076
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_build_patchcable_element_dict",
+      "chart": "comparison-structure.html",
+      "anchor": "build-patchcable-element-dict",
+      "kind": "definition",
+      "ranges": [
+        [
+          2079,
+          2100
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_check_modknobs_structure",
+      "chart": "comparison-structure.html",
+      "anchor": "check-modknobs-structure",
+      "kind": "definition",
+      "ranges": [
+        [
+          2103,
+          2151
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_check_patchcable_structure",
+      "chart": "comparison-structure.html",
+      "anchor": "check-patchcable-structure",
+      "kind": "definition",
+      "ranges": [
+        [
+          2154,
+          2210
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_collect_soft_diffs",
+      "chart": "comparison-soft.html",
+      "anchor": "collect-soft-diffs",
+      "kind": "definition",
+      "ranges": [
+        [
+          2213,
+          2366
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_check_kit_structure_hard",
+      "chart": "comparison-structure.html",
+      "anchor": "check-kit-structure-hard",
+      "kind": "definition",
+      "ranges": [
+        [
+          2369,
+          2448
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/extraction.py",
+      "symbol": "_compare_kit_soft",
+      "chart": "comparison-soft.html",
+      "anchor": "compare-kit-soft",
+      "kind": "definition",
+      "ranges": [
+        [
+          2451,
+          2517
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/scanning.py",
+      "symbol": "normalise_key",
+      "chart": "filesystem-scanning.html",
+      "anchor": "normalise-key",
+      "kind": "definition",
+      "ranges": [
+        [
+          16,
+          21
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/scanning.py",
+      "symbol": "print_path",
+      "chart": "filesystem-scanning.html",
+      "anchor": "print-path",
+      "kind": "definition",
+      "ranges": [
+        [
+          24,
+          26
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/scanning.py",
+      "symbol": "normalise_mtime",
+      "chart": "filesystem-scanning.html",
+      "anchor": "normalise-mtime",
+      "kind": "definition",
+      "ranges": [
+        [
+          29,
+          31
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/scanning.py",
+      "symbol": "format_size",
+      "chart": "filesystem-scanning.html",
+      "anchor": "format-size",
+      "kind": "definition",
+      "ranges": [
+        [
+          47,
+          53
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/scanning.py",
+      "symbol": "scan_tree",
+      "chart": "filesystem-scanning.html",
+      "anchor": "scan-tree",
+      "kind": "definition",
+      "ranges": [
+        [
+          72,
+          98
+        ],
+        [
+          102,
+          141
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/scanning.py",
+      "symbol": "scan_tree.on_walk_error",
+      "chart": "filesystem-scanning.html",
+      "anchor": "on-walk-error",
+      "kind": "definition",
+      "ranges": [
+        [
+          99,
+          101
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "read_manifest",
+      "chart": "manifest-io.html",
+      "anchor": "read-manifest",
+      "kind": "definition",
+      "ranges": [
+        [
+          43,
+          68
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "write_manifest",
+      "chart": "manifest-io.html",
+      "anchor": "write-manifest",
+      "kind": "definition",
+      "ranges": [
+        [
+          71,
+          124
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "build_post_sync_manifest",
+      "chart": "post-sync-manifest.html",
+      "anchor": "build-manifest",
+      "kind": "definition",
+      "ranges": [
+        [
+          127,
+          197
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "SyncError.__init__",
+      "chart": "sync-execution.html",
+      "anchor": "syncerror-init",
+      "kind": "definition",
+      "ranges": [
+        [
+          219,
+          234
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "_mtime_matches",
+      "chart": "sync-planning.html",
+      "anchor": "mtime-matches",
+      "kind": "definition",
+      "ranges": [
+        [
+          246,
+          256
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "compute_sync",
+      "chart": "sync-planning.html",
+      "anchor": "compute-sync",
+      "kind": "definition",
+      "ranges": [
+        [
+          259,
+          388
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "print_plan",
+      "chart": "sync-reporting.html",
+      "anchor": "print-plan",
+      "kind": "definition",
+      "ranges": [
+        [
+          391,
+          415
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "execute_plan",
+      "chart": "sync-execution.html",
+      "anchor": "execute-plan",
+      "kind": "definition",
+      "ranges": [
+        [
+          418,
+          519
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "append_sync_log",
+      "chart": "sync-reporting.html",
+      "anchor": "append-sync-log",
+      "kind": "definition",
+      "ranges": [
+        [
+          522,
+          549
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "_windows_volume_identity",
+      "chart": "directory-identity.html",
+      "anchor": "windows-volume-identity",
+      "kind": "definition",
+      "ranges": [
+        [
+          552,
+          564
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "clean_empty_dirs",
+      "chart": "directory-cleanup.html",
+      "anchor": "clean-empty-dirs",
+      "kind": "definition",
+      "ranges": [
+        [
+          567,
+          586
+        ],
+        [
+          596,
+          596
+        ],
+        [
+          609,
+          609
+        ],
+        [
+          616,
+          616
+        ],
+        [
+          619,
+          687
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "clean_empty_dirs.directory_stat",
+      "chart": "directory-identity.html",
+      "anchor": "clean-empty-dirs-directory-stat",
+      "kind": "definition",
+      "ranges": [
+        [
+          587,
+          595
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "clean_empty_dirs.verify_path",
+      "chart": "directory-identity.html",
+      "anchor": "clean-empty-dirs-verify-path",
+      "kind": "definition",
+      "ranges": [
+        [
+          597,
+          608
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "clean_empty_dirs.empty_directory_stat",
+      "chart": "directory-identity.html",
+      "anchor": "clean-empty-dirs-empty-directory-stat",
+      "kind": "definition",
+      "ranges": [
+        [
+          610,
+          615
+        ]
+      ]
+    },
+    {
+      "source": "scripts/deluge_lib/syncing.py",
+      "symbol": "clean_empty_dirs.warn_scan",
+      "chart": "directory-cleanup.html",
+      "anchor": "clean-empty-dirs-warn-scan",
+      "kind": "definition",
+      "ranges": [
+        [
+          617,
+          618
+        ]
+      ]
+    },
+    {
+      "source": "scripts/extract_instruments.py",
+      "symbol": "main",
+      "chart": "extract-instruments.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          52,
+          133
+        ],
+        [
+          272,
+          330
+        ],
+        [
+          404,
+          405
+        ]
+      ]
+    },
+    {
+      "source": "scripts/extract_instruments.py",
+      "symbol": "main",
+      "chart": "song-extraction.html",
+      "anchor": "song-loop",
+      "kind": "block",
+      "ranges": [
+        [
+          134,
+          271
+        ]
+      ]
+    },
+    {
+      "source": "scripts/extract_instruments.py",
+      "symbol": "main",
+      "chart": "extraction-output.html",
+      "anchor": "apply-output",
+      "kind": "block",
+      "ranges": [
+        [
+          331,
+          403
+        ]
+      ]
+    },
+    {
+      "source": "scripts/extract_instruments.py",
+      "symbol": "_print_dedup_report",
+      "chart": "extraction-deduplication.html",
+      "anchor": "print-dedup-report",
+      "kind": "definition",
+      "ranges": [
+        [
+          413,
+          433
+        ]
+      ]
+    },
+    {
+      "source": "scripts/extract_instruments.py",
+      "symbol": "_print_dedup_stage",
+      "chart": "extraction-deduplication.html",
+      "anchor": "print-dedup-stage",
+      "kind": "definition",
+      "ranges": [
+        [
+          436,
+          496
+        ]
+      ]
+    },
+    {
+      "source": "scripts/extract_instruments.py",
+      "symbol": "_write_manifest",
+      "chart": "extraction-output.html",
+      "anchor": "write-manifest",
+      "kind": "definition",
+      "ranges": [
+        [
+          499,
+          528
+        ]
+      ]
+    },
+    {
+      "source": "scripts/find_similar_kits.py",
+      "symbol": "load_kit",
+      "chart": "kit-profiling.html",
+      "anchor": "load-kit",
+      "kind": "definition",
+      "ranges": [
+        [
+          44,
+          61
+        ],
+        [
+          66,
+          66
+        ],
+        [
+          92,
+          97
+        ]
+      ]
+    },
+    {
+      "source": "scripts/find_similar_kits.py",
+      "symbol": "load_kit.record",
+      "chart": "kit-profiling.html",
+      "anchor": "load-kit-record",
+      "kind": "definition",
+      "ranges": [
+        [
+          62,
+          65
+        ]
+      ]
+    },
+    {
+      "source": "scripts/find_similar_kits.py",
+      "symbol": "load_kit.walk",
+      "chart": "kit-profiling.html",
+      "anchor": "load-kit-walk",
+      "kind": "definition",
+      "ranges": [
+        [
+          67,
+          91
+        ]
+      ]
+    },
+    {
+      "source": "scripts/find_similar_kits.py",
+      "symbol": "find_matches",
+      "chart": "find-similar-kits.html",
+      "anchor": "find-matches",
+      "kind": "definition",
+      "ranges": [
+        [
+          100,
+          132
+        ]
+      ]
+    },
+    {
+      "source": "scripts/find_similar_kits.py",
+      "symbol": "main",
+      "chart": "find-similar-kits.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          135,
+          177
+        ],
+        [
+          180,
+          189
+        ]
+      ]
+    },
+    {
+      "source": "scripts/find_similar_kits.py",
+      "symbol": "main.label",
+      "chart": "find-similar-kits.html",
+      "anchor": "main-label",
+      "kind": "definition",
+      "ranges": [
+        [
+          178,
+          179
+        ]
+      ]
+    },
+    {
+      "source": "scripts/fix_references.py",
+      "symbol": "_compute_migration_map",
+      "chart": "sample-migration.html",
+      "anchor": "compute-migration-map",
+      "kind": "definition",
+      "ranges": [
+        [
+          76,
+          177
+        ]
+      ]
+    },
+    {
+      "source": "scripts/fix_references.py",
+      "symbol": "_classify_ref_changes",
+      "chart": "reference-classification.html",
+      "anchor": "classify-ref-changes",
+      "kind": "definition",
+      "ranges": [
+        [
+          180,
+          281
+        ]
+      ]
+    },
+    {
+      "source": "scripts/fix_references.py",
+      "symbol": "_update_sample_refs",
+      "chart": "reference-repair.html",
+      "anchor": "update-sample-refs",
+      "kind": "definition",
+      "ranges": [
+        [
+          284,
+          310
+        ]
+      ]
+    },
+    {
+      "source": "scripts/fix_references.py",
+      "symbol": "_preview_and_apply",
+      "chart": "reference-repair.html",
+      "anchor": "preview-and-apply",
+      "kind": "definition",
+      "ranges": [
+        [
+          313,
+          398
+        ]
+      ]
+    },
+    {
+      "source": "scripts/fix_references.py",
+      "symbol": "_update_manifest_keys",
+      "chart": "reference-repair.html",
+      "anchor": "update-manifest-keys",
+      "kind": "definition",
+      "ranges": [
+        [
+          401,
+          430
+        ]
+      ]
+    },
+    {
+      "source": "scripts/fix_references.py",
+      "symbol": "_handle_duplicates",
+      "chart": "sample-migration.html",
+      "anchor": "handle-duplicates",
+      "kind": "definition",
+      "ranges": [
+        [
+          432,
+          489
+        ]
+      ]
+    },
+    {
+      "source": "scripts/fix_references.py",
+      "symbol": "main",
+      "chart": "fix-references.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          493,
+          512
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "_folder_label",
+      "chart": "report-formatting.html",
+      "anchor": "folder-label",
+      "kind": "definition",
+      "ranges": [
+        [
+          35,
+          37
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "_print_header",
+      "chart": "report-formatting.html",
+      "anchor": "print-header",
+      "kind": "definition",
+      "ranges": [
+        [
+          40,
+          45
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "_group_by_folder",
+      "chart": "report-formatting.html",
+      "anchor": "group-by-folder",
+      "kind": "definition",
+      "ranges": [
+        [
+          48,
+          60
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "_strip_folder",
+      "chart": "report-formatting.html",
+      "anchor": "strip-folder",
+      "kind": "definition",
+      "ranges": [
+        [
+          63,
+          67
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "cmd_catalogue",
+      "chart": "sample-catalogue.html",
+      "anchor": "cmd-catalogue",
+      "kind": "definition",
+      "ranges": [
+        [
+          74,
+          134
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "cmd_summary",
+      "chart": "sample-reports.html",
+      "anchor": "cmd-summary",
+      "kind": "definition",
+      "ranges": [
+        [
+          137,
+          205
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "_print_unused_full",
+      "chart": "sample-unused.html",
+      "anchor": "print-unused-full",
+      "kind": "definition",
+      "ranges": [
+        [
+          208,
+          260
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "_print_unused_condensed",
+      "chart": "sample-unused.html",
+      "anchor": "print-unused-condensed",
+      "kind": "definition",
+      "ranges": [
+        [
+          263,
+          290
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "cmd_unused",
+      "chart": "sample-unused.html",
+      "anchor": "cmd-unused",
+      "kind": "definition",
+      "ranges": [
+        [
+          293,
+          364
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "cmd_missing",
+      "chart": "sample-missing.html",
+      "anchor": "cmd-missing",
+      "kind": "definition",
+      "ranges": [
+        [
+          366,
+          424
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "cmd_duplicates",
+      "chart": "sample-duplicates.html",
+      "anchor": "cmd-duplicates",
+      "kind": "definition",
+      "ranges": [
+        [
+          426,
+          472
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "cmd_usage",
+      "chart": "sample-reports.html",
+      "anchor": "cmd-usage",
+      "kind": "definition",
+      "ranges": [
+        [
+          475,
+          570
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sample_overview.py",
+      "symbol": "main",
+      "chart": "sample-overview.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          573,
+          687
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sync_from_sd.py",
+      "symbol": "main",
+      "chart": "sync-from-sd.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          29,
+          121
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sync_samples_to_cloud.py",
+      "symbol": "main",
+      "chart": "sync-samples-to-cloud.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          26,
+          98
+        ]
+      ]
+    },
+    {
+      "source": "scripts/sync_to_sd.py",
+      "symbol": "main",
+      "chart": "sync-to-sd.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          31,
+          125
+        ]
+      ]
+    },
+    {
+      "source": "scripts/tests/dedup_threshold_test.py",
+      "symbol": "_extract_default_results",
+      "chart": "benchmark-extraction.html",
+      "anchor": "extract-default-results",
+      "kind": "definition",
+      "ranges": [
+        [
+          37,
+          105
+        ]
+      ]
+    },
+    {
+      "source": "scripts/tests/dedup_threshold_test.py",
+      "symbol": "_extract_extended_results",
+      "chart": "benchmark-extraction.html",
+      "anchor": "extract-extended-results",
+      "kind": "definition",
+      "ranges": [
+        [
+          108,
+          194
+        ]
+      ]
+    },
+    {
+      "source": "scripts/tests/dedup_threshold_test.py",
+      "symbol": "_count_by_type",
+      "chart": "dedup-threshold-benchmark.html",
+      "anchor": "count-by-type",
+      "kind": "definition",
+      "ranges": [
+        [
+          197,
+          202
+        ]
+      ]
+    },
+    {
+      "source": "scripts/tests/dedup_threshold_test.py",
+      "symbol": "_fmt_cell",
+      "chart": "dedup-threshold-benchmark.html",
+      "anchor": "fmt-cell",
+      "kind": "definition",
+      "ranges": [
+        [
+          205,
+          208
+        ]
+      ]
+    },
+    {
+      "source": "scripts/tests/dedup_threshold_test.py",
+      "symbol": "_suppress_stdout",
+      "chart": "dedup-threshold-benchmark.html",
+      "anchor": "suppress-stdout",
+      "kind": "definition",
+      "ranges": [
+        [
+          212,
+          220
+        ]
+      ]
+    },
+    {
+      "source": "scripts/tests/dedup_threshold_test.py",
+      "symbol": "main",
+      "chart": "dedup-threshold-benchmark.html",
+      "anchor": "main",
+      "kind": "definition",
+      "ranges": [
+        [
+          223,
+          376
+        ]
+      ]
+    }
+  ],
+  "configuration": [
+    {
+      "source": "pou.config.mjs",
+      "chart": "repository-operations.html"
+    },
+    {
+      "source": ".pou/python.mjs",
+      "chart": "repository-operations.html"
+    },
+    {
+      "source": "scripts/deluge_lib/paths.py",
+      "chart": "shared-cli.html"
+    }
+  ]
+}

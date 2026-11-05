@@ -125,7 +125,8 @@
   <header>
     <p class="eyebrow">Execution flow</p>
     <h1>Filtered filesystem scanning</h1>
-    <p>Walk a directory tree, collect XML/WAV file metadata, and return entries keyed by normalized relative paths</p>
+    <p>Walk a directory tree, collect selected file metadata, and optionally reject incomplete scans or case-colliding paths</p>
+    <p><a href="index.html">All execution charts</a></p>
     <div class="legend" aria-label="Source layers">
       <span class="app">Script</span>
       <span class="library">Shared Deluge library</span>
@@ -142,35 +143,52 @@
   </header>
 
   <ol class="trace" aria-label="Nested execution calls in order">
-    <li class="call" id="scan-tree">
+    <li class="call" id="scan-tree" data-source="scripts/deluge_lib/scanning.py" data-symbol="scan_tree" data-coverage="definition" data-ranges="[[72,98],[102,141]]">
       <div class="call-head">
         <a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a>
-        <code class="signature">scan_tree(root: Path, *, label: str = "source", file_filter: FileFilter = "both")</code>
+        <code class="signature">scan_tree(root: Path, *, label: str = "source", file_filter: FileFilter | Literal["all"] = "both", strict: bool = False)</code>
         <span class="type">ScanResult</span>
       </div>
-      <p class="annotation"><a href="sync-planning.html#compute-sync">Sync planning</a> invokes this once per tree; other scripts also use this metadata-only scanner</p>
+      <p class="annotation"><a href="sync-planning.html#compute-sync">Sync planning</a> uses the default non-strict mode; kit comparison and catalogue generation request strict scans</p>
       <ol class="steps">
-        <li class="step"><div class="state"><span class="kind">Input</span>FILTER_MAP selects .xml, .wav, or both; label affects progress messages only</div></li>
+        <li class="step"><div class="state"><span class="kind">Input</span>"all" sets allowed=None; otherwise FILTER_MAP selects .xml, .wav, or both; an unknown filter raises KeyError</div></li>
         <li class="call">
           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">ScanResult()</code></div>
           <div class="return"><span class="kind">Result</span>result with an empty files dict</div>
         </li>
-        <li class="step"><div class="state"><span class="kind">State</span>file_count=0; print the initial scanning message</div></li>
+        <li class="step"><div class="state"><span class="kind">State</span>file_count=0; label affects progress messages only</div></li>
+        <li class="branch">
+          <div class="condition">If strict and root.is_dir() is False</div>
+          <ol class="steps"><li class="step"><div class="state"><span class="kind">Raise</span>Raise NotADirectoryError before traversal or progress output</div></li></ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>Define on_walk_error, then print the initial scanning message</div></li>
         <li class="call">
-          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/os.html#os.walk">os.py</a><code class="signature">os.walk(root)</code></div>
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/os.html#os.walk">os.py</a><code class="signature">os.walk(root, onerror=on_walk_error)</code></div>
           <p class="annotation">Create a top-down traversal iterator; iteration below drives directory enumeration</p>
-          <div class="return"><span class="kind">Return</span>Iterator of (dirpath, dirnames, filenames); no custom onerror callback or followlinks option</div>
+          <div class="return"><span class="kind">Return</span>Iterator of (dirpath, dirnames, filenames); followlinks remains False</div>
         </li>
         <li class="branch">
-          <div class="repeat">For each directory tuple yielded by the walk iterator</div>
+          <div class="repeat">While consuming the walk iterator</div>
           <ol class="steps">
+            <li class="branch">
+              <div class="condition">If directory enumeration raises an OSError handled by os.walk</div>
+              <ol class="steps">
+                <li class="call" id="on-walk-error" data-source="scripts/deluge_lib/scanning.py" data-symbol="scan_tree.on_walk_error" data-coverage="definition" data-ranges="[[99,101]]">
+                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">on_walk_error(exc: OSError)</code><span class="type">None</span></div>
+                  <p class="annotation">Callback invoked by os.walk during iteration, not at iterator creation</p>
+                  <div class="state"><span class="kind">Raise</span>Strict mode re-raises exc and stops scanning</div>
+                  <div class="return"><span class="kind">Return</span>Non-strict mode returns None without a warning; traversal skips the affected directory</div>
+                </li>
+              </ol>
+            </li>
+            <li class="step"><div class="state"><span class="kind">Input</span>For each successfully yielded (dirpath, dirnames, filenames)</div></li>
             <li class="step"><div class="state"><span class="kind">State</span>current_dir=Path(dirpath); prune child names matching .trash case-insensitively by modifying dirnames in place</div></li>
             <li class="branch">
               <div class="repeat">For each fname in filenames, without explicit sorting</div>
               <ol class="steps">
                 <li class="step"><div class="state"><span class="kind">State</span>file_path=current_dir/fname; compare file_path.suffix.lower() with the selected extensions</div></li>
                 <li class="branch">
-                  <div class="condition">If the extension is not selected</div>
+                  <div class="condition">If allowed is not None and the extension is not selected</div>
                   <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Continue with the next filename without stat capture</div></li></ol>
                 </li>
                 <li class="branch">
@@ -182,17 +200,24 @@
                     </li>
                     <li class="branch">
                       <div class="condition">If stat raises OSError</div>
-                      <ol class="steps"><li class="step"><div class="state"><span class="kind">Output</span>Warn with the relative path and error; skip the file and continue</div></li></ol>
+                      <ol class="steps">
+                        <li class="step"><div class="state"><span class="kind">Raise</span>Strict mode re-raises the stat error immediately</div></li>
+                        <li class="step"><div class="state"><span class="kind">Output</span>Otherwise warn with the relative path and error; skip the file and continue</div></li>
+                      </ol>
                     </li>
                     <li class="branch">
                       <div class="condition">If stat succeeds</div>
                       <ol class="steps">
                         <li class="step"><div class="state"><span class="kind">State</span>rel=file_path.relative_to(root)</div></li>
-                        <li class="call">
+                        <li class="call" id="normalise-key" data-source="scripts/deluge_lib/scanning.py" data-symbol="normalise_key" data-coverage="definition" data-ranges="[[16,21]]">
                           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">normalise_key(rel)</code><span class="type">str</span></div>
                           <div class="return"><span class="kind">Return</span>str(PurePosixPath(rel)).lower() used as the lookup key</div>
                         </li>
-                        <li class="call">
+                        <li class="branch">
+                          <div class="condition">If strict and key already exists in result.files</div>
+                          <ol class="steps"><li class="step"><div class="state"><span class="kind">Raise</span>Raise ValueError identifying both case-colliding paths before constructing the new entry</div></li></ol>
+                        </li>
+                        <li class="call" id="normalise-mtime" data-source="scripts/deluge_lib/scanning.py" data-symbol="normalise_mtime" data-coverage="definition" data-ranges="[[29,31]]">
                           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">normalise_mtime(st.st_mtime)</code><span class="type">float</span></div>
                           <div class="return"><span class="kind">Return</span>2.0 * (raw_mtime // 2.0), truncating to FAT32's 2-second resolution</div>
                         </li>
@@ -201,7 +226,7 @@
                           <p class="annotation">The preceding normalise_mtime call is argument evaluation for this construction, not a second invocation</p>
                           <div class="return"><span class="kind">Result</span>Frozen entry preserving the relative Path, file size, and normalized mtime</div>
                         </li>
-                        <li class="step"><div class="state"><span class="kind">State</span>Assign result.files[key]=entry; a repeated normalized key replaces the earlier entry</div></li>
+                        <li class="step"><div class="state"><span class="kind">State</span>Assign result.files[key]=entry; only non-strict mode allows a repeated key to replace the earlier entry</div></li>
                         <li class="step"><div class="state"><span class="kind">Output</span>Increment file_count and print progress for the captured file</div></li>
                       </ol>
                     </li>
@@ -215,11 +240,35 @@
       </ol>
       <div class="return"><span class="kind">Return</span>result containing the captured FileEntry records; no file hashing or content writes</div>
     </li>
+
+
+
+
+
+
+
+
+    <li class="call" id="print-path" data-source="scripts/deluge_lib/scanning.py" data-symbol="print_path" data-coverage="definition" data-ranges="[[24,26]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">print_path(path: str | Path)</code><span class="type">str</span></div>
+      <p class="annotation">Independent API used by previews, reports and progress output</p>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">State</span>Convert path to str(PurePosixPath(path)) without lowercasing</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>POSIX-style case-preserving display string</div>
+    </li>
+    <li class="call" id="format-size" data-source="scripts/deluge_lib/scanning.py" data-symbol="format_size" data-coverage="definition" data-ranges="[[47,53]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">format_size(size_bytes: int)</code><span class="type">str</span></div>
+      <p class="annotation">Independent API used by backup and reporting</p>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">State</span>Below 1 MiB return size/1024 with one decimal and KB; below 1 GiB use MiB with one decimal and MB; otherwise GiB with two decimals and GB</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Human-readable size string; these display units use binary divisors</div>
+    </li>
   </ol>
 
   <footer>
-    <p>Direct script callers include <a href="../../scripts/create_backup.py">create_backup.py</a>, <a href="../../scripts/sample_overview.py">sample_overview.py</a>, and <a href="../../scripts/fix_references.py">fix_references.py</a>; <a href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a> also calls this scanner</p><p>Per-file stat failures warn and skip; os.walk uses its default handling of directory-enumeration errors, so a returned scan is not a guarantee that every file was readable</p>
-    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+    <p>Direct script callers include <a href="../../scripts/create_backup.py">create_backup.py</a>, <a href="../../scripts/sample_overview.py">sample_overview.py</a>, <a href="../../scripts/fix_references.py">fix_references.py</a>, and <a href="../../scripts/find_similar_kits.py">find_similar_kits.py</a>; <a href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a> and <a href="../../scripts/deluge_lib/extraction.py">extraction.py</a> also use this scanner</p><p>Non-strict scans can be incomplete: stat failures warn and skip, traversal errors skip silently, and a missing root can yield no files; strict scans propagate failures instead of returning partial results</p>
+    <p>Updated <time datetime="2026-11-05">2026-11-05</time></p>
   </footer>
 </main>
 <script>

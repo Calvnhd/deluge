@@ -126,6 +126,7 @@
     <p class="eyebrow">Execution flow</p>
     <h1>Sync planning and change detection</h1>
     <p>Scan source and destination, classify each source file, then schedule removal of destination-only files</p>
+    <p><a href="index.html">All execution charts</a></p>
     <div class="legend" aria-label="Source layers">
       <span class="app">Script</span>
       <span class="library">Shared Deluge library</span>
@@ -142,7 +143,7 @@
   </header>
 
   <ol class="trace" aria-label="Nested execution calls in order">
-    <li class="call" id="compute-sync">
+    <li class="call" id="compute-sync" data-source="scripts/deluge_lib/syncing.py" data-symbol="compute_sync" data-coverage="definition" data-ranges="[[259,388]]">
       <div class="call-head">
         <a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a>
         <code class="signature">compute_sync(source: Path, dest: Path, *, manifest: FilesDict | None = None, source_is_sd: bool = True, file_filter: FileFilter = "both")</code>
@@ -154,12 +155,12 @@
           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncPlan()</code></div>
           <div class="return"><span class="kind">Result</span>Empty copy/removal lists and files_unchanged=0</div>
         </li>
-        <li class="call">
+        <li class="call" data-source="scripts/deluge_lib/scanning.py" data-symbol="scan_tree" data-coverage="reference">
           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">scan_tree(source, label="source", file_filter=file_filter)</code><span class="type">ScanResult</span></div>
           <p class="annotation">Collect filtered source metadata; <a href="filesystem-scanning.html#scan-tree">expand filesystem scanning</a></p>
           <div class="return"><span class="kind">Return</span>src_scan indexed by normalized relative key</div>
         </li>
-        <li class="call">
+        <li class="call" data-source="scripts/deluge_lib/scanning.py" data-symbol="scan_tree" data-coverage="reference">
           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">scan_tree(dest, label="destination", file_filter=file_filter)</code><span class="type">ScanResult</span></div>
           <p class="annotation">Complete source scanning before starting destination scanning; <a href="filesystem-scanning.html#scan-tree">same scanner flow</a></p>
           <div class="return"><span class="kind">Return</span>dst_scan indexed by normalized relative key</div>
@@ -180,7 +181,7 @@
                 <li class="branch">
                   <div class="condition">If SD sizes match, evaluate the second operand of the metadata-change check</div>
                   <ol class="steps">
-                    <li class="call">
+                    <li class="call" id="mtime-matches" data-source="scripts/deluge_lib/syncing.py" data-symbol="_mtime_matches" data-coverage="definition" data-ranges="[[246,256]]">
                       <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">_mtime_matches(sd_entry.mtime, manifest_entry["sd_mtime"])</code><span class="type">bool</span></div>
                       <div class="return"><span class="kind">Return</span>abs(mtime_a - mtime_b) &lt;= 2.0</div>
                     </li>
@@ -192,11 +193,12 @@
                     <li class="branch">
                       <div class="condition">If a cached hash exists</div>
                       <ol class="steps">
-                        <li class="call">
-                          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(sd_path)</code><span class="type">str</span></div>
-                          <p class="annotation">Read in 64 KiB chunks and compute SHA256</p>
-                          <div class="return"><span class="kind">Return</span>Current SD content digest</div>
-                        </li>
+                        <li class="call" id="hash-file" data-source="scripts/deluge_lib/deluge_sdk.py" data-symbol="hash_file" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(sd_path)</code><span class="type">str</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="content-hashing.html#hash-file">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Content digest for the supplied path</div>
+</li>
                         <li class="branch">
                           <div class="condition">If digest differs from the cached hash</div>
                           <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Schedule source-to-destination copy and continue with the next source file</div></li></ol>
@@ -224,10 +226,12 @@
                     <li class="branch">
                       <div class="condition">If a cached hash exists</div>
                       <ol class="steps">
-                        <li class="call">
-                          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(local_path)</code><span class="type">str</span></div>
-                          <div class="return"><span class="kind">Return</span>Current local SHA256 digest</div>
-                        </li>
+                        <li class="call" data-source="scripts/deluge_lib/deluge_sdk.py" data-symbol="hash_file" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(local_path)</code><span class="type">str</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="content-hashing.html#hash-file">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Content digest for the supplied path</div>
+</li>
                         <li class="branch">
                           <div class="condition">If local digest matches the cached hash</div>
                           <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Refresh local_size and local_mtime in manifest_entry; increment files_unchanged</div></li></ol>
@@ -241,10 +245,12 @@
                     <li class="branch">
                       <div class="condition">Otherwise, no cached hash exists</div>
                       <ol class="steps">
-                        <li class="call">
-                          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(local_path)</code><span class="type">str</span></div>
-                          <div class="return"><span class="kind">Return</span>Local SHA256 digest to seed the existing record</div>
-                        </li>
+                        <li class="call" data-source="scripts/deluge_lib/deluge_sdk.py" data-symbol="hash_file" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(local_path)</code><span class="type">str</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="content-hashing.html#hash-file">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Content digest for the supplied path</div>
+</li>
                         <li class="step"><div class="state"><span class="kind">State</span>Store the local hash, size, and mtime in manifest_entry; conservatively schedule a copy anyway</div></li>
                       </ol>
                     </li>
@@ -262,9 +268,10 @@
                 <li class="branch">
                   <div class="condition">Otherwise, compare modification times</div>
                   <ol class="steps">
-                    <li class="call">
+                    <li class="call" data-source="scripts/deluge_lib/syncing.py" data-symbol="_mtime_matches" data-coverage="reference">
                       <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">_mtime_matches(src_entry.mtime, dst_entry.mtime)</code><span class="type">bool</span></div>
-                      <div class="return"><span class="kind">Return</span>True for an absolute difference of at most 2 seconds</div>
+                      <p class="annotation">Use the <a href="#mtime-matches">same tolerance helper</a> with source and destination metadata</p>
+                      <div class="return"><span class="kind">Return</span>Whether the two timestamps match</div>
                     </li>
                     <li class="step"><div class="state"><span class="kind">State</span>True: increment files_unchanged; False: schedule a copy</div></li>
                   </ol>
@@ -291,7 +298,7 @@
 
   <footer>
     <p>Existing callers: <a href="../../scripts/sync_from_sd.py">sync_from_sd.py</a> uses source_is_sd=True; <a href="../../scripts/sync_to_sd.py">sync_to_sd.py</a> uses False; <a href="../../scripts/sync_samples_to_cloud.py">sync_samples_to_cloud.py</a> uses manifest=None and file_filter="wav"</p><p>No-manifest comparison uses size and mtime, not hashes; unchanged metadata is not a proof of identical content</p>
-    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+    <p>Updated <time datetime="2026-11-05">2026-11-05</time></p>
   </footer>
 </main>
 <script>

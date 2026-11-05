@@ -126,6 +126,7 @@
     <p class="eyebrow">Execution flow</p>
     <h1>Sync plan execution</h1>
     <p>Copy planned files, then trash or permanently delete extras, returning counts or raising a partial-progress error</p>
+    <p><a href="index.html">All execution charts</a></p>
     <div class="legend" aria-label="Source layers">
       <span class="app">Script</span>
       <span class="library">Shared Deluge library</span>
@@ -142,7 +143,7 @@
   </header>
 
   <ol class="trace" aria-label="Nested execution calls in order">
-    <li class="call" id="execute-plan">
+    <li class="call" id="execute-plan" data-source="scripts/deluge_lib/syncing.py" data-symbol="execute_plan" data-coverage="definition" data-ranges="[[418,519]]">
       <div class="call-head">
         <a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a>
         <code class="signature">execute_plan(plan: SyncPlan, *, dest: Path, delete_mode: str = "trash")</code>
@@ -169,10 +170,18 @@
         <li class="branch">
           <div class="condition">If mkdir or copying raises OSError</div>
           <ol class="steps">
-            <li class="call">
-              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(src), copied=copied, unchanged=plan.files_unchanged, remaining=total_copy - copied - 1)</code></div>
-              <div class="return"><span class="kind">Result</span>Error with source path, completed copies, trashed=0, and remaining copies excluding the failed item</div>
-            </li>
+            <li class="call" id="syncerror-init" data-source="scripts/deluge_lib/syncing.py" data-symbol="SyncError.__init__" data-coverage="definition" data-ranges="[[219,234]]">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(src), copied=copied, unchanged=plan.files_unchanged, remaining=total_copy - copied - 1)</code></div>
+  <p class="annotation">Constructor body is canonical here; later error constructions reference it</p>
+  <ol class="steps">
+    <li class="call">
+      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/exceptions.html">exceptions</a><code class="signature">super().__init__(message)</code></div>
+      <div class="return"><span class="kind">Return</span>Base exception initialized</div>
+    </li>
+    <li class="step"><div class="state"><span class="kind">State</span>Retain file, copied, trashed, unchanged and remaining from the supplied arguments and their declared defaults</div></li>
+  </ol>
+  <div class="return"><span class="kind">Result</span>SyncError with partial-progress context</div>
+</li>
             <li class="step"><div class="state"><span class="kind">Raise</span>Raise the constructed SyncError from exc; skip all removals and the normal return</div></li>
           </ol>
         </li>
@@ -203,10 +212,11 @@
             <li class="branch">
               <div class="condition">If a trash operation raises OSError</div>
               <ol class="steps">
-                <li class="call">
-                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(path), copied=copied, trashed=trashed, unchanged=plan.files_unchanged, remaining=trash_count - trashed - 1)</code></div>
-                  <div class="return"><span class="kind">Result</span>Error with completed work and remaining removals excluding the failed item</div>
-                </li>
+                <li class="call" data-source="scripts/deluge_lib/syncing.py" data-symbol="SyncError.__init__" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(path), copied=copied, trashed=trashed, unchanged=plan.files_unchanged, remaining=trash_count - trashed - 1)</code></div>
+  <p class="annotation"><a href="sync-execution.html#syncerror-init">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Result</span>SyncError carrying the caller-supplied partial progress</div>
+</li>
                 <li class="step"><div class="state"><span class="kind">Raise</span>Raise SyncError from exc; no rollback or normal result</div></li>
               </ol>
             </li>
@@ -240,10 +250,11 @@
             <li class="branch">
               <div class="condition">If deletion raises OSError outside the handled ancestor cleanup</div>
               <ol class="steps">
-                <li class="call">
-                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(path), copied=copied, trashed=trashed, unchanged=plan.files_unchanged, remaining=trash_count - trashed - 1)</code></div>
-                  <div class="return"><span class="kind">Result</span>Error with completed copies/deletions and remaining removals excluding the failed item</div>
-                </li>
+                <li class="call" data-source="scripts/deluge_lib/syncing.py" data-symbol="SyncError.__init__" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncError(str(exc), file=str(path), copied=copied, trashed=trashed, unchanged=plan.files_unchanged, remaining=trash_count - trashed - 1)</code></div>
+  <p class="annotation"><a href="sync-execution.html#syncerror-init">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Result</span>SyncError carrying the caller-supplied partial progress</div>
+</li>
                 <li class="step"><div class="state"><span class="kind">Raise</span>Raise SyncError from exc; no rollback or normal result</div></li>
               </ol>
             </li>
@@ -264,7 +275,7 @@
 
   <footer>
     <p>Existing callers: <a href="../../scripts/sync_from_sd.py">sync_from_sd.py</a> trashes extras; <a href="../../scripts/sync_to_sd.py">sync_to_sd.py</a> and <a href="../../scripts/sync_samples_to_cloud.py">sync_samples_to_cloud.py</a> permanently delete extras</p><p>Logging, confirmation, manifest updates, and final clean_empty_dirs calls belong to callers; this function performs no rollback</p><p>SyncError.remaining counts later items in the failing phase, not all outstanding plan operations</p>
-    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+    <p>Updated <time datetime="2026-11-05">2026-11-05</time></p>
   </footer>
 </main>
 <script>

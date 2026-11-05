@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmed extraction output and naming APIs</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #f8fafc;
+      --text: #17243a;
+      --muted: #526277;
+      --guide: #cbd5e1;
+      --app: #166534;
+      --library: #7635a4;
+      --framework: #1d4ed8;
+      --result: #0f766e;
+      --condition: #925000;
+      --badge: #e9eef5;
+      --focus: #c06800;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #151b25;
+        --text: #e4ebf5;
+        --muted: #a9b8cc;
+        --guide: #3d4b61;
+        --app: #8bddaa;
+        --library: #d1a7ff;
+        --framework: #90baff;
+        --result: #74d8cb;
+        --condition: #efbd74;
+        --badge: #263246;
+        --focus: #ffc477;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 20px; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 30px 28px 48px; }
+    h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.2; letter-spacing: -0.6px; }
+    header { margin-bottom: 26px; }
+    header p { margin: 0 0 12px; color: var(--muted); }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+    .legend { font-weight: 650; }
+    .app { color: var(--app); }
+    .library { color: var(--library); }
+    .framework { color: var(--framework); }
+    a { color: var(--framework); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button { font: inherit; }
+    .depth-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; }
+    .depth-controls button {
+      border: 1px solid var(--guide);
+      border-radius: 4px;
+      padding: 3px 9px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .depth-controls button[aria-pressed="true"] { background: var(--badge); border-color: var(--framework); }
+    .fold-toggle {
+      flex: 0 0 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      align-self: center;
+    }
+    .fold-toggle::before { content: "\25BE"; }
+    .fold-toggle[aria-expanded="false"]::before { content: "\25B8"; }
+    .fold-toggle:hover { background: var(--badge); color: var(--text); }
+    .fold-summary { color: var(--muted); font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    code { font: 0.93em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    ol.trace, ol.steps { list-style: none; padding: 0; margin: 0; }
+    ol.steps {
+      margin: 5px 0 8px 5px;
+      padding-left: 19px;
+      border-left: 1px solid var(--guide);
+    }
+    li.call { margin: 9px 0; }
+    .call-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+    .file { font-size: 12px; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .file:hover { text-decoration: underline; }
+    .signature { font-size: 13px; }
+    .type { padding: 1px 6px; border-radius: 4px; background: var(--badge); color: var(--muted); font-size: 11px; }
+    .annotation { margin: 2px 0 5px; color: var(--muted); font-size: 13px; }
+    .annotation::before { content: "\2022"; margin-right: 7px; }
+    .state, .return { margin: 5px 0; font-size: 12px; }
+    .state { color: var(--muted); }
+    .return { color: var(--result); }
+    .kind { margin-right: 7px; font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.5px; }
+    .condition, .repeat { color: var(--condition); font-size: 12px; font-weight: 650; }
+    li.branch { margin: 9px 0; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--guide); color: var(--muted); font-size: 12px; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 700px) {
+      main { padding: 20px 12px; }
+      ol.steps { padding-left: 11px; margin-left: 2px; }
+      .call-head { column-gap: 7px; }
+      .signature { font-size: 12px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: black; }
+      main { max-width: none; padding: 0; }
+      .depth-controls, .fold-toggle, .fold-summary { display: none !important; }
+      ol.steps[hidden] { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Execution flow</p>
+    <h1>Confirmed extraction output and naming APIs</h1>
+    <p>Continue the active main call through confirmation and file output, with independent canonical naming and serialization helpers</p>
+    <p><a href="index.html">All execution charts</a></p>
+    <div class="legend" aria-label="Source layers">
+      <span class="app">Script</span><span class="library">Shared Deluge library</span><span class="framework">Platform or dependency API</span>
+    </div>
+    <div class="depth-controls" role="group" aria-label="Visible call depth" hidden>
+      <span>Show depth</span>
+      <button type="button" data-depth="1" aria-pressed="false">1</button>
+      <button type="button" data-depth="2" aria-pressed="false">2</button>
+      <button type="button" data-depth="3" aria-pressed="false">3</button>
+      <button type="button" data-depth="all" aria-pressed="true">All</button>
+    </div>
+    <span class="sr-only" id="fold-status" role="status" aria-live="polite"></span>
+  </header>
+
+  <ol class="trace" aria-label="Nested execution calls in order">
+    <li class="call" id="apply-output" data-source="scripts/extract_instruments.py" data-symbol="main" data-coverage="block" data-ranges="[[331,403]]">
+      <div class="call-head"><a class="file app" href="../../scripts/extract_instruments.py">extract_instruments.py</a><code class="signature">main(argv: list[str] | None = None)</code><span class="type">None</span></div>
+      <p class="annotation">Inline continuation of extract_instruments.main, lines 331-403; no invented helper call</p>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">Input</span>From main after the no-results and explicit-dry-run gates: accepted all_results, args, root, output directories and parsed songs</div></li>
+        <li class="call" data-source="scripts/deluge_lib/cli_utils.py" data-symbol="confirm_apply" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">confirm_apply(&quot;Existing content in output directories will be replaced\n\nApply these changes?&quot;)</code><span class="type">bool</span></div>
+          <p class="annotation"><a href="shared-cli.html#confirm-apply">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Initial consent</div>
+        </li>
+        <li class="branch">
+          <div class="condition">If False</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">Output</span>Aborted</div></li>
+            <li class="step"><div class="state"><span class="kind">Exit</span>Return from main; do not resume its completion message</div></li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="condition">If --sd-direct</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">Output</span>Print direct-SD warning</div></li>
+            <li class="call">
+              <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/functions.html">functions</a><code class="signature">input(&quot;Are you sure? Type 'yes' to confirm: &quot;).strip()</code></div>
+              <div class="return"><span class="kind">Return</span>Exact second response</div>
+            </li>
+            <li class="branch">
+              <div class="condition">If response != &quot;yes&quot;</div>
+              <ol class="steps">
+                <li class="step"><div class="state"><span class="kind">Output</span>Aborted</div></li>
+                <li class="step"><div class="state"><span class="kind">Exit</span>Return from main</div></li>
+              </ol>
+            </li>
+            <li class="call" data-source="scripts/deluge_lib/cli_utils.py" data-symbol="get_deluge_root" data-coverage="reference">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">get_deluge_root()</code><span class="type">Path</span></div>
+              <p class="annotation"><a href="shared-cli.html#get-deluge-root">Canonical implementation</a></p>
+              <div class="return"><span class="kind">Return</span>Local root for preserving old SD extraction output</div>
+            </li>
+            <li class="branch">
+              <div class="condition">If either old extraction output directory exists</div>
+              <ol class="steps">
+                <li class="step"><div class="state"><span class="kind">State</span>Build local_root/.trash/SD-extract-YYYYMMDD_HHMMSS</div></li>
+                <li class="branch">
+                  <div class="repeat">For each existing old SD output directory</div>
+                  <ol class="steps">
+                    <li class="step"><div class="state"><span class="kind">State</span>Create the corresponding parent beneath the local trash timestamp</div></li>
+                    <li class="call">
+                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/shutil.html">shutil</a><code class="signature">shutil.copytree(str(source_dir), str(trash_dest))</code></div>
+                      <div class="return"><span class="kind">Return</span>Local copy of old SD output</div>
+                    </li>
+                    <li class="call">
+                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/shutil.html">shutil</a><code class="signature">shutil.rmtree(source_dir)</code></div>
+                      <div class="return"><span class="kind">Return</span>Old SD output removed recursively, only after copytree returns</div>
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="condition">Otherwise, local extraction</div>
+          <ol class="steps">
+            <li class="branch">
+              <div class="condition">If either old output directory exists</div>
+              <ol class="steps">
+                <li class="step"><div class="state"><span class="kind">State</span>Build deluge_root/.trash/extract-YYYYMMDD_HHMMSS</div></li>
+                <li class="branch">
+                  <div class="repeat">For each existing old local output directory</div>
+                  <ol class="steps">
+                    <li class="step"><div class="state"><span class="kind">State</span>Create corresponding trash parent</div></li>
+                    <li class="call">
+                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/shutil.html">shutil</a><code class="signature">shutil.move(str(source), str(trash_dest))</code></div>
+                      <div class="return"><span class="kind">Return</span>Old directory moved to timestamped local trash</div>
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>Create both fresh output directories even if one instrument type has no accepted results; print filenames grouped by type</div></li>
+        <li class="branch">
+          <div class="repeat">For each accepted result</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Choose synth or kit output path; print writing progress</div></li>
+            <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="serialise_xml" data-coverage="reference">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">serialise_xml(result.element, output_path)</code><span class="type">None</span></div>
+              <p class="annotation"><a href="extraction-output.html#serialise-xml">Canonical implementation</a></p>
+              <div class="return"><span class="kind">Return</span>Preset XML written</div>
+            </li>
+          </ol>
+        </li>
+        <li class="call" data-source="scripts/extract_instruments.py" data-symbol="_write_manifest" data-coverage="reference">
+          <div class="call-head"><a class="file app" href="../../scripts/extract_instruments.py">extract_instruments.py</a><code class="signature">_write_manifest(synth_output_dir, all_results, &quot;synth&quot;, len(songs))</code><span class="type">None</span></div>
+          <p class="annotation"><a href="extraction-output.html#write-manifest">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Synth extraction manifest when synth results exist</div>
+        </li>
+        <li class="call" data-source="scripts/extract_instruments.py" data-symbol="_write_manifest" data-coverage="reference">
+          <div class="call-head"><a class="file app" href="../../scripts/extract_instruments.py">extract_instruments.py</a><code class="signature">_write_manifest(kit_output_dir, all_results, &quot;kit&quot;, len(songs))</code><span class="type">None</span></div>
+          <p class="annotation"><a href="extraction-output.html#write-manifest">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Kit extraction manifest when kit results exist</div>
+        </li>
+        <li class="step"><div class="state"><span class="kind">Exception</span>No local rollback wraps directory replacement, XML writes or extraction manifests; direct-file guard reports uncaught Exception</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Resume main at line 404 after successful output; early returns above exit the whole main call</div>
+    </li>
+    <li class="call" id="generate-filename" data-source="scripts/deluge_lib/extraction.py" data-symbol="generate_filename" data-coverage="definition" data-ranges="[[1175,1227]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">generate_filename(song_name: str, preset_name: str, instrument_type: str, section_id: int, extended: bool, used_filenames: set[str], naming: str='preset')</code><span class="type">str</span></div>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">Input</span>Independent API called earlier during song/benchmark preparation, not during this apply continuation</div></li>
+        <li class="step"><div class="state"><span class="kind">State</span>Build Preset_Song or Song_Preset using underscores according to naming; instrument_type is not used in the filename</div></li>
+        <li class="branch">
+          <div class="condition">If extended</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Append -Abbr using SECTION_COLOURS[section_id]; unknown section raises KeyError</div></li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>Append .XML</div></li>
+        <li class="branch">
+          <div class="condition">If filename already exists in used_filenames</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Try -2, -3 and later suffixes until an unused exact-case filename is found</div></li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>Add the chosen filename to the supplied set</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Unique filename; filesystem contents are not checked</div>
+    </li>
+    <li class="call" id="serialise-xml" data-source="scripts/deluge_lib/extraction.py" data-symbol="serialise_xml" data-coverage="definition" data-ranges="[[1235,1257]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">serialise_xml(element: etree._Element, output_path: Path)</code><span class="type">None</span></div>
+      <ol class="steps">
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib</a><code class="signature">output_path.parent.mkdir(parents=True, exist_ok=True)</code></div>
+          <div class="return"><span class="kind">Return</span>Output parent</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://lxml.de/api/lxml.etree-module.html">lxml</a><code class="signature">etree.tostring(element, xml_declaration=True, encoding=&quot;UTF-8&quot;, pretty_print=True)</code></div>
+          <div class="return"><span class="kind">Return</span>Serialized bytes</div>
+        </li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib</a><code class="signature">output_path.write_bytes(xml_bytes)</code></div>
+          <div class="return"><span class="kind">Return</span>Preset written directly</div>
+        </li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>None; no atomic replacement</div>
+    </li>
+    <li class="call" id="write-manifest" data-source="scripts/extract_instruments.py" data-symbol="_write_manifest" data-coverage="definition" data-ranges="[[499,528]]">
+      <div class="call-head"><a class="file app" href="../../scripts/extract_instruments.py">extract_instruments.py</a><code class="signature">_write_manifest(output_dir: Path, all_results: list[ExtractionResult], instrument_type: str, songs_processed: int)</code><span class="type">None</span></div>
+      <ol class="steps">
+        <li class="branch">
+          <div class="repeat">For each result matching instrument_type</div>
+          <ol class="steps">
+            <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="build_manifest_entry" data-coverage="reference">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">build_manifest_entry(r)</code><span class="type">dict[str, str | int | list[str]]</span></div>
+              <p class="annotation"><a href="extraction-output.html#build-manifest-entry">Canonical implementation</a></p>
+              <div class="return"><span class="kind">Return</span>One extraction entry</div>
+            </li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="condition">If no entries</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">Exit</span>Return without writing a manifest</div></li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>Build generated UTC ISO timestamp, songs_processed, total_count and extractions</div></li>
+        <li class="call">
+          <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib</a><code class="signature">manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + &quot;\n&quot;, encoding=&quot;utf-8&quot;)</code></div>
+          <div class="return"><span class="kind">Return</span>output_dir/manifest.json written directly</div>
+        </li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>None; this is an extraction manifest, not scripts/data/sync_manifest.json</div>
+    </li>
+    <li class="call" id="build-manifest-entry" data-source="scripts/deluge_lib/extraction.py" data-symbol="build_manifest_entry" data-coverage="definition" data-ranges="[[1665,1683]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">build_manifest_entry(result: ExtractionResult)</code><span class="type">dict[str, str | int | list[str]]</span></div>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">State</span>Select output_filename, source_song, preset_name, preset_folder, instrument_type, section_id, colour_name, colour_abbr and differing_params</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Plain extraction metadata dict</div>
+    </li>
+  </ol>
+
+  <footer>
+    <p>Output writes use the accepted in-memory elements prepared before confirmation</p><p>Timestamp collisions and filesystem errors are not hidden by success-shaped fallbacks</p>
+    <p>Updated <time datetime="2026-11-05">2026-11-05</time></p>
+  </footer>
+</main>
+<script>
+  const calls = [...document.querySelectorAll(".trace .call")];
+  const depthControls = document.querySelector(".depth-controls");
+  const depthButtons = [...depthControls.querySelectorAll("button")];
+  const foldStatus = document.getElementById("fold-status");
+  const entries = new Map();
+
+  function selectDepth(value) {
+    for (const button of depthButtons)
+      button.setAttribute("aria-pressed", String(button.dataset.depth === value));
+  }
+
+  function setExpanded(entry, expanded) {
+    entry.steps.hidden = !expanded;
+    entry.button.setAttribute("aria-expanded", String(expanded));
+    entry.button.setAttribute("aria-label",
+      `${expanded ? "Collapse" : "Expand"} nested calls in ${entry.label}`);
+    entry.summary.hidden = expanded;
+  }
+
+  for (const [index, call] of calls.entries()) {
+    const steps = [...call.children].find(child => child.matches("ol.steps"));
+    if (!steps || !steps.querySelector(".call"))
+      continue;
+
+    const head = [...call.children].find(child => child.classList.contains("call-head"));
+    const label = `${head.querySelector(".file").textContent} ${head.querySelector(".signature").textContent}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "fold-toggle";
+    steps.id = `call-steps-${index + 1}`;
+    button.setAttribute("aria-controls", steps.id);
+
+    const summary = document.createElement("span");
+    summary.className = "fold-summary";
+    const count = steps.querySelectorAll(".call").length;
+    summary.textContent = `${count} nested ${count === 1 ? "call" : "calls"} hidden`;
+
+    let depth = 1;
+    for (let parent = call.parentElement.closest(".call"); parent;
+      parent = parent.parentElement.closest(".call"))
+      depth++;
+
+    const entry = { steps, button, summary, label, depth };
+    entries.set(call, entry);
+    head.prepend(button);
+    head.append(summary);
+    setExpanded(entry, true);
+
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      setExpanded(entry, expanded);
+      selectDepth(null);
+      foldStatus.textContent = `${expanded ? "Expanded" : "Collapsed"} ${label}`;
+    });
+  }
+
+  for (const button of depthButtons) {
+    button.addEventListener("click", () => {
+      const value = button.dataset.depth;
+      for (const entry of entries.values())
+        setExpanded(entry, value === "all" || entry.depth < Number(value));
+      selectDepth(value);
+      foldStatus.textContent = value === "all" ? "All calls expanded" : `Showing call depth ${value}`;
+    });
+  }
+
+  function revealTarget(hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (!target)
+      return;
+
+    let changed = false;
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      const entry = entries.get(parent);
+      if (entry && entry.steps.hidden) {
+        setExpanded(entry, true);
+        changed = true;
+      }
+    }
+    if (changed) {
+      selectDepth(null);
+      foldStatus.textContent = "Expanded the path to the linked step";
+    }
+    target.scrollIntoView({ block: "start" });
+  }
+
+  document.addEventListener("click", event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link)
+      revealTarget(link.getAttribute("href"));
+  });
+  window.addEventListener("hashchange", () => revealTarget(location.hash));
+  depthControls.hidden = false;
+  if (location.hash)
+    revealTarget(location.hash);
+</script>
+</body>
+</html>

@@ -126,6 +126,7 @@
     <p class="eyebrow">Execution flow</p>
     <h1>Sync from SD</h1>
     <p>Preview and confirm an SD-to-local mirror, apply its plan, then update the sync manifest</p>
+    <p><a href="index.html">All execution charts</a></p>
     <div class="legend" aria-label="Source layers">
       <span class="app">Script</span>
       <span class="library">Shared Deluge library</span>
@@ -142,7 +143,7 @@
   </header>
 
   <ol class="trace" aria-label="Nested execution calls in order">
-    <li class="call" id="main">
+    <li class="call" id="main" data-source="scripts/sync_from_sd.py" data-symbol="main" data-coverage="definition" data-ranges="[[29,121]]">
       <div class="call-head">
         <a class="file app" href="../../scripts/sync_from_sd.py">sync_from_sd.py</a>
         <code class="signature">main(argv: list[str] | None = None)</code>
@@ -172,26 +173,26 @@
           <div class="state"><span class="kind">Exit</span>Help or invalid arguments exit through argparse before configuration is loaded</div>
         </li>
         <li class="step"><div class="state"><span class="kind">State</span>XML alone selects "xml"; WAV alone selects "wav"; neither or both selects "both"</div></li>
-        <li class="call">
-          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">get_sd_card_path()</code><span class="type">Path</span></div>
-          <p class="annotation">Load scripts/.env with load_dotenv, read SD_CARD_PATH, resolve the path, and require a directory</p>
-          <div class="return"><span class="kind">Return</span>Validated SD-card path</div>
-          <div class="state"><span class="kind">Exit</span>Missing setting or missing directory raises SystemExit</div>
-        </li>
-        <li class="call">
-          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">get_deluge_root()</code><span class="type">Path</span></div>
-          <p class="annotation">Load scripts/.env again, read DELUGE_ROOT, resolve the path, and require a directory</p>
-          <div class="return"><span class="kind">Return</span>Validated local destination</div>
-          <div class="state"><span class="kind">Exit</span>Missing setting or missing directory raises SystemExit</div>
-        </li>
-        <li class="call">
-          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">read_manifest(SYNC_MANIFEST_PATH)</code><span class="type">FilesDict</span></div>
-          <p class="annotation">Read scripts/data/sync_manifest.json; convert accepted records into SD/local size and mtime fields plus an optional hash</p>
-          <div class="return"><span class="kind">Return</span>Manifest records, or an empty dict with a warning for a missing file or caught read/JSON errors</div>
-          <div class="state"><span class="kind">Exception</span>Unexpected JSON structure or invalid per-record conversions are not caught here</div>
-        </li>
+        <li class="call" id="sd-path" data-source="scripts/deluge_lib/cli_utils.py" data-symbol="get_sd_card_path" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">get_sd_card_path()</code><span class="type">Path</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="shared-cli.html#get-sd-card-path">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Validated SD root</div>
+</li>
+        <li class="call" id="deluge-root" data-source="scripts/deluge_lib/cli_utils.py" data-symbol="get_deluge_root" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">get_deluge_root()</code><span class="type">Path</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="shared-cli.html#get-deluge-root">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Validated local root</div>
+</li>
+        <li class="call" id="read-manifest" data-source="scripts/deluge_lib/syncing.py" data-symbol="read_manifest" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">read_manifest(SYNC_MANIFEST_PATH)</code><span class="type">FilesDict</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="manifest-io.html#read-manifest">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Manifest records</div>
+</li>
         <li class="step"><div class="state"><span class="kind">Output</span>Print source and destination paths</div></li>
-        <li class="call" id="planning">
+        <li class="call" id="planning" data-source="scripts/deluge_lib/syncing.py" data-symbol="compute_sync" data-coverage="reference">
           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">compute_sync(sd_path, deluge_root, manifest=manifest_files, source_is_sd=True, file_filter=file_filter)</code><span class="type">tuple[SyncPlan, ScanResult]</span></div>
           <p class="annotation">Scan both trees and compare files; <a href="sync-planning.html#compute-sync">expand sync planning</a></p>
           <div class="state"><span class="kind">State</span>May refresh manifest_files in memory while checking metadata and hashes</div>
@@ -201,20 +202,22 @@
           <div class="condition">If both plan.files_to_copy and plan.files_to_delete are empty</div>
           <ol class="steps"><li class="step"><div class="state"><span class="kind">Exit</span>Print "Already up to date" and return; no log, manifest write, or cleanup</div></li></ol>
         </li>
-        <li class="call">
-          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">print_plan(plan, dest=deluge_root)</code><span class="type">None</span></div>
-          <p class="annotation">Show existing copy targets as updates, new targets as copies, removals as trash, and action totals</p>
-          <div class="state"><span class="kind">Output</span>Human-readable preview; no files changed</div>
-        </li>
+        <li class="call" id="print-plan" data-source="scripts/deluge_lib/syncing.py" data-symbol="print_plan" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">print_plan(plan, dest=deluge_root)</code><span class="type">None</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="sync-reporting.html#print-plan">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Preview printed</div>
+</li>
         <li class="branch">
           <div class="condition">If args.dry_run</div>
           <ol class="steps"><li class="step"><div class="state"><span class="kind">Exit</span>Print "Dry run complete" and return before confirmation or writes</div></li></ol>
         </li>
-        <li class="call">
-          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">confirm_apply(f"This will overwrite {deluge_root} to match {sd_path} &#92;nContinue?")</code><span class="type">bool</span></div>
-          <p class="annotation">Print the warning, prompt with [y/N], strip whitespace, and lowercase the response</p>
-          <div class="return"><span class="kind">Return</span>True only for "y" after normalization; otherwise False</div>
-        </li>
+        <li class="call" id="confirm-apply" data-source="scripts/deluge_lib/cli_utils.py" data-symbol="confirm_apply" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/cli_utils.py">cli_utils.py</a><code class="signature">confirm_apply(f&quot;This will overwrite {deluge_root} to match {sd_path} &amp;#92;nContinue?&quot;)</code><span class="type">bool</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="shared-cli.html#confirm-apply">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Whether the user consented</div>
+</li>
         <li class="branch">
           <div class="condition">If confirmation is False</div>
           <ol class="steps"><li class="step"><div class="state"><span class="kind">Exit</span>Print "Aborted" and return without writes</div></li></ol>
@@ -223,7 +226,7 @@
           <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/time.html">time</a><code class="signature">time.monotonic()</code><span class="type">float</span></div>
           <div class="return"><span class="kind">Return</span>start_time for file-operation timing</div>
         </li>
-        <li class="call" id="execution">
+        <li class="call" id="execution" data-source="scripts/deluge_lib/syncing.py" data-symbol="execute_plan" data-coverage="reference">
           <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">execute_plan(plan, dest=deluge_root)</code><span class="type">SyncResult</span></div>
           <p class="annotation">Copy first, then trash destination-only files using the default delete_mode="trash"; <a href="sync-execution.html#execute-plan">expand plan execution</a></p>
           <div class="return"><span class="kind">Return</span>result with copied, trashed, and unchanged counts on success</div>
@@ -240,10 +243,12 @@
               <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">SyncResult(copied=exc.copied, trashed=exc.trashed, unchanged=exc.unchanged)</code></div>
               <div class="return"><span class="kind">Result</span>error_result describing completed work</div>
             </li>
-            <li class="call">
-              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">append_sync_log(error_result, direction="from-sd", elapsed_seconds=elapsed, error=str(exc))</code><span class="type">None</span></div>
-              <div class="state"><span class="kind">Output</span>Append FAILED, timestamp, direction, counters, elapsed time, and error to scripts/data/logs/sync.log</div>
-            </li>
+            <li class="call" id="append-sync-log" data-source="scripts/deluge_lib/syncing.py" data-symbol="append_sync_log" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">append_sync_log(error_result, direction=&quot;from-sd&quot;, elapsed_seconds=elapsed, error=str(exc))</code><span class="type">None</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="sync-reporting.html#append-sync-log">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Log entry appended</div>
+</li>
             <li class="step"><div class="state"><span class="kind">Exit</span>Print failure details and raise SystemExit(1); manifest rebuilding, success reporting, and cleanup are skipped</div></li>
           </ol>
         </li>
@@ -254,34 +259,26 @@
               <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/time.html">time</a><code class="signature">time.monotonic()</code><span class="type">float</span></div>
               <div class="return"><span class="kind">Return</span>Completion time; subtract start_time to compute elapsed</div>
             </li>
-            <li class="call">
-              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">append_sync_log(result, direction="from-sd", elapsed_seconds=elapsed)</code><span class="type">None</span></div>
-              <div class="state"><span class="kind">Output</span>Append SUCCESS and file-operation counters to scripts/data/logs/sync.log before any manifest update</div>
-            </li>
+            <li class="call" data-source="scripts/deluge_lib/syncing.py" data-symbol="append_sync_log" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">append_sync_log(result, direction=&quot;from-sd&quot;, elapsed_seconds=elapsed)</code><span class="type">None</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="sync-reporting.html#append-sync-log">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Log entry appended</div>
+</li>
             <li class="branch" id="manifest-update">
               <div class="condition">Try to rebuild and persist the manifest</div>
               <ol class="steps">
-                <li class="call">
+                <li class="call" data-source="scripts/deluge_lib/syncing.py" data-symbol="build_post_sync_manifest" data-coverage="reference">
                   <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">build_post_sync_manifest(plan, src_scan, deluge_root, manifest_files, source_is_sd=True, file_filter=file_filter)</code><span class="type">dict[str, FileRecord]</span></div>
                   <p class="annotation">Reuse unchanged records, capture destination metadata, and hash copied/new files; <a href="post-sync-manifest.html#build-manifest">expand manifest rebuilding</a></p>
                   <div class="return"><span class="kind">Return</span>updated_manifest, preserving records for excluded file types</div>
                 </li>
-                <li class="call">
-                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">write_manifest(SYNC_MANIFEST_PATH, files=updated_manifest)</code><span class="type">None</span></div>
-                  <p class="annotation">Create the parent directory and serialize version 2, a current timestamp, and records with explicit hash fields</p>
-                  <ol class="steps">
-                    <li class="call">
-                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/tempfile.html">tempfile.py</a><code class="signature">tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=str(path.parent), suffix=".tmp", delete=False)</code></div>
-                      <div class="return"><span class="kind">Result</span>Temporary text file in the manifest directory, entered as fd</div>
-                    </li>
-                    <li class="step"><div class="state"><span class="kind">Output</span>Write and flush JSON through fd, then close the file on leaving its context</div></li>
-                    <li class="call">
-                      <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib.py</a><code class="signature">tmp_path.replace(path)</code></div>
-                      <div class="state"><span class="kind">Output</span>Atomically replace the manifest with the completed temporary file</div>
-                    </li>
-                  </ol>
-                  <div class="state"><span class="kind">Exception</span>Write/flush or replace failures attempt temporary-file removal and re-raise</div>
-                </li>
+                <li class="call" id="write-manifest" data-source="scripts/deluge_lib/syncing.py" data-symbol="write_manifest" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">write_manifest(SYNC_MANIFEST_PATH, files=updated_manifest)</code><span class="type">None</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="manifest-io.html#write-manifest">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>None after persistence</div>
+</li>
               </ol>
             </li>
             <li class="branch">
@@ -289,13 +286,12 @@
               <ol class="steps"><li class="step"><div class="state"><span class="kind">Output</span>Print a warning that file sync succeeded but manifest updating failed; continue</div></li></ol>
             </li>
             <li class="step"><div class="state"><span class="kind">Output</span>Print "Sync complete" with copied and trashed counts</div></li>
-            <li class="call">
-              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">clean_empty_dirs(deluge_root)</code><span class="type">int</span></div>
-              <p class="annotation">Walk bottom-up, preserve the root and its immediate children, and attempt rmdir for directories deemed empty</p>
-              <p class="annotation">Filter .trash names from child checks; bottom-up traversal does not prune already-visited .trash subtrees</p>
-              <div class="state"><span class="kind">Output</span>Report removals and warn on caught rmdir failures</div>
-              <div class="return"><span class="kind">Return</span>Number of directories removed, ignored by main</div>
-            </li>
+            <li class="call" id="cleanup" data-source="scripts/deluge_lib/syncing.py" data-symbol="clean_empty_dirs" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a><code class="signature">clean_empty_dirs(deluge_root)</code><span class="type">int</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="directory-cleanup.html#clean-empty-dirs">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Removed-directory count, ignored by main</div>
+</li>
           </ol>
         </li>
       </ol>
@@ -305,7 +301,7 @@
 
   <footer>
     <p>Source-derived alternatives, not a runtime recording; dry runs still scan and may hash files</p><p>Only execute_plan SyncError and manifest-update OSError have dedicated handlers; other failures, including log I/O errors, can propagate</p><p>Standard-library calls are shown at API level; Python 3.12 documentation links do not assert the executing interpreter version</p>
-    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+    <p>Updated <time datetime="2026-11-05">2026-11-05</time></p>
   </footer>
 </main>
 <script>

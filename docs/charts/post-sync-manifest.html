@@ -126,6 +126,7 @@
     <p class="eyebrow">Execution flow</p>
     <h1>Post-sync manifest rebuilding</h1>
     <p>Build manifest records from the retained source scan and successful plan, hashing copied or newly recorded files</p>
+    <p><a href="index.html">All execution charts</a></p>
     <div class="legend" aria-label="Source layers">
       <span class="app">Script</span>
       <span class="library">Shared Deluge library</span>
@@ -142,7 +143,7 @@
   </header>
 
   <ol class="trace" aria-label="Nested execution calls in order">
-    <li class="call" id="build-manifest">
+    <li class="call" id="build-manifest" data-source="scripts/deluge_lib/syncing.py" data-symbol="build_post_sync_manifest" data-coverage="definition" data-ranges="[[127,197]]">
       <div class="call-head">
         <a class="file library" href="../../scripts/deluge_lib/syncing.py">syncing.py</a>
         <code class="signature">build_post_sync_manifest(plan: SyncPlan, src_scan: ScanResult, dest: Path, old_files: dict[str, FileRecord], source_is_sd: bool, file_filter: str = "both")</code>
@@ -153,8 +154,9 @@
         <li class="branch">
           <div class="repeat">For each (_src, dst) in plan.files_to_copy</div>
           <ol class="steps">
-            <li class="call">
+            <li class="call" data-source="scripts/deluge_lib/scanning.py" data-symbol="normalise_key" data-coverage="reference">
               <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">normalise_key(dst.relative_to(dest))</code><span class="type">str</span></div>
+              <p class="annotation">Use the <a href="filesystem-scanning.html#normalise-key">canonical key normalizer</a></p>
               <div class="return"><span class="kind">Return</span>Normalized copied-file key, added to copied_keys</div>
             </li>
           </ol>
@@ -175,17 +177,27 @@
                   <div class="call-head"><a class="file framework" href="https://docs.python.org/3.12/library/pathlib.html">pathlib.py</a><code class="signature">dst_path.stat()</code></div>
                   <div class="return"><span class="kind">Return</span>Current destination size and raw mtime</div>
                 </li>
-                <li class="call">
-                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">normalise_mtime(dst_stat.st_mtime)</code><span class="type">float</span></div>
-                  <div class="return"><span class="kind">Return</span>Destination mtime truncated to a 2-second boundary</div>
-                </li>
                 <li class="branch">
                   <div class="condition">If source_is_sd</div>
-                  <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Record SD size/mtime from src_entry and local size/mtime from destination stat</div></li></ol>
+                  <ol class="steps">
+                    <li class="call" data-source="scripts/deluge_lib/scanning.py" data-symbol="normalise_mtime" data-coverage="reference">
+                      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">normalise_mtime(dst_stat.st_mtime)</code><span class="type">float</span></div>
+                      <p class="annotation">Use the <a href="filesystem-scanning.html#normalise-mtime">canonical timestamp normalizer</a> while evaluating the local_mtime field</p>
+                      <div class="return"><span class="kind">Return</span>Normalized destination mtime</div>
+                    </li>
+                    <li class="step"><div class="state"><span class="kind">State</span>Assign the record with SD size/mtime from src_entry and local size/normalized mtime from destination stat</div></li>
+                  </ol>
                 </li>
                 <li class="branch">
                   <div class="condition">Otherwise, source is local and destination is SD</div>
-                  <ol class="steps"><li class="step"><div class="state"><span class="kind">State</span>Record local size/mtime from src_entry and SD size/mtime from destination stat</div></li></ol>
+                  <ol class="steps">
+                    <li class="call" data-source="scripts/deluge_lib/scanning.py" data-symbol="normalise_mtime" data-coverage="reference">
+                      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/scanning.py">scanning.py</a><code class="signature">normalise_mtime(dst_stat.st_mtime)</code><span class="type">float</span></div>
+                      <p class="annotation">Use the <a href="filesystem-scanning.html#normalise-mtime">same canonical normalizer</a> while evaluating the sd_mtime field</p>
+                      <div class="return"><span class="kind">Return</span>Normalized destination mtime</div>
+                    </li>
+                    <li class="step"><div class="state"><span class="kind">State</span>Assign the record with local size/mtime from src_entry and SD size/normalized mtime from destination stat</div></li>
+                  </ol>
                 </li>
                 <li class="step"><div class="state"><span class="kind">State</span>Queue (key, dst_path) in keys_to_hash</div></li>
               </ol>
@@ -199,11 +211,12 @@
               <div class="repeat">For each (key, path) in keys_to_hash, after all metadata records are built</div>
               <ol class="steps">
                 <li class="step"><div class="state"><span class="kind">Output</span>Print hashing progress</div></li>
-                <li class="call">
-                  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(path)</code><span class="type">str</span></div>
-                  <p class="annotation">Open the destination file in binary mode, read 64 KiB chunks, and compute SHA256</p>
-                  <div class="return"><span class="kind">Return</span>Hex digest for the copied/newly recorded file</div>
-                </li>
+                <li class="call" data-source="scripts/deluge_lib/deluge_sdk.py" data-symbol="hash_file" data-coverage="reference">
+  <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/deluge_sdk.py">deluge_sdk.py</a><code class="signature">hash_file(path)</code><span class="type">str</span></div>
+  <p class="annotation">Interface only; implementation is owned by the linked chart</p>
+  <p class="annotation"><a href="content-hashing.html#hash-file">Canonical implementation</a></p>
+  <div class="return"><span class="kind">Return</span>Content digest for the supplied path</div>
+</li>
                 <li class="step"><div class="state"><span class="kind">State</span>Assign the returned digest to updated_manifest[key]["hash"]</div></li>
               </ol>
             </li>
@@ -232,7 +245,7 @@
 
   <footer>
     <p><a href="../../scripts/sync_from_sd.py">sync_from_sd.py</a> uses source_is_sd=True; <a href="../../scripts/sync_to_sd.py">sync_to_sd.py</a> uses False; each separately calls write_manifest after this function returns</p><p><a href="../../scripts/fix_references.py">fix_references.py</a> shares manifest read/write helpers but does not call this rebuilding flow</p><p>Reused records are not copied, restatted, or rehashed; even an unchanged source file is hashed if it lacks an old manifest record</p>
-    <p>Updated <time datetime="2026-10-25">2026-10-25</time></p>
+    <p>Updated <time datetime="2026-11-05">2026-11-05</time></p>
   </footer>
 </main>
 <script>

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Soft parameter differences and kit thresholds</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #f8fafc;
+      --text: #17243a;
+      --muted: #526277;
+      --guide: #cbd5e1;
+      --app: #166534;
+      --library: #7635a4;
+      --framework: #1d4ed8;
+      --result: #0f766e;
+      --condition: #925000;
+      --badge: #e9eef5;
+      --focus: #c06800;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #151b25;
+        --text: #e4ebf5;
+        --muted: #a9b8cc;
+        --guide: #3d4b61;
+        --app: #8bddaa;
+        --library: #d1a7ff;
+        --framework: #90baff;
+        --result: #74d8cb;
+        --condition: #efbd74;
+        --badge: #263246;
+        --focus: #ffc477;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 20px; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 30px 28px 48px; }
+    h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.2; letter-spacing: -0.6px; }
+    header { margin-bottom: 26px; }
+    header p { margin: 0 0 12px; color: var(--muted); }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+    .legend { font-weight: 650; }
+    .app { color: var(--app); }
+    .library { color: var(--library); }
+    .framework { color: var(--framework); }
+    a { color: var(--framework); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button { font: inherit; }
+    .depth-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; }
+    .depth-controls button {
+      border: 1px solid var(--guide);
+      border-radius: 4px;
+      padding: 3px 9px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .depth-controls button[aria-pressed="true"] { background: var(--badge); border-color: var(--framework); }
+    .fold-toggle {
+      flex: 0 0 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      align-self: center;
+    }
+    .fold-toggle::before { content: "\25BE"; }
+    .fold-toggle[aria-expanded="false"]::before { content: "\25B8"; }
+    .fold-toggle:hover { background: var(--badge); color: var(--text); }
+    .fold-summary { color: var(--muted); font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    code { font: 0.93em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    ol.trace, ol.steps { list-style: none; padding: 0; margin: 0; }
+    ol.steps {
+      margin: 5px 0 8px 5px;
+      padding-left: 19px;
+      border-left: 1px solid var(--guide);
+    }
+    li.call { margin: 9px 0; }
+    .call-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+    .file { font-size: 12px; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .file:hover { text-decoration: underline; }
+    .signature { font-size: 13px; }
+    .type { padding: 1px 6px; border-radius: 4px; background: var(--badge); color: var(--muted); font-size: 11px; }
+    .annotation { margin: 2px 0 5px; color: var(--muted); font-size: 13px; }
+    .annotation::before { content: "\2022"; margin-right: 7px; }
+    .state, .return { margin: 5px 0; font-size: 12px; }
+    .state { color: var(--muted); }
+    .return { color: var(--result); }
+    .kind { margin-right: 7px; font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.5px; }
+    .condition, .repeat { color: var(--condition); font-size: 12px; font-weight: 650; }
+    li.branch { margin: 9px 0; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--guide); color: var(--muted); font-size: 12px; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 700px) {
+      main { padding: 20px 12px; }
+      ol.steps { padding-left: 11px; margin-left: 2px; }
+      .call-head { column-gap: 7px; }
+      .signature { font-size: 12px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: black; }
+      main { max-width: none; padding: 0; }
+      .depth-controls, .fold-toggle, .fold-summary { display: none !important; }
+      ol.steps[hidden] { display: block !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Execution flow</p>
+    <h1>Soft parameter differences and kit thresholds</h1>
+    <p>Collect ordered soft differences using signed hex distance, then apply synth or per-kit-scope count thresholds</p>
+    <p><a href="index.html">All execution charts</a></p>
+    <div class="legend" aria-label="Source layers">
+      <span class="app">Script</span><span class="library">Shared Deluge library</span><span class="framework">Platform or dependency API</span>
+    </div>
+    <div class="depth-controls" role="group" aria-label="Visible call depth" hidden>
+      <span>Show depth</span>
+      <button type="button" data-depth="1" aria-pressed="false">1</button>
+      <button type="button" data-depth="2" aria-pressed="false">2</button>
+      <button type="button" data-depth="3" aria-pressed="false">3</button>
+      <button type="button" data-depth="all" aria-pressed="true">All</button>
+    </div>
+    <span class="sr-only" id="fold-status" role="status" aria-live="polite"></span>
+  </header>
+
+  <ol class="trace" aria-label="Nested execution calls in order">
+    <li class="call" id="collect-soft-diffs" data-source="scripts/deluge_lib/extraction.py" data-symbol="_collect_soft_diffs" data-coverage="definition" data-ranges="[[2213,2366]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_collect_soft_diffs(dp_a: etree._Element | None, dp_b: etree._Element | None, root_a: etree._Element, root_b: etree._Element, config: ComparisonConfig, prefix: str='', soft_elements: dict[str, set[str]] | None=None)</code><span class="type">list[str]</span></div>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">Input</span>Two defaultParams elements, their sound/kit roots, config, optional output prefix and soft-element skip map</div></li>
+        <li class="step"><div class="state"><span class="kind">State</span>Use config.param_percent_threshold and config.ignored_attrs; initialize differences</div></li>
+        <li class="branch">
+          <div class="repeat">1: If both defaultParams exist, for each sorted attribute in their union</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Skip ignored or equal values; for two hex values use the linked threshold helper, otherwise record any unequal strings</div></li>
+            <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_hex_diff_exceeds" data-coverage="reference">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_hex_diff_exceeds(val_a, val_b, threshold)</code><span class="type">bool</span></div>
+              <p class="annotation"><a href="comparison-soft.html#hex-diff-exceeds">Canonical implementation</a></p>
+              <div class="return"><span class="kind">Return</span>Whether a hex change is large enough; invoked only for unequal recognized hex values</div>
+            </li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="repeat">2: For envelope1, envelope2 and equalizer when both defaultParams exist</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Compare the union of child attributes, using {} for an absent child and the same ignored/equality/hex threshold rule</div></li>
+          </ol>
+        </li>
+        <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_build_patchcable_dict" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_build_patchcable_dict(dp_a)</code><span class="type">dict[tuple[str, str], str]</span></div>
+          <p class="annotation"><a href="comparison-structure.html#build-patchcable-dict">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Left route amounts</div>
+        </li>
+        <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_build_patchcable_dict" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_build_patchcable_dict(dp_b)</code><span class="type">dict[tuple[str, str], str]</span></div>
+          <p class="annotation"><a href="comparison-structure.html#build-patchcable-dict">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Right route amounts</div>
+        </li>
+        <li class="branch">
+          <div class="repeat">3: For common routing keys</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Compare amounts with the same threshold rule; structural changes are handled by hard checks</div></li>
+          </ol>
+        </li>
+        <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_build_patchcable_element_dict" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_build_patchcable_element_dict(dp_a)</code><span class="type">dict[tuple[str, str], etree._Element]</span></div>
+          <p class="annotation"><a href="comparison-structure.html#build-patchcable-element-dict">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Left control elements</div>
+        </li>
+        <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_build_patchcable_element_dict" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_build_patchcable_element_dict(dp_b)</code><span class="type">dict[tuple[str, str], etree._Element]</span></div>
+          <p class="annotation"><a href="comparison-structure.html#build-patchcable-element-dict">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Right control elements</div>
+        </li>
+        <li class="branch">
+          <div class="repeat">3b: For common cables with depthControlledBy on both sides and matching nested source</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Compare nested patchCable amounts; skip unmatched structural cases</div></li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="repeat">4: For delay, sidechain and audioCompressor on the two roots</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Compare attribute unions, treating an absent side as {}; skip only when both elements are absent</div></li>
+          </ol>
+        </li>
+        <li class="branch">
+          <div class="repeat">5: For configured soft_elements in sorted order, when supplied</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">State</span>Compare attribute unions of those child elements; skip ignored attributes and that element map entry skip-set</div></li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>For each changed field append its prefixed description in pass order; helper is invoked wherever both unequal values are hex</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Soft-difference descriptions for this one scope; no verdict</div>
+    </li>
+    <li class="call" id="compare-kit-soft" data-source="scripts/deluge_lib/extraction.py" data-symbol="_compare_kit_soft" data-coverage="definition" data-ranges="[[2451,2517]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_compare_kit_soft(preset_a: etree._Element, preset_b: etree._Element, config: ComparisonConfig)</code><span class="type">ComparisonResult</span></div>
+      <ol class="steps">
+        <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_collect_soft_diffs" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_collect_soft_diffs(dp_a, dp_b, preset_a, preset_b, config)</code><span class="type">list[str]</span></div>
+          <p class="annotation"><a href="comparison-soft.html#collect-soft-diffs">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Kit-level differences</div>
+        </li>
+        <li class="branch">
+          <div class="condition">If kit-level count &gt;= param_count_threshold</div>
+          <ol class="steps">
+            <li class="step"><div class="state"><span class="kind">Exit</span>Return distinct ComparisonResult with kit-level reason</div></li>
+          </ol>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>Accumulate the below-threshold kit-level differences</div></li>
+        <li class="branch">
+          <div class="repeat">For each sound pair from strict zip</div>
+          <ol class="steps">
+            <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_collect_soft_diffs" data-coverage="reference">
+              <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_collect_soft_diffs(sdp_a, sdp_b, sa, sb, config, prefix=f&quot;sound[{name}]&quot;, soft_elements=config.kit_sound_soft_elements)</code><span class="type">list[str]</span></div>
+              <p class="annotation"><a href="comparison-soft.html#collect-soft-diffs">Canonical implementation</a></p>
+              <div class="return"><span class="kind">Return</span>Differences for that one sound</div>
+            </li>
+            <li class="step"><div class="state"><span class="kind">State</span>Accumulate the returned differences</div></li>
+            <li class="branch">
+              <div class="condition">If this individual sound count &gt;= param_count_threshold</div>
+              <ol class="steps">
+                <li class="step"><div class="state"><span class="kind">Exit</span>Return distinct ComparisonResult with sound-specific reason and accumulated differences</div></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Similar ComparisonResult when every individual scope is below threshold, even if the combined difference count is larger</div>
+    </li>
+    <li class="call" id="hex-diff-exceeds" data-source="scripts/deluge_lib/extraction.py" data-symbol="_hex_diff_exceeds" data-coverage="definition" data-ranges="[[2046,2051]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_hex_diff_exceeds(val_a: str, val_b: str, threshold: float)</code><span class="type">bool</span></div>
+      <ol class="steps">
+        <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_parse_hex_value" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_parse_hex_value(val_a)</code><span class="type">int</span></div>
+          <p class="annotation"><a href="comparison-soft.html#parse-hex-value">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Signed a</div>
+        </li>
+        <li class="call" data-source="scripts/deluge_lib/extraction.py" data-symbol="_parse_hex_value" data-coverage="reference">
+          <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_parse_hex_value(val_b)</code><span class="type">int</span></div>
+          <p class="annotation"><a href="comparison-soft.html#parse-hex-value">Canonical implementation</a></p>
+          <div class="return"><span class="kind">Return</span>Signed b</div>
+        </li>
+        <li class="step"><div class="state"><span class="kind">State</span>Compute abs(a-b) / 0xFFFFFFFF &gt; threshold, strictly greater rather than greater-or-equal</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>bool</div>
+    </li>
+    <li class="call" id="parse-hex-value" data-source="scripts/deluge_lib/extraction.py" data-symbol="_parse_hex_value" data-coverage="definition" data-ranges="[[2031,2043]]">
+      <div class="call-head"><a class="file library" href="../../scripts/deluge_lib/extraction.py">extraction.py</a><code class="signature">_parse_hex_value(hex_str: str)</code><span class="type">int</span></div>
+      <ol class="steps">
+        <li class="step"><div class="state"><span class="kind">State</span>If more than ten characters, keep the first ten to discard automation after the static value</div></li>
+        <li class="step"><div class="state"><span class="kind">State</span>Parse base 16; if raw &gt;= 0x80000000 subtract 0x100000000</div></li>
+        <li class="step"><div class="state"><span class="kind">Exception</span>Invalid hex strings raise ValueError</div></li>
+      </ol>
+      <div class="return"><span class="kind">Return</span>Signed integer</div>
+    </li>
+  </ol>
+
+  <footer>
+    <p>The default proportional threshold is 10% of the full 32-bit span; default count threshold is three</p><p>The signed parser is also reused by sidechain detection</p>
+    <p>Updated <time datetime="2026-11-05">2026-11-05</time></p>
+  </footer>
+</main>
+<script>
+  const calls = [...document.querySelectorAll(".trace .call")];
+  const depthControls = document.querySelector(".depth-controls");
+  const depthButtons = [...depthControls.querySelectorAll("button")];
+  const foldStatus = document.getElementById("fold-status");
+  const entries = new Map();
+
+  function selectDepth(value) {
+    for (const button of depthButtons)
+      button.setAttribute("aria-pressed", String(button.dataset.depth === value));
+  }
+
+  function setExpanded(entry, expanded) {
+    entry.steps.hidden = !expanded;
+    entry.button.setAttribute("aria-expanded", String(expanded));
+    entry.button.setAttribute("aria-label",
+      `${expanded ? "Collapse" : "Expand"} nested calls in ${entry.label}`);
+    entry.summary.hidden = expanded;
+  }
+
+  for (const [index, call] of calls.entries()) {
+    const steps = [...call.children].find(child => child.matches("ol.steps"));
+    if (!steps || !steps.querySelector(".call"))
+      continue;
+
+    const head = [...call.children].find(child => child.classList.contains("call-head"));
+    const label = `${head.querySelector(".file").textContent} ${head.querySelector(".signature").textContent}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "fold-toggle";
+    steps.id = `call-steps-${index + 1}`;
+    button.setAttribute("aria-controls", steps.id);
+
+    const summary = document.createElement("span");
+    summary.className = "fold-summary";
+    const count = steps.querySelectorAll(".call").length;
+    summary.textContent = `${count} nested ${count === 1 ? "call" : "calls"} hidden`;
+
+    let depth = 1;
+    for (let parent = call.parentElement.closest(".call"); parent;
+      parent = parent.parentElement.closest(".call"))
+      depth++;
+
+    const entry = { steps, button, summary, label, depth };
+    entries.set(call, entry);
+    head.prepend(button);
+    head.append(summary);
+    setExpanded(entry, true);
+
+    button.addEventListener("click", () => {
+      const expanded = button.getAttribute("aria-expanded") !== "true";
+      setExpanded(entry, expanded);
+      selectDepth(null);
+      foldStatus.textContent = `${expanded ? "Expanded" : "Collapsed"} ${label}`;
+    });
+  }
+
+  for (const button of depthButtons) {
+    button.addEventListener("click", () => {
+      const value = button.dataset.depth;
+      for (const entry of entries.values())
+        setExpanded(entry, value === "all" || entry.depth < Number(value));
+      selectDepth(value);
+      foldStatus.textContent = value === "all" ? "All calls expanded" : `Showing call depth ${value}`;
+    });
+  }
+
+  function revealTarget(hash) {
+    const target = document.getElementById(hash.slice(1));
+    if (!target)
+      return;
+
+    let changed = false;
+    for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+      const entry = entries.get(parent);
+      if (entry && entry.steps.hidden) {
+        setExpanded(entry, true);
+        changed = true;
+      }
+    }
+    if (changed) {
+      selectDepth(null);
+      foldStatus.textContent = "Expanded the path to the linked step";
+    }
+    target.scrollIntoView({ block: "start" });
+  }
+
+  document.addEventListener("click", event => {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    const link = event.target.closest('a[href^="#"]');
+    if (link)
+      revealTarget(link.getAttribute("href"));
+  });
+  window.addEventListener("hashchange", () => revealTarget(location.hash));
+  depthControls.hidden = false;
+  if (location.hash)
+    revealTarget(location.hash);
+</script>
+</body>
+</html>

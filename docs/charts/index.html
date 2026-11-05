@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Deluge execution charts</title><style>
+    :root {
+      color-scheme: light dark;
+      --background: #f8fafc;
+      --text: #17243a;
+      --muted: #526277;
+      --guide: #cbd5e1;
+      --app: #166534;
+      --library: #7635a4;
+      --framework: #1d4ed8;
+      --result: #0f766e;
+      --condition: #925000;
+      --badge: #e9eef5;
+      --focus: #c06800;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #151b25;
+        --text: #e4ebf5;
+        --muted: #a9b8cc;
+        --guide: #3d4b61;
+        --app: #8bddaa;
+        --library: #d1a7ff;
+        --framework: #90baff;
+        --result: #74d8cb;
+        --condition: #efbd74;
+        --badge: #263246;
+        --focus: #ffc477;
+      }
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-padding-top: 20px; }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 30px 28px 48px; }
+    h1 { margin: 4px 0 8px; font-size: 30px; line-height: 1.2; letter-spacing: -0.6px; }
+    header { margin-bottom: 26px; }
+    header p { margin: 0 0 12px; color: var(--muted); }
+    .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; }
+    .legend { font-weight: 650; }
+    .app { color: var(--app); }
+    .library { color: var(--library); }
+    .framework { color: var(--framework); }
+    a { color: var(--framework); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+    button { font: inherit; }
+    .depth-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 14px; font-size: 12px; }
+    .depth-controls button {
+      border: 1px solid var(--guide);
+      border-radius: 4px;
+      padding: 3px 9px;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .depth-controls button[aria-pressed="true"] { background: var(--badge); border-color: var(--framework); }
+    .fold-toggle {
+      flex: 0 0 20px;
+      width: 20px;
+      border: 0;
+      border-radius: 3px;
+      padding: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      align-self: center;
+    }
+    .fold-toggle::before { content: "\25BE"; }
+    .fold-toggle[aria-expanded="false"]::before { content: "\25B8"; }
+    .fold-toggle:hover { background: var(--badge); color: var(--text); }
+    .fold-summary { color: var(--muted); font-size: 11px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    code { font: 0.93em/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    ol.trace, ol.steps { list-style: none; padding: 0; margin: 0; }
+    ol.steps {
+      margin: 5px 0 8px 5px;
+      padding-left: 19px;
+      border-left: 1px solid var(--guide);
+    }
+    li.call { margin: 9px 0; }
+    .call-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+    .file { font-size: 12px; font-weight: 750; text-decoration: none; overflow-wrap: anywhere; }
+    .file:hover { text-decoration: underline; }
+    .signature { font-size: 13px; }
+    .type { padding: 1px 6px; border-radius: 4px; background: var(--badge); color: var(--muted); font-size: 11px; }
+    .annotation { margin: 2px 0 5px; color: var(--muted); font-size: 13px; }
+    .annotation::before { content: "\2022"; margin-right: 7px; }
+    .state, .return { margin: 5px 0; font-size: 12px; }
+    .state { color: var(--muted); }
+    .return { color: var(--result); }
+    .kind { margin-right: 7px; font-size: 10px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.5px; }
+    .condition, .repeat { color: var(--condition); font-size: 12px; font-weight: 650; }
+    li.branch { margin: 9px 0; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--guide); color: var(--muted); font-size: 12px; }
+    footer p { margin: 5px 0; }
+    @media (max-width: 700px) {
+      main { padding: 20px 12px; }
+      ol.steps { padding-left: 11px; margin-left: 2px; }
+      .call-head { column-gap: 7px; }
+      .signature { font-size: 12px; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { background: white; color: black; }
+      main { max-width: none; padding: 0; }
+      .depth-controls, .fold-toggle, .fold-summary { display: none !important; }
+      ol.steps[hidden] { display: block !important; }
+    }
+  </style></head>
+<body><main><header><p class="eyebrow">Execution chart index</p><h1>Deluge execution charts</h1><p>Source-derived flows for every management script, report, extraction subsystem and configured developer operation</p><p>Each linked chart opens independently with its inputs, outcomes, alternatives and canonical helper links</p></header>
+<section><h2>Scripts</h2><ul><li><a href="sync-from-sd.html">Sync from SD</a><p class="annotation">SD-to-local preview, trash, manifest update and cleanup</p></li>
+<li><a href="sync-to-sd.html">Sync local files to SD</a><p class="annotation">Preview and confirm the local-to-SD mirror, apply permanent deletions, then update the manifest</p></li>
+<li><a href="sync-samples-to-cloud.html">Sync samples to cloud backup</a><p class="annotation">Preview and confirm a WAV-only mirror into a local cloud-backup folder, then log and clean up</p></li>
+<li><a href="create-backup.html">Timestamped ZIP backup</a><p class="annotation">Scan XML/WAV files, optionally preview totals, then write and verify a timestamped compressed archive</p></li>
+<li><a href="fix-references.html">Fix reorganized sample references</a><p class="annotation">Build migration evidence, optionally remove duplicate WAVs, then classify and confirm reference repairs</p></li>
+<li><a href="sample-overview.html">Sample overview command dispatch</a><p class="annotation">Collect exactly the data required by the selected overview command and dispatch to its canonical report</p></li>
+<li><a href="extract-instruments.html">Extract standalone instruments</a><p class="annotation">Prepare extraction settings, run the per-song continuation, deduplicate results, then enter confirmed output</p></li>
+<li><a href="find-similar-kits.html">Compare existing kit presets</a><p class="annotation">Read kit profiles, bucket compatible XML structures and report exact changed numerical fields without modifying files</p></li>
+<li><a href="kit-profiling.html">Kit XML profiling</a><p class="annotation">Parse a kit with a restricted parser and retain positional XML fields for comparison candidate bucketing</p></li></ul></section>
+<section><h2>Existing shared flows</h2><ul><li><a href="filesystem-scanning.html">Filtered filesystem scanning</a><p class="annotation">Metadata capture, strict scanning and shared path/size formatting</p></li>
+<li><a href="sync-planning.html">Sync planning and change detection</a><p class="annotation">Source/destination comparisons and source-wins planning</p></li>
+<li><a href="sync-execution.html">Sync plan execution</a><p class="annotation">Copy, trash/delete and partial-progress errors</p></li>
+<li><a href="post-sync-manifest.html">Post-sync manifest rebuilding</a><p class="annotation">Reused metadata and hashes for copied/new records</p></li></ul></section>
+<section><h2>Shared operations</h2><ul><li><a href="shared-cli.html">Configuration paths and confirmation</a><p class="annotation">Independent helper entries load directory settings or ask for confirmation before their script caller continues</p></li>
+<li><a href="manifest-io.html">Sync manifest reading and atomic writing</a><p class="annotation">Independent read and write entries translate between v2 JSON and per-file SD/local metadata records</p></li>
+<li><a href="sync-reporting.html">Sync previews and execution logging</a><p class="annotation">Independent entries print a pending plan or append a completed-operation result to the sync log</p></li>
+<li><a href="directory-cleanup.html">Verified empty-directory cleanup</a><p class="annotation">After an applied sync, inspect the destination top-down and remove only verified empty descendants in reverse discovery order</p></li>
+<li><a href="content-hashing.html">File hashing and duplicate-sample indexing</a><p class="annotation">Hash individual files or discover WAV samples and group their relative paths by SHA256</p></li>
+<li><a href="xml-discovery.html">Deluge XML and sample-path discovery</a><p class="annotation">Discover preset/song XMLs for active callers, or inspect the currently unused sample-existence API</p></li>
+<li><a href="xml-parsing.html">Deluge XML parsing fallbacks</a><p class="annotation">Parse one XML file strictly, then try wrapped and recovering parses for legacy or malformed Deluge files</p></li>
+<li><a href="sample-reference-extraction.html">Structured and fallback sample references</a><p class="annotation">Read recognized XML sample references, resolve their owning presets, and independently detect unextracted raw paths</p></li>
+<li><a href="sample-migration.html">Sample migration and duplicate removal</a><p class="annotation">Compare manifest hashes with current WAV paths, then optionally delete duplicates and recompute the evidence</p></li>
+<li><a href="reference-classification.html">Classify sample-reference repairs</a><p class="annotation">Match each XML reference against migration evidence using ordered recovery rules and report ambiguity</p></li>
+<li><a href="reference-repair.html">Preview and apply reference repairs</a><p class="annotation">Confirm proposed XML edits, perform textual replacements, then separately persist renamed manifest keys when requested</p></li>
+<li><a href="sample-usage-index.html">Build the sample usage index</a><p class="annotation">Merge scanned sample metadata with XML-reference occurrences and expose computed usage views without filesystem I/O</p></li>
+<li><a href="sample-reports.html">Summary and matching-sample reports</a><p class="annotation">Independent summary and usage commands query a supplied UsageIndex and render case-preserving grouped output</p></li>
+<li><a href="sample-unused.html">Unreferenced sample reports</a><p class="annotation">Filter the supplied index to on-disk unreferenced samples and select one of four display modes</p></li>
+<li><a href="sample-missing.html">Missing samples and unextracted paths</a><p class="annotation">Report missing indexed samples and separately warn about raw XML sample paths outside recognized reference patterns</p></li>
+<li><a href="sample-duplicates.html">Duplicate sample report</a><p class="annotation">Consume digest groups produced by the hashing subsystem and estimate storage occupied by duplicate copies</p></li>
+<li><a href="sample-catalogue.html">Write the sample catalogue CSV</a><p class="annotation">Select on-disk audio files from a strict all-file index and atomically replace a stable, sorted CSV</p></li>
+<li><a href="song-discovery.html">Init defaults and valid song discovery</a><p class="annotation">Independent loading entries prepare normalization defaults, an optional kit template and supported song trees</p></li>
+<li><a href="instrument-matching.html">Discover and match song instruments</a><p class="annotation">Read embedded instruments and session clips, then match preset-name/folder keys and classify unmatched instruments</p></li>
+<li><a href="clip-selection.html">Sidechain exclusion and clip selection</a><p class="annotation">Independent calls evaluate sidechain-only kits or select default/extended instrument versions from one matched group</p></li>
+<li><a href="preset-normalisation.html">Shared preset mutations</a><p class="annotation">Independent in-memory helpers remove song-only attributes, strip automation and normalize top-level volume/pan</p></li>
+<li><a href="synth-extraction.html">Transform a song synth into a preset</a><p class="annotation">Clone the instrument, merge clip parameters and arpeggiator settings, then restore standalone child order</p></li>
+<li><a href="kit-extraction.html">Transform a song kit into a preset</a><p class="annotation">Clone the kit, merge clip and note-row parameters, ensure every sound has defaults and reorder its children</p></li>
+<li><a href="kit-default-params.html">Kit sound parameter completion</a><p class="annotation">Merge programmed row parameters and fill missing sound defaults from the first available template</p></li>
+<li><a href="preset-comparison.html">Preset equivalence decisions</a><p class="annotation">Apply configured hard markers before soft thresholds to compare two already assembled and normalized presets</p></li>
+<li><a href="comparison-structure.html">Structural preset comparisons</a><p class="annotation">Independent hard-marker helpers compare routing, controller mappings and ordered kit sound structure</p></li>
+<li><a href="comparison-soft.html">Soft parameter differences and kit thresholds</a><p class="annotation">Collect ordered soft differences using signed hex distance, then apply synth or per-kit-scope count thresholds</p></li>
+<li><a href="extraction-deduplication.html">Cross-song preset deduplication</a><p class="annotation">Run name and global acceptance passes, retain comparison evidence and separately render rejection reports</p></li>
+<li><a href="directory-identity.html">Directory identity and emptiness checks</a><p class="annotation">Canonical cleanup helpers verify ordinary directories, ancestor identity, empty contents and Windows volume identity</p></li>
+<li><a href="report-formatting.html">Shared report formatting</a><p class="annotation">Small canonical display helpers label folders, group samples, strip prefixes and print headings</p></li></ul></section>
+<section><h2>Developer tools</h2><ul><li><a href="dedup-threshold-benchmark.html">Deduplication threshold benchmark</a><p class="annotation">Build a threshold grid and compare cached default extraction with repeatedly prepared extended extraction</p></li>
+<li><a href="benchmark-extraction.html">Benchmark-only extraction preparation</a><p class="annotation">Independent benchmark helpers prepare default or extended results using the same canonical extraction subsystems</p></li>
+<li><a href="repository-operations.html">Configured repository operations</a><p class="annotation">Read the repository Pou configuration, then dispatch a readiness probe or the configured Python test command</p></li></ul></section>
+<section><h2>Extraction continuations</h2><ul><li><a href="song-extraction.html">Per-song extraction preparation</a><p class="annotation">Continue the same extraction main call through its song loop, retaining prepared results for later deduplication</p></li>
+<li><a href="extraction-output.html">Confirmed extraction output and naming APIs</a><p class="annotation">Continue the active main call through confirmation and file output, with independent canonical naming and serialization helpers</p></li></ul></section>
+<footer><p><a href="coverage-plan.md">Coverage plan and boundaries</a> | <a href="coverage.json">Canonical source ownership ledger</a></p><p>Updated <time datetime="2026-11-05">2026-11-05</time></p></footer></main></body></html>

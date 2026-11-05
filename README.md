@@ -104,6 +104,10 @@ FAT32 drive roots on Windows can report a directory ID of zero. For these drive 
 
 Cleanup uses non-recursive directory removal, never deletes files to empty a directory, and leaves directories alone when it cannot verify safety. Enumeration includes hidden entries. These checks do not establish whether a cloud provider has finished synchronizing remote contents. Cleanup is skipped for dry runs and when sync reports "Already up to date".
 
+### Execution charts
+
+Open the [execution chart index](docs/charts/index.html) for every management script, report, extraction subsystem, and configured developer operation. All charts are standalone HTML with optional folding and links to canonical shared implementations. The [coverage plan](docs/charts/coverage-plan.md) records the boundaries; the [ownership ledger](docs/charts/coverage.json) maps source definitions and disjoint inline blocks to their charts.
+
 ### Script reference
 
 #### `sync_from_sd.py`
