@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09T10:43:24.227373+00:00",
+  "generated": "2026-11-09T11:13:15.551599+00:00",
   "songs_processed": 77,
   "total_count": 110,
   "extractions": [
@@ -59,8 +59,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "001_Weird-Fishes 62.XML",
-      "source_song": "Weird-Fishes 62",
+      "output_filename": "001_Weird-Fishes-c121.XML",
+      "source_song": "Weird-Fishes-c121",
       "preset_name": "001",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -301,8 +301,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "019_Weird-Fishes 62.XML",
-      "source_song": "Weird-Fishes 62",
+      "output_filename": "019_Weird-Fishes-c121.XML",
+      "source_song": "Weird-Fishes-c121",
       "preset_name": "019",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1170,8 +1170,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Tr8S-Midi_Weird-Fishes 62.XML",
-      "source_song": "Weird-Fishes 62",
+      "output_filename": "Tr8S-Midi_Weird-Fishes-c121.XML",
+      "source_song": "Weird-Fishes-c121",
       "preset_name": "Tr8S-Midi",
       "preset_folder": "KITS",
       "instrument_type": "kit",
@@ -1203,8 +1203,8 @@
       "differing_params": []
     },
     {
-      "output_filename": "Wobble-Crash_Weird-Fishes 62.XML",
-      "source_song": "Weird-Fishes 62",
+      "output_filename": "Wobble-Crash_Weird-Fishes-c121.XML",
+      "source_song": "Weird-Fishes-c121",
       "preset_name": "Wobble-Crash",
       "preset_folder": "KITS",
       "instrument_type": "kit",
