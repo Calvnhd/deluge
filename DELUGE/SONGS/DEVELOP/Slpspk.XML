@@ -153,7 +153,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-BassV-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-BassV-120bpm.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="768000" />
@@ -230,7 +230,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-BassV-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-BassV-120bpm.wav">
 						<zone
 							startSamplePos="768000"
 							endSamplePos="1536000" />
@@ -307,7 +307,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-BassV-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-BassV-120bpm.wav">
 						<zone
 							startSamplePos="1536000"
 							endSamplePos="2304000" />
@@ -384,7 +384,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-BassV-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-BassV-120bpm.wav">
 						<zone
 							startSamplePos="2304000"
 							endSamplePos="3072000" />
@@ -1368,7 +1368,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="96000" />
@@ -1445,7 +1445,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="96000"
 							endSamplePos="192000" />
@@ -1522,7 +1522,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="192000"
 							endSamplePos="288000" />
@@ -1599,7 +1599,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="288000"
 							endSamplePos="384000" />
@@ -1676,7 +1676,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="384000"
 							endSamplePos="480000" />
@@ -1753,7 +1753,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="480000"
 							endSamplePos="576000" />
@@ -1830,7 +1830,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="576000"
 							endSamplePos="672000" />
@@ -1907,7 +1907,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="672000"
 							endSamplePos="768000" />
@@ -1984,7 +1984,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="768000"
 							endSamplePos="864000" />
@@ -2061,7 +2061,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="864000"
 							endSamplePos="960000" />
@@ -2138,7 +2138,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="960000"
 							endSamplePos="1056000" />
@@ -2215,7 +2215,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="1056000"
 							endSamplePos="1152000" />
@@ -2292,7 +2292,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="1152000"
 							endSamplePos="1248000" />
@@ -2369,7 +2369,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="1248000"
 							endSamplePos="1344000" />
@@ -2446,7 +2446,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="1344000"
 							endSamplePos="1440000" />
@@ -2523,7 +2523,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav">
 						<zone
 							startSamplePos="1440000"
 							endSamplePos="1536000" />
@@ -4094,7 +4094,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
 						<zone
 							startSamplePos="0"
 							endSamplePos="192000" />
@@ -4171,7 +4171,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
 						<zone
 							startSamplePos="192000"
 							endSamplePos="384000" />
@@ -4248,7 +4248,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
 						<zone
 							startSamplePos="384000"
 							endSamplePos="576000" />
@@ -4325,7 +4325,7 @@
 						reversed="0"
 						timeStretchEnable="0"
 						timeStretchAmount="0"
-						fileName="SAMPLES/KERERU/SleepSpeak/SS-Inst-5-V0a-120bpm.wav">
+						fileName="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-5-V0a-120bpm.wav">
 						<zone
 							startSamplePos="576000"
 							endSamplePos="768000" />
@@ -10442,7 +10442,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO15"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Vox-5-CX-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-5-CX-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="768000"
 			pitchSpeedIndependent="1"
@@ -10495,7 +10495,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO8"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Inst-8-CX-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-8-CX-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="768000"
 			pitchSpeedIndependent="1"
@@ -10731,7 +10731,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO7"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Inst-7-C2-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-7-C2-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -10784,7 +10784,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO14"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Vox-4-C2-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-4-C2-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -10837,7 +10837,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO13"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Vox-3-V2-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-3-V2-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -11052,7 +11052,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO18"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-GatV-new-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatV-new-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -11985,7 +11985,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO4"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Inst-4-C1-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-4-C1-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -12038,7 +12038,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO12"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Vox-2-C1-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-2-C1-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -12253,7 +12253,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO19"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-GatVPlus-new-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatVPlus-new-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -13603,7 +13603,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO11"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Vox-1-V1-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Vocals/SS-Vox-1-V1-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -13656,7 +13656,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO18"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-GatV-new-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatV-new-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -16300,7 +16300,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO17"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-GatPreV-new-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-GatPreV-new-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="768000"
 			pitchSpeedIndependent="1"
@@ -22921,7 +22921,7 @@
 		</instrumentClip>
 		<audioClip
 			trackName="AUDIO6"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Inst-6-V2-120bpm.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-6-V2-120bpm.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"
@@ -22972,7 +22972,7 @@
 		</audioClip>
 		<audioClip
 			trackName="AUDIO3"
-			filePath="SAMPLES/KERERU/SleepSpeak/SS-Inst-3-V1.wav"
+			filePath="SAMPLES/KERERU/SleepSpeak/Instruments/SS-Inst-3-V1.wav"
 			startSamplePos="0"
 			endSamplePos="1536000"
 			pitchSpeedIndependent="1"

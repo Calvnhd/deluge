@@ -74,7 +74,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FACTORY/DRUMS/Claves/Rhythmace Claves.WAV">
+				fileName="SAMPLES/KB6-LIB/Acetone Rhythm-Ace/CLAVE.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="4116" />
@@ -225,7 +225,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FACTORY/DRUMS/HatC/Rhythmace Closed hihat.wav">
+				fileName="SAMPLES/KB6-LIB/Acetone Rhythm-Ace/HHCL.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="2178" />
@@ -376,7 +376,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FACTORY/DRUMS/HatO/Rhythmace Open hihat.wav">
+				fileName="SAMPLES/KB6-LIB/Acetone Rhythm-Ace/HHOP.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="13915" />
@@ -829,7 +829,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FACTORY/DRUMS/Kick/Rhythmace Kick.wav">
+				fileName="SAMPLES/KB6-LIB/Acetone Rhythm-Ace/KICK3.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="29015" />
@@ -980,7 +980,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FACTORY/DRUMS/ConL/Rhythmace Conga low.wav">
+				fileName="SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC1.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="7718" />
@@ -1886,7 +1886,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FACTORY/DRUMS/ConH/Rhythmace Conga high.wav">
+				fileName="SAMPLES/KB6-LIB/Acetone Rhythm-Ace/PERC7.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="3220" />
@@ -2188,7 +2188,7 @@
 				reversed="0"
 				timeStretchEnable="0"
 				timeStretchAmount="0"
-				fileName="SAMPLES/FACTORY/DRUMS/Snare/Rhythmace Snare.wav">
+				fileName="SAMPLES/KB6-LIB/Acetone Rhythm-Ace/SNARE2.WAV">
 				<zone
 					startSamplePos="0"
 					endSamplePos="5100" />
